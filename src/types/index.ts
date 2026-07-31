@@ -85,7 +85,7 @@ export interface PlayerProgress {
   lastPlayed: string
 }
 
-export type AppScreen = 'home' | 'lesson' | 'worlds'
+export type AppScreen = 'landing' | 'home' | 'lesson' | 'worlds'
 
 export interface AppState {
   screen: AppScreen

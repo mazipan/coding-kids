@@ -2,7 +2,7 @@ import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Lesson, GameState, AppState } from '../types'
 import type { World } from '../types'
-import { BlocklyWorkspace } from '../components/BlocklyWorkspace'
+import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
 import { GameGrid } from '../components/GameGrid'
 import { Mascot } from '../components/Mascot'
 import { RewardModal } from '../components/RewardModal'
@@ -16,6 +16,7 @@ import {
 import { calculateStars, calculateXPReward, getLevelInfo, XP_LEVELS } from '../data/xpSystem'
 import { playSuccess, playError, playMove, playCollect, playLevelUp } from '../utils/sounds'
 import type { useProgress } from '../store/useProgress'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 const STEP_DELAY = 350
 
@@ -29,6 +30,7 @@ interface LessonScreenProps {
 }
 
 export function LessonScreen({ lesson, world, onNavigate, completeLesson, existingProgress, nextLessonId }: LessonScreenProps) {
+  const { t } = useLanguage()
   const [gameState, setGameState] = useState<GameState>(buildInitialState(lesson))
   const [currentCode, setCurrentCode] = useState('')
   const [currentBlockCount, setCurrentBlockCount] = useState(0)
@@ -39,20 +41,33 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
   const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '' })
   const [mascotMessage, setMascotMessage] = useState(lesson.mascotMessage)
   const [mascotMood, setMascotMood] = useState<'happy' | 'thinking' | 'excited' | 'sad'>('happy')
+  const [activeTab, setActiveTab] = useState<'blocks' | 'game'>('blocks')
   const runningRef = useRef(false)
+  const blocklyRef = useRef<BlocklyWorkspaceHandle>(null)
 
   const handleCodeChange = useCallback((code: string, blockCount: number) => {
     setCurrentCode(code)
     setCurrentBlockCount(blockCount)
   }, [])
 
+  const switchToTab = (tab: 'blocks' | 'game') => {
+    setActiveTab(tab)
+    if (tab === 'blocks') {
+      // Re-render Blockly after the container becomes visible
+      requestAnimationFrame(() => {
+        blocklyRef.current?.resize()
+      })
+    }
+  }
+
   const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms))
 
   const runCode = async () => {
     if (isRunning || runningRef.current) return
     if (!currentCode.trim()) {
-      setMascotMessage("There are no blocks yet! Drag some blocks into the workspace first! 😄")
+      setMascotMessage(t('game.no.blocks'))
       setMascotMood('thinking')
+      switchToTab('game')
       return
     }
 
@@ -60,8 +75,8 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
     runningRef.current = true
     setShowReward(false)
     setShowHint(false)
+    switchToTab('game')
 
-    // Reset game state
     const initial = buildInitialState(lesson)
     setGameState({ ...initial, status: 'running' })
     setMascotMessage("Here we go! Watching your code run... 👀")
@@ -73,7 +88,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
 
     if (error) {
       setGameState(s => ({ ...s, status: 'crashed', errorMessage: `Code error: ${error}` }))
-      setMascotMessage(`Oops! Something went wrong with the code. Try again! 😅`)
+      setMascotMessage("Oops! Something went wrong with the code. Try again! 😅")
       setMascotMood('sad')
       playError()
       setIsRunning(false)
@@ -83,21 +98,19 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
 
     if (actions.length === 0) {
       setGameState(s => ({ ...s, status: 'failure' }))
-      setMascotMessage("No movement blocks detected! Add some Move blocks! 🤔")
+      setMascotMessage(t('game.fail.noactions'))
       setMascotMood('thinking')
       setIsRunning(false)
       runningRef.current = false
       return
     }
 
-    // Execute actions step by step
     let state: GameState = { ...initial, status: 'running' }
     for (const action of actions) {
       if (!runningRef.current) break
 
       const next = applyAction(state, action, lesson)
 
-      // Play sound based on action
       if (action.type === 'collect') {
         if (next.collectedIds.size > state.collectedIds.size) playCollect()
       } else {
@@ -112,7 +125,6 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
       await sleep(STEP_DELAY)
     }
 
-    // Check win
     if (state.status !== 'crashed') {
       const won = checkWin(state, lesson)
 
@@ -138,7 +150,6 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
 
         if (result.leveledUp) playLevelUp()
 
-        // Look up level info by level number (levels are 1-indexed)
         const newLevelInfo = getLevelInfo(XP_LEVELS[result.newLevel - 1]?.minXP ?? 0)
 
         setRewardData({
@@ -152,9 +163,17 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
       } else {
         setGameState(s => ({ ...s, status: 'failure' }))
         playError()
-        setMascotMessage("Not quite! I didn't reach all the items. Check your path and try again! 💪")
+        setMascotMessage(t('game.fail.path'))
         setMascotMood('sad')
       }
+    } else {
+      const msg = state.errorMessage ?? ''
+      if (msg.includes('edge') || msg.includes('bounds')) {
+        setMascotMessage(t('game.fail.edge'))
+      } else {
+        setMascotMessage(t('game.fail.obstacle'))
+      }
+      setMascotMood('sad')
     }
 
     setIsRunning(false)
@@ -175,6 +194,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
     setHintIndex(next)
     setMascotMessage(`💡 Hint: ${lesson.hints[hintIndex]}`)
     setMascotMood('thinking')
+    switchToTab('game')
   }
 
   const handleNext = () => {
@@ -202,44 +222,59 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
         animate={{ opacity: 1, y: 0 }}
       >
         <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black"
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shrink-0"
           style={{ background: `${world.theme.accentColor}30`, color: world.theme.accentColor }}
         >
           {lesson.number}
         </div>
-        <div>
-          <h1 className="text-xl font-black text-white leading-tight">{lesson.title}</h1>
-          <p className="text-white/50 text-xs">{world.name} · {world.concept}</p>
+        <div className="min-w-0">
+          <h1 className="text-lg sm:text-xl font-black text-white leading-tight truncate">{lesson.title}</h1>
+          <p className="text-white/50 text-xs truncate">{world.name} · {world.concept}</p>
         </div>
-        <div className="ml-auto flex items-center gap-3">
-          {existingStars > 0 && (
-            <StarRating stars={existingStars} size="sm" />
-          )}
+        <div className="ml-auto flex items-center gap-3 shrink-0">
+          {existingStars > 0 && <StarRating stars={existingStars} size="sm" />}
           <span className="text-sm font-bold text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full">
             ⚡ {lesson.xpReward} XP
           </span>
         </div>
       </motion.div>
 
-      {/* Main content: Blockly + Game */}
+      {/* Mobile tab switcher (hidden on lg+) */}
+      <div className="flex lg:hidden gap-2 bg-[#130D2E] rounded-xl p-1 border border-purple-900/40">
+        <button
+          onClick={() => switchToTab('blocks')}
+          className={`flex-1 py-2 rounded-lg font-bold text-sm transition-all ${activeTab === 'blocks' ? 'bg-purple-600 text-white shadow' : 'text-purple-300 hover:text-white'}`}
+        >
+          {t('game.blocks.tab')}
+        </button>
+        <button
+          onClick={() => switchToTab('game')}
+          className={`flex-1 py-2 rounded-lg font-bold text-sm transition-all ${activeTab === 'game' ? 'bg-purple-600 text-white shadow' : 'text-purple-300 hover:text-white'}`}
+        >
+          {t('game.game.tab')}
+        </button>
+      </div>
+
+      {/* Main content */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 min-h-0">
-        {/* LEFT: Blockly */}
+        {/* LEFT: Blockly — visible when tab=blocks on mobile, always on desktop */}
         <motion.div
-          className="flex flex-col rounded-2xl overflow-hidden border border-purple-900/40 bg-[#130D2E]"
+          className={`flex flex-col rounded-2xl overflow-hidden border border-purple-900/40 bg-[#130D2E] ${activeTab === 'blocks' ? 'flex' : 'hidden'} lg:flex`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          style={{ minHeight: 400 }}
+          style={{ minHeight: 340 }}
         >
           <BlocklyWorkspace
+            ref={blocklyRef}
             categories={lesson.availableCategories}
             onCodeChange={handleCodeChange}
           />
         </motion.div>
 
-        {/* RIGHT: Game + Mascot */}
+        {/* RIGHT: Game + Mascot — visible when tab=game on mobile, always on desktop */}
         <motion.div
-          className="flex flex-col gap-4"
+          className={`flex-col gap-4 ${activeTab === 'game' ? 'flex' : 'hidden'} lg:flex`}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.15 }}
@@ -300,36 +335,30 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        {/* Story */}
         <div className="flex-1 text-xs text-white/40 leading-relaxed hidden sm:block truncate">
           {lesson.story}
         </div>
 
-        {/* Action buttons */}
         <div className="flex gap-2 ml-auto">
-          {/* Hint */}
           <button
             onClick={showNextHint}
             disabled={isRunning}
-            className="flex items-center gap-2 px-4 py-3 rounded-xl border border-yellow-400/30 text-yellow-200 hover:bg-yellow-500/20 transition-colors font-bold text-sm disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-yellow-400/30 text-yellow-200 hover:bg-yellow-500/20 transition-colors font-bold text-sm disabled:opacity-50"
           >
-            💡 Hint
+            {t('game.hint')}
           </button>
 
-          {/* Reset */}
           <button
             onClick={resetGame}
-            disabled={false}
-            className="flex items-center gap-2 px-4 py-3 rounded-xl border border-white/20 text-white/60 hover:bg-white/10 transition-colors font-bold text-sm"
+            className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-white/20 text-white/60 hover:bg-white/10 transition-colors font-bold text-sm"
           >
-            🔄 Reset
+            {t('game.reset')}
           </button>
 
-          {/* RUN */}
           <motion.button
             onClick={runCode}
             disabled={isRunning}
-            className="flex items-center gap-2 px-8 py-3 rounded-xl font-black text-white text-base relative overflow-hidden disabled:opacity-70"
+            className="flex items-center gap-2 px-6 sm:px-8 py-3 rounded-xl font-black text-white text-base relative overflow-hidden disabled:opacity-70"
             style={{
               background: isRunning
                 ? 'rgba(139,92,246,0.5)'
@@ -347,10 +376,10 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
                 >
                   ⚙️
                 </motion.span>
-                Running...
+                <span className="hidden sm:inline">{t('game.running')}</span>
               </>
             ) : (
-              <>▶ Run Code</>
+              <>{t('game.run')}</>
             )}
           </motion.button>
         </div>
