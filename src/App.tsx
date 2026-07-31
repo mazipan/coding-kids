@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LanguageProvider } from './i18n/LanguageProvider'
 import { Header } from './components/Header'
@@ -10,36 +11,16 @@ import { getLesson, getLessonsByWorld } from './data/lessons'
 import { getWorld } from './data/worlds'
 import type { AppState } from './types'
 
-function isAppPath(path: string) {
-  return path.startsWith('/app')
-}
-
-function AppContent() {
-  const [appState, setAppState] = useState<AppState>(() => ({
-    screen: isAppPath(window.location.pathname) ? 'home' : 'landing',
-  }))
-
+function GameApp() {
+  const navigate = useNavigate()
+  const [appState, setAppState] = useState<AppState>({ screen: 'home' })
   const { progress, completeLesson, getLessonProgress, isLessonUnlocked, isWorldUnlocked } = useProgress()
 
-  // Sync browser back/forward
-  useEffect(() => {
-    const onPop = () => {
-      setAppState({ screen: isAppPath(window.location.pathname) ? 'home' : 'landing' })
+  const handleNavigate = (state: Partial<AppState>) => {
+    if (state.screen === 'landing') {
+      navigate('/')
+      return
     }
-    window.addEventListener('popstate', onPop)
-    return () => window.removeEventListener('popstate', onPop)
-  }, [])
-
-  const navigate = (state: Partial<AppState>) => {
-    const nextScreen = state.screen ?? appState.screen
-
-    if (nextScreen === 'landing') {
-      window.history.pushState({}, '', '/')
-    } else if (appState.screen === 'landing') {
-      // Transitioning from landing → app for the first time
-      window.history.pushState({}, '', '/app')
-    }
-
     setAppState(prev => ({ ...prev, ...state }))
   }
 
@@ -51,17 +32,6 @@ function AppContent() {
     const worldLessons = getLessonsByWorld(appState.currentWorldId)
     const idx = worldLessons.findIndex(l => l.id === currentLesson.id)
     return worldLessons[idx + 1]?.id
-  }
-
-  const hasProgress = progress.xp > 0 || progress.totalStars > 0
-
-  if (appState.screen === 'landing') {
-    return (
-      <LandingScreen
-        onStart={() => navigate({ screen: 'home' })}
-        hasProgress={hasProgress}
-      />
-    )
   }
 
   return (
@@ -90,7 +60,7 @@ function AppContent() {
 
       <Header
         progress={progress}
-        onHome={() => navigate({ screen: 'home', currentLessonId: undefined })}
+        onHome={() => handleNavigate({ screen: 'home', currentLessonId: undefined })}
         showBack={appState.screen === 'lesson'}
       />
 
@@ -105,7 +75,7 @@ function AppContent() {
             >
               <HomeScreen
                 progress={progress}
-                onNavigate={navigate}
+                onNavigate={handleNavigate}
                 isWorldUnlocked={isWorldUnlocked}
                 getLessonProgress={getLessonProgress}
                 isLessonUnlocked={isLessonUnlocked}
@@ -123,7 +93,7 @@ function AppContent() {
               <LessonScreen
                 lesson={currentLesson}
                 world={currentWorld}
-                onNavigate={navigate}
+                onNavigate={handleNavigate}
                 completeLesson={completeLesson}
                 existingProgress={getLessonProgress(currentLesson.id)}
                 nextLessonId={getNextLessonId()}
@@ -136,10 +106,27 @@ function AppContent() {
   )
 }
 
+function LandingRoute() {
+  const navigate = useNavigate()
+  const { progress } = useProgress()
+  const hasProgress = progress.xp > 0 || progress.totalStars > 0
+
+  return (
+    <LandingScreen
+      onStart={() => navigate('/app')}
+      hasProgress={hasProgress}
+    />
+  )
+}
+
 export default function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <Routes>
+        <Route path="/" element={<LandingRoute />} />
+        <Route path="/app" element={<GameApp />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </LanguageProvider>
   )
 }

@@ -10,7 +10,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'blockly': ['blockly'],
-          'react-vendor': ['react', 'react-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'framer': ['framer-motion'],
         },
       },
