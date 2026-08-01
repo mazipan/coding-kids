@@ -13,11 +13,14 @@ interface RewardModalProps {
   newLevelName?: string
   newLevelBadge?: string
   missingCategories?: string[]
+  isWorldComplete?: boolean
+  nextWorldEmoji?: string
+  nextWorldName?: string
   onNext: () => void
   onRetry: () => void
 }
 
-export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, missingCategories, onNext, onRetry }: RewardModalProps) {
+export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, missingCategories, isWorldComplete, nextWorldEmoji, nextWorldName, onNext, onRetry }: RewardModalProps) {
   const { t } = useLanguage()
   const msgVariant = Math.floor(Math.random() * 3)
   const message = t(`reward.msg.${stars}.${msgVariant}`) || t('reward.fallback')
@@ -89,6 +92,20 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
                 </motion.div>
               )}
 
+              {isWorldComplete && (
+                <motion.div
+                  className="bg-gradient-to-r from-emerald-500/25 to-teal-500/25 border border-emerald-400/40 rounded-2xl p-3 mb-4"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 1.0, type: 'spring' }}
+                >
+                  <div className="text-emerald-200 font-black text-base">{t('reward.world.complete')}</div>
+                  {nextWorldName && (
+                    <div className="text-emerald-300/80 text-sm mt-0.5">{nextWorldEmoji} {nextWorldName}</div>
+                  )}
+                </motion.div>
+              )}
+
               <div className="flex gap-3 mt-2">
                 <button
                   onClick={onRetry}
@@ -99,9 +116,17 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
                 </button>
                 <button
                   onClick={onNext}
-                  className="flex-1 py-3 rounded-xl font-black text-white bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 transition-all shadow-lg shadow-purple-900/50 text-sm sm:text-base flex items-center justify-center gap-2"
+                  className={`flex-1 py-3 rounded-xl font-black text-white transition-all shadow-lg text-sm sm:text-base flex items-center justify-center gap-2 ${
+                    isWorldComplete && nextWorldEmoji
+                      ? 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 shadow-emerald-900/50'
+                      : 'bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 shadow-purple-900/50'
+                  }`}
                 >
-                  {t('reward.next')}
+                  {isWorldComplete && nextWorldEmoji ? (
+                    <>{nextWorldEmoji} {t('reward.next.world')}</>
+                  ) : (
+                    t('reward.next')
+                  )}
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
