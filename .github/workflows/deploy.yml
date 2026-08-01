@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build site
-        run: bun run build
-
       - name: Set commit SHA
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
@@ -38,9 +35,16 @@ jobs:
           fi
           echo "HEAD_SHA=${COMMIT_SHA}" >> $GITHUB_ENV
           echo "SHORT_SHA=${COMMIT_SHA::7}" >> $GITHUB_ENV
+          echo "BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
 
       - name: Get commit title
         run: echo "COMMIT_TITLE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
+
+      - name: Build site
+        run: bun run build
+        env:
+          VITE_COMMIT_SHA: ${{ env.SHORT_SHA }}
+          VITE_BUILD_DATE: ${{ env.BUILD_DATE }}
 
       - name: Deploy to Netlify
         id: netlify
