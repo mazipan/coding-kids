@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Brand CSS custom properties — used by React Aria components and future shadcn tokens */
+:root {
+  --color-brand-purple: #7C3AED;
+  --color-brand-light: #8B5CF6;
+  --color-brand-dark: #6D28D9;
+  --color-brand-pink: #EC4899;
+  --color-app-bg: #0A0618;
+  --color-app-card: #130D2E;
+}
+
+/* React Aria ModalOverlay fade — RAC waits for [data-exiting] animation before unmounting */
+.ck-overlay[data-entering] {
+  animation: ck-fade-in 0.15s ease forwards;
+}
+.ck-overlay[data-exiting] {
+  animation: ck-fade-out 0.2s ease forwards;
+}
+@keyframes ck-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ck-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
