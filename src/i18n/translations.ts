@@ -51,19 +51,19 @@ const en: Translations = {
   'landing.footer.free': 'Free · No signup · No ads · No data collected',
 
   // ── Navigation ──────────────────────────────
-  'nav.back': '← Back',
+  'nav.back': 'Back',
   'nav.home': 'Home',
 
   // ── Game UI ─────────────────────────────────
-  'game.run': '▶ Run Code',
+  'game.run': 'Run Code',
   'game.running': 'Running...',
-  'game.reset': '🔄 Reset',
-  'game.hint': '💡 Hint',
+  'game.reset': 'Reset',
+  'game.hint': 'Hint',
   'game.blocks.tab': '🧩 Blocks',
   'game.game.tab': '🎮 Game',
   'game.view.code': '👨‍💻 Code',
   'game.view.blocks': '🧩 Blocks',
-  'game.clear': '🗑️ Clear',
+  'game.clear': 'Clear',
   'game.blocks.label': 'Blocks',
   'game.no.blocks': 'No blocks yet! Drag some blocks into the workspace first! 😄',
   'game.success': '🎉 Amazing! You did it!',
@@ -78,8 +78,8 @@ const en: Translations = {
 
   // ── Reward modal ─────────────────────────────
   'reward.levelup': '🎉 LEVEL UP!',
-  'reward.next': 'Next ➡️',
-  'reward.retry': '🔄 Retry',
+  'reward.next': 'Next',
+  'reward.retry': 'Retry',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Jungle Adventure',
@@ -169,7 +169,7 @@ const id: Translations = {
   'landing.sub': 'Petualangan coding yang menyenangkan dan gratis untuk usia 5–14 tahun. Belajar pemrograman dengan blok visual berwarna, kumpulkan XP, dan jelajahi 6 dunia epik — tanpa unduhan, tanpa login!',
   'landing.cta': 'Mulai Belajar Gratis',
   'landing.cta.secondary': 'Lihat cara kerjanya ↓',
-  'landing.returning': 'Lanjutkan petualanganmu →',
+  'landing.returning': 'Lanjutkan →',
 
   'landing.features.title': 'Kenapa Anak-anak Suka CodeKids',
   'landing.features.blocks.icon': '🎮',
@@ -201,7 +201,7 @@ const id: Translations = {
 
   'landing.final.title': 'Siap Mulai Coding?',
   'landing.final.sub': 'Bergabunglah dengan ribuan anak yang belajar coding — sepenuhnya gratis, tanpa perlu daftar!',
-  'landing.final.cta': 'Mulai Petualanganmu Sekarang',
+  'landing.final.cta': 'Mulai Sekarang',
   'landing.final.badge1': '✅ 100% Gratis',
   'landing.final.badge2': '✅ Tanpa Daftar',
   'landing.final.badge3': '✅ Tanpa Iklan',
@@ -211,19 +211,19 @@ const id: Translations = {
   'landing.footer.free': 'Gratis · Tanpa daftar · Tanpa iklan · Tanpa pengumpulan data',
 
   // ── Navigation ──────────────────────────────
-  'nav.back': '← Kembali',
+  'nav.back': 'Kembali',
   'nav.home': 'Beranda',
 
   // ── Game UI ─────────────────────────────────
-  'game.run': '▶ Jalankan Kode',
+  'game.run': 'Jalankan',
   'game.running': 'Berjalan...',
-  'game.reset': '🔄 Ulang',
-  'game.hint': '💡 Petunjuk',
+  'game.reset': 'Ulang',
+  'game.hint': 'Petunjuk',
   'game.blocks.tab': '🧩 Blok',
-  'game.game.tab': '🎮 Permainan',
+  'game.game.tab': '🎮 Game',
   'game.view.code': '👨‍💻 Kode',
   'game.view.blocks': '🧩 Blok',
-  'game.clear': '🗑️ Hapus',
+  'game.clear': 'Hapus',
   'game.blocks.label': 'Blok',
   'game.no.blocks': 'Belum ada blok! Seret beberapa blok ke area kerja dulu! 😄',
   'game.success': '🎉 Luar biasa! Kamu berhasil!',
@@ -238,8 +238,8 @@ const id: Translations = {
 
   // ── Reward modal ─────────────────────────────
   'reward.levelup': '🎉 NAIK LEVEL!',
-  'reward.next': 'Lanjut ➡️',
-  'reward.retry': '🔄 Coba Lagi',
+  'reward.next': 'Lanjut',
+  'reward.retry': 'Ulangi',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Petualangan Hutan',
@@ -272,7 +272,7 @@ const id: Translations = {
   'common.stars': 'Bintang',
   'common.tries': 'percobaan',
   'common.completed': '{n}/{total} pelajaran',
-  'common.to.unlock': '{xp} XP untuk membuka',
+  'common.to.unlock': '{xp} XP lagi',
   'common.need.xp': 'Butuh {xp} XP',
   'common.xp.reward': '⚡ {xp} XP',
 

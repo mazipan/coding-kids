@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Lightbulb, Loader2, Play, RotateCcw } from 'lucide-react'
 import type { Lesson, GameState, AppState } from '../types'
 import type { World } from '../types'
 import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
@@ -339,6 +340,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
             disabled={isRunning}
             className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-yellow-400/30 text-yellow-200 hover:bg-yellow-500/20 transition-colors font-bold text-sm disabled:opacity-50"
           >
+            <Lightbulb className="w-4 h-4 shrink-0" />
             {t('game.hint')}
           </button>
 
@@ -346,6 +348,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
             onClick={resetGame}
             className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-white/20 text-white/60 hover:bg-white/10 transition-colors font-bold text-sm"
           >
+            <RotateCcw className="w-4 h-4 shrink-0" />
             {t('game.reset')}
           </button>
 
@@ -364,16 +367,14 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
           >
             {isRunning ? (
               <>
-                <motion.span
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                >
-                  ⚙️
-                </motion.span>
+                <Loader2 className="w-4 h-4 animate-spin shrink-0" />
                 <span className="hidden sm:inline">{t('game.running')}</span>
               </>
             ) : (
-              <>{t('game.run')}</>
+              <>
+                <Play className="w-4 h-4 shrink-0" />
+                {t('game.run')}
+              </>
             )}
           </motion.button>
         </div>
@@ -389,7 +390,6 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
         newLevelBadge={rewardData.newBadge}
         onNext={handleNext}
         onRetry={handleRetry}
-        onHome={() => { setShowReward(false); onNavigate({ screen: 'home' }) }}
       />
     </div>
   )
