@@ -56,11 +56,15 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
 
       const toolbox = buildToolbox(categories)
 
+      const isMobile = window.innerWidth < 1024
+
       const workspace = Blockly.inject(containerRef.current, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         toolbox: toolbox as any,
         theme: KID_THEME,
         renderer: 'zelos',
+        horizontalLayout: isMobile,
+        toolboxPosition: isMobile ? 'top' : 'start',
         grid: {
           spacing: 24,
           colour: 'rgba(255,255,255,0.05)',
@@ -71,9 +75,9 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
         zoom: {
           controls: true,
           wheel: true,
-          startScale: 1.0,
+          startScale: isMobile ? 0.75 : 1.0,
           maxScale: 2,
-          minScale: 0.5,
+          minScale: isMobile ? 0.3 : 0.5,
           scaleSpeed: 1.2,
         },
         move: {
