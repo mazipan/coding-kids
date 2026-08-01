@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels: ['dependencies', 'javascript']
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+    labels: ['dependencies', 'github-actions']
+    groups:
+      github-official:
+        applies-to: version-updates
+        patterns:
+          - 'actions/*'
+        update-types:
+          - 'major'
+          - 'minor'
+          - 'patch'
+      security-updates:
+        applies-to: security-updates
+        update-types:
+          - 'patch'
+          - 'minor'
