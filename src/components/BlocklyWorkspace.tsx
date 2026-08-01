@@ -1,11 +1,30 @@
 import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react'
 import * as Blockly from 'blockly'
 import { javascriptGenerator } from 'blockly/javascript'
+import * as EnLocale from 'blockly/msg/en'
+import * as IdLocale from 'blockly/msg/id'
 import { buildToolbox } from '../blockly/toolboxes'
 import { registerCustomBlocks } from '../blockly/customBlocks'
 import { useLanguage } from '../i18n/LanguageProvider'
 
 registerCustomBlocks()
+
+const CUSTOM_MSG: Record<string, Record<'en' | 'id', string>> = {
+  MOVE_RIGHT:   { en: '➡️ Move Right',  id: '➡️ Gerak Kanan' },
+  MOVE_LEFT:    { en: '⬅️ Move Left',   id: '⬅️ Gerak Kiri' },
+  MOVE_UP:      { en: '⬆️ Move Up',     id: '⬆️ Gerak Atas' },
+  MOVE_DOWN:    { en: '⬇️ Move Down',   id: '⬇️ Gerak Bawah' },
+  COLLECT_ITEM: { en: '⭐ Collect',     id: '⭐ Ambil' },
+}
+
+function applyLocale(language: string) {
+  const locale = language === 'id' ? IdLocale : EnLocale
+  Blockly.setLocale(locale as unknown as Record<string, string>)
+  const lang = language === 'id' ? 'id' : 'en'
+  for (const [key, vals] of Object.entries(CUSTOM_MSG)) {
+    ;(Blockly.Msg as Record<string, string>)[key] = vals[lang]
+  }
+}
 
 const KID_THEME = Blockly.Theme.defineTheme('kidTheme', {
   name: 'kidTheme',
@@ -36,12 +55,19 @@ interface BlocklyWorkspaceProps {
 
 export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorkspaceProps>(
   function BlocklyWorkspace({ categories, onCodeChange }, ref) {
-    const { t } = useLanguage()
+    const { t, language } = useLanguage()
     const containerRef = useRef<HTMLDivElement>(null)
     const workspaceRef = useRef<Blockly.WorkspaceSvg | null>(null)
+    const savedStateRef = useRef<object | null>(null)
+    const onCodeChangeRef = useRef(onCodeChange)
     const [blockCount, setBlockCount] = useState(0)
     const [showCode, setShowCode] = useState(false)
     const [generatedCode, setGeneratedCode] = useState('')
+
+    // Keep callback ref current without triggering workspace recreation
+    useEffect(() => {
+      onCodeChangeRef.current = onCodeChange
+    }, [onCodeChange])
 
     useImperativeHandle(ref, () => ({
       resize() {
@@ -52,10 +78,11 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
     }))
 
     useEffect(() => {
-      if (!containerRef.current || workspaceRef.current) return
+      if (!containerRef.current) return
 
-      const toolbox = buildToolbox(categories)
+      applyLocale(language)
 
+      const toolbox = buildToolbox(categories, language)
       const isMobile = window.innerWidth < 1024
 
       const workspace = Blockly.inject(containerRef.current, {
@@ -89,6 +116,16 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
 
       workspaceRef.current = workspace
 
+      // Restore blocks saved from previous workspace (e.g. after language switch)
+      if (savedStateRef.current) {
+        try {
+          Blockly.serialization.workspaces.load(savedStateRef.current, workspace)
+        } catch {
+          // Ignore if saved state is incompatible
+        }
+        savedStateRef.current = null
+      }
+
       const updateCode = () => {
         try {
           const code = javascriptGenerator.workspaceToCode(workspace)
@@ -97,7 +134,7 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
           const usedBlockTypes = allBlocks.map(b => b.type)
           setBlockCount(count)
           setGeneratedCode(code)
-          onCodeChange(code, count, usedBlockTypes)
+          onCodeChangeRef.current(code, count, usedBlockTypes)
         } catch {
           // Ignore generation errors
         }
@@ -106,11 +143,18 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
       workspace.addChangeListener(updateCode)
 
       return () => {
+        // Save blocks before disposing so they survive a language switch
+        try {
+          savedStateRef.current = Blockly.serialization.workspaces.save(workspace)
+        } catch {
+          savedStateRef.current = null
+        }
         workspace.removeChangeListener(updateCode)
         workspace.dispose()
         workspaceRef.current = null
       }
-    }, [categories, onCodeChange])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [categories, language])
 
     const clearWorkspace = () => {
       workspaceRef.current?.clear()
