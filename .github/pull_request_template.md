@@ -14,7 +14,7 @@
 
 <!-- Check every invariant touched by this change. See .ai/specs/invariants.md -->
 
-- [ ] `npm run build` passes with zero TypeScript errors (INV-C3)
+- [ ] `bun run build` passes with zero TypeScript errors (INV-C3)
 - [ ] No hardcoded user-visible strings — all copy goes through `t()` (INV-C2)
 - [ ] No network calls added at runtime (INV-P1)
 - [ ] No data sent to external servers (INV-P2)

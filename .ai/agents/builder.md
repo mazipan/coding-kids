@@ -32,7 +32,7 @@ Implements an approved plan. The builder writes code, runs the build, commits, a
 - Never deviate from the plan's scope without updating the plan first
 - Never write hardcoded user-visible strings — use `t()`
 - Never add a dependency without it being in the plan
-- `npm run build` must pass before committing
+- `bun run build` must pass before committing
 - Do not self-approve — after pushing, hand off to reviewer-code
 
 ## What the builder must not do

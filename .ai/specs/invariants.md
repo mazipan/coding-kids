@@ -71,7 +71,7 @@ Block-generated code runs in a `new Function(...)` context. Only the five game v
 Every string shown to the user must go through `t()` from `useLanguage()`. The only exceptions are dev-only console logs and error messages that never reach the UI.
 
 **INV-C3 — Build passes**  
-`npm run build` must succeed before any commit is pushed.
+`bun run build` must succeed before any commit is pushed.
 
 **INV-C4 — localStorage is the only persistence**  
 No other storage mechanism (IndexedDB, cookies, sessionStorage, Cache API) may be used for user data without a decision record in `.ai/decisions/log.md`.

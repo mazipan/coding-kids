@@ -14,7 +14,7 @@ Standard task prompts. Copy, adjust the specifics, and hand to an agent.
 - [ ] `availableCategories` includes `'loops'` if loops are intended
 - [ ] `cells` uses `emptyGrid(rows, cols)` helper
 - [ ] `starThresholds[1]` ≤ `starThresholds[0]` (silver is stricter than bronze)
-- [ ] `npm run build` passes
+- [ ] `bun run build` passes
 
 ---
 
@@ -27,7 +27,7 @@ Standard task prompts. Copy, adjust the specifics, and hand to an agent.
 - [ ] WorldId union updated in `src/types/index.ts`
 - [ ] World translations added for both `en` and `id`
 - [ ] At least 3 lessons added to verify the world is playable
-- [ ] `npm run build` passes
+- [ ] `bun run build` passes
 
 ---
 
@@ -39,7 +39,7 @@ Standard task prompts. Copy, adjust the specifics, and hand to an agent.
 **Checklist:**
 - [ ] Write a mental repro case using an existing lesson before touching code
 - [ ] Verify the fix doesn't break `collect_all`, `reach_goal`, and `collect_any` goal types
-- [ ] `npm run build` passes
+- [ ] `bun run build` passes
 
 ---
 
@@ -52,7 +52,7 @@ Standard task prompts. Copy, adjust the specifics, and hand to an agent.
 - [ ] Key added to both `en` and `id` objects
 - [ ] Key name follows the `{section}.{name}` convention
 - [ ] Hardcoded string replaced with `t('your.key')`
-- [ ] `npm run build` passes
+- [ ] `bun run build` passes
 
 ---
 
@@ -65,7 +65,7 @@ Standard task prompts. Copy, adjust the specifics, and hand to an agent.
 - [ ] Badge ID added to the badge table in `.ai/specs/store.md`
 - [ ] Award logic added in `completeLesson()` — check after star/XP update
 - [ ] Badge display handled in `RewardModal`
-- [ ] `npm run build` passes
+- [ ] `bun run build` passes
 
 ---
 
@@ -79,7 +79,7 @@ Standard task prompts. Copy, adjust the specifics, and hand to an agent.
 - [ ] All keys translated in the `ja` object (copy `en` and translate)
 - [ ] Language toggle button added in Header and LandingScreen nav
 - [ ] Auto-detect logic updated (`navigator.language.startsWith('ja')`)
-- [ ] `npm run build` passes
+- [ ] `bun run build` passes
 
 ---
 

@@ -40,8 +40,8 @@ A fun, free coding adventure for kids ages 5–14. Learn programming with colorf
 ## Getting Started
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173) — landing page at `/`, game at `/app`.

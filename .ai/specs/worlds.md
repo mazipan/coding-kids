@@ -90,4 +90,4 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
    ```ts
    cells: (() => { const g = emptyGrid(6, 6); g[2][3] = 'obstacle'; return g })()
    ```
-3. Run `npm run build` — TypeScript will catch any missing required fields
+3. Run `bun run build` — TypeScript will catch any missing required fields

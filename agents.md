@@ -4,8 +4,8 @@ A fully static, browser-based coding learning platform for kids ages 5–14.
 No backend · No login · No ads · Everything runs in the browser.
 
 ```bash
-npm run dev    # localhost:5173
-npm run build  # must pass before committing
+bun run dev    # localhost:5173
+bun run build  # must pass before committing
 ```
 
 **Routes:** `/` = landing page · `/app` = game · `/*` = redirect to `/`
