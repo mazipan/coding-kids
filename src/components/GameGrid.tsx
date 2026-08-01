@@ -150,18 +150,20 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
         <motion.div
           className="absolute flex items-center justify-center pointer-events-none z-10"
           style={{
+            top: 0,
+            left: 0,
             width: cellSize,
             height: cellSize,
             fontSize: cellSize * 0.55,
           }}
           animate={{
-            top: charPos[0] * cellSize,
-            left: charPos[1] * cellSize,
+            x: charPos[1] * cellSize,
+            y: charPos[0] * cellSize,
             scale: isCrash ? [1, 1.3, 0.8] : isSuccess ? [1, 1.2, 1] : 1,
           }}
           transition={{
-            top: { type: 'spring', stiffness: 300, damping: 25 },
-            left: { type: 'spring', stiffness: 300, damping: 25 },
+            x: { type: 'spring', stiffness: 300, damping: 25 },
+            y: { type: 'spring', stiffness: 300, damping: 25 },
             scale: { duration: 0.4 },
           }}
         >
