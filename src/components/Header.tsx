@@ -15,13 +15,17 @@ export function Header({ progress }: HeaderProps) {
   const location = useLocation()
 
   const pathParts = location.pathname.split('/').filter(Boolean)
+  // world detail: /app/world/:worldId → 3 parts
+  const isWorldPage = pathParts.length === 3 && pathParts[1] === 'world'
   // lesson page: /app/world/:worldId/:lessonNumber → 4 parts
   const isLessonPage = pathParts.length >= 4 && pathParts[1] === 'world'
-  const showBack = isLessonPage
+  const showBack = isWorldPage || isLessonPage
 
   const handleClick = () => {
     if (isLessonPage) {
       navigate(`/app/world/${pathParts[2]}`)
+    } else if (isWorldPage) {
+      navigate('/app')
     } else {
       navigate('/app')
     }

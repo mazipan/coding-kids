@@ -213,25 +213,25 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
     <div className="max-w-7xl mx-auto px-4 pt-4 pb-24 lg:pb-4 h-[calc(100vh-80px)] flex flex-col gap-4">
       {/* Lesson header */}
       <motion.div
-        className="flex items-center gap-4"
+        className="flex items-start gap-3"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
         <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shrink-0"
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shrink-0 mt-0.5"
           style={{ background: `${world.theme.accentColor}30`, color: world.theme.accentColor }}
         >
           {lesson.number}
         </div>
-        <div className="min-w-0">
-          <h1 className="text-lg sm:text-xl font-black text-white leading-tight truncate">{lesson.title}</h1>
-          <p className="text-white/50 text-xs truncate">{world.name} · {world.concept}</p>
-        </div>
-        <div className="ml-auto flex items-center gap-3 shrink-0">
-          {existingStars > 0 && <StarRating stars={existingStars} size="sm" />}
-          <span className="text-sm font-bold text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full">
-            ⚡ {lesson.xpReward} XP
-          </span>
+        <div className="min-w-0 flex-1">
+          <h1 className="text-lg sm:text-xl font-black text-white leading-tight">{lesson.title}</h1>
+          <p className="text-white/50 text-xs mb-1">{world.name} · {world.concept}</p>
+          <div className="flex items-center gap-2 flex-wrap">
+            {existingStars > 0 && <StarRating stars={existingStars} size="sm" />}
+            <span className="text-xs font-bold text-purple-300 bg-purple-500/20 px-2.5 py-1 rounded-full">
+              ⚡ {lesson.xpReward} XP
+            </span>
+          </div>
         </div>
       </motion.div>
 

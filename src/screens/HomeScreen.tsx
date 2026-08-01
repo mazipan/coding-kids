@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { WORLDS } from '../data/worlds'
 import { getLessonsByWorld } from '../data/lessons'
@@ -168,26 +167,17 @@ export function HomeScreen({ progress, isWorldUnlocked, getLessonProgress, isLes
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
           >
-            <div className="flex items-center gap-4 mb-8">
-              <button
-                onClick={() => navigate('/app')}
-                className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors font-bold text-base sm:text-lg"
-              >
-                <ArrowLeft className="w-5 h-5 shrink-0" />
-                {t('nav.back')}
-              </button>
-              {activeWorld && (
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-3xl sm:text-4xl">{activeWorld.emoji}</span>
-                  <div className="min-w-0">
-                    <h2 className="text-xl sm:text-2xl font-black text-white truncate">{activeWorld.name}</h2>
-                    <p className="text-purple-300 text-sm font-semibold truncate">
-                      {t('common.learn')} {activeWorld.concept}
-                    </p>
-                  </div>
+            {activeWorld && (
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-3xl sm:text-4xl">{activeWorld.emoji}</span>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-black text-white truncate">{activeWorld.name}</h2>
+                  <p className="text-purple-300 text-sm font-semibold truncate">
+                    {t('common.learn')} {activeWorld.concept}
+                  </p>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {worldLessons.map((lesson, index) => {
