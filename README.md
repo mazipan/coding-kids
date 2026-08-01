@@ -2,7 +2,7 @@
 
 A fun, free coding adventure for kids ages 5–14. Learn programming with colorful visual blocks, earn XP, and explore 6 epic worlds — no downloads, no logins, no ads.
 
-**Live:** [coding.mazipan.space](https://coding.mazipan.space)
+**Live:** [coding.mazipan.space](https://coding.mazipan.space) -> https://coding-kids.netlify.app/ (_alternative_)
 
 ---
 
