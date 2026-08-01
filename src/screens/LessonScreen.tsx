@@ -18,6 +18,7 @@ import { calculateStars, calculateXPReward, getLevelInfo, XP_LEVELS } from '../d
 import { playSuccess, playError, playMove, playCollect, playLevelUp } from '../utils/sounds'
 import type { useProgress } from '../store/useProgress'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { localize } from '../i18n/localize'
 
 const STEP_DELAY = 350
 
@@ -31,7 +32,7 @@ interface LessonScreenProps {
 }
 
 export function LessonScreen({ lesson, world, onNavigate, completeLesson, existingProgress, nextLessonId }: LessonScreenProps) {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [gameState, setGameState] = useState<GameState>(buildInitialState(lesson))
   const [currentCode, setCurrentCode] = useState('')
   const [currentBlockCount, setCurrentBlockCount] = useState(0)
@@ -40,7 +41,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
   const [hintIndex, setHintIndex] = useState(0)
   const [showReward, setShowReward] = useState(false)
   const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '' })
-  const [mascotMessage, setMascotMessage] = useState(lesson.mascotMessage)
+  const [mascotMessage, setMascotMessage] = useState(() => localize(lesson.mascotMessage, language))
   const [mascotMood, setMascotMood] = useState<'happy' | 'thinking' | 'excited' | 'sad'>('happy')
   const [activeTab, setActiveTab] = useState<'blocks' | 'game'>('blocks')
   const runningRef = useRef(false)
@@ -151,7 +152,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
           stars,
           xp: xpEarned,
           leveledUp: result.leveledUp,
-          newLevel: newLevelInfo.name,
+          newLevel: localize(newLevelInfo.name, language),
           newBadge: newLevelInfo.badge,
         })
         setShowReward(true)
@@ -179,7 +180,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
     runningRef.current = false
     setIsRunning(false)
     setGameState(buildInitialState(lesson))
-    setMascotMessage(lesson.mascotMessage)
+    setMascotMessage(localize(lesson.mascotMessage, language))
     setMascotMood('happy')
   }
 
@@ -187,7 +188,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
     setShowHint(true)
     const next = (hintIndex + 1) % lesson.hints.length
     setHintIndex(next)
-    setMascotMessage(`${t('mascot.hint.prefix')} ${lesson.hints[hintIndex]}`)
+    setMascotMessage(`${t('mascot.hint.prefix')} ${localize(lesson.hints[hintIndex], language)}`)
     setMascotMood('thinking')
     switchToTab('game')
   }
@@ -223,8 +224,8 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
           {lesson.number}
         </div>
         <div className="min-w-0">
-          <h1 className="text-lg sm:text-xl font-black text-white leading-tight truncate">{lesson.title}</h1>
-          <p className="text-white/50 text-xs truncate">{world.name} · {world.concept}</p>
+          <h1 className="text-lg sm:text-xl font-black text-white leading-tight truncate">{localize(lesson.title, language)}</h1>
+          <p className="text-white/50 text-xs truncate">{localize(world.name, language)} · {localize(world.concept, language)}</p>
         </div>
         <div className="ml-auto flex items-center gap-3 shrink-0">
           {existingStars > 0 && <StarRating stars={existingStars} size="sm" />}
@@ -316,7 +317,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
                 exit={{ opacity: 0, height: 0 }}
                 className="rounded-xl p-3 bg-yellow-500/10 border border-yellow-400/30 text-yellow-200 text-sm font-semibold overflow-hidden"
               >
-                💡 {lesson.hints[hintIndex]}
+                💡 {localize(lesson.hints[hintIndex], language)}
               </motion.div>
             )}
           </AnimatePresence>
@@ -332,7 +333,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
       >
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-3">
           <div className="flex-1 text-xs text-white/40 leading-relaxed hidden lg:block truncate">
-            {lesson.story}
+            {localize(lesson.story, language)}
           </div>
 
           <div className="flex gap-2 w-full lg:w-auto lg:ml-auto">

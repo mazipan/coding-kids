@@ -7,6 +7,7 @@ import { StarRating } from '../components/StarRating'
 import type { WorldId, AppState } from '../types'
 import { useProgress } from '../store/useProgress'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { localize } from '../i18n/localize'
 
 interface HomeScreenProps {
   progress: ReturnType<typeof useProgress>['progress']
@@ -17,7 +18,7 @@ interface HomeScreenProps {
 }
 
 export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonProgress, isLessonUnlocked }: HomeScreenProps) {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [selectedWorld, setSelectedWorld] = useState<WorldId | null>(null)
 
   const activeWorld = selectedWorld ? WORLDS.find(w => w.id === selectedWorld) : null
@@ -128,12 +129,12 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                         </span>
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-black text-white mb-1">{world.name}</h3>
+                      <h3 className="text-lg sm:text-xl font-black text-white mb-1">{localize(world.name, language)}</h3>
                       <p className="text-sm font-semibold mb-1" style={{ color: world.theme.textColor }}>
-                        {world.tagline}
+                        {localize(world.tagline, language)}
                       </p>
                       <p className="text-xs mb-4 opacity-60" style={{ color: world.theme.textColor }}>
-                        {t('common.learn')} <strong>{world.concept}</strong>
+                        {t('common.learn')} <strong>{localize(world.concept, language)}</strong>
                       </p>
 
                       {unlocked && (
@@ -180,9 +181,9 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                 <div className="flex items-center gap-3 min-w-0">
                   <span className="text-3xl sm:text-4xl">{activeWorld.emoji}</span>
                   <div className="min-w-0">
-                    <h2 className="text-xl sm:text-2xl font-black text-white truncate">{activeWorld.name}</h2>
+                    <h2 className="text-xl sm:text-2xl font-black text-white truncate">{localize(activeWorld.name, language)}</h2>
                     <p className="text-purple-300 text-sm font-semibold truncate">
-                      {t('common.learn')} {activeWorld.concept}
+                      {t('common.learn')} {localize(activeWorld.concept, language)}
                     </p>
                   </div>
                 </div>
@@ -248,8 +249,8 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                       )}
                     </div>
 
-                    <h3 className="font-black text-white text-sm sm:text-base mb-1">{lesson.title}</h3>
-                    <p className="text-white/50 text-xs leading-relaxed line-clamp-2">{lesson.story}</p>
+                    <h3 className="font-black text-white text-sm sm:text-base mb-1">{localize(lesson.title, language)}</h3>
+                    <p className="text-white/50 text-xs leading-relaxed line-clamp-2">{localize(lesson.story, language)}</p>
 
                     <div className="mt-3 flex items-center justify-between">
                       <span className="text-xs font-bold" style={{ color: activeWorld?.theme.accentColor }}>
