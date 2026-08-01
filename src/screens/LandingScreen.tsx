@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { MousePointerClick, Trophy, Globe, Smartphone, Map, Grip, Zap, Gift, ShieldCheck, EyeOff } from 'lucide-react'
 import { WORLDS } from '../data/worlds'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { localize } from '../i18n/localize'
 import { Logo } from '../components/Logo'
 
 interface LandingScreenProps {
@@ -388,12 +389,12 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
                       {t('common.ages')} {world.ageRange}
                     </span>
                   </div>
-                  <h3 className="font-bold text-base text-white mb-1">{world.name}</h3>
+                  <h3 className="font-bold text-base text-white mb-1">{localize(world.name, language)}</h3>
                   <p
                     className="text-xs mb-3 leading-relaxed"
                     style={{ color: `${world.theme.textColor}99` }}
                   >
-                    {world.tagline}
+                    {localize(world.tagline, language)}
                   </p>
                   <div className="flex items-center gap-1.5">
                     <span
@@ -406,7 +407,7 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
                       className="text-xs font-bold"
                       style={{ color: world.theme.accentColor }}
                     >
-                      {world.concept}
+                      {localize(world.concept, language)}
                     </span>
                   </div>
                 </div>

@@ -1,5 +1,7 @@
 export type WorldId = 'jungle' | 'space' | 'ocean' | 'caves' | 'factory' | 'portal'
 
+export type LocalizedString = { en: string; id: string }
+
 export interface WorldTheme {
   bgGradient: string
   cellBg: string
@@ -10,11 +12,11 @@ export interface WorldTheme {
 
 export interface World {
   id: WorldId
-  name: string
+  name: LocalizedString
   emoji: string
-  tagline: string
+  tagline: LocalizedString
   ageRange: string
-  concept: string
+  concept: LocalizedString
   character: string
   characterName: string
   itemEmoji: string
@@ -43,9 +45,9 @@ export interface Lesson {
   id: string
   worldId: WorldId
   number: number
-  title: string
-  story: string
-  mascotMessage: string
+  title: LocalizedString
+  story: LocalizedString
+  mascotMessage: LocalizedString
   gridRows: number
   gridCols: number
   cells: CellType[][]
@@ -57,7 +59,7 @@ export interface Lesson {
   availableCategories: string[]
   optimalBlockCount: number
   xpReward: number
-  hints: string[]
+  hints: LocalizedString[]
   starThresholds: [number, number]
 }
 
