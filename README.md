@@ -2,7 +2,7 @@
 
 A fun, free coding adventure for kids ages 5–14. Learn programming with colorful visual blocks, earn XP, and explore 6 epic worlds — no downloads, no logins, no ads.
 
-**Live:** deploy to Netlify in one click (see below)
+**Live:** [coding.mazipan.space](https://coding.mazipan.space)
 
 ---
 
@@ -46,20 +46,6 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173) — landing page at `/`, game at `/app`.
 
-## Deploy to Netlify
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start)
-
-Or manually:
-
-1. Push this repo to GitHub
-2. Connect to Netlify → **New site from Git**
-3. Build command: `npm run build`
-4. Publish directory: `dist`
-5. Deploy — the `netlify.toml` handles everything else
-
-The SPA redirect in `netlify.toml` ensures `/app` works on hard refresh.
-
 ## Project Structure
 
 ```
@@ -78,3 +64,7 @@ src/
 ## License
 
 MIT
+
+---
+
+By Irfan Maulana
