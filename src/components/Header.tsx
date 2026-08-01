@@ -27,7 +27,7 @@ export function Header({ progress }: HeaderProps) {
     } else if (isWorldPage) {
       navigate('/app')
     } else {
-      navigate('/app')
+      navigate('/')
     }
   }
 
