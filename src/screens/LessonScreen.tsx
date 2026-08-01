@@ -29,9 +29,10 @@ interface LessonScreenProps {
   completeLesson: ReturnType<typeof useProgress>['completeLesson']
   existingProgress?: { stars: number; completed: boolean }
   nextLessonNumber?: number
+  nextWorld?: World
 }
 
-export function LessonScreen({ lesson, world, completeLesson, existingProgress, nextLessonNumber }: LessonScreenProps) {
+export function LessonScreen({ lesson, world, completeLesson, existingProgress, nextLessonNumber, nextWorld }: LessonScreenProps) {
   const navigate = useNavigate()
   const { t, language } = useLanguage()
   const [gameState, setGameState] = useState<GameState>(buildInitialState(lesson))
@@ -207,6 +208,8 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
     setShowReward(false)
     if (nextLessonNumber) {
       navigate(`/app/world/${lesson.worldId}/${nextLessonNumber}`)
+    } else if (nextWorld) {
+      navigate(`/app/world/${nextWorld.id}`)
     } else {
       navigate(`/app/world/${lesson.worldId}`)
     }
@@ -404,6 +407,9 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         newLevelName={rewardData.newLevel}
         newLevelBadge={rewardData.newBadge}
         missingCategories={rewardData.missingCategories}
+        isWorldComplete={!nextLessonNumber}
+        nextWorldEmoji={nextWorld?.emoji}
+        nextWorldName={nextWorld ? localize(nextWorld.name, language) : undefined}
         onNext={handleNext}
         onRetry={handleRetry}
       />

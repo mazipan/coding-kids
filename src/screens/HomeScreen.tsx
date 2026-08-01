@@ -25,6 +25,9 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
   const activeWorld = selectedWorldId ? WORLDS.find(w => w.id === selectedWorldId) : null
   const worldLessons = selectedWorldId ? getLessonsByWorld(selectedWorldId) : []
   const mainWorlds = WORLDS.filter(w => !w.isBonus)
+  const allLessonsComplete = worldLessons.length > 0 && worldLessons.every(l => getLessonProgress(l.id)?.completed)
+  const currentWorldIdx = activeWorld && !activeWorld.isBonus ? mainWorlds.findIndex(w => w.id === activeWorld.id) : -1
+  const nextMainWorld = currentWorldIdx >= 0 ? (mainWorlds[currentWorldIdx + 1] ?? null) : null
   const bonusWorlds = WORLDS.filter(w => w.isBonus)
   const bonusUnlocked = isBonusWorldUnlocked()
 
@@ -342,6 +345,30 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                   </div>
                 )}
               </div>
+            )}
+
+            {allLessonsComplete && nextMainWorld && (
+              <motion.div
+                className="mb-6 rounded-2xl p-5 text-center"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(16,185,129,0.15), rgba(20,184,166,0.15))',
+                  border: '1px solid rgba(52,211,153,0.4)',
+                }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="text-2xl mb-1">🎉</div>
+                <p className="text-emerald-200 font-black text-base mb-3">{t('reward.world.complete')}</p>
+                <motion.button
+                  onClick={() => navigate(`/app/world/${nextMainWorld.id}`)}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-white text-sm bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 transition-all shadow-lg shadow-emerald-900/40"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {nextMainWorld.emoji} {t('reward.next.world')}: {localize(nextMainWorld.name, language)}
+                </motion.button>
+              </motion.div>
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
