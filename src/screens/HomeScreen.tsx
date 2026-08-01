@@ -246,6 +246,22 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                         </span>
                       )}
                     </div>
+
+                    {unlocked && (
+                      <div className="mt-3">
+                        <span
+                          className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-black text-white"
+                          style={{
+                            background: completed
+                              ? `${activeWorld?.theme.accentColor}40`
+                              : 'linear-gradient(135deg, #7C3AED, #EC4899)',
+                            color: completed ? activeWorld?.theme.accentColor : 'white',
+                          }}
+                        >
+                          {completed ? t('common.play.again') : t('common.play')}
+                        </span>
+                      </div>
+                    )}
                   </motion.button>
                 )
               })}
