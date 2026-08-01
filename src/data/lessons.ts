@@ -612,7 +612,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Collect all crystals first, then check!', id: 'Kumpulkan semua kristal dulu, lalu periksa!' },
       { en: 'Use IF to check if your count is 3!', id: 'Gunakan JIKA untuk memeriksa apakah hitunganmu 3!' },
     ],
-    starThresholds: [12, 8],
+    starThresholds: [17, 12, 10, 8],
   },
   {
     id: 'caves-2',
@@ -645,7 +645,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Plan the path from top to bottom!', id: 'Rencanakan jalur dari atas ke bawah!' },
       { en: 'Navigate through the cave to collect all crystals!', id: 'Navigasi melalui gua untuk mengumpulkan semua kristal!' },
     ],
-    starThresholds: [20, 14],
+    starThresholds: [28, 20, 17, 14],
   },
   {
     id: 'caves-3',
@@ -685,7 +685,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Navigate around obstacles to reach each crystal!', id: 'Navigasi menghindari rintangan untuk mencapai setiap kristal!' },
       { en: 'Plan your route carefully to avoid blocked paths!', id: 'Rencanakan rutenya dengan hati-hati untuk menghindari jalur yang terblokir!' },
     ],
-    starThresholds: [35, 25],
+    starThresholds: [49, 35, 30, 25],
   },
   {
     id: 'caves-4',
@@ -720,7 +720,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Collect all 5 crystals in order!', id: 'Kumpulkan semua 5 kristal secara urut!' },
       { en: 'Plan a route that visits each crystal position!', id: 'Rencanakan rute yang mengunjungi setiap posisi kristal!' },
     ],
-    starThresholds: [42, 30],
+    starThresholds: [59, 42, 36, 30],
   },
   {
     id: 'caves-5',
@@ -762,7 +762,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Navigate around obstacles to all crystals!', id: 'Navigasi menghindari rintangan ke semua kristal!' },
       { en: 'Plan the most efficient route through the cave!', id: 'Rencanakan rute paling efisien melalui gua!' },
     ],
-    starThresholds: [55, 40],
+    starThresholds: [77, 55, 48, 40],
   },
 
   // ─────────────────────────────────────────────
@@ -798,7 +798,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Create a function, then call it multiple times!', id: 'Buat fungsi, lalu panggil beberapa kali!' },
       { en: 'Define a function that moves right and collects, then call it twice!', id: 'Definisikan fungsi yang bergerak ke kanan dan mengumpulkan, lalu panggil dua kali!' },
     ],
-    starThresholds: [12, 8],
+    starThresholds: [17, 12, 10, 8],
   },
   {
     id: 'factory-2',
@@ -830,7 +830,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Create a function that moves right once and collects!', id: 'Buat fungsi yang bergerak ke kanan sekali dan mengumpulkan!' },
       { en: 'Then call that function in a repeat loop 5 times!', id: 'Lalu panggil fungsi itu dalam perulangan ulangi 5 kali!' },
     ],
-    starThresholds: [15, 5],
+    starThresholds: [21, 15, 10, 5],
   },
   {
     id: 'factory-3',
@@ -870,7 +870,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Create functions for common move patterns!', id: 'Buat fungsi untuk pola gerakan umum!' },
       { en: 'Use functions to organize your code neatly!', id: 'Gunakan fungsi untuk mengorganisir kodenya dengan rapi!' },
     ],
-    starThresholds: [45, 30],
+    starThresholds: [63, 45, 38, 30],
   },
   {
     id: 'factory-4',
@@ -905,7 +905,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Create reusable functions to navigate to each gear!', id: 'Buat fungsi yang dapat digunakan kembali untuk navigasi ke setiap gear!' },
       { en: 'Think about which movements repeat and turn them into functions!', id: 'Pikirkan gerakan mana yang berulang dan jadikan fungsi!' },
     ],
-    starThresholds: [50, 35],
+    starThresholds: [70, 50, 43, 35],
   },
   {
     id: 'factory-5',
@@ -949,7 +949,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Navigate carefully around obstacles!', id: 'Navigasi hati-hati menghindari rintangan!' },
       { en: 'Use functions to organize collecting each gear!', id: 'Gunakan fungsi untuk mengorganisir pengumpulan setiap gear!' },
     ],
-    starThresholds: [70, 50],
+    starThresholds: [98, 70, 60, 50],
   },
 
   // ─────────────────────────────────────────────
@@ -986,7 +986,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Create a list to store collected items!', id: 'Buat daftar untuk menyimpan item yang dikumpulkan!' },
       { en: 'Add each crystal to your list as you collect it!', id: 'Tambahkan setiap kristal ke daftarmu saat mengumpulkannya!' },
     ],
-    starThresholds: [14, 8],
+    starThresholds: [20, 14, 11, 8],
   },
   {
     id: 'portal-2',
@@ -1020,7 +1020,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Use a list to keep track of collected crystals!', id: 'Gunakan daftar untuk melacak kristal yang sudah dikumpulkan!' },
       { en: 'Navigate to each crystal and add it to your list!', id: 'Navigasi ke setiap kristal dan tambahkan ke daftarmu!' },
     ],
-    starThresholds: [38, 25],
+    starThresholds: [53, 38, 32, 25],
   },
   {
     id: 'portal-3',
@@ -1061,7 +1061,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Navigate around obstacles carefully!', id: 'Navigasi menghindari rintangan dengan hati-hati!' },
       { en: 'Use lists to organize your route planning!', id: 'Gunakan daftar untuk mengorganisir perencanaan rute!' },
     ],
-    starThresholds: [60, 40],
+    starThresholds: [84, 60, 50, 40],
   },
   {
     id: 'portal-4',
@@ -1106,7 +1106,7 @@ export const LESSONS: Lesson[] = [
       { en: 'Plan your full route before coding!', id: 'Rencanakan rute lengkapmu sebelum membuat kode!' },
       { en: 'Use functions, loops, and conditions together!', id: 'Gunakan fungsi, perulangan, dan kondisi bersama!' },
     ],
-    starThresholds: [90, 60],
+    starThresholds: [126, 90, 75, 60],
   },
 
   // ─────────────────────────────────────────────

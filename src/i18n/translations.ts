@@ -80,11 +80,11 @@ const en: Translations = {
   'reward.levelup': '🎉 LEVEL UP!',
   'reward.next': 'Next',
   'reward.retry': 'Retry',
-  'reward.criteria.loops': '💡 Try using a 🔄 Repeat block to earn 3 stars!',
-  'reward.criteria.variables': '💡 Try using a 📦 Variable block to earn 3 stars!',
-  'reward.criteria.logic': '💡 Try using an ❓ If/Else block to earn 3 stars!',
-  'reward.criteria.functions': '💡 Try defining a 🔧 Function to earn 3 stars!',
-  'reward.criteria.lists': '💡 Try using a 📋 List block to earn 3 stars!',
+  'reward.criteria.loops': '💡 Try using a 🔄 Repeat block to earn more stars!',
+  'reward.criteria.variables': '💡 Try using a 📦 Variable block to earn more stars!',
+  'reward.criteria.logic': '💡 Try using an ❓ If/Else block to earn more stars!',
+  'reward.criteria.functions': '💡 Try defining a 🔧 Function to earn more stars!',
+  'reward.criteria.lists': '💡 Try using a 📋 List block to earn more stars!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Jungle Adventure',
@@ -149,6 +149,8 @@ const en: Translations = {
   // ── Mascot messages ──────────────────────────
   'mascot.running': "Here we go! Watching your code run... 👀",
   'mascot.error': "Oops! Something went wrong with the code. Try again! 😅",
+  'mascot.success.5': "LEGENDARY! 🌟⭐ That's a PERFECT 5-star solution! You're a coding genius!",
+  'mascot.success.4': "Outstanding! 🏆 So close to perfect! Can you squeeze out one more star?",
   'mascot.success.3': "PERFECT! 🌟 You're an absolute coding superstar!",
   'mascot.success.2': "Awesome job! 🎊 You solved it! Can you do it with fewer blocks?",
   'mascot.success.1': "You did it! 🎉 Great work! Try to use fewer blocks for more stars!",
@@ -169,6 +171,12 @@ const en: Translations = {
   'reward.msg.3.0': 'Amazing! 🤩',
   'reward.msg.3.1': 'PERFECT! 🏆',
   'reward.msg.3.2': "YOU'RE A STAR! 🌟",
+  'reward.msg.4.0': 'Outstanding! 🔥',
+  'reward.msg.4.1': 'Almost perfect! ⚡',
+  'reward.msg.4.2': 'So close! 💫',
+  'reward.msg.5.0': 'LEGENDARY! 🌟',
+  'reward.msg.5.1': 'PERFECT CODE! 🏆',
+  'reward.msg.5.2': 'CODING GENIUS! 🧠',
   'reward.fallback': 'Done!',
 
   // ── Landing section labels ────────────────────
@@ -262,11 +270,11 @@ const id: Translations = {
   'reward.levelup': '🎉 NAIK LEVEL!',
   'reward.next': 'Lanjut',
   'reward.retry': 'Ulangi',
-  'reward.criteria.loops': '💡 Coba gunakan blok 🔄 Ulangi untuk mendapat 3 bintang!',
-  'reward.criteria.variables': '💡 Coba gunakan blok 📦 Variabel untuk mendapat 3 bintang!',
-  'reward.criteria.logic': '💡 Coba gunakan blok ❓ Jika/Selain untuk mendapat 3 bintang!',
-  'reward.criteria.functions': '💡 Coba definisikan 🔧 Fungsi untuk mendapat 3 bintang!',
-  'reward.criteria.lists': '💡 Coba gunakan blok 📋 Daftar untuk mendapat 3 bintang!',
+  'reward.criteria.loops': '💡 Coba gunakan blok 🔄 Ulangi untuk mendapat lebih banyak bintang!',
+  'reward.criteria.variables': '💡 Coba gunakan blok 📦 Variabel untuk mendapat lebih banyak bintang!',
+  'reward.criteria.logic': '💡 Coba gunakan blok ❓ Jika/Selain untuk mendapat lebih banyak bintang!',
+  'reward.criteria.functions': '💡 Coba definisikan 🔧 Fungsi untuk mendapat lebih banyak bintang!',
+  'reward.criteria.lists': '💡 Coba gunakan blok 📋 Daftar untuk mendapat lebih banyak bintang!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Petualangan Hutan',
@@ -331,6 +339,8 @@ const id: Translations = {
   // ── Mascot messages ──────────────────────────
   'mascot.running': "Ayo! Melihat kode berjalan... 👀",
   'mascot.error': "Aduh! Ada yang salah. Coba lagi! 😅",
+  'mascot.success.5': "LEGENDARIS! 🌟⭐ Solusi SEMPURNA 5 bintang! Kamu jenius coding!",
+  'mascot.success.4': "Luar biasa! 🏆 Hampir sempurna! Bisa dapat satu bintang lagi?",
   'mascot.success.3': "SEMPURNA! 🌟 Kamu bintang coding sejati!",
   'mascot.success.2': "Kerja bagus! 🎊 Berhasil! Bisa pakai blok lebih sedikit?",
   'mascot.success.1': "Kamu bisa! 🎉 Bagus! Coba pakai lebih sedikit blok untuk bintang lebih banyak!",
@@ -351,6 +361,12 @@ const id: Translations = {
   'reward.msg.3.0': 'Luar biasa! 🤩',
   'reward.msg.3.1': 'SEMPURNA! 🏆',
   'reward.msg.3.2': "KAMU BINTANGNYA! 🌟",
+  'reward.msg.4.0': 'Mengagumkan! 🔥',
+  'reward.msg.4.1': 'Hampir sempurna! ⚡',
+  'reward.msg.4.2': 'Hampir! 💫',
+  'reward.msg.5.0': 'LEGENDARIS! 🌟',
+  'reward.msg.5.1': 'KODE SEMPURNA! 🏆',
+  'reward.msg.5.2': 'JENIUS CODING! 🧠',
   'reward.fallback': 'Selesai!',
 
   // ── Landing section labels ────────────────────
