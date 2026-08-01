@@ -1,4 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { Dialog, Modal, ModalOverlay } from 'react-aria-components'
 import { StarRating } from './StarRating'
 import { Confetti } from './Confetti'
 import { useLanguage } from '../i18n/LanguageProvider'
@@ -23,21 +24,19 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
   return (
     <>
       <Confetti active={open && stars >= 2} />
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-40 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-
+      {/* ModalOverlay provides focus trap, body-scroll lock, and portal rendering.
+          isDismissable=false keeps the modal open until the player explicitly acts. */}
+      <ModalOverlay
+        isOpen={open}
+        isDismissable={false}
+        className="ck-overlay fixed inset-0 z-40 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      >
+        <Modal>
+          <Dialog aria-label={message} className="outline-none">
             <motion.div
               className="relative bg-gradient-to-b from-[#1C1440] to-[#130D2E] rounded-3xl p-6 sm:p-8 max-w-sm w-full border border-purple-500/30 shadow-2xl text-center"
               initial={{ scale: 0.5, y: 50, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             >
               <motion.div
@@ -97,9 +96,9 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
                 </button>
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </Dialog>
+        </Modal>
+      </ModalOverlay>
     </>
   )
 }
