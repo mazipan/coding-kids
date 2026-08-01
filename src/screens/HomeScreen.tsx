@@ -230,7 +230,20 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                       >
                         {completed ? '✓' : index + 1}
                       </div>
-                      <StarRating stars={stars} size="sm" />
+
+                      {unlocked && (
+                        <span
+                          className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-black"
+                          style={{
+                            background: completed
+                              ? `${activeWorld?.theme.accentColor}40`
+                              : 'linear-gradient(135deg, #7C3AED, #EC4899)',
+                            color: completed ? activeWorld?.theme.accentColor : 'white',
+                          }}
+                        >
+                          {completed ? t('common.play.again') : t('common.play')}
+                        </span>
+                      )}
                     </div>
 
                     <h3 className="font-black text-white text-sm sm:text-base mb-1">{lesson.title}</h3>
@@ -240,11 +253,14 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                       <span className="text-xs font-bold" style={{ color: activeWorld?.theme.accentColor }}>
                         {t('common.xp.reward', { xp: lesson.xpReward })}
                       </span>
-                      {lp?.attempts && (
-                        <span className="text-xs text-white/30">
-                          {lp.attempts} {t('common.tries')}
-                        </span>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {stars > 0 && <StarRating stars={stars} size="sm" />}
+                        {lp?.attempts && (
+                          <span className="text-xs text-white/30">
+                            {lp.attempts} {t('common.tries')}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </motion.button>
                 )

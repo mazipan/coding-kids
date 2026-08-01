@@ -102,6 +102,8 @@ const en: Translations = {
   'world.portal.concept': 'Arrays & Lists',
 
   // ── Common labels ────────────────────────────
+  'common.play': '▶ Play',
+  'common.play.again': '▶ Play Again',
   'common.ages': 'Ages',
   'common.learn': 'Learn:',
   'common.level': 'Level',
@@ -260,6 +262,8 @@ const id: Translations = {
   'world.portal.concept': 'Array & Daftar',
 
   // ── Common labels ────────────────────────────
+  'common.play': '▶ Main',
+  'common.play.again': '▶ Main Lagi',
   'common.ages': 'Usia',
   'common.learn': 'Pelajari:',
   'common.level': 'Level',
