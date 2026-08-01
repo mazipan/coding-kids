@@ -152,6 +152,7 @@ const en: Translations = {
   'mascot.success.3': "PERFECT! 🌟 You're an absolute coding superstar!",
   'mascot.success.2': "Awesome job! 🎊 You solved it! Can you do it with fewer blocks?",
   'mascot.success.1': "You did it! 🎉 Great work! Try to use fewer blocks for more stars!",
+  'mascot.success.1.criteria': "You solved it! 🎉 Now try using the special block to earn more stars! 💡",
   'mascot.hint.prefix': '💡 Hint:',
 
   // ── Home screen ──────────────────────────────
@@ -333,6 +334,7 @@ const id: Translations = {
   'mascot.success.3': "SEMPURNA! 🌟 Kamu bintang coding sejati!",
   'mascot.success.2': "Kerja bagus! 🎊 Berhasil! Bisa pakai blok lebih sedikit?",
   'mascot.success.1': "Kamu bisa! 🎉 Bagus! Coba pakai lebih sedikit blok untuk bintang lebih banyak!",
+  'mascot.success.1.criteria': "Berhasil! 🎉 Sekarang coba pakai blok spesial untuk bintang lebih banyak! 💡",
   'mascot.hint.prefix': '💡 Petunjuk:',
 
   // ── Home screen ──────────────────────────────

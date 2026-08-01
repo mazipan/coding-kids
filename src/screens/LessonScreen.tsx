@@ -143,7 +143,10 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         setGameState(s => ({ ...s, status: 'success' }))
         playSuccess()
 
-        setMascotMessage(t(`mascot.success.${stars}`))
+        const mascotKey = stars === 1 && missing.length > 0
+          ? 'mascot.success.1.criteria'
+          : `mascot.success.${stars}`
+        setMascotMessage(t(mascotKey))
         setMascotMood('excited')
 
         await sleep(800)

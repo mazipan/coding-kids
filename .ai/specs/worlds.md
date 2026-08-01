@@ -39,6 +39,7 @@ Defined in `src/data/lessons.ts`. Each lesson:
   goalPos?: [row, col]          // required when goalType = 'reach_goal'
   goalCount?: number            // required when goalType = 'collect_any'
   availableCategories: string[] // controls which Blockly categories appear
+  requiredCategories?: string[] // categories the kid MUST use to earn 3 stars
   optimalBlockCount: number     // fewest blocks needed for a perfect solution
   xpReward: number              // base XP for 1 star
   hints: string[]               // cycled through when the Hint button is pressed
@@ -55,6 +56,8 @@ Defined in `src/data/lessons.ts`. Each lesson:
 | ≤ silver | 3 ⭐⭐⭐ |
 | ≤ bronze | 2 ⭐⭐ |
 | > bronze | 1 ⭐ |
+
+If `requiredCategories` is set, the kid must use at least one block from each listed category or the result is capped at 1 ⭐ regardless of block count. The RewardModal shows a category-specific hint when this happens. Set `requiredCategories` to the concept the world is teaching — e.g. `['loops']` for Space, `['variables']` for Ocean.
 
 ### goalType options
 
