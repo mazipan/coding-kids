@@ -80,6 +80,11 @@ const en: Translations = {
   'reward.levelup': '🎉 LEVEL UP!',
   'reward.next': 'Next',
   'reward.retry': 'Retry',
+  'reward.criteria.loops': '💡 Try using a 🔄 Repeat block to earn 3 stars!',
+  'reward.criteria.variables': '💡 Try using a 📦 Variable block to earn 3 stars!',
+  'reward.criteria.logic': '💡 Try using an ❓ If/Else block to earn 3 stars!',
+  'reward.criteria.functions': '💡 Try defining a 🔧 Function to earn 3 stars!',
+  'reward.criteria.lists': '💡 Try using a 📋 List block to earn 3 stars!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Jungle Adventure',
@@ -256,6 +261,11 @@ const id: Translations = {
   'reward.levelup': '🎉 NAIK LEVEL!',
   'reward.next': 'Lanjut',
   'reward.retry': 'Ulangi',
+  'reward.criteria.loops': '💡 Coba gunakan blok 🔄 Ulangi untuk mendapat 3 bintang!',
+  'reward.criteria.variables': '💡 Coba gunakan blok 📦 Variabel untuk mendapat 3 bintang!',
+  'reward.criteria.logic': '💡 Coba gunakan blok ❓ Jika/Selain untuk mendapat 3 bintang!',
+  'reward.criteria.functions': '💡 Coba definisikan 🔧 Fungsi untuk mendapat 3 bintang!',
+  'reward.criteria.lists': '💡 Coba gunakan blok 📋 Daftar untuk mendapat 3 bintang!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Petualangan Hutan',

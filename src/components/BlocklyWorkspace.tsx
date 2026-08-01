@@ -31,7 +31,7 @@ export interface BlocklyWorkspaceHandle {
 
 interface BlocklyWorkspaceProps {
   categories: string[]
-  onCodeChange: (code: string, blockCount: number) => void
+  onCodeChange: (code: string, blockCount: number, usedBlockTypes: string[]) => void
 }
 
 export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorkspaceProps>(
@@ -92,10 +92,12 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
       const updateCode = () => {
         try {
           const code = javascriptGenerator.workspaceToCode(workspace)
-          const count = workspace.getAllBlocks(false).length
+          const allBlocks = workspace.getAllBlocks(false)
+          const count = allBlocks.length
+          const usedBlockTypes = allBlocks.map(b => b.type)
           setBlockCount(count)
           setGeneratedCode(code)
-          onCodeChange(code, count)
+          onCodeChange(code, count, usedBlockTypes)
         } catch {
           // Ignore generation errors
         }

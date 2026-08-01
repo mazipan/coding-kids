@@ -15,7 +15,7 @@ import {
   applyAction,
   checkWin,
 } from '../engine/gameEngine'
-import { calculateStars, calculateXPReward, getLevelInfo, XP_LEVELS } from '../data/xpSystem'
+import { calculateStars, calculateXPReward, getLevelInfo, getMissingCategories, XP_LEVELS } from '../data/xpSystem'
 import { playSuccess, playError, playMove, playCollect, playLevelUp } from '../utils/sounds'
 import type { useProgress } from '../store/useProgress'
 import { useLanguage } from '../i18n/LanguageProvider'
@@ -37,20 +37,22 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const [gameState, setGameState] = useState<GameState>(buildInitialState(lesson))
   const [currentCode, setCurrentCode] = useState('')
   const [currentBlockCount, setCurrentBlockCount] = useState(0)
+  const [currentUsedBlockTypes, setCurrentUsedBlockTypes] = useState<string[]>([])
   const [isRunning, setIsRunning] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [hintIndex, setHintIndex] = useState(0)
   const [showReward, setShowReward] = useState(false)
-  const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '' })
+  const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '', missingCategories: [] as string[] })
   const [mascotMessage, setMascotMessage] = useState(() => localize(lesson.mascotMessage, language))
   const [mascotMood, setMascotMood] = useState<'happy' | 'thinking' | 'excited' | 'sad'>('happy')
   const [activeTab, setActiveTab] = useState<'blocks' | 'game'>('blocks')
   const runningRef = useRef(false)
   const blocklyRef = useRef<BlocklyWorkspaceHandle>(null)
 
-  const handleCodeChange = useCallback((code: string, blockCount: number) => {
+  const handleCodeChange = useCallback((code: string, blockCount: number, usedBlockTypes: string[]) => {
     setCurrentCode(code)
     setCurrentBlockCount(blockCount)
+    setCurrentUsedBlockTypes(usedBlockTypes)
   }, [])
 
   const switchToTab = (tab: 'blocks' | 'game') => {
@@ -132,8 +134,11 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
       const won = checkWin(state, lesson)
 
       if (won) {
-        const stars = calculateStars(currentBlockCount, lesson.starThresholds)
+        const stars = calculateStars(currentBlockCount, lesson.starThresholds, currentUsedBlockTypes, lesson.requiredCategories)
         const xpEarned = calculateXPReward(lesson.xpReward, stars)
+        const missing = lesson.requiredCategories && stars < 3
+          ? getMissingCategories(currentUsedBlockTypes, lesson.requiredCategories)
+          : []
 
         setGameState(s => ({ ...s, status: 'success' }))
         playSuccess()
@@ -155,6 +160,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
           leveledUp: result.leveledUp,
           newLevel: localize(newLevelInfo.name, language),
           newBadge: newLevelInfo.badge,
+          missingCategories: missing,
         })
         setShowReward(true)
       } else {
@@ -392,6 +398,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         leveledUp={rewardData.leveledUp}
         newLevelName={rewardData.newLevel}
         newLevelBadge={rewardData.newBadge}
+        missingCategories={rewardData.missingCategories}
         onNext={handleNext}
         onRetry={handleRetry}
       />

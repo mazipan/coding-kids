@@ -52,7 +52,30 @@ export function getNextLevelInfo(xp: number): XPLevel | null {
   return XP_LEVELS[current.level] ?? null
 }
 
-export function calculateStars(blockCount: number, thresholds: [number, number]): number {
+const CATEGORY_BLOCK_TYPES: Record<string, string[]> = {
+  loops: ['controls_repeat_ext', 'controls_whileUntil', 'controls_for'],
+  variables: ['variables_get', 'variables_set', 'math_change'],
+  logic: ['controls_if', 'controls_ifelse'],
+  functions: ['procedures_defnoreturn', 'procedures_defreturn', 'procedures_callnoreturn', 'procedures_callreturn'],
+  lists: ['lists_create_with', 'lists_getIndex', 'lists_setIndex', 'lists_repeat', 'lists_length'],
+}
+
+export function getMissingCategories(usedBlockTypes: string[], requiredCategories: string[]): string[] {
+  return requiredCategories.filter(cat => {
+    const catBlocks = CATEGORY_BLOCK_TYPES[cat] ?? []
+    return !catBlocks.some(bt => usedBlockTypes.includes(bt))
+  })
+}
+
+export function calculateStars(
+  blockCount: number,
+  thresholds: [number, number],
+  usedBlockTypes?: string[],
+  requiredCategories?: string[]
+): number {
+  if (usedBlockTypes && requiredCategories && requiredCategories.length > 0) {
+    if (getMissingCategories(usedBlockTypes, requiredCategories).length > 0) return 1
+  }
   if (blockCount <= thresholds[1]) return 3
   if (blockCount <= thresholds[0]) return 2
   return 1
