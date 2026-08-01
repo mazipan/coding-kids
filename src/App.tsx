@@ -6,7 +6,7 @@ import { LessonScreen } from './screens/LessonScreen'
 import { LandingScreen } from './screens/LandingScreen'
 import { useProgress } from './store/useProgress'
 import { getLessonByNumber, getLessonsByWorld } from './data/lessons'
-import { getWorld } from './data/worlds'
+import { getWorld, WORLDS } from './data/worlds'
 import type { WorldId } from './types'
 
 function GameLayout() {
@@ -97,13 +97,19 @@ function LessonRoute() {
   const idx = worldLessons.findIndex(l => l.id === lesson.id)
   const nextLesson = worldLessons[idx + 1]
 
+  const mainWorlds = WORLDS.filter(w => !w.isBonus)
+  const currentWorldIdx = mainWorlds.findIndex(w => w.id === worldId)
+  const nextWorld = !nextLesson ? (mainWorlds[currentWorldIdx + 1] ?? undefined) : undefined
+
   return (
     <LessonScreen
+      key={lesson.id}
       lesson={lesson}
       world={world}
       completeLesson={completeLesson}
       existingProgress={getLessonProgress(lesson.id)}
       nextLessonNumber={nextLesson?.number}
+      nextWorld={nextWorld}
     />
   )
 }
