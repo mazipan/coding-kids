@@ -79,7 +79,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
 
     const initial = buildInitialState(lesson)
     setGameState({ ...initial, status: 'running' })
-    setMascotMessage("Here we go! Watching your code run... 👀")
+    setMascotMessage(t('mascot.running'))
     setMascotMood('thinking')
 
     await sleep(300)
@@ -88,7 +88,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
 
     if (error) {
       setGameState(s => ({ ...s, status: 'crashed', errorMessage: `Code error: ${error}` }))
-      setMascotMessage("Oops! Something went wrong with the code. Try again! 😅")
+      setMascotMessage(t('mascot.error'))
       setMascotMood('sad')
       playError()
       setIsRunning(false)
@@ -135,13 +135,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
         setGameState(s => ({ ...s, status: 'success' }))
         playSuccess()
 
-        setMascotMessage(
-          stars === 3
-            ? "PERFECT! 🌟 You're an absolute coding superstar!"
-            : stars === 2
-            ? "Awesome job! 🎊 You solved it! Can you do it with fewer blocks?"
-            : "You did it! 🎉 Great work! Try to use fewer blocks for more stars!"
-        )
+        setMascotMessage(t(`mascot.success.${stars}`))
         setMascotMood('excited')
 
         await sleep(800)
@@ -192,7 +186,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
     setShowHint(true)
     const next = (hintIndex + 1) % lesson.hints.length
     setHintIndex(next)
-    setMascotMessage(`💡 Hint: ${lesson.hints[hintIndex]}`)
+    setMascotMessage(`${t('mascot.hint.prefix')} ${lesson.hints[hintIndex]}`)
     setMascotMood('thinking')
     switchToTab('game')
   }

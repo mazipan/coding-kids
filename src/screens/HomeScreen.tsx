@@ -39,13 +39,21 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
             🚀
           </motion.div>
           <h1 className="text-4xl sm:text-5xl font-black text-white mb-3 leading-tight">
-            Welcome to{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-              CodeKids!
-            </span>
+            {t('home.welcome').split('CodeKids').map((part, i, arr) =>
+              i < arr.length - 1 ? (
+                <span key={i}>
+                  {part}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                    CodeKids
+                  </span>
+                </span>
+              ) : (
+                <span key={i}>{part}</span>
+              )
+            )}
           </h1>
           <p className="text-lg sm:text-xl text-purple-200 font-semibold">
-            Pick a world and start your coding adventure! 🌟
+            {t('home.subtitle')}
           </p>
         </motion.div>
       )}

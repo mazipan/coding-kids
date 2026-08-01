@@ -3,6 +3,7 @@ import * as Blockly from 'blockly'
 import { javascriptGenerator } from 'blockly/javascript'
 import { buildToolbox } from '../blockly/toolboxes'
 import { registerCustomBlocks } from '../blockly/customBlocks'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 registerCustomBlocks()
 
@@ -35,6 +36,7 @@ interface BlocklyWorkspaceProps {
 
 export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorkspaceProps>(
   function BlocklyWorkspace({ categories, onCodeChange }, ref) {
+    const { t } = useLanguage()
     const containerRef = useRef<HTMLDivElement>(null)
     const workspaceRef = useRef<Blockly.WorkspaceSvg | null>(null)
     const [blockCount, setBlockCount] = useState(0)
@@ -113,10 +115,10 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
         {/* Toolbar */}
         <div className="flex items-center justify-between px-3 py-2 bg-[#130D2E] border-b border-purple-900/30">
           <div className="flex items-center gap-2">
-            <span className="text-purple-300 font-bold text-sm">Blocks</span>
+            <span className="text-purple-300 font-bold text-sm">{t('blockly.label')}</span>
             {blockCount > 0 && (
               <span className="text-xs bg-purple-500/30 text-purple-200 px-2 py-0.5 rounded-full font-bold">
-                {blockCount} {blockCount === 1 ? 'block' : 'blocks'}
+                {blockCount} {t(blockCount === 1 ? 'blockly.block' : 'blockly.blocks')}
               </span>
             )}
           </div>
@@ -125,13 +127,13 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
               onClick={() => setShowCode(v => !v)}
               className="text-xs text-purple-300 hover:text-white px-2 py-1 rounded-lg hover:bg-purple-500/20 transition-colors font-semibold"
             >
-              {showCode ? '🧩 Blocks' : '👨‍💻 Code'}
+              {showCode ? t('blockly.view.blocks') : t('blockly.view.code')}
             </button>
             <button
               onClick={clearWorkspace}
               className="text-xs text-red-300/60 hover:text-red-300 px-2 py-1 rounded-lg hover:bg-red-500/10 transition-colors"
             >
-              🗑️ Clear
+              {t('blockly.clear')}
             </button>
           </div>
         </div>
@@ -145,7 +147,7 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
           {showCode && (
             <div className="absolute inset-0 overflow-auto bg-[#0A0618] p-4">
               <pre className="text-green-300 text-sm font-mono leading-relaxed whitespace-pre-wrap">
-                {generatedCode || '// Your code will appear here when you add blocks!'}
+                {generatedCode || t('blockly.code.placeholder')}
               </pre>
             </div>
           )}
