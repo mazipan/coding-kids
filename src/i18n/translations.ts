@@ -100,6 +100,22 @@ const en: Translations = {
   'world.portal.name': 'Time Portal',
   'world.portal.tagline': 'Help Nova travel through time with arrays!',
   'world.portal.concept': 'Arrays & Lists',
+  'world.jurassic.name': 'Jurassic Park',
+  'world.jurassic.tagline': 'Rescue dino eggs before they hatch!',
+  'world.jurassic.concept': 'Real-World Pathfinding',
+  'world.parking.name': 'City Parking',
+  'world.parking.tagline': 'Sort and park cars in the busy city!',
+  'world.parking.concept': 'Sorting & Routing',
+  'world.sorting.name': 'Space Sorting',
+  'world.sorting.tagline': 'Organize packages in the space warehouse!',
+  'world.sorting.concept': 'Algorithms & Data',
+
+  // ── Bonus worlds ─────────────────────────────
+  'bonus.section.title': 'Bonus Worlds',
+  'bonus.section.subtitle': 'Real-world coding challenges — no XP required!',
+  'bonus.locked.hint': 'Complete the Time Portal to unlock all bonus worlds!',
+  'bonus.unlocked.all': 'All bonus levels unlocked — jump in anywhere!',
+  'bonus.all.open': 'All levels open!',
 
   // ── Common labels ────────────────────────────
   'common.play': '▶ Play',
@@ -260,6 +276,22 @@ const id: Translations = {
   'world.portal.name': 'Portal Waktu',
   'world.portal.tagline': 'Bantu Nova menjelajahi waktu dengan array!',
   'world.portal.concept': 'Array & Daftar',
+  'world.jurassic.name': 'Taman Jurassic',
+  'world.jurassic.tagline': 'Selamatkan telur dino sebelum menetas!',
+  'world.jurassic.concept': 'Pencarian Jalur Nyata',
+  'world.parking.name': 'Parkir Kota',
+  'world.parking.tagline': 'Sortir dan parkir mobil di kota yang sibuk!',
+  'world.parking.concept': 'Pengurutan & Perutean',
+  'world.sorting.name': 'Penyortiran Luar Angkasa',
+  'world.sorting.tagline': 'Organisir paket di gudang luar angkasa!',
+  'world.sorting.concept': 'Algoritma & Data',
+
+  // ── Bonus worlds ─────────────────────────────
+  'bonus.section.title': 'Dunia Bonus',
+  'bonus.section.subtitle': 'Tantangan coding dunia nyata — tanpa XP!',
+  'bonus.locked.hint': 'Selesaikan Portal Waktu untuk membuka semua dunia bonus!',
+  'bonus.unlocked.all': 'Semua level bonus terbuka — langsung masuk ke mana saja!',
+  'bonus.all.open': 'Semua level terbuka!',
 
   // ── Common labels ────────────────────────────
   'common.play': '▶ Main',
