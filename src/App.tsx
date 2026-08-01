@@ -119,10 +119,10 @@ export default function App() {
     <LanguageProvider>
       <Routes>
         <Route path="/" element={<LandingRoute />} />
-        <Route element={<GameLayout />}>
-          <Route path="/app" element={<WorldMapRoute />} />
-          <Route path="/app/world/:worldId" element={<WorldDetailRoute />} />
-          <Route path="/app/world/:worldId/:lessonNumber" element={<LessonRoute />} />
+        <Route path="/app" element={<GameLayout />}>
+          <Route index element={<WorldMapRoute />} />
+          <Route path="world/:worldId" element={<WorldDetailRoute />} />
+          <Route path="world/:worldId/:lessonNumber" element={<LessonRoute />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
