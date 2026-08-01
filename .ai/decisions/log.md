@@ -1,5 +1,46 @@
 # Decision log
 
+## 2026-08-01 — Plus Jakarta Sans for landing page; Nunito retained for game UI
+
+**Context:** User requested a professional redesign that avoids a "newbie vibe." The existing Nunito font is rounded and playful — good for kids game UI, wrong signal for a marketing page targeting parents/teachers.
+
+**Decision:** Load Plus Jakarta Sans (weights 400–800) alongside Nunito in `index.html`. Apply `font-family: 'Plus Jakarta Sans'` via an inline style on the `LandingScreen` root div, leaving `body { font-family: Nunito }` unchanged for the game.
+
+**Alternatives rejected:**
+- Replace body font globally — would break the kid-friendly tone of the game UI.
+- Use a Tailwind `font-jakarta` class on the root div — this works but inline style is slightly more explicit that the override is intentional and scoped to LandingScreen only.
+
+**Consequences:** Landing page feels professional; game preserves its playful character. Any future standalone marketing pages should also opt in to `Plus Jakarta Sans`.
+
+---
+
+## 2026-08-01 — lucide-react for landing page icons
+
+**Context:** Feature cards and "how it works" steps had emoji icons which look inconsistent with a professional layout; user asked for SVG icons in some places.
+
+**Decision:** Add `lucide-react` (tree-shakeable, zero-config, MIT). Use it on the landing page only — feature cards (MousePointerClick, Trophy, Globe, Smartphone) and step icons (Map, Grip, Zap). Emoji retained for world mascots, reward modal, and any kid-facing content where emoji energy is appropriate.
+
+**Alternatives rejected:**
+- Heroicons — also good, but lucide-react is more consistently maintained and has a slightly larger icon set.
+- Hand-crafted inline SVGs — adds maintenance burden; lucide-react is negligible bundle cost given tree-shaking.
+
+**Consequences:** Landing page icons are sharp and consistent. New icons must come from lucide-react (not a second icon library) to maintain visual consistency.
+
+---
+
+## 2026-08-01 — SVG </> favicon replacing emoji rocket
+
+**Context:** The old favicon was `🚀` as a Unicode emoji, which renders inconsistently across platforms and doesn't represent the "coding" brand.
+
+**Decision:** Replace with a custom inline SVG data URI: the same `</>` logo used in the nav, encoded as a URL-safe data URI in `index.html`.
+
+**Alternatives rejected:**
+- A separate `public/favicon.svg` file — works, but the data URI keeps everything self-contained in the HTML without an extra file.
+
+**Consequences:** Consistent, on-brand favicon across all platforms. The gradient (purple→pink) also serves as a distinctive tab icon.
+
+---
+
 Running record of significant decisions. Add an entry whenever a non-obvious choice is made during planning or review. Most recent first.
 
 Format:

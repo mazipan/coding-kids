@@ -15,15 +15,10 @@ interface RewardModalProps {
   onHome: () => void
 }
 
-const MESSAGES = [
-  ['Keep going! 💪', 'Nice try! ⭐', 'Getting there! 🎯'],
-  ['Well done! 👏', 'Great job! 🎊', 'You\'re improving! 📈'],
-  ['Amazing! 🤩', 'PERFECT! 🏆', 'YOU\'RE A STAR! 🌟'],
-]
-
 export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, onNext, onRetry, onHome }: RewardModalProps) {
   const { t } = useLanguage()
-  const message = MESSAGES[stars - 1]?.[Math.floor(Math.random() * 3)] ?? 'Done!'
+  const msgVariant = Math.floor(Math.random() * 3)
+  const message = t(`reward.msg.${stars}.${msgVariant}`) || t('reward.fallback')
 
   return (
     <>

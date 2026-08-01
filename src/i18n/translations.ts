@@ -113,6 +113,51 @@ const en: Translations = {
   'common.to.unlock': '{xp} XP to unlock',
   'common.need.xp': 'Need {xp} XP',
   'common.xp.reward': '⚡ {xp} XP',
+
+  // ── Blockly toolbar ──────────────────────────
+  'blockly.label': 'Blocks',
+  'blockly.block': 'block',
+  'blockly.blocks': 'blocks',
+  'blockly.view.code': '👨‍💻 View Code',
+  'blockly.view.blocks': '🧩 View Blocks',
+  'blockly.clear': '🗑️ Clear',
+  'blockly.code.placeholder': '// Your code will appear here when you add blocks!',
+
+  // ── Mascot messages ──────────────────────────
+  'mascot.running': "Here we go! Watching your code run... 👀",
+  'mascot.error': "Oops! Something went wrong with the code. Try again! 😅",
+  'mascot.success.3': "PERFECT! 🌟 You're an absolute coding superstar!",
+  'mascot.success.2': "Awesome job! 🎊 You solved it! Can you do it with fewer blocks?",
+  'mascot.success.1': "You did it! 🎉 Great work! Try to use fewer blocks for more stars!",
+  'mascot.hint.prefix': '💡 Hint:',
+
+  // ── Home screen ──────────────────────────────
+  'home.welcome': 'Welcome to CodeKids!',
+  'home.subtitle': 'Pick a world and start your coding adventure! 🌟',
+
+  // ── Reward messages (by star count 1–3, variant 0–2) ────
+  'reward.msg.1.0': 'Keep going! 💪',
+  'reward.msg.1.1': 'Nice try! ⭐',
+  'reward.msg.1.2': 'Getting there! 🎯',
+  'reward.msg.2.0': 'Well done! 👏',
+  'reward.msg.2.1': 'Great job! 🎊',
+  'reward.msg.2.2': "You're improving! 📈",
+  'reward.msg.3.0': 'Amazing! 🤩',
+  'reward.msg.3.1': 'PERFECT! 🏆',
+  'reward.msg.3.2': "YOU'RE A STAR! 🌟",
+  'reward.fallback': 'Done!',
+
+  // ── Landing section labels ────────────────────
+  'landing.features.label': 'Features',
+  'landing.how.label': 'How It Works',
+  'landing.worlds.label': 'Worlds',
+  'landing.ages.label': 'Age Groups',
+
+  // ── Trust strip ──────────────────────────────
+  'trust.free': '100% Free',
+  'trust.no.signup': 'No Signup',
+  'trust.no.ads': 'No Ads',
+  'trust.mobile': 'Mobile Friendly',
 }
 
 const id: Translations = {
@@ -226,6 +271,51 @@ const id: Translations = {
   'common.to.unlock': '{xp} XP untuk membuka',
   'common.need.xp': 'Butuh {xp} XP',
   'common.xp.reward': '⚡ {xp} XP',
+
+  // ── Blockly toolbar ──────────────────────────
+  'blockly.label': 'Blok',
+  'blockly.block': 'blok',
+  'blockly.blocks': 'blok',
+  'blockly.view.code': '👨‍💻 Lihat Kode',
+  'blockly.view.blocks': '🧩 Lihat Blok',
+  'blockly.clear': '🗑️ Hapus',
+  'blockly.code.placeholder': '// Kodenya akan muncul di sini ketika kamu menambahkan blok!',
+
+  // ── Mascot messages ──────────────────────────
+  'mascot.running': "Ayo! Melihat kode berjalan... 👀",
+  'mascot.error': "Aduh! Ada yang salah. Coba lagi! 😅",
+  'mascot.success.3': "SEMPURNA! 🌟 Kamu bintang coding sejati!",
+  'mascot.success.2': "Kerja bagus! 🎊 Berhasil! Bisa pakai blok lebih sedikit?",
+  'mascot.success.1': "Kamu bisa! 🎉 Bagus! Coba pakai lebih sedikit blok untuk bintang lebih banyak!",
+  'mascot.hint.prefix': '💡 Petunjuk:',
+
+  // ── Home screen ──────────────────────────────
+  'home.welcome': 'Selamat Datang di CodeKids!',
+  'home.subtitle': 'Pilih dunia dan mulai petualangan coding-mu! 🌟',
+
+  // ── Reward messages (by star count 1–3, variant 0–2) ────
+  'reward.msg.1.0': 'Terus semangat! 💪',
+  'reward.msg.1.1': 'Bagus dicoba! ⭐',
+  'reward.msg.1.2': 'Semakin dekat! 🎯',
+  'reward.msg.2.0': 'Kerja bagus! 👏',
+  'reward.msg.2.1': 'Hebat sekali! 🎊',
+  'reward.msg.2.2': "Kamu makin jago! 📈",
+  'reward.msg.3.0': 'Luar biasa! 🤩',
+  'reward.msg.3.1': 'SEMPURNA! 🏆',
+  'reward.msg.3.2': "KAMU BINTANGNYA! 🌟",
+  'reward.fallback': 'Selesai!',
+
+  // ── Landing section labels ────────────────────
+  'landing.features.label': 'Fitur',
+  'landing.how.label': 'Cara Kerjanya',
+  'landing.worlds.label': 'Dunia',
+  'landing.ages.label': 'Kelompok Usia',
+
+  // ── Trust strip ──────────────────────────────
+  'trust.free': '100% Gratis',
+  'trust.no.signup': 'Tanpa Daftar',
+  'trust.no.ads': 'Tanpa Iklan',
+  'trust.mobile': 'Bisa di HP',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }
