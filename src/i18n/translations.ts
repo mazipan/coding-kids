@@ -80,6 +80,11 @@ const en: Translations = {
   'reward.levelup': '🎉 LEVEL UP!',
   'reward.next': 'Next',
   'reward.retry': 'Retry',
+  'reward.criteria.loops': '💡 Try using a 🔄 Repeat block to earn 3 stars!',
+  'reward.criteria.variables': '💡 Try using a 📦 Variable block to earn 3 stars!',
+  'reward.criteria.logic': '💡 Try using an ❓ If/Else block to earn 3 stars!',
+  'reward.criteria.functions': '💡 Try defining a 🔧 Function to earn 3 stars!',
+  'reward.criteria.lists': '💡 Try using a 📋 List block to earn 3 stars!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Jungle Adventure',
@@ -147,6 +152,7 @@ const en: Translations = {
   'mascot.success.3': "PERFECT! 🌟 You're an absolute coding superstar!",
   'mascot.success.2': "Awesome job! 🎊 You solved it! Can you do it with fewer blocks?",
   'mascot.success.1': "You did it! 🎉 Great work! Try to use fewer blocks for more stars!",
+  'mascot.success.1.criteria': "You solved it! 🎉 Now try using the special block to earn more stars! 💡",
   'mascot.hint.prefix': '💡 Hint:',
 
   // ── Home screen ──────────────────────────────
@@ -256,6 +262,11 @@ const id: Translations = {
   'reward.levelup': '🎉 NAIK LEVEL!',
   'reward.next': 'Lanjut',
   'reward.retry': 'Ulangi',
+  'reward.criteria.loops': '💡 Coba gunakan blok 🔄 Ulangi untuk mendapat 3 bintang!',
+  'reward.criteria.variables': '💡 Coba gunakan blok 📦 Variabel untuk mendapat 3 bintang!',
+  'reward.criteria.logic': '💡 Coba gunakan blok ❓ Jika/Selain untuk mendapat 3 bintang!',
+  'reward.criteria.functions': '💡 Coba definisikan 🔧 Fungsi untuk mendapat 3 bintang!',
+  'reward.criteria.lists': '💡 Coba gunakan blok 📋 Daftar untuk mendapat 3 bintang!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Petualangan Hutan',
@@ -323,6 +334,7 @@ const id: Translations = {
   'mascot.success.3': "SEMPURNA! 🌟 Kamu bintang coding sejati!",
   'mascot.success.2': "Kerja bagus! 🎊 Berhasil! Bisa pakai blok lebih sedikit?",
   'mascot.success.1': "Kamu bisa! 🎉 Bagus! Coba pakai lebih sedikit blok untuk bintang lebih banyak!",
+  'mascot.success.1.criteria': "Berhasil! 🎉 Sekarang coba pakai blok spesial untuk bintang lebih banyak! 💡",
   'mascot.hint.prefix': '💡 Petunjuk:',
 
   // ── Home screen ──────────────────────────────

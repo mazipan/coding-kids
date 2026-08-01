@@ -12,11 +12,12 @@ interface RewardModalProps {
   leveledUp: boolean
   newLevelName?: string
   newLevelBadge?: string
+  missingCategories?: string[]
   onNext: () => void
   onRetry: () => void
 }
 
-export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, onNext, onRetry }: RewardModalProps) {
+export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, missingCategories, onNext, onRetry }: RewardModalProps) {
   const { t } = useLanguage()
   const msgVariant = Math.floor(Math.random() * 3)
   const message = t(`reward.msg.${stars}.${msgVariant}`) || t('reward.fallback')
@@ -61,6 +62,19 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
               >
                 {t('common.xp.reward', { xp: `+${xpEarned}` })}
               </motion.div>
+
+              {missingCategories && missingCategories.length > 0 && (
+                <motion.div
+                  className="bg-blue-500/15 border border-blue-400/30 rounded-xl p-3 mb-4 text-sm text-blue-200"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.7, type: 'spring' }}
+                >
+                  {missingCategories.map(cat => (
+                    <div key={cat}>{t(`reward.criteria.${cat}`)}</div>
+                  ))}
+                </motion.div>
+              )}
 
               {leveledUp && (
                 <motion.div

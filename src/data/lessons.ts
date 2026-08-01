@@ -215,6 +215,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
     optimalBlockCount: 3,
     xpReward: 100,
     hints: [
@@ -249,6 +250,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
     optimalBlockCount: 3,
     xpReward: 110,
     hints: [
@@ -282,6 +284,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
     optimalBlockCount: 12,
     xpReward: 120,
     hints: [
@@ -321,6 +324,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
     optimalBlockCount: 16,
     xpReward: 130,
     hints: [
@@ -358,6 +362,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
     optimalBlockCount: 20,
     xpReward: 140,
     hints: [
@@ -386,6 +391,7 @@ export const LESSONS: Lesson[] = [
     items: Array.from({ length: 6 }, (_, i) => ({ id: `s${i + 1}`, pos: [0, i + 1] as [number, number] })),
     goalType: 'collect_all',
     availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
     optimalBlockCount: 3,
     xpReward: 150,
     hints: [
@@ -422,6 +428,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables'],
     optimalBlockCount: 6,
     xpReward: 150,
     hints: [
@@ -454,6 +461,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables'],
     optimalBlockCount: 15,
     xpReward: 160,
     hints: [
@@ -486,6 +494,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables'],
     optimalBlockCount: 18,
     xpReward: 170,
     hints: [
@@ -559,6 +568,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['loops', 'variables'],
     optimalBlockCount: 30,
     xpReward: 200,
     hints: [
@@ -595,6 +605,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
     optimalBlockCount: 8,
     xpReward: 180,
     hints: [
@@ -627,6 +638,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
     optimalBlockCount: 14,
     xpReward: 190,
     hints: [
@@ -666,6 +678,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
     optimalBlockCount: 25,
     xpReward: 200,
     hints: [
@@ -700,6 +713,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
     optimalBlockCount: 30,
     xpReward: 210,
     hints: [
@@ -741,6 +755,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['loops', 'logic'],
     optimalBlockCount: 40,
     xpReward: 250,
     hints: [
@@ -776,6 +791,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions'],
     optimalBlockCount: 8,
     xpReward: 200,
     hints: [
@@ -807,6 +823,7 @@ export const LESSONS: Lesson[] = [
     })),
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops'],
     optimalBlockCount: 5,
     xpReward: 210,
     hints: [
@@ -846,6 +863,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions'],
     optimalBlockCount: 30,
     xpReward: 230,
     hints: [
@@ -880,6 +898,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions'],
     optimalBlockCount: 35,
     xpReward: 250,
     hints: [
@@ -923,6 +942,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops'],
     optimalBlockCount: 50,
     xpReward: 300,
     hints: [
@@ -959,6 +979,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists'],
     optimalBlockCount: 8,
     xpReward: 250,
     hints: [
@@ -992,6 +1013,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists'],
     optimalBlockCount: 25,
     xpReward: 280,
     hints: [
@@ -1032,6 +1054,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists'],
     optimalBlockCount: 40,
     xpReward: 300,
     hints: [
@@ -1076,6 +1099,7 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops'],
     optimalBlockCount: 60,
     xpReward: 400,
     hints: [

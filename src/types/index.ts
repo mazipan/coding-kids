@@ -58,6 +58,7 @@ export interface Lesson {
   goalPos?: [number, number]
   goalCount?: number
   availableCategories: string[]
+  requiredCategories?: string[]
   optimalBlockCount: number
   xpReward: number
   hints: LocalizedString[]
