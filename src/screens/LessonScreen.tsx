@@ -15,7 +15,7 @@ import {
   applyAction,
   checkWin,
 } from '../engine/gameEngine'
-import { calculateStars, calculateXPReward, getLevelInfo, getMissingCategories, XP_LEVELS } from '../data/xpSystem'
+import { calculateStars, calculateXPReward, getLevelInfo, getMissingCategories, maxStarsForThresholds, XP_LEVELS } from '../data/xpSystem'
 import { playSuccess, playError, playMove, playCollect, playLevelUp } from '../utils/sounds'
 import type { useProgress } from '../store/useProgress'
 import { useLanguage } from '../i18n/LanguageProvider'
@@ -221,6 +221,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   }
 
   const existingStars = existingProgress?.stars ?? 0
+  const maxStars = maxStarsForThresholds(lesson.starThresholds)
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-4 pb-24 lg:pb-4 h-[calc(100vh-80px)] flex flex-col gap-4">
@@ -240,7 +241,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
           <h1 className="text-lg sm:text-xl font-black text-white leading-tight">{localize(lesson.title, language)}</h1>
           <p className="text-white/50 text-xs mb-1">{localize(world.name, language)} · {localize(world.concept, language)}</p>
           <div className="flex items-center gap-2 flex-wrap">
-            {existingStars > 0 && <StarRating stars={existingStars} size="sm" />}
+            {existingStars > 0 && <StarRating stars={existingStars} maxStars={maxStars} size="sm" />}
             <span className="text-xs font-bold text-purple-300 bg-purple-500/20 px-2.5 py-1 rounded-full">
               ⚡ {lesson.xpReward} XP
             </span>
@@ -400,6 +401,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
       <RewardModal
         open={showReward}
         stars={rewardData.stars}
+        maxStars={maxStars}
         xpEarned={rewardData.xp}
         leveledUp={rewardData.leveledUp}
         newLevelName={rewardData.newLevel}

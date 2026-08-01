@@ -4,6 +4,7 @@ import { WORLDS } from '../data/worlds'
 import { getLessonsByWorld } from '../data/lessons'
 import { StarRating } from '../components/StarRating'
 import type { WorldId } from '../types'
+import { maxStarsForThresholds } from '../data/xpSystem'
 import { useProgress } from '../store/useProgress'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
@@ -80,7 +81,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 const lessons = getLessonsByWorld(world.id)
                 const completedCount = lessons.filter(l => getLessonProgress(l.id)?.completed).length
                 const worldStars = lessons.reduce((sum, l) => sum + (getLessonProgress(l.id)?.stars ?? 0), 0)
-                const maxStars = lessons.length * 3
+                const maxStars = lessons.reduce((sum, l) => sum + maxStarsForThresholds(l.starThresholds), 0)
 
                 return (
                   <motion.button
@@ -218,7 +219,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                   const lessons = getLessonsByWorld(world.id)
                   const completedCount = lessons.filter(l => getLessonProgress(l.id)?.completed).length
                   const worldStars = lessons.reduce((sum, l) => sum + (getLessonProgress(l.id)?.stars ?? 0), 0)
-                  const maxStars = lessons.length * 3
+                  const maxStars = lessons.reduce((sum, l) => sum + maxStarsForThresholds(l.starThresholds), 0)
 
                   return (
                     <motion.button
@@ -437,7 +438,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                         {t('common.xp.reward', { xp: lesson.xpReward })}
                       </span>
                       <div className="flex items-center gap-2">
-                        {stars > 0 && <StarRating stars={stars} size="sm" />}
+                        {stars > 0 && <StarRating stars={stars} maxStars={maxStarsForThresholds(lesson.starThresholds)} size="sm" />}
                         {lp?.attempts && (
                           <span className="text-xs text-white/30">
                             {lp.attempts} {t('common.tries')}

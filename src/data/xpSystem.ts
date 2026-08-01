@@ -69,19 +69,31 @@ export function getMissingCategories(usedBlockTypes: string[], requiredCategorie
 
 export function calculateStars(
   blockCount: number,
-  thresholds: [number, number],
+  thresholds: [number, number] | [number, number, number, number],
   usedBlockTypes?: string[],
   requiredCategories?: string[]
 ): number {
   if (usedBlockTypes && requiredCategories && requiredCategories.length > 0) {
     if (getMissingCategories(usedBlockTypes, requiredCategories).length > 0) return 1
   }
+  if (thresholds.length === 4) {
+    const [t1, t2, t3, t4] = thresholds
+    if (blockCount <= t4) return 5
+    if (blockCount <= t3) return 4
+    if (blockCount <= t2) return 3
+    if (blockCount <= t1) return 2
+    return 1
+  }
   if (blockCount <= thresholds[1]) return 3
   if (blockCount <= thresholds[0]) return 2
   return 1
 }
 
+export function maxStarsForThresholds(thresholds: [number, number] | [number, number, number, number]): number {
+  return thresholds.length === 4 ? 5 : 3
+}
+
 export function calculateXPReward(baseXP: number, stars: number): number {
-  const bonus = stars === 3 ? 50 : stars === 2 ? 25 : 0
+  const bonus = stars === 5 ? 150 : stars === 4 ? 100 : stars === 3 ? 50 : stars === 2 ? 25 : 0
   return baseXP + bonus
 }

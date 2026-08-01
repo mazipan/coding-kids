@@ -62,7 +62,7 @@ export interface Lesson {
   optimalBlockCount: number
   xpReward: number
   hints: LocalizedString[]
-  starThresholds: [number, number]
+  starThresholds: [number, number] | [number, number, number, number]
 }
 
 export interface LessonResult {

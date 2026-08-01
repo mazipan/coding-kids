@@ -8,6 +8,7 @@ import { useLanguage } from '../i18n/LanguageProvider'
 interface RewardModalProps {
   open: boolean
   stars: number
+  maxStars?: number
   xpEarned: number
   leveledUp: boolean
   newLevelName?: string
@@ -20,7 +21,7 @@ interface RewardModalProps {
   onRetry: () => void
 }
 
-export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, missingCategories, isWorldComplete, nextWorldEmoji, nextWorldName, onNext, onRetry }: RewardModalProps) {
+export function RewardModal({ open, stars, maxStars = 3, xpEarned, leveledUp, newLevelName, newLevelBadge, missingCategories, isWorldComplete, nextWorldEmoji, nextWorldName, onNext, onRetry }: RewardModalProps) {
   const { t } = useLanguage()
   const msgVariant = Math.floor(Math.random() * 3)
   const message = t(`reward.msg.${stars}.${msgVariant}`) || t('reward.fallback')
@@ -48,13 +49,13 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
                 animate={{ rotate: [0, -10, 10, -10, 0], scale: [1, 1.1, 1] }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                {stars === 3 ? '🏆' : stars === 2 ? '🥈' : '🥉'}
+                {stars === maxStars ? '🏆' : stars >= maxStars - 1 ? '🥇' : stars >= maxStars - 2 ? '🥈' : '🥉'}
               </motion.div>
 
               <h2 className="text-2xl sm:text-3xl font-black text-white mb-1">{message}</h2>
 
               <div className="flex justify-center my-4">
-                <StarRating stars={stars} size="xl" animate />
+                <StarRating stars={stars} maxStars={maxStars} size="xl" animate />
               </div>
 
               <motion.div
