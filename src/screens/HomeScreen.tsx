@@ -1,32 +1,31 @@
-import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { WORLDS } from '../data/worlds'
 import { getLessonsByWorld } from '../data/lessons'
 import { StarRating } from '../components/StarRating'
-import type { WorldId, AppState } from '../types'
+import type { WorldId } from '../types'
 import { useProgress } from '../store/useProgress'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 
 interface HomeScreenProps {
   progress: ReturnType<typeof useProgress>['progress']
-  onNavigate: (state: Partial<AppState>) => void
   isWorldUnlocked: (xp: number) => boolean
   getLessonProgress: ReturnType<typeof useProgress>['getLessonProgress']
   isLessonUnlocked: ReturnType<typeof useProgress>['isLessonUnlocked']
+  selectedWorldId?: WorldId
 }
 
-export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonProgress, isLessonUnlocked }: HomeScreenProps) {
+export function HomeScreen({ progress, isWorldUnlocked, getLessonProgress, isLessonUnlocked, selectedWorldId }: HomeScreenProps) {
   const { t, language } = useLanguage()
-  const [selectedWorld, setSelectedWorld] = useState<WorldId | null>(null)
+  const navigate = useNavigate()
 
-  const activeWorld = selectedWorld ? WORLDS.find(w => w.id === selectedWorld) : null
-  const worldLessons = selectedWorld ? getLessonsByWorld(selectedWorld) : []
+  const activeWorld = selectedWorldId ? WORLDS.find(w => w.id === selectedWorldId) : null
+  const worldLessons = selectedWorldId ? getLessonsByWorld(selectedWorldId) : []
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {!selectedWorld && (
+      {!selectedWorldId && (
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
@@ -61,7 +60,7 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
       )}
 
       <AnimatePresence mode="wait">
-        {!selectedWorld ? (
+        {!selectedWorldId ? (
           <motion.div
             key="world-map"
             initial={{ opacity: 0 }}
@@ -79,7 +78,7 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                 return (
                   <motion.button
                     key={world.id}
-                    onClick={() => unlocked && setSelectedWorld(world.id as WorldId)}
+                    onClick={() => unlocked && navigate(`/app/world/${world.id}`)}
                     className={`relative rounded-3xl overflow-hidden text-left transition-all ${
                       unlocked ? 'cursor-pointer hover:scale-105' : 'cursor-not-allowed opacity-60'
                     }`}
@@ -169,38 +168,29 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
           >
-            <div className="flex items-center gap-4 mb-8">
-              <button
-                onClick={() => setSelectedWorld(null)}
-                className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors font-bold text-base sm:text-lg"
-              >
-                <ArrowLeft className="w-5 h-5 shrink-0" />
-                {t('nav.back')}
-              </button>
-              {activeWorld && (
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-3xl sm:text-4xl">{activeWorld.emoji}</span>
-                  <div className="min-w-0">
-                    <h2 className="text-xl sm:text-2xl font-black text-white truncate">{localize(activeWorld.name, language)}</h2>
-                    <p className="text-purple-300 text-sm font-semibold truncate">
-                      {t('common.learn')} {localize(activeWorld.concept, language)}
-                    </p>
-                  </div>
+            {activeWorld && (
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-3xl sm:text-4xl">{activeWorld.emoji}</span>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-black text-white truncate">{localize(activeWorld.name, language)}</h2>
+                  <p className="text-purple-300 text-sm font-semibold truncate">
+                    {t('common.learn')} {localize(activeWorld.concept, language)}
+                  </p>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {worldLessons.map((lesson, index) => {
                 const lp = getLessonProgress(lesson.id)
-                const unlocked = isLessonUnlocked(lesson.id, selectedWorld!)
+                const unlocked = isLessonUnlocked(lesson.id, selectedWorldId!)
                 const completed = lp?.completed ?? false
                 const stars = lp?.stars ?? 0
 
                 return (
                   <motion.button
                     key={lesson.id}
-                    onClick={() => unlocked && onNavigate({ screen: 'lesson', currentLessonId: lesson.id, currentWorldId: selectedWorld! })}
+                    onClick={() => unlocked && navigate(`/app/world/${selectedWorldId}/${lesson.number}`)}
                     className={`relative text-left rounded-2xl p-4 sm:p-5 border transition-all ${
                       unlocked ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
                     }`}

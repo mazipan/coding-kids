@@ -1,42 +1,19 @@
-import { useState } from 'react'
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Routes, Route, Navigate, useNavigate, useParams, Outlet } from 'react-router-dom'
 import { LanguageProvider } from './i18n/LanguageProvider'
 import { Header } from './components/Header'
 import { HomeScreen } from './screens/HomeScreen'
 import { LessonScreen } from './screens/LessonScreen'
 import { LandingScreen } from './screens/LandingScreen'
 import { useProgress } from './store/useProgress'
-import { getLesson, getLessonsByWorld } from './data/lessons'
+import { getLessonByNumber, getLessonsByWorld } from './data/lessons'
 import { getWorld } from './data/worlds'
-import type { AppState } from './types'
+import type { WorldId } from './types'
 
-function GameApp() {
-  const navigate = useNavigate()
-  const [appState, setAppState] = useState<AppState>({ screen: 'home' })
-  const { progress, completeLesson, getLessonProgress, isLessonUnlocked, isWorldUnlocked } = useProgress()
-
-  const handleNavigate = (state: Partial<AppState>) => {
-    if (state.screen === 'landing') {
-      navigate('/')
-      return
-    }
-    setAppState(prev => ({ ...prev, ...state }))
-  }
-
-  const currentLesson = appState.currentLessonId ? getLesson(appState.currentLessonId) : null
-  const currentWorld = appState.currentWorldId ? getWorld(appState.currentWorldId) : null
-
-  const getNextLessonId = (): string | undefined => {
-    if (!currentLesson || !appState.currentWorldId) return undefined
-    const worldLessons = getLessonsByWorld(appState.currentWorldId)
-    const idx = worldLessons.findIndex(l => l.id === currentLesson.id)
-    return worldLessons[idx + 1]?.id
-  }
+function GameLayout() {
+  const { progress } = useProgress()
 
   return (
     <div className="min-h-screen bg-[#0A0618] font-nunito">
-      {/* Ambient background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-pink-600/8 rounded-full blur-3xl" />
@@ -58,51 +35,70 @@ function GameApp() {
         ))}
       </div>
 
-      <Header
-        progress={progress}
-        onHome={() => handleNavigate({ screen: 'home', currentLessonId: undefined })}
-        showBack={appState.screen === 'lesson'}
-      />
+      <Header progress={progress} />
 
       <main className="relative z-10">
-        <AnimatePresence mode="wait">
-          {appState.screen === 'home' && (
-            <motion.div
-              key="home"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <HomeScreen
-                progress={progress}
-                onNavigate={handleNavigate}
-                isWorldUnlocked={isWorldUnlocked}
-                getLessonProgress={getLessonProgress}
-                isLessonUnlocked={isLessonUnlocked}
-              />
-            </motion.div>
-          )}
-
-          {appState.screen === 'lesson' && currentLesson && currentWorld && (
-            <motion.div
-              key={`lesson-${currentLesson.id}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
-              <LessonScreen
-                lesson={currentLesson}
-                world={currentWorld}
-                onNavigate={handleNavigate}
-                completeLesson={completeLesson}
-                existingProgress={getLessonProgress(currentLesson.id)}
-                nextLessonId={getNextLessonId()}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <Outlet />
       </main>
     </div>
+  )
+}
+
+function WorldMapRoute() {
+  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+  return (
+    <HomeScreen
+      progress={progress}
+      isWorldUnlocked={isWorldUnlocked}
+      getLessonProgress={getLessonProgress}
+      isLessonUnlocked={isLessonUnlocked}
+    />
+  )
+}
+
+function WorldDetailRoute() {
+  const { worldId } = useParams<{ worldId: string }>()
+  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+  const world = worldId ? getWorld(worldId) : null
+  if (!world) return <Navigate to="/app" replace />
+  return (
+    <HomeScreen
+      progress={progress}
+      isWorldUnlocked={isWorldUnlocked}
+      getLessonProgress={getLessonProgress}
+      isLessonUnlocked={isLessonUnlocked}
+      selectedWorldId={worldId as WorldId}
+    />
+  )
+}
+
+function LessonRoute() {
+  const { worldId, lessonNumber } = useParams<{ worldId: string; lessonNumber: string }>()
+  const { completeLesson, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+
+  const lesson = worldId && lessonNumber ? getLessonByNumber(worldId, Number(lessonNumber)) : null
+  const world = worldId ? getWorld(worldId) : null
+
+  if (!lesson || !world || !isWorldUnlocked(world.unlockAtXP)) {
+    return <Navigate to="/app" replace />
+  }
+
+  if (!isLessonUnlocked(lesson.id, lesson.worldId)) {
+    return <Navigate to={`/app/world/${worldId}`} replace />
+  }
+
+  const worldLessons = getLessonsByWorld(worldId!)
+  const idx = worldLessons.findIndex(l => l.id === lesson.id)
+  const nextLesson = worldLessons[idx + 1]
+
+  return (
+    <LessonScreen
+      lesson={lesson}
+      world={world}
+      completeLesson={completeLesson}
+      existingProgress={getLessonProgress(lesson.id)}
+      nextLessonNumber={nextLesson?.number}
+    />
   )
 }
 
@@ -110,7 +106,6 @@ function LandingRoute() {
   const navigate = useNavigate()
   const { progress } = useProgress()
   const hasProgress = progress.xp > 0 || progress.totalStars > 0
-
   return (
     <LandingScreen
       onStart={() => navigate('/app')}
@@ -124,7 +119,11 @@ export default function App() {
     <LanguageProvider>
       <Routes>
         <Route path="/" element={<LandingRoute />} />
-        <Route path="/app" element={<GameApp />} />
+        <Route path="/app" element={<GameLayout />}>
+          <Route index element={<WorldMapRoute />} />
+          <Route path="world/:worldId" element={<WorldDetailRoute />} />
+          <Route path="world/:worldId/:lessonNumber" element={<LessonRoute />} />
+        </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </LanguageProvider>

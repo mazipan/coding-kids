@@ -1,7 +1,8 @@
 import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Lightbulb, Loader2, Play, RotateCcw } from 'lucide-react'
-import type { Lesson, GameState, AppState } from '../types'
+import { useNavigate } from 'react-router-dom'
+import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
 import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
 import { GameGrid } from '../components/GameGrid'
@@ -25,13 +26,13 @@ const STEP_DELAY = 350
 interface LessonScreenProps {
   lesson: Lesson
   world: World
-  onNavigate: (state: Partial<AppState>) => void
   completeLesson: ReturnType<typeof useProgress>['completeLesson']
   existingProgress?: { stars: number; completed: boolean }
-  nextLessonId?: string
+  nextLessonNumber?: number
 }
 
-export function LessonScreen({ lesson, world, onNavigate, completeLesson, existingProgress, nextLessonId }: LessonScreenProps) {
+export function LessonScreen({ lesson, world, completeLesson, existingProgress, nextLessonNumber }: LessonScreenProps) {
+  const navigate = useNavigate()
   const { t, language } = useLanguage()
   const [gameState, setGameState] = useState<GameState>(buildInitialState(lesson))
   const [currentCode, setCurrentCode] = useState('')
@@ -194,12 +195,12 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
   }
 
   const handleNext = () => {
-    if (nextLessonId) {
-      onNavigate({ screen: 'lesson', currentLessonId: nextLessonId, currentWorldId: lesson.worldId })
-    } else {
-      onNavigate({ screen: 'home', currentWorldId: lesson.worldId })
-    }
     setShowReward(false)
+    if (nextLessonNumber) {
+      navigate(`/app/world/${lesson.worldId}/${nextLessonNumber}`)
+    } else {
+      navigate(`/app/world/${lesson.worldId}`)
+    }
   }
 
   const handleRetry = () => {
@@ -213,25 +214,25 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
     <div className="max-w-7xl mx-auto px-4 pt-4 pb-24 lg:pb-4 h-[calc(100vh-80px)] flex flex-col gap-4">
       {/* Lesson header */}
       <motion.div
-        className="flex items-center gap-4"
+        className="flex items-start gap-3"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
         <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shrink-0"
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shrink-0 mt-0.5"
           style={{ background: `${world.theme.accentColor}30`, color: world.theme.accentColor }}
         >
           {lesson.number}
         </div>
-        <div className="min-w-0">
-          <h1 className="text-lg sm:text-xl font-black text-white leading-tight truncate">{localize(lesson.title, language)}</h1>
-          <p className="text-white/50 text-xs truncate">{localize(world.name, language)} · {localize(world.concept, language)}</p>
-        </div>
-        <div className="ml-auto flex items-center gap-3 shrink-0">
-          {existingStars > 0 && <StarRating stars={existingStars} size="sm" />}
-          <span className="text-sm font-bold text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full">
-            ⚡ {lesson.xpReward} XP
-          </span>
+        <div className="min-w-0 flex-1">
+          <h1 className="text-lg sm:text-xl font-black text-white leading-tight">{localize(lesson.title, language)}</h1>
+          <p className="text-white/50 text-xs mb-1">{localize(world.name, language)} · {localize(world.concept, language)}</p>
+          <div className="flex items-center gap-2 flex-wrap">
+            {existingStars > 0 && <StarRating stars={existingStars} size="sm" />}
+            <span className="text-xs font-bold text-purple-300 bg-purple-500/20 px-2.5 py-1 rounded-full">
+              ⚡ {lesson.xpReward} XP
+            </span>
+          </div>
         </div>
       </motion.div>
 

@@ -1,23 +1,41 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, Star } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { XPBar } from './XPBar'
 import type { PlayerProgress } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 
 interface HeaderProps {
   progress: PlayerProgress
-  onHome: () => void
-  showBack?: boolean
 }
 
-export function Header({ progress, onHome, showBack = false }: HeaderProps) {
+export function Header({ progress }: HeaderProps) {
   const { language, setLanguage, t } = useLanguage()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const pathParts = location.pathname.split('/').filter(Boolean)
+  // world detail: /app/world/:worldId → 3 parts
+  const isWorldPage = pathParts.length === 3 && pathParts[1] === 'world'
+  // lesson page: /app/world/:worldId/:lessonNumber → 4 parts
+  const isLessonPage = pathParts.length >= 4 && pathParts[1] === 'world'
+  const showBack = isWorldPage || isLessonPage
+
+  const handleClick = () => {
+    if (isLessonPage) {
+      navigate(`/app/world/${pathParts[2]}`)
+    } else if (isWorldPage) {
+      navigate('/app')
+    } else {
+      navigate('/')
+    }
+  }
 
   return (
     <header className="sticky top-0 z-30 bg-[#0A0618]/80 backdrop-blur-md border-b border-purple-900/30">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
         {/* Logo / Back */}
-        <button onClick={onHome} className="flex items-center gap-2 group shrink-0">
+        <button onClick={handleClick} className="flex items-center gap-2 group shrink-0">
           {showBack ? (
             <div className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors font-bold">
               <ArrowLeft className="w-5 h-5 shrink-0" />

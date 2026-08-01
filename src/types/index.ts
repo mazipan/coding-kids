@@ -87,14 +87,6 @@ export interface PlayerProgress {
   lastPlayed: string
 }
 
-export type AppScreen = 'landing' | 'home' | 'lesson' | 'worlds'
-
-export interface AppState {
-  screen: AppScreen
-  currentWorldId?: WorldId
-  currentLessonId?: string
-}
-
 export type ActionType = 'move_right' | 'move_left' | 'move_up' | 'move_down' | 'collect'
 
 export interface GameAction {
