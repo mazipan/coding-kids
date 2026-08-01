@@ -67,4 +67,4 @@ MIT
 
 ---
 
-By Irfan Maulana
+By [Irfan Maulana](https://mazipan.space)
