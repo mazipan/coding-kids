@@ -18,16 +18,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          bun-version-file: 'package.json'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: npm ci
 
       - name: Build site
-        run: bun run build
+        run: npm run build
 
       - name: Set commit SHA
         run: |
@@ -46,10 +47,10 @@ jobs:
         id: netlify
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
-            RESULT=$(bunx netlify-cli deploy --prod --dir=./dist \
+            RESULT=$(npx netlify-cli deploy --prod --dir=./dist \
               --message="Deploy from GitHub Actions (${{ env.SHORT_SHA }})" --json)
           else
-            RESULT=$(bunx netlify-cli deploy --dir=./dist \
+            RESULT=$(npx netlify-cli deploy --dir=./dist \
               --alias="preview-${{ github.event.pull_request.number }}" \
               --message="Deploy from GitHub Actions (${{ env.SHORT_SHA }})" --json)
           fi
