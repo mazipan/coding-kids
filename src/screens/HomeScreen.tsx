@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft } from 'lucide-react'
 import { WORLDS } from '../data/worlds'
 import { getLessonsByWorld } from '../data/lessons'
 import { StarRating } from '../components/StarRating'
@@ -172,6 +173,7 @@ export function HomeScreen({ progress, onNavigate, isWorldUnlocked, getLessonPro
                 onClick={() => setSelectedWorld(null)}
                 className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors font-bold text-base sm:text-lg"
               >
+                <ArrowLeft className="w-5 h-5 shrink-0" />
                 {t('nav.back')}
               </button>
               {activeWorld && (

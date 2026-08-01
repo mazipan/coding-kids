@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Dialog, Modal, ModalOverlay } from 'react-aria-components'
+import { ArrowRight, RotateCcw } from 'lucide-react'
 import { StarRating } from './StarRating'
 import { Confetti } from './Confetti'
 import { useLanguage } from '../i18n/LanguageProvider'
@@ -13,10 +14,9 @@ interface RewardModalProps {
   newLevelBadge?: string
   onNext: () => void
   onRetry: () => void
-  onHome: () => void
 }
 
-export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, onNext, onRetry, onHome }: RewardModalProps) {
+export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, newLevelBadge, onNext, onRetry }: RewardModalProps) {
   const { t } = useLanguage()
   const msgVariant = Math.floor(Math.random() * 3)
   const message = t(`reward.msg.${stars}.${msgVariant}`) || t('reward.fallback')
@@ -29,12 +29,12 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
       <ModalOverlay
         isOpen={open}
         isDismissable={false}
-        className="ck-overlay fixed inset-0 z-40 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+        className="ck-overlay fixed inset-0 z-40 flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-sm"
       >
         <Modal>
           <Dialog aria-label={message} className="outline-none">
             <motion.div
-              className="relative bg-gradient-to-b from-[#1C1440] to-[#130D2E] rounded-3xl p-6 sm:p-8 max-w-sm w-full border border-purple-500/30 shadow-2xl text-center"
+              className="relative bg-gradient-to-b from-[#1C1440] to-[#130D2E] rounded-3xl p-6 sm:p-8 w-[90vw] sm:max-w-sm border border-purple-500/30 shadow-2xl text-center"
               initial={{ scale: 0.5, y: 50, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
@@ -78,21 +78,17 @@ export function RewardModal({ open, stars, xpEarned, leveledUp, newLevelName, ne
               <div className="flex gap-3 mt-2">
                 <button
                   onClick={onRetry}
-                  className="flex-1 py-3 rounded-xl font-bold text-white/70 border border-white/20 hover:bg-white/10 transition-colors text-sm sm:text-base"
+                  className="flex-1 py-3 rounded-xl font-bold text-white/70 border border-white/20 hover:bg-white/10 transition-colors text-sm sm:text-base flex items-center justify-center gap-2"
                 >
+                  <RotateCcw className="w-4 h-4" />
                   {t('reward.retry')}
                 </button>
                 <button
-                  onClick={onHome}
-                  className="py-3 px-4 rounded-xl font-bold text-white/70 border border-white/20 hover:bg-white/10 transition-colors"
-                >
-                  🏠
-                </button>
-                <button
                   onClick={onNext}
-                  className="flex-1 py-3 rounded-xl font-black text-white bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 transition-all shadow-lg shadow-purple-900/50 text-sm sm:text-base"
+                  className="flex-1 py-3 rounded-xl font-black text-white bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 transition-all shadow-lg shadow-purple-900/50 text-sm sm:text-base flex items-center justify-center gap-2"
                 >
                   {t('reward.next')}
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </motion.div>

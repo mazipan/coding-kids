@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Lightbulb, Loader2, Play, RotateCcw } from 'lucide-react'
 import type { Lesson, GameState, AppState } from '../types'
 import type { World } from '../types'
 import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
@@ -208,7 +209,7 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
   const existingStars = existingProgress?.stars ?? 0
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-4 h-[calc(100vh-80px)] flex flex-col gap-4">
+    <div className="max-w-7xl mx-auto px-4 pt-4 pb-24 lg:pb-4 h-[calc(100vh-80px)] flex flex-col gap-4">
       {/* Lesson header */}
       <motion.div
         className="flex items-center gap-4"
@@ -322,60 +323,62 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
         </motion.div>
       </div>
 
-      {/* Controls bar */}
+      {/* Controls bar — fixed floating on mobile, inline on desktop */}
       <motion.div
-        className="flex gap-3 items-center"
+        className="fixed bottom-0 inset-x-0 z-20 bg-[#0A0618]/95 backdrop-blur-md border-t border-purple-900/30 lg:static lg:inset-auto lg:bg-transparent lg:backdrop-blur-none lg:border-0"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <div className="flex-1 text-xs text-white/40 leading-relaxed hidden sm:block truncate">
-          {lesson.story}
-        </div>
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-3">
+          <div className="flex-1 text-xs text-white/40 leading-relaxed hidden lg:block truncate">
+            {lesson.story}
+          </div>
 
-        <div className="flex gap-2 ml-auto">
-          <button
-            onClick={showNextHint}
-            disabled={isRunning}
-            className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-yellow-400/30 text-yellow-200 hover:bg-yellow-500/20 transition-colors font-bold text-sm disabled:opacity-50"
-          >
-            {t('game.hint')}
-          </button>
+          <div className="flex gap-2 w-full lg:w-auto lg:ml-auto">
+            <button
+              onClick={showNextHint}
+              disabled={isRunning}
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-yellow-400/30 text-yellow-200 hover:bg-yellow-500/20 transition-colors font-bold text-sm disabled:opacity-50"
+            >
+              <Lightbulb className="w-4 h-4 shrink-0" />
+              <span className="hidden sm:inline">{t('game.hint')}</span>
+            </button>
 
-          <button
-            onClick={resetGame}
-            className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-white/20 text-white/60 hover:bg-white/10 transition-colors font-bold text-sm"
-          >
-            {t('game.reset')}
-          </button>
+            <button
+              onClick={resetGame}
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-3 rounded-xl border border-white/20 text-white/60 hover:bg-white/10 transition-colors font-bold text-sm"
+            >
+              <RotateCcw className="w-4 h-4 shrink-0" />
+              <span className="hidden sm:inline">{t('game.reset')}</span>
+            </button>
 
-          <motion.button
-            onClick={runCode}
-            disabled={isRunning}
-            className="flex items-center gap-2 px-6 sm:px-8 py-3 rounded-xl font-black text-white text-base relative overflow-hidden disabled:opacity-70"
-            style={{
-              background: isRunning
-                ? 'rgba(139,92,246,0.5)'
-                : 'linear-gradient(135deg, #7C3AED, #EC4899)',
-              boxShadow: isRunning ? 'none' : '0 4px 24px rgba(124,58,237,0.5)',
-            }}
-            whileHover={!isRunning ? { scale: 1.05 } : {}}
-            whileTap={!isRunning ? { scale: 0.95 } : {}}
-          >
-            {isRunning ? (
-              <>
-                <motion.span
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                >
-                  ⚙️
-                </motion.span>
-                <span className="hidden sm:inline">{t('game.running')}</span>
-              </>
-            ) : (
-              <>{t('game.run')}</>
-            )}
-          </motion.button>
+            <motion.button
+              onClick={runCode}
+              disabled={isRunning}
+              className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-6 sm:px-8 py-3 rounded-xl font-black text-white text-base relative overflow-hidden disabled:opacity-70"
+              style={{
+                background: isRunning
+                  ? 'rgba(139,92,246,0.5)'
+                  : 'linear-gradient(135deg, #7C3AED, #EC4899)',
+                boxShadow: isRunning ? 'none' : '0 4px 24px rgba(124,58,237,0.5)',
+              }}
+              whileHover={!isRunning ? { scale: 1.05 } : {}}
+              whileTap={!isRunning ? { scale: 0.95 } : {}}
+            >
+              {isRunning ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                  <span className="hidden sm:inline">{t('game.running')}</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-4 h-4 shrink-0" />
+                  {t('game.run')}
+                </>
+              )}
+            </motion.button>
+          </div>
         </div>
       </motion.div>
 
@@ -389,7 +392,6 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
         newLevelBadge={rewardData.newBadge}
         onNext={handleNext}
         onRetry={handleRetry}
-        onHome={() => { setShowReward(false); onNavigate({ screen: 'home' }) }}
       />
     </div>
   )
