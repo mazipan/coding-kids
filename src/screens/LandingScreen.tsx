@@ -518,17 +518,17 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
             <p className="text-white/40 text-sm font-medium mb-1">{t('landing.footer')}</p>
             <p className="text-white/20 text-xs">{t('landing.footer.free')}</p>
             {import.meta.env.VITE_COMMIT_SHA && (
-              <p className="text-white/15 text-xs mt-1 font-mono">
+              <p className="text-white/40 text-xs mt-1 font-mono">
                 <a
                   href={`https://github.com/mazipan/coding-kids/commit/${import.meta.env.VITE_COMMIT_SHA}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white/30 transition-colors"
+                  className="hover:text-white/60 transition-colors"
                 >
                   {import.meta.env.VITE_COMMIT_SHA}
                 </a>
                 {import.meta.env.VITE_BUILD_DATE && (
-                  <span className="text-white/10">
+                  <span className="text-white/30">
                     {' · '}
                     {new Date(import.meta.env.VITE_BUILD_DATE).toLocaleDateString(undefined, {
                       year: 'numeric',
