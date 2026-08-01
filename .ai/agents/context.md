@@ -3,11 +3,11 @@
 ## Quick commands
 
 ```bash
-npm run dev    # dev server at localhost:5173
-npm run build  # tsc + vite build → dist/
+bun run dev    # dev server at localhost:5173
+bun run build  # tsc + vite build → dist/
 ```
 
-Build must pass `tsc -b` (strict TypeScript) before Vite bundles. Always run `npm run build` to verify before committing.
+Build must pass `tsc -b` (strict TypeScript) before Vite bundles. Always run `bun run build` to verify before committing.
 
 ## Routes
 
@@ -63,7 +63,10 @@ src/
 - `getLevelInfo` takes an XP value, not a level number. After `completeLesson`, use `XP_LEVELS[result.newLevel - 1]?.minXP` to get the XP for that level, then pass to `getLevelInfo`.
 - `Math.random()` in the star background (App.tsx ambient stars) is stable because those divs only render once — the component never re-renders the star array.
 - React Router v7 (not v6) is installed. The declarative `BrowserRouter` + `Routes` + `Route` API still works as in v6.
+- Vite 8 uses **rolldown** (Rust bundler) for `RollupOptions` types, not JS Rollup. `manualChunks` in `vite.config.ts` must be the function form `(id) => 'chunkName' | undefined` — the `Record<string, string[]>` object form Rollup accepted no longer type-checks.
+- Tailwind v4: `postcss.config.js` uses `@tailwindcss/postcss` (autoprefixer is built in, not a separate dep). `src/index.css` uses `@import 'tailwindcss'` + `@config '../tailwind.config.js'` — the JS config file is still the source of truth for theme colors/fonts/keyframes, bridged in rather than rewritten as CSS-first `@theme`.
+- `src/vite-env.d.ts` (`/// <reference types="vite/client" />`) is required for TypeScript 7's stricter side-effect import checking (e.g. `import './index.css'`) — don't remove it.
 
 ## Deployment
 
-Netlify: `npm run build` → `dist/`. The `netlify.toml` sets the build command, publish dir, and a `/* → /index.html` SPA redirect so `/app` works on direct visit. No environment variables needed.
+Netlify: `bun run build` → `dist/`. The `netlify.toml` sets the build command, publish dir, and a `/* → /index.html` SPA redirect so `/app` works on direct visit. No environment variables needed.

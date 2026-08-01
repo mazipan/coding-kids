@@ -83,7 +83,7 @@ If not: plan status → `needs-clarification`, specific questions listed in the 
 See `.ai/agents/builder.md` for full instructions.
 
 Builder follows the plan step by step. After implementation:
-- `npm run build` passes
+- `bun run build` passes
 - Spec files updated
 - Plan status → `in-review` with implementation notes
 - Committed and pushed

@@ -79,7 +79,7 @@ For each invariant in `.ai/specs/invariants.md`, mark whether this change affect
 1. {Step — specific enough that the builder makes no design decisions}
 2. 
 3. 
-4. Run `npm run build` — must pass before committing
+4. Run `bun run build` — must pass before committing
 
 ---
 

@@ -27,7 +27,7 @@ Reviews the builder's implementation. Thinks as an experienced TypeScript/React 
 - [ ] INV-G1/2/3/4 — Game engine bounds, collision, cap, sandbox intact
 - [ ] INV-C1 — `tsc -b` passes (zero errors)
 - [ ] INV-C2 — No hardcoded user-visible strings
-- [ ] INV-C3 — `npm run build` passes
+- [ ] INV-C3 — `bun run build` passes
 - [ ] INV-C4 — localStorage is the only persistence
 - [ ] INV-I1/2 — All new keys have EN + ID values; no fixed-width layout assumptions
 
