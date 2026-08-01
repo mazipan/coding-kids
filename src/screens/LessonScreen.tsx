@@ -1,7 +1,8 @@
 import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Lightbulb, Loader2, Play, RotateCcw } from 'lucide-react'
-import type { Lesson, GameState, AppState } from '../types'
+import { useNavigate } from 'react-router-dom'
+import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
 import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
 import { GameGrid } from '../components/GameGrid'
@@ -24,13 +25,13 @@ const STEP_DELAY = 350
 interface LessonScreenProps {
   lesson: Lesson
   world: World
-  onNavigate: (state: Partial<AppState>) => void
   completeLesson: ReturnType<typeof useProgress>['completeLesson']
   existingProgress?: { stars: number; completed: boolean }
-  nextLessonId?: string
+  nextLessonNumber?: number
 }
 
-export function LessonScreen({ lesson, world, onNavigate, completeLesson, existingProgress, nextLessonId }: LessonScreenProps) {
+export function LessonScreen({ lesson, world, completeLesson, existingProgress, nextLessonNumber }: LessonScreenProps) {
+  const navigate = useNavigate()
   const { t } = useLanguage()
   const [gameState, setGameState] = useState<GameState>(buildInitialState(lesson))
   const [currentCode, setCurrentCode] = useState('')
@@ -193,12 +194,12 @@ export function LessonScreen({ lesson, world, onNavigate, completeLesson, existi
   }
 
   const handleNext = () => {
-    if (nextLessonId) {
-      onNavigate({ screen: 'lesson', currentLessonId: nextLessonId, currentWorldId: lesson.worldId })
-    } else {
-      onNavigate({ screen: 'home', currentWorldId: lesson.worldId })
-    }
     setShowReward(false)
+    if (nextLessonNumber) {
+      navigate(`/app/world/${lesson.worldId}/${nextLessonNumber}`)
+    } else {
+      navigate(`/app/world/${lesson.worldId}`)
+    }
   }
 
   const handleRetry = () => {

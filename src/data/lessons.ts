@@ -907,3 +907,7 @@ export function getLessonsByWorld(worldId: string): Lesson[] {
 export function getLesson(id: string): Lesson | undefined {
   return LESSONS.find(l => l.id === id)
 }
+
+export function getLessonByNumber(worldId: string, number: number): Lesson | undefined {
+  return LESSONS.find(l => l.worldId === worldId && l.number === number)
+}
