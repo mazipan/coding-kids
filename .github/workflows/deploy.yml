@@ -1,0 +1,106 @@
+name: Build and Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version-file: 'package.json'
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build site
+        run: bun run build
+
+      - name: Set commit SHA
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            COMMIT_SHA="${{ github.event.pull_request.head.sha }}"
+          else
+            COMMIT_SHA="${GITHUB_SHA}"
+          fi
+          echo "HEAD_SHA=${COMMIT_SHA}" >> $GITHUB_ENV
+          echo "SHORT_SHA=${COMMIT_SHA::7}" >> $GITHUB_ENV
+
+      - name: Get commit title
+        run: echo "COMMIT_TITLE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
+
+      - name: Deploy to Netlify
+        id: netlify
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            RESULT=$(bunx netlify-cli deploy --prod --dir=./dist \
+              --message="Deploy from GitHub Actions (${{ env.SHORT_SHA }})" --json)
+          else
+            RESULT=$(bunx netlify-cli deploy --dir=./dist \
+              --alias="preview-${{ github.event.pull_request.number }}" \
+              --message="Deploy from GitHub Actions (${{ env.SHORT_SHA }})" --json)
+          fi
+          echo "deploy_url=$(echo $RESULT | jq -r '.deploy_url')" >> $GITHUB_OUTPUT
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Comment deploy URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+        with:
+          script: |
+            const marker = '<!-- netlify-preview-comment -->';
+            const deployUrl = '${{ steps.netlify.outputs.deploy_url }}';
+            const sha = '${{ env.HEAD_SHA }}';
+            const shortSha = '${{ env.SHORT_SHA }}';
+            const commitTitle = '${{ env.COMMIT_TITLE }}';
+            const deployedAt = new Date().toUTCString();
+            const commitUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${sha}`;
+            const body = [
+              marker,
+              `## 🚀 Netlify Preview Deployment`,
+              ``,
+              `| | |`,
+              `|---|---|`,
+              `| **Preview URL** | ${deployUrl} |`,
+              `| **Branch** | \`${{ github.head_ref }}\` |`,
+              `| **Triggered by** | @${{ github.actor }} |`,
+              `| **Commit** | [\`${shortSha}\`](${commitUrl}) |`,
+              `| **Commit title** | ${commitTitle} |`,
+              `| **Deployed at** | ${deployedAt} |`,
+            ].join('\n');
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const existing = comments.find(c => c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                comment_id: existing.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            }
