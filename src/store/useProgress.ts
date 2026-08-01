@@ -4,6 +4,9 @@ import { getLevelInfo } from '../data/xpSystem'
 
 const STORAGE_KEY = 'codekids_progress_v1'
 
+const BONUS_WORLD_IDS = new Set(['jurassic', 'parking', 'sorting'])
+const FINAL_LESSON_ID = 'portal-4'
+
 const DEFAULT_PROGRESS: PlayerProgress = {
   xp: 0,
   level: 1,
@@ -104,8 +107,14 @@ export function useProgress() {
     return progress.lessons[lessonId]
   }, [progress.lessons])
 
+  const isBonusWorldUnlocked = useCallback((): boolean => {
+    return progress.lessons[FINAL_LESSON_ID]?.completed ?? false
+  }, [progress.lessons])
+
   const isLessonUnlocked = useCallback((lessonId: string, worldId: string): boolean => {
-    const worldLessons = Object.keys(progress.lessons).filter(id => id.startsWith(worldId))
+    if (BONUS_WORLD_IDS.has(worldId)) {
+      return progress.lessons[FINAL_LESSON_ID]?.completed ?? false
+    }
     const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
     if (lessonNum === 1) return true
     const prevId = `${worldId}-${lessonNum - 1}`
@@ -126,6 +135,7 @@ export function useProgress() {
     getLessonProgress,
     isLessonUnlocked,
     isWorldUnlocked,
+    isBonusWorldUnlocked,
     resetProgress,
   }
 }

@@ -45,11 +45,12 @@ function GameLayout() {
 }
 
 function WorldMapRoute() {
-  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
   return (
     <HomeScreen
       progress={progress}
       isWorldUnlocked={isWorldUnlocked}
+      isBonusWorldUnlocked={isBonusWorldUnlocked}
       getLessonProgress={getLessonProgress}
       isLessonUnlocked={isLessonUnlocked}
     />
@@ -58,13 +59,14 @@ function WorldMapRoute() {
 
 function WorldDetailRoute() {
   const { worldId } = useParams<{ worldId: string }>()
-  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
   const world = worldId ? getWorld(worldId) : null
   if (!world) return <Navigate to="/app" replace />
   return (
     <HomeScreen
       progress={progress}
       isWorldUnlocked={isWorldUnlocked}
+      isBonusWorldUnlocked={isBonusWorldUnlocked}
       getLessonProgress={getLessonProgress}
       isLessonUnlocked={isLessonUnlocked}
       selectedWorldId={worldId as WorldId}
@@ -74,12 +76,16 @@ function WorldDetailRoute() {
 
 function LessonRoute() {
   const { worldId, lessonNumber } = useParams<{ worldId: string; lessonNumber: string }>()
-  const { completeLesson, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+  const { completeLesson, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
 
   const lesson = worldId && lessonNumber ? getLessonByNumber(worldId, Number(lessonNumber)) : null
   const world = worldId ? getWorld(worldId) : null
 
-  if (!lesson || !world || !isWorldUnlocked(world.unlockAtXP)) {
+  const worldAccessible = world
+    ? (world.isBonus ? isBonusWorldUnlocked() : isWorldUnlocked(world.unlockAtXP))
+    : false
+
+  if (!lesson || !world || !worldAccessible) {
     return <Navigate to="/app" replace />
   }
 

@@ -1084,6 +1084,632 @@ export const LESSONS: Lesson[] = [
     ],
     starThresholds: [90, 60],
   },
+
+  // ─────────────────────────────────────────────
+  // BONUS WORLD 1: JURASSIC PARK — Real-World Pathfinding
+  // ─────────────────────────────────────────────
+  {
+    id: 'jurassic-1',
+    worldId: 'jurassic',
+    number: 1,
+    title: { en: 'First Egg Hunt', id: 'Perburuan Telur Pertama' },
+    story: {
+      en: 'Dr. Rex discovers two dinosaur eggs hidden in the jungle! The eggs must be rescued before night falls — navigate around the dense foliage to reach them.',
+      id: 'Dr. Rex menemukan dua telur dinosaurus tersembunyi di hutan! Telur harus diselamatkan sebelum malam tiba — navigasi menghindari dedaunan lebat untuk mencapainya.',
+    },
+    mascotMessage: {
+      en: "Welcome to Jurassic Park, Dr. Rex! 🦕 Rescue the eggs 🥚 before the raptors find them! Use loops to move efficiently!",
+      id: 'Selamat datang di Taman Jurassic, Dr. Rex! 🦕 Selamatkan telur 🥚 sebelum raptor menemukannya! Gunakan perulangan untuk bergerak efisien!',
+    },
+    gridRows: 6,
+    gridCols: 7,
+    cells: (() => {
+      const g = emptyGrid(6, 7)
+      g[1][2] = 'obstacle'
+      g[3][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 4] },
+      { id: 'e2', pos: [5, 6] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic'],
+    optimalBlockCount: 12,
+    xpReward: 200,
+    hints: [
+      { en: 'Plan your route to both eggs before coding!', id: 'Rencanakan rute ke kedua telur sebelum membuat kode!' },
+      { en: 'Use loops to avoid repeating move blocks!', id: 'Gunakan perulangan untuk menghindari pengulangan blok gerak!' },
+    ],
+    starThresholds: [20, 12],
+  },
+  {
+    id: 'jurassic-2',
+    worldId: 'jurassic',
+    number: 2,
+    title: { en: 'Raptor Maze', id: 'Labirin Raptor' },
+    story: {
+      en: 'The raptors scattered three eggs across the maze! Use variables to track how many eggs you have collected as you navigate the prehistoric jungle.',
+      id: 'Para raptor menyebarkan tiga telur ke seluruh labirin! Gunakan variabel untuk melacak berapa banyak telur yang sudah kamu kumpulkan saat menavigasi hutan prasejarah.',
+    },
+    mascotMessage: {
+      en: "Three eggs, three locations! 🥚🥚🥚 Use a VARIABLE to count how many you've found — just like a real paleontologist uses a tally!",
+      id: 'Tiga telur, tiga lokasi! 🥚🥚🥚 Gunakan VARIABEL untuk menghitung berapa yang sudah kamu temukan — seperti paleontolog sungguhan menggunakan catatan!',
+    },
+    gridRows: 7,
+    gridCols: 7,
+    cells: (() => {
+      const g = emptyGrid(7, 7)
+      g[0][3] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[4][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [3, 0],
+    items: [
+      { id: 'e1', pos: [0, 6] },
+      { id: 'e2', pos: [6, 2] },
+      { id: 'e3', pos: [3, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables'],
+    optimalBlockCount: 25,
+    xpReward: 250,
+    hints: [
+      { en: 'Use a variable to count collected eggs!', id: 'Gunakan variabel untuk menghitung telur yang sudah dikumpulkan!' },
+      { en: 'Plan the most efficient route between all three eggs!', id: 'Rencanakan rute paling efisien di antara ketiga telur!' },
+    ],
+    starThresholds: [40, 25],
+  },
+  {
+    id: 'jurassic-3',
+    worldId: 'jurassic',
+    number: 3,
+    title: { en: 'Pterodactyl Watch', id: 'Pengawasan Pterodaktil' },
+    story: {
+      en: 'Pterodactyls are circling above! Dr. Rex must quickly collect four eggs using efficient functions. Write reusable code — every second counts in the Jurassic wilderness!',
+      id: 'Pterodaktil melingkar di atas! Dr. Rex harus cepat mengumpulkan empat telur menggunakan fungsi yang efisien. Tulis kode yang dapat digunakan kembali — setiap detik berarti di alam liar Jurassic!',
+    },
+    mascotMessage: {
+      en: "Pterodactyls spotted! ⏰ Use FUNCTIONS to write reusable code — just like real programmers write helper functions for repeated tasks!",
+      id: 'Pterodaktil terlihat! ⏰ Gunakan FUNGSI untuk menulis kode yang dapat digunakan kembali — seperti programmer sungguhan yang menulis fungsi pembantu untuk tugas berulang!',
+    },
+    gridRows: 7,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(7, 8)
+      g[0][4] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[3][0] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 7] },
+      { id: 'e2', pos: [3, 4] },
+      { id: 'e3', pos: [6, 1] },
+      { id: 'e4', pos: [5, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions'],
+    optimalBlockCount: 35,
+    xpReward: 300,
+    hints: [
+      { en: 'Define a function for navigating to each egg!', id: 'Buat fungsi untuk navigasi ke setiap telur!' },
+      { en: 'Reuse your function for similar paths!', id: 'Gunakan kembali fungsimu untuk jalur yang serupa!' },
+    ],
+    starThresholds: [55, 35],
+  },
+  {
+    id: 'jurassic-4',
+    worldId: 'jurassic',
+    number: 4,
+    title: { en: 'T-Rex Territory', id: 'Wilayah T-Rex' },
+    story: {
+      en: 'T-Rex has blocked large sections of the park! Dr. Rex must use conditional logic to find safe paths through the dinosaur territory and rescue five precious eggs.',
+      id: 'T-Rex telah memblokir area besar di taman! Dr. Rex harus menggunakan logika kondisional untuk menemukan jalur aman melalui wilayah dinosaurus dan menyelamatkan lima telur berharga.',
+    },
+    mascotMessage: {
+      en: "T-Rex danger zones ahead! 🦖 Use IF conditions and lists to track safe paths — just like GPS apps use conditions to avoid traffic!",
+      id: 'Zona bahaya T-Rex di depan! 🦖 Gunakan kondisi IF dan daftar untuk melacak jalur aman — seperti aplikasi GPS menggunakan kondisi untuk menghindari kemacetan!',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[0][3] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[6][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 7] },
+      { id: 'e2', pos: [2, 4] },
+      { id: 'e3', pos: [5, 8] },
+      { id: 'e4', pos: [7, 1] },
+      { id: 'e5', pos: [4, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 50,
+    xpReward: 350,
+    hints: [
+      { en: 'Store egg locations in a list before navigating!', id: 'Simpan lokasi telur dalam daftar sebelum menavigasi!' },
+      { en: 'Use if-else to choose the best path around obstacles!', id: 'Gunakan if-else untuk memilih jalur terbaik menghindari rintangan!' },
+    ],
+    starThresholds: [75, 50],
+  },
+  {
+    id: 'jurassic-5',
+    worldId: 'jurassic',
+    number: 5,
+    title: { en: 'Volcano Eruption!', id: 'Gunung Berapi Meletus!' },
+    story: {
+      en: "The volcano is erupting! Dr. Rex has minutes to rescue all six eggs scattered across the park. This is the ultimate real-world algorithm challenge — plan the optimal path and execute it perfectly!",
+      id: 'Gunung berapi meletus! Dr. Rex punya menit untuk menyelamatkan semua enam telur yang tersebar di seluruh taman. Ini tantangan algoritma dunia nyata tertinggi — rencanakan jalur optimal dan jalankan dengan sempurna!',
+    },
+    mascotMessage: {
+      en: "VOLCANO ALERT! 🌋 This is the REAL-WORLD challenge! Real delivery apps solve this problem every day — finding the optimal route to visit multiple locations. Use EVERYTHING you know!",
+      id: 'PERINGATAN GUNUNG BERAPI! 🌋 Ini adalah tantangan DUNIA NYATA! Aplikasi pengiriman nyata memecahkan masalah ini setiap hari — menemukan rute optimal untuk mengunjungi banyak lokasi. Gunakan SEGALANYA yang kamu ketahui!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[0][4] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][0] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[7][7] = 'obstacle'
+      g[8][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 8] },
+      { id: 'e2', pos: [2, 5] },
+      { id: 'e3', pos: [4, 1] },
+      { id: 'e4', pos: [6, 7] },
+      { id: 'e5', pos: [8, 4] },
+      { id: 'e6', pos: [3, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 65,
+    xpReward: 400,
+    hints: [
+      { en: 'Plan the optimal route visiting all eggs before coding!', id: 'Rencanakan rute optimal mengunjungi semua telur sebelum membuat kode!' },
+      { en: 'Use lists and functions to organize your approach!', id: 'Gunakan daftar dan fungsi untuk mengorganisir pendekatanmu!' },
+    ],
+    starThresholds: [100, 65],
+  },
+
+  // ─────────────────────────────────────────────
+  // BONUS WORLD 2: CITY PARKING — Sorting & Routing
+  // ─────────────────────────────────────────────
+  {
+    id: 'parking-1',
+    worldId: 'parking',
+    number: 1,
+    title: { en: 'First Shift', id: 'Giliran Pertama' },
+    story: {
+      en: "Parker the parking officer just started their shift! Guide Parker to mark two empty parking spaces before the rush hour crowd arrives.",
+      id: 'Parker si petugas parkir baru saja memulai gilirannya! Pandu Parker untuk menandai dua tempat parkir kosong sebelum keramaian jam sibuk tiba.',
+    },
+    mascotMessage: {
+      en: "Welcome to the parking lot! 🚗 Real parking apps use algorithms to find empty spots. Use loops to patrol the lot efficiently!",
+      id: 'Selamat datang di tempat parkir! 🚗 Aplikasi parkir nyata menggunakan algoritma untuk menemukan tempat kosong. Gunakan perulangan untuk berpatroli secara efisien!',
+    },
+    gridRows: 6,
+    gridCols: 6,
+    cells: (() => {
+      const g = emptyGrid(6, 6)
+      g[2][2] = 'obstacle'
+      g[4][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [1, 4] },
+      { id: 'p2', pos: [5, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic'],
+    optimalBlockCount: 10,
+    xpReward: 200,
+    hints: [
+      { en: 'Navigate around the construction barriers!', id: 'Navigasi menghindari penghalang konstruksi!' },
+      { en: 'Use loops to move in straight lines quickly!', id: 'Gunakan perulangan untuk bergerak dalam garis lurus dengan cepat!' },
+    ],
+    starThresholds: [18, 10],
+  },
+  {
+    id: 'parking-2',
+    worldId: 'parking',
+    number: 2,
+    title: { en: 'Rush Hour', id: 'Jam Sibuk' },
+    story: {
+      en: "Rush hour chaos! Three parking zones need to be checked and confirmed. Parker must use variables to track which zones have been verified — just like real parking management software.",
+      id: 'Kekacauan jam sibuk! Tiga zona parkir perlu diperiksa dan dikonfirmasi. Parker harus menggunakan variabel untuk melacak zona mana yang sudah diverifikasi — seperti perangkat lunak manajemen parkir nyata.',
+    },
+    mascotMessage: {
+      en: "Rush hour! 🚦 Real parking apps use VARIABLES to track availability. Use variables to remember which spots you've checked!",
+      id: 'Jam sibuk! 🚦 Aplikasi parkir nyata menggunakan VARIABEL untuk melacak ketersediaan. Gunakan variabel untuk mengingat tempat mana yang sudah kamu periksa!',
+    },
+    gridRows: 7,
+    gridCols: 7,
+    cells: (() => {
+      const g = emptyGrid(7, 7)
+      g[1][3] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[5][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 6] },
+      { id: 'p2', pos: [4, 1] },
+      { id: 'p3', pos: [6, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables'],
+    optimalBlockCount: 22,
+    xpReward: 250,
+    hints: [
+      { en: 'Use a variable to count confirmed parking zones!', id: 'Gunakan variabel untuk menghitung zona parkir yang sudah dikonfirmasi!' },
+      { en: 'Plan the most direct path through all three zones!', id: 'Rencanakan jalur paling langsung melalui ketiga zona!' },
+    ],
+    starThresholds: [38, 22],
+  },
+  {
+    id: 'parking-3',
+    worldId: 'parking',
+    number: 3,
+    title: { en: 'Double Deck', id: 'Dua Lantai' },
+    story: {
+      en: "The parking garage expanded to four zones! Parker must use functions to handle each zone type — compact, standard, oversized, and VIP. Real parking garages use exactly this kind of categorization logic.",
+      id: 'Gedung parkir diperluas menjadi empat zona! Parker harus menggunakan fungsi untuk menangani setiap jenis zona — kompak, standar, besar, dan VIP. Gedung parkir nyata menggunakan logika kategorisasi seperti ini.',
+    },
+    mascotMessage: {
+      en: "Four zones to manage! 🅿️🅿️🅿️🅿️ Real garage software uses FUNCTIONS for each zone type. Write a function for each parking procedure!",
+      id: 'Empat zona yang harus dikelola! 🅿️🅿️🅿️🅿️ Perangkat lunak garasi nyata menggunakan FUNGSI untuk setiap jenis zona. Tulis fungsi untuk setiap prosedur parkir!',
+    },
+    gridRows: 7,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(7, 8)
+      g[0][4] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[3][0] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 7] },
+      { id: 'p2', pos: [3, 4] },
+      { id: 'p3', pos: [6, 0] },
+      { id: 'p4', pos: [5, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions'],
+    optimalBlockCount: 35,
+    xpReward: 300,
+    hints: [
+      { en: 'Create a function to navigate to each parking zone!', id: 'Buat fungsi untuk navigasi ke setiap zona parkir!' },
+      { en: 'Reuse the function by passing different zone positions!', id: 'Gunakan kembali fungsi dengan memberikan posisi zona yang berbeda!' },
+    ],
+    starThresholds: [55, 35],
+  },
+  {
+    id: 'parking-4',
+    worldId: 'parking',
+    number: 4,
+    title: { en: 'VIP Night', id: 'Malam VIP' },
+    story: {
+      en: "VIP event tonight! Five premium parking zones need to be reserved. Parker must use lists to manage the reservation order — the same technique used in real hotel and airport parking systems.",
+      id: 'Acara VIP malam ini! Lima zona parkir premium perlu dipesan. Parker harus menggunakan daftar untuk mengelola urutan reservasi — teknik yang sama digunakan dalam sistem parkir hotel dan bandara nyata.',
+    },
+    mascotMessage: {
+      en: "VIP event! 🌟 Airports and hotels use LISTS to manage parking reservations in order. Use a list to queue up the zones Parker visits!",
+      id: 'Acara VIP! 🌟 Bandara dan hotel menggunakan DAFTAR untuk mengelola reservasi parkir secara berurutan. Gunakan daftar untuk mengantri zona yang dikunjungi Parker!',
+    },
+    gridRows: 8,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(8, 8)
+      g[0][3] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[4][0] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 7] },
+      { id: 'p2', pos: [2, 4] },
+      { id: 'p3', pos: [4, 7] },
+      { id: 'p4', pos: [7, 2] },
+      { id: 'p5', pos: [5, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 50,
+    xpReward: 350,
+    hints: [
+      { en: 'Store zone positions in a list before navigating!', id: 'Simpan posisi zona dalam daftar sebelum menavigasi!' },
+      { en: 'Process the list in the most efficient order!', id: 'Proses daftar dalam urutan yang paling efisien!' },
+    ],
+    starThresholds: [75, 50],
+  },
+  {
+    id: 'parking-5',
+    worldId: 'parking',
+    number: 5,
+    title: { en: 'Grand Prix Day', id: 'Hari Grand Prix' },
+    story: {
+      en: "Race day! The entire parking grid must be optimized for thousands of spectators. Parker needs to use every tool — loops, functions, conditions, and lists — to manage all six zones. This is real-world logistics code!",
+      id: 'Hari balapan! Seluruh grid parkir harus dioptimalkan untuk ribuan penonton. Parker perlu menggunakan semua alat — perulangan, fungsi, kondisi, dan daftar — untuk mengelola semua enam zona. Ini adalah kode logistik dunia nyata!',
+    },
+    mascotMessage: {
+      en: "GRAND PRIX! 🏁 Real logistics companies write code exactly like this to optimize routes for delivery trucks. Use EVERYTHING to find the perfect path!",
+      id: 'GRAND PRIX! 🏁 Perusahaan logistik nyata menulis kode seperti ini untuk mengoptimalkan rute truk pengiriman. Gunakan SEGALANYA untuk menemukan jalur yang sempurna!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[0][4] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 8] },
+      { id: 'p2', pos: [2, 5] },
+      { id: 'p3', pos: [4, 0] },
+      { id: 'p4', pos: [6, 4] },
+      { id: 'p5', pos: [8, 8] },
+      { id: 'p6', pos: [3, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 70,
+    xpReward: 400,
+    hints: [
+      { en: 'Use lists to plan the optimal visit order!', id: 'Gunakan daftar untuk merencanakan urutan kunjungan yang optimal!' },
+      { en: 'Think like a GPS — find the shortest total path!', id: 'Berpikirlah seperti GPS — temukan total jalur terpendek!' },
+    ],
+    starThresholds: [105, 70],
+  },
+
+  // ─────────────────────────────────────────────
+  // BONUS WORLD 3: SPACE SORTING — Algorithms & Data
+  // ─────────────────────────────────────────────
+  {
+    id: 'sorting-1',
+    worldId: 'sorting',
+    number: 1,
+    title: { en: 'Package Sort', id: 'Penyortiran Paket' },
+    story: {
+      en: "Sorty the robot just powered up in the space warehouse! Two packages are out of place. Guide Sorty to collect and sort them — just like how Amazon and UPS use robots in their real warehouses.",
+      id: 'Robot Sorty baru saja menyala di gudang luar angkasa! Dua paket tidak pada tempatnya. Pandu Sorty untuk mengumpulkan dan menyortirnya — seperti bagaimana Amazon dan UPS menggunakan robot di gudang nyata mereka.',
+    },
+    mascotMessage: {
+      en: "Warehouse robots use the SAME code you're writing! 🤖 Real companies like Amazon use algorithms to sort millions of packages. Use loops to patrol the warehouse!",
+      id: 'Robot gudang menggunakan kode YANG SAMA yang kamu tulis! 🤖 Perusahaan nyata seperti Amazon menggunakan algoritma untuk menyortir jutaan paket. Gunakan perulangan untuk berpatroli di gudang!',
+    },
+    gridRows: 6,
+    gridCols: 6,
+    cells: (() => {
+      const g = emptyGrid(6, 6)
+      g[1][3] = 'obstacle'
+      g[4][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 5] },
+      { id: 's2', pos: [5, 4] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables'],
+    optimalBlockCount: 12,
+    xpReward: 200,
+    hints: [
+      { en: 'Use loops to move across the warehouse rows!', id: 'Gunakan perulangan untuk bergerak di sepanjang baris gudang!' },
+      { en: 'Find the most direct route to each package!', id: 'Temukan rute paling langsung ke setiap paket!' },
+    ],
+    starThresholds: [20, 12],
+  },
+  {
+    id: 'sorting-2',
+    worldId: 'sorting',
+    number: 2,
+    title: { en: 'Conveyor Chaos', id: 'Kekacauan Conveyor' },
+    story: {
+      en: "The conveyor belts broke down! Three packages are stuck in wrong sections. Sorty must use variables to track the sorting queue — real warehouse management systems use this exact technique.",
+      id: 'Ban berjalan rusak! Tiga paket terjebak di bagian yang salah. Sorty harus menggunakan variabel untuk melacak antrian penyortiran — sistem manajemen gudang nyata menggunakan teknik yang persis ini.',
+    },
+    mascotMessage: {
+      en: "Conveyor breakdown! 🔧 Real logistics software uses VARIABLES as counters and trackers. Use a variable to count sorted packages — that's exactly how inventory systems work!",
+      id: 'Conveyor rusak! 🔧 Perangkat lunak logistik nyata menggunakan VARIABEL sebagai penghitung dan pelacak. Gunakan variabel untuk menghitung paket yang sudah disortir — begitulah cara sistem inventaris bekerja!',
+    },
+    gridRows: 7,
+    gridCols: 7,
+    cells: (() => {
+      const g = emptyGrid(7, 7)
+      g[0][3] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[5][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [3, 0],
+    items: [
+      { id: 's1', pos: [0, 6] },
+      { id: 's2', pos: [4, 4] },
+      { id: 's3', pos: [6, 2] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions'],
+    optimalBlockCount: 22,
+    xpReward: 250,
+    hints: [
+      { en: 'Use a variable to track how many packages are sorted!', id: 'Gunakan variabel untuk melacak berapa banyak paket yang sudah disortir!' },
+      { en: 'Create a function for the sorting routine!', id: 'Buat fungsi untuk rutinitas penyortiran!' },
+    ],
+    starThresholds: [38, 22],
+  },
+  {
+    id: 'sorting-3',
+    worldId: 'sorting',
+    number: 3,
+    title: { en: 'Priority Delivery', id: 'Pengiriman Prioritas' },
+    story: {
+      en: "Priority packages must be processed first! Sorty needs to sort four packages across a complex warehouse layout. Real priority queues in software work exactly like this — urgent items jump the line.",
+      id: 'Paket prioritas harus diproses terlebih dahulu! Sorty perlu menyortir empat paket di seluruh tata letak gudang yang kompleks. Antrian prioritas nyata dalam perangkat lunak bekerja persis seperti ini — item mendesak melompat antrean.',
+    },
+    mascotMessage: {
+      en: "Priority sorting! ⭐ Operating systems use priority queues to manage tasks — urgent tasks first! Use LISTS and FUNCTIONS to build your priority sorter!",
+      id: 'Penyortiran prioritas! ⭐ Sistem operasi menggunakan antrian prioritas untuk mengelola tugas — tugas mendesak terlebih dahulu! Gunakan DAFTAR dan FUNGSI untuk membangun penyortir prioritasmu!',
+    },
+    gridRows: 8,
+    gridCols: 7,
+    cells: (() => {
+      const g = emptyGrid(8, 7)
+      g[1][2] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[5][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 6] },
+      { id: 's2', pos: [3, 2] },
+      { id: 's3', pos: [5, 5] },
+      { id: 's4', pos: [7, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 35,
+    xpReward: 300,
+    hints: [
+      { en: 'Use a list to store the order packages should be sorted!', id: 'Gunakan daftar untuk menyimpan urutan paket yang harus disortir!' },
+      { en: 'Write a function that sorts one package at a time!', id: 'Tulis fungsi yang menyortir satu paket sekaligus!' },
+    ],
+    starThresholds: [55, 35],
+  },
+  {
+    id: 'sorting-4',
+    worldId: 'sorting',
+    number: 4,
+    title: { en: 'Warehouse Run', id: 'Lari Gudang' },
+    story: {
+      en: "The warehouse is massive — five packages scattered across every corner! Sorty must navigate the largest layout yet, using all available tools. This mirrors how real distribution center robots handle end-of-day sweeps.",
+      id: 'Gudang sangat besar — lima paket tersebar di setiap sudut! Sorty harus menavigasi tata letak terbesar hingga saat ini, menggunakan semua alat yang tersedia. Ini mencerminkan bagaimana robot pusat distribusi nyata menangani pemeriksaan akhir hari.',
+    },
+    mascotMessage: {
+      en: "Warehouse sweep! 🏭 Real robots at fulfillment centers do exactly this — systematic coverage using algorithms. Use LOOPS and LISTS to cover the entire warehouse!",
+      id: 'Sapu gudang! 🏭 Robot nyata di pusat pemenuhan melakukan hal yang persis ini — cakupan sistematis menggunakan algoritma. Gunakan PERULANGAN dan DAFTAR untuk mencakup seluruh gudang!',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[0][5] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 8] },
+      { id: 's2', pos: [2, 3] },
+      { id: 's3', pos: [4, 8] },
+      { id: 's4', pos: [7, 0] },
+      { id: 's5', pos: [6, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 55,
+    xpReward: 350,
+    hints: [
+      { en: 'Map out a snake-pattern route to cover the warehouse!', id: 'Petakan rute pola ular untuk mencakup gudang!' },
+      { en: 'Use lists to plan which packages to grab first!', id: 'Gunakan daftar untuk merencanakan paket mana yang harus diambil terlebih dahulu!' },
+    ],
+    starThresholds: [85, 55],
+  },
+  {
+    id: 'sorting-5',
+    worldId: 'sorting',
+    number: 5,
+    title: { en: 'Master Sorter', id: 'Penyortir Master' },
+    story: {
+      en: "Sorty has become the ultimate Master Sorter! Six packages in the most complex warehouse layout. This is the pinnacle of real-world robotics programming — the exact type of algorithm that autonomous warehouse robots run 24/7.",
+      id: 'Sorty telah menjadi Penyortir Master terbaik! Enam paket di tata letak gudang paling kompleks. Ini adalah puncak dari pemrograman robotika dunia nyata — jenis algoritma yang persis dijalankan oleh robot gudang otonom 24/7.',
+    },
+    mascotMessage: {
+      en: "MASTER SORTER challenge! 🏆 You've learned the algorithms that power real-world robots and apps. This is what professional programmers build! Use EVERYTHING — you've got this! 📦",
+      id: 'Tantangan PENYORTIR MASTER! 🏆 Kamu telah mempelajari algoritma yang menggerakkan robot dan aplikasi dunia nyata. Ini yang dibangun oleh programmer profesional! Gunakan SEGALANYA — kamu bisa! 📦',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[0][3] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[7][0] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[4][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 8] },
+      { id: 's2', pos: [2, 5] },
+      { id: 's3', pos: [4, 0] },
+      { id: 's4', pos: [6, 7] },
+      { id: 's5', pos: [8, 3] },
+      { id: 's6', pos: [3, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 75,
+    xpReward: 450,
+    hints: [
+      { en: 'Plan the full optimal path before writing any code!', id: 'Rencanakan jalur optimal penuh sebelum menulis kode apapun!' },
+      { en: 'Use all tools: lists, functions, loops, and conditions!', id: 'Gunakan semua alat: daftar, fungsi, perulangan, dan kondisi!' },
+    ],
+    starThresholds: [110, 75],
+  },
 ]
 
 export function getLessonsByWorld(worldId: string): Lesson[] {

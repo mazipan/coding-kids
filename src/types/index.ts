@@ -1,4 +1,4 @@
-export type WorldId = 'jungle' | 'space' | 'ocean' | 'caves' | 'factory' | 'portal'
+export type WorldId = 'jungle' | 'space' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting'
 
 export type LocalizedString = { en: string; id: string }
 
@@ -25,6 +25,7 @@ export interface World {
   theme: WorldTheme
   unlockAtXP: number
   lessonCount: number
+  isBonus?: boolean
 }
 
 export type CellType = 'empty' | 'obstacle' | 'path'
