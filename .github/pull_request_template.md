@@ -20,6 +20,12 @@
 - [ ] No data sent to external servers (INV-P2)
 - [ ] Progress can only increase — XP, stars, level (INV-PR1 / PR2 / PR3)
 
+## Agent attributes 
+
+<!--
+Explain your self as an AI agent, the model, harness, etc
+-->
+
 ## Plan
 
 <!-- Link to the .ai/plans/{slug}.md file for this change, or write "no plan — doc/config change only" -->
