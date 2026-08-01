@@ -81,7 +81,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 const lessons = getLessonsByWorld(world.id)
                 const completedCount = lessons.filter(l => getLessonProgress(l.id)?.completed).length
                 const worldStars = lessons.reduce((sum, l) => sum + (getLessonProgress(l.id)?.stars ?? 0), 0)
-                const maxStars = lessons.length * 3
+                const maxStars = lessons.reduce((sum, l) => sum + maxStarsForThresholds(l.starThresholds), 0)
 
                 return (
                   <motion.button
@@ -219,7 +219,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                   const lessons = getLessonsByWorld(world.id)
                   const completedCount = lessons.filter(l => getLessonProgress(l.id)?.completed).length
                   const worldStars = lessons.reduce((sum, l) => sum + (getLessonProgress(l.id)?.stars ?? 0), 0)
-                  const maxStars = lessons.length * 3
+                  const maxStars = lessons.reduce((sum, l) => sum + maxStarsForThresholds(l.starThresholds), 0)
 
                   return (
                     <motion.button
