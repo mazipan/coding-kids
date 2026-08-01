@@ -482,7 +482,7 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
             </motion.button>
           </FadeIn>
           <FadeIn delay={0.22}>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {(
                 [
                   'trust.free',
@@ -493,9 +493,10 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
               ).map(key => (
                 <span
                   key={key}
-                  className="text-sm font-semibold text-green-400/70"
+                  className="inline-flex items-center gap-1.5 bg-white/[0.04] border border-white/[0.08] rounded-full px-3 py-1 text-xs font-semibold text-white/55"
                 >
-                  ✓ {t(key)}
+                  <span className="text-green-400 text-[10px] leading-none">✓</span>
+                  {t(key)}
                 </span>
               ))}
             </div>
