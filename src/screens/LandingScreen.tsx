@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { MousePointerClick, Trophy, Globe, Smartphone, Map, Grip, Zap } from 'lucide-react'
+import { MousePointerClick, Trophy, Globe, Smartphone, Map, Grip, Zap, Gift, ShieldCheck, EyeOff } from 'lucide-react'
 import { WORLDS } from '../data/worlds'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { Logo } from '../components/Logo'
@@ -234,27 +234,32 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
         </div>
       </section>
 
-      {/* ── TRUST BAR ────────────────────────────── */}
-      <div className="border-y border-white/[0.06] bg-white/[0.015] py-5 px-5 sm:px-8">
-        <div className="max-w-3xl mx-auto flex flex-wrap justify-center gap-x-10 gap-y-3">
-          {(
-            [
-              'trust.free',
-              'trust.no.signup',
-              'trust.no.ads',
-              'trust.mobile',
-            ] as const
-          ).map(key => (
-            <span
-              key={key}
-              className="flex items-center gap-2 text-sm font-semibold text-white/50"
-            >
-              <span className="text-green-400 text-base">✓</span>
-              {t(key)}
-            </span>
-          ))}
+      {/* ── TRUST CARDS ─────────────────────────── */}
+      <section className="py-10 sm:py-12 px-5 sm:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {[
+              { Icon: Gift, key: 'trust.free' as const, color: '#22C55E' },
+              { Icon: ShieldCheck, key: 'trust.no.signup' as const, color: '#60A5FA' },
+              { Icon: EyeOff, key: 'trust.no.ads' as const, color: '#A78BFA' },
+              { Icon: Smartphone, key: 'trust.mobile' as const, color: '#F472B6' },
+            ].map(({ Icon, key, color }) => (
+              <div
+                key={key}
+                className="rounded-2xl p-4 sm:p-5 flex flex-col items-center gap-3 text-center border border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-200"
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: `${color}18`, border: `1px solid ${color}30` }}
+                >
+                  <Icon size={20} color={color} />
+                </div>
+                <span className="font-bold text-sm text-white/75 leading-tight">{t(key)}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* ── FEATURES ─────────────────────────────── */}
       <section className="py-28 sm:py-32 px-5 sm:px-8">
