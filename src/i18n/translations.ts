@@ -202,6 +202,11 @@ const en: Translations = {
   'tutorial.complete.title': "You're Ready! 🎉",
   'tutorial.complete.subtitle': 'Great job! You know how {concept} blocks work. Time to play for real!',
   'tutorial.complete.cta': 'Start Level 1!',
+
+  // ── Walkthrough tour ─────────────────────────
+  'walkthrough.next': 'Next →',
+  'walkthrough.skip': 'Skip',
+  'walkthrough.go': "Got it! Let's go! 🚀",
 }
 
 const id: Translations = {
@@ -404,6 +409,11 @@ const id: Translations = {
   'tutorial.complete.title': 'Kamu Siap! 🎉',
   'tutorial.complete.subtitle': 'Bagus sekali! Kamu sudah tahu cara kerja blok {concept}. Saatnya bermain sungguhan!',
   'tutorial.complete.cta': 'Mulai Level 1!',
+
+  // ── Walkthrough tour ─────────────────────────
+  'walkthrough.next': 'Lanjut →',
+  'walkthrough.skip': 'Lewati',
+  'walkthrough.go': 'Mengerti! Ayo! 🚀',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }
