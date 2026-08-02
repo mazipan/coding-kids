@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
 import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
+import { BlocklyWalkthrough, isTourDone } from '../components/BlocklyWalkthrough'
 import { GameGrid } from '../components/GameGrid'
 import { Mascot } from '../components/Mascot'
 import { RewardModal } from '../components/RewardModal'
@@ -44,12 +45,22 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const [hintIndex, setHintIndex] = useState(0)
   const [showReward, setShowReward] = useState(false)
   const [showTutorialComplete, setShowTutorialComplete] = useState(false)
+  const [showWalkthrough, setShowWalkthrough] = useState(
+    () => lesson.isTutorial === true && !isTourDone(lesson.worldId)
+  )
   const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '', missingCategories: [] as string[] })
   const [mascotMessage, setMascotMessage] = useState(() => localize(lesson.mascotMessage, language))
   const [mascotMood, setMascotMood] = useState<'happy' | 'thinking' | 'excited' | 'sad'>('happy')
   const [activeTab, setActiveTab] = useState<'blocks' | 'game'>('blocks')
   const runningRef = useRef(false)
   const blocklyRef = useRef<BlocklyWorkspaceHandle>(null)
+
+  const handleWalkthroughStepChange = useCallback((nextStep: number) => {
+    if (nextStep < 3) {
+      setActiveTab('blocks')
+      requestAnimationFrame(() => { blocklyRef.current?.resize() })
+    }
+  }, [])
 
   const handleCodeChange = useCallback((code: string, blockCount: number, usedBlockTypes: string[]) => {
     setCurrentCode(code)
@@ -487,6 +498,15 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         onNext={handleNext}
         onRetry={handleRetry}
       />
+
+      {/* UI walkthrough — shown on tutorial lessons the first time */}
+      {showWalkthrough && (
+        <BlocklyWalkthrough
+          world={world}
+          onDone={() => setShowWalkthrough(false)}
+          onStepChange={handleWalkthroughStepChange}
+        />
+      )}
     </div>
   )
 }
