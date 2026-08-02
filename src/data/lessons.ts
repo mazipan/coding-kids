@@ -1316,6 +1316,269 @@ export const LESSONS: Lesson[] = [
     ],
     starThresholds: [140, 100, 83, 65],
   },
+  {
+    id: 'jurassic-6',
+    worldId: 'jurassic',
+    number: 6,
+    title: { en: 'Fossil Valley', id: 'Lembah Fosil' },
+    story: {
+      en: "Deep in Fossil Valley, seven dino eggs are buried beneath the ferns! Dr. Rex must navigate a tangled prehistoric landscape to rescue them all before the dig site floods.",
+      id: 'Jauh di Lembah Fosil, tujuh telur dino terkubur di bawah pakis! Dr. Rex harus menavigasi lanskap prasejarah yang kusut untuk menyelamatkan semuanya sebelum lokasi penggalian kebanjiran.',
+    },
+    mascotMessage: {
+      en: "Seven eggs to save! 🥚🥚🥚🥚🥚🥚🥚 Real archaeologists plan their dig grid before excavating — plan your route with LISTS and FUNCTIONS before you start coding!",
+      id: 'Tujuh telur yang harus diselamatkan! 🥚🥚🥚🥚🥚🥚🥚 Arkeolog sungguhan merencanakan kisi penggalian sebelum menggali — rencanakan rutemmu dengan DAFTAR dan FUNGSI sebelum mulai membuat kode!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][4] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][3] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[7][2] = 'obstacle'
+      g[0][5] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[5][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 8] },
+      { id: 'e2', pos: [2, 3] },
+      { id: 'e3', pos: [4, 7] },
+      { id: 'e4', pos: [6, 1] },
+      { id: 'e5', pos: [8, 5] },
+      { id: 'e6', pos: [3, 0] },
+      { id: 'e7', pos: [7, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 80,
+    xpReward: 450,
+    hints: [
+      { en: 'Store all egg positions in a list and loop through it!', id: 'Simpan semua posisi telur dalam daftar dan ulangi dengan perulangan!' },
+      { en: 'Group nearby eggs so you travel less total distance!', id: 'Kelompokkan telur yang berdekatan agar jarak tempuh total lebih pendek!' },
+    ],
+    starThresholds: [168, 120, 100, 80],
+  },
+  {
+    id: 'jurassic-7',
+    worldId: 'jurassic',
+    number: 7,
+    title: { en: 'Pterodactyl Nest', id: 'Sarang Pterodaktil' },
+    story: {
+      en: "A pterodactyl nest guards the valley paths! Dr. Rex must outwit the patrols and collect seven precious eggs scattered across a treacherous grid of jungle obstacles.",
+      id: 'Sarang pterodaktil menjaga jalur lembah! Dr. Rex harus mengecoh patroli dan mengumpulkan tujuh telur berharga yang tersebar di kisi hutan yang berbahaya.',
+    },
+    mascotMessage: {
+      en: "Pterodactyls on patrol! 🦅 Use CONDITIONAL LOGIC to pick the best direction around each obstacle — real robots use sensors and if-else exactly like this!",
+      id: 'Pterodaktil berpatroli! 🦅 Gunakan LOGIKA KONDISIONAL untuk memilih arah terbaik menghindari setiap rintangan — robot nyata menggunakan sensor dan if-else persis seperti ini!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][2] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][3] = 'obstacle'
+      g[7][7] = 'obstacle'
+      g[2][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [4, 0],
+    items: [
+      { id: 'e1', pos: [0, 4] },
+      { id: 'e2', pos: [0, 8] },
+      { id: 'e3', pos: [3, 6] },
+      { id: 'e4', pos: [6, 3] },
+      { id: 'e5', pos: [8, 0] },
+      { id: 'e6', pos: [8, 8] },
+      { id: 'e7', pos: [5, 4] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 95,
+    xpReward: 500,
+    hints: [
+      { en: 'Start from the middle — it gives you the shortest reach to all corners!', id: 'Mulai dari tengah — ini memberimu jangkauan terpendek ke semua sudut!' },
+      { en: 'Use a list to store egg positions and a function to travel to each!', id: 'Gunakan daftar untuk menyimpan posisi telur dan fungsi untuk pergi ke masing-masing!' },
+    ],
+    starThresholds: [200, 143, 119, 95],
+  },
+  {
+    id: 'jurassic-8',
+    worldId: 'jurassic',
+    number: 8,
+    title: { en: 'Ice Age Crossing', id: 'Penyeberangan Zaman Es' },
+    story: {
+      en: "A sudden blizzard has frozen parts of the valley! Eight dino eggs are scattered across a wide 10-row grid. Dr. Rex must navigate icy obstacles in the largest landscape yet.",
+      id: 'Badai salju tiba-tiba telah membekukan sebagian lembah! Delapan telur dino tersebar di kisi 10 baris yang lebar. Dr. Rex harus menavigasi rintangan beku di lanskap terbesar sejauh ini.',
+    },
+    mascotMessage: {
+      en: "Frozen terrain! 🧊 Real autonomous vehicles use pathfinding algorithms across huge grids like this. Use LOOPS, FUNCTIONS, and LISTS to plan the optimal rescue route!",
+      id: 'Medan yang membeku! 🧊 Kendaraan otonom nyata menggunakan algoritma pencarian jalur di kisi besar seperti ini. Gunakan PERULANGAN, FUNGSI, dan DAFTAR untuk merencanakan rute penyelamatan optimal!',
+    },
+    gridRows: 10,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(10, 9)
+      g[1][3] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[8][2] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[3][0] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[9][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 8] },
+      { id: 'e2', pos: [2, 4] },
+      { id: 'e3', pos: [4, 8] },
+      { id: 'e4', pos: [5, 2] },
+      { id: 'e5', pos: [7, 6] },
+      { id: 'e6', pos: [9, 0] },
+      { id: 'e7', pos: [9, 8] },
+      { id: 'e8', pos: [6, 4] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 110,
+    xpReward: 550,
+    hints: [
+      { en: 'With 10 rows to cover, loops save you the most blocks!', id: 'Dengan 10 baris yang harus dijangkau, perulangan menghemat paling banyak blok!' },
+      { en: 'Group eggs by their column position to minimize backtracking!', id: 'Kelompokkan telur berdasarkan posisi kolomnya untuk meminimalkan jalan bolak-balik!' },
+    ],
+    starThresholds: [231, 165, 138, 110],
+  },
+  {
+    id: 'jurassic-9',
+    worldId: 'jurassic',
+    number: 9,
+    title: { en: 'Mega Herd', id: 'Kawanan Mega' },
+    story: {
+      en: "A mega herd of dinosaurs has trampled the landscape! Nine eggs are scattered across the massive 10×10 park. Dr. Rex must execute a perfect algorithm to rescue every last one.",
+      id: 'Kawanan mega dinosaurus telah menginjak-injak lanskapnya! Sembilan telur tersebar di seluruh taman 10×10 yang besar. Dr. Rex harus menjalankan algoritma yang sempurna untuk menyelamatkan semuanya.',
+    },
+    mascotMessage: {
+      en: "Nine eggs across a massive grid! 🦕🦕🦕 Real drone delivery systems solve exactly this every day — visiting many locations in the shortest path. Use ALL your skills!",
+      id: 'Sembilan telur di kisi yang besar! 🦕🦕🦕 Sistem pengiriman drone nyata memecahkan hal ini setiap hari — mengunjungi banyak lokasi dalam jalur terpendek. Gunakan SEMUA keterampilanmu!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][4] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[9][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 9] },
+      { id: 'e2', pos: [2, 5] },
+      { id: 'e3', pos: [4, 1] },
+      { id: 'e4', pos: [4, 9] },
+      { id: 'e5', pos: [6, 4] },
+      { id: 'e6', pos: [7, 8] },
+      { id: 'e7', pos: [9, 2] },
+      { id: 'e8', pos: [9, 7] },
+      { id: 'e9', pos: [5, 6] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 130,
+    xpReward: 600,
+    hints: [
+      { en: 'Split the grid into zones and write a function per zone!', id: 'Bagi kisi menjadi zona dan tulis fungsi untuk setiap zona!' },
+      { en: 'A list of positions processed in the right order cuts the total moves in half!', id: 'Daftar posisi yang diproses dalam urutan yang tepat memangkas total gerakan menjadi setengah!' },
+    ],
+    starThresholds: [273, 195, 163, 130],
+  },
+  {
+    id: 'jurassic-10',
+    worldId: 'jurassic',
+    number: 10,
+    title: { en: 'The Great Extinction', id: 'Kepunahan Besar' },
+    story: {
+      en: "The asteroid is hours away! Dr. Rex must save ten dinosaur eggs — the last of their kind — from across the entire 10×10 park. This is the ultimate real-world pathfinding challenge. Every move counts!",
+      id: 'Asteroid tinggal beberapa jam lagi! Dr. Rex harus menyelamatkan sepuluh telur dinosaurus — yang terakhir dari jenisnya — dari seluruh taman 10×10. Ini adalah tantangan pencarian jalur dunia nyata tertinggi. Setiap gerakan sangat berarti!',
+    },
+    mascotMessage: {
+      en: "THE GREAT EXTINCTION — final challenge! 🌋🦕 Ten eggs, one chance. This is the Travelling Salesman Problem — one of the most famous algorithms in computer science. Give it your BEST!",
+      id: 'KEPUNAHAN BESAR — tantangan final! 🌋🦕 Sepuluh telur, satu kesempatan. Ini adalah Masalah Penjual Keliling — salah satu algoritma paling terkenal dalam ilmu komputer. Berikan yang TERBAIK!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[0][4] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[2][0] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[4][7] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][6] = 'obstacle'
+      g[8][4] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1',  pos: [0, 9] },
+      { id: 'e2',  pos: [1, 5] },
+      { id: 'e3',  pos: [3, 8] },
+      { id: 'e4',  pos: [4, 2] },
+      { id: 'e5',  pos: [5, 6] },
+      { id: 'e6',  pos: [6, 0] },
+      { id: 'e7',  pos: [7, 4] },
+      { id: 'e8',  pos: [8, 8] },
+      { id: 'e9',  pos: [9, 3] },
+      { id: 'e10', pos: [9, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 150,
+    xpReward: 700,
+    hints: [
+      { en: 'Plan the full route on paper first — count every move before you code!', id: 'Rencanakan rute lengkap di atas kertas terlebih dahulu — hitung setiap gerakan sebelum membuat kode!' },
+      { en: 'Functions + lists = the real programmer\'s toolkit for solving this problem!', id: 'Fungsi + daftar = perangkat programmer nyata untuk memecahkan masalah ini!' },
+    ],
+    starThresholds: [315, 225, 188, 150],
+  },
 
   // ─────────────────────────────────────────────
   // BONUS WORLD 2: CITY PARKING — Sorting & Routing
@@ -1523,6 +1786,269 @@ export const LESSONS: Lesson[] = [
       { en: 'Think like a GPS — find the shortest total path!', id: 'Berpikirlah seperti GPS — temukan total jalur terpendek!' },
     ],
     starThresholds: [147, 105, 88, 70],
+  },
+  {
+    id: 'parking-6',
+    worldId: 'parking',
+    number: 6,
+    title: { en: 'Holiday Rush', id: 'Hari Raya Padat' },
+    story: {
+      en: "The holiday season has begun! Seven parking zones across the city need to be checked and cleared before the parade starts. Parker must plan an efficient route through heavy decorations.",
+      id: 'Musim liburan telah dimulai! Tujuh zona parkir di seluruh kota perlu diperiksa dan dibersihkan sebelum parade dimulai. Parker harus merencanakan rute yang efisien melalui dekorasi yang padat.',
+    },
+    mascotMessage: {
+      en: "Holiday rush! 🎄 Real city parking managers use route-optimization software during events. Build a LIST of zones and loop through them with FUNCTIONS — just like the pros!",
+      id: 'Keramaian hari raya! 🎄 Manajer parkir kota nyata menggunakan perangkat lunak optimasi rute selama acara. Buat DAFTAR zona dan ulangi dengan FUNGSI — seperti yang dilakukan para profesional!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][4] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][0] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[3][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 8] },
+      { id: 'p2', pos: [2, 3] },
+      { id: 'p3', pos: [4, 7] },
+      { id: 'p4', pos: [6, 0] },
+      { id: 'p5', pos: [8, 4] },
+      { id: 'p6', pos: [1, 6] },
+      { id: 'p7', pos: [7, 2] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 80,
+    xpReward: 450,
+    hints: [
+      { en: 'Put all zone positions in a list and process them in order!', id: 'Masukkan semua posisi zona ke dalam daftar dan proses berurutan!' },
+      { en: 'Write a helper function to navigate between any two points!', id: 'Tulis fungsi pembantu untuk navigasi antara dua titik mana pun!' },
+    ],
+    starThresholds: [168, 120, 100, 80],
+  },
+  {
+    id: 'parking-7',
+    worldId: 'parking',
+    number: 7,
+    title: { en: 'Airport Terminal', id: 'Terminal Bandara' },
+    story: {
+      en: "A major flight lands in 20 minutes! Seven airport parking zones must be allocated and confirmed before the crowd arrives. Parker must navigate the sprawling terminal grounds efficiently.",
+      id: 'Penerbangan besar mendarat dalam 20 menit! Tujuh zona parkir bandara harus dialokasikan dan dikonfirmasi sebelum keramaian tiba. Parker harus menavigasi area terminal yang luas secara efisien.',
+    },
+    mascotMessage: {
+      en: "Airport parking! ✈️ Airports use AI-powered systems to direct thousands of cars every hour. Model that with FUNCTIONS for each terminal zone and LISTS to track the allocation order!",
+      id: 'Parkir bandara! ✈️ Bandara menggunakan sistem berbasis AI untuk mengarahkan ribuan mobil setiap jam. Modelkan itu dengan FUNGSI untuk setiap zona terminal dan DAFTAR untuk melacak urutan alokasi!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][1] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][0] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[7][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [4, 0],
+    items: [
+      { id: 'p1', pos: [0, 2] },
+      { id: 'p2', pos: [0, 7] },
+      { id: 'p3', pos: [3, 5] },
+      { id: 'p4', pos: [5, 3] },
+      { id: 'p5', pos: [6, 8] },
+      { id: 'p6', pos: [8, 1] },
+      { id: 'p7', pos: [8, 6] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 95,
+    xpReward: 500,
+    hints: [
+      { en: 'Starting in the middle row lets you reach top and bottom zones efficiently!', id: 'Memulai dari baris tengah memungkinkanmu menjangkau zona atas dan bawah secara efisien!' },
+      { en: 'Use a list sorted by distance from your current position!', id: 'Gunakan daftar yang diurutkan berdasarkan jarak dari posisimu saat ini!' },
+    ],
+    starThresholds: [200, 143, 119, 95],
+  },
+  {
+    id: 'parking-8',
+    worldId: 'parking',
+    number: 8,
+    title: { en: 'Shopping Mall Madness', id: 'Kegilaan Mall' },
+    story: {
+      en: "The mega mall opened today! Eight parking checkpoints across a 10-row lot must be verified. Parker must cover every section before closing time — this is large-scale logistics in action.",
+      id: 'Mega mall dibuka hari ini! Delapan pos pemeriksaan parkir di area 10 baris harus diverifikasi. Parker harus mencakup setiap bagian sebelum waktu tutup — ini adalah logistik skala besar dalam tindakan.',
+    },
+    mascotMessage: {
+      en: "Mall-scale logistics! 🛍️ Real mall operators track every parking zone in real time with sensors and code. Use LOOPS to sweep rows and LISTS to mark checkpoints!",
+      id: 'Logistik skala mall! 🛍️ Operator mall nyata melacak setiap zona parkir secara real time dengan sensor dan kode. Gunakan PERULANGAN untuk menyapu baris dan DAFTAR untuk menandai pos pemeriksaan!',
+    },
+    gridRows: 10,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(10, 9)
+      g[1][3] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[9][4] = 'obstacle'
+      g[1][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 8] },
+      { id: 'p2', pos: [2, 5] },
+      { id: 'p3', pos: [4, 0] },
+      { id: 'p4', pos: [5, 7] },
+      { id: 'p5', pos: [7, 3] },
+      { id: 'p6', pos: [8, 8] },
+      { id: 'p7', pos: [9, 1] },
+      { id: 'p8', pos: [6, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 110,
+    xpReward: 550,
+    hints: [
+      { en: 'With 10 rows, a zigzag sweep pattern often beats jumping around!', id: 'Dengan 10 baris, pola sapuan zigzag sering kali lebih baik daripada melompat-lompat!' },
+      { en: 'Write a reusable "go to checkpoint" function to save blocks!', id: 'Tulis fungsi "pergi ke pos pemeriksaan" yang dapat digunakan kembali untuk menghemat blok!' },
+    ],
+    starThresholds: [231, 165, 138, 110],
+  },
+  {
+    id: 'parking-9',
+    worldId: 'parking',
+    number: 9,
+    title: { en: 'Stadium Night', id: 'Malam Stadion' },
+    story: {
+      en: "Sold-out concert night! Nine VIP parking sectors around the massive stadium must be confirmed before the gates open. Parker needs a flawless algorithm to cover the entire 10×10 lot.",
+      id: 'Malam konser terjual habis! Sembilan sektor parkir VIP di sekitar stadion besar harus dikonfirmasi sebelum pintu gerbang dibuka. Parker membutuhkan algoritma yang sempurna untuk mencakup seluruh area 10×10.',
+    },
+    mascotMessage: {
+      en: "Stadium night! 🏟️ Major event venues run multi-agent parking algorithms so thousands of cars flow smoothly. Use ALL your tools — LISTS, FUNCTIONS, LOOPS, CONDITIONS — to master this grid!",
+      id: 'Malam stadion! 🏟️ Venue acara besar menjalankan algoritma parkir multi-agen agar ribuan mobil mengalir lancar. Gunakan SEMUA alatmu — DAFTAR, FUNGSI, PERULANGAN, KONDISI — untuk menguasai kisi ini!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][1] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[8][5] = 'obstacle'
+      g[9][2] = 'obstacle'
+      g[9][6] = 'obstacle'
+      g[1][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 9] },
+      { id: 'p2', pos: [1, 5] },
+      { id: 'p3', pos: [3, 2] },
+      { id: 'p4', pos: [4, 8] },
+      { id: 'p5', pos: [6, 1] },
+      { id: 'p6', pos: [7, 6] },
+      { id: 'p7', pos: [8, 3] },
+      { id: 'p8', pos: [9, 8] },
+      { id: 'p9', pos: [5, 4] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 130,
+    xpReward: 600,
+    hints: [
+      { en: 'Divide the 10×10 lot into four quadrants and tackle one at a time!', id: 'Bagi area 10×10 menjadi empat kuadran dan tangani satu per satu!' },
+      { en: 'A function per quadrant makes your code readable and efficient!', id: 'Fungsi per kuadran membuat kode kamu mudah dibaca dan efisien!' },
+    ],
+    starThresholds: [273, 195, 163, 130],
+  },
+  {
+    id: 'parking-10',
+    worldId: 'parking',
+    number: 10,
+    title: { en: 'Mega City Grid', id: 'Kisi Kota Mega' },
+    story: {
+      en: "The entire city grid is yours to manage! Ten critical parking zones are spread across the 10×10 map. This is the Master Parking Officer final exam — only the most efficient algorithm will earn three stars!",
+      id: 'Seluruh kisi kota menjadi tanggungjawabmu! Sepuluh zona parkir kritis tersebar di seluruh peta 10×10. Ini adalah ujian akhir Petugas Parkir Master — hanya algoritma yang paling efisien yang akan mendapatkan tiga bintang!',
+    },
+    mascotMessage: {
+      en: "MEGA CITY final! 🏙️ Congratulations — you've mastered the routing algorithms that real smart-city systems use to manage millions of vehicles. Code the perfect path and BECOME the algorithm! 🚗",
+      id: 'Final KOTA MEGA! 🏙️ Selamat — kamu telah menguasai algoritma perutean yang digunakan sistem kota cerdas nyata untuk mengelola jutaan kendaraan. Buat kode jalur yang sempurna dan JADILAH algoritmanya! 🚗',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[0][5] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[5][0] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][3] = 'obstacle'
+      g[8][5] = 'obstacle'
+      g[8][8] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1',  pos: [0, 9] },
+      { id: 'p2',  pos: [1, 4] },
+      { id: 'p3',  pos: [2, 8] },
+      { id: 'p4',  pos: [4, 1] },
+      { id: 'p5',  pos: [5, 6] },
+      { id: 'p6',  pos: [6, 3] },
+      { id: 'p7',  pos: [7, 9] },
+      { id: 'p8',  pos: [8, 2] },
+      { id: 'p9',  pos: [9, 5] },
+      { id: 'p10', pos: [3, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 150,
+    xpReward: 700,
+    hints: [
+      { en: 'Ten zones — build a list of all positions and process them in optimal order!', id: 'Sepuluh zona — buat daftar semua posisi dan proses dalam urutan optimal!' },
+      { en: 'Think like a GPS: minimize total distance, not just hops between zones!', id: 'Berpikirlah seperti GPS: minimalkan total jarak, bukan hanya lompatan antar zona!' },
+    ],
+    starThresholds: [315, 225, 188, 150],
   },
 
   // ─────────────────────────────────────────────
@@ -1733,6 +2259,271 @@ export const LESSONS: Lesson[] = [
       { en: 'Use all tools: lists, functions, loops, and conditions!', id: 'Gunakan semua alat: daftar, fungsi, perulangan, dan kondisi!' },
     ],
     starThresholds: [154, 110, 93, 75],
+  },
+  {
+    id: 'sorting-6',
+    worldId: 'sorting',
+    number: 6,
+    title: { en: 'Black Friday Surge', id: 'Lonjakan Jumat Hitam' },
+    story: {
+      en: "Black Friday sale! Seven misplaced packages are causing chaos in the space warehouse. Sorty must execute a high-speed sweep to sort them all before the delivery deadline hits.",
+      id: 'Penjualan Jumat Hitam! Tujuh paket yang salah tempat menyebabkan kekacauan di gudang luar angkasa. Sorty harus melakukan sapuan berkecepatan tinggi untuk menyortir semuanya sebelum tenggat waktu pengiriman.',
+    },
+    mascotMessage: {
+      en: "Black Friday surge! 📦📦📦📦📦📦📦 Real e-commerce warehouses run surge algorithms during sales events. Use LISTS to queue packages and FUNCTIONS to sort them — just like the pros!",
+      id: 'Lonjakan Jumat Hitam! 📦📦📦📦📦📦📦 Gudang e-commerce nyata menjalankan algoritma lonjakan selama acara penjualan. Gunakan DAFTAR untuk mengantri paket dan FUNGSI untuk menyortirnya — seperti yang dilakukan para profesional!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][2] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][0] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[8][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 8] },
+      { id: 's2', pos: [2, 4] },
+      { id: 's3', pos: [4, 1] },
+      { id: 's4', pos: [5, 7] },
+      { id: 's5', pos: [7, 3] },
+      { id: 's6', pos: [8, 6] },
+      { id: 's7', pos: [3, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 85,
+    xpReward: 500,
+    hints: [
+      { en: 'Store all package positions in a list, then loop through them!', id: 'Simpan semua posisi paket dalam daftar, lalu ulangi dengan perulangan!' },
+      { en: 'Sort the list by row first to reduce backtracking!', id: 'Urutkan daftar berdasarkan baris terlebih dahulu untuk mengurangi jalan bolak-balik!' },
+    ],
+    starThresholds: [179, 128, 106, 85],
+  },
+  {
+    id: 'sorting-7',
+    worldId: 'sorting',
+    number: 7,
+    title: { en: 'International Hub', id: 'Hub Internasional' },
+    story: {
+      en: "The space hub receives packages from seven star systems! Each must be sorted and dispatched to the right quadrant. Sorty must navigate a crowded hub with obstacles at every junction.",
+      id: 'Hub luar angkasa menerima paket dari tujuh sistem bintang! Setiap paket harus disortir dan dikirim ke kuadran yang tepat. Sorty harus menavigasi hub yang padat dengan rintangan di setiap persimpangan.',
+    },
+    mascotMessage: {
+      en: "International hub! 🌌 Global logistics companies handle millions of cross-border packages daily using routing algorithms. Apply FUNCTIONS and CONDITIONAL LOGIC to manage each incoming parcel!",
+      id: 'Hub internasional! 🌌 Perusahaan logistik global menangani jutaan paket lintas batas setiap hari menggunakan algoritma perutean. Terapkan FUNGSI dan LOGIKA KONDISIONAL untuk mengelola setiap paket masuk!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[0][5] = 'obstacle'
+      g[1][1] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[8][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [4, 0],
+    items: [
+      { id: 's1', pos: [0, 3] },
+      { id: 's2', pos: [0, 8] },
+      { id: 's3', pos: [3, 6] },
+      { id: 's4', pos: [5, 4] },
+      { id: 's5', pos: [7, 1] },
+      { id: 's6', pos: [8, 5] },
+      { id: 's7', pos: [6, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 100,
+    xpReward: 550,
+    hints: [
+      { en: 'Starting from the middle row, plan trips to upper and lower clusters separately!', id: 'Mulai dari baris tengah, rencanakan perjalanan ke kluster atas dan bawah secara terpisah!' },
+      { en: 'A function that accepts a target position removes repeated move logic!', id: 'Fungsi yang menerima posisi target menghilangkan logika gerakan yang berulang!' },
+    ],
+    starThresholds: [210, 150, 125, 100],
+  },
+  {
+    id: 'sorting-8',
+    worldId: 'sorting',
+    number: 8,
+    title: { en: 'Mega Fulfillment', id: 'Pemenuhan Mega' },
+    story: {
+      en: "The mega fulfillment center has eight packages scattered across a vast 10-row warehouse. Sorty must execute a precise sweep to pick them all up before the launch window closes.",
+      id: 'Pusat pemenuhan mega memiliki delapan paket tersebar di gudang 10 baris yang luas. Sorty harus melakukan sapuan presisi untuk mengambil semuanya sebelum jendela peluncuran ditutup.',
+    },
+    mascotMessage: {
+      en: "Mega fulfillment! 🏭 Companies like Amazon run thousands of robot sorters simultaneously across huge warehouse floors. Coordinate your movements with LOOPS and LISTS — efficiency is everything!",
+      id: 'Pemenuhan mega! 🏭 Perusahaan seperti Amazon menjalankan ribuan penyortir robot secara bersamaan di lantai gudang yang luas. Koordinasikan gerakanmu dengan PERULANGAN dan DAFTAR — efisiensi adalah segalanya!',
+    },
+    gridRows: 10,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(10, 9)
+      g[1][4] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][0] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[9][3] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[6][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 8] },
+      { id: 's2', pos: [2, 3] },
+      { id: 's3', pos: [4, 0] },
+      { id: 's4', pos: [5, 7] },
+      { id: 's5', pos: [7, 3] },
+      { id: 's6', pos: [8, 8] },
+      { id: 's7', pos: [9, 1] },
+      { id: 's8', pos: [6, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 115,
+    xpReward: 600,
+    hints: [
+      { en: 'A snake-pattern sweep across rows picks up nearby packages automatically!', id: 'Sapuan pola ular di seluruh baris secara otomatis mengambil paket di dekatnya!' },
+      { en: 'Use a list of the 8 positions and a function to navigate to each in sequence!', id: 'Gunakan daftar 8 posisi dan fungsi untuk navigasi ke masing-masing secara berurutan!' },
+    ],
+    starThresholds: [242, 173, 144, 115],
+  },
+  {
+    id: 'sorting-9',
+    worldId: 'sorting',
+    number: 9,
+    title: { en: 'Flash Sale Frenzy', id: 'Kegilaan Flash Sale' },
+    story: {
+      en: "Flash sale activated — nine packages across a 10×10 warehouse grid must be sorted in under the time limit! Sorty must apply the most advanced algorithms to achieve a perfect run.",
+      id: 'Flash sale diaktifkan — sembilan paket di seluruh kisi gudang 10×10 harus disortir dalam batas waktu! Sorty harus menerapkan algoritma paling canggih untuk mencapai run yang sempurna.',
+    },
+    mascotMessage: {
+      en: "Flash sale frenzy! ⚡ Time-sensitive logistics require optimal algorithms — no backtracking allowed! Use LISTS ordered by proximity and FUNCTIONS that reuse movement logic!",
+      id: 'Kegilaan flash sale! ⚡ Logistik sensitif waktu memerlukan algoritma optimal — tidak ada jalan bolak-balik! Gunakan DAFTAR yang diurutkan berdasarkan kedekatan dan FUNGSI yang menggunakan kembali logika gerakan!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][3] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][9] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[6][0] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[9][2] = 'obstacle'
+      g[9][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 9] },
+      { id: 's2', pos: [2, 6] },
+      { id: 's3', pos: [4, 2] },
+      { id: 's4', pos: [5, 8] },
+      { id: 's5', pos: [6, 5] },
+      { id: 's6', pos: [8, 1] },
+      { id: 's7', pos: [9, 4] },
+      { id: 's8', pos: [9, 9] },
+      { id: 's9', pos: [3, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 135,
+    xpReward: 650,
+    hints: [
+      { en: 'Nine packages — map the optimal visiting order before you write a single block!', id: 'Sembilan paket — petakan urutan kunjungan optimal sebelum kamu menulis satu blok pun!' },
+      { en: 'Group packages into two columns (left side / right side) for a clean divide-and-conquer!', id: 'Kelompokkan paket menjadi dua kolom (sisi kiri / sisi kanan) untuk divide-and-conquer yang bersih!' },
+    ],
+    starThresholds: [284, 203, 169, 135],
+  },
+  {
+    id: 'sorting-10',
+    worldId: 'sorting',
+    number: 10,
+    title: { en: 'Galactic Dispatch', id: 'Pengiriman Galaktik' },
+    story: {
+      en: "Final mission: ten packages scattered across the entire 10×10 space warehouse. This is the Galactic Dispatch — Sorty's ultimate test of algorithmic mastery. Code the perfect route and become a true Master Sorter!",
+      id: 'Misi terakhir: sepuluh paket tersebar di seluruh gudang luar angkasa 10×10. Ini adalah Pengiriman Galaktik — ujian penguasaan algoritma Sorty yang tertinggi. Buat kode rute yang sempurna dan jadilah Penyortir Master sejati!',
+    },
+    mascotMessage: {
+      en: "GALACTIC DISPATCH — the final challenge! 🚀📦 You've learned the algorithms that power real robots, apps, and AI systems. Ten packages, one perfect run. Show the galaxy what a true programmer can do! 🌌",
+      id: 'PENGIRIMAN GALAKTIK — tantangan final! 🚀📦 Kamu telah mempelajari algoritma yang menggerakkan robot nyata, aplikasi, dan sistem AI. Sepuluh paket, satu run yang sempurna. Tunjukkan kepada galaksi apa yang bisa dilakukan programmer sejati! 🌌',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[0][4] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[7][2] = 'obstacle'
+      g[7][7] = 'obstacle'
+      g[8][4] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1',  pos: [0, 9] },
+      { id: 's2',  pos: [1, 5] },
+      { id: 's3',  pos: [3, 8] },
+      { id: 's4',  pos: [4, 3] },
+      { id: 's5',  pos: [5, 1] },
+      { id: 's6',  pos: [6, 7] },
+      { id: 's7',  pos: [7, 4] },
+      { id: 's8',  pos: [8, 0] },
+      { id: 's9',  pos: [9, 6] },
+      { id: 's10', pos: [2, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 160,
+    xpReward: 700,
+    hints: [
+      { en: 'Build a complete list of all ten positions — then find the greedy nearest-neighbour order!', id: 'Buat daftar lengkap semua sepuluh posisi — lalu temukan urutan tetangga terdekat yang serakah!' },
+      { en: 'A reusable "goTo(row, col)" function removes almost all repeated code!', id: 'Fungsi "goTo(baris, kolom)" yang dapat digunakan kembali menghapus hampir semua kode berulang!' },
+    ],
+    starThresholds: [336, 240, 200, 160],
   },
 ]
 
