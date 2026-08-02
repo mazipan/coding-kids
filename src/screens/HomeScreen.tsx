@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { WORLDS } from '../data/worlds'
-import { getLessonsByWorld } from '../data/lessons'
+import { getLessonsByWorld, getWorldTutorial } from '../data/lessons'
 import { StarRating } from '../components/StarRating'
 import type { WorldId } from '../types'
 import { maxStarsForThresholds } from '../data/xpSystem'
@@ -24,6 +24,8 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
 
   const activeWorld = selectedWorldId ? WORLDS.find(w => w.id === selectedWorldId) : null
   const worldLessons = selectedWorldId ? getLessonsByWorld(selectedWorldId) : []
+  const worldTutorial = selectedWorldId ? getWorldTutorial(selectedWorldId) : undefined
+  const tutorialDone = worldTutorial ? (getLessonProgress(worldTutorial.id)?.completed ?? false) : true
   const mainWorlds = WORLDS.filter(w => !w.isBonus)
   const allLessonsComplete = worldLessons.length > 0 && worldLessons.every(l => getLessonProgress(l.id)?.completed)
   const currentWorldIdx = activeWorld && !activeWorld.isBonus ? mainWorlds.findIndex(w => w.id === activeWorld.id) : -1
@@ -368,6 +370,81 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 >
                   {nextMainWorld.emoji} {t('reward.next.world')}: {localize(nextMainWorld.name, language)}
                 </motion.button>
+              </motion.div>
+            )}
+
+            {/* Tutorial card — shown when world has a tutorial */}
+            {worldTutorial && (
+              <motion.div
+                className="mb-4"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                {tutorialDone ? (
+                  <div
+                    className="flex items-center gap-3 rounded-2xl px-4 py-3 border opacity-60"
+                    style={{
+                      background: `${activeWorld?.theme.accentColor}10`,
+                      borderColor: `${activeWorld?.theme.accentColor}30`,
+                    }}
+                  >
+                    <span className="text-2xl">{activeWorld?.character}</span>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-xs font-black" style={{ color: activeWorld?.theme.accentColor }}>
+                        {t('tutorial.card.done')}
+                      </span>
+                      <p className="text-white/40 text-xs">{worldTutorial.title[language as 'en' | 'id'] ?? worldTutorial.title.en}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <motion.button
+                    onClick={() => navigate(`/app/world/${selectedWorldId}/0`)}
+                    className="w-full flex items-center gap-4 rounded-2xl px-5 py-4 text-left relative overflow-hidden"
+                    style={{
+                      background: `linear-gradient(135deg, ${activeWorld?.theme.accentColor}25, ${activeWorld?.theme.accentColor}10)`,
+                      border: `2px solid ${activeWorld?.theme.accentColor}80`,
+                      boxShadow: `0 0 24px ${activeWorld?.theme.accentColor}30`,
+                    }}
+                    whileHover={{ scale: 1.01, y: -2 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    {/* Animated glow ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl pointer-events-none"
+                      style={{ border: `2px solid ${activeWorld?.theme.accentColor}` }}
+                      animate={{ opacity: [0.3, 0.7, 0.3] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                    <motion.span
+                      className="text-4xl shrink-0"
+                      animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                      {activeWorld?.character}
+                    </motion.span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className="text-xs font-black px-2 py-0.5 rounded-full"
+                          style={{ background: activeWorld?.theme.accentColor, color: '#0a0618' }}
+                        >
+                          {t('tutorial.badge')}
+                        </span>
+                        <span className="text-white font-black text-sm">{t('tutorial.card.label')}</span>
+                      </div>
+                      <p className="text-white/60 text-xs leading-snug">
+                        {t('tutorial.card.desc', { concept: activeWorld ? (language === 'id' ? activeWorld.concept.id : activeWorld.concept.en) : '' })}
+                      </p>
+                    </div>
+                    <span
+                      className="shrink-0 px-4 py-2 rounded-xl font-black text-sm"
+                      style={{ background: activeWorld?.theme.accentColor, color: '#0a0618' }}
+                    >
+                      {t('tutorial.card.cta')}
+                    </span>
+                  </motion.button>
+                )}
               </motion.div>
             )}
 

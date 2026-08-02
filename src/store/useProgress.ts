@@ -116,7 +116,16 @@ export function useProgress() {
       return progress.lessons[FINAL_LESSON_ID]?.completed ?? false
     }
     const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
-    if (lessonNum === 1) return true
+    if (lessonNum === 0) return true  // tutorials always accessible
+    if (lessonNum === 1) {
+      // existing players who already have world progress bypass the tutorial gate
+      const hasWorldProgress = Object.keys(progress.lessons).some(
+        id => id.startsWith(`${worldId}-`) && id !== `${worldId}-0`
+      )
+      if (hasWorldProgress) return true
+      // new players must complete the tutorial first (if one exists)
+      return progress.lessons[`${worldId}-0`]?.completed ?? false
+    }
     const prevId = `${worldId}-${lessonNum - 1}`
     return progress.lessons[prevId]?.completed ?? false
   }, [progress.lessons])

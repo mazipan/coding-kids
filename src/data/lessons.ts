@@ -12,6 +12,35 @@ export const LESSONS: Lesson[] = [
   // WORLD 1: JUNGLE ADVENTURE — Sequences
   // ─────────────────────────────────────────────
   {
+    id: 'jungle-0',
+    worldId: 'jungle',
+    number: 0,
+    isTutorial: true,
+    title: { en: 'Tutorial: How to Move!', id: 'Tutorial: Cara Bergerak!' },
+    story: {
+      en: "Welcome to Jungle Adventure! Let's learn how to use blocks. Drag a ➡️ Move Right block into the workspace, then press Run Code!",
+      id: 'Selamat datang di Petualangan Hutan! Mari belajar cara menggunakan blok. Seret blok ➡️ Gerak Kanan ke area kerja, lalu tekan Jalankan!',
+    },
+    mascotMessage: {
+      en: "Hi! I'm Bingo! 🐒 See the panel on the left? DRAG the ➡️ Move Right block into the middle area. Then press the green Run Code button!",
+      id: 'Hei! Aku Bingo! 🐒 Lihat panel di kiri? SERET blok ➡️ Gerak Kanan ke area tengah. Lalu tekan tombol hijau Jalankan!',
+    },
+    gridRows: 3,
+    gridCols: 5,
+    cells: emptyGrid(3, 5),
+    startPos: [1, 0],
+    items: [{ id: 't1', pos: [1, 2] }],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 2,
+    xpReward: 0,
+    hints: [
+      { en: 'Look at the left panel — drag the ➡️ Move Right block into the empty white area in the middle!', id: 'Lihat panel kiri — seret blok ➡️ Gerak Kanan ke area putih kosong di tengah!' },
+      { en: 'The banana is 2 steps to the right. You need TWO ➡️ Move Right blocks!', id: 'Pisangnya 2 langkah ke kanan. Kamu butuh DUA blok ➡️ Gerak Kanan!' },
+    ],
+    starThresholds: [999, 999],
+  },
+  {
     id: 'jungle-1',
     worldId: 'jungle',
     number: 1,
@@ -190,6 +219,39 @@ export const LESSONS: Lesson[] = [
   // ─────────────────────────────────────────────
   // WORLD 2: SPACE STATION — Loops
   // ─────────────────────────────────────────────
+  {
+    id: 'space-0',
+    worldId: 'space',
+    number: 0,
+    isTutorial: true,
+    title: { en: 'Tutorial: Loops!', id: 'Tutorial: Perulangan!' },
+    story: {
+      en: "Welcome to Space Station! Loops repeat the same action many times. Instead of 3 Move Right blocks, try ONE Repeat block set to 3!",
+      id: 'Selamat datang di Stasiun Luar Angkasa! Perulangan mengulangi aksi yang sama berkali-kali. Daripada 3 blok Gerak Kanan, coba SATU blok Ulangi diatur ke 3!',
+    },
+    mascotMessage: {
+      en: "Those 3 stars are in a row! 🚀 You could use 3 Move Right blocks... OR open the 🔄 Loops section and use a Repeat block! Set it to repeat 3 times!",
+      id: '3 bintang itu berjajar! 🚀 Kamu bisa pakai 3 blok Gerak Kanan... ATAU buka bagian 🔄 Ulangi dan pakai blok Repeat! Atur untuk ulangi 3 kali!',
+    },
+    gridRows: 3,
+    gridCols: 6,
+    cells: emptyGrid(3, 6),
+    startPos: [1, 0],
+    items: [
+      { id: 's1', pos: [1, 1] },
+      { id: 's2', pos: [1, 2] },
+      { id: 's3', pos: [1, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 2,
+    xpReward: 0,
+    hints: [
+      { en: 'Open the 🔄 Loops category on the left. Drag "Repeat X times" into the workspace and change the number to 3!', id: 'Buka kategori 🔄 Ulangi di kiri. Seret "Ulangi X kali" ke area kerja dan ubah angkanya menjadi 3!' },
+      { en: 'Put a ➡️ Move Right block INSIDE the Repeat block. The blocks snap together like puzzle pieces!', id: 'Taruh blok ➡️ Gerak Kanan DI DALAM blok Repeat. Blok-blok itu akan terkunci bersama seperti kepingan puzzle!' },
+    ],
+    starThresholds: [999, 999],
+  },
   {
     id: 'space-1',
     worldId: 'space',
@@ -405,6 +467,35 @@ export const LESSONS: Lesson[] = [
   // WORLD 3: OCEAN DEEP — Variables
   // ─────────────────────────────────────────────
   {
+    id: 'ocean-0',
+    worldId: 'ocean',
+    number: 0,
+    isTutorial: true,
+    title: { en: 'Tutorial: Variables!', id: 'Tutorial: Variabel!' },
+    story: {
+      en: "Welcome to Ocean Deep! Variables are like boxes that store numbers. Create a 'steps' variable, set it to 4, then use it in a Repeat block to move Finn to the gem!",
+      id: 'Selamat datang di Kedalaman Samudra! Variabel seperti kotak yang menyimpan angka. Buat variabel "langkah", atur ke 4, lalu gunakan dalam blok Repeat untuk menggerakkan Finn ke permata!',
+    },
+    mascotMessage: {
+      en: "Variables store numbers for later! 📦 Open Variables → Create a variable called 'steps' → Set it to 4 → Then use Repeat with 'steps' and move right inside!",
+      id: 'Variabel menyimpan angka untuk nanti! 📦 Buka Variabel → Buat variabel "langkah" → Atur ke 4 → Lalu gunakan Repeat dengan "langkah" dan gerak kanan di dalamnya!',
+    },
+    gridRows: 3,
+    gridCols: 7,
+    cells: emptyGrid(3, 7),
+    startPos: [1, 0],
+    items: [{ id: 't1', pos: [1, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'variables', 'loops'],
+    optimalBlockCount: 3,
+    xpReward: 0,
+    hints: [
+      { en: "Open 📦 Variables on the left → click 'Create variable' → name it 'steps'. Then drag 'Set steps to 4' into the workspace!", id: "Buka 📦 Variabel di kiri → klik 'Buat variabel' → beri nama 'langkah'. Lalu seret 'Atur langkah ke 4' ke area kerja!" },
+      { en: "After setting 'steps = 4', add a Repeat block from Loops. Set it to repeat 'steps' times, with Move Right inside!", id: "Setelah mengatur 'langkah = 4', tambahkan blok Repeat dari Perulangan. Atur untuk ulangi sebanyak 'langkah' kali, dengan Gerak Kanan di dalamnya!" },
+    ],
+    starThresholds: [999, 999],
+  },
+  {
     id: 'ocean-1',
     worldId: 'ocean',
     number: 1,
@@ -581,6 +672,35 @@ export const LESSONS: Lesson[] = [
   // ─────────────────────────────────────────────
   // WORLD 4: CRYSTAL CAVES — Conditions (If/Else)
   // ─────────────────────────────────────────────
+  {
+    id: 'caves-0',
+    worldId: 'caves',
+    number: 0,
+    isTutorial: true,
+    title: { en: 'Tutorial: If/Else!', id: 'Tutorial: Jika/Selain!' },
+    story: {
+      en: "Welcome to Crystal Caves! If blocks make decisions — 'IF something is true, do this, ELSE do something else'. Try wrapping your moves inside an IF block!",
+      id: 'Selamat datang di Gua Kristal! Blok If membuat keputusan — "JIKA sesuatu benar, lakukan ini, SELAIN ITU lakukan hal lain". Coba bungkus gerakanmu di dalam blok IF!',
+    },
+    mascotMessage: {
+      en: "IF blocks are like asking a question! 🤔 Open ❓ Logic → drag 'if true do' → put 'true' inside it → add your Move blocks inside the gap. Run it!",
+      id: 'Blok IF seperti mengajukan pertanyaan! 🤔 Buka ❓ Kondisi → seret "jika benar lakukan" → taruh "benar" di dalamnya → tambahkan blok Gerak di celahnya. Jalankan!',
+    },
+    gridRows: 3,
+    gridCols: 6,
+    cells: emptyGrid(3, 6),
+    startPos: [1, 0],
+    items: [{ id: 't1', pos: [1, 3] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'logic', 'variables'],
+    optimalBlockCount: 3,
+    xpReward: 0,
+    hints: [
+      { en: 'Open ❓ Logic on the left. Drag the "if ... do" block into the workspace. Put the green "true" block into the diamond slot!', id: 'Buka ❓ Kondisi di kiri. Seret blok "jika ... lakukan" ke area kerja. Taruh blok hijau "benar" ke slot berlian!' },
+      { en: 'Put 3 Move Right blocks INSIDE the if block. When the condition is true, all the blocks inside will run!', id: 'Taruh 3 blok Gerak Kanan DI DALAM blok if. Ketika kondisinya benar, semua blok di dalamnya akan berjalan!' },
+    ],
+    starThresholds: [999, 999],
+  },
   {
     id: 'caves-1',
     worldId: 'caves',
@@ -769,6 +889,38 @@ export const LESSONS: Lesson[] = [
   // WORLD 5: ROBOT FACTORY — Functions
   // ─────────────────────────────────────────────
   {
+    id: 'factory-0',
+    worldId: 'factory',
+    number: 0,
+    isTutorial: true,
+    title: { en: 'Tutorial: Functions!', id: 'Tutorial: Fungsi!' },
+    story: {
+      en: "Welcome to Robot Factory! Functions let you name a group of blocks and reuse them. Define a function called 'moveTwo', put 2 Move Right blocks inside, then call it twice to collect both gears!",
+      id: 'Selamat datang di Pabrik Robot! Fungsi memungkinkanmu memberi nama pada sekelompok blok dan menggunakannya kembali. Definisikan fungsi "gerakDua", taruh 2 blok Gerak Kanan di dalamnya, lalu panggil 2 kali untuk mengumpulkan kedua roda gigi!',
+    },
+    mascotMessage: {
+      en: "Functions are reusable code recipes! 🔧 Open Functions → 'Define function moveTwo' → put 2 Move Right blocks inside → then CALL moveTwo twice to reach both gears!",
+      id: 'Fungsi adalah resep kode yang bisa dipakai ulang! 🔧 Buka Fungsi → "Definisikan fungsi gerakDua" → taruh 2 blok Gerak Kanan di dalamnya → lalu PANGGIL gerakDua dua kali untuk mencapai kedua roda gigi!',
+    },
+    gridRows: 3,
+    gridCols: 8,
+    cells: emptyGrid(3, 8),
+    startPos: [1, 0],
+    items: [
+      { id: 't1', pos: [1, 2] },
+      { id: 't2', pos: [1, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'functions'],
+    optimalBlockCount: 4,
+    xpReward: 0,
+    hints: [
+      { en: 'Open 🔧 Functions on the left. Click "Define a function" to create a new named block. Give it a name like moveTwo!', id: 'Buka 🔧 Fungsi di kiri. Klik "Definisikan fungsi" untuk membuat blok bernama baru. Beri nama seperti gerakDua!' },
+      { en: "Put 2 Move Right blocks INSIDE the function definition. Then drag the 'call moveTwo' block into the main workspace and use it twice!", id: "Taruh 2 blok Gerak Kanan DI DALAM definisi fungsi. Lalu seret blok 'panggil gerakDua' ke area kerja utama dan gunakan dua kali!" },
+    ],
+    starThresholds: [999, 999],
+  },
+  {
     id: 'factory-1',
     worldId: 'factory',
     number: 1,
@@ -955,6 +1107,39 @@ export const LESSONS: Lesson[] = [
   // ─────────────────────────────────────────────
   // WORLD 6: TIME PORTAL — Arrays & Lists
   // ─────────────────────────────────────────────
+  {
+    id: 'portal-0',
+    worldId: 'portal',
+    number: 0,
+    isTutorial: true,
+    title: { en: 'Tutorial: Lists!', id: 'Tutorial: Daftar!' },
+    story: {
+      en: "Welcome to Time Portal! Lists hold multiple values — like a shopping list. Create a list with 3 numbers, then use a loop to read each one and move right that many times!",
+      id: 'Selamat datang di Portal Waktu! Daftar menyimpan banyak nilai — seperti daftar belanja. Buat daftar dengan 3 angka, lalu gunakan perulangan untuk membaca masing-masing dan bergerak ke kanan sebanyak itu!',
+    },
+    mascotMessage: {
+      en: "Lists store multiple things! 📋 Open Lists → drag 'create list with' → add 3 numbers. Then use a Repeat block to loop through them and collect all 3 time crystals!",
+      id: 'Daftar menyimpan banyak hal! 📋 Buka Daftar → seret "buat daftar dengan" → tambahkan 3 angka. Lalu gunakan blok Repeat untuk mengulanginya dan kumpulkan semua 3 kristal waktu!',
+    },
+    gridRows: 3,
+    gridCols: 7,
+    cells: emptyGrid(3, 7),
+    startPos: [1, 0],
+    items: [
+      { id: 't1', pos: [1, 1] },
+      { id: 't2', pos: [1, 3] },
+      { id: 't3', pos: [1, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'lists', 'loops', 'variables'],
+    optimalBlockCount: 4,
+    xpReward: 0,
+    hints: [
+      { en: 'Open 📋 Lists on the left. Try dragging "repeat 3 times" from Loops, with Move Right inside — this collects the crystals step by step!', id: 'Buka 📋 Daftar di kiri. Coba seret "ulangi 3 kali" dari Perulangan, dengan Gerak Kanan di dalamnya — ini mengumpulkan kristal satu per satu!' },
+      { en: 'For a list challenge: create a list with 3 items, then use "for each item in list" with Move Right inside to loop through them all!', id: 'Untuk tantangan daftar: buat daftar dengan 3 item, lalu gunakan "untuk setiap item dalam daftar" dengan Gerak Kanan di dalamnya untuk mengulangnya semua!' },
+    ],
+    starThresholds: [999, 999],
+  },
   {
     id: 'portal-1',
     worldId: 'portal',
@@ -1737,7 +1922,11 @@ export const LESSONS: Lesson[] = [
 ]
 
 export function getLessonsByWorld(worldId: string): Lesson[] {
-  return LESSONS.filter(l => l.worldId === worldId).sort((a, b) => a.number - b.number)
+  return LESSONS.filter(l => l.worldId === worldId && !l.isTutorial).sort((a, b) => a.number - b.number)
+}
+
+export function getWorldTutorial(worldId: string): Lesson | undefined {
+  return LESSONS.find(l => l.worldId === worldId && l.isTutorial)
 }
 
 export function getLesson(id: string): Lesson | undefined {

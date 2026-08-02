@@ -63,6 +63,7 @@ export interface Lesson {
   xpReward: number
   hints: LocalizedString[]
   starThresholds: [number, number] | [number, number, number, number]
+  isTutorial?: true
 }
 
 export interface LessonResult {
