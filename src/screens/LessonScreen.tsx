@@ -57,8 +57,12 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
 
   const handleWalkthroughStepChange = useCallback((nextStep: number) => {
     if (nextStep < 3) {
+      // Toolbox/drag/concept steps — show the blocks panel
       setActiveTab('blocks')
       requestAnimationFrame(() => { blocklyRef.current?.resize() })
+    } else {
+      // Run Code step — switch to game tab on mobile so kids see the character + run button together
+      setActiveTab('game')
     }
   }, [])
 
@@ -503,7 +507,12 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
       {showWalkthrough && (
         <BlocklyWalkthrough
           world={world}
-          onDone={() => setShowWalkthrough(false)}
+          onDone={() => {
+            setShowWalkthrough(false)
+            // Return to blocks tab so kids can start dragging immediately
+            setActiveTab('blocks')
+            requestAnimationFrame(() => { blocklyRef.current?.resize() })
+          }}
           onStepChange={handleWalkthroughStepChange}
         />
       )}

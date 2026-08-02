@@ -75,18 +75,18 @@ export function BlocklyWalkthrough({ world, onDone, onStepChange }: BlocklyWalkt
     {
       glow: 'left',
       title: { en: '🧩 This is the TOOLBOX!', id: '🧩 Ini adalah KOTAK ALAT!' },
-      desc: { en: 'All your coding blocks live here on the LEFT side. Click any coloured category to open it! 👈', id: 'Semua blok kodingmu ada di sisi KIRI. Klik kategori berwarna apa saja untuk membukanya! 👈' },
+      desc: { en: 'All coding blocks are listed on the LEFT side — tap any coloured category to pop it open! 👈', id: 'Semua blok koding ada di sisi KIRI — ketuk kategori berwarna apa saja untuk membukanya! 👈' },
     },
     {
       glow: 'left',
-      title: { en: '✋ DRAG a block to the white area!', id: '✋ SERET blok ke area putih!' },
-      desc: { en: 'Click a block and drag it into the big white workspace area to place it in your code! 👈', id: 'Klik sebuah blok dan seret ke area kerja putih yang besar untuk menempatkannya di kodemu! 👈' },
+      title: { en: '✋ DRAG a block to the workspace!', id: '✋ SERET blok ke area kerja!' },
+      desc: { en: 'Tap and drag a block from the toolbox into the larger area to the right — that builds your code! 👈', id: 'Ketuk dan seret blok dari kotak alat ke area yang lebih besar di kanannya — di situ kamu membuat kode! 👈' },
     },
     conceptStep(world.id),
     {
       glow: 'bottom',
       title: { en: '▶ Press RUN CODE when ready!', id: '▶ Tekan JALANKAN saat sudah siap!' },
-      desc: { en: "Stack your blocks, then tap the big ▶ Run Code button at the bottom to watch them go! 👇", id: 'Susun blokmu, lalu tekan tombol ▶ Jalankan yang besar di bawah untuk melihatnya berjalan! 👇' },
+      desc: { en: 'Stack your blocks in the 🧩 Blocks tab, then tap the big ▶ Run Code button at the bottom! 👇', id: 'Susun blokmu di tab 🧩 Blok, lalu tekan tombol ▶ Jalankan yang besar di bawah! 👇' },
     },
   ]
 
@@ -135,10 +135,10 @@ export function BlocklyWalkthrough({ world, onDone, onStepChange }: BlocklyWalkt
         />
       )}
 
-      {/* Floating card */}
+      {/* Floating card — sits above the fixed mobile controls bar (bottom-24) */}
       <motion.div
         key={step}
-        className="absolute bottom-4 left-4 right-4 pointer-events-auto"
+        className="absolute bottom-24 lg:bottom-4 left-4 right-4 pointer-events-auto"
         initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', damping: 20, stiffness: 300 }}
