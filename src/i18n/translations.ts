@@ -192,6 +192,16 @@ const en: Translations = {
   'trust.no.signup': 'No Signup',
   'trust.no.ads': 'No Ads',
   'trust.mobile': 'Mobile Friendly',
+
+  // ── Tutorial ──────────────────────────────────
+  'tutorial.badge': 'TUTORIAL',
+  'tutorial.card.label': 'Start Here First!',
+  'tutorial.card.desc': 'Learn how {concept} blocks work before playing the levels.',
+  'tutorial.card.cta': '▶ Start Tutorial',
+  'tutorial.card.done': '✓ Tutorial Complete',
+  'tutorial.complete.title': "You're Ready! 🎉",
+  'tutorial.complete.subtitle': 'Great job! You know how {concept} blocks work. Time to play for real!',
+  'tutorial.complete.cta': 'Start Level 1!',
 }
 
 const id: Translations = {
@@ -384,6 +394,16 @@ const id: Translations = {
   'trust.no.signup': 'Tanpa Daftar',
   'trust.no.ads': 'Tanpa Iklan',
   'trust.mobile': 'Bisa di HP',
+
+  // ── Tutorial ──────────────────────────────────
+  'tutorial.badge': 'TUTORIAL',
+  'tutorial.card.label': 'Mulai di Sini Dulu!',
+  'tutorial.card.desc': 'Pelajari cara kerja blok {concept} sebelum bermain level.',
+  'tutorial.card.cta': '▶ Mulai Tutorial',
+  'tutorial.card.done': '✓ Tutorial Selesai',
+  'tutorial.complete.title': 'Kamu Siap! 🎉',
+  'tutorial.complete.subtitle': 'Bagus sekali! Kamu sudah tahu cara kerja blok {concept}. Saatnya bermain sungguhan!',
+  'tutorial.complete.cta': 'Mulai Level 1!',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }

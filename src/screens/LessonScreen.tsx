@@ -43,6 +43,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const [showHint, setShowHint] = useState(false)
   const [hintIndex, setHintIndex] = useState(0)
   const [showReward, setShowReward] = useState(false)
+  const [showTutorialComplete, setShowTutorialComplete] = useState(false)
   const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '', missingCategories: [] as string[] })
   const [mascotMessage, setMascotMessage] = useState(() => localize(lesson.mascotMessage, language))
   const [mascotMood, setMascotMood] = useState<'happy' | 'thinking' | 'excited' | 'sad'>('happy')
@@ -135,20 +136,30 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
       const won = checkWin(state, lesson)
 
       if (won) {
+        setGameState(s => ({ ...s, status: 'success' }))
+        playSuccess()
+        setMascotMood('excited')
+
+        if (lesson.isTutorial) {
+          setMascotMessage(t('tutorial.complete.title'))
+          await sleep(600)
+          completeLesson(lesson.id, 1, 0)
+          setIsRunning(false)
+          runningRef.current = false
+          setShowTutorialComplete(true)
+          return
+        }
+
         const stars = calculateStars(currentBlockCount, lesson.starThresholds, currentUsedBlockTypes, lesson.requiredCategories)
         const xpEarned = calculateXPReward(lesson.xpReward, stars)
         const missing = lesson.requiredCategories && stars < 3
           ? getMissingCategories(currentUsedBlockTypes, lesson.requiredCategories)
           : []
 
-        setGameState(s => ({ ...s, status: 'success' }))
-        playSuccess()
-
         const mascotKey = stars === 1 && missing.length > 0
           ? 'mascot.success.1.criteria'
           : `mascot.success.${stars}`
         setMascotMessage(t(mascotKey))
-        setMascotMood('excited')
 
         await sleep(800)
 
@@ -231,12 +242,21 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shrink-0 mt-0.5"
-          style={{ background: `${world.theme.accentColor}30`, color: world.theme.accentColor }}
-        >
-          {lesson.number}
-        </div>
+        {lesson.isTutorial ? (
+          <div
+            className="px-2 py-1 rounded-xl text-xs font-black shrink-0 mt-1"
+            style={{ background: world.theme.accentColor, color: '#0a0618' }}
+          >
+            {t('tutorial.badge')}
+          </div>
+        ) : (
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shrink-0 mt-0.5"
+            style={{ background: `${world.theme.accentColor}30`, color: world.theme.accentColor }}
+          >
+            {lesson.number}
+          </div>
+        )}
         <div className="min-w-0 flex-1">
           <h1 className="text-lg sm:text-xl font-black text-white leading-tight">{localize(lesson.title, language)}</h1>
           <p className="text-white/50 text-xs mb-1">{localize(world.name, language)} · {localize(world.concept, language)}</p>
@@ -396,6 +416,60 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
           </div>
         </div>
       </motion.div>
+
+      {/* Tutorial complete overlay */}
+      <AnimatePresence>
+        {showTutorialComplete && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ background: 'rgba(10,6,24,0.92)', backdropFilter: 'blur(8px)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="relative rounded-3xl p-8 max-w-sm w-full text-center overflow-hidden"
+              style={{
+                background: `linear-gradient(135deg, ${world.theme.accentColor}20, ${world.theme.accentColor}08)`,
+                border: `2px solid ${world.theme.accentColor}60`,
+                boxShadow: `0 0 60px ${world.theme.accentColor}30`,
+              }}
+              initial={{ scale: 0.8, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 20 }}
+              transition={{ type: 'spring', damping: 15 }}
+            >
+              <motion.div
+                className="text-7xl mb-4 block"
+                animate={{ y: [0, -12, 0], rotate: [0, 8, -8, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                {world.character}
+              </motion.div>
+              <h2 className="text-2xl font-black text-white mb-3">{t('tutorial.complete.title')}</h2>
+              <p className="text-white/70 text-sm font-semibold leading-relaxed mb-8">
+                {t('tutorial.complete.subtitle', { concept: localize(world.concept, language) })}
+              </p>
+              <motion.button
+                onClick={() => {
+                  setShowTutorialComplete(false)
+                  if (nextLessonNumber) {
+                    navigate(`/app/world/${lesson.worldId}/${nextLessonNumber}`)
+                  } else {
+                    navigate(`/app/world/${lesson.worldId}`)
+                  }
+                }}
+                className="w-full py-4 rounded-2xl font-black text-lg text-[#0a0618] relative overflow-hidden"
+                style={{ background: `linear-gradient(135deg, ${world.theme.accentColor}, ${world.theme.accentColor}cc)` }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                {t('tutorial.complete.cta')}
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Reward modal */}
       <RewardModal
