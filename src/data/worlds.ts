@@ -154,7 +154,7 @@ export const WORLDS: World[] = [
       textColor: '#fef08a',
     },
     unlockAtXP: 999999,
-    lessonCount: 5,
+    lessonCount: 10,
     isBonus: true,
   },
   {
@@ -177,7 +177,7 @@ export const WORLDS: World[] = [
       textColor: '#bae6fd',
     },
     unlockAtXP: 999999,
-    lessonCount: 5,
+    lessonCount: 10,
     isBonus: true,
   },
   {
@@ -200,7 +200,7 @@ export const WORLDS: World[] = [
       textColor: '#a5f3fc',
     },
     unlockAtXP: 999999,
-    lessonCount: 5,
+    lessonCount: 10,
     isBonus: true,
   },
 ]
