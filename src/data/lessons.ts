@@ -147,13 +147,13 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move'],
-    optimalBlockCount: 7,
+    optimalBlockCount: 6,
     xpReward: 80,
     hints: [
       { en: 'Collect the first banana, then plan the path to the second!', id: 'Kumpulkan pisang pertama, lalu rencanakan jalan ke pisang kedua!' },
       { en: 'Go right 3 times to get banana 1, then down 3 to get banana 2!', id: 'Ke kanan 3 kali untuk pisang 1, lalu ke bawah 3 kali untuk pisang 2!' },
     ],
-    starThresholds: [10, 7],
+    starThresholds: [10, 6],
   },
   {
     id: 'jungle-5',
@@ -207,13 +207,13 @@ export const LESSONS: Lesson[] = [
     ],
     goalType: 'collect_all',
     availableCategories: ['move'],
-    optimalBlockCount: 12,
+    optimalBlockCount: 10,
     xpReward: 100,
     hints: [
       { en: 'Plan the full path before adding blocks!', id: 'Rencanakan jalur lengkap sebelum menambahkan blok!' },
       { en: 'Try right 2, down 2, right 2, down 2, right 2. That\'s 10 moves!', id: 'Coba: kanan 2, bawah 2, kanan 2, bawah 2, kanan 2. Itu 10 gerakan!' },
     ],
-    starThresholds: [16, 12],
+    starThresholds: [16, 10],
   },
 
   // ─────────────────────────────────────────────

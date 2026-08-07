@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react'
+import { motion } from 'framer-motion'
 import * as Blockly from 'blockly'
 import { javascriptGenerator } from 'blockly/javascript'
 import * as EnLocale from 'blockly/msg/en'
@@ -177,9 +178,15 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
           <div className="flex items-center gap-2">
             <span className="text-purple-300 font-bold text-sm">{t('blockly.label')}</span>
             {blockCount > 0 && (
-              <span className="text-xs bg-purple-500/30 text-purple-200 px-2 py-0.5 rounded-full font-bold">
+              <motion.span
+                key={blockCount}
+                className="text-xs bg-purple-500/30 text-purple-200 px-2 py-0.5 rounded-full font-bold"
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+              >
                 {blockCount} {t(blockCount === 1 ? 'blockly.block' : 'blockly.blocks')}
-              </span>
+              </motion.span>
             )}
           </div>
           <div className="flex gap-2">

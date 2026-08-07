@@ -417,10 +417,17 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
                 background: isRunning
                   ? 'rgba(139,92,246,0.5)'
                   : 'linear-gradient(135deg, #7C3AED, #EC4899)',
-                boxShadow: isRunning ? 'none' : '0 4px 24px rgba(124,58,237,0.5)',
               }}
-              whileHover={!isRunning ? { scale: 1.05 } : {}}
-              whileTap={!isRunning ? { scale: 0.95 } : {}}
+              animate={
+                isRunning
+                  ? { boxShadow: '0 0 0 rgba(0,0,0,0)' }
+                  : currentBlockCount > 0
+                    ? { boxShadow: ['0 4px 24px rgba(124,58,237,0.5)', '0 4px 36px rgba(236,72,153,0.8)', '0 4px 24px rgba(124,58,237,0.5)'] }
+                    : { boxShadow: '0 4px 20px rgba(124,58,237,0.3)' }
+              }
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              whileHover={!isRunning ? { scale: 1.05, transition: { type: 'spring', stiffness: 400, damping: 20 } } : {}}
+              whileTap={!isRunning ? { scale: 0.95, transition: { type: 'spring', stiffness: 400, damping: 20 } } : {}}
             >
               {isRunning ? (
                 <>

@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 interface GameGridProps {
   lesson: Lesson
@@ -17,6 +18,7 @@ const FACING_ROTATE: Record<string, number> = {
 }
 
 export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridProps) {
+  const { t } = useLanguage()
   const cellSize = Math.min(
     Math.floor(maxSize / Math.max(lesson.gridCols, lesson.gridRows)),
     72
@@ -39,7 +41,7 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
             exit={{ opacity: 0 }}
             className="text-center font-bold text-green-300 text-lg bg-green-500/20 px-4 py-2 rounded-full border border-green-400/30"
           >
-            🎉 Amazing! You did it!
+            {t('game.success')}
           </motion.div>
         )}
         {isCrash && (
@@ -95,7 +97,7 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
         )}
 
         {/* Items (bananas, stars, gems etc.) */}
-        {lesson.items.map(item => {
+        {lesson.items.map((item, index) => {
           const collected = collectedIds.has(item.id)
           return (
             <AnimatePresence key={item.id}>
@@ -110,13 +112,17 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
                     fontSize: cellSize * 0.5,
                   }}
                   initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: [1, 1.1, 1], opacity: 1 }}
+                  animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 1.5, opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }}>
+                  <motion.span
+                    style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }}
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut', delay: (index % 4) * 0.4 }}
+                  >
                     {world.itemEmoji}
-                  </span>
+                  </motion.span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -167,14 +173,16 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
             scale: { duration: 0.4 },
           }}
         >
-          <span
+          <motion.span
             style={{
               filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))',
               display: 'block',
             }}
+            animate={status === 'idle' ? { y: [0, -4, 0] } : {}}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
             {world.character}
-          </span>
+          </motion.span>
           {/* Trail effect when moving */}
           {status === 'running' && (
             <motion.div
