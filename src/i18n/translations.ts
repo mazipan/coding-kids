@@ -6,7 +6,7 @@ const en: Translations = {
   // ── Landing page ─────────────────────────────
   'landing.badge': '🌟 Free for everyone · No signup required',
   'landing.headline': 'Where Kids Become Coders',
-  'landing.sub': 'A fun, free coding adventure for ages 5–14. Learn programming with colorful visual blocks, earn XP, and explore 6 epic worlds — no downloads, no logins!',
+  'landing.sub': 'A fun, free coding adventure for ages 5–14. Learn programming with colorful visual blocks, earn XP, and explore 7 epic worlds — no downloads, no logins!',
   'landing.cta': 'Start Learning Free',
   'landing.cta.secondary': 'See how it works ↓',
   'landing.returning': 'Continue your adventure',
@@ -19,21 +19,21 @@ const en: Translations = {
   'landing.features.xp.title': 'XP & Levels',
   'landing.features.xp.desc': 'Earn XP, level up from Code Cub to Master Coder, and collect achievement badges!',
   'landing.features.worlds.icon': '🌍',
-  'landing.features.worlds.title': '6 Epic Worlds',
-  'landing.features.worlds.desc': 'Journey from Jungle to Space, Ocean, Crystal Caves, a Robot Factory, and a Time Portal!',
+  'landing.features.worlds.title': '7 Epic Worlds',
+  'landing.features.worlds.desc': 'Journey from Jungle to Space, Loop Land, Ocean, Crystal Caves, a Robot Factory, and a Time Portal!',
   'landing.features.anywhere.icon': '📱',
   'landing.features.anywhere.title': 'Play Anywhere',
   'landing.features.anywhere.desc': 'Works on any device — phone, tablet, or computer. No downloads, always free!',
 
   'landing.how.title': 'How It Works',
   'landing.how.step1.title': 'Choose Your World',
-  'landing.how.step1.desc': 'Pick from 6 themed worlds, each teaching a different coding concept — from simple sequences to arrays.',
+  'landing.how.step1.desc': 'Pick from 7 themed worlds, each teaching a different coding concept — from simple sequences to arrays.',
   'landing.how.step2.title': 'Drag & Drop Blocks',
   'landing.how.step2.desc': 'Use colorful visual blocks to build your code solution. It\'s like snapping puzzle pieces together!',
   'landing.how.step3.title': 'Watch It Run!',
   'landing.how.step3.desc': 'Hit Run and watch your character come to life on screen. Earn stars and XP for clever solutions!',
 
-  'landing.worlds.title': 'Explore 6 Coding Worlds',
+  'landing.worlds.title': 'Explore 7 Coding Worlds',
   'landing.worlds.sub': 'Each world teaches a new coding concept, designed to grow with your child from ages 5 to 14.',
 
   'landing.ages.title': 'Something for Every Age',
@@ -71,6 +71,7 @@ const en: Translations = {
   'game.fail.obstacle': 'Crashed into an obstacle! 💥',
   'game.fail.path': 'Not quite! I didn\'t reach all the items. Check your path and try again! 💪',
   'game.fail.noactions': 'No movement blocks detected! Add some Move blocks! 🤔',
+  'game.efficiency.badge': '🎯 {n} blocks = 3 stars',
 
   // ── Grid legend ─────────────────────────────
   'grid.collect': '= collect these',
@@ -95,6 +96,9 @@ const en: Translations = {
   'world.space.name': 'Space Station',
   'world.space.tagline': 'Help Astro collect stars in space!',
   'world.space.concept': 'Loops',
+  'world.loops.name': 'Loop Land',
+  'world.loops.tagline': 'Help Dash race through the track efficiently!',
+  'world.loops.concept': 'Loop Efficiency',
   'world.ocean.name': 'Ocean Deep',
   'world.ocean.tagline': 'Help Finn the Diver explore the ocean!',
   'world.ocean.concept': 'Variables',
@@ -211,7 +215,7 @@ const en: Translations = {
   // ── Path selector ─────────────────────────────
   'path.choose': 'Choose your adventure!',
   'path.blocks.name': 'Block Coding',
-  'path.blocks.desc': 'Write code with visual blocks. 6 epic worlds to explore!',
+  'path.blocks.desc': 'Write code with visual blocks. 7 epic worlds to explore!',
   'path.thinking.name': 'Brain Training',
   'path.thinking.desc': 'Patterns, logic & math puzzles. Build your problem-solving superpowers!',
   'path.start': 'Start',
@@ -242,7 +246,7 @@ const id: Translations = {
   // ── Landing page ─────────────────────────────
   'landing.badge': '🌟 Gratis untuk semua · Tanpa pendaftaran',
   'landing.headline': 'Tempat Anak Belajar Coding',
-  'landing.sub': 'Petualangan coding yang menyenangkan dan gratis untuk usia 5–14 tahun. Belajar pemrograman dengan blok visual berwarna, kumpulkan XP, dan jelajahi 6 dunia epik — tanpa unduhan, tanpa login!',
+  'landing.sub': 'Petualangan coding yang menyenangkan dan gratis untuk usia 5–14 tahun. Belajar pemrograman dengan blok visual berwarna, kumpulkan XP, dan jelajahi 7 dunia epik — tanpa unduhan, tanpa login!',
   'landing.cta': 'Mulai Belajar Gratis',
   'landing.cta.secondary': 'Lihat cara kerjanya ↓',
   'landing.returning': 'Lanjutkan',
@@ -255,21 +259,21 @@ const id: Translations = {
   'landing.features.xp.title': 'XP & Level',
   'landing.features.xp.desc': 'Kumpulkan XP, naiki level dari Code Cub ke Master Coder, dan raih lencana prestasi!',
   'landing.features.worlds.icon': '🌍',
-  'landing.features.worlds.title': '6 Dunia Epik',
-  'landing.features.worlds.desc': 'Berpetualang dari Hutan ke Luar Angkasa, Samudra, Gua Kristal, Pabrik Robot, dan Portal Waktu!',
+  'landing.features.worlds.title': '7 Dunia Epik',
+  'landing.features.worlds.desc': 'Berpetualang dari Hutan ke Luar Angkasa, Negeri Perulangan, Samudra, Gua Kristal, Pabrik Robot, dan Portal Waktu!',
   'landing.features.anywhere.icon': '📱',
   'landing.features.anywhere.title': 'Main di Mana Saja',
   'landing.features.anywhere.desc': 'Bisa dimainkan di HP, tablet, atau komputer. Tanpa unduhan, selalu gratis!',
 
   'landing.how.title': 'Cara Kerjanya',
   'landing.how.step1.title': 'Pilih Duniamu',
-  'landing.how.step1.desc': 'Pilih dari 6 dunia bertema, masing-masing mengajarkan konsep coding yang berbeda — dari urutan sederhana hingga array.',
+  'landing.how.step1.desc': 'Pilih dari 7 dunia bertema, masing-masing mengajarkan konsep coding yang berbeda — dari urutan sederhana hingga array.',
   'landing.how.step2.title': 'Seret & Lepas Blok',
   'landing.how.step2.desc': 'Gunakan blok visual berwarna untuk membangun solusi kodenya. Seperti menyusun kepingan puzzle!',
   'landing.how.step3.title': 'Lihat Kodenya Berjalan!',
   'landing.how.step3.desc': 'Tekan Jalankan dan lihat karaktermu hidup di layar. Kumpulkan bintang dan XP untuk solusi terbaik!',
 
-  'landing.worlds.title': 'Jelajahi 6 Dunia Coding',
+  'landing.worlds.title': 'Jelajahi 7 Dunia Coding',
   'landing.worlds.sub': 'Setiap dunia mengajarkan konsep coding baru, dirancang untuk berkembang bersama anakmu dari usia 5 hingga 14 tahun.',
 
   'landing.ages.title': 'Cocok untuk Semua Usia',
@@ -307,6 +311,7 @@ const id: Translations = {
   'game.fail.obstacle': 'Nabrak rintangan! 💥',
   'game.fail.path': 'Belum tepat! Belum mencapai semua item. Cek lagi jalannya dan coba lagi! 💪',
   'game.fail.noactions': 'Tidak ada blok gerak! Tambahkan blok Pindah dulu! 🤔',
+  'game.efficiency.badge': '🎯 {n} blok = 3 bintang',
 
   // ── Grid legend ─────────────────────────────
   'grid.collect': '= kumpulkan ini',
@@ -331,6 +336,9 @@ const id: Translations = {
   'world.space.name': 'Stasiun Luar Angkasa',
   'world.space.tagline': 'Bantu Astro mengumpulkan bintang di luar angkasa!',
   'world.space.concept': 'Perulangan',
+  'world.loops.name': 'Negeri Perulangan',
+  'world.loops.tagline': 'Bantu Dash berlomba di lintasan dengan efisien!',
+  'world.loops.concept': 'Efisiensi Perulangan',
   'world.ocean.name': 'Kedalaman Samudra',
   'world.ocean.tagline': 'Bantu Finn si Penyelam menjelajahi samudra!',
   'world.ocean.concept': 'Variabel',
@@ -447,7 +455,7 @@ const id: Translations = {
   // ── Path selector ─────────────────────────────
   'path.choose': 'Pilih petualanganmu!',
   'path.blocks.name': 'Coding Blok',
-  'path.blocks.desc': 'Tulis kode dengan blok visual. 6 dunia epik untuk dijelajahi!',
+  'path.blocks.desc': 'Tulis kode dengan blok visual. 7 dunia epik untuk dijelajahi!',
   'path.thinking.name': 'Latihan Otak',
   'path.thinking.desc': 'Puzzle pola, logika & matematika. Kembangkan kemampuan memecahkan masalah!',
   'path.start': 'Mulai',

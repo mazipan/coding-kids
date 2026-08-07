@@ -20,15 +20,14 @@ export function parseCodeToActions(code: string): { actions: GameAction[]; error
   const moveLeft = () => { if (actions.length < MAX_ACTIONS) actions.push({ type: 'move_left' }) }
   const moveUp = () => { if (actions.length < MAX_ACTIONS) actions.push({ type: 'move_up' }) }
   const moveDown = () => { if (actions.length < MAX_ACTIONS) actions.push({ type: 'move_down' }) }
-  const collect = () => { if (actions.length < MAX_ACTIONS) actions.push({ type: 'collect' }) }
 
   try {
     // eslint-disable-next-line no-new-func
     const fn = new Function(
-      'moveRight', 'moveLeft', 'moveUp', 'moveDown', 'collect',
+      'moveRight', 'moveLeft', 'moveUp', 'moveDown',
       code
     )
-    fn(moveRight, moveLeft, moveUp, moveDown, collect)
+    fn(moveRight, moveLeft, moveUp, moveDown)
   } catch (e) {
     error = e instanceof Error ? e.message : 'Code error'
   }
@@ -44,18 +43,6 @@ export function applyAction(
   const [row, col] = state.charPos
   let newRow = row
   let newCol = col
-
-  if (action.type === 'collect') {
-    const item = lesson.items.find(
-      i => i.pos[0] === row && i.pos[1] === col && !state.collectedIds.has(i.id)
-    )
-    if (item) {
-      const newCollected = new Set(state.collectedIds)
-      newCollected.add(item.id)
-      return { ...state, collectedIds: newCollected, steps: state.steps + 1 }
-    }
-    return { ...state, steps: state.steps + 1 }
-  }
 
   switch (action.type) {
     case 'move_right': newCol = col + 1; break

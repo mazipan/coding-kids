@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
 import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
-import { BlocklyWalkthrough, isTourDone } from '../components/BlocklyWalkthrough'
+import { BlocklyWalkthrough } from '../components/BlocklyWalkthrough'
 import { GameGrid } from '../components/GameGrid'
 import { Mascot } from '../components/Mascot'
 import { RewardModal } from '../components/RewardModal'
@@ -46,7 +46,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const [showReward, setShowReward] = useState(false)
   const [showTutorialComplete, setShowTutorialComplete] = useState(false)
   const [showWalkthrough, setShowWalkthrough] = useState(
-    () => lesson.isTutorial === true && !isTourDone(lesson.worldId)
+    () => lesson.isTutorial === true
   )
   const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '', missingCategories: [] as string[] })
   const [mascotMessage, setMascotMessage] = useState(() => localize(lesson.mascotMessage, language))
@@ -55,14 +55,15 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const runningRef = useRef(false)
   const blocklyRef = useRef<BlocklyWorkspaceHandle>(null)
 
-  const handleWalkthroughStepChange = useCallback((nextStep: number) => {
-    if (nextStep < 3) {
-      // Toolbox/drag/concept steps — show the blocks panel
-      setActiveTab('blocks')
+  const handleWalkthroughLoadState = useCallback((state: object) => {
+    blocklyRef.current?.loadState(state)
+    requestAnimationFrame(() => { blocklyRef.current?.resize() })
+  }, [])
+
+  const handleWalkthroughSwitchTab = useCallback((tab: 'blocks' | 'game') => {
+    setActiveTab(tab)
+    if (tab === 'blocks') {
       requestAnimationFrame(() => { blocklyRef.current?.resize() })
-    } else {
-      // Run Code step — switch to game tab on mobile so kids see the character + run button together
-      setActiveTab('game')
     }
   }, [])
 
@@ -133,8 +134,8 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
 
       const next = applyAction(state, action, lesson)
 
-      if (action.type === 'collect') {
-        if (next.collectedIds.size > state.collectedIds.size) playCollect()
+      if (next.collectedIds.size > state.collectedIds.size) {
+        playCollect()
       } else {
         playMove()
       }
@@ -280,6 +281,11 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
             <span className="text-xs font-bold text-purple-300 bg-purple-500/20 px-2.5 py-1 rounded-full">
               ⚡ {lesson.xpReward} XP
             </span>
+            {!lesson.isTutorial && lesson.requiredCategories?.includes('loops') && (
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full" style={{ background: `${world.theme.accentColor}25`, color: world.theme.accentColor }}>
+                {t('game.efficiency.badge', { n: String(lesson.starThresholds[1]) })}
+              </span>
+            )}
           </div>
         </div>
       </motion.div>
@@ -411,10 +417,17 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
                 background: isRunning
                   ? 'rgba(139,92,246,0.5)'
                   : 'linear-gradient(135deg, #7C3AED, #EC4899)',
-                boxShadow: isRunning ? 'none' : '0 4px 24px rgba(124,58,237,0.5)',
               }}
-              whileHover={!isRunning ? { scale: 1.05 } : {}}
-              whileTap={!isRunning ? { scale: 0.95 } : {}}
+              animate={
+                isRunning
+                  ? { boxShadow: '0 0 0 rgba(0,0,0,0)' }
+                  : currentBlockCount > 0
+                    ? { boxShadow: ['0 4px 24px rgba(124,58,237,0.5)', '0 4px 36px rgba(236,72,153,0.8)', '0 4px 24px rgba(124,58,237,0.5)'] }
+                    : { boxShadow: '0 4px 20px rgba(124,58,237,0.3)' }
+              }
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              whileHover={!isRunning ? { scale: 1.05, transition: { type: 'spring', stiffness: 400, damping: 20 } } : {}}
+              whileTap={!isRunning ? { scale: 0.95, transition: { type: 'spring', stiffness: 400, damping: 20 } } : {}}
             >
               {isRunning ? (
                 <>
@@ -503,17 +516,17 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         onRetry={handleRetry}
       />
 
-      {/* UI walkthrough — shown on tutorial lessons the first time */}
+      {/* Concept walkthrough — shown on tutorial lessons (first visit) */}
       {showWalkthrough && (
         <BlocklyWalkthrough
           world={world}
           onDone={() => {
             setShowWalkthrough(false)
-            // Return to blocks tab so kids can start dragging immediately
             setActiveTab('blocks')
             requestAnimationFrame(() => { blocklyRef.current?.resize() })
           }}
-          onStepChange={handleWalkthroughStepChange}
+          onLoadState={handleWalkthroughLoadState}
+          onSwitchTab={handleWalkthroughSwitchTab}
         />
       )}
     </div>

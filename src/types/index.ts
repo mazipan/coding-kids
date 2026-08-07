@@ -1,4 +1,4 @@
-export type WorldId = 'jungle' | 'space' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting'
+export type WorldId = 'jungle' | 'space' | 'loops' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting'
 
 export type LocalizedString = { en: string; id: string }
 
@@ -181,7 +181,7 @@ export interface ThinkingLesson {
 
 // ── Blocks path ───────────────────────────────────────────────
 
-export type ActionType = 'move_right' | 'move_left' | 'move_up' | 'move_down' | 'collect'
+export type ActionType = 'move_right' | 'move_left' | 'move_up' | 'move_down'
 
 export interface GameAction {
   type: ActionType

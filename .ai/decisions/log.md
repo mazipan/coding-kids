@@ -1,5 +1,69 @@
 # Decision log
 
+## 2026-08-07 — BlocklyWalkthrough: two-phase overlay (teach + demo) before tutorial lesson
+
+**Context:** Each world has a tutorial lesson (number 0, `isTutorial: true`) that kids must complete before level 1. The question was whether it was enough to drop kids straight into that lesson, or whether they needed pre-lesson concept preparation.
+
+**Decision:** Added a two-phase concept walkthrough overlay that fires automatically when a tutorial lesson opens:
+- **Teach phase** — full-screen modal with 1–2 slides showing visual block diagrams (using `<Pill>`, `<RepeatWrap>`, `<IfWrap>`, `<VarSet>/<VarGet>` primitives that simulate Blockly stacks without the real workspace). Explains the world's core concept in kid-friendly language.
+- **Demo phase** — loads a pre-built Blockly workspace state into the real workspace via `blocklyRef.current.loadState()`, then shows a floating card pointing at it. Kids see a working example before clearing it and building their own.
+
+The tutorial lesson itself is the hands-on practice — the overlay is the "watch first" layer before the "try it" layer. The Skip button lets confident kids bypass both phases.
+
+**Alternatives rejected:**
+- Just show the tutorial lesson with no overlay — the lesson's grid is the practice, not the explanation; kids with no context still don't know how to drag blocks or what a "repeat" block looks like.
+- Use real Blockly in the overlay — requires a second workspace mount, doubles memory, and the workspace has a slow init path. The visual block primitives are a lightweight, instant-loading equivalent that's good enough for the teach phase.
+- Show text instructions on the lesson screen instead of an overlay — walls of text are ignored by kids; the overlay with animation and visual diagrams is closer to what they'd experience in a game tutorial.
+
+**Consequences:** `BlocklyWorkspaceHandle` got a `loadState(state: object)` method exposed via `useImperativeHandle`. `DEMO_STATES` in `BlocklyWalkthrough.tsx` holds pre-built Blockly JSON per world. Factory world has no demo state (its concept diagram is sufficient). The walkthrough fires once per tutorial lesson visit (state is local to the component mount); after Skip or completion it does not re-appear until the lesson is re-opened.
+
+**Note on translation keys:** `walkthrough.next`, `walkthrough.skip`, `walkthrough.go` were added to `translations.ts` but ended up unused — the component uses inline `lang === 'id' ? ... : ...` checks for those labels. These keys are dead code.
+
+---
+
+## 2026-08-07 — Framer Motion animations added to block coding path
+
+**Context:** The thinking path's animated star reveal drew attention to the relative stillness of the block coding path. User requested animations to make blocks feel as engaging as brain training.
+
+**Decision:** Added four targeted animations: (1) collectible items bob continuously with staggered delays; (2) character gently bounces when the game is idle; (3) block count badge pops with a spring on every change; (4) Run button glow cycles between purple and pink when blocks are ready. Also fixed a pre-existing INV-C2 violation: the success banner in GameGrid had a hardcoded English string (`"Amazing! You did it!"`) that now uses `t('game.success')`.
+
+**Alternatives rejected:**
+- Animating HomeScreen world/lesson cards — already well-animated (entrance stagger, emoji wiggle, hover lift, progress bar).
+- Animating the star row in the LessonScreen header — those are prior best stars that shouldn't flash on every visit; RewardModal already animates newly-earned stars.
+- Lottie files — would introduce an external asset dependency and download cost.
+
+**Consequences:** block coding path now matches the energy level of the thinking path. No new dependencies — framer-motion was already installed.
+
+---
+
+## 2026-08-07 — Blockly block counting: controls_repeat_ext uses real math_number block
+
+**Context:** Auditing `optimalBlockCount` values required knowing exactly how `workspace.getAllBlocks(false)` counts blocks. The key question was whether the number input inside a repeat block is a "shadow" (not counted) or a real block.
+
+**Decision:** Our `toolboxes.ts` defines the repeat entry as `{ block: { type: 'math_number' } }` (not `{ shadow: ... }`), so the number IS a real block. Therefore: `repeat(N) { move }` = 3 blocks (repeat container + math_number + body block), regardless of N. For N ≤ 2, using individual move blocks (2 blocks for 2 moves) is cheaper than a loop (3 blocks). This rule is documented in the block-count-audit plan and applied when setting `optimalBlockCount` and `starThresholds`.
+
+**Alternatives rejected:**
+- Changing the toolbox to use a shadow number — would break existing lesson saves; not worth it.
+- Using N as the block count for a loop — incorrect; contradicted by the actual Blockly API.
+
+**Consequences:** All `optimalBlockCount` and `starThresholds` values must be validated against this 3-block-per-repeat rule, not 1-per-repeat. Two jungle lessons (jungle-4, jungle-6) had incorrect values and were corrected.
+
+---
+
+## 2026-08-07 — Remove collect_item block; items auto-collect on movement
+
+**Context:** The `collect_item` Blockly block was originally added to give kids explicit control over picking up items. In practice, `applyAction` in `gameEngine.ts` already auto-collects items whenever the character moves onto their cell, making the explicit block redundant. Kids who used it inflated their block count and scored fewer stars.
+
+**Decision:** Remove `collect_item` from toolbox, custom block definitions, JS generator, game engine, type definitions, and i18n strings. The `new Function` sandbox now exposes only four verbs: `moveRight`, `moveLeft`, `moveUp`, `moveDown`. Sound logic in LessonScreen was updated to play the collect sound whenever a move causes `collectedIds.size` to increase (auto-collect detection), replacing the now-dead `action.type === 'collect'` branch.
+
+**Alternatives rejected:**
+- Keep the block but don't count it in the score — `workspace.getAllBlocks()` counts all real blocks; excluding specific types would require forking the toolbox counting logic.
+- Hide from toolbox but keep engine support — the engine handler would be dead code; serialized Blockly state could still reference it from old saves.
+
+**Consequences:** Six files changed. No lesson data changes needed (no lesson required the collect block). INV-G4 is tighter: sandbox has exactly 4 verbs, not 5.
+
+---
+
 ## 2026-08-07 — Brain Training expanded to 6 worlds (Memory Maze, Nature Quest, Number Ninja)
 
 **Context:** The original three thinking worlds (patterns, logic, counting) covered only core CS-adjacent cognitive skills. Users requested more worlds to extend the brain training path.

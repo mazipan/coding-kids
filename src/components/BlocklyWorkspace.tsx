@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react'
+import { motion } from 'framer-motion'
 import * as Blockly from 'blockly'
 import { javascriptGenerator } from 'blockly/javascript'
 import * as EnLocale from 'blockly/msg/en'
@@ -10,11 +11,10 @@ import { useLanguage } from '../i18n/LanguageProvider'
 registerCustomBlocks()
 
 const CUSTOM_MSG: Record<string, Record<'en' | 'id', string>> = {
-  MOVE_RIGHT:   { en: '➡️ Move Right',  id: '➡️ Gerak Kanan' },
-  MOVE_LEFT:    { en: '⬅️ Move Left',   id: '⬅️ Gerak Kiri' },
-  MOVE_UP:      { en: '⬆️ Move Up',     id: '⬆️ Gerak Atas' },
-  MOVE_DOWN:    { en: '⬇️ Move Down',   id: '⬇️ Gerak Bawah' },
-  COLLECT_ITEM: { en: '⭐ Collect',     id: '⭐ Ambil' },
+  MOVE_RIGHT: { en: '➡️ Move Right', id: '➡️ Gerak Kanan' },
+  MOVE_LEFT:  { en: '⬅️ Move Left',  id: '⬅️ Gerak Kiri' },
+  MOVE_UP:    { en: '⬆️ Move Up',    id: '⬆️ Gerak Atas' },
+  MOVE_DOWN:  { en: '⬇️ Move Down',  id: '⬇️ Gerak Bawah' },
 }
 
 function applyLocale(language: string) {
@@ -46,6 +46,7 @@ const KID_THEME = Blockly.Theme.defineTheme('kidTheme', {
 
 export interface BlocklyWorkspaceHandle {
   resize: () => void
+  loadState: (state: object) => void
 }
 
 interface BlocklyWorkspaceProps {
@@ -73,6 +74,16 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
       resize() {
         if (workspaceRef.current) {
           Blockly.svgResize(workspaceRef.current)
+        }
+      },
+      loadState(state: object) {
+        const ws = workspaceRef.current
+        if (!ws) return
+        ws.clear()
+        try {
+          Blockly.serialization.workspaces.load(state, ws)
+        } catch {
+          // ignore incompatible state
         }
       },
     }))
@@ -167,9 +178,15 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
           <div className="flex items-center gap-2">
             <span className="text-purple-300 font-bold text-sm">{t('blockly.label')}</span>
             {blockCount > 0 && (
-              <span className="text-xs bg-purple-500/30 text-purple-200 px-2 py-0.5 rounded-full font-bold">
+              <motion.span
+                key={blockCount}
+                className="text-xs bg-purple-500/30 text-purple-200 px-2 py-0.5 rounded-full font-bold"
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+              >
                 {blockCount} {t(blockCount === 1 ? 'blockly.block' : 'blockly.blocks')}
-              </span>
+              </motion.span>
             )}
           </div>
           <div className="flex gap-2">
