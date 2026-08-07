@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Star, ArrowRight, ArrowLeft } from 'lucide-react'
-import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle } from '../types'
+import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { useProgress } from '../store/useProgress'
@@ -319,6 +319,162 @@ function SequencePuzzleView({
   )
 }
 
+function TrueFalsePuzzleView({
+  puzzle,
+  onAnswer,
+  selected,
+  isCorrect,
+  completed,
+  language,
+  trueLabel,
+  falseLabel,
+}: {
+  puzzle: TrueFalsePuzzle
+  onAnswer: (value: string) => void
+  selected: string | null
+  isCorrect: boolean | null
+  completed: boolean
+  language: string
+  trueLabel: string
+  falseLabel: string
+}) {
+  return (
+    <div className="space-y-8">
+      <div className="bg-indigo-900/40 border border-indigo-500/30 rounded-2xl p-6 text-center">
+        <p className="text-lg sm:text-xl font-bold text-indigo-100 leading-relaxed">
+          {localize(puzzle.statement, language as 'en' | 'id')}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        {(['true', 'false'] as const).map((val) => {
+          const isSelected = selected === val
+          const correct = completed && String(puzzle.answer) === val
+          const wrong = isSelected && isCorrect === false
+          const isTrue = val === 'true'
+          return (
+            <motion.button
+              key={val}
+              onClick={() => !completed && onAnswer(val)}
+              disabled={completed}
+              className={`h-20 sm:h-24 rounded-2xl text-xl font-black border-2 transition-all flex items-center justify-center ${
+                correct
+                  ? 'bg-green-500/30 border-green-400 text-green-200'
+                  : wrong
+                  ? 'bg-red-500/30 border-red-400 text-red-200'
+                  : isSelected
+                  ? isTrue
+                    ? 'bg-emerald-500/30 border-emerald-400 text-white'
+                    : 'bg-rose-500/30 border-rose-400 text-white'
+                  : isTrue
+                  ? 'bg-emerald-900/30 border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-400'
+                  : 'bg-rose-900/30 border-rose-500/40 text-rose-300 hover:bg-rose-500/20 hover:border-rose-400'
+              } ${completed ? 'cursor-default' : 'cursor-pointer'}`}
+              animate={wrong ? { x: [-4, 4, -4, 4, 0] } : {}}
+              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              {isTrue ? trueLabel : falseLabel}
+            </motion.button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function SortPuzzleView({
+  puzzle,
+  onAnswer,
+  selected,
+  isCorrect,
+  completed,
+  prompt,
+}: {
+  puzzle: SortPuzzle
+  onAnswer: (value: string) => void
+  selected: string | null
+  isCorrect: boolean | null
+  completed: boolean
+  prompt: string
+}) {
+  const [orderedItems, setOrderedItems] = useState<string[]>([])
+
+  useEffect(() => {
+    if (selected === null && !completed) {
+      setOrderedItems([])
+    }
+  }, [selected, completed])
+
+  const handleTap = (item: string) => {
+    if (completed || orderedItems.includes(item)) return
+    const next = [...orderedItems, item]
+    setOrderedItems(next)
+    if (next.length === puzzle.items.length) {
+      onAnswer(next.join(','))
+    }
+  }
+
+  return (
+    <div className="space-y-6">
+      <p className="text-center text-white/60 text-sm font-bold">{prompt}</p>
+
+      <motion.div
+        className="flex items-center justify-center gap-2 flex-wrap"
+        animate={isCorrect === false ? { x: [-6, 6, -6, 6, 0] } : {}}
+        transition={{ duration: 0.4 }}
+      >
+        {puzzle.items.map((_, i) => {
+          const filled = orderedItems[i]
+          return (
+            <div
+              key={i}
+              className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center border-2 transition-all font-black text-lg ${
+                filled
+                  ? isCorrect === false
+                    ? 'bg-red-500/30 border-red-400 text-white'
+                    : 'bg-indigo-500/30 border-indigo-400 text-white'
+                  : 'bg-white/8 border-white/20 border-dashed text-white/25'
+              }`}
+            >
+              {filled ?? (i + 1)}
+            </div>
+          )
+        })}
+      </motion.div>
+
+      <div className="flex flex-wrap gap-3 justify-center">
+        {puzzle.items.map(item => {
+          const isUsed = orderedItems.includes(item)
+          return (
+            <motion.button
+              key={item}
+              onClick={() => handleTap(item)}
+              disabled={isUsed || completed}
+              className={`w-16 h-16 rounded-2xl text-xl font-black border-2 transition-all ${
+                isUsed
+                  ? 'bg-white/5 border-white/10 text-white/20 cursor-default'
+                  : completed
+                  ? 'bg-white/10 border-white/20 text-white cursor-default'
+                  : 'bg-white/10 border-white/20 text-white hover:bg-indigo-500/20 hover:border-indigo-400 cursor-pointer active:scale-95'
+              }`}
+              animate={{ opacity: isUsed ? 0.25 : 1 }}
+              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: isUsed ? 0.25 : 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              {item}
+            </motion.button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 export function ThinkingLessonScreen({
   lesson,
   world,
@@ -340,6 +496,8 @@ export function ThinkingLessonScreen({
     if (p.type === 'if-then') return value === p.answerId
     if (p.type === 'math') return value === p.answer
     if (p.type === 'sequence') return value === p.steps.map(s => s.id).join(',')
+    if (p.type === 'true-false') return value === String(p.answer)
+    if (p.type === 'sort') return value === p.answer.join(',')
     return false
   }
 
@@ -445,6 +603,28 @@ export function ThinkingLessonScreen({
             completed={completed}
             language={language}
             prompt={t('thinking.sequence.prompt')}
+          />
+        )}
+        {puzzle.type === 'true-false' && (
+          <TrueFalsePuzzleView
+            puzzle={puzzle as TrueFalsePuzzle}
+            onAnswer={handleAnswer}
+            selected={selected}
+            isCorrect={isCorrect}
+            completed={completed}
+            language={language}
+            trueLabel={t('thinking.true')}
+            falseLabel={t('thinking.false')}
+          />
+        )}
+        {puzzle.type === 'sort' && (
+          <SortPuzzleView
+            puzzle={puzzle as SortPuzzle}
+            onAnswer={handleAnswer}
+            selected={selected}
+            isCorrect={isCorrect}
+            completed={completed}
+            prompt={t('thinking.sort.prompt')}
           />
         )}
       </motion.div>

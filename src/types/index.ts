@@ -135,7 +135,19 @@ export interface SequencePuzzle {
   steps: Array<{ id: string; emoji: string; label: LocalizedString }>
 }
 
-export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle
+export interface TrueFalsePuzzle {
+  type: 'true-false'
+  statement: LocalizedString
+  answer: boolean
+}
+
+export interface SortPuzzle {
+  type: 'sort'
+  items: string[]
+  answer: string[]
+}
+
+export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle
 
 export interface ThinkingLesson {
   id: string
