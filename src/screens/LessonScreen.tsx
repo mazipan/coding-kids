@@ -134,8 +134,8 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
 
       const next = applyAction(state, action, lesson)
 
-      if (action.type === 'collect') {
-        if (next.collectedIds.size > state.collectedIds.size) playCollect()
+      if (next.collectedIds.size > state.collectedIds.size) {
+        playCollect()
       } else {
         playMove()
       }

@@ -181,7 +181,7 @@ export interface ThinkingLesson {
 
 // ── Blocks path ───────────────────────────────────────────────
 
-export type ActionType = 'move_right' | 'move_left' | 'move_up' | 'move_down' | 'collect'
+export type ActionType = 'move_right' | 'move_left' | 'move_up' | 'move_down'
 
 export interface GameAction {
   type: ActionType

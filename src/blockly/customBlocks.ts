@@ -2,7 +2,6 @@ import * as Blockly from 'blockly'
 import { javascriptGenerator, Order } from 'blockly/javascript'
 
 const MOTION_COLOR = '#5C6BC0'
-const ACTION_COLOR = '#2E7D32'
 
 export function registerCustomBlocks() {
   Blockly.defineBlocksWithJsonArray([
@@ -42,22 +41,12 @@ export function registerCustomBlocks() {
       tooltip: '',
       helpUrl: '',
     },
-    {
-      type: 'collect_item',
-      message0: '%{BKY_COLLECT_ITEM}',
-      previousStatement: null,
-      nextStatement: null,
-      colour: ACTION_COLOR,
-      tooltip: '',
-      helpUrl: '',
-    },
   ])
 
   javascriptGenerator.forBlock['move_right'] = () => 'moveRight();\n'
   javascriptGenerator.forBlock['move_left'] = () => 'moveLeft();\n'
   javascriptGenerator.forBlock['move_up'] = () => 'moveUp();\n'
   javascriptGenerator.forBlock['move_down'] = () => 'moveDown();\n'
-  javascriptGenerator.forBlock['collect_item'] = () => 'collect();\n'
 
   // Suppress unused Order import warning
   void Order

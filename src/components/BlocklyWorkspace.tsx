@@ -10,11 +10,10 @@ import { useLanguage } from '../i18n/LanguageProvider'
 registerCustomBlocks()
 
 const CUSTOM_MSG: Record<string, Record<'en' | 'id', string>> = {
-  MOVE_RIGHT:   { en: '➡️ Move Right',  id: '➡️ Gerak Kanan' },
-  MOVE_LEFT:    { en: '⬅️ Move Left',   id: '⬅️ Gerak Kiri' },
-  MOVE_UP:      { en: '⬆️ Move Up',     id: '⬆️ Gerak Atas' },
-  MOVE_DOWN:    { en: '⬇️ Move Down',   id: '⬇️ Gerak Bawah' },
-  COLLECT_ITEM: { en: '⭐ Collect',     id: '⭐ Ambil' },
+  MOVE_RIGHT: { en: '➡️ Move Right', id: '➡️ Gerak Kanan' },
+  MOVE_LEFT:  { en: '⬅️ Move Left',  id: '⬅️ Gerak Kiri' },
+  MOVE_UP:    { en: '⬆️ Move Up',    id: '⬆️ Gerak Atas' },
+  MOVE_DOWN:  { en: '⬇️ Move Down',  id: '⬇️ Gerak Bawah' },
 }
 
 function applyLocale(language: string) {
