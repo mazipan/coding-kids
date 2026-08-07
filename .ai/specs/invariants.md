@@ -39,14 +39,19 @@ Once a badge is awarded it is never removed, even if the triggering condition co
 ## Lesson unlock invariants
 
 **INV-L1 — Sequential unlock**  
-Lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 1 is always accessible once the world is unlocked.
+Lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 0 (the first lesson) is always accessible once the world is unlocked. This applies to both the blocks path and the thinking path.
 
-**INV-L2 — World unlock by XP**  
-A world is accessible only when `progress.xp >= world.unlockAtXP`. The Jungle world (0 XP) is always accessible.
+**INV-L2 — World unlock by XP (blocks path)**  
+In the blocks path, a world is accessible only when `progress.xp >= world.unlockAtXP`. The Jungle world (0 XP) is always accessible.
+
+**INV-L3 — Thinking worlds are always unlocked**  
+All three thinking worlds (`patterns`, `logic`, `counting`) have `unlockAtXP: 0` and are accessible from the moment a player enters the thinking path. XP earned in either path contributes to the shared pool, but thinking worlds must never be gated by XP.
 
 ---
 
-## Game engine invariants
+## Game engine invariants (blocks path only)
+
+These invariants apply exclusively to the blocks path (`/app/blocks`). The thinking path has no code editor or game grid.
 
 **INV-G1 — Bounded grid**  
 The character can never occupy a cell outside the grid. Any action that would move the character out of bounds must result in `status: 'crashed'`.
@@ -68,13 +73,16 @@ Block-generated code runs in a `new Function(...)` context. Only the five game v
 `tsc -b` must pass with zero errors before any commit. No `@ts-ignore` or `@ts-expect-error` suppressions without a documented reason in the commit message.
 
 **INV-C2 — No hardcoded user-visible strings**  
-Every string shown to the user must go through `t()` from `useLanguage()`. The only exceptions are dev-only console logs and error messages that never reach the UI.
+Every string shown to the user must go through `t()` from `useLanguage()`, or `localize(value, language)` for world/lesson content stored in data files. The only exceptions are dev-only console logs and error messages that never reach the UI.
 
 **INV-C3 — Build passes**  
 `bun run build` must succeed before any commit is pushed.
 
 **INV-C4 — localStorage is the only persistence**  
 No other storage mechanism (IndexedDB, cookies, sessionStorage, Cache API) may be used for user data without a decision record in `.ai/decisions/log.md`.
+
+**INV-C5 — lucide-react is the only icon library**  
+All icons in the UI must come from `lucide-react`. Translation strings must never embed directional or status symbols (`←`, `→`, `▶`, `✓`, `🔒`, etc.) — icons are placed exclusively in JSX alongside `t()` calls. Emoji are permitted only for decorative mascots, world themes, and puzzle content, never as functional UI icons.
 
 ---
 

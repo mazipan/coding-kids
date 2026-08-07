@@ -1,6 +1,6 @@
 # Plan: feat-two-learning-paths
 
-**Status:** in-review  
+**Status:** done  
 **Slug:** feat-two-learning-paths  
 **Date:** 2026-08-07
 
@@ -128,3 +128,4 @@ All blocks-path code is preserved unchanged in function; only paths moved from `
 - Lesson numbering starts at 0 so the first lesson is always accessible (matching the tutorial-always-accessible logic in `isLessonUnlocked`)
 - `ThinkingLesson` uses inline completion state instead of `RewardModal` (which is tightly coupled to the blocks `Lesson` type)
 - `Header.tsx` updated to detect `/app/blocks/...` and `/app/thinking/...` paths and generate correct back-navigation URLs
+- Post-plan additions shipped on same branch: lessons expanded to 10 per world (30 total), all thinking worlds unlocked from start (`unlockAtXP: 0`), lessons 5–9 redesigned for progressive difficulty, next-world navigation banner added to each world view, `XPBar` gained `hideLabel` prop to suppress coding-level names on thinking path, all interactive icons migrated to `lucide-react` with symbol characters stripped from translation strings

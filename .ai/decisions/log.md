@@ -1,5 +1,61 @@
 # Decision log
 
+## 2026-08-07 — Lucide icons used app-wide; emoji/symbol characters banned from controls
+
+**Context:** After migrating action icons in PathSelector, ThinkingHome, and ThinkingLesson to `lucide-react`, a secondary audit found embedded arrow/symbol characters (`←`, `→`, `▶`, `✓`) baked into multiple translation strings (`path.back`, `landing.returning`, `tutorial.card.cta`, `tutorial.card.done`, `walkthrough.next`, `thinking.correct`). These were causing double-icon display when JSX icons were added alongside the strings.
+
+**Decision:** Strip all symbol characters from translation strings — the translation value is always plain text. Icons are placed exclusively in JSX next to `t()` calls. This rule is now documented in `context.md` as a gotcha and applies to all future translation keys.
+
+**Alternatives rejected:**
+- Keep symbols in translations and skip JSX icons — loses visual consistency; emoji arrows are lower quality than lucide icons and render differently per OS.
+- Strip JSX icons and keep translation symbols — translation strings should be language-agnostic text; embedding directional arrows couples content to layout.
+
+**Consequences:** All interactive controls (buttons, badges, status labels) use lucide-react icons. Emoji is retained only for decorative mascots and puzzle content. Translation strings are pure text.
+
+---
+
+## 2026-08-07 — Thinking path header: XP level name hidden
+
+**Context:** The XP level progression uses coding-themed names (Code Cub, Block Builder, …) which are irrelevant and confusing when the player is on the Brain Training path.
+
+**Decision:** Added `hideLabel?: boolean` prop to `XPBar`. `Header` passes `hideLabel` when `subPath === 'thinking'`. The XP bar still shows the progress fill; only the level name text is suppressed.
+
+**Alternatives rejected:**
+- Separate XP system per path — adds complexity; shared XP is a deliberate design choice (see two-paths entry below).
+- Replace level names with generic labels on thinking path — adds translation keys for marginal benefit; hiding is simpler.
+
+**Consequences:** The XP bar remains visible on both paths (kids can see progress), but coding-specific jargon doesn't bleed into the thinking context.
+
+---
+
+## 2026-08-07 — Thinking path: all worlds unlocked from start
+
+**Context:** Initial implementation locked Logic Land at 30 XP and Math Magic at 80 XP. User feedback: the locks felt too strict; kids should be free to explore whichever world interests them.
+
+**Decision:** Set `unlockAtXP: 0` for all three thinking worlds. Individual lessons within each world remain sequentially locked (lesson N requires lesson N-1 completed). The lesson-level gates preserve a natural difficulty ramp without a hard XP barrier at world entry.
+
+**Alternatives rejected:**
+- Keep XP gates but lower thresholds — still arbitrary friction; lesson-level gates provide enough structure.
+- Unlock all lessons in all worlds — removes all progression structure; kids might skip to lessons they're not ready for.
+
+**Consequences:** Kids can start any thinking world immediately. The sequential lesson lock inside each world still teaches the concept in order.
+
+---
+
+## 2026-08-07 — Thinking lessons 5–9: increased difficulty
+
+**Context:** First 10 lessons were added with uniform easy difficulty. User testing found all 10 could be completed in under 2 minutes — no challenge ramp.
+
+**Decision:** Redesigned lessons 5–9 in all three worlds with progressive difficulty: patterns get longer sequences (8–9 items), ABCD 4-element cycles, blank placed in the middle, number sequences (+2 odd, doubling); logic introduces negation, two-step ordering, even/odd classification, chained if-then, and deductive reasoning; counting adds reverse operations, multiplication, multi-step equations, and order-of-operations (brackets).
+
+**Alternatives rejected:**
+- Add more worlds instead of harder lessons — premature; depth in existing worlds is better than breadth for now.
+- Difficulty flags per lesson — adds data complexity; the 0–4 / 5–9 ramp is implicit in the ordering and sufficient.
+
+**Consequences:** A motivated 8-year-old should spend 5–10 minutes on a full world rather than 2. The boss lesson in counting (`(4 + 6) × 3 = 30`) rewards 30 XP and requires understanding operator precedence.
+
+---
+
 ## 2026-08-07 — Two parallel learning paths: /app/blocks and /app/thinking
 
 **Context:** Blockly is good for teaching syntax but skips computational thinking fundamentals (pattern recognition, if/then reasoning, number patterns) that matter for ages 5–10. User requested two separate paths.
