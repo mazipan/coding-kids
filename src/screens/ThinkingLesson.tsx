@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { Star, ArrowRight, ArrowLeft } from 'lucide-react'
-import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle } from '../types'
+import { Star, ArrowRight, ArrowLeft, Check } from 'lucide-react'
+import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { useProgress } from '../store/useProgress'
@@ -475,6 +475,206 @@ function SortPuzzleView({
   )
 }
 
+function FillInPuzzleView({
+  puzzle,
+  onAnswer,
+  isCorrect,
+  completed,
+  language,
+  checkLabel,
+}: {
+  puzzle: FillInPuzzle
+  onAnswer: (value: string) => void
+  isCorrect: boolean | null
+  completed: boolean
+  language: string
+  checkLabel: string
+}) {
+  const [input, setInput] = useState('')
+
+  useEffect(() => {
+    if (isCorrect === null && !completed) {
+      setInput('')
+    }
+  }, [isCorrect, completed])
+
+  const handleSubmit = () => {
+    if (!input.trim() || completed) return
+    onAnswer(input.trim())
+  }
+
+  return (
+    <div className="space-y-8">
+      <div className="text-center">
+        {puzzle.visual && <div className="text-4xl mb-3">{puzzle.visual}</div>}
+        <div className="bg-emerald-900/40 border border-emerald-500/30 rounded-2xl p-5">
+          <p className="text-2xl sm:text-3xl font-black text-emerald-100 tracking-wider">
+            {localize(puzzle.question, language as 'en' | 'id')}
+          </p>
+        </div>
+      </div>
+
+      <motion.div
+        className="flex gap-3"
+        animate={isCorrect === false ? { x: [-4, 4, -4, 4, 0] } : {}}
+        transition={{ duration: 0.3 }}
+      >
+        <input
+          type="text"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+          disabled={completed}
+          className="flex-1 bg-white/10 border-2 border-white/20 rounded-2xl text-center text-3xl font-black text-white px-4 py-4 focus:outline-none focus:border-purple-400 transition-colors disabled:opacity-50"
+          inputMode={puzzle.inputType === 'text' ? 'text' : 'numeric'}
+          autoComplete="off"
+        />
+        <motion.button
+          onClick={handleSubmit}
+          disabled={!input.trim() || completed}
+          className="px-6 rounded-2xl font-black text-white bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors border-2 border-purple-500"
+          whileTap={{ scale: 0.97 }}
+        >
+          {checkLabel}
+        </motion.button>
+      </motion.div>
+    </div>
+  )
+}
+
+const MATCH_COLORS = [
+  { bg: 'bg-blue-500/30', border: 'border-blue-400', text: 'text-blue-200' },
+  { bg: 'bg-green-500/30', border: 'border-green-400', text: 'text-green-200' },
+  { bg: 'bg-purple-500/30', border: 'border-purple-400', text: 'text-purple-200' },
+  { bg: 'bg-amber-500/30', border: 'border-amber-400', text: 'text-amber-200' },
+]
+
+function MatchPuzzleView({
+  puzzle,
+  onAnswer,
+  completed,
+  language,
+  prompt,
+}: {
+  puzzle: MatchPuzzle
+  onAnswer: (value: string) => void
+  completed: boolean
+  language: string
+  prompt: string
+}) {
+  const [selectedLeft, setSelectedLeft] = useState<string | null>(null)
+  const [matched, setMatched] = useState<Record<string, string>>({})
+  const [wrongPair, setWrongPair] = useState<string | null>(null)
+  const [wrongRight, setWrongRight] = useState<string | null>(null)
+  const [pairColors, setPairColors] = useState<Record<string, number>>({})
+
+  const shuffledRight = useMemo(
+    () => [...puzzle.pairs].sort(() => 0.5 - Math.random()),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+
+  const matchedRightIds = Object.values(matched)
+
+  const handleLeft = (leftId: string) => {
+    if (matched[leftId] !== undefined || completed) return
+    setSelectedLeft(prev => prev === leftId ? null : leftId)
+  }
+
+  const handleRight = (rightId: string) => {
+    if (!selectedLeft || matchedRightIds.includes(rightId) || completed) return
+    const pair = puzzle.pairs.find(p => p.leftId === selectedLeft)!
+
+    if (pair.rightId === rightId) {
+      const colorIdx = Object.keys(pairColors).length
+      const newMatched = { ...matched, [selectedLeft]: rightId }
+      const newColors = { ...pairColors, [selectedLeft]: colorIdx }
+      setMatched(newMatched)
+      setPairColors(newColors)
+      setSelectedLeft(null)
+      if (Object.keys(newMatched).length === puzzle.pairs.length) {
+        setTimeout(() => onAnswer('matched'), 300)
+      }
+    } else {
+      setWrongPair(selectedLeft)
+      setWrongRight(rightId)
+      setSelectedLeft(null)
+      setTimeout(() => { setWrongPair(null); setWrongRight(null) }, 600)
+    }
+  }
+
+  const getLeftStyle = (leftId: string) => {
+    const colorIdx = pairColors[leftId]
+    if (colorIdx !== undefined) return MATCH_COLORS[colorIdx % MATCH_COLORS.length]
+    if (wrongPair === leftId) return { bg: 'bg-red-500/30', border: 'border-red-400', text: 'text-red-200' }
+    if (selectedLeft === leftId) return { bg: 'bg-yellow-500/30', border: 'border-yellow-400', text: 'text-yellow-100' }
+    return { bg: 'bg-white/8', border: 'border-white/20', text: 'text-white/80' }
+  }
+
+  const getRightStyle = (rightId: string) => {
+    const leftIdForRight = Object.entries(matched).find(([, rid]) => rid === rightId)?.[0]
+    if (leftIdForRight !== undefined) return MATCH_COLORS[pairColors[leftIdForRight] % MATCH_COLORS.length]
+    if (wrongRight === rightId) return { bg: 'bg-red-500/30', border: 'border-red-400', text: 'text-red-200' }
+    return { bg: 'bg-white/8', border: 'border-white/20', text: 'text-white/80' }
+  }
+
+  return (
+    <div className="space-y-5">
+      <p className="text-center text-white/60 text-sm font-bold">{prompt}</p>
+
+      <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-3">
+          {puzzle.pairs.map(pair => {
+            const style = getLeftStyle(pair.leftId)
+            const isMatched = matched[pair.leftId] !== undefined
+            return (
+              <motion.button
+                key={pair.leftId}
+                onClick={() => handleLeft(pair.leftId)}
+                disabled={isMatched || completed}
+                className={`w-full p-3 rounded-2xl border-2 flex items-center gap-2 transition-all text-left ${style.bg} ${style.border} ${isMatched || completed ? 'cursor-default' : 'cursor-pointer'}`}
+                animate={wrongPair === pair.leftId ? { x: [-4, 4, -4, 4, 0] } : {}}
+                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="text-2xl shrink-0">{pair.leftEmoji}</span>
+                <span className={`text-sm font-bold leading-tight ${style.text}`}>{localize(pair.leftLabel, language as 'en' | 'id')}</span>
+                {isMatched && <Check className="w-4 h-4 ml-auto shrink-0 text-white/70" />}
+              </motion.button>
+            )
+          })}
+        </div>
+
+        <div className="space-y-3">
+          {shuffledRight.map(pair => {
+            const style = getRightStyle(pair.rightId)
+            const isMatched = matchedRightIds.includes(pair.rightId)
+            return (
+              <motion.button
+                key={pair.rightId}
+                onClick={() => handleRight(pair.rightId)}
+                disabled={isMatched || completed || !selectedLeft}
+                className={`w-full p-3 rounded-2xl border-2 flex items-center gap-2 transition-all text-left ${style.bg} ${style.border} ${isMatched || completed ? 'cursor-default' : selectedLeft ? 'cursor-pointer' : 'cursor-default opacity-60'}`}
+                animate={wrongRight === pair.rightId ? { x: [-4, 4, -4, 4, 0] } : {}}
+                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, x: 10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="text-2xl shrink-0">{pair.rightEmoji}</span>
+                <span className={`text-sm font-bold leading-tight ${style.text}`}>{localize(pair.rightLabel, language as 'en' | 'id')}</span>
+                {isMatched && <Check className="w-4 h-4 ml-auto shrink-0 text-white/70" />}
+              </motion.button>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function ThinkingLessonScreen({
   lesson,
   world,
@@ -498,6 +698,8 @@ export function ThinkingLessonScreen({
     if (p.type === 'sequence') return value === p.steps.map(s => s.id).join(',')
     if (p.type === 'true-false') return value === String(p.answer)
     if (p.type === 'sort') return value === p.answer.join(',')
+    if (p.type === 'fill-in') return value.trim().toLowerCase() === p.answer.trim().toLowerCase()
+    if (p.type === 'match') return value === 'matched'
     return false
   }
 
@@ -625,6 +827,25 @@ export function ThinkingLessonScreen({
             isCorrect={isCorrect}
             completed={completed}
             prompt={t('thinking.sort.prompt')}
+          />
+        )}
+        {puzzle.type === 'fill-in' && (
+          <FillInPuzzleView
+            puzzle={puzzle as FillInPuzzle}
+            onAnswer={handleAnswer}
+            isCorrect={isCorrect}
+            completed={completed}
+            language={language}
+            checkLabel={t('thinking.fill.check')}
+          />
+        )}
+        {puzzle.type === 'match' && (
+          <MatchPuzzleView
+            puzzle={puzzle as MatchPuzzle}
+            onAnswer={handleAnswer}
+            completed={completed}
+            language={language}
+            prompt={t('thinking.match.prompt')}
           />
         )}
       </motion.div>

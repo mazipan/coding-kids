@@ -147,7 +147,27 @@ export interface SortPuzzle {
   answer: string[]
 }
 
-export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle
+export interface FillInPuzzle {
+  type: 'fill-in'
+  question: LocalizedString
+  visual?: string
+  answer: string
+  inputType?: 'text' | 'numeric'
+}
+
+export interface MatchPuzzle {
+  type: 'match'
+  pairs: Array<{
+    leftId: string
+    leftEmoji: string
+    leftLabel: LocalizedString
+    rightId: string
+    rightEmoji: string
+    rightLabel: LocalizedString
+  }>
+}
+
+export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle | FillInPuzzle | MatchPuzzle
 
 export interface ThinkingLesson {
   id: string

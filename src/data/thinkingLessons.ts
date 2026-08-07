@@ -305,22 +305,25 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
     id: 'logic-8',
     worldId: 'logic',
     number: 8,
-    title: { en: 'Chain Reaction', id: 'Reaksi Berantai' },
-    mascotMessage: { en: 'Follow the chain of IF-THEN all the way to the end! 🔗', id: 'Ikuti rantai JIKA-MAKA sampai ke akhir! 🔗' },
+    title: { en: 'Match the Action', id: 'Cocokkan Tindakannya' },
+    mascotMessage: { en: 'Match each situation to the right action! 🔗', id: 'Cocokkan setiap situasi dengan tindakan yang tepat! 🔗' },
     xpReward: 22,
     puzzle: {
-      type: 'if-then',
-      condition: {
-        en: 'IF it rains → the ground gets wet. IF the ground is wet → Sara needs boots. It IS raining. What does Sara need?',
-        id: 'JIKA hujan → tanah menjadi basah. JIKA tanah basah → Sara butuh sepatu bot. Sekarang HUJAN. Apa yang dibutuhkan Sara?',
-      },
-      options: [
-        { id: 'boots', emoji: '🥾', label: { en: 'Boots', id: 'Sepatu bot' } },
-        { id: 'umbrella', emoji: '☂️', label: { en: 'Only an umbrella', id: 'Hanya payung' } },
-        { id: 'sunscreen', emoji: '🧴', label: { en: 'Sunscreen', id: 'Tabir surya' } },
-        { id: 'nothing', emoji: '😐', label: { en: 'Nothing at all', id: 'Tidak butuh apa-apa' } },
+      type: 'match',
+      pairs: [
+        {
+          leftId: 'rain', leftEmoji: '🌧️', leftLabel: { en: "It's raining outside", id: 'Di luar sedang hujan' },
+          rightId: 'umbrella', rightEmoji: '☂️', rightLabel: { en: 'Bring an umbrella', id: 'Bawa payung' },
+        },
+        {
+          leftId: 'bedtime', leftEmoji: '🛏️', leftLabel: { en: "It's bedtime", id: 'Waktunya tidur' },
+          rightId: 'sleep', rightEmoji: '😴', rightLabel: { en: 'Brush teeth and sleep', id: 'Gosok gigi dan tidur' },
+        },
+        {
+          leftId: 'sick', leftEmoji: '🤒', leftLabel: { en: 'You feel sick', id: 'Kamu merasa sakit' },
+          rightId: 'doctor', rightEmoji: '🩺', rightLabel: { en: 'Rest and see a doctor', id: 'Istirahat dan temui dokter' },
+        },
       ],
-      answerId: 'boots',
     },
   },
   {
@@ -459,13 +462,12 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
     worldId: 'counting',
     number: 7,
     title: { en: 'Reverse Subtraction', id: 'Pengurangan Terbalik' },
-    mascotMessage: { en: 'What do you take away from 30 to land on 14? 🎯', id: 'Apa yang dikurangi dari 30 untuk mendapat 14? 🎯' },
+    mascotMessage: { en: 'What do you take away from 30 to land on 14? Type your answer! 🎯', id: 'Apa yang dikurangi dari 30 untuk mendapat 14? Ketik jawabanmu! 🎯' },
     xpReward: 22,
     puzzle: {
-      type: 'math',
+      type: 'fill-in',
       question: { en: '30 - ___ = 14', id: '30 - ___ = 14' },
       visual: '🎯',
-      options: ['14', '15', '16', '17'],
       answer: '16',
     },
   },
@@ -474,13 +476,12 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
     worldId: 'counting',
     number: 8,
     title: { en: 'Reverse Multiply', id: 'Perkalian Terbalik' },
-    mascotMessage: { en: 'Which number times 5 equals 35? Count up by 5s to find it! 🖐️', id: 'Angka berapa dikali 5 sama dengan 35? Hitung loncat 5 untuk menemukannya! 🖐️' },
+    mascotMessage: { en: 'Which number times 5 gives 35? Type it in! 🖐️', id: 'Angka berapa dikali 5 sama dengan 35? Ketikkan! 🖐️' },
     xpReward: 25,
     puzzle: {
-      type: 'math',
+      type: 'fill-in',
       question: { en: '___ × 5 = 35', id: '___ × 5 = 35' },
       visual: '🖐️',
-      options: ['5', '6', '7', '8'],
       answer: '7',
     },
   },
@@ -753,19 +754,25 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
     id: 'nature-6',
     worldId: 'nature',
     number: 6,
-    title: { en: 'Ocean Home', id: 'Rumah di Lautan' },
-    mascotMessage: { en: 'Sharks are ocean animals! Where would you find one? 🦈', id: 'Hiu adalah hewan laut! Di mana kamu akan menemukannya? 🦈' },
+    title: { en: 'Animal Homes', id: 'Rumah Hewan' },
+    mascotMessage: { en: 'Match each animal to where it lives! 🌍', id: 'Cocokkan setiap hewan dengan tempat tinggalnya! 🌍' },
     xpReward: 20,
     puzzle: {
-      type: 'if-then',
-      condition: { en: 'IF you want to find a shark...', id: 'JIKA kamu ingin menemukan hiu...' },
-      options: [
-        { id: 'ocean', emoji: '🌊', label: { en: 'Look in the ocean', id: 'Cari di lautan' } },
-        { id: 'sky', emoji: '☁️', label: { en: 'Look in the sky', id: 'Cari di langit' } },
-        { id: 'forest', emoji: '🌲', label: { en: 'Look in the forest', id: 'Cari di hutan' } },
-        { id: 'desert', emoji: '🏜️', label: { en: 'Look in the desert', id: 'Cari di gurun' } },
+      type: 'match',
+      pairs: [
+        {
+          leftId: 'shark', leftEmoji: '🦈', leftLabel: { en: 'Shark', id: 'Hiu' },
+          rightId: 'ocean', rightEmoji: '🌊', rightLabel: { en: 'Ocean', id: 'Lautan' },
+        },
+        {
+          leftId: 'elephant', leftEmoji: '🐘', leftLabel: { en: 'Elephant', id: 'Gajah' },
+          rightId: 'savanna', rightEmoji: '🌿', rightLabel: { en: 'Savanna', id: 'Sabana' },
+        },
+        {
+          leftId: 'penguin', leftEmoji: '🐧', leftLabel: { en: 'Penguin', id: 'Penguin' },
+          rightId: 'antarctica', rightEmoji: '🧊', rightLabel: { en: 'Antarctica', id: 'Antartika' },
+        },
       ],
-      answerId: 'ocean',
     },
   },
   {
