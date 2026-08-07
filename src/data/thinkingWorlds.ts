@@ -11,7 +11,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'purple',
     bgGradient: 'from-purple-900/50 to-violet-900/30',
     unlockAtXP: 0,
-    lessonCount: 5,
+    lessonCount: 10,
   },
   {
     id: 'logic',
@@ -23,7 +23,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'blue',
     bgGradient: 'from-blue-900/50 to-cyan-900/30',
     unlockAtXP: 30,
-    lessonCount: 5,
+    lessonCount: 10,
   },
   {
     id: 'counting',
@@ -35,7 +35,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'emerald',
     bgGradient: 'from-emerald-900/50 to-teal-900/30',
     unlockAtXP: 80,
-    lessonCount: 5,
+    lessonCount: 10,
   },
 ]
 
