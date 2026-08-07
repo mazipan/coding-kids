@@ -223,13 +223,13 @@ const en: Translations = {
   'thinking.sub': 'Build your problem-solving superpowers! 🧠',
   'thinking.correct': '✓ Correct!',
   'thinking.wrong': 'Not quite — try again! 💪',
-  'thinking.next': 'Next Lesson →',
+  'thinking.next': 'Next Lesson',
   'thinking.back.world': 'Back to World',
   'thinking.world.complete': 'World Complete! 🏆',
   'thinking.xp': '+{xp} XP',
   'thinking.attempt': 'Attempt {n}',
   'thinking.first.try': '🌟 First try!',
-  'thinking.next.world': 'Explore Next World →',
+  'thinking.next.world': 'Explore Next World',
 }
 
 const id: Translations = {
@@ -453,13 +453,13 @@ const id: Translations = {
   'thinking.sub': 'Kembangkan kemampuan memecahkan masalah! 🧠',
   'thinking.correct': '✓ Benar!',
   'thinking.wrong': 'Belum tepat — coba lagi! 💪',
-  'thinking.next': 'Pelajaran Berikutnya →',
+  'thinking.next': 'Pelajaran Berikutnya',
   'thinking.back.world': 'Kembali ke Dunia',
   'thinking.world.complete': 'Dunia Selesai! 🏆',
   'thinking.xp': '+{xp} XP',
   'thinking.attempt': 'Percobaan {n}',
   'thinking.first.try': '🌟 Percobaan pertama!',
-  'thinking.next.world': 'Jelajahi Dunia Berikutnya →',
+  'thinking.next.world': 'Jelajahi Dunia Berikutnya',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }

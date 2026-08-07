@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { Star } from 'lucide-react'
+import { Star, ArrowRight, ArrowLeft } from 'lucide-react'
 import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
@@ -378,9 +378,11 @@ export function ThinkingLessonScreen({
 
             <button
               onClick={handleNext}
-              className="bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-2.5 rounded-xl transition-colors text-sm"
+              className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-2.5 rounded-xl transition-colors text-sm"
             >
-              {nextLessonNumber !== undefined ? t('thinking.next') : t('thinking.back.world')}
+              {nextLessonNumber !== undefined
+                ? <><span>{t('thinking.next')}</span><ArrowRight className="w-4 h-4" /></>
+                : <><ArrowLeft className="w-4 h-4" /><span>{t('thinking.back.world')}</span></>}
             </button>
           </motion.div>
         )}

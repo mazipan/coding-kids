@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { ArrowRight, Play } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageProvider'
 import type { PlayerProgress } from '../types'
 
@@ -49,7 +50,9 @@ export function PathSelector({ progress }: PathSelectorProps) {
           <h2 className="text-2xl font-black text-white mb-2">{t('path.blocks.name')}</h2>
           <p className="text-purple-200 text-sm leading-relaxed mb-6">{t('path.blocks.desc')}</p>
           <div className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white font-bold px-5 py-2.5 rounded-xl transition-colors text-sm">
-            {hasBlocksProgress ? t('path.continue') : t('path.start')}
+            {hasBlocksProgress
+              ? <><Play className="w-3.5 h-3.5 fill-current" /><span>{t('path.continue')}</span></>
+              : <><span>{t('path.start')}</span><ArrowRight className="w-3.5 h-3.5" /></>}
           </div>
         </motion.button>
 
@@ -72,7 +75,9 @@ export function PathSelector({ progress }: PathSelectorProps) {
           <h2 className="text-2xl font-black text-white mb-2">{t('path.thinking.name')}</h2>
           <p className="text-blue-200 text-sm leading-relaxed mb-6">{t('path.thinking.desc')}</p>
           <div className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl transition-colors text-sm">
-            {hasThinkingProgress ? t('path.continue') : t('path.start')}
+            {hasThinkingProgress
+              ? <><Play className="w-3.5 h-3.5 fill-current" /><span>{t('path.continue')}</span></>
+              : <><span>{t('path.start')}</span><ArrowRight className="w-3.5 h-3.5" /></>}
           </div>
         </motion.button>
       </div>

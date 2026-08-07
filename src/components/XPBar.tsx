@@ -6,9 +6,10 @@ import { localize } from '../i18n/localize'
 interface XPBarProps {
   xp: number
   compact?: boolean
+  hideLabel?: boolean
 }
 
-export function XPBar({ xp, compact = false }: XPBarProps) {
+export function XPBar({ xp, compact = false, hideLabel = false }: XPBarProps) {
   const { language } = useLanguage()
   const level = getLevelInfo(xp)
   const progress = getXPProgress(xp)
@@ -18,7 +19,9 @@ export function XPBar({ xp, compact = false }: XPBarProps) {
       <div className="flex items-center gap-2">
         <span className="text-xl">{level.badge}</span>
         <div className="flex flex-col min-w-0">
-          <span className="text-xs font-bold text-white/80 truncate">{localize(level.name, language)}</span>
+          {!hideLabel && (
+            <span className="text-xs font-bold text-white/80 truncate">{localize(level.name, language)}</span>
+          )}
           <div className="flex items-center gap-1">
             <div className="h-1.5 w-20 rounded-full bg-white/20 overflow-hidden">
               <motion.div
