@@ -22,7 +22,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     concept: { en: 'If/Then Thinking', id: 'Berpikir Jika/Maka' },
     color: 'blue',
     bgGradient: 'from-blue-900/50 to-cyan-900/30',
-    unlockAtXP: 30,
+    unlockAtXP: 0,
     lessonCount: 10,
   },
   {
@@ -34,7 +34,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     concept: { en: 'Number Patterns', id: 'Pola Angka' },
     color: 'emerald',
     bgGradient: 'from-emerald-900/50 to-teal-900/30',
-    unlockAtXP: 80,
+    unlockAtXP: 0,
     lessonCount: 10,
   },
 ]
