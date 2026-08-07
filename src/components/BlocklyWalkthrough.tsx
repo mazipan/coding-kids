@@ -520,7 +520,7 @@ export function BlocklyWalkthrough({ world, onDone, onLoadState, onSwitchTab }: 
     : (lang === 'id' ? 'Lanjut' : 'Next')
 
   return (
-    <div className="fixed inset-0 z-40 pointer-events-none">
+    <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
       {/* Dim overlay */}
       <div
         className="absolute inset-0 pointer-events-auto"
