@@ -229,6 +229,7 @@ const en: Translations = {
   'thinking.xp': '+{xp} XP',
   'thinking.attempt': 'Attempt {n}',
   'thinking.first.try': '🌟 First try!',
+  'thinking.next.world': 'Explore Next World →',
 }
 
 const id: Translations = {
@@ -458,6 +459,7 @@ const id: Translations = {
   'thinking.xp': '+{xp} XP',
   'thinking.attempt': 'Percobaan {n}',
   'thinking.first.try': '🌟 Percobaan pertama!',
+  'thinking.next.world': 'Jelajahi Dunia Berikutnya →',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }

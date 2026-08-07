@@ -32,6 +32,8 @@ export function ThinkingHome({
   if (activeWorld && selectedWorldId) {
     const completedCount = worldLessons.filter(l => getLessonProgress(l.id)?.completed).length
     const allDone = completedCount === worldLessons.length
+    const currentWorldIdx = THINKING_WORLDS.findIndex(w => w.id === selectedWorldId)
+    const nextWorld = THINKING_WORLDS[currentWorldIdx + 1] ?? null
 
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
@@ -112,6 +114,26 @@ export function ThinkingHome({
             )
           })}
         </div>
+
+        {nextWorld && (
+          <motion.button
+            onClick={() => navigate(`/app/thinking/world/${nextWorld.id}`)}
+            className={`mt-8 w-full flex items-center gap-4 p-5 rounded-2xl border bg-gradient-to-br ${nextWorld.bgGradient} border-white/20 hover:border-white/40 transition-all text-left`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="text-4xl shrink-0">{nextWorld.emoji}</div>
+            <div className="flex-1 min-w-0">
+              <div className="text-xs text-white/50 mb-0.5">{t('thinking.next.world')}</div>
+              <div className="font-black text-white text-lg leading-tight">{localize(nextWorld.name, language)}</div>
+              <div className="text-white/60 text-xs mt-0.5">{localize(nextWorld.concept, language)}</div>
+            </div>
+            <div className="text-white/40 text-2xl shrink-0">›</div>
+          </motion.button>
+        )}
       </div>
     )
   }
