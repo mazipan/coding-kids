@@ -55,14 +55,15 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const runningRef = useRef(false)
   const blocklyRef = useRef<BlocklyWorkspaceHandle>(null)
 
-  const handleWalkthroughStepChange = useCallback((nextStep: number) => {
-    if (nextStep < 3) {
-      // Toolbox/drag/concept steps — show the blocks panel
-      setActiveTab('blocks')
+  const handleWalkthroughLoadState = useCallback((state: object) => {
+    blocklyRef.current?.loadState(state)
+    requestAnimationFrame(() => { blocklyRef.current?.resize() })
+  }, [])
+
+  const handleWalkthroughSwitchTab = useCallback((tab: 'blocks' | 'game') => {
+    setActiveTab(tab)
+    if (tab === 'blocks') {
       requestAnimationFrame(() => { blocklyRef.current?.resize() })
-    } else {
-      // Run Code step — switch to game tab on mobile so kids see the character + run button together
-      setActiveTab('game')
     }
   }, [])
 
@@ -508,17 +509,17 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         onRetry={handleRetry}
       />
 
-      {/* UI walkthrough — shown on tutorial lessons the first time */}
+      {/* Concept walkthrough — shown on tutorial lessons (first visit) */}
       {showWalkthrough && (
         <BlocklyWalkthrough
           world={world}
           onDone={() => {
             setShowWalkthrough(false)
-            // Return to blocks tab so kids can start dragging immediately
             setActiveTab('blocks')
             requestAnimationFrame(() => { blocklyRef.current?.resize() })
           }}
-          onStepChange={handleWalkthroughStepChange}
+          onLoadState={handleWalkthroughLoadState}
+          onSwitchTab={handleWalkthroughSwitchTab}
         />
       )}
     </div>

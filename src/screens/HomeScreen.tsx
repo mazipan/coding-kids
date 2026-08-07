@@ -374,7 +374,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
               </motion.div>
             )}
 
-            {/* Tutorial card — shown when world has a tutorial */}
+            {/* Tutorial card — always accessible, checkmark when done */}
             {worldTutorial && (
               <motion.div
                 className="mb-4"
@@ -382,58 +382,53 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
-                {tutorialDone ? (
-                  <div
-                    className="flex items-center gap-3 rounded-2xl px-4 py-3 border opacity-60"
-                    style={{
-                      background: `${activeWorld?.theme.accentColor}10`,
-                      borderColor: `${activeWorld?.theme.accentColor}30`,
-                    }}
-                  >
-                    <span className="text-2xl">{activeWorld?.character}</span>
-                    <div className="min-w-0 flex-1">
-                      <span className="inline-flex items-center gap-1 text-xs font-black" style={{ color: activeWorld?.theme.accentColor }}>
-                        <Check className="w-3.5 h-3.5" />
-                        {t('tutorial.card.done')}
-                      </span>
-                      <p className="text-white/40 text-xs">{worldTutorial.title[language as 'en' | 'id'] ?? worldTutorial.title.en}</p>
-                    </div>
-                  </div>
-                ) : (
                   <motion.button
                     onClick={() => navigate(`/app/blocks/world/${selectedWorldId}/0`)}
                     className="w-full flex items-center gap-4 rounded-2xl px-5 py-4 text-left relative overflow-hidden"
                     style={{
-                      background: `linear-gradient(135deg, ${activeWorld?.theme.accentColor}25, ${activeWorld?.theme.accentColor}10)`,
-                      border: `2px solid ${activeWorld?.theme.accentColor}80`,
-                      boxShadow: `0 0 24px ${activeWorld?.theme.accentColor}30`,
+                      background: tutorialDone
+                        ? `${activeWorld?.theme.accentColor}12`
+                        : `linear-gradient(135deg, ${activeWorld?.theme.accentColor}25, ${activeWorld?.theme.accentColor}10)`,
+                      border: `2px solid ${tutorialDone ? (activeWorld?.theme.accentColor + '40') : (activeWorld?.theme.accentColor + '80')}`,
+                      boxShadow: tutorialDone ? 'none' : `0 0 24px ${activeWorld?.theme.accentColor}30`,
                     }}
                     whileHover={{ scale: 1.01, y: -2 }}
                     whileTap={{ scale: 0.99 }}
                   >
-                    {/* Animated glow ring */}
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl pointer-events-none"
-                      style={{ border: `2px solid ${activeWorld?.theme.accentColor}` }}
-                      animate={{ opacity: [0.3, 0.7, 0.3] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                    />
+                    {/* Animated glow ring — only when not done */}
+                    {!tutorialDone && (
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl pointer-events-none"
+                        style={{ border: `2px solid ${activeWorld?.theme.accentColor}` }}
+                        animate={{ opacity: [0.3, 0.7, 0.3] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                      />
+                    )}
                     <motion.span
                       className="text-4xl shrink-0"
-                      animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
+                      animate={tutorialDone ? {} : { rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
                       transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                     >
                       {activeWorld?.character}
                     </motion.span>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span
-                          className="text-xs font-black px-2 py-0.5 rounded-full"
-                          style={{ background: activeWorld?.theme.accentColor, color: '#0a0618' }}
-                        >
-                          {t('tutorial.badge')}
+                        {tutorialDone ? (
+                          <span className="inline-flex items-center gap-1 text-xs font-black" style={{ color: activeWorld?.theme.accentColor }}>
+                            <Check className="w-3.5 h-3.5" />
+                            {t('tutorial.card.done')}
+                          </span>
+                        ) : (
+                          <span
+                            className="text-xs font-black px-2 py-0.5 rounded-full"
+                            style={{ background: activeWorld?.theme.accentColor, color: '#0a0618' }}
+                          >
+                            {t('tutorial.badge')}
+                          </span>
+                        )}
+                        <span className={`font-black text-sm ${tutorialDone ? 'text-white/50' : 'text-white'}`}>
+                          {t('tutorial.card.label')}
                         </span>
-                        <span className="text-white font-black text-sm">{t('tutorial.card.label')}</span>
                       </div>
                       <p className="text-white/60 text-xs leading-snug">
                         {t('tutorial.card.desc', { concept: activeWorld ? (language === 'id' ? activeWorld.concept.id : activeWorld.concept.en) : '' })}
@@ -441,13 +436,15 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                     </div>
                     <span
                       className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-black text-sm"
-                      style={{ background: activeWorld?.theme.accentColor, color: '#0a0618' }}
+                      style={{
+                        background: tutorialDone ? `${activeWorld?.theme.accentColor}30` : activeWorld?.theme.accentColor,
+                        color: tutorialDone ? activeWorld?.theme.accentColor : '#0a0618',
+                      }}
                     >
                       <Play className="w-3 h-3 fill-current" />
-                      {t('tutorial.card.cta')}
+                      {tutorialDone ? (language === 'id' ? 'Tinjau' : 'Review') : t('tutorial.card.cta')}
                     </span>
                   </motion.button>
-                )}
               </motion.div>
             )}
 

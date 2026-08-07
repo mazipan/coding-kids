@@ -46,6 +46,7 @@ const KID_THEME = Blockly.Theme.defineTheme('kidTheme', {
 
 export interface BlocklyWorkspaceHandle {
   resize: () => void
+  loadState: (state: object) => void
 }
 
 interface BlocklyWorkspaceProps {
@@ -73,6 +74,16 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
       resize() {
         if (workspaceRef.current) {
           Blockly.svgResize(workspaceRef.current)
+        }
+      },
+      loadState(state: object) {
+        const ws = workspaceRef.current
+        if (!ws) return
+        ws.clear()
+        try {
+          Blockly.serialization.workspaces.load(state, ws)
+        } catch {
+          // ignore incompatible state
         }
       },
     }))
