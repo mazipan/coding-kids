@@ -233,11 +233,11 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const handleNext = () => {
     setShowReward(false)
     if (nextLessonNumber) {
-      navigate(`/app/world/${lesson.worldId}/${nextLessonNumber}`)
+      navigate(`/app/blocks/world/${lesson.worldId}/${nextLessonNumber}`)
     } else if (nextWorld) {
-      navigate(`/app/world/${nextWorld.id}`)
+      navigate(`/app/blocks/world/${nextWorld.id}`)
     } else {
-      navigate(`/app/world/${lesson.worldId}`)
+      navigate(`/app/blocks/world/${lesson.worldId}`)
     }
   }
 
@@ -469,9 +469,9 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
                 onClick={() => {
                   setShowTutorialComplete(false)
                   if (nextLessonNumber) {
-                    navigate(`/app/world/${lesson.worldId}/${nextLessonNumber}`)
+                    navigate(`/app/blocks/world/${lesson.worldId}/${nextLessonNumber}`)
                   } else {
-                    navigate(`/app/world/${lesson.worldId}`)
+                    navigate(`/app/blocks/world/${lesson.worldId}`)
                   }
                 }}
                 className="w-full py-4 rounded-2xl font-black text-lg text-[#0a0618] relative overflow-hidden"

@@ -4,10 +4,15 @@ import { Header } from './components/Header'
 import { HomeScreen } from './screens/HomeScreen'
 import { LessonScreen } from './screens/LessonScreen'
 import { LandingScreen } from './screens/LandingScreen'
+import { PathSelector } from './screens/PathSelector'
+import { ThinkingHomeWithProgress } from './screens/ThinkingHome'
+import { ThinkingLessonScreen } from './screens/ThinkingLesson'
 import { useProgress } from './store/useProgress'
 import { getLessonByNumber, getLessonsByWorld } from './data/lessons'
 import { getWorld, WORLDS } from './data/worlds'
-import type { WorldId } from './types'
+import { getThinkingWorld, THINKING_WORLDS } from './data/thinkingWorlds'
+import { getThinkingLessonByNumber, getThinkingLessonsByWorld } from './data/thinkingLessons'
+import type { WorldId, ThinkingWorldId } from './types'
 
 function GameLayout() {
   const { progress } = useProgress()
@@ -44,6 +49,8 @@ function GameLayout() {
   )
 }
 
+// ── Blocks path routes ────────────────────────────────────────
+
 function WorldMapRoute() {
   const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
   return (
@@ -61,7 +68,7 @@ function WorldDetailRoute() {
   const { worldId } = useParams<{ worldId: string }>()
   const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
   const world = worldId ? getWorld(worldId) : null
-  if (!world) return <Navigate to="/app" replace />
+  if (!world) return <Navigate to="/app/blocks" replace />
   return (
     <HomeScreen
       progress={progress}
@@ -86,11 +93,11 @@ function LessonRoute() {
     : false
 
   if (!lesson || !world || !worldAccessible) {
-    return <Navigate to="/app" replace />
+    return <Navigate to="/app/blocks" replace />
   }
 
   if (!isLessonUnlocked(lesson.id, lesson.worldId)) {
-    return <Navigate to={`/app/world/${worldId}`} replace />
+    return <Navigate to={`/app/blocks/world/${worldId}`} replace />
   }
 
   const worldLessons = getLessonsByWorld(worldId!)
@@ -114,6 +121,49 @@ function LessonRoute() {
   )
 }
 
+// ── Thinking path routes ──────────────────────────────────────
+
+function ThinkingWorldRoute() {
+  const { worldId } = useParams<{ worldId: string }>()
+  const { isWorldUnlocked } = useProgress()
+  const world = worldId ? getThinkingWorld(worldId) : null
+  if (!world || !isWorldUnlocked(world.unlockAtXP)) return <Navigate to="/app/thinking" replace />
+  return <ThinkingHomeWithProgress selectedWorldId={worldId as ThinkingWorldId} />
+}
+
+function ThinkingLessonRoute() {
+  const { worldId, lessonNumber } = useParams<{ worldId: string; lessonNumber: string }>()
+  const { completeLesson, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+
+  const world = worldId ? getThinkingWorld(worldId) : null
+  const lesson = worldId && lessonNumber !== undefined
+    ? getThinkingLessonByNumber(worldId, Number(lessonNumber))
+    : null
+
+  if (!world || !lesson || !isWorldUnlocked(world.unlockAtXP)) {
+    return <Navigate to="/app/thinking" replace />
+  }
+
+  if (!isLessonUnlocked(lesson.id, lesson.worldId)) {
+    return <Navigate to={`/app/thinking/world/${worldId}`} replace />
+  }
+
+  const nextLesson = getThinkingLessonsByWorld(worldId!).find(l => l.number === lesson.number + 1)
+
+  return (
+    <ThinkingLessonScreen
+      key={lesson.id}
+      lesson={lesson}
+      world={world}
+      completeLesson={completeLesson}
+      existingProgress={getLessonProgress(lesson.id)}
+      nextLessonNumber={nextLesson?.number}
+    />
+  )
+}
+
+// ── Landing ───────────────────────────────────────────────────
+
 function LandingRoute() {
   const navigate = useNavigate()
   const { progress } = useProgress()
@@ -126,15 +176,30 @@ function LandingRoute() {
   )
 }
 
+function PathSelectorRoute() {
+  const { progress } = useProgress()
+  return <PathSelector progress={progress} />
+}
+
+// ── App ───────────────────────────────────────────────────────
+
 export default function App() {
   return (
     <LanguageProvider>
       <Routes>
         <Route path="/" element={<LandingRoute />} />
         <Route path="/app" element={<GameLayout />}>
-          <Route index element={<WorldMapRoute />} />
-          <Route path="world/:worldId" element={<WorldDetailRoute />} />
-          <Route path="world/:worldId/:lessonNumber" element={<LessonRoute />} />
+          <Route index element={<PathSelectorRoute />} />
+          <Route path="blocks">
+            <Route index element={<WorldMapRoute />} />
+            <Route path="world/:worldId" element={<WorldDetailRoute />} />
+            <Route path="world/:worldId/:lessonNumber" element={<LessonRoute />} />
+          </Route>
+          <Route path="thinking">
+            <Route index element={<ThinkingHomeWithProgress />} />
+            <Route path="world/:worldId" element={<ThinkingWorldRoute />} />
+            <Route path="world/:worldId/:lessonNumber" element={<ThinkingLessonRoute />} />
+          </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

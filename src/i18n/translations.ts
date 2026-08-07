@@ -207,6 +207,28 @@ const en: Translations = {
   'walkthrough.next': 'Next →',
   'walkthrough.skip': 'Skip',
   'walkthrough.go': "Got it! Let's go! 🚀",
+
+  // ── Path selector ─────────────────────────────
+  'path.choose': 'Choose your adventure!',
+  'path.blocks.name': 'Block Coding',
+  'path.blocks.desc': 'Write code with visual blocks. 6 epic worlds to explore!',
+  'path.thinking.name': 'Brain Training',
+  'path.thinking.desc': 'Patterns, logic & math puzzles. Build your problem-solving superpowers!',
+  'path.start': 'Start →',
+  'path.continue': 'Continue →',
+  'path.back': '← Back to home',
+
+  // ── Thinking path ─────────────────────────────
+  'thinking.title': 'Brain Training',
+  'thinking.sub': 'Build your problem-solving superpowers! 🧠',
+  'thinking.correct': '✓ Correct!',
+  'thinking.wrong': 'Not quite — try again! 💪',
+  'thinking.next': 'Next Lesson →',
+  'thinking.back.world': 'Back to World',
+  'thinking.world.complete': 'World Complete! 🏆',
+  'thinking.xp': '+{xp} XP',
+  'thinking.attempt': 'Attempt {n}',
+  'thinking.first.try': '🌟 First try!',
 }
 
 const id: Translations = {
@@ -414,6 +436,28 @@ const id: Translations = {
   'walkthrough.next': 'Lanjut →',
   'walkthrough.skip': 'Lewati',
   'walkthrough.go': 'Mengerti! Ayo! 🚀',
+
+  // ── Path selector ─────────────────────────────
+  'path.choose': 'Pilih petualanganmu!',
+  'path.blocks.name': 'Coding Blok',
+  'path.blocks.desc': 'Tulis kode dengan blok visual. 6 dunia epik untuk dijelajahi!',
+  'path.thinking.name': 'Latihan Otak',
+  'path.thinking.desc': 'Puzzle pola, logika & matematika. Kembangkan kemampuan memecahkan masalah!',
+  'path.start': 'Mulai →',
+  'path.continue': 'Lanjutkan →',
+  'path.back': '← Kembali ke beranda',
+
+  // ── Thinking path ─────────────────────────────
+  'thinking.title': 'Latihan Otak',
+  'thinking.sub': 'Kembangkan kemampuan memecahkan masalah! 🧠',
+  'thinking.correct': '✓ Benar!',
+  'thinking.wrong': 'Belum tepat — coba lagi! 💪',
+  'thinking.next': 'Pelajaran Berikutnya →',
+  'thinking.back.world': 'Kembali ke Dunia',
+  'thinking.world.complete': 'Dunia Selesai! 🏆',
+  'thinking.xp': '+{xp} XP',
+  'thinking.attempt': 'Percobaan {n}',
+  'thinking.first.try': '🌟 Percobaan pertama!',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }

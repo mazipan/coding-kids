@@ -15,16 +15,20 @@ export function Header({ progress }: HeaderProps) {
   const location = useLocation()
 
   const pathParts = location.pathname.split('/').filter(Boolean)
-  // world detail: /app/world/:worldId → 3 parts
-  const isWorldPage = pathParts.length === 3 && pathParts[1] === 'world'
-  // lesson page: /app/world/:worldId/:lessonNumber → 4 parts
-  const isLessonPage = pathParts.length >= 4 && pathParts[1] === 'world'
-  const showBack = isWorldPage || isLessonPage
+  // pathParts: ['app', 'blocks'|'thinking'] | ['app', 'blocks', 'world', worldId] | ['app', 'blocks', 'world', worldId, lessonNum]
+  const subPath = pathParts.length >= 2 ? pathParts[1] : null
+  const isInSubPath = subPath === 'blocks' || subPath === 'thinking'
+  const isSubHome = isInSubPath && pathParts.length === 2
+  const isWorldPage = isInSubPath && pathParts.length === 4 && pathParts[2] === 'world'
+  const isLessonPage = isInSubPath && pathParts.length >= 5 && pathParts[2] === 'world'
+  const showBack = isSubHome || isWorldPage || isLessonPage
 
   const handleClick = () => {
     if (isLessonPage) {
-      navigate(`/app/world/${pathParts[2]}`)
+      navigate(`/app/${subPath}/world/${pathParts[3]}`)
     } else if (isWorldPage) {
+      navigate(`/app/${subPath}`)
+    } else if (isSubHome) {
       navigate('/app')
     } else {
       navigate('/')

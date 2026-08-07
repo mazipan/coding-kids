@@ -88,7 +88,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 return (
                   <motion.button
                     key={world.id}
-                    onClick={() => unlocked && navigate(`/app/world/${world.id}`)}
+                    onClick={() => unlocked && navigate(`/app/blocks/world/${world.id}`)}
                     className={`relative rounded-3xl overflow-hidden text-left transition-all ${
                       unlocked ? 'cursor-pointer hover:scale-105' : 'cursor-not-allowed opacity-60'
                     }`}
@@ -226,7 +226,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                   return (
                     <motion.button
                       key={world.id}
-                      onClick={() => bonusUnlocked && navigate(`/app/world/${world.id}`)}
+                      onClick={() => bonusUnlocked && navigate(`/app/blocks/world/${world.id}`)}
                       className={`relative rounded-3xl overflow-hidden text-left transition-all ${
                         bonusUnlocked ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
                       }`}
@@ -363,7 +363,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 <div className="text-2xl mb-1">🎉</div>
                 <p className="text-emerald-200 font-black text-base mb-3">{t('reward.world.complete')}</p>
                 <motion.button
-                  onClick={() => navigate(`/app/world/${nextMainWorld.id}`)}
+                  onClick={() => navigate(`/app/blocks/world/${nextMainWorld.id}`)}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-white text-sm bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 transition-all shadow-lg shadow-emerald-900/40"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -399,7 +399,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                   </div>
                 ) : (
                   <motion.button
-                    onClick={() => navigate(`/app/world/${selectedWorldId}/0`)}
+                    onClick={() => navigate(`/app/blocks/world/${selectedWorldId}/0`)}
                     className="w-full flex items-center gap-4 rounded-2xl px-5 py-4 text-left relative overflow-hidden"
                     style={{
                       background: `linear-gradient(135deg, ${activeWorld?.theme.accentColor}25, ${activeWorld?.theme.accentColor}10)`,
@@ -458,7 +458,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 return (
                   <motion.button
                     key={lesson.id}
-                    onClick={() => unlocked && navigate(`/app/world/${selectedWorldId}/${lesson.number}`)}
+                    onClick={() => unlocked && navigate(`/app/blocks/world/${selectedWorldId}/${lesson.number}`)}
                     className={`relative text-left rounded-2xl p-4 sm:p-5 border transition-all ${
                       unlocked ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
                     }`}
