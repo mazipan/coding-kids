@@ -91,8 +91,11 @@ Source: `src/data/thinkingWorlds.ts` — `THINKING_WORLDS` array.
 | patterns | 🔮 | Pattern recognition | 5–8 | 0 | 10 |
 | logic | 🧠 | If-then reasoning | 7–10 | 0 | 10 |
 | counting | ✨ | Number & math | 8–12 | 0 | 10 |
+| memory | 🧩 | Sequence memory | 6–10 | 0 | 10 |
+| nature | 🌿 | Science thinking | 8–11 | 0 | 10 |
+| numbers | ⚡ | Number sequences | 9–13 | 0 | 10 |
 
-All three worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely.
+All six worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely.
 
 ### Thinking lesson fields
 

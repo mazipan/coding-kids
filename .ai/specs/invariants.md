@@ -45,7 +45,7 @@ Lesson N in a world is only accessible after lesson N-1 is marked `completed: tr
 In the blocks path, a world is accessible only when `progress.xp >= world.unlockAtXP`. The Jungle world (0 XP) is always accessible.
 
 **INV-L3 — Thinking worlds are always unlocked**  
-All three thinking worlds (`patterns`, `logic`, `counting`) have `unlockAtXP: 0` and are accessible from the moment a player enters the thinking path. XP earned in either path contributes to the shared pool, but thinking worlds must never be gated by XP.
+All thinking worlds (`patterns`, `logic`, `counting`, `memory`, `nature`, `numbers`) have `unlockAtXP: 0` and are accessible from the moment a player enters the thinking path. XP earned in either path contributes to the shared pool, but thinking worlds must never be gated by XP. Any new thinking world added in the future must also have `unlockAtXP: 0`.
 
 ---
 
