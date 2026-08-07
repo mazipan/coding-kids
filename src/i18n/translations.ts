@@ -9,7 +9,7 @@ const en: Translations = {
   'landing.sub': 'A fun, free coding adventure for ages 5–14. Learn programming with colorful visual blocks, earn XP, and explore 6 epic worlds — no downloads, no logins!',
   'landing.cta': 'Start Learning Free',
   'landing.cta.secondary': 'See how it works ↓',
-  'landing.returning': 'Continue your adventure →',
+  'landing.returning': 'Continue your adventure',
 
   'landing.features.title': 'Why Kids Love CodeKids',
   'landing.features.blocks.icon': '🎮',
@@ -125,8 +125,8 @@ const en: Translations = {
   'bonus.all.open': 'All levels open!',
 
   // ── Common labels ────────────────────────────
-  'common.play': '▶ Play',
-  'common.play.again': '▶ Play Again',
+  'common.play': 'Play',
+  'common.play.again': 'Play Again',
   'common.ages': 'Ages',
   'common.learn': 'Learn:',
   'common.level': 'Level',
@@ -197,16 +197,39 @@ const en: Translations = {
   'tutorial.badge': 'TUTORIAL',
   'tutorial.card.label': 'Start Here First!',
   'tutorial.card.desc': 'Learn how {concept} blocks work before playing the levels.',
-  'tutorial.card.cta': '▶ Start Tutorial',
-  'tutorial.card.done': '✓ Tutorial Complete',
+  'tutorial.card.cta': 'Start Tutorial',
+  'tutorial.card.done': 'Tutorial Complete',
   'tutorial.complete.title': "You're Ready! 🎉",
   'tutorial.complete.subtitle': 'Great job! You know how {concept} blocks work. Time to play for real!',
   'tutorial.complete.cta': 'Start Level 1!',
 
   // ── Walkthrough tour ─────────────────────────
-  'walkthrough.next': 'Next →',
+  'walkthrough.next': 'Next',
   'walkthrough.skip': 'Skip',
   'walkthrough.go': "Got it! Let's go! 🚀",
+
+  // ── Path selector ─────────────────────────────
+  'path.choose': 'Choose your adventure!',
+  'path.blocks.name': 'Block Coding',
+  'path.blocks.desc': 'Write code with visual blocks. 6 epic worlds to explore!',
+  'path.thinking.name': 'Brain Training',
+  'path.thinking.desc': 'Patterns, logic & math puzzles. Build your problem-solving superpowers!',
+  'path.start': 'Start',
+  'path.continue': 'Continue',
+  'path.back': 'Back to home',
+
+  // ── Thinking path ─────────────────────────────
+  'thinking.title': 'Brain Training',
+  'thinking.sub': 'Build your problem-solving superpowers! 🧠',
+  'thinking.correct': 'Correct!',
+  'thinking.wrong': 'Not quite — try again! 💪',
+  'thinking.next': 'Next Lesson',
+  'thinking.back.world': 'Back to World',
+  'thinking.world.complete': 'World Complete! 🏆',
+  'thinking.xp': '+{xp} XP',
+  'thinking.attempt': 'Attempt {n}',
+  'thinking.first.try': '🌟 First try!',
+  'thinking.next.world': 'Explore Next World',
 }
 
 const id: Translations = {
@@ -216,7 +239,7 @@ const id: Translations = {
   'landing.sub': 'Petualangan coding yang menyenangkan dan gratis untuk usia 5–14 tahun. Belajar pemrograman dengan blok visual berwarna, kumpulkan XP, dan jelajahi 6 dunia epik — tanpa unduhan, tanpa login!',
   'landing.cta': 'Mulai Belajar Gratis',
   'landing.cta.secondary': 'Lihat cara kerjanya ↓',
-  'landing.returning': 'Lanjutkan →',
+  'landing.returning': 'Lanjutkan',
 
   'landing.features.title': 'Kenapa Anak-anak Suka CodeKids',
   'landing.features.blocks.icon': '🎮',
@@ -332,8 +355,8 @@ const id: Translations = {
   'bonus.all.open': 'Semua level terbuka!',
 
   // ── Common labels ────────────────────────────
-  'common.play': '▶ Main',
-  'common.play.again': '▶ Main Lagi',
+  'common.play': 'Main',
+  'common.play.again': 'Main Lagi',
   'common.ages': 'Usia',
   'common.learn': 'Pelajari:',
   'common.level': 'Level',
@@ -404,16 +427,39 @@ const id: Translations = {
   'tutorial.badge': 'TUTORIAL',
   'tutorial.card.label': 'Mulai di Sini Dulu!',
   'tutorial.card.desc': 'Pelajari cara kerja blok {concept} sebelum bermain level.',
-  'tutorial.card.cta': '▶ Mulai Tutorial',
-  'tutorial.card.done': '✓ Tutorial Selesai',
+  'tutorial.card.cta': 'Mulai Tutorial',
+  'tutorial.card.done': 'Tutorial Selesai',
   'tutorial.complete.title': 'Kamu Siap! 🎉',
   'tutorial.complete.subtitle': 'Bagus sekali! Kamu sudah tahu cara kerja blok {concept}. Saatnya bermain sungguhan!',
   'tutorial.complete.cta': 'Mulai Level 1!',
 
   // ── Walkthrough tour ─────────────────────────
-  'walkthrough.next': 'Lanjut →',
+  'walkthrough.next': 'Lanjut',
   'walkthrough.skip': 'Lewati',
   'walkthrough.go': 'Mengerti! Ayo! 🚀',
+
+  // ── Path selector ─────────────────────────────
+  'path.choose': 'Pilih petualanganmu!',
+  'path.blocks.name': 'Coding Blok',
+  'path.blocks.desc': 'Tulis kode dengan blok visual. 6 dunia epik untuk dijelajahi!',
+  'path.thinking.name': 'Latihan Otak',
+  'path.thinking.desc': 'Puzzle pola, logika & matematika. Kembangkan kemampuan memecahkan masalah!',
+  'path.start': 'Mulai',
+  'path.continue': 'Lanjutkan',
+  'path.back': 'Kembali ke beranda',
+
+  // ── Thinking path ─────────────────────────────
+  'thinking.title': 'Latihan Otak',
+  'thinking.sub': 'Kembangkan kemampuan memecahkan masalah! 🧠',
+  'thinking.correct': 'Benar!',
+  'thinking.wrong': 'Belum tepat — coba lagi! 💪',
+  'thinking.next': 'Pelajaran Berikutnya',
+  'thinking.back.world': 'Kembali ke Dunia',
+  'thinking.world.complete': 'Dunia Selesai! 🏆',
+  'thinking.xp': '+{xp} XP',
+  'thinking.attempt': 'Percobaan {n}',
+  'thinking.first.try': '🌟 Percobaan pertama!',
+  'thinking.next.world': 'Jelajahi Dunia Berikutnya',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }

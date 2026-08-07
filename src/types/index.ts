@@ -90,6 +90,60 @@ export interface PlayerProgress {
   lastPlayed: string
 }
 
+// ── Thinking path ─────────────────────────────────────────────
+
+export type ThinkingWorldId = 'patterns' | 'logic' | 'counting'
+
+export interface ThinkingWorld {
+  id: ThinkingWorldId
+  name: LocalizedString
+  emoji: string
+  tagline: LocalizedString
+  ageRange: string
+  concept: LocalizedString
+  color: string
+  bgGradient: string
+  unlockAtXP: number
+  lessonCount: number
+}
+
+export interface PatternPuzzle {
+  type: 'pattern'
+  items: string[]
+  blankIndex: number
+  options: string[]
+  answer: string
+}
+
+export interface IfThenPuzzle {
+  type: 'if-then'
+  condition: LocalizedString
+  options: Array<{ id: string; emoji: string; label: LocalizedString }>
+  answerId: string
+}
+
+export interface MathPuzzle {
+  type: 'math'
+  question: LocalizedString
+  visual?: string
+  options: string[]
+  answer: string
+}
+
+export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle
+
+export interface ThinkingLesson {
+  id: string
+  worldId: ThinkingWorldId
+  number: number
+  title: LocalizedString
+  mascotMessage: LocalizedString
+  xpReward: number
+  puzzle: ThinkingPuzzle
+}
+
+// ── Blocks path ───────────────────────────────────────────────
+
 export type ActionType = 'move_right' | 'move_left' | 'move_up' | 'move_down' | 'collect'
 
 export interface GameAction {
