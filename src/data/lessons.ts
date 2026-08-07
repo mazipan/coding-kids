@@ -1258,8 +1258,8 @@ export const LESSONS: Lesson[] = [
       id: 'Tantangan tertinggi! Nova harus menggunakan array, perulangan, fungsi, dan kondisi untuk mengumpulkan semua kristal waktu!',
     },
     mascotMessage: {
-      en: "This is the FINAL LEVEL! 🌟 Use EVERYTHING you've learned! You're incredible! ⏰🧑‍🚀",
-      id: 'Ini LEVEL TERAKHIR! 🌟 Gunakan SEGALANYA yang sudah kamu pelajari! Kamu luar biasa! ⏰🧑‍🚀',
+      en: "Incredible challenge! 🌟 Use EVERYTHING you've learned so far! You're amazing! ⏰🧑‍🚀",
+      id: 'Tantangan yang luar biasa! 🌟 Gunakan SEGALANYA yang sudah kamu pelajari! Kamu menakjubkan! ⏰🧑‍🚀',
     },
     gridRows: 8,
     gridCols: 9,
@@ -1292,6 +1292,222 @@ export const LESSONS: Lesson[] = [
       { en: 'Use functions, loops, and conditions together!', id: 'Gunakan fungsi, perulangan, dan kondisi bersama!' },
     ],
     starThresholds: [126, 90, 75, 60],
+  },
+
+  {
+    id: 'portal-5',
+    worldId: 'portal',
+    number: 5,
+    title: { en: 'Array Sprint', id: 'Sprint Array' },
+    story: {
+      en: 'Nova discovers that arrays can encode entire journeys! Store distances in a list and race through the time stream.',
+      id: 'Nova menemukan bahwa array bisa menyimpan seluruh perjalanan! Simpan jarak dalam daftar dan berlomba melintasi aliran waktu.',
+    },
+    mascotMessage: {
+      en: 'Arrays are like a plan stored in a list! 📋 Build a list of moves, then loop through it to collect all the crystals!',
+      id: 'Array itu seperti rencana yang tersimpan dalam daftar! 📋 Buat daftar gerakan, lalu ulangi untuk mengumpulkan semua kristal!',
+    },
+    gridRows: 5,
+    gridCols: 8,
+    cells: emptyGrid(5, 8),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 3] },
+      { id: 't2', pos: [2, 7] },
+      { id: 't3', pos: [4, 1] },
+      { id: 't4', pos: [4, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists'],
+    optimalBlockCount: 20,
+    xpReward: 320,
+    hints: [
+      { en: 'Try storing your move counts in a list!', id: 'Coba simpan jumlah gerakanmu dalam daftar!' },
+      { en: 'Loop through the list to execute each move sequence!', id: 'Ulangi daftar untuk menjalankan setiap urutan gerakan!' },
+    ],
+    starThresholds: [42, 30, 25, 20],
+  },
+  {
+    id: 'portal-6',
+    worldId: 'portal',
+    number: 6,
+    title: { en: 'Crystal Matrix', id: 'Matriks Kristal' },
+    story: {
+      en: 'The crystals form a matrix! Nova must loop through her array of coordinates to collect them all efficiently.',
+      id: 'Kristal-kristal membentuk matriks! Nova harus mengulang array koordinatnya untuk mengumpulkan semuanya dengan efisien.',
+    },
+    mascotMessage: {
+      en: 'Use a loop to go through your list one by one! 🔄 Each item in the list is your next target!',
+      id: 'Gunakan perulangan untuk melalui daftarmu satu per satu! 🔄 Setiap item dalam daftar adalah target berikutmu!',
+    },
+    gridRows: 6,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(6, 8)
+      g[2][3] = 'obstacle'
+      g[3][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 5] },
+      { id: 't2', pos: [1, 7] },
+      { id: 't3', pos: [3, 1] },
+      { id: 't4', pos: [4, 5] },
+      { id: 't5', pos: [5, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops'],
+    optimalBlockCount: 28,
+    xpReward: 340,
+    hints: [
+      { en: 'Navigate around the time barriers carefully!', id: 'Navigasi menghindari penghalang waktu dengan hati-hati!' },
+      { en: 'Use loops to iterate through your movement arrays!', id: 'Gunakan perulangan untuk mengiterasi array gerakanmu!' },
+    ],
+    starThresholds: [59, 42, 35, 28],
+  },
+  {
+    id: 'portal-7',
+    worldId: 'portal',
+    number: 7,
+    title: { en: 'Temporal Storm', id: 'Badai Temporal' },
+    story: {
+      en: 'A temporal storm has scattered the crystals! Create helper functions that use arrays to navigate the chaos.',
+      id: 'Badai temporal telah menyebarkan kristal! Buat fungsi pembantu yang menggunakan array untuk menavigasi kekacauan.',
+    },
+    mascotMessage: {
+      en: 'Write a FUNCTION that takes a list of moves! 🔧 Reuse it to reach crystals in different spots!',
+      id: 'Tulis FUNGSI yang menerima daftar gerakan! 🔧 Gunakan ulang untuk mencapai kristal di tempat berbeda!',
+    },
+    gridRows: 7,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(7, 9)
+      g[1][4] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 6] },
+      { id: 't2', pos: [2, 0] },
+      { id: 't3', pos: [2, 5] },
+      { id: 't4', pos: [4, 1] },
+      { id: 't5', pos: [5, 8] },
+      { id: 't6', pos: [6, 4] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'functions'],
+    optimalBlockCount: 38,
+    xpReward: 360,
+    hints: [
+      { en: 'Define a function with a list parameter for moves!', id: 'Definisikan fungsi dengan parameter daftar untuk gerakan!' },
+      { en: 'Call your function multiple times with different move lists!', id: 'Panggil fungsimu beberapa kali dengan daftar gerakan berbeda!' },
+    ],
+    starThresholds: [80, 57, 48, 38],
+  },
+  {
+    id: 'portal-8',
+    worldId: 'portal',
+    number: 8,
+    title: { en: 'Paradox Loop', id: 'Perulangan Paradoks' },
+    story: {
+      en: 'Time paradoxes have created extra barriers! Nova needs smart conditions combined with arrays to find the safe route.',
+      id: 'Paradoks waktu telah menciptakan lebih banyak penghalang! Nova butuh kondisi cerdas dikombinasikan dengan array untuk menemukan jalur aman.',
+    },
+    mascotMessage: {
+      en: 'Use IF blocks to decide which direction to move! 🧠 Check your list index to choose the right path!',
+      id: 'Gunakan blok JIKA untuk memutuskan arah gerakan! 🧠 Periksa indeks daftarmu untuk memilih jalur yang tepat!',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[1][3] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 5] },
+      { id: 't2', pos: [1, 8] },
+      { id: 't3', pos: [2, 3] },
+      { id: 't4', pos: [4, 0] },
+      { id: 't5', pos: [5, 7] },
+      { id: 't6', pos: [6, 2] },
+      { id: 't7', pos: [7, 6] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'logic'],
+    optimalBlockCount: 50,
+    xpReward: 385,
+    hints: [
+      { en: 'Plan your full route to avoid all obstacles!', id: 'Rencanakan rute lengkapmu untuk menghindari semua rintangan!' },
+      { en: 'Combine lists, loops, and conditions for an elegant solution!', id: 'Gabungkan daftar, perulangan, dan kondisi untuk solusi yang elegan!' },
+    ],
+    starThresholds: [105, 75, 63, 50],
+  },
+  {
+    id: 'portal-9',
+    worldId: 'portal',
+    number: 9,
+    title: { en: 'Time Lord', id: 'Penguasa Waktu' },
+    story: {
+      en: 'The true final challenge! Become the Time Lord — master arrays, loops, functions, and conditions to collect all 8 crystals!',
+      id: 'Tantangan akhir yang sesungguhnya! Jadilah Penguasa Waktu — kuasai array, perulangan, fungsi, dan kondisi untuk mengumpulkan semua 8 kristal!',
+    },
+    mascotMessage: {
+      en: "You're the TIME LORD now! 👑 Use EVERY skill — lists, loops, functions, conditions! This is your ultimate test! ⏰🌟",
+      id: 'Kamu adalah PENGUASA WAKTU sekarang! 👑 Gunakan SETIAP kemampuan — daftar, perulangan, fungsi, kondisi! Ini ujian terakhirmu! ⏰🌟',
+    },
+    gridRows: 8,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(8, 10)
+      g[1][4] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 4] },
+      { id: 't2', pos: [1, 9] },
+      { id: 't3', pos: [2, 2] },
+      { id: 't4', pos: [3, 7] },
+      { id: 't5', pos: [4, 0] },
+      { id: 't6', pos: [5, 5] },
+      { id: 't7', pos: [6, 8] },
+      { id: 't8', pos: [7, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions'],
+    optimalBlockCount: 65,
+    xpReward: 450,
+    hints: [
+      { en: 'Divide the grid into zones and write a function for each!', id: 'Bagi grid menjadi zona dan tulis fungsi untuk setiap zona!' },
+      { en: 'Use arrays of coordinates and loop through them systematically!', id: 'Gunakan array koordinat dan ulangi secara sistematis!' },
+    ],
+    starThresholds: [137, 98, 82, 65],
   },
 
   // ─────────────────────────────────────────────
