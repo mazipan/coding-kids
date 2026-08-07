@@ -5,21 +5,6 @@ import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageProvider'
 import type { World } from '../types'
 
-const tourKey = (worldId: string) => `codekids_tour_v1_${worldId}`
-
-export function isTourDone(worldId: string): boolean {
-  try {
-    return localStorage.getItem(tourKey(worldId)) === 'done'
-  } catch {
-    return false
-  }
-}
-
-function markTourDone(worldId: string) {
-  try {
-    localStorage.setItem(tourKey(worldId), 'done')
-  } catch {}
-}
 
 // ── Block mockup color palette ────────────────────────────────────────────────
 
@@ -509,7 +494,6 @@ export function BlocklyWalkthrough({ world, onDone, onLoadState, onSwitchTab }: 
   }
 
   const finish = () => {
-    markTourDone(world.id)
     onDone()
   }
 
