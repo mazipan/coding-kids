@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { MousePointerClick, Trophy, Globe, Smartphone, Map, Grip, Zap, Gift, ShieldCheck, EyeOff } from 'lucide-react'
+import { MousePointerClick, Trophy, Globe, Smartphone, Map, Grip, Zap, Gift, ShieldCheck, EyeOff, ArrowRight } from 'lucide-react'
 import { WORLDS } from '../data/worlds'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
@@ -189,7 +189,7 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
               whileTap={{ scale: 0.97 }}
             >
               {t('landing.cta')}
-              <span className="transition-transform group-hover:translate-x-1">→</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </motion.button>
 
             {hasProgress && (
@@ -198,6 +198,7 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
                 className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base text-purple-300 border border-purple-600/30 hover:bg-purple-900/20 transition-colors"
                 whileHover={{ scale: 1.02 }}
               >
+                <ArrowRight className="w-4 h-4" />
                 {t('landing.returning')}
               </motion.button>
             )}

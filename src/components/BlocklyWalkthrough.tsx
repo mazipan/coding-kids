@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageProvider'
 import type { World } from '../types'
 
@@ -195,7 +196,7 @@ export function BlocklyWalkthrough({ world, onDone, onStepChange }: BlocklyWalkt
 
             <motion.button
               onClick={handleNext}
-              className="px-5 py-2.5 rounded-xl font-black text-sm shrink-0"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-black text-sm shrink-0"
               style={{
                 background: `linear-gradient(135deg, ${world.theme.accentColor}, ${world.theme.accentColor}bb)`,
                 color: '#0a0618',
@@ -203,7 +204,7 @@ export function BlocklyWalkthrough({ world, onDone, onStepChange }: BlocklyWalkt
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isLast ? t('walkthrough.go') : t('walkthrough.next')}
+              {isLast ? t('walkthrough.go') : <><span>{t('walkthrough.next')}</span><ArrowRight className="w-3.5 h-3.5" /></>}
             </motion.button>
           </div>
         </div>

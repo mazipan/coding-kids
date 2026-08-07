@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, Play } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Play } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageProvider'
 import type { PlayerProgress } from '../types'
 
@@ -90,8 +90,9 @@ export function PathSelector({ progress }: PathSelectorProps) {
       >
         <button
           onClick={() => navigate('/')}
-          className="text-purple-400 hover:text-purple-200 text-sm transition-colors"
+          className="inline-flex items-center gap-1.5 text-purple-400 hover:text-purple-200 text-sm transition-colors"
         >
+          <ArrowLeft className="w-3.5 h-3.5" />
           {t('path.back')}
         </button>
       </motion.div>
