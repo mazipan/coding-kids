@@ -384,7 +384,7 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
               >
                   <motion.button
                     onClick={() => navigate(`/app/blocks/world/${selectedWorldId}/0`)}
-                    className="w-full flex items-center gap-4 rounded-2xl px-5 py-4 text-left relative overflow-hidden"
+                    className="w-full rounded-2xl px-4 py-4 text-left relative overflow-hidden"
                     style={{
                       background: tutorialDone
                         ? `${activeWorld?.theme.accentColor}12`
@@ -404,45 +404,49 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                       />
                     )}
-                    <motion.span
-                      className="text-4xl shrink-0"
-                      animate={tutorialDone ? {} : { rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                      {activeWorld?.character}
-                    </motion.span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        {tutorialDone ? (
-                          <span className="inline-flex items-center gap-1 text-xs font-black" style={{ color: activeWorld?.theme.accentColor }}>
-                            <Check className="w-3.5 h-3.5" />
-                            {t('tutorial.card.done')}
-                          </span>
-                        ) : (
-                          <span
-                            className="text-xs font-black px-2 py-0.5 rounded-full"
-                            style={{ background: activeWorld?.theme.accentColor, color: '#0a0618' }}
-                          >
-                            {t('tutorial.badge')}
-                          </span>
-                        )}
-                        <span className={`font-black text-sm ${tutorialDone ? 'text-white/50' : 'text-white'}`}>
-                          {t('tutorial.card.label')}
+
+                    {/* Top row: emoji + badge + label */}
+                    <div className="flex items-center gap-3 mb-2">
+                      <motion.span
+                        className="text-3xl shrink-0"
+                        animate={tutorialDone ? {} : { rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                      >
+                        {activeWorld?.character}
+                      </motion.span>
+                      {tutorialDone ? (
+                        <span className="inline-flex items-center gap-1 text-xs font-black" style={{ color: activeWorld?.theme.accentColor }}>
+                          <Check className="w-3.5 h-3.5" />
+                          {t('tutorial.card.done')}
                         </span>
-                      </div>
-                      <p className="text-white/60 text-xs leading-snug">
-                        {t('tutorial.card.desc', { concept: activeWorld ? (language === 'id' ? activeWorld.concept.id : activeWorld.concept.en) : '' })}
-                      </p>
+                      ) : (
+                        <span
+                          className="text-xs font-black px-2 py-0.5 rounded-full shrink-0"
+                          style={{ background: activeWorld?.theme.accentColor, color: '#0a0618' }}
+                        >
+                          {t('tutorial.badge')}
+                        </span>
+                      )}
+                      <span className={`font-black text-sm leading-tight ${tutorialDone ? 'text-white/50' : 'text-white'}`}>
+                        {t('tutorial.card.label')}
+                      </span>
                     </div>
+
+                    {/* Description */}
+                    <p className="text-white/60 text-xs leading-snug mb-3 pl-1">
+                      {t('tutorial.card.desc', { concept: activeWorld ? (language === 'id' ? activeWorld.concept.id : activeWorld.concept.en) : '' })}
+                    </p>
+
+                    {/* CTA — full width */}
                     <span
-                      className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-black text-sm"
+                      className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-black text-sm"
                       style={{
                         background: tutorialDone ? `${activeWorld?.theme.accentColor}30` : activeWorld?.theme.accentColor,
                         color: tutorialDone ? activeWorld?.theme.accentColor : '#0a0618',
                       }}
                     >
                       <Play className="w-3 h-3 fill-current" />
-                      {tutorialDone ? (language === 'id' ? 'Tinjau' : 'Review') : t('tutorial.card.cta')}
+                      {tutorialDone ? (language === 'id' ? 'Tinjau Lagi' : 'Review Again') : t('tutorial.card.cta')}
                     </span>
                   </motion.button>
               </motion.div>
