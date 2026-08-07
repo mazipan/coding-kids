@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
 import { BlocklyWorkspace, type BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
-import { BlocklyWalkthrough, isTourDone } from '../components/BlocklyWalkthrough'
+import { BlocklyWalkthrough } from '../components/BlocklyWalkthrough'
 import { GameGrid } from '../components/GameGrid'
 import { Mascot } from '../components/Mascot'
 import { RewardModal } from '../components/RewardModal'
@@ -46,7 +46,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const [showReward, setShowReward] = useState(false)
   const [showTutorialComplete, setShowTutorialComplete] = useState(false)
   const [showWalkthrough, setShowWalkthrough] = useState(
-    () => lesson.isTutorial === true && !isTourDone(lesson.worldId)
+    () => lesson.isTutorial === true
   )
   const [rewardData, setRewardData] = useState({ stars: 0, xp: 0, leveledUp: false, newLevel: '', newBadge: '', missingCategories: [] as string[] })
   const [mascotMessage, setMascotMessage] = useState(() => localize(lesson.mascotMessage, language))
