@@ -280,6 +280,11 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
             <span className="text-xs font-bold text-purple-300 bg-purple-500/20 px-2.5 py-1 rounded-full">
               ⚡ {lesson.xpReward} XP
             </span>
+            {!lesson.isTutorial && lesson.requiredCategories?.includes('loops') && (
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full" style={{ background: `${world.theme.accentColor}25`, color: world.theme.accentColor }}>
+                {t('game.efficiency.badge', { n: String(lesson.starThresholds[1]) })}
+              </span>
+            )}
           </div>
         </div>
       </motion.div>

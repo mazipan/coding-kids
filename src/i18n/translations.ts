@@ -71,6 +71,7 @@ const en: Translations = {
   'game.fail.obstacle': 'Crashed into an obstacle! 💥',
   'game.fail.path': 'Not quite! I didn\'t reach all the items. Check your path and try again! 💪',
   'game.fail.noactions': 'No movement blocks detected! Add some Move blocks! 🤔',
+  'game.efficiency.badge': '🎯 {n} blocks = 3 stars',
 
   // ── Grid legend ─────────────────────────────
   'grid.collect': '= collect these',
@@ -310,6 +311,7 @@ const id: Translations = {
   'game.fail.obstacle': 'Nabrak rintangan! 💥',
   'game.fail.path': 'Belum tepat! Belum mencapai semua item. Cek lagi jalannya dan coba lagi! 💪',
   'game.fail.noactions': 'Tidak ada blok gerak! Tambahkan blok Pindah dulu! 🤔',
+  'game.efficiency.badge': '🎯 {n} blok = 3 bintang',
 
   // ── Grid legend ─────────────────────────────
   'grid.collect': '= kumpulkan ini',

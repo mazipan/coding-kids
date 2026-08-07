@@ -38,6 +38,11 @@ function conceptStep(worldId: string): Step {
       title: { en: '🔄 Find the Loops category!', id: '🔄 Cari kategori Perulangan!' },
       desc: { en: 'Click "Loops" in the toolbox — Repeat blocks run your code many times automatically! 👈', id: 'Klik "Perulangan" di kotak alat — blok Ulangi menjalankan kodemu berkali-kali secara otomatis! 👈' },
     },
+    loops: {
+      glow: 'left',
+      title: { en: '🔄 Fewer blocks = MORE STARS here!', id: '🔄 Lebih sedikit blok = LEBIH BANYAK BINTANG!' },
+      desc: { en: 'Click "Loops" — one Repeat block replaces MANY Move blocks. Use fewer blocks to earn 3 stars! 👈', id: 'Klik "Perulangan" — satu blok Ulangi menggantikan BANYAK blok Gerak. Gunakan lebih sedikit blok untuk mendapat 3 bintang! 👈' },
+    },
     ocean: {
       glow: 'left',
       title: { en: '📦 Find the Variables category!', id: '📦 Cari kategori Variabel!' },
