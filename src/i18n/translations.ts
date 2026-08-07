@@ -230,6 +230,7 @@ const en: Translations = {
   'thinking.attempt': 'Attempt {n}',
   'thinking.first.try': '🌟 First try!',
   'thinking.next.world': 'Explore Next World',
+  'thinking.sequence.prompt': 'Tap the steps in the right order!',
 }
 
 const id: Translations = {
@@ -460,6 +461,7 @@ const id: Translations = {
   'thinking.attempt': 'Percobaan {n}',
   'thinking.first.try': '🌟 Percobaan pertama!',
   'thinking.next.world': 'Jelajahi Dunia Berikutnya',
+  'thinking.sequence.prompt': 'Ketuk langkah-langkah dalam urutan yang benar!',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }

@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Star, ArrowRight, ArrowLeft } from 'lucide-react'
-import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle } from '../types'
+import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { useProgress } from '../store/useProgress'
@@ -204,6 +204,121 @@ function MathPuzzleView({
   )
 }
 
+function SequencePuzzleView({
+  puzzle,
+  onAnswer,
+  selected,
+  isCorrect,
+  completed,
+  language,
+  prompt,
+}: {
+  puzzle: SequencePuzzle
+  onAnswer: (value: string) => void
+  selected: string | null
+  isCorrect: boolean | null
+  completed: boolean
+  language: string
+  prompt: string
+}) {
+  const [orderedIds, setOrderedIds] = useState<string[]>([])
+
+  const shuffled = useMemo(
+    () => [...puzzle.steps].sort(() => 0.5 - Math.random()),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+
+  useEffect(() => {
+    if (selected === null && !completed) {
+      setOrderedIds([])
+    }
+  }, [selected, completed])
+
+  const handleTap = (id: string) => {
+    if (completed || orderedIds.includes(id)) return
+    const next = [...orderedIds, id]
+    setOrderedIds(next)
+    if (next.length === puzzle.steps.length) {
+      onAnswer(next.join(','))
+    }
+  }
+
+  const stepById = (id: string) => puzzle.steps.find(s => s.id === id)!
+
+  return (
+    <div className="space-y-6">
+      <p className="text-center text-white/60 text-sm font-bold">{prompt}</p>
+
+      {/* Sequence slots */}
+      <motion.div
+        className="flex items-start justify-center gap-3 flex-wrap"
+        animate={isCorrect === false ? { x: [-6, 6, -6, 6, 0] } : {}}
+        transition={{ duration: 0.4 }}
+      >
+        {puzzle.steps.map((_, i) => {
+          const filledId = orderedIds[i]
+          const step = filledId ? stepById(filledId) : null
+          return (
+            <div
+              key={i}
+              className={`w-20 h-24 rounded-2xl flex flex-col items-center justify-center gap-1 border-2 transition-all ${
+                step
+                  ? isCorrect === false
+                    ? 'bg-red-500/30 border-red-400'
+                    : 'bg-orange-500/30 border-orange-400'
+                  : 'bg-white/8 border-white/20 border-dashed'
+              }`}
+            >
+              {step ? (
+                <>
+                  <span className="text-2xl">{step.emoji}</span>
+                  <span className="text-xs font-bold text-center leading-tight text-white/80 px-1">
+                    {localize(step.label, language as 'en' | 'id')}
+                  </span>
+                </>
+              ) : (
+                <span className="text-lg font-black text-white/25">{i + 1}</span>
+              )}
+            </div>
+          )
+        })}
+      </motion.div>
+
+      {/* Tappable step cards */}
+      <div className="grid grid-cols-2 gap-3">
+        {shuffled.map(step => {
+          const isUsed = orderedIds.includes(step.id)
+          return (
+            <motion.button
+              key={step.id}
+              onClick={() => handleTap(step.id)}
+              disabled={isUsed || completed}
+              className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-2 transition-all ${
+                isUsed
+                  ? 'bg-white/5 border-white/10 opacity-30 cursor-default'
+                  : completed
+                  ? 'bg-white/10 border-white/20 cursor-default'
+                  : 'bg-white/10 border-white/20 hover:bg-orange-500/20 hover:border-orange-400 cursor-pointer active:scale-95'
+              }`}
+              animate={{ opacity: isUsed ? 0.3 : 1 }}
+              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: isUsed ? 0.3 : 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-3xl">{step.emoji}</span>
+              <span className="text-xs font-bold text-center leading-tight text-white/80">
+                {localize(step.label, language as 'en' | 'id')}
+              </span>
+            </motion.button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 export function ThinkingLessonScreen({
   lesson,
   world,
@@ -224,6 +339,7 @@ export function ThinkingLessonScreen({
     if (p.type === 'pattern') return value === p.answer
     if (p.type === 'if-then') return value === p.answerId
     if (p.type === 'math') return value === p.answer
+    if (p.type === 'sequence') return value === p.steps.map(s => s.id).join(',')
     return false
   }
 
@@ -318,6 +434,17 @@ export function ThinkingLessonScreen({
             isCorrect={isCorrect}
             completed={completed}
             language={language}
+          />
+        )}
+        {puzzle.type === 'sequence' && (
+          <SequencePuzzleView
+            puzzle={puzzle as SequencePuzzle}
+            onAnswer={handleAnswer}
+            selected={selected}
+            isCorrect={isCorrect}
+            completed={completed}
+            language={language}
+            prompt={t('thinking.sequence.prompt')}
           />
         )}
       </motion.div>

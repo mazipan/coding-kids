@@ -92,7 +92,7 @@ export interface PlayerProgress {
 
 // ── Thinking path ─────────────────────────────────────────────
 
-export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers'
+export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition'
 
 export interface ThinkingWorld {
   id: ThinkingWorldId
@@ -130,7 +130,12 @@ export interface MathPuzzle {
   answer: string
 }
 
-export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle
+export interface SequencePuzzle {
+  type: 'sequence'
+  steps: Array<{ id: string; emoji: string; label: LocalizedString }>
+}
+
+export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle
 
 export interface ThinkingLesson {
   id: string
