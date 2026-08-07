@@ -230,6 +230,12 @@ const en: Translations = {
   'thinking.attempt': 'Attempt {n}',
   'thinking.first.try': '🌟 First try!',
   'thinking.next.world': 'Explore Next World',
+  'thinking.sequence.prompt': 'Tap the steps in the right order!',
+  'thinking.true': 'TRUE',
+  'thinking.false': 'FALSE',
+  'thinking.sort.prompt': 'Tap numbers from smallest to largest!',
+  'thinking.fill.check': 'Check',
+  'thinking.match.prompt': 'Tap a clue on the left, then tap its match on the right!',
 }
 
 const id: Translations = {
@@ -460,6 +466,12 @@ const id: Translations = {
   'thinking.attempt': 'Percobaan {n}',
   'thinking.first.try': '🌟 Percobaan pertama!',
   'thinking.next.world': 'Jelajahi Dunia Berikutnya',
+  'thinking.sequence.prompt': 'Ketuk langkah-langkah dalam urutan yang benar!',
+  'thinking.true': 'BENAR',
+  'thinking.false': 'SALAH',
+  'thinking.sort.prompt': 'Ketuk angka dari terkecil ke terbesar!',
+  'thinking.fill.check': 'Cek',
+  'thinking.match.prompt': 'Ketuk petunjuk di kiri, lalu ketuk pasangannya di kanan!',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }
