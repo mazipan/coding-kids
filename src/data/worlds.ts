@@ -131,7 +131,7 @@ export const WORLDS: World[] = [
       textColor: '#fef3c7',
     },
     unlockAtXP: 1650,
-    lessonCount: 4,
+    lessonCount: 9,
   },
   // ── BONUS WORLDS — unlocked after completing the final lesson ──
   {
