@@ -111,9 +111,6 @@ export function ThinkingHome({
                     ))}
                   </div>
                 )}
-                {!unlocked && (
-                  <Lock className="w-3.5 h-3.5 text-white/25 shrink-0" />
-                )}
               </motion.button>
             )
           })}

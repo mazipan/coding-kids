@@ -125,8 +125,8 @@ const en: Translations = {
   'bonus.all.open': 'All levels open!',
 
   // ── Common labels ────────────────────────────
-  'common.play': '▶ Play',
-  'common.play.again': '▶ Play Again',
+  'common.play': 'Play',
+  'common.play.again': 'Play Again',
   'common.ages': 'Ages',
   'common.learn': 'Learn:',
   'common.level': 'Level',
@@ -214,8 +214,8 @@ const en: Translations = {
   'path.blocks.desc': 'Write code with visual blocks. 6 epic worlds to explore!',
   'path.thinking.name': 'Brain Training',
   'path.thinking.desc': 'Patterns, logic & math puzzles. Build your problem-solving superpowers!',
-  'path.start': 'Start →',
-  'path.continue': 'Continue →',
+  'path.start': 'Start',
+  'path.continue': 'Continue',
   'path.back': '← Back to home',
 
   // ── Thinking path ─────────────────────────────
@@ -355,8 +355,8 @@ const id: Translations = {
   'bonus.all.open': 'Semua level terbuka!',
 
   // ── Common labels ────────────────────────────
-  'common.play': '▶ Main',
-  'common.play.again': '▶ Main Lagi',
+  'common.play': 'Main',
+  'common.play.again': 'Main Lagi',
   'common.ages': 'Usia',
   'common.learn': 'Pelajari:',
   'common.level': 'Level',
@@ -444,8 +444,8 @@ const id: Translations = {
   'path.blocks.desc': 'Tulis kode dengan blok visual. 6 dunia epik untuk dijelajahi!',
   'path.thinking.name': 'Latihan Otak',
   'path.thinking.desc': 'Puzzle pola, logika & matematika. Kembangkan kemampuan memecahkan masalah!',
-  'path.start': 'Mulai →',
-  'path.continue': 'Lanjutkan →',
+  'path.start': 'Mulai',
+  'path.continue': 'Lanjutkan',
   'path.back': '← Kembali ke beranda',
 
   // ── Thinking path ─────────────────────────────

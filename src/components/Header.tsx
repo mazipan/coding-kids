@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowLeft, Star, Brain, Code2 } from 'lucide-react'
+import { ArrowLeft, Star } from 'lucide-react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { XPBar } from './XPBar'
 import type { PlayerProgress } from '../types'
@@ -43,9 +43,6 @@ export function Header({ progress }: HeaderProps) {
           {showBack ? (
             <div className="flex items-center gap-2 text-purple-300 hover:text-white transition-colors font-bold">
               <ArrowLeft className="w-5 h-5 shrink-0" />
-              {subPath === 'thinking'
-                ? <Brain className="w-4 h-4 shrink-0 hidden sm:block" />
-                : <Code2 className="w-4 h-4 shrink-0 hidden sm:block" />}
               <span className="text-sm hidden sm:inline">
                 {subPath === 'thinking' ? t('path.thinking.name') : t('path.blocks.name')}
               </span>
