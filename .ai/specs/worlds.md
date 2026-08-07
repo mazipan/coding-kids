@@ -1,6 +1,6 @@
 # Worlds & lessons spec
 
-## Worlds
+## Block coding worlds
 
 | ID | Emoji | Concept | Ages | unlockAtXP | Lessons |
 |----|-------|---------|------|------------|---------|
@@ -79,6 +79,69 @@ Set per lesson via `availableCategories`. Introduce categories gradually as conc
 | `logic` | controls_if, controls_ifelse, logic_compare |
 | `functions` | PROCEDURE (Blockly built-in) |
 | `lists` | lists_create_with, lists_getIndex, lists_setIndex, etc. |
+
+---
+
+## Thinking worlds (Brain Training path)
+
+Source: `src/data/thinkingWorlds.ts` — `THINKING_WORLDS` array.
+
+| ID | Emoji | Concept | Ages | unlockAtXP | Lessons |
+|----|-------|---------|------|------------|---------|
+| patterns | 🔮 | Pattern recognition | 5–8 | 0 | 10 |
+| logic | 🧠 | If-then reasoning | 7–10 | 0 | 10 |
+| counting | ✨ | Number & math | 8–12 | 0 | 10 |
+
+All three worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely.
+
+### Thinking lesson fields
+
+Defined in `src/data/thinkingLessons.ts`. Each lesson:
+
+```ts
+{
+  id: string           // '{worldId}-{number}', e.g. 'patterns-0'
+  worldId: ThinkingWorldId
+  number: number       // 0-indexed
+  title: LocalizedString
+  mascotMessage: LocalizedString
+  xpReward: number
+  puzzle: PatternPuzzle | IfThenPuzzle | MathPuzzle
+}
+```
+
+### Puzzle types
+
+| Type | Shape |
+|------|-------|
+| `pattern` | `items[]` with a `blankIndex` and 4 `options[]`; kid picks the missing item |
+| `if-then` | `condition` (LocalizedString) + `options[]` with emoji labels; kid picks the correct outcome |
+| `math` | `question` (LocalizedString) + optional `visual` emoji + 4 `options[]` of string numbers |
+
+### Star & XP logic (thinking path)
+
+- 3 stars — correct on first attempt
+- 2 stars — correct on second attempt
+- 1 star — correct on third attempt or later
+- XP is awarded once per lesson (delta on improvement, same `completeLesson` invariants as blocks)
+
+### Difficulty curve (10 lessons per world)
+
+Lessons 0–4: gentle introduction, simple 4-item sequences / basic if-then / small arithmetic.  
+Lessons 5–9: progressive difficulty — longer sequences (8–9 items), ABCD cycles, blank in middle, number sequences (+2, doubling), negation logic, multi-step chains, reverse operations, order of operations.
+
+### Next-world navigation
+
+`ThinkingHome` renders a tappable banner below the lesson list pointing to the next world in the array. The last world (counting) shows no banner.
+
+### Adding a new thinking lesson
+
+1. Append an entry to the correct world array in `src/data/thinkingLessons.ts`
+2. Increment `lessonCount` in `src/data/thinkingWorlds.ts`
+3. Lesson number follows 0-based sequential order; the next number is `lessonCount - 1` after the update
+4. Run `bun run build` — TypeScript catches missing required fields
+
+---
 
 ## XP levels (15 total)
 
