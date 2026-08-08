@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { Star, ArrowRight, ArrowLeft, Check } from 'lucide-react'
+import { Star, ArrowRight, ArrowLeft, Check, BookOpen } from 'lucide-react'
 import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle, AbstractionPuzzle } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
@@ -795,6 +795,7 @@ export function ThinkingLessonScreen({
 }: ThinkingLessonProps) {
   const { t, language } = useLanguage()
   const navigate = useNavigate()
+  const [showTutorial, setShowTutorial] = useState(!!lesson.tutorial)
   const [attempts, setAttempts] = useState(0)
   const [selected, setSelected] = useState<string | null>(null)
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
@@ -864,6 +865,40 @@ export function ThinkingLessonScreen({
         </div>
         <h1 className="text-xl font-black text-white">{localize(lesson.title, language)}</h1>
       </motion.div>
+
+      {/* Tutorial card */}
+      <AnimatePresence>
+        {showTutorial && lesson.tutorial && (
+          <motion.div
+            className="bg-amber-900/40 border border-amber-500/30 rounded-2xl p-5 mb-6"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <BookOpen className="w-5 h-5 text-amber-400 shrink-0" />
+              <span className="text-amber-300 font-black text-sm">
+                {localize(lesson.tutorial.title, language)}
+              </span>
+            </div>
+            <p className="text-amber-100 text-sm leading-relaxed mb-3">
+              {localize(lesson.tutorial.body, language)}
+            </p>
+            {lesson.tutorial.example && (
+              <p className="text-amber-300/80 text-xs leading-relaxed mb-4 italic">
+                {localize(lesson.tutorial.example, language)}
+              </p>
+            )}
+            <button
+              onClick={() => setShowTutorial(false)}
+              className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-black text-sm transition-colors"
+            >
+              {t('thinking.tutorial.dismiss')}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mascot message */}
       <motion.div
