@@ -240,6 +240,9 @@ const en: Translations = {
   'thinking.sort.prompt': 'Tap numbers from smallest to largest!',
   'thinking.fill.check': 'Check',
   'thinking.match.prompt': 'Tap a clue on the left, then tap its match on the right!',
+  'thinking.abstraction.odd.prompt': "Tap the one that doesn't belong!",
+  'thinking.abstraction.category.prompt': 'Tap all that fit! Then press Check.',
+  'thinking.abstraction.check': 'Check',
 }
 
 const id: Translations = {
@@ -480,6 +483,9 @@ const id: Translations = {
   'thinking.sort.prompt': 'Ketuk angka dari terkecil ke terbesar!',
   'thinking.fill.check': 'Cek',
   'thinking.match.prompt': 'Ketuk petunjuk di kiri, lalu ketuk pasangannya di kanan!',
+  'thinking.abstraction.odd.prompt': 'Ketuk yang tidak termasuk!',
+  'thinking.abstraction.category.prompt': 'Ketuk semua yang sesuai! Lalu tekan Cek.',
+  'thinking.abstraction.check': 'Cek',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }
