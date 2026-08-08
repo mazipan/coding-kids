@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Star, ArrowRight, ArrowLeft, Check } from 'lucide-react'
-import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle } from '../types'
+import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle, AbstractionPuzzle } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { useProgress } from '../store/useProgress'
@@ -675,6 +675,117 @@ function MatchPuzzleView({
   )
 }
 
+function AbstractionPuzzleView({
+  puzzle,
+  onAnswer,
+  selected,
+  isCorrect,
+  completed,
+  language,
+  oddPrompt,
+  categoryPrompt,
+  checkLabel,
+}: {
+  puzzle: AbstractionPuzzle
+  onAnswer: (value: string) => void
+  selected: string | null
+  isCorrect: boolean | null
+  completed: boolean
+  language: string
+  oddPrompt: string
+  categoryPrompt: string
+  checkLabel: string
+}) {
+  const [selectedItems, setSelectedItems] = useState<string[]>([])
+  const isOdd = puzzle.subtype === 'odd-one-out'
+
+  useEffect(() => {
+    if (selected === null && !completed) setSelectedItems([])
+  }, [selected, completed])
+
+  const handleTap = (id: string) => {
+    if (completed) return
+    if (isOdd) {
+      onAnswer(id)
+    } else {
+      setSelectedItems(prev => (prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]))
+    }
+  }
+
+  const handleCheck = () => {
+    if (completed || selectedItems.length === 0) return
+    onAnswer([...selectedItems].sort().join(','))
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-teal-900/40 border border-teal-500/30 rounded-2xl p-5 text-center">
+        <p className="text-lg sm:text-xl font-bold text-teal-100">
+          {localize(puzzle.question, language as 'en' | 'id')}
+        </p>
+      </div>
+
+      <p className="text-center text-white/60 text-sm font-bold">
+        {isOdd ? oddPrompt : categoryPrompt}
+      </p>
+
+      <motion.div
+        className="grid grid-cols-2 gap-3"
+        animate={isCorrect === false ? { x: [-4, 4, -4, 4, 0] } : {}}
+        transition={{ duration: 0.3 }}
+      >
+        {puzzle.items.map((item, i) => {
+          const isItemSelected = isOdd ? selected === item.id : selectedItems.includes(item.id)
+          const correct = completed && puzzle.correctIds.includes(item.id)
+          const wrong = isOdd
+            ? isItemSelected && isCorrect === false
+            : completed && isCorrect === false && selectedItems.includes(item.id) && !puzzle.correctIds.includes(item.id)
+          return (
+            <motion.button
+              key={item.id}
+              onClick={() => !completed && handleTap(item.id)}
+              disabled={completed}
+              className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-2 transition-all ${
+                correct
+                  ? 'bg-green-500/30 border-green-400'
+                  : wrong
+                  ? 'bg-red-500/30 border-red-400'
+                  : isItemSelected
+                  ? 'bg-teal-500/30 border-teal-400'
+                  : 'bg-white/8 border-white/20 hover:bg-white/15 hover:border-white/40'
+              } ${completed ? 'cursor-default' : 'cursor-pointer'}`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.07 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-4xl">{item.emoji}</span>
+              <span
+                className={`text-xs font-bold text-center leading-tight ${
+                  correct ? 'text-green-200' : wrong ? 'text-red-200' : 'text-white/80'
+                }`}
+              >
+                {localize(item.label, language as 'en' | 'id')}
+              </span>
+            </motion.button>
+          )
+        })}
+      </motion.div>
+
+      {!isOdd && !completed && (
+        <motion.button
+          onClick={handleCheck}
+          disabled={selectedItems.length === 0}
+          className="w-full py-3 rounded-2xl font-black text-white bg-teal-600 hover:bg-teal-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors border-2 border-teal-500"
+          whileTap={{ scale: 0.97 }}
+        >
+          {checkLabel}
+        </motion.button>
+      )}
+    </div>
+  )
+}
+
 export function ThinkingLessonScreen({
   lesson,
   world,
@@ -700,6 +811,10 @@ export function ThinkingLessonScreen({
     if (p.type === 'sort') return value === p.answer.join(',')
     if (p.type === 'fill-in') return value.trim().toLowerCase() === p.answer.trim().toLowerCase()
     if (p.type === 'match') return value === 'matched'
+    if (p.type === 'abstraction') {
+      if (p.subtype === 'odd-one-out') return value === p.correctIds[0]
+      return value === [...p.correctIds].sort().join(',')
+    }
     return false
   }
 
@@ -846,6 +961,19 @@ export function ThinkingLessonScreen({
             completed={completed}
             language={language}
             prompt={t('thinking.match.prompt')}
+          />
+        )}
+        {puzzle.type === 'abstraction' && (
+          <AbstractionPuzzleView
+            puzzle={puzzle as AbstractionPuzzle}
+            onAnswer={handleAnswer}
+            selected={selected}
+            isCorrect={isCorrect}
+            completed={completed}
+            language={language}
+            oddPrompt={t('thinking.abstraction.odd.prompt')}
+            categoryPrompt={t('thinking.abstraction.category.prompt')}
+            checkLabel={t('thinking.abstraction.check')}
           />
         )}
       </motion.div>
