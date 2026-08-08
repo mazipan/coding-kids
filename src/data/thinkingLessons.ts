@@ -1598,6 +1598,515 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
       answer: '12',
     },
   },
+
+  // ── Inductive Reasoning (Rule Finder) ─────────────────────────────────
+
+  {
+    id: 'induction-0',
+    worldId: 'induction',
+    number: 0,
+    title: { en: 'Spot the Even Numbers', id: 'Temukan Bilangan Genap' },
+    mascotMessage: {
+      en: 'Look at these numbers: 2, 4, 6, 8. They all share a secret rule! Can you find which others belong? 🔬',
+      id: 'Lihat angka-angka ini: 2, 4, 6, 8. Mereka semua punya aturan rahasia! Bisakah kamu menemukan yang lain? 🔬',
+    },
+    xpReward: 10,
+    tutorial: {
+      title: { en: 'What is Inductive Reasoning?', id: 'Apa itu Penalaran Induktif?' },
+      body: {
+        en: 'Inductive reasoning means: look at several examples → find what they all share → form a rule → apply it to new cases. You go from specific examples to a general rule!',
+        id: 'Penalaran induktif berarti: lihat beberapa contoh → temukan kesamaannya → bentuk aturan → terapkan ke kasus baru. Kamu bergerak dari contoh spesifik ke aturan umum!',
+      },
+      example: {
+        en: 'Examples: 2, 4, 6, 8 → Rule: "These are even numbers" → New case: Is 10 even? Yes, it fits the rule!',
+        id: 'Contoh: 2, 4, 6, 8 → Aturan: "Ini bilangan genap" → Kasus baru: Apakah 10 genap? Ya, cocok dengan aturannya!',
+      },
+    },
+    puzzle: {
+      type: 'abstraction',
+      subtype: 'category-match',
+      question: {
+        en: '2, 4, 6, 8 all follow the same rule. Which of these also follow it?',
+        id: '2, 4, 6, 8 semua mengikuti aturan yang sama. Mana yang juga mengikutinya?',
+      },
+      items: [
+        { id: 'n10', emoji: '🔟', label: { en: '10', id: '10' } },
+        { id: 'n11', emoji: '1️⃣', label: { en: '11', id: '11' } },
+        { id: 'n12', emoji: '2️⃣', label: { en: '12', id: '12' } },
+        { id: 'n13', emoji: '3️⃣', label: { en: '13', id: '13' } },
+        { id: 'n14', emoji: '4️⃣', label: { en: '14', id: '14' } },
+        { id: 'n15', emoji: '5️⃣', label: { en: '15', id: '15' } },
+      ],
+      correctIds: ['n10', 'n12', 'n14'],
+    },
+  },
+
+  {
+    id: 'induction-1',
+    worldId: 'induction',
+    number: 1,
+    title: { en: 'Hot Things', id: 'Benda Panas' },
+    mascotMessage: {
+      en: 'Fire, the Sun, and chilli are all HOT. Look for the same quality in the other options! 🌶️',
+      id: 'Api, Matahari, dan cabai semuanya PANAS. Carilah kualitas yang sama pada pilihan lainnya! 🌶️',
+    },
+    xpReward: 10,
+    puzzle: {
+      type: 'abstraction',
+      subtype: 'category-match',
+      question: {
+        en: '🔥 Fire, ☀️ Sun, 🌶️ Chilli are all HOT. Which of these are also hot?',
+        id: '🔥 Api, ☀️ Matahari, 🌶️ Cabai semuanya PANAS. Mana yang juga panas?',
+      },
+      items: [
+        { id: 'ice', emoji: '🧊', label: { en: 'Ice', id: 'Es' } },
+        { id: 'steam', emoji: '♨️', label: { en: 'Steam', id: 'Uap' } },
+        { id: 'candle', emoji: '🕯️', label: { en: 'Candle flame', id: 'Nyala lilin' } },
+        { id: 'snow', emoji: '❄️', label: { en: 'Snow', id: 'Salju' } },
+        { id: 'hottea', emoji: '🍵', label: { en: 'Hot tea', id: 'Teh panas' } },
+        { id: 'wind', emoji: '🌬️', label: { en: 'Cold wind', id: 'Angin dingin' } },
+      ],
+      correctIds: ['steam', 'candle', 'hottea'],
+    },
+  },
+
+  {
+    id: 'induction-2',
+    worldId: 'induction',
+    number: 2,
+    title: { en: 'Shape Sides Rule', id: 'Aturan Sisi Bentuk' },
+    mascotMessage: {
+      en: 'Triangle = 3, Square = 4, Pentagon = 5... Do you see the rule hiding in the names? 🔺',
+      id: 'Segitiga = 3, Persegi = 4, Pentagon = 5... Apakah kamu melihat aturan yang tersembunyi di nama-namanya? 🔺',
+    },
+    xpReward: 15,
+    puzzle: {
+      type: 'fill-in',
+      question: {
+        en: 'Triangle = 3 sides, Square = 4 sides, Pentagon = 5 sides. Hexagon = ___ sides',
+        id: 'Segitiga = 3 sisi, Persegi = 4 sisi, Pentagon = 5 sisi. Heksagon = ___ sisi',
+      },
+      visual: '🔺🟥⬠ → ❓',
+      answer: '6',
+      inputType: 'numeric',
+    },
+  },
+
+  {
+    id: 'induction-3',
+    worldId: 'induction',
+    number: 3,
+    title: { en: 'Skip Five', id: 'Loncat Lima' },
+    mascotMessage: {
+      en: 'Look at this counting pattern: 5, 10, 15, then there\'s a gap, then 25. What goes in the gap? 🦘',
+      id: 'Lihat pola berhitung ini: 5, 10, 15, lalu ada celah, lalu 25. Apa yang mengisi celah itu? 🦘',
+    },
+    xpReward: 15,
+    puzzle: {
+      type: 'pattern',
+      items: ['5', '10', '15', '?', '25'],
+      blankIndex: 3,
+      options: ['18', '19', '20', '21'],
+      answer: '20',
+    },
+  },
+
+  {
+    id: 'induction-4',
+    worldId: 'induction',
+    number: 4,
+    title: { en: 'Break the Rule', id: 'Langgar Aturan' },
+    mascotMessage: {
+      en: 'These numbers are SUPPOSED to all be even — but one sneaked in that doesn\'t follow the rule! 🕵️',
+      id: 'Angka-angka ini SEHARUSNYA semua genap — tapi ada satu yang masuk tanpa mengikuti aturannya! 🕵️',
+    },
+    xpReward: 15,
+    puzzle: {
+      type: 'abstraction',
+      subtype: 'odd-one-out',
+      question: {
+        en: 'Rule: all these should be even numbers. Which one breaks the rule?',
+        id: 'Aturan: semuanya harus bilangan genap. Mana yang melanggar aturan?',
+      },
+      items: [
+        { id: 'n2', emoji: '2️⃣', label: { en: '2', id: '2' } },
+        { id: 'n8', emoji: '8️⃣', label: { en: '8', id: '8' } },
+        { id: 'n7', emoji: '7️⃣', label: { en: '7', id: '7' } },
+        { id: 'n4', emoji: '4️⃣', label: { en: '4', id: '4' } },
+      ],
+      correctIds: ['n7'],
+    },
+  },
+
+  {
+    id: 'induction-5',
+    worldId: 'induction',
+    number: 5,
+    title: { en: "What's the Rule?", id: 'Apa Aturannya?' },
+    mascotMessage: {
+      en: 'You observe: rain → wet ground, rain → wet car, rain → wet umbrella. What general rule can you form? ☔',
+      id: 'Kamu mengamati: hujan → tanah basah, hujan → mobil basah, hujan → payung basah. Aturan umum apa yang bisa kamu bentuk? ☔',
+    },
+    xpReward: 20,
+    tutorial: {
+      title: { en: 'Forming a Rule from Examples', id: 'Membentuk Aturan dari Contoh' },
+      body: {
+        en: 'When the same thing happens every time you observe a pattern, you can form a general rule. The rule should cover ALL the examples you saw.',
+        id: 'Ketika hal yang sama terjadi setiap kali kamu mengamati pola, kamu bisa membentuk aturan umum. Aturan harus mencakup SEMUA contoh yang kamu lihat.',
+      },
+      example: {
+        en: 'Observation: 🍎 falls down, 🪨 falls down, 🍂 falls down → Rule: "Things fall down when dropped." This covers all examples!',
+        id: 'Pengamatan: 🍎 jatuh ke bawah, 🪨 jatuh ke bawah, 🍂 jatuh ke bawah → Aturan: "Benda jatuh ke bawah ketika dijatuhkan." Ini mencakup semua contoh!',
+      },
+    },
+    puzzle: {
+      type: 'if-then',
+      condition: {
+        en: '🌧️ Rain → wet ground · 🌧️ Rain → wet car · 🌧️ Rain → wet umbrella. Which rule fits ALL observations?',
+        id: '🌧️ Hujan → tanah basah · 🌧️ Hujan → mobil basah · 🌧️ Hujan → payung basah. Aturan mana yang cocok untuk SEMUA pengamatan?',
+      },
+      options: [
+        { id: 'rain-wet', emoji: '💧', label: { en: 'Rain makes things wet', id: 'Hujan membuat benda basah' } },
+        { id: 'ground-only', emoji: '🌱', label: { en: 'Rain only wets the ground', id: 'Hujan hanya membasahi tanah' } },
+        { id: 'umbrella-rain', emoji: '☂️', label: { en: 'Umbrellas cause rain', id: 'Payung menyebabkan hujan' } },
+        { id: 'sun-rain', emoji: '☀️', label: { en: 'Sunshine causes rain', id: 'Sinar matahari menyebabkan hujan' } },
+      ],
+      answerId: 'rain-wet',
+    },
+  },
+
+  {
+    id: 'induction-6',
+    worldId: 'induction',
+    number: 6,
+    title: { en: 'Day and Night', id: 'Siang dan Malam' },
+    mascotMessage: {
+      en: 'Day, night, day, night... the pattern keeps going! What comes after the last night? 🌙',
+      id: 'Siang, malam, siang, malam... polanya terus berlanjut! Apa yang muncul setelah malam terakhir? 🌙',
+    },
+    xpReward: 20,
+    puzzle: {
+      type: 'pattern',
+      items: ['🌙', '☀️', '🌙', '☀️', '?'],
+      blankIndex: 4,
+      options: ['☀️', '🌙', '⭐', '🌟'],
+      answer: '🌙',
+    },
+  },
+
+  {
+    id: 'induction-7',
+    worldId: 'induction',
+    number: 7,
+    title: { en: 'Reasonable Conclusion?', id: 'Kesimpulan yang Masuk Akal?' },
+    mascotMessage: {
+      en: 'You\'ve observed something 6 times and it\'s ALWAYS the same. Can you make a general rule? 🌅',
+      id: 'Kamu sudah mengamati sesuatu 6 kali dan SELALU sama. Bisakah kamu membuat aturan umum? 🌅',
+    },
+    xpReward: 20,
+    puzzle: {
+      type: 'true-false',
+      statement: {
+        en: 'You observe 6 sunsets: Monday west, Tuesday west, Wednesday west, Thursday west, Friday west, Saturday west. Is it reasonable to conclude "The sun sets in the west"?',
+        id: 'Kamu mengamati 6 matahari terbenam: Senin barat, Selasa barat, Rabu barat, Kamis barat, Jumat barat, Sabtu barat. Apakah masuk akal menyimpulkan "Matahari terbenam di barat"?',
+      },
+      answer: true,
+    },
+  },
+
+  {
+    id: 'induction-8',
+    worldId: 'induction',
+    number: 8,
+    title: { en: 'Match the Rule', id: 'Cocokkan Aturannya' },
+    mascotMessage: {
+      en: 'Each set of examples follows a rule. Can you match every example group to its correct rule? 🎯',
+      id: 'Setiap kumpulan contoh mengikuti sebuah aturan. Bisakah kamu mencocokkan setiap kelompok contoh dengan aturan yang benar? 🎯',
+    },
+    xpReward: 20,
+    puzzle: {
+      type: 'match',
+      pairs: [
+        {
+          leftId: 'ex-even', leftEmoji: '🔢', leftLabel: { en: '2, 4, 6, 8...', id: '2, 4, 6, 8...' },
+          rightId: 'rule-even', rightEmoji: '✌️', rightLabel: { en: 'Even numbers', id: 'Bilangan genap' },
+        },
+        {
+          leftId: 'ex-red', leftEmoji: '🍎', leftLabel: { en: '🍎 🍓 🍒 🌹', id: '🍎 🍓 🍒 🌹' },
+          rightId: 'rule-red', rightEmoji: '❤️', rightLabel: { en: 'Red things', id: 'Benda merah' },
+        },
+        {
+          leftId: 'ex-3', leftEmoji: '3️⃣', leftLabel: { en: '3, 6, 9, 12...', id: '3, 6, 9, 12...' },
+          rightId: 'rule-3', rightEmoji: '✖️', rightLabel: { en: 'Multiples of 3', id: 'Kelipatan 3' },
+        },
+        {
+          leftId: 'ex-wild', leftEmoji: '🦁', leftLabel: { en: '🦁 🐯 🐺 🦊', id: '🦁 🐯 🐺 🦊' },
+          rightId: 'rule-wild', rightEmoji: '🌿', rightLabel: { en: 'Wild animals', id: 'Hewan liar' },
+        },
+      ],
+    },
+  },
+
+  {
+    id: 'induction-9',
+    worldId: 'induction',
+    number: 9,
+    title: { en: 'Squares Pattern', id: 'Pola Kuadrat' },
+    mascotMessage: {
+      en: '1×1=1, 2×2=4, 3×3=9, 4×4=16... There\'s a pattern here. Can you extend the rule? 🧮',
+      id: '1×1=1, 2×2=4, 3×3=9, 4×4=16... Ada pola di sini. Bisakah kamu memperluas aturannya? 🧮',
+    },
+    xpReward: 30,
+    puzzle: {
+      type: 'math',
+      question: {
+        en: '1×1=1, 2×2=4, 3×3=9, 4×4=16. Using the same rule, what is 5×5?',
+        id: '1×1=1, 2×2=4, 3×3=9, 4×4=16. Menggunakan aturan yang sama, berapa 5×5?',
+      },
+      visual: '1️⃣ 4️⃣ 9️⃣ 1️⃣6️⃣ ❓',
+      options: ['20', '25', '30', '35'],
+      answer: '25',
+    },
+  },
+
+  // ── Deductive Reasoning (Logic Detective) ─────────────────────────────
+
+  {
+    id: 'deduction-0',
+    worldId: 'deduction',
+    number: 0,
+    title: { en: 'All Fruits Grow on Plants', id: 'Semua Buah Tumbuh di Tanaman' },
+    mascotMessage: {
+      en: 'In deductive reasoning, if the rule is true AND the case fits the rule, the conclusion MUST be true! 🔍',
+      id: 'Dalam penalaran deduktif, jika aturannya benar DAN kasusnya cocok dengan aturan, kesimpulannya PASTI benar! 🔍',
+    },
+    xpReward: 10,
+    tutorial: {
+      title: { en: 'What is Deductive Reasoning?', id: 'Apa itu Penalaran Deduktif?' },
+      body: {
+        en: 'Deductive reasoning works top-down: you start with a GENERAL rule, then apply it to a SPECIFIC case. If the rule is true and the case fits, the conclusion is guaranteed to be true — no exceptions!',
+        id: 'Penalaran deduktif bekerja dari atas ke bawah: mulai dengan aturan UMUM, lalu terapkan ke kasus SPESIFIK. Jika aturannya benar dan kasusnya cocok, kesimpulannya dijamin benar — tidak ada pengecualian!',
+      },
+      example: {
+        en: 'Rule: All birds have feathers. Case: A parrot is a bird. Conclusion: A parrot has feathers. ✓ (This MUST be true!)',
+        id: 'Aturan: Semua burung punya bulu. Kasus: Burung beo adalah burung. Kesimpulan: Burung beo punya bulu. ✓ (Ini PASTI benar!)',
+      },
+    },
+    puzzle: {
+      type: 'true-false',
+      statement: {
+        en: 'Rule: All fruits grow on plants. Case: An apple is a fruit. Conclusion: An apple grows on a plant. Is this conclusion correct?',
+        id: 'Aturan: Semua buah tumbuh di tanaman. Kasus: Apel adalah buah. Kesimpulan: Apel tumbuh di tanaman. Apakah kesimpulan ini benar?',
+      },
+      answer: true,
+    },
+  },
+
+  {
+    id: 'deduction-1',
+    worldId: 'deduction',
+    number: 1,
+    title: { en: 'Luna the Cat', id: 'Luna si Kucing' },
+    mascotMessage: {
+      en: 'We know the rule about ALL cats. We know Luna IS a cat. So what do we know about Luna? 🐱',
+      id: 'Kita tahu aturan tentang SEMUA kucing. Kita tahu Luna ADALAH kucing. Jadi apa yang kita tahu tentang Luna? 🐱',
+    },
+    xpReward: 10,
+    puzzle: {
+      type: 'true-false',
+      statement: {
+        en: 'Rule: All cats meow. Case: Luna is a cat. Conclusion: Luna meows. Is this correct?',
+        id: 'Aturan: Semua kucing mengeong. Kasus: Luna adalah kucing. Kesimpulan: Luna mengeong. Apakah ini benar?',
+      },
+      answer: true,
+    },
+  },
+
+  {
+    id: 'deduction-2',
+    worldId: 'deduction',
+    number: 2,
+    title: { en: 'Rainy Day', id: 'Hari Hujan' },
+    mascotMessage: {
+      en: 'You have a rule about rain. It IS raining. Apply the rule and pick what MUST be true! ☔',
+      id: 'Kamu punya aturan tentang hujan. Hujan SEDANG turun. Terapkan aturannya dan pilih yang PASTI benar! ☔',
+    },
+    xpReward: 10,
+    puzzle: {
+      type: 'if-then',
+      condition: {
+        en: 'Rule: If it rains, the ground gets wet. Right now: it is raining. What MUST be true?',
+        id: 'Aturan: Jika hujan, tanah menjadi basah. Saat ini: sedang hujan. Apa yang PASTI benar?',
+      },
+      options: [
+        { id: 'ground', emoji: '💧', label: { en: 'The ground is wet', id: 'Tanah menjadi basah' } },
+        { id: 'sun', emoji: '☀️', label: { en: 'The sun is shining brightly', id: 'Matahari bersinar cerah' } },
+        { id: 'snow', emoji: '❄️', label: { en: 'It is snowing', id: 'Sedang turun salju' } },
+        { id: 'dry', emoji: '🏜️', label: { en: 'The ground stays dry', id: 'Tanah tetap kering' } },
+      ],
+      answerId: 'ground',
+    },
+  },
+
+  {
+    id: 'deduction-3',
+    worldId: 'deduction',
+    number: 3,
+    title: { en: 'Not a Bird', id: 'Bukan Burung' },
+    mascotMessage: {
+      en: 'If you know what ALL birds have, and something is MISSING that feature, what can you conclude? 🐟',
+      id: 'Jika kamu tahu apa yang dimiliki SEMUA burung, dan sesuatu TIDAK memiliki ciri itu, apa yang bisa kamu simpulkan? 🐟',
+    },
+    xpReward: 15,
+    puzzle: {
+      type: 'true-false',
+      statement: {
+        en: 'Rule: All birds have feathers. Fact: A fish does NOT have feathers. Conclusion: A fish is NOT a bird. Is this correct?',
+        id: 'Aturan: Semua burung punya bulu. Fakta: Ikan TIDAK punya bulu. Kesimpulan: Ikan BUKAN burung. Apakah ini benar?',
+      },
+      answer: true,
+    },
+  },
+
+  {
+    id: 'deduction-4',
+    worldId: 'deduction',
+    number: 4,
+    title: { en: 'Chain Reasoning', id: 'Rantai Penalaran' },
+    mascotMessage: {
+      en: 'If A leads to B, and B leads to C, then A leads all the way to C! Follow the chain! ⛓️',
+      id: 'Jika A mengarah ke B, dan B mengarah ke C, maka A mengarah sampai ke C! Ikuti rantainya! ⛓️',
+    },
+    xpReward: 15,
+    tutorial: {
+      title: { en: 'Chain Reasoning: A → B → C', id: 'Rantai Penalaran: A → B → C' },
+      body: {
+        en: 'Sometimes conclusions chain together: Rule 1 says A → B. Rule 2 says B → C. If A is true, then B is true (by Rule 1), and then C is true (by Rule 2). The chain carries the truth all the way through!',
+        id: 'Terkadang kesimpulan berantai: Aturan 1 bilang A → B. Aturan 2 bilang B → C. Jika A benar, maka B benar (oleh Aturan 1), dan kemudian C benar (oleh Aturan 2). Rantai membawa kebenaran sampai ke ujung!',
+      },
+      example: {
+        en: 'If it\'s cloudy (A) → it rains (B). If it rains (B) → ground is wet (C). It\'s cloudy. Conclusion: ground is wet! ✓',
+        id: 'Jika mendung (A) → hujan (B). Jika hujan (B) → tanah basah (C). Sedang mendung. Kesimpulan: tanah basah! ✓',
+      },
+    },
+    puzzle: {
+      type: 'if-then',
+      condition: {
+        en: 'Rule 1: If you study hard, you learn a lot. Rule 2: If you learn a lot, you get good grades. Fact: Ali studies hard. What can we conclude?',
+        id: 'Aturan 1: Jika kamu belajar keras, kamu banyak belajar. Aturan 2: Jika kamu banyak belajar, kamu mendapat nilai bagus. Fakta: Ali belajar keras. Apa kesimpulannya?',
+      },
+      options: [
+        { id: 'good', emoji: '🌟', label: { en: 'Ali gets good grades', id: 'Ali mendapat nilai bagus' } },
+        { id: 'bad', emoji: '📉', label: { en: 'Ali gets bad grades', id: 'Ali mendapat nilai buruk' } },
+        { id: 'unknown', emoji: '❓', label: { en: 'We cannot know', id: 'Kita tidak bisa tahu' } },
+        { id: 'skip', emoji: '💤', label: { en: 'Ali skips school', id: 'Ali membolos sekolah' } },
+      ],
+      answerId: 'good',
+    },
+  },
+
+  {
+    id: 'deduction-5',
+    worldId: 'deduction',
+    number: 5,
+    title: { en: 'Whale Breathing', id: 'Napas Paus' },
+    mascotMessage: {
+      en: 'A whale lives in the ocean, but does that change what ALL mammals must do? Think carefully! 🐋',
+      id: 'Paus hidup di lautan, tapi apakah itu mengubah apa yang SEMUA mamalia harus lakukan? Pikirkan dengan hati-hati! 🐋',
+    },
+    xpReward: 20,
+    puzzle: {
+      type: 'true-false',
+      statement: {
+        en: 'Rule: All mammals breathe air. Fact: A whale is a mammal. Conclusion: A whale breathes air. Is this correct?',
+        id: 'Aturan: Semua mamalia bernapas dengan udara. Fakta: Paus adalah mamalia. Kesimpulan: Paus bernapas dengan udara. Apakah ini benar?',
+      },
+      answer: true,
+    },
+  },
+
+  {
+    id: 'deduction-6',
+    worldId: 'deduction',
+    number: 6,
+    title: { en: 'Is It a Square?', id: 'Apakah Itu Persegi?' },
+    mascotMessage: {
+      en: 'You know the rule for squares. Shape A breaks that rule. What must that mean? 🟥',
+      id: 'Kamu tahu aturan untuk persegi. Bentuk A melanggar aturan itu. Apa artinya? 🟥',
+    },
+    xpReward: 20,
+    puzzle: {
+      type: 'true-false',
+      statement: {
+        en: 'Rule: All squares have exactly 4 equal sides. Fact: Shape A has only 3 sides. Conclusion: Shape A is NOT a square. Is this correct?',
+        id: 'Aturan: Semua persegi memiliki tepat 4 sisi yang sama. Fakta: Bentuk A hanya memiliki 3 sisi. Kesimpulan: Bentuk A BUKAN persegi. Apakah ini benar?',
+      },
+      answer: true,
+    },
+  },
+
+  {
+    id: 'deduction-7',
+    worldId: 'deduction',
+    number: 7,
+    title: { en: 'Logic Steps', id: 'Langkah Logika' },
+    mascotMessage: {
+      en: 'Deductive reasoning has a clear order! Can you put these four steps in the right sequence? 📋',
+      id: 'Penalaran deduktif memiliki urutan yang jelas! Bisakah kamu menyusun empat langkah ini dalam urutan yang benar? 📋',
+    },
+    xpReward: 20,
+    puzzle: {
+      type: 'sequence',
+      steps: [
+        { id: 'rule', emoji: '📏', label: { en: 'State the general rule', id: 'Nyatakan aturan umum' } },
+        { id: 'case', emoji: '🔎', label: { en: 'Identify the specific case', id: 'Identifikasi kasus spesifik' } },
+        { id: 'apply', emoji: '🔗', label: { en: 'Apply the rule to the case', id: 'Terapkan aturan ke kasus' } },
+        { id: 'conclude', emoji: '✅', label: { en: 'State the conclusion', id: 'Nyatakan kesimpulan' } },
+      ],
+    },
+  },
+
+  {
+    id: 'deduction-8',
+    worldId: 'deduction',
+    number: 8,
+    title: { en: 'Even Number Test', id: 'Tes Bilangan Genap' },
+    mascotMessage: {
+      en: 'You know the rule about even numbers. 14 fits the rule. Apply the deduction! 🧮',
+      id: 'Kamu tahu aturan tentang bilangan genap. 14 cocok dengan aturan. Terapkan deduksinya! 🧮',
+    },
+    xpReward: 20,
+    puzzle: {
+      type: 'true-false',
+      statement: {
+        en: 'Rule: Even numbers are divisible by 2 with no remainder. Fact: 14 is an even number. Conclusion: 14 can be divided by 2 with no remainder. Is this correct?',
+        id: 'Aturan: Bilangan genap habis dibagi 2 tanpa sisa. Fakta: 14 adalah bilangan genap. Kesimpulan: 14 bisa dibagi 2 tanpa sisa. Apakah ini benar?',
+      },
+      answer: true,
+    },
+  },
+
+  {
+    id: 'deduction-9',
+    worldId: 'deduction',
+    number: 9,
+    title: { en: 'The Zero Rule', id: 'Aturan Nol' },
+    mascotMessage: {
+      en: 'There\'s a powerful rule in math about zero. If you know the rule, ANY number becomes easy! 🌀',
+      id: 'Ada aturan yang kuat dalam matematika tentang nol. Jika kamu tahu aturannya, angka APAPUN menjadi mudah! 🌀',
+    },
+    xpReward: 30,
+    puzzle: {
+      type: 'fill-in',
+      question: {
+        en: 'Rule: Any number × 0 = 0. Apply the rule: 999 × 0 = ___',
+        id: 'Aturan: Semua angka × 0 = 0. Terapkan aturannya: 999 × 0 = ___',
+      },
+      visual: '9️⃣9️⃣9️⃣ × 0️⃣ = ❓',
+      answer: '0',
+      inputType: 'numeric',
+    },
+  },
 ]
 
 export function getThinkingLessonsByWorld(worldId: string): ThinkingLesson[] {
