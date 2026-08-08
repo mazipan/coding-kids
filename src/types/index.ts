@@ -94,7 +94,7 @@ export interface PlayerProgress {
 
 // ── Thinking path ─────────────────────────────────────────────
 
-export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction'
+export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction' | 'math_reasoning'
 
 export interface ThinkingWorld {
   id: ThinkingWorldId
@@ -179,6 +179,12 @@ export interface AbstractionPuzzle {
 
 export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle | FillInPuzzle | MatchPuzzle | AbstractionPuzzle
 
+export interface ThinkingLessonTutorial {
+  title: LocalizedString
+  body: LocalizedString
+  example?: LocalizedString
+}
+
 export interface ThinkingLesson {
   id: string
   worldId: ThinkingWorldId
@@ -187,6 +193,7 @@ export interface ThinkingLesson {
   mascotMessage: LocalizedString
   xpReward: number
   puzzle: ThinkingPuzzle
+  tutorial?: ThinkingLessonTutorial
 }
 
 // ── Blocks path ───────────────────────────────────────────────

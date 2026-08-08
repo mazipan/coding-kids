@@ -247,6 +247,7 @@ const en: Translations = {
   'thinking.abstraction.odd.prompt': "Tap the one that doesn't belong!",
   'thinking.abstraction.category.prompt': 'Tap all that fit! Then press Check.',
   'thinking.abstraction.check': 'Check',
+  'thinking.tutorial.dismiss': "Got it! Let's go! 🚀",
 }
 
 const id: Translations = {
@@ -494,6 +495,7 @@ const id: Translations = {
   'thinking.abstraction.odd.prompt': 'Ketuk yang tidak termasuk!',
   'thinking.abstraction.category.prompt': 'Ketuk semua yang sesuai! Lalu tekan Cek.',
   'thinking.abstraction.check': 'Cek',
+  'thinking.tutorial.dismiss': 'Mengerti! Ayo mulai! 🚀',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }
