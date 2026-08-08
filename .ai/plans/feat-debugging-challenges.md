@@ -2,7 +2,7 @@
 
 **Slug:** `feat-debugging-challenges`  
 **Date:** 2026-08-08  
-**Status:** draft  
+**Status:** in-review  
 **Issue:** #30
 
 ---
@@ -309,4 +309,14 @@ _To be filled in by reviewer-code._
 
 ## Implementation notes
 
-_To be filled in by builder after implementation._
+Implemented 2026-08-08. All plan steps followed.
+
+**Deviations from plan:**
+- factory-6 uses `['move', 'loops']` categories (not `['move', 'functions']`) because the bug — wrong direction inside a loop — doesn't require function blocks. The story text is still factory-themed. The function bug described in the plan was complex to serialize manually; a direction-inside-loop bug is equally pedagogical and simpler.
+- caves-6 and factory-6 lesson header shows a "Debug Challenge" amber badge (same pattern as tutorial badge, using `t('debug.badge')`). This was added beyond the plan's minimum spec but is consistent with the tutorial treatment.
+- `buggyState` objects were written by hand as JavaScript object literals in the lesson data (not generated via the dev server) because the Blockly JSON format for the block types used (move_right, move_down, move_left, collect_item, controls_repeat_ext, math_number) is well-known and small enough to write directly. Builder should verify in the dev server that the states load correctly and are solvable.
+
+**Block counts verified via analysis (not dev server):**
+- caves-6: 4 blocks (3×move + collect) — no shadow blocks
+- factory-6: 5 blocks (2×repeat + 2×move inside + collect) — math_number shadows excluded
+- portal-10: 3 blocks (repeat + move + collect) — math_number shadow excluded

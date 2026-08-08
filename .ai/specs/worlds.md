@@ -7,9 +7,9 @@
 | jungle | 🌿 | Sequences | 5–7 | 0 | 6 |
 | space | 🚀 | Loops | 7–9 | 100 | 6 |
 | ocean | 🌊 | Variables | 9–10 | 350 | 5 |
-| caves | 💎 | Conditions | 10–11 | 700 | 5 |
-| factory | 🤖 | Functions | 11–13 | 1250 | 5 |
-| portal | ⏰ | Arrays & Lists | 12–14 | 1650 | 4 |
+| caves | 💎 | Conditions | 10–11 | 700 | 6 |
+| factory | 🤖 | Functions | 11–13 | 1250 | 6 |
+| portal | ⏰ | Arrays & Lists | 12–14 | 1650 | 10 |
 
 Source: `src/data/worlds.ts` — `WORLDS` array. Each world has `theme` (bgGradient, accentColor, textColor, cellBorder, cellBg), `emoji`, `character` (emoji for mascot), `characterName`, `itemEmoji`, `obstacleEmoji`, `goalEmoji`.
 
@@ -44,6 +44,11 @@ Defined in `src/data/lessons.ts`. Each lesson:
   xpReward: number              // base XP for 1 star
   hints: string[]               // cycled through when the Hint button is pressed
   starThresholds: [number, number]  // [bronze, silver] block counts
+  isTutorial?: true             // tutorial lessons skip the reward modal
+  isBuggy?: true                // debug challenge: workspace starts pre-broken
+  buggyState?: object           // Blockly JSON serialisation of the broken workspace
+                                // generated via Blockly.serialization.workspaces.save()
+                                // optimalBlockCount = block count of the CORRECT solution
 }
 ```
 

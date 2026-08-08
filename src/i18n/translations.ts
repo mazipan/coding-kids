@@ -207,6 +207,10 @@ const en: Translations = {
   'tutorial.complete.subtitle': 'Great job! You know how {concept} blocks work. Time to play for real!',
   'tutorial.complete.cta': 'Start Level 1!',
 
+  // ── Debug challenge ───────────────────────────
+  'debug.banner': "Something's broken — can you find and fix it?",
+  'debug.badge': 'Debug Challenge',
+
   // ── Walkthrough tour ─────────────────────────
   'walkthrough.next': 'Next',
   'walkthrough.skip': 'Skip',
@@ -449,6 +453,10 @@ const id: Translations = {
   'tutorial.complete.title': 'Kamu Siap! 🎉',
   'tutorial.complete.subtitle': 'Bagus sekali! Kamu sudah tahu cara kerja blok {concept}. Saatnya bermain sungguhan!',
   'tutorial.complete.cta': 'Mulai Level 1!',
+
+  // ── Debug challenge ───────────────────────────
+  'debug.banner': 'Ada yang rusak — bisakah kamu menemukan dan memperbaikinya?',
+  'debug.badge': 'Tantangan Debug',
 
   // ── Walkthrough tour ─────────────────────────
   'walkthrough.next': 'Lanjut',
