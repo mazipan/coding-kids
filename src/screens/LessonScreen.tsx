@@ -1,6 +1,6 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Lightbulb, Loader2, Play, RotateCcw } from 'lucide-react'
+import { Bug, Lightbulb, Loader2, Play, RotateCcw } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
@@ -54,6 +54,12 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
   const [activeTab, setActiveTab] = useState<'blocks' | 'game'>('blocks')
   const runningRef = useRef(false)
   const blocklyRef = useRef<BlocklyWorkspaceHandle>(null)
+
+  useEffect(() => {
+    if (lesson.isBuggy === true && lesson.buggyState) {
+      blocklyRef.current?.loadState(lesson.buggyState)
+    }
+  }, [])
 
   const handleWalkthroughLoadState = useCallback((state: object) => {
     blocklyRef.current?.loadState(state)
@@ -258,12 +264,18 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        {lesson.isTutorial ? (
+        {lesson.isTutorial === true ? (
           <div
             className="px-2 py-1 rounded-xl text-xs font-black shrink-0 mt-1"
             style={{ background: world.theme.accentColor, color: '#0a0618' }}
           >
             {t('tutorial.badge')}
+          </div>
+        ) : lesson.isBuggy === true ? (
+          <div
+            className="px-2 py-1 rounded-xl text-xs font-black shrink-0 mt-1 bg-amber-500/30 text-amber-300 border border-amber-400/40"
+          >
+            {t('debug.badge')}
           </div>
         ) : (
           <div
@@ -316,6 +328,12 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
           transition={{ delay: 0.1 }}
           style={{ minHeight: 340 }}
         >
+          {lesson.isBuggy === true && (
+            <div className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold bg-amber-500/20 border-b border-amber-400/30 text-amber-300 shrink-0">
+              <Bug className="w-4 h-4 shrink-0" />
+              {t('debug.banner')}
+            </div>
+          )}
           <BlocklyWorkspace
             ref={blocklyRef}
             categories={lesson.availableCategories}

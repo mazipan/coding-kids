@@ -109,7 +109,7 @@ export const WORLDS: World[] = [
       textColor: '#e9d5ff',
     },
     unlockAtXP: 700,
-    lessonCount: 5,
+    lessonCount: 6,
   },
   {
     id: 'factory',
@@ -131,7 +131,7 @@ export const WORLDS: World[] = [
       textColor: '#d1d5db',
     },
     unlockAtXP: 1250,
-    lessonCount: 5,
+    lessonCount: 6,
   },
   {
     id: 'portal',
@@ -153,7 +153,7 @@ export const WORLDS: World[] = [
       textColor: '#fef3c7',
     },
     unlockAtXP: 1650,
-    lessonCount: 9,
+    lessonCount: 10,
   },
   // ── BONUS WORLDS — unlocked after completing the final lesson ──
   {

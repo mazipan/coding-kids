@@ -64,6 +64,8 @@ export interface Lesson {
   hints: LocalizedString[]
   starThresholds: [number, number] | [number, number, number, number]
   isTutorial?: true
+  isBuggy?: true
+  buggyState?: object
 }
 
 export interface LessonResult {

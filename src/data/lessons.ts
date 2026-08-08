@@ -1120,6 +1120,66 @@ export const LESSONS: Lesson[] = [
     ],
     starThresholds: [77, 55, 48, 40],
   },
+  {
+    id: 'caves-6',
+    worldId: 'caves',
+    number: 6,
+    isBuggy: true,
+    title: { en: 'The Wrong Turn', id: 'Belokan yang Salah' },
+    story: {
+      en: "Zara's map has a mistake! The code is almost right, but one block is pointing the wrong way. Find it and fix it!",
+      id: 'Peta Zara ada kesalahannya! Kodenya hampir benar, tapi satu blok mengarah ke arah yang salah. Temukan dan perbaiki!',
+    },
+    mascotMessage: {
+      en: 'Look at where each block sends you. One of them takes a wrong turn! 🧝',
+      id: 'Lihat ke mana setiap blok membawamu. Salah satunya berbelok ke arah yang salah! 🧝',
+    },
+    gridRows: 3,
+    gridCols: 5,
+    cells: emptyGrid(3, 5),
+    startPos: [1, 0],
+    items: [{ id: 'gem-1', pos: [1, 3] }],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 4,
+    xpReward: 75,
+    hints: [
+      { en: 'Run the code and watch where the character goes wrong.', id: 'Jalankan kode dan perhatikan di mana karakter salah jalan.' },
+      { en: 'Compare each block direction to the path on the grid.', id: 'Bandingkan arah setiap blok dengan jalur di grid.' },
+    ],
+    starThresholds: [10, 7, 5, 4],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'move_right',
+            id: 'dbg_c6_1',
+            x: 30,
+            y: 50,
+            next: {
+              block: {
+                type: 'move_down',
+                id: 'dbg_c6_2',
+                next: {
+                  block: {
+                    type: 'move_right',
+                    id: 'dbg_c6_3',
+                    next: {
+                      block: {
+                        type: 'collect_item',
+                        id: 'dbg_c6_4',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
 
   // ─────────────────────────────────────────────
   // WORLD 5: ROBOT FACTORY — Functions
@@ -1338,6 +1398,88 @@ export const LESSONS: Lesson[] = [
       { en: 'Use functions to organize collecting each gear!', id: 'Gunakan fungsi untuk mengorganisir pengumpulan setiap gear!' },
     ],
     starThresholds: [98, 70, 60, 50],
+  },
+  {
+    id: 'factory-6',
+    worldId: 'factory',
+    number: 6,
+    isBuggy: true,
+    title: { en: 'The Assembly Error', id: 'Kesalahan Perakitan' },
+    story: {
+      en: "Bolt's assembly line has a bug! One repeat block is moving in the wrong direction. Fix the direction and collect the gear!",
+      id: 'Lini perakitan Bolt punya bug! Satu blok perulangan bergerak ke arah yang salah. Perbaiki arahnya dan kumpulkan gear!',
+    },
+    mascotMessage: {
+      en: "The first loop is going the wrong way! 🤖 Look at the move block inside it.",
+      id: 'Perulangan pertama pergi ke arah yang salah! 🤖 Lihat blok gerak di dalamnya.',
+    },
+    gridRows: 5,
+    gridCols: 5,
+    cells: emptyGrid(5, 5),
+    startPos: [0, 0],
+    items: [{ id: 'gear-1', pos: [4, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 5,
+    xpReward: 100,
+    hints: [
+      { en: 'Run the code — which direction does the character move first?', id: 'Jalankan kode — ke arah mana karakter bergerak pertama?' },
+      { en: 'The goal is in the bottom-right corner. What two directions do you need?', id: 'Tujuan ada di sudut kanan bawah. Dua arah apa yang kamu butuhkan?' },
+    ],
+    starThresholds: [16, 11, 7, 5],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_f6_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 4 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_left',
+                  id: 'dbg_f6_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_f6_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 4 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_down',
+                      id: 'dbg_f6_4',
+                    },
+                  },
+                },
+                next: {
+                  block: {
+                    type: 'collect_item',
+                    id: 'dbg_f6_5',
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
   },
 
   // ─────────────────────────────────────────────
@@ -1744,6 +1886,68 @@ export const LESSONS: Lesson[] = [
       { en: 'Use arrays of coordinates and loop through them systematically!', id: 'Gunakan array koordinat dan ulangi secara sistematis!' },
     ],
     starThresholds: [137, 98, 82, 65],
+  },
+  {
+    id: 'portal-10',
+    worldId: 'portal',
+    number: 10,
+    isBuggy: true,
+    title: { en: 'The Loop Lag', id: 'Lingkaran yang Kurang' },
+    story: {
+      en: "Nova's time loop is one step short! The repeat count is wrong. Adjust it so the portal aligns.",
+      id: 'Lingkaran waktu Nova kurang satu langkah! Jumlah pengulangan salah. Sesuaikan agar portal sejajar.',
+    },
+    mascotMessage: {
+      en: "Count how many steps you need, then check the number in the repeat block. ⏰",
+      id: 'Hitung berapa langkah yang kamu butuhkan, lalu periksa angka di blok pengulangan. ⏰',
+    },
+    gridRows: 3,
+    gridCols: 5,
+    cells: emptyGrid(3, 5),
+    startPos: [1, 0],
+    items: [{ id: 'clock-1', pos: [1, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 3,
+    xpReward: 100,
+    hints: [
+      { en: 'How many columns are between the start and the goal?', id: 'Berapa kolom antara awal dan tujuan?' },
+      { en: 'The repeat count controls how many times the block inside runs.', id: 'Jumlah pengulangan menentukan berapa kali blok di dalamnya berjalan.' },
+    ],
+    starThresholds: [9, 6, 4, 3],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_p10_1',
+            x: 30,
+            y: 50,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 3 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_right',
+                  id: 'dbg_p10_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'collect_item',
+                id: 'dbg_p10_3',
+              },
+            },
+          },
+        ],
+      },
+    },
   },
 
   // ─────────────────────────────────────────────
