@@ -133,7 +133,7 @@ const en: Translations = {
   // ── Bonus worlds ─────────────────────────────
   'bonus.section.title': 'Bonus Worlds',
   'bonus.section.subtitle': 'Real-world coding challenges — no XP required!',
-  'bonus.locked.hint': 'Complete the Time Portal to unlock all bonus worlds!',
+  'bonus.locked.hint': 'Finish "Master of Time" in Time Portal to unlock all bonus worlds!',
   'bonus.unlocked.all': 'All bonus levels unlocked — jump in anywhere!',
   'bonus.all.open': 'All levels open!',
 
@@ -390,7 +390,7 @@ const id: Translations = {
   // ── Bonus worlds ─────────────────────────────
   'bonus.section.title': 'Dunia Bonus',
   'bonus.section.subtitle': 'Tantangan coding dunia nyata — tanpa XP!',
-  'bonus.locked.hint': 'Selesaikan Portal Waktu untuk membuka semua dunia bonus!',
+  'bonus.locked.hint': 'Tamatkan "Master Waktu" di Portal Waktu untuk membuka semua dunia bonus!',
   'bonus.unlocked.all': 'Semua level bonus terbuka — langsung masuk ke mana saja!',
   'bonus.all.open': 'Semua level terbuka!',
 
