@@ -8,7 +8,8 @@
       <stop offset="0%" stop-color="#7C3AED"/>
       <stop offset="100%" stop-color="#EC4899"/>
     </linearGradient>
-    <linearGradient id="logoGrad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+    <!-- objectBoundingBox (default) so the gradient fills the element itself, not the SVG origin -->
+    <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#7C3AED"/><stop offset="1" stop-color="#EC4899"/>
     </linearGradient>
   </defs>
@@ -34,13 +35,14 @@
   <circle cx="200" cy="315" r="220" fill="#7C3AED" opacity="0.12"/>
   <circle cx="1000" cy="315" r="200" fill="#EC4899" opacity="0.10"/>
 
-  <!-- Logo icon: y=140..220, vertically aligned with "CodeKids" text -->
+  <!-- Logo icon -->
   <rect x="80" y="140" width="80" height="80" rx="18" fill="url(#logoGrad)"/>
-  <path d="M108 160L96 180L108 200" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M132 160L144 180L132 200" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M127 155L113 205" stroke="#E9D5FF" stroke-width="4" stroke-linecap="round"/>
+  <!-- fill="none" required — SVG paths default to fill:black which bleeds over the gradient -->
+  <path d="M108 160L96 180L108 200" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M132 160L144 180L132 200" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M127 155L113 205" fill="none" stroke="#E9D5FF" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- App name: baseline y=205, cap-height ~52px → top ≈ y=153, matches logo top -->
+  <!-- App name -->
   <text x="180" y="205" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="900" fill="white" letter-spacing="-2">CodeKids</text>
 
   <!-- Tagline -->
@@ -49,25 +51,29 @@
   <!-- Divider -->
   <rect x="80" y="315" width="160" height="4" rx="2" fill="url(#accent)"/>
 
-  <!-- Feature pills: y=340..384 -->
-  <rect x="80" y="340" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="175" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3AE; Block Coding</text>
+  <!-- Feature pills — 20px gaps between each -->
+  <!-- Block Coding: x=80..275 -->
+  <rect x="80" y="340" width="195" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="178" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3AE; Block Coding</text>
 
-  <rect x="286" y="340" width="210" height="44" rx="22" fill="#EC4899" opacity="0.25"/>
-  <text x="391" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FBCFE8" text-anchor="middle">&#x1F9E0; Brain Training</text>
+  <!-- Brain Training: x=295..510, 20px gap -->
+  <rect x="295" y="340" width="215" height="44" rx="22" fill="#EC4899" opacity="0.25"/>
+  <text x="403" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FBCFE8" text-anchor="middle">&#x1F9E0; Brain Training</text>
 
-  <rect x="512" y="340" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="607" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3C6; XP &amp; Levels</text>
+  <!-- XP & Levels: x=530..720, 20px gap -->
+  <rect x="530" y="340" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="625" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3C6; XP &amp; Levels</text>
 
-  <rect x="718" y="340" width="160" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="798" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x2705; 100% Free</text>
+  <!-- 100% Free: x=740..900, 20px gap -->
+  <rect x="740" y="340" width="160" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="820" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x2705; 100% Free</text>
 
-  <!-- Ages badge: y=415..459 (31px gap from pills) -->
+  <!-- Ages badge: y=415..459, 31px gap from pills -->
   <rect x="80" y="415" width="260" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.9"/>
   <text x="210" y="443" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">For Ages 5&#x2013;14 · No Login Needed</text>
 
-  <!-- Domain: baseline y=535, top ≈ y=518 → 59px gap from badge bottom (459) -->
-  <text x="80" y="535" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#6D28D9">coding.mazipan.space</text>
+  <!-- Domain: baseline y=540, lighter purple for contrast, 81px gap from badge bottom -->
+  <text x="80" y="540" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#8B5CF6">coding.mazipan.space</text>
 
   <!-- Right side decorative blocks -->
   <g transform="translate(940, 130)">
