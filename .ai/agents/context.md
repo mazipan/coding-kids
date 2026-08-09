@@ -85,6 +85,43 @@ src/
 - All icons in the app use `lucide-react`. Never add a second icon library. Emoji is acceptable for decorative mascots and world/puzzle flavour; avoid emoji in interactive controls (buttons, badges, status indicators).
 - Translation strings must never embed arrow/symbol characters (`←`, `→`, `▶`, `✓`). Place icons in JSX alongside `t()` calls.
 
+## OG image (`public/og-image.svg` + `public/og-image.png`)
+
+`og-image.svg` is the **source of truth** — edit it, then re-export to `og-image.png`.  
+`index.html` `og:image` and `twitter:image` both point to the `.png` (SVG is not rendered by most social crawlers).
+
+### Re-generating the PNG after any SVG edit
+
+Chromium is pre-installed in the remote environment at `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`. Use it to render an exact 1200×630 screenshot:
+
+```bash
+CHROME="/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
+OUT="public/og-image.png"
+
+# Inline the SVG into a minimal HTML page (avoids file:// cross-origin issues with <img>)
+{ echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>* { margin:0;padding:0; } html,body { width:1200px;height:630px;overflow:hidden;background:#0A0618; } svg { display:block; }</style></head><body>'
+  cat public/og-image.svg
+  echo '</body></html>'
+} > /tmp/render-og.html
+
+$CHROME --headless=new --no-sandbox --disable-gpu \
+  --window-size=1200,630 --hide-scrollbars \
+  --screenshot="$OUT" \
+  "file:///tmp/render-og.html" 2>/dev/null
+
+echo "$(ls -lh $OUT)"
+```
+
+Commit both files together — they must always be in sync.
+
+### SVG authoring pitfalls
+
+- **`fill="none"` on every `<path>`** — SVG paths default to `fill="black"`. Any open path (brackets, slashes, arrows) will render a filled black shape over the background unless `fill="none"` is explicit.
+- **Gradient `gradientUnits`** — use the default `objectBoundingBox` with `x1/y1/x2/y2` in the `0→1` range. If `gradientUnits="userSpaceOnUse"` is used, coordinates must match the element's actual position in the SVG canvas; a gradient defined at `(0,0)→(80,80)` applied to a rect at `(80,140)` will collapse to the end-stop colour.
+- **Text overflow in pills** — always measure pill `width` against the rendered text. A single pill with long text (e.g. "For Ages 5–14 · No Login Needed") will overflow its `rx` rounded container invisibly; split into two pills instead.
+- **Safe render zone** — the Chromium headless screenshot clips content below approximately `y=560` even with a `630px` window. Keep all visible content above `y=555` (baseline for 24px text). Leave the `viewBox` at `0 0 1200 630` — the dark background still fills the full frame.
+- **Content sync** — after adding a new world, path, or feature to the app, update the OG image pills/tagline to match. Stale copy ("6 Epic Worlds", "Where Kids Become Coders") misleads social previews.
+
 ## Deployment
 
 Netlify: `bun run build` → `dist/`. The `netlify.toml` sets the build command, publish dir, and a `/* → /index.html` SPA redirect so `/app` works on direct visit. No environment variables needed.
