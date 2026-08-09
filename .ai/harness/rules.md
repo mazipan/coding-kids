@@ -32,6 +32,14 @@ Before adding any UI copy, feature, or UX flow, ask: **does this serve Rafi (age
 - Makes feedback slower or quieter → reconsider
 - Collects or transmits data → reject
 
+## PR rules — any agent must ALWAYS
+
+- Title format: `{type}: {description}` — type in the title, never a checklist in the body
+- Body must follow `.github/pull_request_template.md` — all sections filled, in order
+- Every resolved issue linked with `Closes #N` in the **Issues** section
+- **Screenshots** section must be present — write "No visual change." when nothing changed visually
+- **Agent attributes** section must name the model and link the plan file used
+
 ## Hard constraints — any agent must NEVER
 
 - Add a backend, database, or API call of any kind
