@@ -1,38 +1,71 @@
 import { useLanguage } from '../i18n/LanguageProvider'
-import { Logo } from './Logo'
+
+const REPO_URL = 'https://github.com/mazipan/coding-kids'
+const START_YEAR = 2026
+
+function formatBuildDate(iso: string): string {
+  const d = new Date(iso)
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`
+}
 
 export function Footer() {
   const { t } = useLanguage()
   return (
-    <footer className="py-12 px-5 sm:px-8 border-t border-white/[0.06]">
-      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-3">
-          <Logo size={30} />
-          <div className="font-bold text-white/60 text-sm leading-none">CodeKids</div>
-        </div>
-        <div className="text-center sm:text-right">
-          <p className="text-white/40 text-sm font-medium mb-1">{t('landing.footer')}</p>
-          <p className="text-white/20 text-xs">{t('landing.footer.free')}</p>
-          {__COMMIT_SHA__ && (
-            <p className="text-white/40 text-xs mt-1 font-mono">
-              <a
-                href={`https://github.com/mazipan/coding-kids/commit/${__COMMIT_SHA__}`}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white/60 transition-colors"
-              >
-                {__COMMIT_SHA__}
-              </a>
-              <span className="text-white/30">
-                {' · '}
-                {new Date(__BUILD_DATE__).toLocaleDateString(undefined, {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                })}
-              </span>
-            </p>
-          )}
+    <footer className="py-8 px-5 border-t border-white/[0.06] text-center">
+      <div className="max-w-2xl mx-auto space-y-1 text-white/40 text-xs">
+        <p>{t('footer.copyright', { year: START_YEAR })}</p>
+        <p>
+          {t('footer.updated_at')} {formatBuildDate(__BUILD_DATE__)}
+        </p>
+        {__COMMIT_SHA__ && (
+          <p className="font-mono">
+            <a
+              href={`${REPO_URL}/commit/${__COMMIT_SHA__}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/70 transition-colors"
+            >
+              {__COMMIT_SHA__}
+            </a>
+            {' · '}
+            <a
+              href={REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/70 transition-colors"
+            >
+              {t('footer.source')}
+            </a>
+          </p>
+        )}
+        <div className="pt-3 text-white/30 flex items-center justify-center gap-2">
+          <a
+            href="https://baca-quran.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/60 transition-colors"
+          >
+            Baca Quran
+          </a>
+          <span>•</span>
+          <a
+            href="https://tools.mazipan.space"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/60 transition-colors"
+          >
+            Tools
+          </a>
+          <span>•</span>
+          <a
+            href="https://games.mazipan.space"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/60 transition-colors"
+          >
+            Games
+          </a>
         </div>
       </div>
     </footer>
