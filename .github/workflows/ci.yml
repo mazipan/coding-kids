@@ -25,4 +25,4 @@ jobs:
         run: bunx biome ci
 
       - name: Type check
-        run: bunx tsc -b --noEmit
+        run: bun run type-check
