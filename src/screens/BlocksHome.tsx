@@ -10,7 +10,7 @@ import { useProgress } from '../store/useProgress'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 
-interface HomeScreenProps {
+interface BlocksHomeProps {
   progress: ReturnType<typeof useProgress>['progress']
   isWorldUnlocked: (xp: number) => boolean
   isBonusWorldUnlocked: () => boolean
@@ -19,7 +19,7 @@ interface HomeScreenProps {
   selectedWorldId?: WorldId
 }
 
-export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, getLessonProgress, isLessonUnlocked, selectedWorldId }: HomeScreenProps) {
+export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, getLessonProgress, isLessonUnlocked, selectedWorldId }: BlocksHomeProps) {
   const { t, language } = useLanguage()
   const navigate = useNavigate()
 

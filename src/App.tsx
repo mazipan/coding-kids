@@ -2,7 +2,7 @@ import { Routes, Route, Navigate, useNavigate, useParams, Outlet } from 'react-r
 import { LanguageProvider } from './i18n/LanguageProvider'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
-import { HomeScreen } from './screens/HomeScreen'
+import { BlocksHome } from './screens/BlocksHome'
 import { LessonScreen } from './screens/LessonScreen'
 import { LandingScreen } from './screens/LandingScreen'
 import { PathSelector } from './screens/PathSelector'
@@ -56,7 +56,7 @@ function GameLayout() {
 function WorldMapRoute() {
   const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
   return (
-    <HomeScreen
+    <BlocksHome
       progress={progress}
       isWorldUnlocked={isWorldUnlocked}
       isBonusWorldUnlocked={isBonusWorldUnlocked}
@@ -72,7 +72,7 @@ function WorldDetailRoute() {
   const world = worldId ? getWorld(worldId) : null
   if (!world) return <Navigate to="/app/blocks" replace />
   return (
-    <HomeScreen
+    <BlocksHome
       progress={progress}
       isWorldUnlocked={isWorldUnlocked}
       isBonusWorldUnlocked={isBonusWorldUnlocked}
