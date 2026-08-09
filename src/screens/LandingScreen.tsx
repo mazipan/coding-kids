@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { MousePointerClick, Trophy, Globe, Smartphone, Map, Grip, Zap, Gift, ShieldCheck, EyeOff, ArrowRight } from 'lucide-react'
 import { WORLDS } from '../data/worlds'
+import { THINKING_WORLDS } from '../data/thinkingWorlds'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import { Logo } from '../components/Logo'
@@ -20,6 +21,20 @@ const WORLD_MASCOTS = [
   { emoji: '🤖', color: '#F97316', delay: 1.2 },
   { emoji: '⏰', color: '#0EA5E9', delay: 1.5 },
 ]
+
+const THINKING_COLOR_MAP: Record<string, { accent: string; bg: string; text: string }> = {
+  purple: { accent: '#a855f7', bg: 'linear-gradient(135deg, #0d0520 0%, #1a0a2e 100%)', text: '#e9d5ff' },
+  blue: { accent: '#3b82f6', bg: 'linear-gradient(135deg, #030c1a 0%, #0c1f3f 100%)', text: '#bfdbfe' },
+  emerald: { accent: '#10b981', bg: 'linear-gradient(135deg, #011a0e 0%, #042d1a 100%)', text: '#a7f3d0' },
+  rose: { accent: '#f43f5e', bg: 'linear-gradient(135deg, #1a0308 0%, #2e0812 100%)', text: '#fecdd3' },
+  green: { accent: '#22c55e', bg: 'linear-gradient(135deg, #031208 0%, #0a2412 100%)', text: '#bbf7d0' },
+  indigo: { accent: '#6366f1', bg: 'linear-gradient(135deg, #08061f 0%, #131230 100%)', text: '#c7d2fe' },
+  orange: { accent: '#f97316', bg: 'linear-gradient(135deg, #1a0800 0%, #2d1200 100%)', text: '#fed7aa' },
+  teal: { accent: '#14b8a6', bg: 'linear-gradient(135deg, #00140f 0%, #012320 100%)', text: '#99f6e4' },
+  amber: { accent: '#f59e0b', bg: 'linear-gradient(135deg, #1a0f00 0%, #291700 100%)', text: '#fde68a' },
+  cyan: { accent: '#06b6d4', bg: 'linear-gradient(135deg, #001317 0%, #022028 100%)', text: '#a5f3fc' },
+  violet: { accent: '#8b5cf6', bg: 'linear-gradient(135deg, #0c0620 0%, #180d30 100%)', text: '#ede9fe' },
+}
 
 const AGE_GROUPS = [
   { range: '5–7', concept: 'Sequences', color: '#22C55E', emoji: '🐒' },
@@ -369,9 +384,20 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {WORLDS.map((world, i) => (
-              <FadeIn key={world.id} delay={i * 0.07}>
+          {/* Block Coding subsection */}
+          <FadeIn className="mb-5">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 px-3 py-1.5 rounded-full">
+                <span className="text-sm">🎮</span>
+                <span className="text-purple-300 text-sm font-bold">{t('landing.worlds.blocks.label')}</span>
+              </div>
+              <div className="flex-1 h-px bg-white/[0.06]" />
+            </div>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+            {WORLDS.filter(w => !w.isBonus).map((world, i) => (
+              <FadeIn key={world.id} delay={i * 0.05}>
                 <div
                   className="relative rounded-2xl p-5 border overflow-hidden hover:scale-[1.025] transition-transform duration-300 cursor-default"
                   style={{
@@ -379,17 +405,22 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
                     borderColor: `${world.theme.accentColor}30`,
                   }}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-4xl">{world.emoji}</span>
-                    <span
-                      className="text-xs font-semibold px-2.5 py-1 rounded-full"
-                      style={{
-                        background: `${world.theme.accentColor}22`,
-                        color: world.theme.accentColor,
-                      }}
-                    >
-                      {t('common.ages')} {world.ageRange}
-                    </span>
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="text-3xl">{world.emoji}</span>
+                    <div className="flex flex-col items-end gap-1">
+                      <span
+                        className="text-xs font-semibold px-2.5 py-1 rounded-full"
+                        style={{
+                          background: `${world.theme.accentColor}22`,
+                          color: world.theme.accentColor,
+                        }}
+                      >
+                        {t('common.ages')} {world.ageRange}
+                      </span>
+                      <span className="text-xs opacity-40" style={{ color: world.theme.textColor }}>
+                        {world.lessonCount} {t('landing.worlds.lessons')}
+                      </span>
+                    </div>
                   </div>
                   <h3 className="font-bold text-base text-white mb-1">{localize(world.name, language)}</h3>
                   <p
@@ -415,6 +446,67 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
                 </div>
               </FadeIn>
             ))}
+          </div>
+
+          {/* Brain Training subsection */}
+          <FadeIn className="mb-5">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">
+                <span className="text-sm">🧠</span>
+                <span className="text-emerald-300 text-sm font-bold">{t('landing.worlds.thinking.label')}</span>
+              </div>
+              <div className="flex-1 h-px bg-white/[0.06]" />
+            </div>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {THINKING_WORLDS.map((world, i) => {
+              const c = THINKING_COLOR_MAP[world.color] ?? THINKING_COLOR_MAP['purple']
+              return (
+                <FadeIn key={world.id} delay={i * 0.05}>
+                  <div
+                    className="relative rounded-2xl p-5 border overflow-hidden hover:scale-[1.025] transition-transform duration-300 cursor-default"
+                    style={{
+                      background: c.bg,
+                      borderColor: `${c.accent}28`,
+                    }}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <span className="text-3xl">{world.emoji}</span>
+                      <div className="flex flex-col items-end gap-1">
+                        <span
+                          className="text-xs font-semibold px-2.5 py-1 rounded-full"
+                          style={{
+                            background: `${c.accent}22`,
+                            color: c.accent,
+                          }}
+                        >
+                          {t('common.ages')} {world.ageRange}
+                        </span>
+                        <span className="text-xs opacity-40" style={{ color: c.text }}>
+                          {world.lessonCount} {t('landing.worlds.lessons')}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-base text-white mb-1">{localize(world.name, language)}</h3>
+                    <p
+                      className="text-xs mb-3 leading-relaxed"
+                      style={{ color: `${c.accent}99` }}
+                    >
+                      {localize(world.tagline, language)}
+                    </p>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-medium opacity-50" style={{ color: c.text }}>
+                        {t('common.learn')}
+                      </span>
+                      <span className="text-xs font-bold" style={{ color: c.accent }}>
+                        {localize(world.concept, language)}
+                      </span>
+                    </div>
+                  </div>
+                </FadeIn>
+              )
+            })}
           </div>
         </div>
       </section>

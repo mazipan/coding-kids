@@ -9,25 +9,42 @@ A fun, free learning adventure for kids ages 5–14. Two parallel paths: visual 
 ## Learning Paths
 
 ### 🧩 Block Coding
-Write code with visual Blockly blocks. 6 themed worlds teaching programming concepts.
+Write code with visual Blockly blocks. 7 main worlds + 3 bonus worlds teaching programming concepts.
 
 | World | Ages | Concept | Lessons |
 |-------|------|---------|---------|
-| 🌿 Jungle Adventure | 5–7 | Sequences | 6 |
+| 🌴 Jungle Adventure | 5–7 | Sequences | 6 |
 | 🚀 Space Station | 7–9 | Loops | 6 |
-| 🌊 Ocean Deep | 9–10 | Variables | 5 |
-| 💎 Crystal Caves | 10–11 | Conditions | 5 |
-| 🤖 Robot Factory | 11–13 | Functions | 5 |
-| ⏰ Time Portal | 12–14 | Arrays & Lists | 4 |
+| 🔄 Loop Land | 8–10 | Loop Efficiency | 6 |
+| 🌊 Ocean Deep | 9–11 | Variables | 5 |
+| 💎 Crystal Caves | 10–12 | Conditions | 6 |
+| 🤖 Robot Factory | 11–13 | Functions | 6 |
+| ⏰ Time Portal | 12–14 | Arrays & Lists | 10 |
+
+**Bonus worlds** (unlocked after completing all main worlds):
+
+| World | Ages | Concept | Lessons |
+|-------|------|---------|---------|
+| 🦕 Jurassic Park | 10–14 | Real-World Pathfinding | 10 |
+| 🚗 City Parking | 10–14 | Sorting & Routing | 10 |
+| 📦 Space Sorting | 11–14 | Algorithms & Data | 10 |
 
 ### 🧠 Brain Training
-Pattern recognition, logic puzzles, and math challenges. No code editor required.
+Pattern recognition, logic puzzles, math, science, and reasoning challenges. No code editor required. All 11 worlds are unlocked from the start.
 
-| World | Ages | Puzzle type | Lessons |
-|-------|------|-------------|---------|
-| 🔮 Pattern World | 5–8 | Pattern completion | 10 |
-| 🧠 Logic Land | 7–10 | If-then choices | 10 |
-| ✨ Math Magic | 8–12 | Number puzzles | 10 |
+| World | Ages | Concept | Lessons |
+|-------|------|---------|---------|
+| 🔮 Pattern World | 5–8 | Pattern Recognition | 10 |
+| 🧠 Logic Land | 7–10 | If/Then Thinking | 10 |
+| ✨ Math Magic | 8–12 | Number Patterns | 10 |
+| 🧩 Memory Maze | 6–10 | Sequence Memory | 10 |
+| 🌿 Nature Quest | 8–11 | Science Thinking | 10 |
+| ⚡ Number Ninja | 9–13 | Number Sequences | 10 |
+| 🧩 Step by Step | 6–10 | Decomposition | 10 |
+| 🔍 Think Alike | 7–11 | Abstraction | 10 |
+| 🔢 Math Reasoning | 8–12 | Mathematical Reasoning | 10 |
+| 🔬 Rule Finder | 8–12 | Inductive Reasoning | 10 |
+| 🕵️ Logic Detective | 9–13 | Deductive Reasoning | 10 |
 
 ---
 
@@ -35,8 +52,8 @@ Pattern recognition, logic puzzles, and math challenges. No code editor required
 
 - **Two learning paths** — Block Coding and Brain Training, both accessible from the hub at `/app`
 - **Shared XP & stars** — progress flows across both paths; one store, one level system
-- **6 block coding worlds** — Jungle → Space → Ocean → Crystal Caves → Robot Factory → Time Portal
-- **3 brain training worlds** — 30 puzzles with progressively harder difficulty
+- **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 3 bonus worlds)
+- **11 brain training worlds** — 110 puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, and deduction
 - **XP & leveling** — 15 levels from Code Cub to Master Coder
 - **Stars per lesson** — 1–3 stars based on code efficiency (blocks) or attempts (thinking)
 - **Next-world navigation** — each world links directly to the next at the bottom of its lesson list
@@ -101,10 +118,10 @@ src/
 │   ├── StarRating.tsx          # 1–3 stars display
 │   └── XPBar.tsx               # XP progress bar with optional level name (hideLabel prop)
 ├── data/
-│   ├── lessons.ts              # 31 block coding lessons across 6 worlds
-│   ├── thinkingLessons.ts      # 30 brain training lessons across 3 worlds
-│   ├── thinkingWorlds.ts       # 3 thinking worlds: patterns, logic, counting
-│   ├── worlds.ts               # 6 block coding worlds with themes, emoji, characters
+│   ├── lessons.ts              # block coding lessons across 10 worlds
+│   ├── thinkingLessons.ts      # 110 brain training lessons across 11 worlds
+│   ├── thinkingWorlds.ts       # 11 thinking worlds
+│   ├── worlds.ts               # 10 block coding worlds with themes, emoji, characters
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), getLevelInfo()
 ├── engine/
 │   └── gameEngine.ts           # parseCodeToActions(), applyAction(), checkWin()
