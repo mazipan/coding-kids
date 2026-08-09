@@ -1165,12 +1165,6 @@ export const LESSONS: Lesson[] = [
                   block: {
                     type: 'move_right',
                     id: 'dbg_c6_3',
-                    next: {
-                      block: {
-                        type: 'collect_item',
-                        id: 'dbg_c6_4',
-                      },
-                    },
                   },
                 },
               },
@@ -1466,12 +1460,6 @@ export const LESSONS: Lesson[] = [
                       type: 'move_down',
                       id: 'dbg_f6_4',
                     },
-                  },
-                },
-                next: {
-                  block: {
-                    type: 'collect_item',
-                    id: 'dbg_f6_5',
                   },
                 },
               },
@@ -1936,12 +1924,6 @@ export const LESSONS: Lesson[] = [
                   type: 'move_right',
                   id: 'dbg_p10_2',
                 },
-              },
-            },
-            next: {
-              block: {
-                type: 'collect_item',
-                id: 'dbg_p10_3',
               },
             },
           },

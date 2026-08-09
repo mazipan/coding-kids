@@ -1829,7 +1829,7 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
         { id: 'only-ice',    emoji: '🧊',  label: { en: 'Only ice can melt',                                id: 'Hanya es yang bisa mencair' } },
         { id: 'night-melts', emoji: '🌙',  label: { en: 'Melting only happens at night',                    id: 'Pencairan hanya terjadi di malam hari' } },
       ],
-      answerId: 'rain-wet',
+      answerId: 'heat-melts',
     },
   },
 

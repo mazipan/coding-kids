@@ -946,7 +946,7 @@ export function ThinkingLessonScreen({
               onClick={() => setShowTutorial(false)}
               className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-black text-sm transition-colors"
             >
-              {t('thinking.tutorial.dismiss')}
+              {t('thinking.tutorial.dismiss')} 🚀
             </button>
           </motion.div>
         )}
