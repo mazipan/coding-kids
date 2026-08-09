@@ -111,6 +111,36 @@ PR is ready to merge.
 
 ---
 
+## PR creation rules
+
+When opening a pull request, follow these rules exactly.
+
+### Title format
+
+```
+{type}: {short description}
+```
+
+`type` must be one of: `feat` · `fix` · `refactor` · `content` · `chore`  
+The title carries the type — **do not add a Type checklist section in the body**.
+
+### Body — required sections (in order)
+
+Fill every section. Use the template at `.github/pull_request_template.md`.
+
+| Section | What to write |
+|---------|---------------|
+| **Issues** | `Closes #N` for every issue this PR resolves. One per line. |
+| **Summary** | One sentence: what changed and why. |
+| **Changes to be aware of** | Non-obvious things a reviewer must know: edge cases, removed behaviour, deliberate trade-offs, gotchas. |
+| **Blast radius** | What could break or be affected. List screens, paths, or data that are impacted. State explicitly when nothing is affected. |
+| **Invariants** | Tick every invariant touched. Note any pre-existing failures that are unrelated to this PR. |
+| **Screenshots** | Before/after for any UI change. Write "No visual change." when nothing changed visually. |
+| **Additional references** | Links to related issues, ADRs, specs, plan files, or external docs. |
+| **Agent attributes** | Model name, harness, and link to the `.ai/plans/{slug}.md` used, or "no plan — doc/config change only". |
+
+---
+
 ## Decision record rule
 
 Any decision made during planning or review that isn't already in `.ai/decisions/` must be recorded in `.ai/decisions/log.md` before the plan is marked `approved`. This includes:
