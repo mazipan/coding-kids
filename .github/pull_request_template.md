@@ -6,14 +6,6 @@
 
 <!-- One sentence: what does this PR do and why? -->
 
-## Type
-
-- [ ] `feat` — new feature
-- [ ] `fix` — bug fix
-- [ ] `refactor` — internal restructure, no user-visible change
-- [ ] `content` — lesson, translation, or copy change only
-- [ ] `chore` — tooling, config, docs
-
 ## Changes to be aware of
 
 <!-- Anything non-obvious a reviewer should know: edge cases, deliberate trade-offs, removed behaviour, gotchas. -->
