@@ -32,7 +32,7 @@ const en: Translations = {
   'landing.paths.stat.puzzles': 'puzzles',
   'landing.paths.stat.ages': 'ages',
 
-  'landing.worlds.title': '21 Worlds to Explore',
+  'landing.worlds.title': '22 Worlds to Explore',
   'landing.worlds.sub': 'Browse every world across both paths — each one teaches a different concept at its own depth.',
   'landing.worlds.blocks.label': 'Block Coding',
   'landing.worlds.thinking.label': 'Brain Training',
@@ -228,7 +228,7 @@ const en: Translations = {
   // ── Path selector ─────────────────────────────
   'path.choose': 'Choose your adventure!',
   'path.blocks.name': 'Block Coding',
-  'path.blocks.desc': 'Write code with visual blocks. 10 themed worlds to explore!',
+  'path.blocks.desc': 'Write code with visual blocks. 11 themed worlds to explore!',
   'path.thinking.name': 'Brain Training',
   'path.thinking.desc': 'Patterns, logic & math puzzles. Build your problem-solving superpowers!',
   'path.start': 'Start',
@@ -289,7 +289,7 @@ const id: Translations = {
   'landing.paths.stat.puzzles': 'teka-teki',
   'landing.paths.stat.ages': 'usia',
 
-  'landing.worlds.title': '21 Dunia untuk Dijelajahi',
+  'landing.worlds.title': '22 Dunia untuk Dijelajahi',
   'landing.worlds.sub': 'Jelajahi setiap dunia di kedua jalur — masing-masing mengajarkan konsep yang berbeda.',
   'landing.worlds.blocks.label': 'Coding Blok',
   'landing.worlds.thinking.label': 'Latihan Otak',
@@ -485,7 +485,7 @@ const id: Translations = {
   // ── Path selector ─────────────────────────────
   'path.choose': 'Pilih petualanganmu!',
   'path.blocks.name': 'Coding Blok',
-  'path.blocks.desc': 'Tulis kode dengan blok visual. 10 dunia bertema untuk dijelajahi!',
+  'path.blocks.desc': 'Tulis kode dengan blok visual. 11 dunia bertema untuk dijelajahi!',
   'path.thinking.name': 'Latihan Otak',
   'path.thinking.desc': 'Puzzle pola, logika & matematika. Kembangkan kemampuan memecahkan masalah!',
   'path.start': 'Mulai',
