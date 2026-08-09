@@ -104,7 +104,7 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                     whileHover={unlocked ? { y: -4 } : {}}
                   >
                     {!unlocked && (
-                      <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/60">
+                      <div className="absolute bottom-3 right-3 z-10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/60">
                         <Lock className="w-3.5 h-3.5 text-white/80 shrink-0" />
                         <div>
                           <div className="text-white/80 font-bold text-xs leading-tight">
@@ -254,7 +254,7 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                       </div>
 
                       {!bonusUnlocked && (
-                        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/60">
+                        <div className="absolute bottom-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/60">
                           <Lock className="w-3.5 h-3.5 text-white/80 shrink-0" />
                           <span className="text-white/70 font-bold text-xs leading-tight">
                             {t('bonus.locked.hint')}
