@@ -68,15 +68,15 @@
   <rect x="740" y="340" width="160" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
   <text x="820" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x2705; 100% Free</text>
 
-  <!-- Ages + no-login: two pills, y=415..459, 20px gap between them -->
-  <rect x="80" y="415" width="155" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.9"/>
-  <text x="158" y="443" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">Ages 5-14</text>
+  <!-- Ages + no-login: two pills, y=400..444 -->
+  <rect x="80" y="400" width="155" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.9"/>
+  <text x="158" y="428" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">Ages 5-14</text>
 
-  <rect x="255" y="415" width="155" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.9"/>
-  <text x="333" y="443" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">No Login</text>
+  <rect x="255" y="400" width="155" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.9"/>
+  <text x="333" y="428" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">No Login</text>
 
-  <!-- Domain: baseline y=540, lighter purple for contrast, 81px gap from badge bottom -->
-  <text x="80" y="540" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#8B5CF6">coding.mazipan.space</text>
+  <!-- Domain: baseline y=530, clear gap from badges -->
+  <text x="80" y="530" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#8B5CF6">coding.mazipan.space</text>
 
   <!-- Right side decorative blocks -->
   <g transform="translate(940, 130)">
