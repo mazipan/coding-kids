@@ -44,23 +44,23 @@
   <text x="180" y="268" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="900" fill="white" letter-spacing="-2">CodeKids</text>
 
   <!-- Tagline -->
-  <text x="80" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#A78BFA">Where Kids Become Coders</text>
+  <text x="80" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#A78BFA">Learn to Code &amp; Train Your Brain!</text>
 
   <!-- Divider -->
   <rect x="80" y="375" width="160" height="4" rx="2" fill="url(#accent)"/>
 
   <!-- Feature pills -->
-  <rect x="80" y="405" width="220" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="190" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">🎮 Visual Blocks</text>
+  <rect x="80" y="405" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="175" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3AE; Block Coding</text>
 
-  <rect x="316" y="405" width="180" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="406" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">🏆 XP &amp; Levels</text>
+  <rect x="286" y="405" width="210" height="44" rx="22" fill="#EC4899" opacity="0.25"/>
+  <text x="391" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FBCFE8" text-anchor="middle">&#x1F9E0; Brain Training</text>
 
-  <rect x="512" y="405" width="200" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="612" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">🌍 6 Epic Worlds</text>
+  <rect x="512" y="405" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="607" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3C6; XP &amp; Levels</text>
 
-  <rect x="728" y="405" width="160" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="808" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">✅ 100% Free</text>
+  <rect x="718" y="405" width="160" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="798" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x2705; 100% Free</text>
 
   <!-- Domain -->
   <text x="80" y="555" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#6D28D9">coding.mazipan.space</text>
@@ -89,5 +89,5 @@
 
   <!-- Ages badge -->
   <rect x="80" y="470" width="260" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.8"/>
-  <text x="210" y="498" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">For Ages 5–14 · No Login Needed</text>
+  <text x="210" y="498" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">For Ages 5&#x2013;14 · No Login Needed</text>
 </svg>
