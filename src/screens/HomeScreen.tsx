@@ -104,13 +104,15 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                     whileHover={unlocked ? { y: -4 } : {}}
                   >
                     {!unlocked && (
-                      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2">
-                        <span className="text-4xl">🔒</span>
-                        <span className="text-white/80 font-bold text-sm">
-                          {t('common.need.xp', { xp: world.unlockAtXP })}
-                        </span>
-                        <div className="text-white/50 text-xs">
-                          {t('common.to.unlock', { xp: world.unlockAtXP - progress.xp })}
+                      <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/60">
+                        <Lock className="w-3.5 h-3.5 text-white/80 shrink-0" />
+                        <div>
+                          <div className="text-white/80 font-bold text-xs leading-tight">
+                            {t('common.need.xp', { xp: world.unlockAtXP })}
+                          </div>
+                          <div className="text-white/50 text-[10px] leading-tight">
+                            {t('common.to.unlock', { xp: world.unlockAtXP - progress.xp })}
+                          </div>
                         </div>
                       </div>
                     )}
@@ -252,9 +254,9 @@ export function HomeScreen({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                       </div>
 
                       {!bonusUnlocked && (
-                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2 px-4 text-center">
-                          <span className="text-4xl">🔒</span>
-                          <span className="text-white/70 font-bold text-xs leading-relaxed">
+                        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/60">
+                          <Lock className="w-3.5 h-3.5 text-white/80 shrink-0" />
+                          <span className="text-white/70 font-bold text-xs leading-tight">
                             {t('bonus.locked.hint')}
                           </span>
                         </div>
