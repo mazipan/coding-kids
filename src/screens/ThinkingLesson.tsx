@@ -15,6 +15,58 @@ interface ThinkingLessonProps {
   nextLessonNumber?: number
 }
 
+type GraphemeSegmenter = {
+  segment: (input: string) => Iterable<{ segment: string }>
+}
+
+function splitGraphemes(text: string): string[] {
+  const SegmenterCtor = (Intl as typeof Intl & {
+    Segmenter?: new (
+      locales?: string | string[],
+      options?: { granularity?: 'grapheme' | 'word' | 'sentence' },
+    ) => GraphemeSegmenter
+  }).Segmenter
+
+  if (typeof SegmenterCtor === 'function') {
+    return [...new SegmenterCtor(undefined, { granularity: 'grapheme' }).segment(text)].map(
+      (part) => part.segment,
+    )
+  }
+  return Array.from(text)
+}
+
+function emojiClusterSizeClass(count: number, surface: 'sequence' | 'option'): string {
+  if (surface === 'sequence') {
+    if (count <= 1) return 'text-3xl sm:text-4xl'
+    if (count <= 3) return 'text-2xl sm:text-3xl'
+    return 'text-xl sm:text-2xl'
+  }
+  if (count <= 2) return 'text-3xl sm:text-4xl'
+  if (count <= 4) return 'text-2xl sm:text-3xl'
+  return 'text-xl sm:text-2xl'
+}
+
+function EmojiCluster({
+  text,
+  surface,
+}: {
+  text: string
+  surface: 'sequence' | 'option'
+}) {
+  const parts = splitGraphemes(text)
+  return (
+    <span
+      className={`inline-flex items-center justify-center gap-0.5 leading-none ${emojiClusterSizeClass(parts.length, surface)}`}
+    >
+      {parts.map((part, i) => (
+        <span key={i} className="shrink-0">
+          {part}
+        </span>
+      ))}
+    </span>
+  )
+}
+
 function PatternPuzzleView({
   puzzle,
   onAnswer,
@@ -34,16 +86,16 @@ function PatternPuzzleView({
         {puzzle.items.map((item, i) => (
           <motion.div
             key={i}
-            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl font-bold ${
+            className={`min-w-14 h-14 sm:min-w-16 sm:h-16 px-2 rounded-2xl flex items-center justify-center font-bold ${
               i === puzzle.blankIndex
-                ? 'bg-purple-500/30 border-2 border-purple-400 border-dashed text-purple-300'
+                ? 'bg-purple-500/30 border-2 border-purple-400 border-dashed text-purple-300 text-3xl sm:text-4xl'
                 : 'bg-white/10 border border-white/20'
             }`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.06 }}
           >
-            {i === puzzle.blankIndex ? '?' : item}
+            {i === puzzle.blankIndex ? '?' : <EmojiCluster text={item} surface="sequence" />}
           </motion.div>
         ))}
       </div>
@@ -58,7 +110,7 @@ function PatternPuzzleView({
               key={i}
               onClick={() => !completed && onAnswer(option)}
               disabled={completed}
-              className={`h-16 sm:h-20 rounded-2xl text-4xl sm:text-5xl flex items-center justify-center border-2 transition-all font-bold ${
+              className={`min-h-16 sm:min-h-20 px-2 py-2 rounded-2xl flex items-center justify-center border-2 transition-all font-bold ${
                 correct
                   ? 'bg-green-500/30 border-green-400 text-green-300'
                   : wrong
@@ -73,7 +125,7 @@ function PatternPuzzleView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              {option}
+              <EmojiCluster text={option} surface="option" />
             </motion.button>
           )
         })}
