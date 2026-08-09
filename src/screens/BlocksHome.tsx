@@ -110,7 +110,7 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                           <div className="text-white/80 font-bold text-xs leading-tight">
                             {t('common.need.xp', { xp: world.unlockAtXP })}
                           </div>
-                          <div className="text-white/50 text-[10px] leading-tight">
+                          <div className="text-amber-400 text-[10px] leading-tight font-bold">
                             {t('common.to.unlock', { xp: world.unlockAtXP - progress.xp })}
                           </div>
                         </div>
