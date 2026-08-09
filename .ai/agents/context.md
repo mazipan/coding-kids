@@ -15,8 +15,8 @@ Build must pass `tsc -b` (strict TypeScript) before Vite bundles. Always run `bu
 |-----|-----------|-------|
 | `/` | `LandingScreen` | Marketing page, scrollable |
 | `/app` | `PathSelector` | Hub — choose Blocks or Brain Training |
-| `/app/blocks` | `HomeScreen` | Block coding world map |
-| `/app/blocks/world/:worldId` | `HomeScreen` | Lesson list for a world |
+| `/app/blocks` | `BlocksHome` | Block coding world map |
+| `/app/blocks/world/:worldId` | `BlocksHome` | Lesson list for a world |
 | `/app/blocks/world/:worldId/:lessonNumber` | `LessonScreen` | Blockly editor + game grid |
 | `/app/thinking` | `ThinkingHome` | Brain training world map |
 | `/app/thinking/world/:worldId` | `ThinkingHome` | Lesson list for a thinking world |
@@ -56,7 +56,7 @@ src/
 │   ├── localize.ts             # localize(field: LocalizedString, language) → string
 │   └── translations.ts         # Flat-key EN + ID strings, exported as TRANSLATIONS
 ├── screens/
-│   ├── HomeScreen.tsx          # Block coding: world map + lesson list
+│   ├── BlocksHome.tsx          # Block coding: world map + lesson list
 │   ├── LandingScreen.tsx       # Marketing landing page (hero, features, worlds, CTA, footer)
 │   ├── LessonScreen.tsx        # Blockly editor + game grid + controls
 │   ├── PathSelector.tsx        # Hub at /app — pick Blocks or Brain Training

@@ -5,16 +5,28 @@ Plan → Plan review → Build → Dual review (code + kid). No exceptions excep
 
 ---
 
+## Verification commands
+
+These three commands are the quality gate. Run them in order — all three must pass before any commit, push, or PR:
+
+```bash
+bunx biome ci          # format + lint
+bun run type-check     # TypeScript 7 strict check
+bun run build          # tsc -b + Vite bundle
+```
+
+Never use `bunx tsc` directly — it may pull a stale version from bun's global cache instead of the local TypeScript 7.
+
 ## Before starting any task
 
 1. Read `agents.md` (root index) and your agent definition in `.ai/agents/`
 2. Read the relevant spec(s) in `.ai/specs/`
-3. Run `bun run build` — confirm the repo is clean before touching anything
+3. Run all three verification commands — confirm the repo is clean before touching anything
 4. Read the source file(s) relevant to the task — never guess at signatures or types
 
 ## After every change
 
-1. `bun run build` — must pass with zero TypeScript errors
+1. Run all three verification commands — all must pass with zero errors
 2. Apply any spec changes drafted in the plan
 3. Update the plan status and add implementation notes
 4. Commit with a descriptive message referencing the plan slug
@@ -47,7 +59,7 @@ Before adding any UI copy, feature, or UX flow, ask: **does this serve Rafi (age
 - Add analytics, tracking scripts, or telemetry
 - Collect or transmit any personal data
 - Add features that require a server (including serverless functions)
-- Break `bun run build` (INV-C3)
+- Let any of the three verification commands fail before pushing (INV-C1, INV-C3)
 - Hardcode user-visible strings — all copy through `t()` (INV-C2)
 - Change a localStorage key name without a migration plan (INV-C4)
 - Add a new dependency without it appearing in the plan
