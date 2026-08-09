@@ -42,9 +42,6 @@ jobs:
 
       - name: Build site
         run: bun run build
-        env:
-          VITE_COMMIT_SHA: ${{ env.SHORT_SHA }}
-          VITE_BUILD_DATE: ${{ env.BUILD_DATE }}
 
       - name: Deploy to Netlify
         id: netlify

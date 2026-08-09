@@ -5,6 +5,7 @@ import { WORLDS } from '../data/worlds'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import { Logo } from '../components/Logo'
+import { Footer } from '../components/Footer'
 
 interface LandingScreenProps {
   onStart: () => void
@@ -506,43 +507,7 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
         </div>
       </section>
 
-      {/* ── FOOTER ───────────────────────────────── */}
-      <footer className="py-12 px-5 sm:px-8 border-t border-white/[0.06]">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <Logo size={30} />
-            <div>
-              <div className="font-bold text-white/60 text-sm leading-none">CodeKids</div>
-            </div>
-          </div>
-          <div className="text-center sm:text-right">
-            <p className="text-white/40 text-sm font-medium mb-1">{t('landing.footer')}</p>
-            <p className="text-white/20 text-xs">{t('landing.footer.free')}</p>
-            {import.meta.env.VITE_COMMIT_SHA && (
-              <p className="text-white/40 text-xs mt-1 font-mono">
-                <a
-                  href={`https://github.com/mazipan/coding-kids/commit/${import.meta.env.VITE_COMMIT_SHA}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-white/60 transition-colors"
-                >
-                  {import.meta.env.VITE_COMMIT_SHA}
-                </a>
-                {import.meta.env.VITE_BUILD_DATE && (
-                  <span className="text-white/30">
-                    {' · '}
-                    {new Date(import.meta.env.VITE_BUILD_DATE).toLocaleDateString(undefined, {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </span>
-                )}
-              </p>
-            )}
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, useNavigate, useParams, Outlet } from 'react-router-dom'
 import { LanguageProvider } from './i18n/LanguageProvider'
 import { Header } from './components/Header'
+import { Footer } from './components/Footer'
 import { HomeScreen } from './screens/HomeScreen'
 import { LessonScreen } from './screens/LessonScreen'
 import { LandingScreen } from './screens/LandingScreen'
@@ -45,6 +46,7 @@ function GameLayout() {
       <main className="relative z-10">
         <Outlet />
       </main>
+      <Footer />
     </div>
   )
 }
