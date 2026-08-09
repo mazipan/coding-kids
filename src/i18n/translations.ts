@@ -50,6 +50,11 @@ const en: Translations = {
   'landing.footer': 'Made with ❤️ for young coders everywhere',
   'landing.footer.free': 'Free · No signup · No ads · No data collected',
 
+  // ── Footer ──────────────────────────────────
+  'footer.copyright': '© {year}-present Irfan Maulana & Claude',
+  'footer.updated_at': 'Updated at',
+  'footer.source': 'Source',
+
   // ── Navigation ──────────────────────────────
   'nav.back': 'Back',
   'nav.home': 'Home',
@@ -297,6 +302,11 @@ const id: Translations = {
 
   'landing.footer': 'Dibuat dengan ❤️ untuk para coder muda di seluruh dunia',
   'landing.footer.free': 'Gratis · Tanpa daftar · Tanpa iklan · Tanpa pengumpulan data',
+
+  // ── Footer ──────────────────────────────────
+  'footer.copyright': '© {year}-sekarang Irfan Maulana & Claude',
+  'footer.updated_at': 'Diperbarui pada',
+  'footer.source': 'Sumber',
 
   // ── Navigation ──────────────────────────────
   'nav.back': 'Kembali',

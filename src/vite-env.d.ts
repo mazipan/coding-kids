@@ -1,10 +1,4 @@
 /// <reference types="vite/client" />
 
-interface ImportMetaEnv {
-  readonly VITE_COMMIT_SHA: string | undefined
-  readonly VITE_BUILD_DATE: string | undefined
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv
-}
+declare const __COMMIT_SHA__: string
+declare const __BUILD_DATE__: string
