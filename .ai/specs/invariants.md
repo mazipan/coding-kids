@@ -93,3 +93,24 @@ Every key in `translations.ts` must have a non-empty English string. Indonesian 
 
 **INV-I2 — No language-specific layout assumptions**  
 UI layout must not assume English word length. Use truncation or wrapping — never fixed-width containers that clip translated text.
+
+---
+
+## Content quality invariants
+
+These apply to every lesson addition or modification — both block coding and thinking path.
+
+**INV-Q1 — Lesson uniqueness within a world**  
+No two lessons in the same world may share both the same core mechanic (puzzle structure or operation type) AND the same scenario (topic or theme). Swapping emoji while keeping the same structure, or changing numbers while keeping the same operation, is a duplicate and is not allowed.
+
+**INV-Q2 — Cross-world scenario freshness**  
+A scenario (e.g. rain, apples, a specific animal) may appear in more than one world only when it is applied from a genuinely different cognitive angle in each. Reusing the same scenario with only the world framing changed is a violation.
+
+**INV-Q3 — True-false answer balance**  
+Any world that contains multiple true-false puzzles must have a mix of true and false answers. A run of 3 or more consecutive same-answer true-false puzzles in a single world is a violation — a child must not be able to score 100% by always tapping the same choice.
+
+**INV-Q4 — Plausible distractors**  
+Every option in a 4-option puzzle must be plausible to a child of the target age. Nonsensical filler options added only to reach the 4-option count are not allowed.
+
+**INV-Q5 — Real difficulty curve**  
+Lessons 0–4 in any world must be genuinely easier for the target age than lessons 5–9. Difficulty must come from increased cognitive load — compound conditions, longer sequences, inverse operations, multi-step reasoning — not merely from larger numbers or longer text.

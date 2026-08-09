@@ -44,3 +44,7 @@ Before adding any UI copy, feature, or UX flow, ask: **does this serve Rafi (age
 - Change a localStorage key name without a migration plan (INV-C4)
 - Add a new dependency without it appearing in the plan
 - Merge to master without both reviewer-code and reviewer-kid passing
+- Add a lesson whose core mechanic AND scenario duplicate an existing lesson in the same world (INV-Q1)
+- Add true-false puzzles that create a run of 3+ same-answer questions in one world (INV-Q3)
+- Add a puzzle with nonsensical filler distractors — all options must be plausible (INV-Q4)
+- Skip the content audit when a plan adds or modifies lessons (see planner.md step 5)

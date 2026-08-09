@@ -231,6 +231,33 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
 
 ---
 
+## Lesson content quality rules
+
+Apply these rules every time a lesson is added or changed, for both the blocks path and the thinking path. They enforce the invariants in `invariants.md` (INV-Q1 through INV-Q5) at the authoring stage.
+
+### Before writing a new lesson
+
+Run this audit against all existing lessons in the target world:
+
+| Check | What to look for |
+|-------|-----------------|
+| Mechanic + scenario uniqueness | Does any existing lesson use the same operation/structure **and** the same topic/theme? If yes, change one or both. |
+| Scenario reuse | Does the same scenario appear in another lesson in this world? Use it only if the cognitive angle is genuinely different. |
+| True-false balance | Will adding this puzzle create a run of 3+ identical answers? If so, flip the new lesson's answer or swap it for a different puzzle type. |
+| Distractor quality | Are all 4 options something a child might genuinely believe? Remove any obviously wrong filler. |
+| Difficulty fit | Does the lesson's cognitive load match its position (0–4 easy, 5–9 harder)? |
+
+### Common failure patterns to avoid
+
+- **Number-swap duplicates** — same operation (e.g. reverse subtraction) with only the numbers changed
+- **Emoji-swap duplicates** — same sequence structure (e.g. ABAB) with only the emoji changed
+- **All-true / all-false runs** — 3+ consecutive true-false puzzles with the same answer in one world
+- **Overused scenarios** — rain→wet, apples in baskets, and cats vs dogs appear across too many worlds already; use only if genuinely distinct
+- **Trivially obvious true-false** — statements so obvious ("ice melts when heated") that no child of the target age would hesitate; replace with content that requires actual reasoning
+- **Cosmetic difficulty increase** — larger numbers or longer text that doesn't add cognitive load; use compound conditions, inverse operations, or multi-step chains instead
+
+---
+
 ## Adding a new thinking world
 
 1. Add a `ThinkingWorldId` literal to the union in `src/types/index.ts`:

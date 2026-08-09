@@ -25,7 +25,16 @@ Receives a feature request, bug report, or improvement idea. Produces a plan doc
 
 4. **Consider alternatives.** For non-trivial decisions, note at least one alternative approach and explain why it was rejected.
 
-5. **Write the plan.** Fill in `.ai/plans/_template.md`. The plan must be detailed enough that the builder agent can implement without making design decisions.
+5. **Content audit (lesson additions or edits only).** If the plan adds or modifies any lesson, before drafting implementation steps:
+   - List the core mechanic and scenario of every existing lesson in the affected world(s)
+   - Confirm the planned content does not duplicate any existing mechanic + scenario pair (INV-Q1)
+   - Confirm any reused scenario is applied from a genuinely different cognitive angle (INV-Q2)
+   - Check true-false answer balance in the world — flag if adding a same-answer puzzle would create a run of 3+ identical answers (INV-Q3)
+   - Verify distractors are plausible, not filler (INV-Q4)
+   - Verify the lesson's difficulty is appropriate for its position in the 0–9 curve (INV-Q5)
+   If any check fails, redesign the lesson's mechanic or scenario before writing the implementation steps. Do not hand the builder a plan with duplicate content.
+
+6. **Write the plan.** Fill in `.ai/plans/_template.md`. The plan must be detailed enough that the builder agent can implement without making design decisions.
 
 6. **Update specs.** If the change alters the store schema, adds a translation key section, introduces a new world field, etc., draft the spec update inline in the plan's "Spec changes" section. The builder will apply these after implementation.
 
