@@ -3348,6 +3348,742 @@ export const LESSONS: Lesson[] = [
     ],
     starThresholds: [336, 240, 200, 160],
   },
+
+  // ─────────────────────────────────────────────
+  // BONUS WORLD 4: BUG LAB — Debugging
+  // ─────────────────────────────────────────────
+  {
+    id: 'debugging-1',
+    worldId: 'debugging',
+    number: 1,
+    isBuggy: true,
+    title: { en: 'Wrong Way, Robot!', id: 'Jalan Salah, Robot!' },
+    story: {
+      en: "Bugsy left a move block pointing the wrong way! The robot keeps backtracking instead of reaching the wrench. Find the bad block and flip it.",
+      id: 'Bugsy meninggalkan blok gerak yang mengarah ke arah yang salah! Robot terus berbalik arah dan tidak bisa mencapai kunci. Temukan blok yang salah dan balikkan.',
+    },
+    mascotMessage: {
+      en: "Watch where the robot goes — one block sends it the wrong way! 🐛 The fix is just one block.",
+      id: 'Perhatikan ke mana robot pergi — satu blok mengirimnya ke arah yang salah! 🐛 Perbaikannya hanya satu blok.',
+    },
+    gridRows: 3,
+    gridCols: 6,
+    cells: emptyGrid(3, 6),
+    startPos: [1, 0],
+    items: [{ id: 'wrench-1', pos: [1, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 4,
+    xpReward: 75,
+    hints: [
+      { en: 'Run the code and watch which step goes backwards.', id: 'Jalankan kode dan perhatikan langkah mana yang berbalik.' },
+      { en: 'The robot needs to go right 4 times total.', id: 'Robot perlu bergerak ke kanan sebanyak 4 kali.' },
+    ],
+    starThresholds: [10, 7, 5, 4],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'move_right',
+            id: 'dbg_d1_1',
+            x: 30,
+            y: 50,
+            next: {
+              block: {
+                type: 'move_right',
+                id: 'dbg_d1_2',
+                next: {
+                  block: {
+                    type: 'move_left',
+                    id: 'dbg_d1_3',
+                    next: {
+                      block: {
+                        type: 'move_right',
+                        id: 'dbg_d1_4',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-2',
+    worldId: 'debugging',
+    number: 2,
+    isBuggy: true,
+    title: { en: 'Short Circuit', id: 'Sirkuit Pendek' },
+    story: {
+      en: "Bugsy's loop stops too early — the repeat count is wrong! The robot runs out of steps before reaching the wrench. Find the number and fix it.",
+      id: 'Perulangan Bugsy berhenti terlalu awal — jumlah pengulangannya salah! Robot kehabisan langkah sebelum mencapai kunci. Temukan angkanya dan perbaiki.',
+    },
+    mascotMessage: {
+      en: "Count the columns between start and goal, then check the number inside the repeat block. 🐛",
+      id: 'Hitung kolom antara awal dan tujuan, lalu periksa angka di dalam blok pengulangan. 🐛',
+    },
+    gridRows: 3,
+    gridCols: 8,
+    cells: emptyGrid(3, 8),
+    startPos: [1, 0],
+    items: [{ id: 'wrench-2', pos: [1, 5] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 3,
+    xpReward: 80,
+    hints: [
+      { en: 'The robot stops at column 3. Where does it need to go?', id: 'Robot berhenti di kolom 3. Di mana seharusnya ia pergi?' },
+      { en: 'Change the number in the repeat block to the right count.', id: 'Ubah angka di blok pengulangan ke jumlah yang benar.' },
+    ],
+    starThresholds: [9, 6, 4, 3],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d2_1',
+            x: 30,
+            y: 50,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 3 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_right',
+                  id: 'dbg_d2_2',
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-3',
+    worldId: 'debugging',
+    number: 3,
+    isBuggy: true,
+    title: { en: 'Wrong Order', id: 'Urutan Salah' },
+    story: {
+      en: "The two loops are in the wrong order! Going right first sends the robot straight into a warning sign. Swap the loops and the path opens up.",
+      id: 'Dua perulangan berada dalam urutan yang salah! Bergerak ke kanan lebih dulu mengirim robot langsung ke tanda peringatan. Tukar perulangan dan jalan pun terbuka.',
+    },
+    mascotMessage: {
+      en: "There's a blocker on row 0 — think about which direction to move first! 🐛",
+      id: 'Ada penghalang di baris 0 — pikirkan arah mana yang harus digerakkan terlebih dahulu! 🐛',
+    },
+    gridRows: 4,
+    gridCols: 6,
+    cells: (() => {
+      const g = emptyGrid(4, 6)
+      g[0][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-3', pos: [3, 5] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 90,
+    hints: [
+      { en: 'Run the code — on which step does the robot crash?', id: 'Jalankan kode — pada langkah mana robot bertabrakan?' },
+      { en: 'Try moving down first to avoid the obstacle on row 0.', id: 'Coba bergerak ke bawah terlebih dahulu untuk menghindari rintangan di baris 0.' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d3_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 5 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_right',
+                  id: 'dbg_d3_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d3_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 3 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_down',
+                      id: 'dbg_d3_4',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-4',
+    worldId: 'debugging',
+    number: 4,
+    isBuggy: true,
+    title: { en: 'Upside-Down Loop', id: 'Perulangan Terbalik' },
+    story: {
+      en: "Bugsy mixed up the directions! The loop moves the robot up instead of down — and it crashes on the very first step. Flip the direction block inside the loop.",
+      id: 'Bugsy mengacaukan arahnya! Perulangan menggerakkan robot ke atas dan bukan ke bawah — dan robot langsung bertabrakan pada langkah pertama. Balikkan blok arah di dalam perulangan.',
+    },
+    mascotMessage: {
+      en: "The wrench is below — so which direction should the robot go? 🐛",
+      id: 'Kunci ada di bawah — jadi ke arah mana seharusnya robot bergerak? 🐛',
+    },
+    gridRows: 6,
+    gridCols: 4,
+    cells: emptyGrid(6, 4),
+    startPos: [0, 1],
+    items: [{ id: 'wrench-4', pos: [4, 1] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 3,
+    xpReward: 90,
+    hints: [
+      { en: "The robot crashes immediately. What direction causes an instant crash from row 0?", id: 'Robot langsung bertabrakan. Arah mana yang menyebabkan tabrakan langsung dari baris 0?' },
+      { en: 'The wrench is 4 rows below the start.', id: 'Kunci berada 4 baris di bawah posisi awal.' },
+    ],
+    starThresholds: [9, 6, 4, 3],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d4_1',
+            x: 30,
+            y: 50,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 4 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_up',
+                  id: 'dbg_d4_2',
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-5',
+    worldId: 'debugging',
+    number: 5,
+    isBuggy: true,
+    title: { en: 'Almost There', id: 'Hampir Sampai' },
+    story: {
+      en: "The robot moves down the right number of steps — but the second loop is too short! It stops two squares away from the wrench. Fix the count in the second loop.",
+      id: 'Robot bergerak ke bawah dengan jumlah langkah yang benar — tapi perulangan kedua terlalu pendek! Robot berhenti dua kotak dari kunci. Perbaiki jumlah di perulangan kedua.',
+    },
+    mascotMessage: {
+      en: "Run the code and count how many squares short the robot falls. 🐛 Check the second loop's number.",
+      id: 'Jalankan kode dan hitung berapa kotak kurangnya robot. 🐛 Periksa angka perulangan kedua.',
+    },
+    gridRows: 5,
+    gridCols: 6,
+    cells: emptyGrid(5, 6),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-5', pos: [4, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 100,
+    hints: [
+      { en: 'The robot ends up at row 4, column 2. Where does it need to be?', id: 'Robot berakhir di baris 4, kolom 2. Di mana seharusnya ia berada?' },
+      { en: 'Count the columns between column 0 and the wrench to find the right loop count.', id: 'Hitung kolom antara kolom 0 dan kunci untuk menemukan jumlah perulangan yang benar.' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d5_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 4 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_down',
+                  id: 'dbg_d5_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d5_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 2 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_right',
+                      id: 'dbg_d5_4',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-6',
+    worldId: 'debugging',
+    number: 6,
+    isBuggy: true,
+    title: { en: 'Double Trouble', id: 'Masalah Ganda' },
+    story: {
+      en: "Two bugs — one in each loop! The directions are completely backwards. Fix both loop directions to guide the robot up and to the right.",
+      id: 'Dua bug — satu di setiap perulangan! Arahnya sepenuhnya terbalik. Perbaiki kedua arah perulangan untuk mengarahkan robot ke atas dan ke kanan.',
+    },
+    mascotMessage: {
+      en: "Fix the first crash, then run again — there's a second bug waiting! 🐛",
+      id: 'Perbaiki tabrakan pertama, lalu jalankan lagi — ada bug kedua yang menunggu! 🐛',
+    },
+    gridRows: 5,
+    gridCols: 7,
+    cells: emptyGrid(5, 7),
+    startPos: [4, 0],
+    items: [{ id: 'wrench-6', pos: [0, 6] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 110,
+    hints: [
+      { en: 'The robot starts at the bottom-left. The wrench is at the top-right.', id: 'Robot mulai di kiri bawah. Kunci ada di kanan atas.' },
+      { en: 'After fixing the first loop, run again to discover the second bug.', id: 'Setelah memperbaiki perulangan pertama, jalankan lagi untuk menemukan bug kedua.' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d6_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 4 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_down',
+                  id: 'dbg_d6_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d6_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 6 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_left',
+                      id: 'dbg_d6_4',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-7',
+    worldId: 'debugging',
+    number: 7,
+    isBuggy: true,
+    title: { en: 'Two Wrong Counts', id: 'Dua Jumlah Salah' },
+    story: {
+      en: "Both loops have the wrong count! The robot stops far short of the wrench. You need to find the right number for each loop.",
+      id: 'Kedua perulangan memiliki jumlah yang salah! Robot berhenti jauh sebelum mencapai kunci. Kamu perlu menemukan angka yang benar untuk setiap perulangan.',
+    },
+    mascotMessage: {
+      en: "The goal is at row 5, column 6. How far down and right does the robot need to go? 🐛",
+      id: 'Tujuan ada di baris 5, kolom 6. Seberapa jauh ke bawah dan ke kanan robot harus pergi? 🐛',
+    },
+    gridRows: 6,
+    gridCols: 7,
+    cells: emptyGrid(6, 7),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-7', pos: [5, 6] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 120,
+    hints: [
+      { en: 'Count the rows between start and goal for the first loop.', id: 'Hitung baris antara awal dan tujuan untuk perulangan pertama.' },
+      { en: 'Count the columns between start and goal for the second loop.', id: 'Hitung kolom antara awal dan tujuan untuk perulangan kedua.' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d7_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 2 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_down',
+                  id: 'dbg_d7_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d7_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 3 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_right',
+                      id: 'dbg_d7_4',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-8',
+    worldId: 'debugging',
+    number: 8,
+    isBuggy: true,
+    title: { en: 'Direction AND Count Bug', id: 'Bug Arah DAN Jumlah' },
+    story: {
+      en: "The first loop has two bugs at once — the direction is wrong AND the count is off! Fix both to reach the wrench in the corner.",
+      id: 'Perulangan pertama memiliki dua bug sekaligus — arahnya salah DAN jumlahnya meleset! Perbaiki keduanya untuk mencapai kunci di sudut.',
+    },
+    mascotMessage: {
+      en: "Even after fixing the direction, the robot won't reach the goal. Keep debugging! 🐛",
+      id: 'Bahkan setelah memperbaiki arahnya, robot tidak akan mencapai tujuan. Terus debug! 🐛',
+    },
+    gridRows: 5,
+    gridCols: 7,
+    cells: emptyGrid(5, 7),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-8', pos: [4, 6] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 130,
+    hints: [
+      { en: 'Run the code. The robot crashes right away — what direction causes that?', id: 'Jalankan kode. Robot langsung bertabrakan — arah mana yang menyebabkan itu?' },
+      { en: 'After fixing the direction, run again. Is the count right for reaching row 4?', id: 'Setelah memperbaiki arahnya, jalankan lagi. Apakah jumlahnya benar untuk mencapai baris 4?' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d8_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 3 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_up',
+                  id: 'dbg_d8_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d8_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 6 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_right',
+                      id: 'dbg_d8_4',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-9',
+    worldId: 'debugging',
+    number: 9,
+    isBuggy: true,
+    title: { en: 'Triple Mismatch', id: 'Tiga Ketidakcocokan' },
+    story: {
+      en: "Three loops — three wrong counts! Each number is off. The robot crashes on the third loop trying to go past the grid edge. Fix all three counts to complete the L-shaped path.",
+      id: 'Tiga perulangan — tiga jumlah yang salah! Setiap angka meleset. Robot bertabrakan pada perulangan ketiga saat mencoba melewati tepi grid. Perbaiki ketiga jumlahnya untuk menyelesaikan jalur berbentuk L.',
+    },
+    mascotMessage: {
+      en: "Fix one count, run again, check progress. Repeat until all three are right! 🐛",
+      id: 'Perbaiki satu jumlah, jalankan lagi, periksa kemajuan. Ulangi sampai ketiganya benar! 🐛',
+    },
+    gridRows: 6,
+    gridCols: 8,
+    cells: emptyGrid(6, 8),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-9', pos: [5, 7] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 9,
+    xpReward: 140,
+    hints: [
+      { en: 'The path goes: down to row 2, right to column 7, then down to row 5.', id: 'Jalurnya: turun ke baris 2, kanan ke kolom 7, lalu turun ke baris 5.' },
+      { en: 'Work out the count for each leg of the path one at a time.', id: 'Hitung jumlah untuk setiap segmen jalur satu per satu.' },
+    ],
+    starThresholds: [27, 18, 12, 9],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d9_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 5 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_down',
+                  id: 'dbg_d9_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d9_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 3 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_right',
+                      id: 'dbg_d9_4',
+                    },
+                  },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d9_5',
+                    inputs: {
+                      TIMES: {
+                        shadow: {
+                          type: 'math_number',
+                          fields: { NUM: 2 },
+                        },
+                      },
+                      DO: {
+                        block: {
+                          type: 'move_down',
+                          id: 'dbg_d9_6',
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-10',
+    worldId: 'debugging',
+    number: 10,
+    isBuggy: true,
+    title: { en: 'The Final Bug Hunt', id: 'Perburuan Bug Terakhir' },
+    story: {
+      en: "Two separate bugs hidden in two loops — one makes the robot fall off the edge, and the other leaves it short. Watch out for the warning sign blocking row 0! Fix both counts to finish the mission.",
+      id: 'Dua bug tersembunyi di dua perulangan — satu membuat robot jatuh dari tepi, dan yang lain membuatnya kurang. Hati-hati dengan tanda peringatan yang menghalangi baris 0! Perbaiki kedua jumlahnya untuk menyelesaikan misi.',
+    },
+    mascotMessage: {
+      en: "Two bugs, two fixes. Find the first crash, fix it, then track down the second bug. 🐛",
+      id: 'Dua bug, dua perbaikan. Temukan tabrakan pertama, perbaiki, lalu lacak bug kedua. 🐛',
+    },
+    gridRows: 5,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(5, 8)
+      g[0][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-10', pos: [4, 7] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 150,
+    hints: [
+      { en: 'The first loop crashes going down. How many rows to the goal row?', id: 'Perulangan pertama bertabrakan saat turun. Berapa baris menuju baris tujuan?' },
+      { en: 'After fixing the crash, run again — the robot stops short. Fix the second count too.', id: 'Setelah memperbaiki tabrakan, jalankan lagi — robot berhenti sebelum sampai. Perbaiki jumlah kedua juga.' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d10_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: 'math_number',
+                  fields: { NUM: 6 },
+                },
+              },
+              DO: {
+                block: {
+                  type: 'move_down',
+                  id: 'dbg_d10_2',
+                },
+              },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d10_3',
+                inputs: {
+                  TIMES: {
+                    shadow: {
+                      type: 'math_number',
+                      fields: { NUM: 5 },
+                    },
+                  },
+                  DO: {
+                    block: {
+                      type: 'move_right',
+                      id: 'dbg_d10_4',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
 ]
 
 export function getLessonsByWorld(worldId: string): Lesson[] {
