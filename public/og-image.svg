@@ -31,63 +31,68 @@
   </g>
 
   <!-- Glow orbs -->
-  <circle cx="200" cy="315" r="200" fill="#7C3AED" opacity="0.12"/>
-  <circle cx="1000" cy="315" r="180" fill="#EC4899" opacity="0.10"/>
+  <circle cx="200" cy="315" r="220" fill="#7C3AED" opacity="0.12"/>
+  <circle cx="1000" cy="315" r="200" fill="#EC4899" opacity="0.10"/>
 
-  <!-- Logo icon -->
-  <rect x="80" y="215" width="80" height="80" rx="18" fill="url(#logoGrad)"/>
-  <path d="M108 235L96 255L108 275" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M132 235L144 255L132 275" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M127 230L113 280" stroke="#E9D5FF" stroke-width="4" stroke-linecap="round"/>
+  <!-- Logo icon: y=140..220, vertically aligned with "CodeKids" text -->
+  <rect x="80" y="140" width="80" height="80" rx="18" fill="url(#logoGrad)"/>
+  <path d="M108 160L96 180L108 200" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M132 160L144 180L132 200" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M127 155L113 205" stroke="#E9D5FF" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- App name -->
-  <text x="180" y="268" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="900" fill="white" letter-spacing="-2">CodeKids</text>
+  <!-- App name: baseline y=205, cap-height ~52px → top ≈ y=153, matches logo top -->
+  <text x="180" y="205" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="900" fill="white" letter-spacing="-2">CodeKids</text>
 
   <!-- Tagline -->
-  <text x="80" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#A78BFA">Learn to Code &amp; Train Your Brain!</text>
+  <text x="80" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#A78BFA">Learn to Code &amp; Train Your Brain!</text>
 
   <!-- Divider -->
-  <rect x="80" y="375" width="160" height="4" rx="2" fill="url(#accent)"/>
+  <rect x="80" y="315" width="160" height="4" rx="2" fill="url(#accent)"/>
 
-  <!-- Feature pills -->
-  <rect x="80" y="405" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="175" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3AE; Block Coding</text>
+  <!-- Feature pills: y=340..384 -->
+  <rect x="80" y="340" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="175" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3AE; Block Coding</text>
 
-  <rect x="286" y="405" width="210" height="44" rx="22" fill="#EC4899" opacity="0.25"/>
-  <text x="391" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FBCFE8" text-anchor="middle">&#x1F9E0; Brain Training</text>
+  <rect x="286" y="340" width="210" height="44" rx="22" fill="#EC4899" opacity="0.25"/>
+  <text x="391" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FBCFE8" text-anchor="middle">&#x1F9E0; Brain Training</text>
 
-  <rect x="512" y="405" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="607" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3C6; XP &amp; Levels</text>
+  <rect x="512" y="340" width="190" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="607" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x1F3C6; XP &amp; Levels</text>
 
-  <rect x="718" y="405" width="160" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
-  <text x="798" y="433" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x2705; 100% Free</text>
+  <rect x="718" y="340" width="160" height="44" rx="22" fill="#7C3AED" opacity="0.3"/>
+  <text x="798" y="368" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#C4B5FD" text-anchor="middle">&#x2705; 100% Free</text>
 
-  <!-- Domain -->
-  <text x="80" y="555" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#6D28D9">coding.mazipan.space</text>
+  <!-- Ages badge: y=415..459 (31px gap from pills) -->
+  <rect x="80" y="415" width="260" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.9"/>
+  <text x="210" y="443" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">For Ages 5&#x2013;14 · No Login Needed</text>
+
+  <!-- Domain: baseline y=535, top ≈ y=518 → 59px gap from badge bottom (459) -->
+  <text x="80" y="535" font-family="system-ui, sans-serif" font-size="24" font-weight="600" fill="#6D28D9">coding.mazipan.space</text>
 
   <!-- Right side decorative blocks -->
-  <g transform="translate(950, 160)">
-    <rect width="180" height="52" rx="10" fill="#7C3AED" opacity="0.5"/>
+  <g transform="translate(940, 130)">
+    <rect width="190" height="52" rx="10" fill="#7C3AED" opacity="0.5"/>
     <rect x="12" y="14" width="24" height="24" rx="6" fill="#C4B5FD"/>
-    <rect x="48" y="20" width="100" height="12" rx="6" fill="#E9D5FF"/>
+    <rect x="48" y="20" width="110" height="12" rx="6" fill="#E9D5FF"/>
   </g>
-  <g transform="translate(980, 230)">
-    <rect width="180" height="52" rx="10" fill="#EC4899" opacity="0.4"/>
-    <rect x="12" y="14" width="24" height="24" rx="6" fill="#FBCFE8"/>
-    <rect x="48" y="20" width="80" height="12" rx="6" fill="#FCE7F3"/>
-  </g>
-  <g transform="translate(950, 300)">
-    <rect width="180" height="52" rx="10" fill="#7C3AED" opacity="0.5"/>
-    <rect x="12" y="14" width="24" height="24" rx="6" fill="#C4B5FD"/>
-    <rect x="48" y="20" width="120" height="12" rx="6" fill="#E9D5FF"/>
-  </g>
-  <g transform="translate(980, 370)">
-    <rect width="180" height="52" rx="10" fill="#EC4899" opacity="0.4"/>
+  <g transform="translate(970, 205)">
+    <rect width="190" height="52" rx="10" fill="#EC4899" opacity="0.4"/>
     <rect x="12" y="14" width="24" height="24" rx="6" fill="#FBCFE8"/>
     <rect x="48" y="20" width="90" height="12" rx="6" fill="#FCE7F3"/>
   </g>
-
-  <!-- Ages badge -->
-  <rect x="80" y="470" width="260" height="44" rx="22" fill="#1C1440" stroke="#7C3AED" stroke-width="1.5" opacity="0.8"/>
-  <text x="210" y="498" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#A78BFA" text-anchor="middle">For Ages 5&#x2013;14 · No Login Needed</text>
+  <g transform="translate(940, 280)">
+    <rect width="190" height="52" rx="10" fill="#7C3AED" opacity="0.5"/>
+    <rect x="12" y="14" width="24" height="24" rx="6" fill="#C4B5FD"/>
+    <rect x="48" y="20" width="130" height="12" rx="6" fill="#E9D5FF"/>
+  </g>
+  <g transform="translate(970, 355)">
+    <rect width="190" height="52" rx="10" fill="#EC4899" opacity="0.4"/>
+    <rect x="12" y="14" width="24" height="24" rx="6" fill="#FBCFE8"/>
+    <rect x="48" y="20" width="100" height="12" rx="6" fill="#FCE7F3"/>
+  </g>
+  <g transform="translate(940, 430)">
+    <rect width="190" height="52" rx="10" fill="#7C3AED" opacity="0.35"/>
+    <rect x="12" y="14" width="24" height="24" rx="6" fill="#C4B5FD"/>
+    <rect x="48" y="20" width="80" height="12" rx="6" fill="#E9D5FF"/>
+  </g>
 </svg>
