@@ -43,6 +43,13 @@ Reviews the builder's implementation. Thinks as an experienced TypeScript/React 
 - [ ] No large new dependency added without a plan entry
 - [ ] If Blockly, React, or Framer Motion imports changed, verify chunk sizes are still reasonable
 
+### Content quality (skip if no lesson data was changed)
+- [ ] INV-Q1 — No two lessons in the same world share both the same mechanic AND the same scenario
+- [ ] INV-Q2 — Any scenario reused across worlds is applied from a different cognitive angle in each
+- [ ] INV-Q3 — True-false answer balance checked: no run of 3+ same-answer puzzles in one world
+- [ ] INV-Q4 — All distractors are plausible for the target age; no nonsensical filler options
+- [ ] INV-Q5 — Lesson difficulty is appropriate for its position (0–4 easy, 5–9 harder via increased cognitive load)
+
 ## Output
 
 A written review with:
