@@ -47,6 +47,12 @@ const en: Translations = {
   'landing.trust.edu.title': 'Actually educational',
   'landing.trust.edu.desc': 'Aligned with computational thinking curriculum — teaching sequences, logic, and reasoning, not just button-pressing.',
 
+  'landing.origin.label': 'The Story Behind It',
+  'landing.origin.title': 'Built by a parent, for his kids',
+  'landing.origin.desc': 'CodeKids started as a personal weekend project. A parent wanted his children to discover the joy of coding and critical thinking — without ads, distractions, or sign-ups. Every puzzle and lesson has been playtested by real kids.',
+  'landing.origin.tag.built': 'Built by a parent',
+  'landing.origin.tag.tested': 'Tested by real kids',
+
   'landing.final.title': 'The Adventure Starts Here',
   'landing.final.sub': 'No signup, no downloads, no cost — just pick a path and play.',
   'landing.final.cta': 'Start Your Adventure Now',
@@ -303,6 +309,12 @@ const id: Translations = {
   'landing.trust.private.desc': 'Tidak perlu akun. Tidak perlu email. Tidak ada data pribadi yang pernah meninggalkan perangkat.',
   'landing.trust.edu.title': 'Sungguh edukatif',
   'landing.trust.edu.desc': 'Selaras dengan kurikulum berpikir komputasi — mengajarkan urutan, logika, dan penalaran, bukan sekadar menekan tombol.',
+
+  'landing.origin.label': 'Cerita di Baliknya',
+  'landing.origin.title': 'Dibuat oleh orang tua, untuk anaknya',
+  'landing.origin.desc': 'CodeKids bermula dari proyek pribadi akhir pekan. Seorang ayah ingin anak-anaknya merasakan keseruan coding dan berpikir kritis — tanpa iklan, gangguan, atau perlu mendaftar. Setiap teka-teki dan pelajaran telah diuji langsung oleh anak-anak nyata.',
+  'landing.origin.tag.built': 'Dibuat oleh orang tua',
+  'landing.origin.tag.tested': 'Diuji oleh anak-anak nyata',
 
   'landing.final.title': 'Mulai Petualangan',
   'landing.final.sub': 'Tanpa daftar, tanpa unduhan, tanpa biaya — cukup pilih jalur dan mulai bermain.',

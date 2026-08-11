@@ -472,6 +472,42 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
         </div>
       </section>
 
+      {/* ── ORIGIN STORY ─────────────────────────── */}
+      <section className="py-20 sm:py-24 px-5 sm:px-8">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <div
+              className="relative rounded-3xl p-8 sm:p-10 border border-amber-500/20 overflow-hidden text-center"
+              style={{ background: 'linear-gradient(135deg, #1a100a 0%, #1f1308 60%, #1a0e06 100%)' }}
+            >
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-amber-500/10 rounded-full blur-[60px]" />
+              </div>
+              <div className="relative z-10">
+                <p className="text-amber-400 text-xs font-semibold uppercase tracking-[0.15em] mb-4">
+                  {t('landing.origin.label')}
+                </p>
+                <div className="text-4xl mb-5">❤️</div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 tracking-tight">
+                  {t('landing.origin.title')}
+                </h2>
+                <p className="text-white/50 text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-7">
+                  {t('landing.origin.desc')}
+                </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/25 text-amber-300 px-4 py-2 rounded-full text-sm font-semibold">
+                    👨‍👧‍👦 {t('landing.origin.tag.built')}
+                  </span>
+                  <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/25 text-amber-300 px-4 py-2 rounded-full text-sm font-semibold">
+                    🧒 {t('landing.origin.tag.tested')}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="py-32 sm:py-40 px-5 sm:px-8">
         <div className="max-w-2xl mx-auto text-center">
