@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Star } from 'lucide-react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { XPBar } from './XPBar'
+import { Logo } from './Logo'
 import type { PlayerProgress } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 
@@ -49,20 +50,10 @@ export function Header({ progress }: HeaderProps) {
             </div>
           ) : (
             <motion.div className="flex items-center gap-2" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <svg viewBox="0 0 40 40" className="w-8 h-8 shrink-0" aria-hidden="true">
-                <defs>
-                  <linearGradient id="hg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#7C3AED" /><stop offset="1" stopColor="#EC4899" />
-                  </linearGradient>
-                </defs>
-                <rect width="40" height="40" rx="9" fill="url(#hg)" />
-                <path d="M14 13L8.5 20L14 27" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M26 13L31.5 20L26 27" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M23 12L17 28" stroke="#E9D5FF" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <Logo size={32} className="shrink-0" />
               <div className="leading-tight hidden sm:block">
                 <div className="font-black text-white text-lg">CodeKids</div>
-                <div className="text-xs text-purple-300 font-semibold">Learn to Code!</div>
+                <div className="text-xs text-purple-300 font-semibold">{t('landing.nav.tagline')}</div>
               </div>
             </motion.div>
           )}
