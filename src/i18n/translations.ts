@@ -304,7 +304,7 @@ const id: Translations = {
   'landing.trust.edu.title': 'Sungguh edukatif',
   'landing.trust.edu.desc': 'Selaras dengan kurikulum berpikir komputasi — mengajarkan urutan, logika, dan penalaran, bukan sekadar menekan tombol.',
 
-  'landing.final.title': 'Petualangan Dimulai di Sini',
+  'landing.final.title': 'Mulai Petualangan',
   'landing.final.sub': 'Tanpa daftar, tanpa unduhan, tanpa biaya — cukup pilih jalur dan mulai bermain.',
   'landing.final.cta': 'Mulai Sekarang',
 
