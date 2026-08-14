@@ -418,6 +418,27 @@ function getTeachSteps(worldId: string): TeachStep[] {
       },
     ],
 
+    orchestra: [
+      {
+        icon: '🔄',
+        title: { en: 'Loops repeat a musical beat!', id: 'Perulangan mengulang ketukan musik!' },
+        body: { en: 'Put a move inside Repeat to play the same step several times with fewer blocks.', id: 'Taruh gerakan di dalam Ulangi untuk memainkan langkah yang sama beberapa kali dengan lebih sedikit blok.' },
+        diagram: (lang) => <RepeatWrap count={4} childLabel={mr(lang)} lang={lang} />,
+      },
+      {
+        icon: '🔧',
+        title: { en: 'Functions save a whole phrase!', id: 'Fungsi menyimpan seluruh frasa!' },
+        body: { en: 'Open Functions, create a named function, put moves inside its definition, then use its call block whenever the phrase returns.', id: 'Buka Fungsi, buat fungsi bernama, taruh gerakan di dalam definisinya, lalu gunakan blok panggilannya setiap kali frasa kembali.' },
+        diagram: (lang) => (
+          <StackedPills items={[
+            { color: C.func, label: lang === 'id' ? '🔧 Fungsi: refrain' : '🔧 Function: chorus' },
+            { color: C.move, label: mr(lang) },
+            { color: C.func, label: lang === 'id' ? 'panggil refrain' : 'call chorus' },
+          ]} />
+        ),
+      },
+    ],
+
     portal: [
       {
         icon: '📋',
