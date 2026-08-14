@@ -2,7 +2,7 @@
 
 **Slug:** `content-more-world-ideas`
 **Date:** 2026-08-11
-**Status:** draft
+**Status:** approved
 
 ---
 
@@ -14,13 +14,13 @@
 
 ## Decision
 
-Create a bounded content roadmap rather than adding several worlds in one release. The next recommended blocks world is **Code Orchestra**, a 10-lesson bonus world that revisits nested loops and functions in a fresh musical route-building setting; the next recommended brain-training world is **Spatial Studio**, a 10-lesson, always-unlocked world about rotation, symmetry, and mental mapping. Each world must be delivered later through its own implementation plan and content audit so the first release can be playtested before the backlog is expanded.
+Create a bounded content roadmap rather than adding several worlds in one release. The next recommended blocks world is **Code Orchestra**, a 10-lesson bonus world that revisits loops and functions in a fresh musical route-building setting; the next recommended brain-training world is **Spatial Studio**, a 10-lesson, always-unlocked world about rotation, symmetry, and mental mapping. Each world must be delivered later through its own implementation plan and content audit so the first release can be playtested before the backlog is expanded.
 
 ### Priority roadmap
 
 | Priority | Path | World | Ages | Learning focus | Platform fit | Delivery note |
 |---|---|---|---|---|---|---|
-| 1 | Blocks | 🎵 **Code Orchestra** / **Orkestra Kode** | 8–12 | nested loops, reusable phrases, functions | high — existing movement, collection, loops, and functions | Ship as a bonus world with 10 lessons; no new runtime mechanic. |
+| 1 | Blocks | 🎵 **Code Orchestra** / **Orkestra Kode** | 8–12 | loops, reusable phrases, functions | high — existing movement, collection, loops, and functions | Ship as a bonus world with 10 lessons; no new runtime mechanic. |
 | 2 | Brain | 🧭 **Spatial Studio** / **Studio Spasial** | 7–11 | mental rotation, symmetry, viewpoints, spatial paths | medium — early lessons fit current option puzzles; rotations need a dedicated puzzle representation | Prototype the interaction before authoring all 10 lessons. |
 | 3 | Brain | 🗺️ **Planning Peaks** / **Puncak Perencanaan** | 8–12 | ordering under constraints, working backward, planning | high — `sequence`, `sort`, and multiple-choice puzzles already exist | Ship after Spatial Studio if the new spatial interaction tests well, or first if a data-only release is preferred. |
 | 4 | Blocks | 🌱 **Eco City** / **Kota Hijau** | 10–14 | decomposition and capstone algorithm design | high — combines existing categories | Keep objectives route-based; do not turn environmental facts into required prior knowledge. |
@@ -38,12 +38,12 @@ Create a bounded content roadmap rather than adding several worlds in one releas
   2. Repeat one movement to collect a row of notes.
   3. Repeat a two-move rhythm around a corner.
   4. Build two repeated phrases on a mirrored route.
-  5. Use a nested loop for repeating note bars.
+  5. Repeat a complete three-move note bar.
   6. Create a function for a short chorus path.
   7. Call the chorus from two different grid positions.
   8. Combine a loop and a function without extra moves.
   9. Choose between two valid arrangements and optimize block count.
-  10. Perform a finale that combines nested loops, functions, and a goal cell.
+  10. Perform a finale that combines loops, functions, and a goal cell.
 - **Guardrails:** Music is the scenario, not an audio-recognition test; every goal remains visible and solvable with the existing grid. Do not duplicate Space’s simple straight-line loop lesson or Factory’s introductory single-function lesson.
 
 #### 2. Eco City
@@ -196,4 +196,4 @@ Revert the planning commit. No application code, lesson data, routes, dependenci
 
 ## Implementation notes
 
-Planning only. No application implementation is included in this change.
+The first roadmap item, Code Orchestra, was selected for implementation in `feat-code-orchestra-world.md`. The remaining ideas stay in the backlog and are not part of that release.

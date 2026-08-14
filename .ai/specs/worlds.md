@@ -10,6 +10,13 @@
 | caves | 💎 | Conditions | 10–11 | 700 | 6 |
 | factory | 🤖 | Functions | 11–13 | 1250 | 6 |
 | portal | ⏰ | Arrays & Lists | 12–14 | 1650 | 10 |
+| jurassic | 🦕 | Real-World Pathfinding | 10–14 | bonus gate | 10 |
+| parking | 🚗 | Sorting & Routing | 10–14 | bonus gate | 10 |
+| sorting | 📦 | Algorithms & Data | 11–14 | bonus gate | 10 |
+| debugging | 🐛 | Debugging | 11–14 | bonus gate | 10 |
+| orchestra | 🎵 | Loops & Functions | 8–12 | bonus gate | 10 |
+
+Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1.
 
 Source: `src/data/worlds.ts` — `WORLDS` array. Each world has `theme` (bgGradient, accentColor, textColor, cellBorder, cellBg), `emoji`, `character` (emoji for mascot), `characterName`, `itemEmoji`, `obstacleEmoji`, `goalEmoji`.
 

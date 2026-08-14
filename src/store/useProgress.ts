@@ -4,7 +4,7 @@ import { getLevelInfo } from '../data/xpSystem'
 
 const STORAGE_KEY = 'codekids_progress_v1'
 
-const BONUS_WORLD_IDS = new Set(['jurassic', 'parking', 'sorting'])
+const BONUS_WORLD_IDS = new Set(['jurassic', 'parking', 'sorting', 'debugging', 'orchestra'])
 const FINAL_LESSON_ID = 'portal-4'
 
 const DEFAULT_PROGRESS: PlayerProgress = {
@@ -14,6 +14,30 @@ const DEFAULT_PROGRESS: PlayerProgress = {
   badges: [],
   totalStars: 0,
   lastPlayed: new Date().toISOString(),
+}
+
+export function isLessonAvailable(progress: PlayerProgress, lessonId: string, worldId: string): boolean {
+  if (BONUS_WORLD_IDS.has(worldId)) {
+    if (!progress.lessons[FINAL_LESSON_ID]?.completed) return false
+    const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
+    if (lessonNum === 0) return true
+    if (lessonNum === 1) {
+      return worldId === 'orchestra'
+        ? progress.lessons['orchestra-0']?.completed ?? false
+        : true
+    }
+    return progress.lessons[`${worldId}-${lessonNum - 1}`]?.completed ?? false
+  }
+  const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
+  if (lessonNum === 0) return true
+  if (lessonNum === 1) {
+    const hasWorldProgress = Object.keys(progress.lessons).some(
+      id => id.startsWith(`${worldId}-`) && id !== `${worldId}-0`
+    )
+    if (hasWorldProgress) return true
+    return progress.lessons[`${worldId}-0`]?.completed ?? false
+  }
+  return progress.lessons[`${worldId}-${lessonNum - 1}`]?.completed ?? false
 }
 
 function loadProgress(): PlayerProgress {
@@ -112,22 +136,7 @@ export function useProgress() {
   }, [progress.lessons])
 
   const isLessonUnlocked = useCallback((lessonId: string, worldId: string): boolean => {
-    if (BONUS_WORLD_IDS.has(worldId)) {
-      return progress.lessons[FINAL_LESSON_ID]?.completed ?? false
-    }
-    const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
-    if (lessonNum === 0) return true  // tutorials always accessible
-    if (lessonNum === 1) {
-      // existing players who already have world progress bypass the tutorial gate
-      const hasWorldProgress = Object.keys(progress.lessons).some(
-        id => id.startsWith(`${worldId}-`) && id !== `${worldId}-0`
-      )
-      if (hasWorldProgress) return true
-      // new players must complete the tutorial first (if one exists)
-      return progress.lessons[`${worldId}-0`]?.completed ?? false
-    }
-    const prevId = `${worldId}-${lessonNum - 1}`
-    return progress.lessons[prevId]?.completed ?? false
+    return isLessonAvailable(progress, lessonId, worldId)
   }, [progress.lessons])
 
   const isWorldUnlocked = useCallback((unlockAtXP: number): boolean => {

@@ -9,7 +9,7 @@ A fun, free learning adventure for kids ages 5–14. Two parallel paths: visual 
 ## Learning Paths
 
 ### 🧩 Block Coding
-Write code with visual Blockly blocks. 7 main worlds + 3 bonus worlds teaching programming concepts.
+Write code with visual Blockly blocks. 7 main worlds + 5 bonus worlds teaching programming concepts.
 
 | World | Ages | Concept | Lessons |
 |-------|------|---------|---------|
@@ -28,6 +28,8 @@ Write code with visual Blockly blocks. 7 main worlds + 3 bonus worlds teaching p
 | 🦕 Jurassic Park | 10–14 | Real-World Pathfinding | 10 |
 | 🚗 City Parking | 10–14 | Sorting & Routing | 10 |
 | 📦 Space Sorting | 11–14 | Algorithms & Data | 10 |
+| 🐛 Bug Lab | 11–14 | Debugging | 10 |
+| 🎵 Code Orchestra | 8–12 | Loops & Functions | 10 |
 
 ### 🧠 Brain Training
 Pattern recognition, logic puzzles, math, science, and reasoning challenges. No code editor required. All 11 worlds are unlocked from the start.
@@ -52,7 +54,7 @@ Pattern recognition, logic puzzles, math, science, and reasoning challenges. No 
 
 - **Two learning paths** — Block Coding and Brain Training, both accessible from the hub at `/app`
 - **Shared XP & stars** — progress flows across both paths; one store, one level system
-- **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 3 bonus worlds)
+- **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 5 bonus worlds)
 - **11 brain training worlds** — 110 puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, and deduction
 - **XP & leveling** — 15 levels from Code Cub to Master Coder
 - **Stars per lesson** — 1–3 stars based on code efficiency (blocks) or attempts (thinking)
@@ -118,10 +120,10 @@ src/
 │   ├── StarRating.tsx          # 1–3 stars display
 │   └── XPBar.tsx               # XP progress bar with optional level name (hideLabel prop)
 ├── data/
-│   ├── lessons.ts              # block coding lessons across 10 worlds
+│   ├── lessons.ts              # block coding lessons across 12 worlds
 │   ├── thinkingLessons.ts      # 110 brain training lessons across 11 worlds
 │   ├── thinkingWorlds.ts       # 11 thinking worlds
-│   ├── worlds.ts               # 10 block coding worlds with themes, emoji, characters
+│   ├── worlds.ts               # 12 block coding worlds with themes, emoji, characters
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), getLevelInfo()
 ├── engine/
 │   └── gameEngine.ts           # parseCodeToActions(), applyAction(), checkWin()

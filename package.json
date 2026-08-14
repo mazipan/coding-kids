@@ -10,6 +10,7 @@
     "dev": "vite",
     "format": "biome format --write",
     "lint": "biome lint",
+    "test": "bun test",
     "prepare": "[ -n \"$CI\" ] || lefthook install",
     "preview": "vite preview"
   },
