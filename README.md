@@ -32,7 +32,7 @@ Write code with visual Blockly blocks. 7 main worlds + 5 bonus worlds teaching p
 | 🎵 Code Orchestra | 8–12 | Loops & Functions | 10 |
 
 ### 🧠 Brain Training
-Pattern recognition, logic puzzles, math, science, and reasoning challenges. No code editor required. All 11 worlds are unlocked from the start.
+Pattern recognition, logic puzzles, math, science, and reasoning challenges. No code editor required. All 13 worlds are unlocked from the start.
 
 | World | Ages | Concept | Lessons |
 |-------|------|---------|---------|
@@ -47,6 +47,8 @@ Pattern recognition, logic puzzles, math, science, and reasoning challenges. No 
 | 🔢 Math Reasoning | 8–12 | Mathematical Reasoning | 10 |
 | 🔬 Rule Finder | 8–12 | Inductive Reasoning | 10 |
 | 🕵️ Logic Detective | 9–13 | Deductive Reasoning | 10 |
+| 🗺️ Planning Peaks | 8–12 | Constraint Planning | 10 |
+| 🎲 Chance Camp | 9–13 | Probability | 10 |
 
 ---
 
@@ -55,7 +57,7 @@ Pattern recognition, logic puzzles, math, science, and reasoning challenges. No 
 - **Two learning paths** — Block Coding and Brain Training, both accessible from the hub at `/app`
 - **Shared XP & stars** — progress flows across both paths; one store, one level system
 - **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 5 bonus worlds)
-- **11 brain training worlds** — 110 puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, and deduction
+- **13 brain training worlds** — 130 puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, deduction, constraint planning, and probability
 - **XP & leveling** — 15 levels from Code Cub to Master Coder
 - **Stars per lesson** — 1–3 stars based on code efficiency (blocks) or attempts (thinking)
 - **Next-world navigation** — each world links directly to the next at the bottom of its lesson list
@@ -121,8 +123,8 @@ src/
 │   └── XPBar.tsx               # XP progress bar with optional level name (hideLabel prop)
 ├── data/
 │   ├── lessons.ts              # block coding lessons across 12 worlds
-│   ├── thinkingLessons.ts      # 110 brain training lessons across 11 worlds
-│   ├── thinkingWorlds.ts       # 11 thinking worlds
+│   ├── thinkingLessons.ts      # 130 brain training lessons across 13 worlds
+│   ├── thinkingWorlds.ts       # 13 thinking worlds
 │   ├── worlds.ts               # 12 block coding worlds with themes, emoji, characters
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), getLevelInfo()
 ├── engine/

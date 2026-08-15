@@ -98,16 +98,30 @@ Set per lesson via `availableCategories`. Introduce categories gradually as conc
 
 Source: `src/data/thinkingWorlds.ts` — `THINKING_WORLDS` array.
 
-| ID | Emoji | Concept | Ages | unlockAtXP | Lessons |
-|----|-------|---------|------|------------|---------|
-| patterns | 🔮 | Pattern recognition | 5–8 | 0 | 10 |
-| logic | 🧠 | If-then reasoning | 7–10 | 0 | 10 |
-| counting | ✨ | Number & math | 8–12 | 0 | 10 |
-| memory | 🧩 | Sequence memory | 6–10 | 0 | 10 |
-| nature | 🌿 | Science thinking | 8–11 | 0 | 10 |
-| numbers | ⚡ | Number sequences | 9–13 | 0 | 10 |
+| ID | Emoji | Concept | Ages | Colour | unlockAtXP | Lessons |
+|----|-------|---------|------|--------|------------|---------|
+| patterns | 🔮 | Pattern recognition | 5–8 | purple | 0 | 10 |
+| logic | 🧠 | If-then reasoning | 7–10 | blue | 0 | 10 |
+| counting | ✨ | Number & math | 8–12 | emerald | 0 | 10 |
+| memory | 🧩 | Sequence memory | 6–10 | rose | 0 | 10 |
+| nature | 🌿 | Science thinking | 8–11 | green | 0 | 10 |
+| numbers | ⚡ | Number sequences | 9–13 | indigo | 0 | 10 |
+| decomposition | 🧩 | Decomposition | 6–10 | orange | 0 | 10 |
+| abstraction | 🔍 | Abstraction | 7–11 | teal | 0 | 10 |
+| math_reasoning | 🔢 | Mathematical reasoning | 8–12 | amber | 0 | 10 |
+| induction | 🔬 | Inductive reasoning | 8–12 | cyan | 0 | 10 |
+| deduction | 🕵️ | Deductive reasoning | 9–13 | violet | 0 | 10 |
+| planning | 🗺️ | Constraint planning | 8–12 | sky | 0 | 10 |
+| probability | 🎲 | Probability | 9–13 | lime | 0 | 10 |
 
-All six worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely.
+All thirteen worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely — see INV-L3, which binds any future thinking world too.
+
+### World boundaries
+
+Two pairs sit close enough that new lessons must respect the boundary:
+
+- `decomposition` (Step by Step) vs `planning` (Planning Peaks) — both use `sequence`. In `decomposition` the answer is the familiar real-world routine and comes from the child's own knowledge. In `planning` the answer comes from written clues in `mascotMessage`, and the clues may deliberately contradict the habitual order.
+- `logic` (Logic Land) vs `probability` (Chance Camp) — both use `if-then`. `logic` asks what *must* follow from a rule; `probability` asks what is *likely*, *possible*, *certain*, or *fair*. Never phrase a Chance Camp answer as a certainty unless the puzzle is specifically about certainty.
 
 ### Thinking lesson fields
 
@@ -132,6 +146,23 @@ Defined in `src/data/thinkingLessons.ts`. Each lesson:
 | `pattern` | `items[]` with a `blankIndex` and 4 `options[]`; kid picks the missing item |
 | `if-then` | `condition` (LocalizedString) + `options[]` with emoji labels; kid picks the correct outcome |
 | `math` | `question` (LocalizedString) + optional `visual` emoji + 4 `options[]` of string numbers |
+| `sequence` | `steps[]` (id, emoji, LocalizedString label); kid taps them into order. The **array order is the answer** |
+| `true-false` | `statement` (LocalizedString) + boolean `answer` |
+| `sort` | `items[]` + `answer[]`; kid taps the items into order |
+| `fill-in` | `question` (LocalizedString) + typed `answer` + optional `inputType` |
+| `match` | `pairs[]` of left/right items; kid links each pair |
+| `abstraction` | `subtype: 'odd-one-out' \| 'category-match'` + `items[]` + `correctIds[]` |
+
+### Puzzle authoring constraints
+
+These are properties of the renderer, not style preferences. Breaking them ships a broken lesson:
+
+| Constraint | Why |
+|------------|-----|
+| `sort` is for **numeric ascending order only** | Its prompt is the fixed string `thinking.sort.prompt` — "Tap numbers from smallest to largest!". A `sort` puzzle whose answer is not ascending contradicts its own on-screen instruction. Use `sequence` for any other ordering. |
+| `pattern.options` and `math.options` must be **numbers or emoji** | They are typed `string[]`, not `LocalizedString[]`, so their text cannot be translated. A word answer there breaks INV-C2/INV-I1. When the answer needs words, use `if-then`, whose options carry `label: LocalizedString`. |
+| `sequence` has no question field | The constraints or clues must live in the lesson's `mascotMessage`, which renders directly above the puzzle. |
+| `abstraction` `correctIds` must be a **strict subset** of `items` | A multi-select where every item is correct teaches nothing and always passes. |
 
 ### Star & XP logic (thinking path)
 
@@ -147,7 +178,7 @@ Lessons 5–9: progressive difficulty — longer sequences (8–9 items), ABCD c
 
 ### Next-world navigation
 
-`ThinkingHome` renders a tappable banner below the lesson list pointing to the next world in the array. The last world (counting) shows no banner.
+`ThinkingHome` renders a tappable banner below the lesson list pointing to the next world in the array. The last world in `THINKING_WORLDS` shows no banner — appending a world moves the banner onto what used to be the last one.
 
 ### Adding a new thinking lesson
 
@@ -227,11 +258,7 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
 3. All `title` and `mascotMessage` strings are `LocalizedString` — always provide both `en` and `id`.
 4. Increment `lessonCount` in `src/data/thinkingWorlds.ts` for the world that received the new lesson.
 5. Lesson number follows 0-based sequential order: the new lesson's `number` is the old `lessonCount` value (before incrementing).
-6. Pick the right puzzle type based on the world:
-   - `patterns` world → `PatternPuzzle` (`type: 'pattern'`)
-   - `logic` world → `IfThenPuzzle` (`type: 'if-then'`)
-   - `counting` world → `MathPuzzle` (`type: 'math'`)
-   Mixed types are technically allowed but avoid them — they break the world's thematic consistency.
+6. Pick the puzzle type that fits the reasoning the lesson is testing, then check it against the **Puzzle authoring constraints** table above. Early single-concept worlds stay on one type (`patterns` uses `pattern`, `decomposition` uses `sequence`); later worlds deliberately mix types so a child cannot pass by recognising the interaction instead of the idea. Mix only when each type is doing distinct cognitive work — never for variety alone.
 7. Always provide exactly 4 `options`. For `PatternPuzzle` and `MathPuzzle`, include the correct answer plus 3 plausible distractors. For `IfThenPuzzle`, each option needs `id`, `emoji`, and `label: LocalizedString`.
 8. Set `xpReward` consistent with the lesson's position in the difficulty curve: lessons 0–4 use 10–15 XP; lessons 5–9 use 15–25 XP.
 9. Run `bun run build` — TypeScript catches missing required fields.
@@ -286,10 +313,16 @@ Run this audit against all existing lessons in the target world:
      lessonCount: number,
    }
    ```
-3. Choose a `color` not already used by the existing worlds (purple, blue, emerald). Pick a Tailwind color that has 900-shade availability.
-4. The `bgGradient` uses `from-{color}-900/50 to-{secondaryColor}-900/30` — keep opacity low so the star field behind shows through.
-5. Add the puzzle type (if it's new) to `src/types/index.ts` and implement it in `src/screens/ThinkingLesson.tsx`.
-6. Add the lessons to `src/data/thinkingLessons.ts` following the "Adding a new thinking lesson" steps above.
-7. `ThinkingHome` renders a next-world banner automatically by reading the next item in `THINKING_WORLDS` — no code change needed for navigation between worlds.
-8. Run `bun run build`.
-9. Add a decision log entry in `.ai/decisions/log.md` explaining the new concept and age range.
+3. Choose a `color` not already used by any world in the catalog table above. Pick a Tailwind color that has 900-shade availability.
+4. **Register the new colour in both colour maps, or the world silently renders purple:**
+   - `getWorldTheme` in `src/screens/ThinkingHome.tsx` — `?? themes.purple` swallows an unregistered colour with no error
+   - `THINKING_COLOR_MAP` in `src/screens/LandingScreen.tsx` — same silent purple fallback
+
+   `tests/thinkingWorldsContent.test.ts` asserts every world's colour is present in both files. Do not skip this step; three worlds shipped mis-themed for several releases because the two maps drifted apart.
+5. The `bgGradient` uses `from-{color}-900/50 to-{secondaryColor}-900/30` — keep opacity low so the star field behind shows through.
+6. Add the puzzle type (if it's new) to `src/types/index.ts` and implement it in `src/screens/ThinkingLesson.tsx`.
+7. Add the lessons to `src/data/thinkingLessons.ts` following the "Adding a new thinking lesson" steps above.
+8. `ThinkingHome` renders a next-world banner automatically by reading the next item in `THINKING_WORLDS` — no code change needed for navigation between worlds.
+9. Update the hardcoded `landing.worlds.title` count in `src/i18n/translations.ts` (EN **and** ID) — it is a literal, not derived from the arrays.
+10. Update the catalog table above, the world counts in `README.md`, and add a decision log entry in `.ai/decisions/log.md` explaining the new concept and age range.
+11. Run `bunx biome ci`, `bun run type-check`, `bun run build`, and `bun test`.

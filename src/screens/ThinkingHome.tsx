@@ -27,6 +27,11 @@ function getWorldTheme(color: string) {
     indigo:  { bgGradient: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #3730a3 100%)', accentColor: '#818cf8', textColor: '#c7d2fe' },
     orange:  { bgGradient: 'linear-gradient(135deg, #431407 0%, #9a3412 50%, #c2410c 100%)', accentColor: '#fb923c', textColor: '#fed7aa' },
     teal:    { bgGradient: 'linear-gradient(135deg, #042f2e 0%, #0f766e 50%, #0d9488 100%)', accentColor: '#2dd4bf', textColor: '#99f6e4' },
+    amber:   { bgGradient: 'linear-gradient(135deg, #451a03 0%, #92400e 50%, #b45309 100%)', accentColor: '#fbbf24', textColor: '#fde68a' },
+    cyan:    { bgGradient: 'linear-gradient(135deg, #083344 0%, #155e75 50%, #0e7490 100%)', accentColor: '#22d3ee', textColor: '#a5f3fc' },
+    violet:  { bgGradient: 'linear-gradient(135deg, #2e1065 0%, #5b21b6 50%, #6d28d9 100%)', accentColor: '#a78bfa', textColor: '#ddd6fe' },
+    sky:     { bgGradient: 'linear-gradient(135deg, #082f49 0%, #075985 50%, #0369a1 100%)', accentColor: '#38bdf8', textColor: '#bae6fd' },
+    lime:    { bgGradient: 'linear-gradient(135deg, #1a2e05 0%, #3f6212 50%, #4d7c0f 100%)', accentColor: '#a3e635', textColor: '#d9f99d' },
   }
   return themes[color] ?? themes.purple
 }

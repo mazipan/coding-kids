@@ -133,6 +133,30 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     unlockAtXP: 0,
     lessonCount: 10,
   },
+  {
+    id: 'planning',
+    name: { en: 'Planning Peaks', id: 'Puncak Perencanaan' },
+    emoji: '🗺️',
+    tagline: { en: 'Follow every clue to build the right plan!', id: 'Ikuti setiap petunjuk untuk menyusun rencana yang tepat!' },
+    ageRange: '8–12',
+    concept: { en: 'Constraint Planning', id: 'Perencanaan Bersyarat' },
+    color: 'sky',
+    bgGradient: 'from-sky-900/50 to-blue-900/30',
+    unlockAtXP: 0,
+    lessonCount: 10,
+  },
+  {
+    id: 'probability',
+    name: { en: 'Chance Camp', id: 'Kamp Peluang' },
+    emoji: '🎲',
+    tagline: { en: 'Decide what is likely, what is certain, and what is fair!', id: 'Tentukan mana yang mungkin, pasti, dan adil!' },
+    ageRange: '9–13',
+    concept: { en: 'Probability', id: 'Peluang' },
+    color: 'lime',
+    bgGradient: 'from-lime-900/50 to-green-900/30',
+    unlockAtXP: 0,
+    lessonCount: 10,
+  },
 ]
 
 export function getThinkingWorld(id: string): ThinkingWorld | undefined {
