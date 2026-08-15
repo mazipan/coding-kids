@@ -25,6 +25,8 @@ const THINKING_COLOR_MAP: Record<string, { accent: string; bg: string }> = {
   amber:  { accent: '#f59e0b', bg: 'rgba(245,158,11,0.08)' },
   cyan:   { accent: '#06b6d4', bg: 'rgba(6,182,212,0.08)' },
   violet: { accent: '#8b5cf6', bg: 'rgba(139,92,246,0.08)' },
+  sky:    { accent: '#0ea5e9', bg: 'rgba(14,165,233,0.08)' },
+  lime:   { accent: '#84cc16', bg: 'rgba(132,204,22,0.08)' },
 }
 
 function FadeIn({

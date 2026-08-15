@@ -197,3 +197,18 @@ Revert the planning commit. No application code, lesson data, routes, dependenci
 ## Implementation notes
 
 The first roadmap item, Code Orchestra, was selected for implementation in `feat-code-orchestra-world.md`. The remaining ideas stay in the backlog and are not part of that release.
+
+### Roadmap status (updated 2026-08-15)
+
+| Priority | World | Status | Plan |
+|---|---|---|---|
+| 1 | 🎵 Code Orchestra | **shipped** | `feat-code-orchestra-world.md` |
+| 2 | 🧭 Spatial Studio | blocked | needs the spatial-choice interaction prototype (a new puzzle type in `types/index.ts` plus a view in `ThinkingLesson.tsx`) built and passed through code + kid review before any lesson is authored |
+| 3 | 🗺️ Planning Peaks | **shipped** | `content-planning-peaks-chance-camp.md` |
+| 4 | 🌱 Eco City | backlog | unblocked but deliberately deferred — a blocks world needs 10 grids with exact simulated routes and deserves its own independently revertible release |
+| 5 | 🎲 Chance Camp | **shipped** | `content-planning-peaks-chance-camp.md` |
+| 6 | 🧭 Coordinate Cove | blocked | still needs a technical plan defining read-only row/column sensor blocks, sandbox exposure, and action-cap behaviour |
+
+Planning Peaks and Chance Camp were taken out of priority order because they were the only remaining ideas that needed nothing but lesson data. Spatial Studio keeps its priority-2 position for whenever the interaction prototype is built; that prototype, not its content, is the next piece of work on it.
+
+Two authoring constraints discovered while implementing these worlds have been promoted into `.ai/specs/worlds.md` so future plans do not rediscover them: `sort` puzzles render a fixed "smallest to largest" prompt, and `pattern`/`math` options are not localizable.
