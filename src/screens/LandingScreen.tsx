@@ -27,6 +27,7 @@ const THINKING_COLOR_MAP: Record<string, { accent: string; bg: string }> = {
   violet: { accent: '#8b5cf6', bg: 'rgba(139,92,246,0.08)' },
   sky:    { accent: '#0ea5e9', bg: 'rgba(14,165,233,0.08)' },
   lime:   { accent: '#84cc16', bg: 'rgba(132,204,22,0.08)' },
+  fuchsia:{ accent: '#d946ef', bg: 'rgba(217,70,239,0.08)' },
 }
 
 function FadeIn({

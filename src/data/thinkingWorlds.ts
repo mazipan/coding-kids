@@ -157,6 +157,19 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     unlockAtXP: 0,
     lessonCount: 10,
   },
+  {
+    id: 'spatial',
+    name: { en: 'Spatial Studio', id: 'Studio Spasial' },
+    emoji: '🧭',
+    tagline: { en: 'Turn shapes in your mind and see them a new way!', id: 'Putar bentuk dalam pikiranmu dan lihat dari sisi baru!' },
+    ageRange: '7–11',
+    concept: { en: 'Spatial Reasoning', id: 'Penalaran Ruang' },
+    color: 'fuchsia',
+    bgGradient: 'from-fuchsia-900/50 to-pink-900/30',
+    unlockAtXP: 0,
+    // Prototype scope: 3 of the planned 10 lessons. See .ai/plans/feat-spatial-puzzle-prototype.md
+    lessonCount: 3,
+  },
 ]
 
 export function getThinkingWorld(id: string): ThinkingWorld | undefined {

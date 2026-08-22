@@ -2640,6 +2640,96 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
       answerId: 'orange_biggest',
     },
   },
+  // ── Spatial Studio (prototype: 3 of 10 lessons) ──────────────
+  {
+    id: 'spatial-0',
+    worldId: 'spatial',
+    number: 0,
+    title: { en: 'Same Shape, New Spot', id: 'Bentuk Sama, Tempat Baru' },
+    mascotMessage: {
+      en: 'Orbit slid a piece across the frame. It did not turn it and did not flip it. 🧭',
+      id: 'Orbit menggeser sebuah potongan di dalam bingkai. Potongan itu tidak diputar dan tidak dibalik. 🧭',
+    },
+    xpReward: 12,
+    tutorial: {
+      title: { en: 'How the frames work', id: 'Cara membaca bingkai' },
+      body: {
+        en: 'Each frame is a little grid. Solid squares are the piece, dotted squares are empty space. One square has a dot on it, and that dot always stays on the same corner of the piece — so you can tell which way the piece is facing.',
+        id: 'Setiap bingkai adalah kisi kecil. Kotak penuh adalah potongannya, kotak putus-putus adalah ruang kosong. Satu kotak punya titik, dan titik itu selalu berada di sudut potongan yang sama — jadi kamu bisa tahu ke arah mana potongan itu menghadap.',
+      },
+      example: {
+        en: 'Sliding a piece never moves the dot to a different corner. Turning or flipping it does.',
+        id: 'Menggeser potongan tidak pernah memindahkan titik ke sudut yang lain. Memutar atau membaliknya iya.',
+      },
+    },
+    puzzle: {
+      type: 'spatial',
+      question: {
+        en: 'Which frame shows exactly the same piece, just moved to a new spot?',
+        id: 'Bingkai mana yang menunjukkan potongan yang sama persis, hanya pindah tempat?',
+      },
+      figure: ['o#..', '.#..', '....', '....'],
+      options: [
+        { id: 'a', grid: ['....', '....', '.o#.', '..#.'], label: { en: 'Shape A', id: 'Bentuk A' } },
+        { id: 'b', grid: ['....', '....', '.#o.', '.#..'], label: { en: 'Shape B', id: 'Bentuk B' } },
+        { id: 'c', grid: ['....', '....', '..o.', '.##.'], label: { en: 'Shape C', id: 'Bentuk C' } },
+        { id: 'd', grid: ['....', '....', '.o#.', '....'], label: { en: 'Shape D', id: 'Bentuk D' } },
+      ],
+      answerId: 'a',
+    },
+  },
+  {
+    id: 'spatial-1',
+    worldId: 'spatial',
+    number: 1,
+    title: { en: 'Flip the Flag', id: 'Balik Benderanya' },
+    mascotMessage: {
+      en: 'Orbit holds the flag up to a mirror standing on its right side. Left and right swap over; top and bottom stay put. 🪞',
+      id: 'Orbit menaruh bendera di depan cermin yang berdiri di sisi kanannya. Kiri dan kanan bertukar; atas dan bawah tetap. 🪞',
+    },
+    xpReward: 14,
+    puzzle: {
+      type: 'spatial',
+      question: {
+        en: 'Which frame shows the flag flipped left to right?',
+        id: 'Bingkai mana yang menunjukkan bendera dibalik dari kiri ke kanan?',
+      },
+      figure: ['o##.', '.#..', '.#..', '....'],
+      options: [
+        { id: 'a', grid: ['....', '.#..', '.#..', 'o##.'], label: { en: 'Shape A', id: 'Bentuk A' } },
+        { id: 'b', grid: ['.##o', '..#.', '..#.', '....'], label: { en: 'Shape B', id: 'Bentuk B' } },
+        { id: 'c', grid: ['o##.', '..#.', '..#.', '....'], label: { en: 'Shape C', id: 'Bentuk C' } },
+        { id: 'd', grid: ['.o##', '..#.', '..#.', '....'], label: { en: 'Shape D', id: 'Bentuk D' } },
+      ],
+      answerId: 'b',
+    },
+  },
+  {
+    id: 'spatial-2',
+    worldId: 'spatial',
+    number: 2,
+    title: { en: 'A Quarter Turn Right', id: 'Seperempat Putaran ke Kanan' },
+    mascotMessage: {
+      en: 'Every frame below holds the very same signpost. Only the turn is different, so follow the dot. 🧭',
+      id: 'Semua bingkai di bawah berisi papan penunjuk yang sama persis. Hanya putarannya yang berbeda, jadi ikuti titiknya. 🧭',
+    },
+    xpReward: 15,
+    puzzle: {
+      type: 'spatial',
+      question: {
+        en: 'Orbit turns this signpost one quarter turn to the right, the way clock hands go. Which frame shows it after the turn?',
+        id: 'Orbit memutar papan penunjuk ini seperempat putaran ke kanan, searah jarum jam. Bingkai mana yang menunjukkannya setelah diputar?',
+      },
+      figure: ['o..', '#..', '##.'],
+      options: [
+        { id: 'a', grid: ['..o', '..#', '.##'], label: { en: 'Shape A', id: 'Bentuk A' } },
+        { id: 'b', grid: ['.##', '..#', '..o'], label: { en: 'Shape B', id: 'Bentuk B' } },
+        { id: 'c', grid: ['##o', '#..', '...'], label: { en: 'Shape C', id: 'Bentuk C' } },
+        { id: 'd', grid: ['...', '..#', 'o##'], label: { en: 'Shape D', id: 'Bentuk D' } },
+      ],
+      answerId: 'c',
+    },
+  },
 ]
 
 export function getThinkingLessonsByWorld(worldId: string): ThinkingLesson[] {

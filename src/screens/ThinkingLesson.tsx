@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Star, ArrowRight, ArrowLeft, Check, BookOpen } from 'lucide-react'
-import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle, AbstractionPuzzle } from '../types'
+import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle, AbstractionPuzzle, SpatialPuzzle, SpatialGrid } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { useProgress } from '../store/useProgress'
@@ -838,6 +838,131 @@ function AbstractionPuzzleView({
   )
 }
 
+/** Cell alphabet for `SpatialGrid`. See the type doc in `src/types/index.ts`. */
+const SPATIAL_FILLED = '#'
+const SPATIAL_MARKER = 'o'
+
+function hasSpatialMarker(grid: SpatialGrid): boolean {
+  return grid.some(row => row.includes(SPATIAL_MARKER))
+}
+
+/**
+ * Draws a `SpatialGrid` as a CSS grid of square cells. No image is loaded (INV-P1).
+ * The marker cell carries a centred dot rather than a colour, so orientation survives
+ * greyscale and colourblind vision.
+ */
+function SpatialFigureView({
+  grid,
+  surface,
+}: {
+  grid: SpatialGrid
+  surface: 'prompt' | 'option'
+}) {
+  const cols = grid.reduce((widest, row) => Math.max(widest, row.length), 0)
+  if (cols === 0) return null
+
+  return (
+    <div
+      className={`w-full mx-auto grid gap-1 ${surface === 'prompt' ? 'max-w-[180px]' : 'max-w-[124px]'}`}
+      style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+      aria-hidden="true"
+    >
+      {grid.flatMap((row, r) =>
+        Array.from({ length: cols }, (_, c) => {
+          const cell = row[c]
+          const filled = cell === SPATIAL_FILLED || cell === SPATIAL_MARKER
+          return (
+            <div
+              key={`${r}-${c}`}
+              className={`aspect-square rounded-[4px] flex items-center justify-center ${
+                filled
+                  ? 'bg-white/85 border border-white shadow-sm'
+                  : 'border border-dashed border-white/15'
+              }`}
+            >
+              {cell === SPATIAL_MARKER && (
+                <span className="block w-1/2 h-1/2 rounded-full bg-slate-900" />
+              )}
+            </div>
+          )
+        }),
+      )}
+    </div>
+  )
+}
+
+function SpatialPuzzleView({
+  puzzle,
+  onAnswer,
+  selected,
+  isCorrect,
+  completed,
+  language,
+  prompt,
+  markerHint,
+}: {
+  puzzle: SpatialPuzzle
+  onAnswer: (id: string) => void
+  selected: string | null
+  isCorrect: boolean | null
+  completed: boolean
+  language: string
+  prompt: string
+  markerHint: string
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="bg-fuchsia-900/40 border border-fuchsia-500/30 rounded-2xl p-5 text-center space-y-4">
+        <p className="text-lg sm:text-xl font-bold text-fuchsia-100">
+          {localize(puzzle.question, language as 'en' | 'id')}
+        </p>
+        <SpatialFigureView grid={puzzle.figure} surface="prompt" />
+        {hasSpatialMarker(puzzle.figure) && (
+          <p className="text-xs text-fuchsia-200/70 leading-relaxed">{markerHint}</p>
+        )}
+      </div>
+
+      <p className="text-center text-white/60 text-sm font-bold">{prompt}</p>
+
+      <div className="grid grid-cols-2 gap-3">
+        {puzzle.options.map((option, i) => {
+          const isSelected = selected === option.id
+          const correct = completed && option.id === puzzle.answerId
+          const wrong = isSelected && isCorrect === false
+          return (
+            <motion.button
+              key={option.id}
+              onClick={() => !completed && onAnswer(option.id)}
+              disabled={completed}
+              className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-3 transition-all ${
+                correct
+                  ? 'bg-green-500/30 border-green-400'
+                  : wrong
+                  ? 'bg-red-500/30 border-red-400'
+                  : isSelected
+                  ? 'bg-fuchsia-500/30 border-fuchsia-400'
+                  : 'bg-white/8 border-white/20 hover:bg-white/15 hover:border-white/40'
+              } ${completed ? 'cursor-default' : 'cursor-pointer'}`}
+              animate={wrong ? { x: [-4, 4, -4, 4, 0] } : {}}
+              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <SpatialFigureView grid={option.grid} surface="option" />
+              <span className={`text-xs font-bold text-center leading-tight ${
+                correct ? 'text-green-200' : wrong ? 'text-red-200' : 'text-white/80'
+              }`}>
+                {localize(option.label, language as 'en' | 'id')}
+              </span>
+            </motion.button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 export function ThinkingLessonScreen({
   lesson,
   world,
@@ -864,6 +989,7 @@ export function ThinkingLessonScreen({
     if (p.type === 'sort') return value === p.answer.join(',')
     if (p.type === 'fill-in') return value.trim().toLowerCase() === p.answer.trim().toLowerCase()
     if (p.type === 'match') return value === 'matched'
+    if (p.type === 'spatial') return value === p.answerId
     if (p.type === 'abstraction') {
       if (p.subtype === 'odd-one-out') return value === p.correctIds[0]
       return value === [...p.correctIds].sort().join(',')
@@ -1061,6 +1187,18 @@ export function ThinkingLessonScreen({
             oddPrompt={t('thinking.abstraction.odd.prompt')}
             categoryPrompt={t('thinking.abstraction.category.prompt')}
             checkLabel={t('thinking.abstraction.check')}
+          />
+        )}
+        {puzzle.type === 'spatial' && (
+          <SpatialPuzzleView
+            puzzle={puzzle as SpatialPuzzle}
+            onAnswer={handleAnswer}
+            selected={selected}
+            isCorrect={isCorrect}
+            completed={completed}
+            language={language}
+            prompt={t('thinking.spatial.prompt')}
+            markerHint={t('thinking.spatial.marker')}
           />
         )}
       </motion.div>
