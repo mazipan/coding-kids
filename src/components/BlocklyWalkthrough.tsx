@@ -439,6 +439,34 @@ function getTeachSteps(worldId: string): TeachStep[] {
       },
     ],
 
+    eco: [
+      {
+        icon: '🧩',
+        title: { en: 'Break the mission into small pieces!', id: 'Pecah misi menjadi bagian kecil!' },
+        body: {
+          en: 'Never plan one long route at once. Find the small piece that repeats — one street, one city block — and solve that piece first.',
+          id: 'Jangan pernah merencanakan satu rute panjang sekaligus. Temukan bagian kecil yang berulang — satu jalan, satu blok kota — dan selesaikan bagian itu dulu.',
+        },
+        diagram: (lang) => <RepeatWrap count={6} childLabel={mr(lang)} lang={lang} />,
+      },
+      {
+        icon: '🔧',
+        title: { en: 'Reuse the piece that works!', id: 'Pakai ulang bagian yang berhasil!' },
+        body: {
+          en: 'Once a piece works, name it as a function. Then every district that shares the same shape costs you one call block instead of a whole new route.',
+          id: 'Setelah sebuah bagian berhasil, beri nama sebagai fungsi. Lalu setiap distrik dengan bentuk yang sama hanya butuh satu blok panggilan, bukan rute baru.',
+        },
+        diagram: (lang) => (
+          <StackedPills items={[
+            { color: C.func, label: lang === 'id' ? '🔧 Fungsi: distrik' : '🔧 Function: district' },
+            { color: C.move, label: mr(lang) },
+            { color: C.func, label: lang === 'id' ? 'panggil distrik' : 'call district' },
+            { color: C.func, label: lang === 'id' ? 'panggil distrik' : 'call district' },
+          ]} />
+        ),
+      },
+    ],
+
     portal: [
       {
         icon: '📋',

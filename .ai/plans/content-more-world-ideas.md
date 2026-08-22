@@ -205,9 +205,13 @@ The first roadmap item, Code Orchestra, was selected for implementation in `feat
 | 1 | 🎵 Code Orchestra | **shipped** | `feat-code-orchestra-world.md` |
 | 2 | 🧭 Spatial Studio | blocked | needs the spatial-choice interaction prototype (a new puzzle type in `types/index.ts` plus a view in `ThinkingLesson.tsx`) built and passed through code + kid review before any lesson is authored |
 | 3 | 🗺️ Planning Peaks | **shipped** | `content-planning-peaks-chance-camp.md` |
-| 4 | 🌱 Eco City | backlog | unblocked but deliberately deferred — a blocks world needs 10 grids with exact simulated routes and deserves its own independently revertible release |
+| 4 | 🌱 Eco City | **shipped** | `feat-eco-city-world.md` |
 | 5 | 🎲 Chance Camp | **shipped** | `content-planning-peaks-chance-camp.md` |
 | 6 | 🧭 Coordinate Cove | blocked | still needs a technical plan defining read-only row/column sensor blocks, sandbox exposure, and action-cap behaviour |
+
+### Roadmap status (updated 2026-08-22)
+
+Eco City shipped as `feat-eco-city-world.md`: a 10-lesson blocks bonus world built from the six existing Blockly categories, with every canonical route simulated in `tests/ecoCityLessons.test.ts`. Only Spatial Studio (needs its interaction prototype) and Coordinate Cove (needs a position-sensor design) remain, and both are still blocked on the same design work they were blocked on before.
 
 Planning Peaks and Chance Camp were taken out of priority order because they were the only remaining ideas that needed nothing but lesson data. Spatial Studio keeps its priority-2 position for whenever the interaction prototype is built; that prototype, not its content, is the next piece of work on it.
 

@@ -373,3 +373,19 @@ Format:
 - Phrase probability answers as words on `MathPuzzle` — its `options` are `string[]`, not localizable, so word answers there would break INV-C2. Word answers go through `if-then`.
 
 **Consequences:** Two new thinking worlds, 20 lessons, no new dependency, puzzle type, engine change, or persistence change. New lesson IDs are additive, so existing saves need no migration. A drive-by fix registers the three colours (`amber`, `cyan`, `violet`) that `ThinkingHome.getWorldTheme` was missing, which had been silently rendering Math Reasoning, Rule Finder and Logic Detective in the purple fallback; a test now asserts both colour maps stay in sync. Two pre-existing INV-Q3 true-false runs (in `nature` and `deduction`) were found during the audit and are recorded, not fixed, in the plan.
+
+---
+
+## 2026-08-22 — Eco City as the decomposition capstone bonus world
+
+**Context:** Eco City was roadmap priority 4 and the last unblocked idea on the list. It had been deferred for effort, not capability: a blocks world needs 10 grids whose routes are provably solvable, which is materially more work than a data-only thinking world. Code Orchestra had already set the precedent of shipping a blocks bonus world with a route-simulation test.
+
+**Decision:** Ship Eco City (`eco`) as a 10-lesson blocks bonus world for ages 10–14, teaching Decomposition & Reuse. It is built entirely from the six existing Blockly categories and the existing grid engine — no new block, goal type, or engine behaviour. It sits behind the shared bonus gate, unlocks sequentially, and gates lesson 1 behind its own tutorial the way Code Orchestra does. `tests/ecoCityLessons.test.ts` simulates every canonical route through `applyAction`/`checkWin` and asserts the obstacle lessons really do block the naive route.
+
+**Alternatives rejected:**
+- Add a typed-token sorting mechanic (bins that accept only one kind of token) — needs a new engine concept, and the issue explicitly keeps objectives route-based.
+- Assess environmental facts — the issue forbids it. Recycling, water and power are scenery, and every fact a lesson uses is explained in the same sentence that uses it.
+- Make Eco City a main XP-gated world — it mixes six categories the main path already teaches one at a time, which is exactly what the bonus tier is for.
+- Use `reach_goal` for the finale so the 🏙️ goal cell appears — `GameGrid` does not render `goalPos` at all, and `reach_goal` would let a child win while skipping every token.
+
+**Consequences:** A sixth bonus world, 11 new lesson IDs (`eco-0` … `eco-10`), no new dependency and no persistence change, so existing saves need no migration. The `orchestra`-only tutorial gate in `useProgress.ts` was generalized into `TUTORIAL_GATED_BONUS_WORLD_IDS` rather than duplicated. A drive-by fix corrects the hardcoded `landing.worlds.title` count, which had read "24" since before Code Orchestra took the real total to 25 and now reads 26.

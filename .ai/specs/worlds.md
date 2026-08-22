@@ -15,8 +15,11 @@
 | sorting | 📦 | Algorithms & Data | 11–14 | bonus gate | 10 |
 | debugging | 🐛 | Debugging | 11–14 | bonus gate | 10 |
 | orchestra | 🎵 | Loops & Functions | 8–12 | bonus gate | 10 |
+| eco | 🌱 | Decomposition & Reuse | 10–14 | bonus gate | 10 |
 
-Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1.
+Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1. Two bonus worlds ship their own tutorial (`orchestra-0`, `eco-0`) and gate lesson 1 behind it — see `TUTORIAL_GATED_BONUS_WORLD_IDS` in `src/store/useProgress.ts`.
+
+`eco` (Eco City) is a capstone: it uses all six existing Blockly categories and introduces no new block, no new engine behaviour, and no new goal type. Every one of its canonical routes is simulated in `tests/ecoCityLessons.test.ts`; any change to an Eco City grid must keep that test green.
 
 Source: `src/data/worlds.ts` — `WORLDS` array. Each world has `theme` (bgGradient, accentColor, textColor, cellBorder, cellBg), `emoji`, `character` (emoji for mascot), `characterName`, `itemEmoji`, `obstacleEmoji`, `goalEmoji`.
 

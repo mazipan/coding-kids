@@ -271,6 +271,29 @@ export const WORLDS: World[] = [
     lessonCount: 10,
     isBonus: true,
   },
+  {
+    id: 'eco',
+    name: { en: 'Eco City', id: 'Kota Hijau' },
+    emoji: '🌱',
+    tagline: { en: 'Break one big mission into smaller algorithms!', id: 'Pecah satu misi besar menjadi algoritma kecil!' },
+    ageRange: '10–14',
+    concept: { en: 'Decomposition & Reuse', id: 'Dekomposisi & Penggunaan Ulang' },
+    character: '👷',
+    characterName: 'Sol',
+    itemEmoji: '♻️',
+    obstacleEmoji: '🏗️',
+    goalEmoji: '🏙️',
+    theme: {
+      bgGradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #115e59 100%)',
+      cellBg: 'rgba(52,211,153,0.13)',
+      cellBorder: 'rgba(52,211,153,0.32)',
+      accentColor: '#34d399',
+      textColor: '#a7f3d0',
+    },
+    unlockAtXP: 999999,
+    lessonCount: 10,
+    isBonus: true,
+  },
 ]
 
 export function getWorld(id: string): World | undefined {
