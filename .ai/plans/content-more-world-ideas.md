@@ -207,7 +207,7 @@ The first roadmap item, Code Orchestra, was selected for implementation in `feat
 | 3 | 🗺️ Planning Peaks | **shipped** | `content-planning-peaks-chance-camp.md` |
 | 4 | 🌱 Eco City | backlog | unblocked but deliberately deferred — a blocks world needs 10 grids with exact simulated routes and deserves its own independently revertible release |
 | 5 | 🎲 Chance Camp | **shipped** | `content-planning-peaks-chance-camp.md` |
-| 6 | 🧭 Coordinate Cove | blocked | still needs a technical plan defining read-only row/column sensor blocks, sandbox exposure, and action-cap behaviour |
+| 6 | 🧭 Coordinate Cove | **shipped** | `feat-coordinate-cove-world.md` — the sensor design that unblocked it also restated INV-G3/INV-G4 |
 
 Planning Peaks and Chance Camp were taken out of priority order because they were the only remaining ideas that needed nothing but lesson data. Spatial Studio keeps its priority-2 position for whenever the interaction prototype is built; that prototype, not its content, is the next piece of work on it.
 

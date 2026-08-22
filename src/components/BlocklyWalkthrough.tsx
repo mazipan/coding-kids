@@ -15,6 +15,7 @@ const C = {
   logic: '#1D4ED8',
   func:  '#B45309',
   list:  '#0F766E',
+  sense: '#0D9488',
 }
 
 // ── Primitive visual block components ────────────────────────────────────────
@@ -182,6 +183,28 @@ const DEMO_STATES: Partial<Record<string, object>> = {
         type: 'controls_repeat_ext', x: 40, y: 30,
         inputs: {
           TIMES: { shadow: { type: 'math_number', fields: { NUM: 5 } } },
+          DO: { block: { type: 'move_right' } },
+        },
+      }],
+    },
+  },
+  cove: {
+    blocks: {
+      languageVersion: 0,
+      blocks: [{
+        type: 'controls_whileUntil', x: 40, y: 30,
+        fields: { MODE: 'WHILE' },
+        inputs: {
+          BOOL: {
+            block: {
+              type: 'logic_compare',
+              fields: { OP: 'LT' },
+              inputs: {
+                A: { block: { type: 'sensor_col' } },
+                B: { block: { type: 'math_number', fields: { NUM: 3 } } },
+              },
+            },
+          },
           DO: { block: { type: 'move_right' } },
         },
       }],
@@ -435,6 +458,85 @@ function getTeachSteps(worldId: string): TeachStep[] {
             { color: C.move, label: mr(lang) },
             { color: C.func, label: lang === 'id' ? 'panggil refrain' : 'call chorus' },
           ]} />
+        ),
+      },
+    ],
+
+    cove: [
+      {
+        icon: '🧭',
+        title: { en: 'Every square has an address', id: 'Setiap kotak punya alamat' },
+        body: {
+          en: 'The numbers along the top and the left of the chart name every square. A marker at Row 2, Column 5 is on the 2nd row down and the 5th column across. Read the address — never count squares in your head.',
+          id: 'Angka di atas dan di kiri peta menamai setiap kotak. Penanda di Baris 2, Kolom 5 ada di baris ke-2 dari atas dan kolom ke-5 dari kiri. Baca alamatnya — jangan menghitung kotak dalam kepala.',
+        },
+        diagram: (lang) => (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <div style={{ display: 'flex' }}>
+              <div style={{ width: 22 }} />
+              {[1, 2, 3, 4, 5].map(c => (
+                <div key={c} style={{ width: 30, textAlign: 'center', fontSize: 12, fontWeight: 900, color: C.sense }}>{c}</div>
+              ))}
+            </div>
+            {[1, 2, 3].map(r => (
+              <div key={r} style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ width: 22, textAlign: 'right', paddingRight: 5, fontSize: 12, fontWeight: 900, color: C.sense }}>{r}</div>
+                {[1, 2, 3, 4, 5].map(c => (
+                  <div key={c} style={{
+                    width: 30, height: 30,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    border: '1px solid rgba(45,212,191,0.3)',
+                    background: 'rgba(45,212,191,0.1)',
+                    fontSize: 16,
+                  }}>
+                    {r === 2 && c === 1 ? '⛵' : r === 2 && c === 5 ? '📍' : ''}
+                  </div>
+                ))}
+              </div>
+            ))}
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>
+              {lang === 'id' ? '⛵ Baris 2, Kolom 1 → 📍 Baris 2, Kolom 5' : '⛵ Row 2, Column 1 → 📍 Row 2, Column 5'}
+            </div>
+          </div>
+        ),
+      },
+      {
+        icon: '🧭',
+        title: { en: 'The boat can read its own position', id: 'Perahu bisa membaca posisinya sendiri' },
+        body: {
+          en: 'Open the 🧭 Position drawer. "my row" and "my column" report where the boat is right now, and the number changes every time it moves. Drop one into a comparison to build a test.',
+          id: 'Buka laci 🧭 Posisi. "barisku" dan "kolomku" melaporkan posisi perahu sekarang, dan angkanya berubah setiap kali perahu bergerak. Taruh salah satunya di perbandingan untuk membuat uji.',
+        },
+        diagram: (lang) => (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+            <StackedPills items={[
+              { color: C.sense, label: lang === 'id' ? '🧭 barisku' : '🧭 my row' },
+              { color: C.sense, label: lang === 'id' ? '🧭 kolomku' : '🧭 my column' },
+            ]} />
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>
+              {lang === 'id' ? 'pasang ke dalam perbandingan:' : 'plug into a comparison:'}
+            </div>
+            <Pill color={C.logic}>{lang === 'id' ? '🧭 kolomku  <  3' : '🧭 my column  <  3'}</Pill>
+          </div>
+        ),
+      },
+      {
+        icon: '🔄',
+        title: { en: 'Sail while the test is still true', id: 'Berlayar selama ujinya masih benar' },
+        body: {
+          en: 'A "repeat while" loop checks the test before every move and stops the moment it is false. So the boat sails east until its column reaches the number you chose — however far away it started.',
+          id: 'Perulangan "ulangi selama" memeriksa uji sebelum setiap gerakan dan berhenti begitu ujinya salah. Jadi perahu berlayar ke timur sampai kolomnya mencapai angka yang kamu pilih — sejauh apa pun titik awalnya.',
+        },
+        diagram: (lang) => (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Pill color={C.loop}>
+              {lang === 'id' ? '🔄 Ulangi selama  🧭 kolomku < 3' : '🔄 Repeat while  🧭 my column < 3'}
+            </Pill>
+            <div style={{ marginLeft: 14, borderLeft: `4px solid ${C.loop}80`, paddingLeft: 10, paddingTop: 4, paddingBottom: 4 }}>
+              <Pill color={C.move}>{mr(lang)}</Pill>
+            </div>
+            <Pill color={C.loop} small>{lang === 'id' ? '(selesai ulangi)' : '(end repeat)'}</Pill>
+          </div>
         ),
       },
     ],

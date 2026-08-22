@@ -113,7 +113,7 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
 
     await sleep(300)
 
-    const { actions, error } = parseCodeToActions(currentCode)
+    const { actions, error, stopped } = parseCodeToActions(currentCode, lesson)
 
     if (error) {
       setGameState(s => ({ ...s, status: 'crashed', errorMessage: `Code error: ${error}` }))
@@ -127,7 +127,9 @@ export function LessonScreen({ lesson, world, completeLesson, existingProgress, 
 
     if (actions.length === 0) {
       setGameState(s => ({ ...s, status: 'failure' }))
-      setMascotMessage(t('game.fail.noactions'))
+      // A loop that spun without ever moving is a different mistake from
+      // forgetting to add a move block — say which one it was.
+      setMascotMessage(t(stopped === 'loop-cap' ? 'game.fail.loop' : 'game.fail.noactions'))
       setMascotMood('thinking')
       setIsRunning(false)
       runningRef.current = false

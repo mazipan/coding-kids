@@ -6,6 +6,7 @@ import * as EnLocale from 'blockly/msg/en'
 import * as IdLocale from 'blockly/msg/id'
 import { buildToolbox } from '../blockly/toolboxes'
 import { registerCustomBlocks } from '../blockly/customBlocks'
+import { stripLoopGuard } from '../engine/gameEngine'
 import { useLanguage } from '../i18n/LanguageProvider'
 
 registerCustomBlocks()
@@ -15,6 +16,8 @@ const CUSTOM_MSG: Record<string, Record<'en' | 'id', string>> = {
   MOVE_LEFT:  { en: '⬅️ Move Left',  id: '⬅️ Gerak Kiri' },
   MOVE_UP:    { en: '⬆️ Move Up',    id: '⬆️ Gerak Atas' },
   MOVE_DOWN:  { en: '⬇️ Move Down',  id: '⬇️ Gerak Bawah' },
+  SENSOR_ROW: { en: '🧭 my row',     id: '🧭 barisku' },
+  SENSOR_COL: { en: '🧭 my column',  id: '🧭 kolomku' },
 }
 
 function applyLocale(language: string) {
@@ -144,7 +147,9 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
           const count = allBlocks.length
           const usedBlockTypes = allBlocks.map(b => b.type)
           setBlockCount(count)
-          setGeneratedCode(code)
+          // The loop guard is machinery, not something a child wrote — hide it
+          // from the code view while still executing it.
+          setGeneratedCode(stripLoopGuard(code))
           onCodeChangeRef.current(code, count, usedBlockTypes)
         } catch {
           // Ignore generation errors

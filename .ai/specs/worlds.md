@@ -15,6 +15,7 @@
 | sorting | 📦 | Algorithms & Data | 11–14 | bonus gate | 10 |
 | debugging | 🐛 | Debugging | 11–14 | bonus gate | 10 |
 | orchestra | 🎵 | Loops & Functions | 8–12 | bonus gate | 10 |
+| cove | 🧭 | Coordinates & Position | 10–13 | bonus gate | 10 |
 
 Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1.
 
@@ -56,8 +57,20 @@ Defined in `src/data/lessons.ts`. Each lesson:
   buggyState?: object           // Blockly JSON serialisation of the broken workspace
                                 // generated via Blockly.serialization.workspaces.save()
                                 // optimalBlockCount = block count of the CORRECT solution
+  showCoords?: true             // draw 1-based row/column labels around the grid plus a
+                                // live "Row n · Column n" readout (Coordinate Cove)
 }
 ```
+
+### Position sensors (Coordinate Cove)
+
+`sensor_row` and `sensor_col` are value blocks that return the character's **1-based** row and column — the same numbers the `showCoords` gutter draws, so a child never has to translate between what they read and what they type. They generate `currentRow()` / `currentCol()`, which the engine answers from a headless simulation that replays the child's moves through `applyAction`. Authoring rules:
+
+- Any lesson using sensors must set `showCoords: true`. A sensor without a labelled chart forces the child to count cells, which is the thing the world is meant to remove.
+- Sensors are ordinary blocks and are counted by `workspace.getAllBlocks()`. Author `optimalBlockCount` and `starThresholds` from the **full** count of the canonical solution, comparison and number blocks included.
+- Set `requiredCategories: ['sensors', ...]`. A hardcoded route always uses fewer blocks than a sensor loop, so without this the star system would reward skipping the concept.
+- Never write a condition that can only resolve one way — that is a fixed sequence in a costume. A sensor test must be able to be false at some point in the run.
+- The loop guard (INV-G3) means a non-terminating loop stops cleanly, but a lesson must still be solvable within `MAX_ACTIONS = 200` moves.
 
 ### Star threshold logic
 
@@ -91,6 +104,9 @@ Set per lesson via `availableCategories`. Introduce categories gradually as conc
 | `logic` | controls_if, controls_ifelse, logic_compare |
 | `functions` | PROCEDURE (Blockly built-in) |
 | `lists` | lists_create_with, lists_getIndex, lists_setIndex, etc. |
+| `sensors` | sensor_row, sensor_col — read-only 1-based position getters |
+
+Selecting `variables`, `logic`, `lists`, **or** `sensors` also adds the Math category, because each needs a number to compare or compute against.
 
 ---
 
