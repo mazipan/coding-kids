@@ -917,8 +917,14 @@ function SpatialPuzzleView({
           {localize(puzzle.question, language as 'en' | 'id')}
         </p>
         <SpatialFigureView grid={puzzle.figure} surface="prompt" />
-        {hasSpatialMarker(puzzle.figure) && (
-          <p className="text-xs text-fuchsia-200/70 leading-relaxed">{markerHint}</p>
+        {puzzle.note ? (
+          <p className="text-xs text-fuchsia-200/70 leading-relaxed">
+            {localize(puzzle.note, language as 'en' | 'id')}
+          </p>
+        ) : (
+          hasSpatialMarker(puzzle.figure) && (
+            <p className="text-xs text-fuchsia-200/70 leading-relaxed">{markerHint}</p>
+          )
         )}
       </div>
 

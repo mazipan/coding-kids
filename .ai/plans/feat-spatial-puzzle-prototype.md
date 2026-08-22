@@ -53,7 +53,7 @@
 
 Add a tenth thinking puzzle type, `spatial`, that renders a **prompt figure plus four labelled figure options** and scores by option id. Figures are authored as compact text rows — one string per grid row, `'#'` a filled cell, `'o'` a filled cell carrying a dot, `'.'` empty — so every figure is local, diffable in review, and needs no image asset (INV-P1). The dot is an **orientation anchor made of shape, not colour**: a rotation and its mirror produce visibly different dot positions, which is what makes the distractors readable for a colourblind child.
 
-Ship the world `spatial` (🧭 Spatial Studio / Studio Spasial, ages 7–11, colour `fuchsia`, `unlockAtXP: 0`) with **3 prototype lessons** covering the three primitive transformations the full arc is built from: translate, reflect, rotate. `lessonCount` is `3` and rises to `10` in the follow-up content issue.
+Ship the world `spatial` (🧭 Spatial Studio / Studio Spasial, ages 7–11, colour `fuchsia`, `unlockAtXP: 0`) with the **complete 10-lesson arc** from the roadmap. The issue scoped this to 2–3 sample lessons so the interaction could be reviewed before content was written; the interaction was built and reviewed in a browser first, and the author then asked for the full arc, so the remaining seven lessons ship in the same release.
 
 ### Why a text-row grid rather than SVG or emoji
 
@@ -67,15 +67,26 @@ Ship the world `spatial` (🧭 Spatial Studio / Studio Spasial, ages 7–11, col
 
 Every option carries a required `label: LocalizedString`. In the prototype the labels are the neutral frame names (Shape A/B/C/D — Bentuk A/B/C/D): a label must **never name its transformation**, because "Quarter turn right" as a label answers the puzzle. The field is required rather than optional so the later viewpoint lessons ("from above", "from the left side") have somewhere translatable to put real words, which `pattern`/`math` `string[]` options could not.
 
-### Prototype lesson content
+### Lesson content — the full arc
 
 | # | Mechanic | Scenario | Answer | Distractors (all believable errors) | XP |
 |---|---|---|---|---|---|
-| 0 | Translate — same shape, new position | Orbit slides a corner piece to a new spot in the frame | same shape moved | mirrored, quarter-turned, one cell missing | 12 |
-| 1 | Reflect — flip left/right across a mirror line | Orbit holds a flag up to a mirror | left-right flip | flipped top-to-bottom (wrong axis), the stem flipped but the bar and its dot left where they were, slid across without flipping at all | 14 |
-| 2 | Rotate — quarter turn clockwise | Orbit turns a signpost a quarter turn to the right | 90° clockwise | mirrored instead of rotated, 180° (turned too far), 90° anticlockwise (wrong direction) | 15 |
+| 0 | Translate — same shape, new position | Orbit slides a corner piece to a new spot | same shape moved | mirrored, quarter-turned, one cell missing | 12 |
+| 1 | Reflect across a vertical mirror line | Orbit holds a flag up to a mirror | left-right flip | flipped top-to-bottom (wrong axis), the stem flipped but the bar and its dot left behind, slid across without flipping at all | 13 |
+| 2 | Reflect across a horizontal mirror line | A tree reflected in a still lake | top-to-bottom flip | flipped left-to-right (wrong axis), half turn (reverses sideways too), slid down without flipping | 14 |
+| 3 | Rotate — quarter turn clockwise | Orbit turns a signpost | 90° clockwise | mirrored instead of rotated, 180° (turned too far), 90° anticlockwise (wrong direction) | 15 |
+| 4 | Trace a route on an overhead map | Orbit walks the park and leaves a trail | down 2, right 2 | order swapped, one step short, one step too far | 15 |
+| 5 | Compose a turn **and** a reflection | Two moves in a stated order | turn then flip | the turn alone, the flip alone, the two done in the wrong order | 17 |
+| 6 | Viewpoint — egocentric left from four headings | Which door did Orbit come through to see the wall on its left | the bottom door | the other three doors, each of which puts the wall ahead or on the right | 18 |
+| 7 | Mental fold | Orbit folds paper in half, top down | mark lands mirrored below the fold | slid down without turning over, folded but mirrored sideways too, both errors at once | 20 |
+| 8 | Work backward from a rotated result | Undo a quarter turn to the left | 90° clockwise (the inverse) | turned the same way again, turned twice, mirrored instead of turned back | 22 |
+| 9 | Multi-turn route with re-orientation | A robot drives, turns right twice | the hooked trail | second turn taken left, never re-oriented after the first turn, first turn taken left | 25 |
 
-Lesson 2's four options are the *same* shape in four states, so the child cannot shortcut by shape recognition — only by tracking the turn. Every distractor in the table is a named error from the issue's list; none is an unrelated shape (INV-Q4).
+Lesson 3's four options are the *same* shape in four states, so the child cannot shortcut by shape recognition — only by tracking the turn. Lesson 5 exists because the two orders genuinely disagree; a shape where turn-then-flip equalled flip-then-turn would teach nothing, and the test asserts they differ. Lesson 6 is the one place labels carry real words (door names), which is why the type requires `LocalizedString` labels. Lesson 9's real load is that the robot's second "right" is a different map direction from its first. Every distractor is a named error from the issue's list; none is an unrelated shape (INV-Q4).
+
+### Difficulty curve (INV-Q5)
+
+Lessons 0–4 are single transformations or a single concrete walk, all judged from outside the figure. Lessons 5–9 each add a second thing to hold in mind: two operations in a fixed order, another person's left, a fold that reverses, an inverse, and a heading that changes mid-route. The step up is cognitive load, not bigger grids.
 
 ---
 
@@ -88,7 +99,8 @@ Lesson 2's four options are the *same* shape in four states, so the child cannot
 | Encode figures as `number[][]` | Equivalent information, but a nested numeric array in the diff shows nothing a reviewer can check by eye. Text rows are the same data drawn as the shape. |
 | Colour one cell to mark orientation | Fails colourblind players, which the issue calls out explicitly. A dot is a shape cue and survives greyscale. |
 | Make `label` optional and auto-generate A/B/C/D from a translation key | Less data, but leaves the localizable-label path untested in the prototype, which is one of the things this prototype exists to validate. |
-| Give `spatial` `lessonCount: 10` now and backfill | Every progress bar and the landing-page lesson total read `lessonCount`; claiming 10 with 3 authored would render a permanently stuck world. |
+| Ship 3 lessons and defer the other 7 to a follow-up issue | This was the plan as approved, and the interaction was in fact built and reviewed first. Once it rendered correctly in a browser the author asked for the full arc, so holding seven written-and-tested lessons back for a second PR would add a release for no reduction in risk. |
+| Colour each cell of a figure so the options are easier to spot | Raised and rejected during review: it converts mental rotation into colour matching, which makes lesson 3 near-trivial and hands sighted children a shortcut colourblind children cannot use. |
 
 ---
 
@@ -104,7 +116,7 @@ Lesson 2's four options are the *same* shape in four states, so the child cannot
 | INV-PR2 stars are best-of | no | Same shared star path. |
 | INV-PR3 XP is delta-only | no | Same shared XP path. |
 | INV-PR4 badges are permanent | no | No badge logic touched. |
-| INV-L1 sequential lesson unlock | yes | Lessons are `spatial-0..2`, 0-indexed and contiguous, so the shared `isLessonUnlocked` chain applies unchanged. Asserted in test. |
+| INV-L1 sequential lesson unlock | yes | Lessons are `spatial-0..9`, 0-indexed and contiguous, so the shared `isLessonUnlocked` chain applies unchanged. Asserted in test. |
 | INV-L2 world unlock by XP | no | Blocks path untouched. |
 | INV-L3 thinking worlds always unlocked | yes | `spatial` is `unlockAtXP: 0`. Asserted in test. |
 | INV-G1 bounded grid | no | Blocks engine untouched. |
@@ -118,15 +130,15 @@ Lesson 2's four options are the *same* shape in four states, so the child cannot
 | INV-C5 lucide-react only | yes | No icon added; the figure is `<div>` geometry and the marker is a rounded `<span>`, not a glyph. No symbol characters in any new string. Asserted in test. |
 | INV-I1 all keys have EN value | yes | Two new keys added to both EN and ID tables. Asserted in test for lesson data. |
 | INV-I2 no layout assumptions | yes | Option buttons wrap their label text and the figure is width-relative (`aspect-square` cells in a fractional grid), so a longer Indonesian label grows the button instead of clipping. |
-| INV-Q1 lesson uniqueness | yes | Three distinct mechanics (translate / reflect / rotate) on three distinct scenarios (corner piece, flag, signpost). |
-| INV-Q2 scenario freshness | yes | No other world uses shape transformation; flag/signpost/corner piece appear nowhere else. |
+| INV-Q1 lesson uniqueness | yes | Ten distinct mechanics on ten distinct scenarios — see the arc table. The two reflection lessons differ by mirror axis *and* scenario; the three rotation-family lessons are forward turn, composed turn-plus-flip, and inverse turn. |
+| INV-Q2 scenario freshness | yes | No other world uses shape transformation. Corner piece, flag, lake, signpost, park map, room door, folded paper and robot trail appear nowhere else in the catalogue. |
 | INV-Q3 true-false balance | no | No true-false puzzle added. |
 | INV-Q4 plausible distractors | yes | Every distractor is a named spatial error (wrong axis, wrong direction, mirror-not-rotate, one step short, dot left behind). Asserted in test that no option repeats another. |
-| INV-Q5 real difficulty curve | yes | Translate (no mental transformation) → reflect (one transformation, wrong-axis trap) → rotate (four states of one shape, so shape recognition cannot substitute for reasoning). Not larger numbers. |
+| INV-Q5 real difficulty curve | yes | See the difficulty-curve note above: one operation judged from outside the figure in 0–4, a second thing to hold in mind in 5–9. XP runs 12→25 and never decreases. |
 
 ### Content audit — target world `spatial`
 
-The world is new, so there are no existing lessons to collide with. Cross-world check: no existing thinking lesson in any of the thirteen shipped worlds uses shape transformation, a figure grid, or the flag / signpost / corner-piece scenarios. `memory` (Memory Maze) is the nearest neighbour and is about recalling a sequence, not transforming a figure.
+The world is new, so there are no existing lessons to collide with. Within the world, every lesson pairs a distinct mechanic with a distinct scenario (arc table above), and no two lessons share a figure. Cross-world check: no existing thinking lesson in any of the thirteen shipped worlds uses shape transformation, a route trace, or a figure grid of any kind. `memory` (Memory Maze) is the nearest neighbour and is about recalling a sequence, not transforming a figure; `decomposition` and `planning` order steps rather than move them through space. No true-false puzzle is added, so INV-Q3 does not apply.
 
 ---
 
@@ -136,12 +148,13 @@ The world is new, so there are no existing lessons to collide with. Cross-world 
 |------|-------------|-------|
 | `src/types/index.ts` | edit | Add `'spatial'` to `ThinkingWorldId`; add `SpatialGrid`, `SpatialPuzzle`; add to the `ThinkingPuzzle` union. |
 | `src/screens/ThinkingLesson.tsx` | edit | Add `SpatialFigureView` + `SpatialPuzzleView`; wire into the render chain and `isAnswerCorrect`. |
-| `src/data/thinkingWorlds.ts` | edit | Append the `spatial` world, `unlockAtXP: 0`, `lessonCount: 3`, colour `fuchsia`. |
-| `src/data/thinkingLessons.ts` | edit | Append `spatial-0`, `spatial-1`, `spatial-2`. |
+| `src/data/thinkingWorlds.ts` | edit | Append the `spatial` world, `unlockAtXP: 0`, `lessonCount: 10`, colour `fuchsia`. |
+| `src/data/thinkingLessons.ts` | edit | Append `spatial-0` … `spatial-9`. |
 | `src/i18n/translations.ts` | edit | Add `thinking.spatial.prompt` and `thinking.spatial.marker` in EN and ID. |
 | `src/screens/ThinkingHome.tsx` | edit | Register `fuchsia` in `getWorldTheme`. |
 | `src/screens/LandingScreen.tsx` | edit | Register `fuchsia` in `THINKING_COLOR_MAP`. |
-| `tests/spatialPuzzle.test.ts` | add | Validate grids, options, localization, and that each authored answer really is the declared transformation. |
+| `tests/spatialPuzzle.test.ts` | add | Validate grids and options, and replay each lesson's own instructions — transformation, route walk, robot drive, paper fold — to confirm the authored answer is what the question actually asks for. |
+| `tests/thinkingWorldsContent.test.ts` | edit | Add `spatial` to `NEW_WORLDS` so the shared world-shape, localization and difficulty-curve suite covers it. |
 | `.ai/specs/worlds.md` | edit | Add the world row, the `spatial` puzzle-type row, and its authoring constraints. |
 | `.ai/decisions/log.md` | edit | Record the representation decision and the 3-lesson prototype scope. |
 | `.ai/plans/feat-spatial-puzzle-prototype.md` | add | This plan. |
@@ -152,22 +165,21 @@ The world is new, so there are no existing lessons to collide with. Cross-world 
 
 ### `.ai/specs/worlds.md`
 
-- Thinking worlds table: append `| spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 3 |`, and change "All thirteen worlds" to fourteen.
-- Puzzle types table: append `| spatial | question (LocalizedString) + figure grid + 4 options, each a figure grid with an id and a LocalizedString label |`.
-- Puzzle authoring constraints table: add the three `spatial` rules (character alphabet, all option grids share one size, labels must not name the transformation).
-- Note that `spatial` is a prototype at 3 lessons and the follow-up issue takes it to 10.
+- Thinking worlds table: append `| spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 10 |`, and change "All thirteen worlds" to fourteen.
+- Puzzle types table: append the `spatial` row, including the optional `note` field.
+- Puzzle authoring constraints table: add the five `spatial` rules — character alphabet and rectangular rows, at most one marker, all option grids share the figure's size, labels must not name the transformation, distractors must be believable spatial errors — plus the rule that a puzzle whose dot is not a shape corner must supply `note`.
 
 ---
 
 ## Implementation steps
 
 1. Add `SpatialGrid`, `SpatialPuzzle`, the `'spatial'` world id, and the union member in `src/types/index.ts`.
-2. Add `SpatialFigureView` (text rows to CSS grid; `'#'` filled, `'o'` filled with a centred dot, `'.'` empty with a dashed outline) and `SpatialPuzzleView` (question card + prompt figure + marker hint + 2×2 option grid) to `src/screens/ThinkingLesson.tsx`.
+2. Add `SpatialFigureView` (text rows to CSS grid; `'#'` filled, `'o'` filled with a centred dot, `'.'` empty with a dashed outline) and `SpatialPuzzleView` (question card + prompt figure + `note` or the default marker hint + 2×2 option grid) to `src/screens/ThinkingLesson.tsx`.
 3. Wire `puzzle.type === 'spatial'` into the render chain and add `if (p.type === 'spatial') return value === p.answerId` to `isAnswerCorrect`.
 4. Add the two translation keys to both language tables.
 5. Append the `spatial` world and register `fuchsia` in both colour maps.
-6. Append the three lessons, with the lesson-0 tutorial card.
-7. Add `tests/spatialPuzzle.test.ts`, including transformation checks that recompute each answer from the prompt figure.
+6. Append the ten lessons, with the lesson-0 tutorial card and a `note` on the route, viewpoint, fold and robot lessons.
+7. Add `tests/spatialPuzzle.test.ts` with simulators that recompute each answer from the prompt figure, and add `spatial` to the shared content suite.
 8. Apply the spec and decision-log changes.
 9. Run `bunx biome ci`, `bun run type-check`, `bun run build`, `bun test` — all must pass.
 
@@ -175,22 +187,25 @@ The world is new, so there are no existing lessons to collide with. Cross-world 
 
 ## Rollback
 
-Revert the commit. The change is additive: a new puzzle type, a new world, three new lesson ids, two new translation keys, one new colour entry per map. No existing lesson, key, route, dependency, or localStorage field changes, so a stored save written while the world existed simply carries three lesson records the app no longer looks up.
+Revert the commits. The change is additive: a new puzzle type, a new world, ten new lesson ids, two new translation keys, one new colour entry per map. No existing lesson, key, route, dependency, or localStorage field changes, so a stored save written while the world existed simply carries lesson records the app no longer looks up.
 
 ---
 
 ## Review notes
 
-Plan reviewed against `.ai/specs/invariants.md` before implementation. Scope is bounded to the interaction plus three lessons; the remaining seven lessons of the arc are explicitly out of scope and belong to the follow-up content issue.
+Plan reviewed against `.ai/specs/invariants.md` before implementation. Originally scoped to the interaction plus three lessons, with the remaining seven deferred. After the interaction was built and checked in a browser, the author asked for the full arc, so the scope was widened to all ten lessons and this plan and its content audit were re-run against them. No follow-up content issue is needed.
 
 ---
 
 ## Implementation notes
 
-- `lessonCount: 3` is deliberate and temporary. `tests/thinkingWorldsContent.test.ts` asserts a 10-lesson shape for the worlds it covers, so `spatial` is validated by its own suite instead and moves into the shared list when the arc is completed.
+- `spatial` is in `NEW_WORLDS` in `tests/thinkingWorldsContent.test.ts`, so the shared suite covers its world shape, bilingual copy and difficulty curve. `tests/spatialPuzzle.test.ts` covers only what is specific to the new puzzle type.
+- The route, fold and robot lessons are verified by simulators rather than by restating the grid: the test replays "2 down then 2 right", the fold, and the robot program, and compares the result to the authored option. Deliberately breaking lessons 6, 7 and 9 was confirmed to fail the suite.
+- `note` was added to `SpatialPuzzle` after the first three lessons: the default hint says the dot marks a corner of the shape, which is false on a map, a fold and a door. `note` replaces that line per puzzle; lessons 4, 6, 7 and 9 use it.
+- Lesson 6's figure has no dot at all — the marker appears only in the options, as the door. The renderer therefore had to suppress the default hint on a markerless figure, which it does.
 - Appending `spatial` moves `ThinkingHome`'s next-world banner from `probability` onto `spatial`; `probability` now points at Spatial Studio, and `spatial`, being last, shows no banner. Expected per `.ai/specs/worlds.md`.
 - The marker hint line renders only when the prompt figure actually contains a `'o'` cell, so a future markerless figure (an overhead map, for instance) does not display an instruction about a dot that is not there.
-- The correct answer sits in a different slot in each of the three lessons (A, B, C), so a child cannot pass the prototype by tapping the same position. Asserted in the test suite.
+- Answer slots run A, B, D, C, A, B, D, A, D, B — never twice in a row, never more than three times in ten. Asserted in the test suite, since a child who spots a positional habit stops reading the shapes.
 - Verified in a real browser at 430px: both languages, the tutorial card, a wrong answer's shake, and the correct-answer/stars/XP state all render as intended. Screenshots are attached to the PR.
 - Known limitation, carried to the follow-up issue: the figure grid is `aria-hidden`, so a screen-reader user hears only the option label. This matches the existing emoji-based puzzle types, which are equally opaque to a screen reader; fixing it is a path-wide change, not a spatial-only one.
 - `SpatialFigureView` derives its column count from the longest row and treats a short row as trailing empties, so a ragged grid degrades to an obviously wrong picture rather than a crash. The test suite rejects ragged grids at author time.

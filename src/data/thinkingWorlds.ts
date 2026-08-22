@@ -167,8 +167,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'fuchsia',
     bgGradient: 'from-fuchsia-900/50 to-pink-900/30',
     unlockAtXP: 0,
-    // Prototype scope: 3 of the planned 10 lessons. See .ai/plans/feat-spatial-puzzle-prototype.md
-    lessonCount: 3,
+    lessonCount: 10,
   },
 ]
 

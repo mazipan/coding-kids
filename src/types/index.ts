@@ -197,6 +197,12 @@ export interface SpatialPuzzle {
   type: 'spatial'
   question: LocalizedString
   figure: SpatialGrid
+  /**
+   * Replaces the default dot explanation under the prompt figure. Supply it whenever the
+   * dot means something other than a corner of a shape — the start of a route, a mark on
+   * folded paper, a door — so the on-screen hint never contradicts the puzzle.
+   */
+  note?: LocalizedString
   /** Labels name the frame ("Shape A"), never its transformation — that would answer the puzzle. */
   options: Array<{ id: string; grid: SpatialGrid; label: LocalizedString }>
   answerId: string

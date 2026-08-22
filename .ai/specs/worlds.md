@@ -113,9 +113,7 @@ Source: `src/data/thinkingWorlds.ts` — `THINKING_WORLDS` array.
 | deduction | 🕵️ | Deductive reasoning | 9–13 | violet | 0 | 10 |
 | planning | 🗺️ | Constraint planning | 8–12 | sky | 0 | 10 |
 | probability | 🎲 | Probability | 9–13 | lime | 0 | 10 |
-| spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 3 (prototype) |
-
-`spatial` (Spatial Studio) ships as a 3-lesson interaction prototype covering translate, reflect and rotate. A follow-up content issue takes it to the full 10-lesson arc and raises `lessonCount` to `10`; until then it is validated by `tests/spatialPuzzle.test.ts` rather than the 10-lesson shape asserted in `tests/thinkingWorldsContent.test.ts`.
+| spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 10 |
 
 All fourteen worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely — see INV-L3, which binds any future thinking world too.
 
@@ -155,7 +153,7 @@ Defined in `src/data/thinkingLessons.ts`. Each lesson:
 | `fill-in` | `question` (LocalizedString) + typed `answer` + optional `inputType` |
 | `match` | `pairs[]` of left/right items; kid links each pair |
 | `abstraction` | `subtype: 'odd-one-out' \| 'category-match'` + `items[]` + `correctIds[]` |
-| `spatial` | `question` (LocalizedString) + a `figure` grid + 4 `options[]`, each an `id`, a `grid`, and a `label: LocalizedString`; kid picks the frame that shows the transformed figure |
+| `spatial` | `question` (LocalizedString) + a `figure` grid + optional `note` (LocalizedString) + 4 `options[]`, each an `id`, a `grid`, and a `label: LocalizedString`; kid picks the frame that shows the transformed figure |
 
 ### Puzzle authoring constraints
 
@@ -172,6 +170,7 @@ These are properties of the renderer, not style preferences. Breaking them ships
 | All `spatial` option grids share the **prompt figure's dimensions** | Options render side by side at one size. A differently sized grid changes the cell scale, which reads as a difference in the shape rather than in its orientation. |
 | A `spatial` option `label` must **never name its transformation** | "Quarter turn right" as a label answers the puzzle. Labels name the frame ("Shape A"), or carry real words only where the words are part of the question (a viewpoint name, for example). |
 | `spatial` distractors must be **believable spatial errors** | Wrong turn direction, mirrored instead of rotated, wrong mirror axis, turned too far, one cell short. An unrelated shape is filler and breaks INV-Q4. |
+| A `spatial` puzzle whose dot is **not** a shape corner must supply `note` | The default line under the figure reads "The dot marks one corner of the shape". On a route, fold or map lesson the dot means the start, a pencil mark, or a door, and `note` replaces that line so the hint never contradicts the puzzle. |
 
 ### Star & XP logic (thinking path)
 

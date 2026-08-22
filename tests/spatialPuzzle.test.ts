@@ -3,10 +3,11 @@ import { getThinkingLessonsByWorld } from '../src/data/thinkingLessons'
 import { THINKING_WORLDS } from '../src/data/thinkingWorlds'
 import type { SpatialGrid, SpatialPuzzle, ThinkingLesson } from '../src/types'
 
-// Spatial Studio ships as a 3-lesson interaction prototype
-// (.ai/plans/feat-spatial-puzzle-prototype.md), so it is validated here rather than by
-// the 10-lesson shape asserted in thinkingWorldsContent.test.ts. When the full arc lands,
-// this world moves into that suite and only the transformation checks below stay here.
+// Spatial Studio's world shape — 10 sequential lessons, unlockAtXP 0, the xp curve, the
+// lesson-0 tutorial, bilingual copy — is covered by thinkingWorldsContent.test.ts, which
+// now includes this world. What lives here is everything specific to the `spatial` puzzle
+// type: the figure grids, the option structure, and whether each authored answer really is
+// the transformation, route, or fold its own question describes.
 
 const WORLD_ID = 'spatial'
 const EMPTY = '.'
@@ -89,41 +90,6 @@ function optionGrid(puzzle: SpatialPuzzle, id: string): SpatialGrid {
 }
 
 // ── World and lesson shape ────────────────────────────────────
-
-describe('Spatial Studio world', () => {
-  const world = THINKING_WORLDS.find(w => w.id === WORLD_ID)
-
-  test('is registered and always unlocked (INV-L3)', () => {
-    expect(world).toBeDefined()
-    expect(world?.unlockAtXP).toBe(0)
-  })
-
-  test('lessonCount matches the authored prototype lessons', () => {
-    expect(lessons).toHaveLength(3)
-    expect(world?.lessonCount).toBe(lessons.length)
-  })
-
-  test('lessons are contiguous from 0 (INV-L1)', () => {
-    lessons.forEach((lesson, i) => {
-      expect(lesson.number).toBe(i)
-      expect(lesson.id).toBe(`${WORLD_ID}-${i}`)
-      expect(lesson.worldId).toBe(WORLD_ID)
-    })
-  })
-
-  test('lesson 0 opens the world with a tutorial card', () => {
-    expect(lessons[0].tutorial).toBeDefined()
-  })
-
-  test('xp rewards follow the difficulty curve (INV-Q5)', () => {
-    const rewards = lessons.map(l => l.xpReward)
-    for (const lesson of lessons) {
-      expect(lesson.xpReward).toBeGreaterThanOrEqual(10)
-      expect(lesson.xpReward).toBeLessThanOrEqual(lesson.number <= 4 ? 15 : 25)
-    }
-    expect([...rewards].sort((a, b) => a - b)).toEqual(rewards)
-  })
-})
 
 // ── Puzzle data integrity ─────────────────────────────────────
 
@@ -212,16 +178,119 @@ describe.each(lessons.map(l => [l.id, l] as const))('%s', (_id, lesson) => {
   })
 })
 
-// ── The authored answers really are the transformations they claim ──
+// ── Route and fold simulators ─────────────────────────────────
+// These replay the instructions a lesson gives the child and build the grid that must
+// come out, so an authored answer that does not match its own question fails the suite.
+
+const STEP = { up: [-1, 0], down: [1, 0], left: [0, -1], right: [0, 1] } as const
+/** Headings in clockwise order, so turning right is +1 and turning left is -1 (mod 4). */
+const HEADINGS = ['up', 'right', 'down', 'left'] as const
+
+function blank(rows: number, cols: number): string[][] {
+  return Array.from({ length: rows }, () => Array.from({ length: cols }, () => EMPTY))
+}
+
+function paint(cells: string[][], trail: Array<[number, number]>, markAt: 'start' | 'end'): SpatialGrid {
+  for (const [r, c] of trail) cells[r][c] = FILLED
+  const [mr, mc] = markAt === 'start' ? trail[0] : trail[trail.length - 1]
+  cells[mr][mc] = MARKER
+  return cells.map(row => row.join(''))
+}
+
+/** Walks absolute compass steps, e.g. "2 squares down, then 2 squares to the right". */
+function walkRoute(
+  size: number,
+  start: [number, number],
+  steps: Array<[keyof typeof STEP, number]>,
+  markAt: 'start' | 'end',
+): SpatialGrid {
+  const trail: Array<[number, number]> = [start]
+  let [r, c] = start
+  for (const [direction, count] of steps) {
+    const [dr, dc] = STEP[direction]
+    for (let i = 0; i < count; i++) {
+      r += dr
+      c += dc
+      expect(`step to ${r},${c} stays on the map: ${r >= 0 && r < size && c >= 0 && c < size}`).toEndWith('true')
+      trail.push([r, c])
+    }
+  }
+  return paint(blank(size, size), trail, markAt)
+}
+
+/** Drives a robot that turns relative to its own heading: 'R'/'L' turn, a number drives. */
+function driveRobot(
+  size: number,
+  start: [number, number],
+  facing: (typeof HEADINGS)[number],
+  program: Array<'R' | 'L' | number>,
+): SpatialGrid {
+  const trail: Array<[number, number]> = [start]
+  let [r, c] = start
+  let heading = HEADINGS.indexOf(facing)
+  for (const instruction of program) {
+    if (instruction === 'R') {
+      heading = (heading + 1) % 4
+    } else if (instruction === 'L') {
+      heading = (heading + 3) % 4
+    } else {
+      const [dr, dc] = STEP[HEADINGS[heading]]
+      for (let i = 0; i < instruction; i++) {
+        r += dr
+        c += dc
+        expect(`drive to ${r},${c} stays on the map: ${r >= 0 && r < size && c >= 0 && c < size}`).toEndWith('true')
+        trail.push([r, c])
+      }
+    }
+  }
+  return paint(blank(size, size), trail, 'end')
+}
+
+/** Folds the top half of a grid straight down onto the bottom half. */
+function foldTopOntoBottom(grid: SpatialGrid): SpatialGrid {
+  const rows = grid.length
+  const half = rows / 2
+  expect(`${rows} rows fold evenly: ${Number.isInteger(half)}`).toEndWith('true')
+  const out = grid.slice(half).map(row => [...row])
+  for (let r = 0; r < half; r++) {
+    const landing = rows - 1 - r - half
+    for (let c = 0; c < grid[r].length; c++) {
+      if (grid[r][c] !== EMPTY) out[landing][c] = grid[r][c]
+    }
+  }
+  return [...Array.from({ length: half }, () => EMPTY.repeat(grid[0].length)), ...out.map(row => row.join(''))]
+}
+
+/** Erases the orientation marker, leaving the cell empty. */
+function withoutMarker(grid: SpatialGrid): SpatialGrid {
+  return grid.map(row => row.replaceAll(MARKER, EMPTY))
+}
+
+function findMarker(grid: SpatialGrid): [number, number] {
+  for (let r = 0; r < grid.length; r++) {
+    const c = grid[r].indexOf(MARKER)
+    if (c !== -1) return [r, c]
+  }
+  throw new Error(`no marker in ${show(grid)}`)
+}
+
+// ── The authored answers really are what each lesson claims ───
+
+function puzzleFor(number: number): SpatialPuzzle {
+  return spatialPuzzle(lessons[number])
+}
+
+function answerGrid(puzzle: SpatialPuzzle): SpatialGrid {
+  return optionGrid(puzzle, puzzle.answerId)
+}
 
 describe('authored answers match their declared transformation', () => {
-  test('spatial-0 — the answer is the figure translated, and nothing else is', () => {
-    const puzzle = spatialPuzzle(lessons[0])
+  test('0 — the answer is the figure translated, and no distractor is', () => {
+    const puzzle = puzzleFor(0)
     const shape = show(crop(puzzle.figure))
 
-    expect(show(crop(optionGrid(puzzle, puzzle.answerId)))).toBe(shape)
-    // ...but moved, so it must not sit in the original cells.
-    expect(show(optionGrid(puzzle, puzzle.answerId))).not.toBe(show(puzzle.figure))
+    expect(show(crop(answerGrid(puzzle)))).toBe(shape)
+    expect(show(answerGrid(puzzle))).not.toBe(show(puzzle.figure))
 
     // Distractors are the named spatial errors, not unrelated shapes (INV-Q4).
     expect(show(crop(optionGrid(puzzle, 'b')))).toBe(show(crop(mirrorLeftRight(puzzle.figure))))
@@ -234,25 +303,137 @@ describe('authored answers match their declared transformation', () => {
     }
   })
 
-  test('spatial-1 — the answer is the left-to-right mirror', () => {
-    const puzzle = spatialPuzzle(lessons[1])
-    expect(show(optionGrid(puzzle, puzzle.answerId))).toBe(show(mirrorLeftRight(puzzle.figure)))
+  test('1 — the answer is the left-to-right mirror', () => {
+    const puzzle = puzzleFor(1)
+    expect(show(answerGrid(puzzle))).toBe(show(mirrorLeftRight(puzzle.figure)))
     // The wrong-axis distractor is the top-to-bottom mirror.
     expect(show(optionGrid(puzzle, 'a'))).toBe(show(mirrorTopBottom(puzzle.figure)))
   })
 
-  test('spatial-2 — the answer is the quarter turn clockwise, and each distractor is a different turn', () => {
-    const puzzle = spatialPuzzle(lessons[2])
-    expect(puzzle.figure.length).toBe(puzzle.figure[0].length)
+  test('2 — the answer is the top-to-bottom mirror', () => {
+    const puzzle = puzzleFor(2)
+    expect(show(answerGrid(puzzle))).toBe(show(mirrorTopBottom(puzzle.figure)))
+    expect(show(optionGrid(puzzle, 'a'))).toBe(show(mirrorLeftRight(puzzle.figure)))
+    // A half turn looks close to a fold but reverses left and right as well.
+    expect(show(optionGrid(puzzle, 'b'))).toBe(show(rotateHalfTurn(puzzle.figure)))
+  })
 
-    expect(show(optionGrid(puzzle, puzzle.answerId))).toBe(show(rotateClockwise(puzzle.figure)))
+  test('3 — the answer is the quarter turn clockwise, and each distractor is a different turn', () => {
+    const puzzle = puzzleFor(3)
+    expect(puzzle.figure.length).toBe(puzzle.figure[0].length)
+    expect(show(answerGrid(puzzle))).toBe(show(rotateClockwise(puzzle.figure)))
     expect(show(optionGrid(puzzle, 'a'))).toBe(show(mirrorLeftRight(puzzle.figure)))
     expect(show(optionGrid(puzzle, 'b'))).toBe(show(rotateHalfTurn(puzzle.figure)))
     expect(show(optionGrid(puzzle, 'd'))).toBe(show(rotateAnticlockwise(puzzle.figure)))
   })
 
-  test('the answer is not always in the same slot', () => {
+  test('4 — the answer is the route the question actually describes', () => {
+    const puzzle = puzzleFor(4)
+    const start: [number, number] = [0, 0]
+    expect(show(puzzle.figure)).toBe(show(paint(blank(4, 4), [start], 'start')))
+
+    expect(show(answerGrid(puzzle))).toBe(show(walkRoute(4, start, [['down', 2], ['right', 2]], 'start')))
+    // Order swapped, one step short, one step too far.
+    expect(show(optionGrid(puzzle, 'b'))).toBe(show(walkRoute(4, start, [['right', 2], ['down', 2]], 'start')))
+    expect(show(optionGrid(puzzle, 'c'))).toBe(show(walkRoute(4, start, [['down', 1], ['right', 2]], 'start')))
+    expect(show(optionGrid(puzzle, 'd'))).toBe(show(walkRoute(4, start, [['down', 3], ['right', 2]], 'start')))
+  })
+
+  test('5 — the answer is a turn then a flip, and the wrong order is a separate option', () => {
+    const puzzle = puzzleFor(5)
+    const turnThenFlip = mirrorLeftRight(rotateClockwise(puzzle.figure))
+    const flipThenTurn = rotateClockwise(mirrorLeftRight(puzzle.figure))
+
+    expect(show(answerGrid(puzzle))).toBe(show(turnThenFlip))
+    // The two orders must genuinely differ, or the lesson teaches nothing.
+    expect(show(flipThenTurn)).not.toBe(show(turnThenFlip))
+    expect(show(optionGrid(puzzle, 'd'))).toBe(show(flipThenTurn))
+    // Half-finished attempts: the turn alone, and the flip alone.
+    expect(show(optionGrid(puzzle, 'a'))).toBe(show(rotateClockwise(puzzle.figure)))
+    expect(show(optionGrid(puzzle, 'c'))).toBe(show(mirrorLeftRight(puzzle.figure)))
+  })
+
+  test('6 — every door sits on the same map, and only one has the wall on the walker\'s left', () => {
+    const puzzle = puzzleFor(6)
+    // The room never changes between options; only the door moves.
+    for (const option of puzzle.options) {
+      expect(`${option.id}: ${show(withoutMarker(option.grid))}`).toBe(`${option.id}: ${show(puzzle.figure)}`)
+    }
+
+    // Walk in from each door and work out which side the wall falls on.
+    const size = puzzle.figure.length
+    const wallColumns = new Set<number>()
+    puzzle.figure.forEach(row => {
+      ;[...row].forEach((cell, c) => {
+        if (cell !== EMPTY) wallColumns.add(c)
+      })
+    })
+    expect(wallColumns.size).toBe(1)
+    const wallColumn = [...wallColumns][0]
+
+    const wallOnLeft = puzzle.options.filter(option => {
+      const [doorRow, doorCol] = findMarker(option.grid)
+      // Facing straight into the room from the edge the door sits on.
+      const facing =
+        doorRow === 0 ? 'down' : doorRow === size - 1 ? 'up' : doorCol === 0 ? 'right' : 'left'
+      // Turning left from each heading, which map direction does the walker's left point at?
+      const leftIs = { down: 'right', up: 'left', right: 'up', left: 'down' }[facing]
+      if (leftIs === 'left') return wallColumn < doorCol
+      if (leftIs === 'right') return wallColumn > doorCol
+      return false // a vertical wall is never above or below the walker
+    })
+
+    expect(wallOnLeft.map(o => o.id)).toEqual([puzzle.answerId])
+  })
+
+  test('7 — the answer is where the fold actually puts the mark', () => {
+    const puzzle = puzzleFor(7)
+    expect(show(answerGrid(puzzle))).toBe(show(foldTopOntoBottom(puzzle.figure)))
+    // Slid straight down instead of turning over: the mark keeps its distance from the top.
+    const [markRow, markCol] = findMarker(puzzle.figure)
+    const half = puzzle.figure.length / 2
+    const slid = foldTopOntoBottom(puzzle.figure).map((row, r) =>
+      [...row].map((cell, c) => (cell === MARKER ? FILLED : cell)).join(''),
+    )
+    slid[markRow + half] = `${slid[markRow + half].slice(0, markCol)}${MARKER}${slid[markRow + half].slice(markCol + 1)}`
+    expect(show(optionGrid(puzzle, 'b'))).toBe(show(slid))
+    // Folded, but mirrored sideways as well.
+    expect(show(optionGrid(puzzle, 'c'))).toBe(show(mirrorLeftRight(foldTopOntoBottom(puzzle.figure))))
+  })
+
+  test('8 — the answer undoes the turn the question says was already made', () => {
+    const puzzle = puzzleFor(8)
+    // The question says a quarter turn to the left was applied, so undo it with a right turn.
+    expect(show(answerGrid(puzzle))).toBe(show(rotateClockwise(puzzle.figure)))
+    expect(show(rotateAnticlockwise(answerGrid(puzzle)))).toBe(show(puzzle.figure))
+    // Turned the same way again, turned twice, mirrored instead of turned back.
+    expect(show(optionGrid(puzzle, 'a'))).toBe(show(rotateAnticlockwise(puzzle.figure)))
+    expect(show(optionGrid(puzzle, 'b'))).toBe(show(rotateHalfTurn(puzzle.figure)))
+    expect(show(optionGrid(puzzle, 'c'))).toBe(show(mirrorLeftRight(puzzle.figure)))
+  })
+
+  test('9 — the answer is the trail the robot program actually drives', () => {
+    const puzzle = puzzleFor(9)
+    const start = findMarker(puzzle.figure)
+
+    expect(show(answerGrid(puzzle))).toBe(show(driveRobot(4, start, 'up', [2, 'R', 1, 'R', 1])))
+    // Took the second turn the wrong way; never re-oriented; took the first turn the wrong way.
+    expect(show(optionGrid(puzzle, 'a'))).toBe(show(driveRobot(4, start, 'up', [2, 'R', 1, 'L', 1])))
+    expect(show(optionGrid(puzzle, 'c'))).toBe(show(driveRobot(4, start, 'up', [2, 'R', 2])))
+    expect(show(optionGrid(puzzle, 'd'))).toBe(show(driveRobot(4, start, 'up', [2, 'L', 1, 'R', 1])))
+  })
+
+  test('the answer never sits in the same slot three lessons running, or in over half of them', () => {
     const answerIds = lessons.map(l => spatialPuzzle(l).answerId)
-    expect(new Set(answerIds).size).toBe(answerIds.length)
+    for (let i = 2; i < answerIds.length; i++) {
+      const run = answerIds[i] === answerIds[i - 1] && answerIds[i - 1] === answerIds[i - 2]
+      expect(`slots ${i - 2}..${i} all "${answerIds[i]}": ${run}`).toEndWith('false')
+    }
+    for (const id of new Set(answerIds)) {
+      const uses = answerIds.filter(a => a === id).length
+      expect(`slot "${id}" used ${uses}/${answerIds.length}`).toEndWith(
+        `${uses <= answerIds.length / 2 ? uses : 'TOO MANY'}/${answerIds.length}`,
+      )
+    }
   })
 })
