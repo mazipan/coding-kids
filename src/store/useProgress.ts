@@ -4,11 +4,11 @@ import { getLevelInfo } from '../data/xpSystem'
 
 const STORAGE_KEY = 'codekids_progress_v1'
 
-const BONUS_WORLD_IDS = new Set(['jurassic', 'parking', 'sorting', 'debugging', 'orchestra', 'eco'])
-// Bonus worlds that ship a tutorial (lesson 0) the first real lesson is gated behind.
-// The older bonus worlds have no tutorial, so their lesson 1 opens with the world.
-const TUTORIAL_GATED_BONUS_WORLD_IDS = new Set(['orchestra', 'eco'])
+const BONUS_WORLD_IDS = new Set(['jurassic', 'parking', 'sorting', 'debugging', 'orchestra', 'cove', 'eco'])
 const FINAL_LESSON_ID = 'portal-4'
+
+/** Bonus worlds that open with a tutorial (lesson 0) which must be cleared first. */
+const TUTORIAL_GATED_BONUS_WORLDS = new Set(['orchestra', 'cove', 'eco'])
 
 const DEFAULT_PROGRESS: PlayerProgress = {
   xp: 0,
@@ -25,7 +25,7 @@ export function isLessonAvailable(progress: PlayerProgress, lessonId: string, wo
     const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
     if (lessonNum === 0) return true
     if (lessonNum === 1) {
-      return TUTORIAL_GATED_BONUS_WORLD_IDS.has(worldId)
+      return TUTORIAL_GATED_BONUS_WORLDS.has(worldId)
         ? progress.lessons[`${worldId}-0`]?.completed ?? false
         : true
     }

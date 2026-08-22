@@ -4193,8 +4193,180 @@ export const LESSONS: Lesson[] = [
     goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 17, xpReward: 220,
     hints: [{ en: 'Put four two-step lines into one zigzag function.', id: 'Taruh empat garis dua langkah ke dalam satu fungsi zigzag.' }, { en: 'Call the zigzag once, repeat Right 7 times, then repeat Down 2 times.', id: 'Panggil zigzag sekali, ulangi Kanan 7 kali, lalu ulangi Bawah 2 kali.' }], starThresholds: [36, 27, 21, 17],
   },
+
   // ─────────────────────────────────────────────
-  // BONUS WORLD 6: ECO CITY — Decomposition & Reuse
+  // BONUS WORLD 6: COORDINATE COVE — Coordinates & Position
+  // Grid labels and the 🧭 sensor blocks are both 1-based, so the number a
+  // child reads off the chart is the number the block returns.
+  // ─────────────────────────────────────────────
+  {
+    id: 'cove-0', worldId: 'cove', number: 0, isTutorial: true, showCoords: true,
+    title: { en: 'Tutorial: Read the Chart', id: 'Tutorial: Baca Peta' },
+    story: { en: 'Numbers around the chart name every square. Coral is at Row 1, Column 1. The marker is at Row 1, Column 3.', id: 'Angka di tepi peta menamai setiap kotak. Coral ada di Baris 1, Kolom 1. Penandanya ada di Baris 1, Kolom 3.' },
+    mascotMessage: { en: "Ahoy! ⛵ Look at the numbers on the edge of the chart. I'm at Row 1, Column 1. The 📍 is at Row 1, Column 3 — two squares to my right!", id: 'Ahoi! ⛵ Lihat angka di tepi peta. Aku di Baris 1, Kolom 1. 📍-nya di Baris 1, Kolom 3 — dua kotak di kananku!' },
+    gridRows: 4, gridCols: 5, cells: emptyGrid(4, 5), startPos: [0, 0], items: [{ id: 'm1', pos: [0, 2] }],
+    goalType: 'collect_all', availableCategories: ['move', 'sensors'], optimalBlockCount: 2, xpReward: 0,
+    hints: [
+      { en: 'Column 1 to Column 3 is two squares. Use two ➡️ Move Right blocks.', id: 'Kolom 1 ke Kolom 3 berjarak dua kotak. Pakai dua blok ➡️ Gerak Kanan.' },
+      { en: 'Open the 🧭 Position drawer too — those blocks tell you your own row and column while you sail.', id: 'Buka juga laci 🧭 Posisi — blok itu memberitahu baris dan kolommu sendiri saat berlayar.' },
+    ], starThresholds: [999, 999],
+  },
+  {
+    id: 'cove-1', worldId: 'cove', number: 1, showCoords: true,
+    title: { en: 'Marker at Row 2, Column 5', id: 'Penanda di Baris 2, Kolom 5' },
+    story: { en: 'A single marker floats on open water. Read its coordinate off the chart and sail straight to it.', id: 'Satu penanda mengapung di laut lepas. Baca koordinatnya dari peta dan berlayarlah lurus ke sana.' },
+    mascotMessage: { en: "I'm at Row 2, Column 1. The marker is at Row 2, Column 5. Same row — so I only need to change my column! 🧭", id: 'Aku di Baris 2, Kolom 1. Penandanya di Baris 2, Kolom 5. Baris sama — jadi aku hanya perlu mengubah kolomku! 🧭' },
+    gridRows: 4, gridCols: 6, cells: emptyGrid(4, 6), startPos: [1, 0], items: [{ id: 'm1', pos: [1, 4] }],
+    goalType: 'collect_all', availableCategories: ['move'], optimalBlockCount: 4, xpReward: 120,
+    hints: [
+      { en: 'Column 5 minus Column 1 is 4. That is how many steps right you need.', id: 'Kolom 5 dikurangi Kolom 1 sama dengan 4. Itulah jumlah langkah ke kanan yang kamu butuhkan.' },
+      { en: 'Four ➡️ Move Right blocks, nothing else.', id: 'Empat blok ➡️ Gerak Kanan, tidak ada yang lain.' },
+    ], starThresholds: [10, 7, 5, 4],
+  },
+  {
+    id: 'cove-2', worldId: 'cove', number: 2, showCoords: true,
+    title: { en: 'Two Rows Above the Island', id: 'Dua Baris di Atas Pulau' },
+    story: { en: 'The chart does not name the marker. It says: 2 rows above the island, 3 columns to its right.', id: 'Peta tidak menyebut penandanya. Katanya: 2 baris di atas pulau, 3 kolom di kanannya.' },
+    mascotMessage: { en: 'The island 🏝️ sits at Row 4, Column 2. Two rows above is Row 2. Three columns right is Column 5. Work out where I must land! 🧭', id: 'Pulau 🏝️ ada di Baris 4, Kolom 2. Dua baris di atasnya adalah Baris 2. Tiga kolom di kanannya adalah Kolom 5. Hitung ke mana aku harus mendarat! 🧭' },
+    gridRows: 5, gridCols: 6,
+    cells: (() => { const g = emptyGrid(5, 6); g[3][1] = 'obstacle'; return g })(),
+    startPos: [3, 0], items: [{ id: 'm1', pos: [1, 4] }],
+    goalType: 'collect_all', availableCategories: ['move'], optimalBlockCount: 6, xpReward: 130,
+    hints: [
+      { en: 'The marker is at Row 2, Column 5. You start at Row 4, Column 1.', id: 'Penandanya di Baris 2, Kolom 5. Kamu mulai di Baris 4, Kolom 1.' },
+      { en: 'Sail up 2 first — the island is right beside you — then right 4.', id: 'Berlayarlah ke atas 2 dulu — pulaunya tepat di sebelahmu — lalu ke kanan 4.' },
+    ], starThresholds: [14, 10, 7, 6],
+  },
+  {
+    id: 'cove-3', worldId: 'cove', number: 3, showCoords: true,
+    title: { en: 'Name the Step Count', id: 'Beri Nama Jumlah Langkah' },
+    story: { en: 'Store the distance in a variable, then let a loop use it.', id: 'Simpan jaraknya dalam sebuah variabel, lalu biarkan perulangan memakainya.' },
+    mascotMessage: { en: 'From Column 1 to Column 6 is 5 squares. Make a variable called steps, set it to 5, and repeat that many times! 📦', id: 'Dari Kolom 1 ke Kolom 6 ada 5 kotak. Buat variabel bernama langkah, isi dengan 5, lalu ulangi sebanyak itu! 📦' },
+    gridRows: 3, gridCols: 8, cells: emptyGrid(3, 8), startPos: [1, 0], items: [{ id: 'm1', pos: [1, 5] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'variables'], requiredCategories: ['variables'], optimalBlockCount: 5, xpReward: 140,
+    hints: [
+      { en: 'In 📦 Variables, create steps and set it to 5.', id: 'Di 📦 Variabel, buat langkah dan isi dengan 5.' },
+      { en: 'Then use 🔄 Repeat with your steps variable in the count slot, and one ➡️ Move Right inside.', id: 'Lalu pakai 🔄 Ulangi dengan variabel langkah di slot jumlah, dan satu ➡️ Gerak Kanan di dalamnya.' },
+    ], starThresholds: [12, 9, 6, 5],
+  },
+  {
+    id: 'cove-4', worldId: 'cove', number: 4, showCoords: true,
+    title: { en: 'The Widening Gap', id: 'Jarak yang Melebar' },
+    story: { en: 'The second marker is further away than the first. Change the value you stored instead of writing a new one.', id: 'Penanda kedua lebih jauh dari yang pertama. Ubah nilai yang kamu simpan, jangan menulis yang baru.' },
+    mascotMessage: { en: 'First gap: 3 squares. Then the gap grows by 2. Set gap to 3, sail it, add 2 to gap, and sail again! 📦', id: 'Jarak pertama: 3 kotak. Lalu jaraknya bertambah 2. Isi jarak dengan 3, berlayarlah, tambahkan 2 ke jarak, lalu berlayar lagi! 📦' },
+    gridRows: 3, gridCols: 10, cells: emptyGrid(3, 10), startPos: [1, 0], items: [{ id: 'm1', pos: [1, 3] }, { id: 'm2', pos: [1, 8] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'variables'], requiredCategories: ['variables'], optimalBlockCount: 12, xpReward: 150,
+    hints: [
+      { en: 'Set gap to 3 and repeat gap times. The first marker is at Column 4.', id: 'Isi jarak dengan 3 dan ulangi sebanyak jarak. Penanda pertama ada di Kolom 4.' },
+      { en: 'Now set gap to gap + 2, and repeat gap times again. That lands you on Column 9.', id: 'Sekarang isi jarak dengan jarak + 2, dan ulangi sebanyak jarak lagi. Itu membawamu ke Kolom 9.' },
+    ], starThresholds: [28, 20, 15, 12],
+  },
+  {
+    id: 'cove-5', worldId: 'cove', number: 5, showCoords: true,
+    title: { en: 'Sail Down to Row 5', id: 'Berlayar Turun ke Baris 5' },
+    story: { en: 'Let the boat check its own row and stop by itself.', id: 'Biarkan perahu memeriksa barisnya sendiri dan berhenti sendiri.' },
+    mascotMessage: { en: 'New blocks in 🧭 Position! "my row" tells me which row I am on right now. Keep sailing down while my row is less than 5.', id: 'Blok baru di 🧭 Posisi! "barisku" memberitahu aku sedang di baris berapa sekarang. Terus berlayar turun selama barisku kurang dari 5.' },
+    gridRows: 6, gridCols: 5, cells: emptyGrid(6, 5), startPos: [0, 2], items: [{ id: 'm1', pos: [4, 2] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 5, xpReward: 160,
+    hints: [
+      { en: 'Use 🔄 repeat while, and drop a comparison into its test slot.', id: 'Pakai 🔄 ulangi selama, dan taruh perbandingan di slot ujinya.' },
+      { en: 'The test is: 🧭 my row < 5. Inside the loop, one ⬇️ Move Down.', id: 'Ujinya adalah: 🧭 barisku < 5. Di dalam perulangan, satu ⬇️ Gerak Bawah.' },
+    ], starThresholds: [12, 9, 6, 5],
+  },
+  {
+    id: 'cove-6', worldId: 'cove', number: 6, showCoords: true,
+    title: { en: 'Channel to Column 8', id: 'Alur ke Kolom 8' },
+    story: { en: 'A narrow channel runs east. Sail until your column is exactly 8, picking up the buoy on the way.', id: 'Alur sempit membentang ke timur. Berlayarlah sampai kolommu tepat 8, sambil mengambil pelampung di jalan.' },
+    mascotMessage: { en: 'This time use "repeat until" with an equals test: sail until 🧭 my column equals 8. Not less than — equals! 🧭', id: 'Kali ini pakai "ulangi sampai" dengan uji sama dengan: berlayar sampai 🧭 kolomku sama dengan 8. Bukan kurang dari — sama dengan!' },
+    gridRows: 5, gridCols: 8, cells: emptyGrid(5, 8), startPos: [2, 0], items: [{ id: 'm1', pos: [2, 3] }, { id: 'm2', pos: [2, 7] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 5, xpReward: 170,
+    hints: [
+      { en: 'Switch the loop block from "while" to "until" using its dropdown.', id: 'Ubah blok perulangan dari "selama" menjadi "sampai" lewat dropdown-nya.' },
+      { en: 'The test is: 🧭 my column = 8. Inside, one ➡️ Move Right. The first buoy is collected on the way.', id: 'Ujinya adalah: 🧭 kolomku = 8. Di dalamnya, satu ➡️ Gerak Kanan. Pelampung pertama terambil di jalan.' },
+    ], starThresholds: [14, 10, 7, 5],
+  },
+  {
+    id: 'cove-7', worldId: 'cove', number: 7, showCoords: true,
+    title: { en: 'Reef Bar, Two Tests', id: 'Beting Karang, Dua Uji' },
+    story: { en: 'A reef blocks the top row. Fix your row first, then your column — the other order runs aground.', id: 'Beting menghalangi baris teratas. Betulkan barismu dulu, baru kolommu — urutan sebaliknya akan kandas.' },
+    mascotMessage: { en: 'Two loops this time: one that watches 🧭 my row, then one that watches 🧭 my column. Order matters — the reef is straight ahead!', id: 'Dua perulangan kali ini: satu mengawasi 🧭 barisku, lalu satu mengawasi 🧭 kolomku. Urutan itu penting — betingnya tepat di depan!' },
+    gridRows: 6, gridCols: 7,
+    cells: (() => { const g = emptyGrid(6, 7); g[0][2] = 'obstacle'; g[0][3] = 'obstacle'; g[0][4] = 'obstacle'; g[0][5] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'm1', pos: [3, 5] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 10, xpReward: 180,
+    hints: [
+      { en: 'The marker is at Row 4, Column 6. Sail down before you sail east.', id: 'Penandanya di Baris 4, Kolom 6. Berlayarlah turun sebelum ke timur.' },
+      { en: 'Loop 1: while 🧭 my row < 4, move down. Loop 2: while 🧭 my column < 6, move right.', id: 'Perulangan 1: selama 🧭 barisku < 4, gerak bawah. Perulangan 2: selama 🧭 kolomku < 6, gerak kanan.' },
+    ], starThresholds: [24, 17, 13, 10],
+  },
+  {
+    id: 'cove-8', worldId: 'cove', number: 8, showCoords: true,
+    title: { en: 'Three Chart Markers', id: 'Tiga Penanda Peta' },
+    story: { en: 'Two markers share a column. Reach the first row target, then push on to the second.', id: 'Dua penanda berbagi kolom yang sama. Capai target baris pertama, lalu lanjut ke yang kedua.' },
+    mascotMessage: { en: 'Markers at Row 3 Column 4 and Row 6 Column 4. Line up my column once, then chase two different rows! 🧭', id: 'Penanda di Baris 3 Kolom 4 dan Baris 6 Kolom 4. Luruskan kolomku sekali, lalu kejar dua baris berbeda! 🧭' },
+    gridRows: 7, gridCols: 6, cells: emptyGrid(7, 6), startPos: [0, 0], items: [{ id: 'm1', pos: [2, 3] }, { id: 'm2', pos: [5, 3] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 15, xpReward: 190,
+    hints: [
+      { en: 'Start with: while 🧭 my column < 4, move right.', id: 'Mulai dengan: selama 🧭 kolomku < 4, gerak kanan.' },
+      { en: 'Then two row loops: while 🧭 my row < 3 move down, then while 🧭 my row < 6 move down.', id: 'Lalu dua perulangan baris: selama 🧭 barisku < 3 gerak bawah, lalu selama 🧭 barisku < 6 gerak bawah.' },
+    ], starThresholds: [35, 25, 19, 15],
+  },
+  {
+    id: 'cove-9', worldId: 'cove', number: 9, isBuggy: true, showCoords: true,
+    title: { en: 'Off by One', id: 'Meleset Satu' },
+    story: { en: 'The survey loop already sails east, but it stops one square short of the marker.', id: 'Perulangan survei sudah berlayar ke timur, tapi berhenti satu kotak sebelum penanda.' },
+    mascotMessage: { en: 'The blocks are already here — and they are wrong! The marker is at Column 6, but the loop stops at Column 5. Find the number and fix it! 🐛', id: 'Bloknya sudah ada di sini — dan salah! Penandanya di Kolom 6, tapi perulangannya berhenti di Kolom 5. Temukan angkanya dan perbaiki! 🐛' },
+    gridRows: 3, gridCols: 7, cells: emptyGrid(3, 7), startPos: [1, 0], items: [{ id: 'm1', pos: [1, 5] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 5, xpReward: 200,
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [{
+          type: 'controls_whileUntil', x: 40, y: 30,
+          fields: { MODE: 'WHILE' },
+          inputs: {
+            BOOL: {
+              block: {
+                type: 'logic_compare',
+                fields: { OP: 'LT' },
+                inputs: {
+                  A: { block: { type: 'sensor_col' } },
+                  B: { block: { type: 'math_number', fields: { NUM: 5 } } },
+                },
+              },
+            },
+            DO: { block: { type: 'move_right' } },
+          },
+        }],
+      },
+    },
+    hints: [
+      { en: 'Read the loop out loud: "while my column is less than 5". Where does that stop?', id: 'Bacakan perulangannya: "selama kolomku kurang dari 5". Berhenti di mana itu?' },
+      { en: 'Click the number 5 and type 6. Now the loop stops on Column 6, right on the marker.', id: 'Klik angka 5 dan ketik 6. Sekarang perulangannya berhenti di Kolom 6, tepat di penanda.' },
+    ], starThresholds: [12, 9, 6, 5],
+  },
+  {
+    id: 'cove-10', worldId: 'cove', number: 10, showCoords: true,
+    title: { en: 'The Deep Chart', id: 'Peta Dalam' },
+    story: { en: 'Four legs, three markers, and reefs that punish every overshoot. Read each coordinate before you sail it.', id: 'Empat tahap, tiga penanda, dan beting yang menghukum setiap kelebihan langkah. Baca setiap koordinat sebelum berlayar.' },
+    mascotMessage: { en: 'Column 4, then Row 5, then Column 8, then Row 8. One sensor loop for each leg — and do not overshoot, the reefs are close! 🗺️', id: 'Kolom 4, lalu Baris 5, lalu Kolom 8, lalu Baris 8. Satu perulangan sensor untuk tiap tahap — dan jangan kelebihan, betingnya dekat! 🗺️' },
+    gridRows: 8, gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      for (let c = 4; c < 9; c++) g[0][c] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[4][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0], items: [{ id: 'm1', pos: [4, 3] }, { id: 'm2', pos: [4, 7] }, { id: 'm3', pos: [7, 7] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 20, xpReward: 240,
+    hints: [
+      { en: 'Leg 1: while 🧭 my column < 4, move right. Leg 2: while 🧭 my row < 5, move down.', id: 'Tahap 1: selama 🧭 kolomku < 4, gerak kanan. Tahap 2: selama 🧭 barisku < 5, gerak bawah.' },
+      { en: 'Leg 3: while 🧭 my column < 8, move right. Leg 4: while 🧭 my row < 8, move down.', id: 'Tahap 3: selama 🧭 kolomku < 8, gerak kanan. Tahap 4: selama 🧭 barisku < 8, gerak bawah.' },
+    ], starThresholds: [46, 33, 26, 20],
+  },
+  // ─────────────────────────────────────────────
+  // BONUS WORLD 7: ECO CITY — Decomposition & Reuse
   // ─────────────────────────────────────────────
   {
     id: 'eco-0', worldId: 'eco', number: 0, isTutorial: true,

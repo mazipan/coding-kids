@@ -15,9 +15,10 @@
 | sorting | 📦 | Algorithms & Data | 11–14 | bonus gate | 10 |
 | debugging | 🐛 | Debugging | 11–14 | bonus gate | 10 |
 | orchestra | 🎵 | Loops & Functions | 8–12 | bonus gate | 10 |
+| cove | 🧭 | Coordinates & Position | 10–13 | bonus gate | 10 |
 | eco | 🌱 | Decomposition & Reuse | 10–14 | bonus gate | 10 |
 
-Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1. Two bonus worlds ship their own tutorial (`orchestra-0`, `eco-0`) and gate lesson 1 behind it — see `TUTORIAL_GATED_BONUS_WORLD_IDS` in `src/store/useProgress.ts`.
+Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1. Three bonus worlds ship their own tutorial (`orchestra-0`, `cove-0`, `eco-0`) and gate lesson 1 behind it — see `TUTORIAL_GATED_BONUS_WORLDS` in `src/store/useProgress.ts`.
 
 `eco` (Eco City) is a capstone: it uses all six existing Blockly categories and introduces no new block, no new engine behaviour, and no new goal type. Every one of its canonical routes is simulated in `tests/ecoCityLessons.test.ts`; any change to an Eco City grid must keep that test green.
 
@@ -59,8 +60,20 @@ Defined in `src/data/lessons.ts`. Each lesson:
   buggyState?: object           // Blockly JSON serialisation of the broken workspace
                                 // generated via Blockly.serialization.workspaces.save()
                                 // optimalBlockCount = block count of the CORRECT solution
+  showCoords?: true             // draw 1-based row/column labels around the grid plus a
+                                // live "Row n · Column n" readout (Coordinate Cove)
 }
 ```
+
+### Position sensors (Coordinate Cove)
+
+`sensor_row` and `sensor_col` are value blocks that return the character's **1-based** row and column — the same numbers the `showCoords` gutter draws, so a child never has to translate between what they read and what they type. They generate `currentRow()` / `currentCol()`, which the engine answers from a headless simulation that replays the child's moves through `applyAction`. Authoring rules:
+
+- Any lesson using sensors must set `showCoords: true`. A sensor without a labelled chart forces the child to count cells, which is the thing the world is meant to remove.
+- Sensors are ordinary blocks and are counted by `workspace.getAllBlocks()`. Author `optimalBlockCount` and `starThresholds` from the **full** count of the canonical solution, comparison and number blocks included.
+- Set `requiredCategories: ['sensors', ...]`. A hardcoded route always uses fewer blocks than a sensor loop, so without this the star system would reward skipping the concept.
+- Never write a condition that can only resolve one way — that is a fixed sequence in a costume. A sensor test must be able to be false at some point in the run.
+- The loop guard (INV-G3) means a non-terminating loop stops cleanly, but a lesson must still be solvable within `MAX_ACTIONS = 200` moves.
 
 ### Star threshold logic
 
@@ -94,6 +107,9 @@ Set per lesson via `availableCategories`. Introduce categories gradually as conc
 | `logic` | controls_if, controls_ifelse, logic_compare |
 | `functions` | PROCEDURE (Blockly built-in) |
 | `lists` | lists_create_with, lists_getIndex, lists_setIndex, etc. |
+| `sensors` | sensor_row, sensor_col — read-only 1-based position getters |
+
+Selecting `variables`, `logic`, `lists`, **or** `sensors` also adds the Math category, because each needs a number to compare or compute against.
 
 ---
 
@@ -116,8 +132,9 @@ Source: `src/data/thinkingWorlds.ts` — `THINKING_WORLDS` array.
 | deduction | 🕵️ | Deductive reasoning | 9–13 | violet | 0 | 10 |
 | planning | 🗺️ | Constraint planning | 8–12 | sky | 0 | 10 |
 | probability | 🎲 | Probability | 9–13 | lime | 0 | 10 |
+| spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 10 |
 
-All thirteen worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely — see INV-L3, which binds any future thinking world too.
+All fourteen worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely — see INV-L3, which binds any future thinking world too.
 
 ### World boundaries
 
@@ -155,6 +172,7 @@ Defined in `src/data/thinkingLessons.ts`. Each lesson:
 | `fill-in` | `question` (LocalizedString) + typed `answer` + optional `inputType` |
 | `match` | `pairs[]` of left/right items; kid links each pair |
 | `abstraction` | `subtype: 'odd-one-out' \| 'category-match'` + `items[]` + `correctIds[]` |
+| `spatial` | `question` (LocalizedString) + a `figure` grid + optional `note` (LocalizedString) + 4 `options[]`, each an `id`, a `grid`, and a `label: LocalizedString`; kid picks the frame that shows the transformed figure |
 
 ### Puzzle authoring constraints
 
@@ -166,6 +184,12 @@ These are properties of the renderer, not style preferences. Breaking them ships
 | `pattern.options` and `math.options` must be **numbers or emoji** | They are typed `string[]`, not `LocalizedString[]`, so their text cannot be translated. A word answer there breaks INV-C2/INV-I1. When the answer needs words, use `if-then`, whose options carry `label: LocalizedString`. |
 | `sequence` has no question field | The constraints or clues must live in the lesson's `mascotMessage`, which renders directly above the puzzle. |
 | `abstraction` `correctIds` must be a **strict subset** of `items` | A multi-select where every item is correct teaches nothing and always passes. |
+| `spatial` grids use only `'#'`, `'o'` and `'.'`, and every row in one grid is the same length | The renderer maps one character to one cell and derives the column count from the longest row, so a stray character draws an empty cell and a short row silently shifts the shape. |
+| A `spatial` figure carries **at most one** `'o'` marker | The dot is the orientation anchor. Two dots give the child two conflicting anchors and make a mirror indistinguishable from a rotation. |
+| All `spatial` option grids share the **prompt figure's dimensions** | Options render side by side at one size. A differently sized grid changes the cell scale, which reads as a difference in the shape rather than in its orientation. |
+| A `spatial` option `label` must **never name its transformation** | "Quarter turn right" as a label answers the puzzle. Labels name the frame ("Shape A"), or carry real words only where the words are part of the question (a viewpoint name, for example). |
+| `spatial` distractors must be **believable spatial errors** | Wrong turn direction, mirrored instead of rotated, wrong mirror axis, turned too far, one cell short. An unrelated shape is filler and breaks INV-Q4. |
+| A `spatial` puzzle whose dot is **not** a shape corner must supply `note` | The default line under the figure reads "The dot marks one corner of the shape". On a route, fold or map lesson the dot means the start, a pencil mark, or a door, and `note` replaces that line so the hint never contradicts the puzzle. |
 
 ### Star & XP logic (thinking path)
 

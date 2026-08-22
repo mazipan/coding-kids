@@ -30,6 +30,13 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
   const isSuccess = status === 'success'
   const isCrash = status === 'crashed'
 
+  // Coordinate Cove renders a labelled chart: the coordinate is read off the
+  // gutter, never inferred by counting cells. Labels are 1-based so they match
+  // what the position sensor blocks return (COORD_ORIGIN in the engine).
+  const showCoords = lesson.showCoords === true
+  const gutter = showCoords ? Math.max(18, Math.round(cellSize * 0.45)) : 0
+  const labelSize = Math.max(10, Math.round(cellSize * 0.26))
+
   return (
     <div className="flex flex-col items-center gap-2">
       {/* Status message */}
@@ -55,6 +62,35 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Chart with row/column labels */}
+      <div style={{ display: 'grid', gridTemplateColumns: `${gutter}px ${gridWidth}px`, gridTemplateRows: `${gutter}px ${gridHeight}px` }}>
+        {/* Empty corner */}
+        <div />
+        {/* Column labels */}
+        <div style={{ display: showCoords ? 'flex' : 'none', height: gutter }}>
+          {Array.from({ length: lesson.gridCols }, (_, col) => (
+            <div
+              key={`col-${col}`}
+              className="flex items-end justify-center font-black"
+              style={{ width: cellSize, fontSize: labelSize, color: world.theme.accentColor, paddingBottom: 2 }}
+            >
+              {col + 1}
+            </div>
+          ))}
+        </div>
+        {/* Row labels */}
+        <div style={{ display: showCoords ? 'flex' : 'none', flexDirection: 'column', width: gutter }}>
+          {Array.from({ length: lesson.gridRows }, (_, row) => (
+            <div
+              key={`row-${row}`}
+              className="flex items-center justify-end font-black"
+              style={{ height: cellSize, fontSize: labelSize, color: world.theme.accentColor, paddingRight: 4 }}
+            >
+              {row + 1}
+            </div>
+          ))}
+        </div>
 
       {/* Grid container */}
       <div
@@ -212,6 +248,17 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
           </motion.div>
         )}
       </div>
+      </div>
+
+      {/* Live position readout — the coordinate is readable, not counted */}
+      {showCoords && (
+        <div
+          className="text-xs sm:text-sm font-black px-3 py-1 rounded-full"
+          style={{ color: world.theme.accentColor, background: `${world.theme.accentColor}18` }}
+        >
+          {t('game.coords.readout', { row: String(charPos[0] + 1), col: String(charPos[1] + 1) })}
+        </div>
+      )}
 
       {/* Legend */}
       <div className="flex gap-3 text-xs text-white/50 flex-wrap justify-center">

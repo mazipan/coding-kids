@@ -13,7 +13,7 @@
 
 Ship Eco City as a bilingual 10-lesson blocks **bonus** world (`eco`), built entirely from the existing grid engine and the existing Blockly categories (`move`, `loops`, `variables`, `logic`, `functions`, `lists`). No engine change, no new block, no new dependency. Every canonical route is simulated in `tests/ecoCityLessons.test.ts` through `applyAction` and `checkWin`, matching the precedent Code Orchestra set.
 
-Eco City is the sixth bonus world and stays behind the existing shared bonus gate (`portal-4` complete), with normal sequential unlock inside the world. Lesson 1 is additionally gated behind the world tutorial `eco-0`, the same way Code Orchestra is.
+Eco City is the seventh bonus world and stays behind the existing shared bonus gate (`portal-4` complete), with normal sequential unlock inside the world. Lesson 1 is additionally gated behind the world tutorial `eco-0`, the same way Code Orchestra and Coordinate Cove are.
 
 ## Alternatives considered
 
@@ -33,6 +33,7 @@ Eco City is the sixth bonus world and stays behind the existing shared bonus gat
 | INV-L1 | yes | `eco` joins `BONUS_WORLD_IDS`, so lesson N requires lesson N−1; lesson 1 requires the `eco-0` tutorial. |
 | INV-L2 | yes | `unlockAtXP: 999999` + `isBonus: true` — reachable only through the bonus gate, never by XP. |
 | INV-L3 | no | Thinking path untouched. |
+| INV-G3 loop guard | no | No `controls_whileUntil` and no sensors in any Eco City lesson, so the `MAX_LOOP_TICKS` trap is never exercised by this world. |
 | INV-G1 | yes | Every canonical route is simulated and asserted never to reach `crashed`; all coordinates are inside `gridRows`/`gridCols`. |
 | INV-G2 | yes | Lessons 5, 9 and 10 place obstacles; the test proves no canonical route steps on one. |
 | INV-G3 | yes | The longest canonical route is 15 actions, far under `MAX_ACTIONS = 200`. |
@@ -93,7 +94,7 @@ Recycling, water and power appear only as scenery and are always explained insid
 | `src/types/index.ts` | Add `eco` to the `WorldId` union. |
 | `src/data/worlds.ts` | Add the bilingual Eco City bonus-world entry. |
 | `src/data/lessons.ts` | Add the `eco-0` tutorial plus 10 bilingual lessons. |
-| `src/store/useProgress.ts` | Add `eco` to `BONUS_WORLD_IDS` and to the tutorial-gated set. |
+| `src/store/useProgress.ts` | Add `eco` to `BONUS_WORLD_IDS` and `TUTORIAL_GATED_BONUS_WORLDS`. |
 | `src/components/BlocklyWalkthrough.tsx` | Add the two-step `eco` teach sequence (loops, then functions). |
 | `src/i18n/translations.ts` | Update the hardcoded `landing.worlds.title` count (EN + ID). |
 | `tests/ecoCityLessons.test.ts` | Simulate every canonical route; assert the bonus gate. |
@@ -126,3 +127,13 @@ Drive-by correction: `landing.worlds.title` still read "24 Worlds to Explore" af
 ## Implementation notes
 
 Implemented as planned. `tests/ecoCityLessons.test.ts` simulates all ten canonical routes, asserts none reaches `crashed`, asserts every lesson wins on its route, asserts no token sits on a start cell or an obstacle, and regresses the bonus/tutorial gate. The tutorial-gated bonus set in `useProgress.ts` was generalized from the single `orchestra` special case to a named set so Eco City reuses it instead of adding a second branch.
+
+### Merge with Coordinate Cove and Spatial Studio (2026-08-22)
+
+`main` moved ahead with Coordinate Cove (`cove`, blocks bonus world #6 with read-only position sensors) and Spatial Studio (`spatial`, thinking world #14) while this branch was open. Resolved by keeping both sides everywhere and correcting the derived numbers:
+
+- `TUTORIAL_GATED_BONUS_WORLDS` — `main` had independently generalized the same `orchestra`-only branch this plan generalized. `main`'s name is kept and `eco` added to it, rather than shipping two helpers that do the same job.
+- Eco City's theme moved from emerald (`#34d399`) to lime (`#a3e635`). Coordinate Cove shipped a teal (`#2dd4bf`) theme close enough that the two bonus cards read as the same world side by side.
+- Eco City is now bonus world 7, not 6, and the `LESSONS` array orders its block after Cove's to match `WORLDS`.
+- `landing.worlds.title` goes to 28 (14 blocks + 14 thinking), and the README bonus/blocks counts to 7 and 14.
+- Eco City takes no `sensors` category. Position sensors now exist, but reading a coordinate is Cove's concept; Eco City's lessons are about naming and reusing a sub-route, which a sensor does not help with. The `availableCategories` in the design table above are unchanged by the merge.

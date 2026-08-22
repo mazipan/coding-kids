@@ -32,6 +32,7 @@ function getWorldTheme(color: string) {
     violet:  { bgGradient: 'linear-gradient(135deg, #2e1065 0%, #5b21b6 50%, #6d28d9 100%)', accentColor: '#a78bfa', textColor: '#ddd6fe' },
     sky:     { bgGradient: 'linear-gradient(135deg, #082f49 0%, #075985 50%, #0369a1 100%)', accentColor: '#38bdf8', textColor: '#bae6fd' },
     lime:    { bgGradient: 'linear-gradient(135deg, #1a2e05 0%, #3f6212 50%, #4d7c0f 100%)', accentColor: '#a3e635', textColor: '#d9f99d' },
+    fuchsia: { bgGradient: 'linear-gradient(135deg, #4a044e 0%, #86198f 50%, #a21caf 100%)', accentColor: '#e879f9', textColor: '#f5d0fe' },
   }
   return themes[color] ?? themes.purple
 }

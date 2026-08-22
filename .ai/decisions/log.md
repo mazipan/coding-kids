@@ -376,16 +376,53 @@ Format:
 
 ---
 
+## 2026-08-22 — Spatial figures are text rows, and Spatial Studio ships the full 10-lesson arc
+
+**Context:** Spatial Studio was roadmap priority 2 but blocked: none of the nine existing thinking puzzle types can ask "here is a figure, which of these four is it after a quarter turn?" — they all express answers as emoji, short strings, or ordered taps. The roadmap made a reviewed interaction prototype an explicit precondition for authoring the world's content.
+
+**Decision:** Add a tenth puzzle type, `spatial`, rendering a prompt figure plus four labelled figure options. A figure is authored as one string per grid row (`'#'` filled, `'o'` filled and dotted, `'.'` empty) and drawn into a CSS grid. Build the interaction first and check it in a browser; then, with the interaction confirmed, author the complete 10-lesson arc for the world `spatial` (🧭, `fuchsia`, `unlockAtXP: 0`) in the same release rather than deferring seven lessons to a follow-up.
+
+**Alternatives rejected:**
+- Inline SVG paths per option — path data is unreadable in review, so an authoring error is invisible until the lesson renders.
+- Emoji rows, as `pattern` uses — most emoji have no rotated variants, so "the same shape turned" cannot be expressed at all.
+- `number[][]` figures — same information, but a nested numeric array shows a reviewer nothing. Text rows *are* the shape in the diff.
+- A coloured cell as the orientation anchor, or colouring each cell of the figure — both fail colourblind players, and per-cell colour turns mental rotation into colour matching, which makes the rotation lesson near-trivial.
+- Stopping at 3 lessons and opening a follow-up content issue — the risk that precondition guards against is an interaction that fails review, and the interaction had already been built and checked by then. Holding seven written-and-tested lessons for a second release buys nothing.
+
+**Consequences:** One new puzzle type, one new world, ten lessons, two translation keys, and one `fuchsia` entry in each of the two thinking colour maps. `SpatialPuzzle` also carries an optional `note`, because the default hint under the figure ("the dot marks one corner of the shape") is false on the route, viewpoint, fold and robot lessons, where the dot is a start square, a door, or a pencil mark. `spatial` joins `NEW_WORLDS` in the shared content suite, and `tests/spatialPuzzle.test.ts` adds simulators that replay each lesson's own instructions — the transformation, the map walk, the paper fold, the robot program — so an authored answer that does not match its own question fails the build. Appending the world moves `ThinkingHome`'s next-world banner from `probability` onto `spatial`. New lesson ids are additive, so no localStorage migration is needed. Known limitation: the figure grids are `aria-hidden`, so a screen-reader user hears only the option label — the same gap the emoji-based puzzle types already have, and a path-wide fix rather than a spatial-only one.
+
+---
+
+## 2026-08-22 — Read-only position sensors unblock Coordinate Cove
+
+**Context:** Coordinate Cove (roadmap priority 6, issue #56) was the last blocked blocks world. The game engine exposed only movement verbs, so a character could not read where it was. Every "coordinate" lesson would have been a fixed sequence in a costume, or a condition that always resolves the same way — which the roadmap explicitly forbids. `parseCodeToActions` also ran block-generated code with no world state at all: it collected an action list without ever simulating the route.
+
+**Decision:** Add exactly two read-only sensor blocks, `sensor_row` and `sensor_col`, returning **1-based** coordinates that match new row/column labels drawn on the grid. Make `parseCodeToActions` a headless simulation that reuses the existing `applyAction` reducer, so a sensor read during code generation returns exactly the position the animation will show. Guard termination with three halts: the existing `MAX_ACTIONS = 200` cap (now a clean throw rather than a silent drop), a crash halt, and Blockly's `INFINITE_LOOP_TRAP` bounded by `MAX_LOOP_TICKS = 10 000`. Ship the world with a tutorial and 10 lessons on that surface.
+
+**Alternatives rejected:**
+- One `sensor_pos` block returning a `[row, col]` list — forces list indexing, which is Time Portal's concept, not this world's.
+- 0-based sensor values — the chart gutter would read `0..n-1` while every lesson says "Row 3"; off-by-one confusion would swamp the concept.
+- A "distance to nearest marker" sensor — answers the navigation question for the child.
+- A position setter or teleport block — lets a lesson be won without navigating, and would bypass the INV-G1/INV-G2 checks.
+- Evaluating sensors against `startPos` and keeping the parser stateless — every read returns the same number, so every condition resolves identically.
+- Reimplementing movement rules inside the parser instead of reusing `applyAction` — two copies of the bounds/obstacle/collection logic would drift.
+- Capping actions only, with no loop trap — a `while` loop containing no move block would hang the tab. That hazard already existed in Crystal Caves and Time Portal, which both ship `controls_whileUntil`; the trap closes it everywhere.
+
+**Consequences:** INV-G3 gains a second bound (loop ticks) and INV-G4 is restated: the sandbox now exposes seven names — four verbs, two sensors, and the loop guard — and every global INV-G4 names is shadowed to `undefined` by an unbound parameter under a `'use strict'` prologue, which makes the invariant literally true rather than a claim about the parameter list. This is defence in depth for a closed input space, not a hardened security boundary: prototype walks such as `[].constructor.constructor` cannot be shadowed away, and every line of code executed here is generated by blocks this app defines. INV-G4's stale mention of a `collect` verb is corrected — items have been auto-collected since `fix-collect-item-remove`. Sensor blocks count toward block totals like any other block, so `requiredCategories: ['sensors']` is what stops the star system rewarding a hardcoded route. No dependency, route, or localStorage change; `cove-*` progress keys are additive.
+
+---
+
 ## 2026-08-22 — Eco City as the decomposition capstone bonus world
 
-**Context:** Eco City was roadmap priority 4 and the last unblocked idea on the list. It had been deferred for effort, not capability: a blocks world needs 10 grids whose routes are provably solvable, which is materially more work than a data-only thinking world. Code Orchestra had already set the precedent of shipping a blocks bonus world with a route-simulation test.
+**Context:** Eco City was roadmap priority 4 and had been deferred for effort, not capability: a blocks world needs 10 grids whose routes are provably solvable, which is materially more work than a data-only thinking world. Code Orchestra had already set the precedent of shipping a blocks bonus world with a route-simulation test.
 
-**Decision:** Ship Eco City (`eco`) as a 10-lesson blocks bonus world for ages 10–14, teaching Decomposition & Reuse. It is built entirely from the six existing Blockly categories and the existing grid engine — no new block, goal type, or engine behaviour. It sits behind the shared bonus gate, unlocks sequentially, and gates lesson 1 behind its own tutorial the way Code Orchestra does. `tests/ecoCityLessons.test.ts` simulates every canonical route through `applyAction`/`checkWin` and asserts the obstacle lessons really do block the naive route.
+**Decision:** Ship Eco City (`eco`) as a 10-lesson blocks bonus world for ages 10–14, teaching Decomposition & Reuse. It is built entirely from the six pre-existing Blockly categories and the existing grid engine — no new block, goal type, or engine behaviour, and in particular no use of the `sensors` category Coordinate Cove introduced. It sits behind the shared bonus gate, unlocks sequentially, and gates lesson 1 behind its own tutorial the way Code Orchestra and Coordinate Cove do. `tests/ecoCityLessons.test.ts` simulates every canonical route through `applyAction`/`checkWin` and asserts the obstacle lessons really do block the naive route.
 
 **Alternatives rejected:**
 - Add a typed-token sorting mechanic (bins that accept only one kind of token) — needs a new engine concept, and the issue explicitly keeps objectives route-based.
 - Assess environmental facts — the issue forbids it. Recycling, water and power are scenery, and every fact a lesson uses is explained in the same sentence that uses it.
 - Make Eco City a main XP-gated world — it mixes six categories the main path already teaches one at a time, which is exactly what the bonus tier is for.
 - Use `reach_goal` for the finale so the 🏙️ goal cell appears — `GameGrid` does not render `goalPos` at all, and `reach_goal` would let a child win while skipping every token.
+- Give Eco City position sensors now that they exist — reading a coordinate is Coordinate Cove's concept. Eco City's lessons are about naming and reusing a sub-route, and a sensor would answer nothing they ask.
 
-**Consequences:** A sixth bonus world, 11 new lesson IDs (`eco-0` … `eco-10`), no new dependency and no persistence change, so existing saves need no migration. The `orchestra`-only tutorial gate in `useProgress.ts` was generalized into `TUTORIAL_GATED_BONUS_WORLD_IDS` rather than duplicated. A drive-by fix corrects the hardcoded `landing.worlds.title` count, which had read "24" since before Code Orchestra took the real total to 25 and now reads 26.
+**Consequences:** A seventh bonus world, 11 new lesson IDs (`eco-0` … `eco-10`), no new dependency and no persistence change, so existing saves need no migration. `eco` joins both `BONUS_WORLD_IDS` and `TUTORIAL_GATED_BONUS_WORLDS`. Eco City's palette was moved from emerald to lime during the merge with Coordinate Cove, whose teal theme was close enough to read as the same world on the bonus map. The hardcoded `landing.worlds.title` count goes from 27 to 28.

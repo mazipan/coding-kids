@@ -1,4 +1,4 @@
-export type ToolboxCategory = 'move' | 'loops' | 'variables' | 'logic' | 'functions' | 'lists'
+export type ToolboxCategory = 'move' | 'loops' | 'variables' | 'logic' | 'functions' | 'lists' | 'sensors'
 
 interface ToolboxConfig {
   kind: string
@@ -7,6 +7,7 @@ interface ToolboxConfig {
 
 const CATEGORY_NAMES: Record<ToolboxCategory | 'math', Record<'en' | 'id', string>> = {
   move:      { en: '🏃 Move',      id: '🏃 Gerak' },
+  sensors:   { en: '🧭 Position',  id: '🧭 Posisi' },
   loops:     { en: '🔄 Loops',     id: '🔄 Ulangi' },
   variables: { en: '📦 Variables', id: '📦 Variabel' },
   logic:     { en: '❓ Logic',     id: '❓ Kondisi' },
@@ -20,6 +21,11 @@ const MOVE_CONTENTS = [
   { kind: 'block', type: 'move_left' },
   { kind: 'block', type: 'move_up' },
   { kind: 'block', type: 'move_down' },
+]
+
+const SENSORS_CONTENTS = [
+  { kind: 'block', type: 'sensor_row' },
+  { kind: 'block', type: 'sensor_col' },
 ]
 
 const LOOPS_CONTENTS = [
@@ -93,11 +99,14 @@ export function buildToolbox(categories: string[], language = 'en'): ToolboxConf
       case 'lists':
         contents.push({ kind: 'category', name: catName('lists', language), colour: '#009688', contents: LISTS_CONTENTS })
         break
+      case 'sensors':
+        contents.push({ kind: 'category', name: catName('sensors', language), colour: '#0D9488', contents: SENSORS_CONTENTS })
+        break
     }
   }
 
   // Always add math if variables or logic are present
-  if (categories.includes('variables') || categories.includes('logic') || categories.includes('lists')) {
+  if (categories.includes('variables') || categories.includes('logic') || categories.includes('lists') || categories.includes('sensors')) {
     contents.push({ kind: 'category', name: catName('math', language), colour: '#4CAF50', contents: MATH_CONTENTS })
   }
 
