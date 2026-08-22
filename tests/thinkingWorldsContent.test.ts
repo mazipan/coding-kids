@@ -4,9 +4,11 @@ import { getThinkingLessonsByWorld } from '../src/data/thinkingLessons'
 import { THINKING_WORLDS } from '../src/data/thinkingWorlds'
 import type { ThinkingLesson, ThinkingWorldId } from '../src/types'
 
-// Worlds added by content-planning-peaks-chance-camp. Scoped to the new worlds so the
-// suite does not fail on pre-existing violations documented in that plan.
-const NEW_WORLDS: ThinkingWorldId[] = ['planning', 'probability']
+// Worlds added by content-planning-peaks-chance-camp and feat-spatial-puzzle-prototype.
+// Scoped to the new worlds so the suite does not fail on pre-existing violations
+// documented in those plans. Spatial Studio's figure grids and transformation
+// correctness are checked separately in spatialPuzzle.test.ts.
+const NEW_WORLDS: ThinkingWorldId[] = ['planning', 'probability', 'spatial']
 
 // INV-C5: translation strings never embed directional or status symbols.
 const FORBIDDEN_SYMBOLS = ['←', '→', '▶', '✓', '✗', '✗', '🔒']

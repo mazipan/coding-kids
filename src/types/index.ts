@@ -96,7 +96,7 @@ export interface PlayerProgress {
 
 // ── Thinking path ─────────────────────────────────────────────
 
-export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction' | 'math_reasoning' | 'induction' | 'deduction' | 'planning' | 'probability'
+export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction' | 'math_reasoning' | 'induction' | 'deduction' | 'planning' | 'probability' | 'spatial'
 
 export interface ThinkingWorld {
   id: ThinkingWorldId
@@ -179,7 +179,38 @@ export interface AbstractionPuzzle {
   correctIds: string[]
 }
 
-export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle | FillInPuzzle | MatchPuzzle | AbstractionPuzzle
+/**
+ * A spatial figure, drawn as one string per grid row so lesson data stays local and
+ * reviewable in a diff (INV-P1 — no remote images).
+ *
+ * Each character is one cell:
+ *   '#' filled
+ *   'o' filled, and marked with a dot
+ *   '.' empty
+ *
+ * The dot is an orientation anchor made of shape, not colour: a rotation and its mirror
+ * put the dot in different places, so the two stay distinguishable in greyscale.
+ * Every row in one figure must be the same length, and all option grids in a puzzle must
+ * share the prompt figure's dimensions.
+ */
+export type SpatialGrid = string[]
+
+export interface SpatialPuzzle {
+  type: 'spatial'
+  question: LocalizedString
+  figure: SpatialGrid
+  /**
+   * Replaces the default dot explanation under the prompt figure. Supply it whenever the
+   * dot means something other than a corner of a shape — the start of a route, a mark on
+   * folded paper, a door — so the on-screen hint never contradicts the puzzle.
+   */
+  note?: LocalizedString
+  /** Labels name the frame ("Shape A"), never its transformation — that would answer the puzzle. */
+  options: Array<{ id: string; grid: SpatialGrid; label: LocalizedString }>
+  answerId: string
+}
+
+export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle | FillInPuzzle | MatchPuzzle | AbstractionPuzzle | SpatialPuzzle
 
 export interface ThinkingLessonTutorial {
   title: LocalizedString
