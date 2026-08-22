@@ -262,6 +262,8 @@ const en: Translations = {
   'thinking.abstraction.odd.prompt': "Tap the one that doesn't belong!",
   'thinking.abstraction.category.prompt': 'Tap all that fit! Then press Check.',
   'thinking.abstraction.check': 'Check',
+  'thinking.spatial.prompt': 'Tap the frame that answers the question!',
+  'thinking.spatial.marker': 'The dot marks one corner of the shape. Watch where the dot ends up.',
   'thinking.tutorial.dismiss': "Got it! Let's go!",
 }
 
@@ -525,6 +527,8 @@ const id: Translations = {
   'thinking.abstraction.odd.prompt': 'Ketuk yang tidak termasuk!',
   'thinking.abstraction.category.prompt': 'Ketuk semua yang sesuai! Lalu tekan Cek.',
   'thinking.abstraction.check': 'Cek',
+  'thinking.spatial.prompt': 'Ketuk bingkai yang menjawab pertanyaannya!',
+  'thinking.spatial.marker': 'Titik menandai satu sudut bentuk. Perhatikan ke mana titik itu berpindah.',
   'thinking.tutorial.dismiss': 'Mengerti! Ayo mulai!',
 }
 

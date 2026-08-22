@@ -373,3 +373,20 @@ Format:
 - Phrase probability answers as words on `MathPuzzle` — its `options` are `string[]`, not localizable, so word answers there would break INV-C2. Word answers go through `if-then`.
 
 **Consequences:** Two new thinking worlds, 20 lessons, no new dependency, puzzle type, engine change, or persistence change. New lesson IDs are additive, so existing saves need no migration. A drive-by fix registers the three colours (`amber`, `cyan`, `violet`) that `ThinkingHome.getWorldTheme` was missing, which had been silently rendering Math Reasoning, Rule Finder and Logic Detective in the purple fallback; a test now asserts both colour maps stay in sync. Two pre-existing INV-Q3 true-false runs (in `nature` and `deduction`) were found during the audit and are recorded, not fixed, in the plan.
+
+---
+
+## 2026-08-22 — Spatial figures are text rows, and Spatial Studio ships the full 10-lesson arc
+
+**Context:** Spatial Studio was roadmap priority 2 but blocked: none of the nine existing thinking puzzle types can ask "here is a figure, which of these four is it after a quarter turn?" — they all express answers as emoji, short strings, or ordered taps. The roadmap made a reviewed interaction prototype an explicit precondition for authoring the world's content.
+
+**Decision:** Add a tenth puzzle type, `spatial`, rendering a prompt figure plus four labelled figure options. A figure is authored as one string per grid row (`'#'` filled, `'o'` filled and dotted, `'.'` empty) and drawn into a CSS grid. Build the interaction first and check it in a browser; then, with the interaction confirmed, author the complete 10-lesson arc for the world `spatial` (🧭, `fuchsia`, `unlockAtXP: 0`) in the same release rather than deferring seven lessons to a follow-up.
+
+**Alternatives rejected:**
+- Inline SVG paths per option — path data is unreadable in review, so an authoring error is invisible until the lesson renders.
+- Emoji rows, as `pattern` uses — most emoji have no rotated variants, so "the same shape turned" cannot be expressed at all.
+- `number[][]` figures — same information, but a nested numeric array shows a reviewer nothing. Text rows *are* the shape in the diff.
+- A coloured cell as the orientation anchor, or colouring each cell of the figure — both fail colourblind players, and per-cell colour turns mental rotation into colour matching, which makes the rotation lesson near-trivial.
+- Stopping at 3 lessons and opening a follow-up content issue — the risk that precondition guards against is an interaction that fails review, and the interaction had already been built and checked by then. Holding seven written-and-tested lessons for a second release buys nothing.
+
+**Consequences:** One new puzzle type, one new world, ten lessons, two translation keys, and one `fuchsia` entry in each of the two thinking colour maps. `SpatialPuzzle` also carries an optional `note`, because the default hint under the figure ("the dot marks one corner of the shape") is false on the route, viewpoint, fold and robot lessons, where the dot is a start square, a door, or a pencil mark. `spatial` joins `NEW_WORLDS` in the shared content suite, and `tests/spatialPuzzle.test.ts` adds simulators that replay each lesson's own instructions — the transformation, the map walk, the paper fold, the robot program — so an authored answer that does not match its own question fails the build. Appending the world moves `ThinkingHome`'s next-world banner from `probability` onto `spatial`. New lesson ids are additive, so no localStorage migration is needed. Known limitation: the figure grids are `aria-hidden`, so a screen-reader user hears only the option label — the same gap the emoji-based puzzle types already have, and a path-wide fix rather than a spatial-only one.
