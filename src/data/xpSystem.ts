@@ -58,6 +58,7 @@ const CATEGORY_BLOCK_TYPES: Record<string, string[]> = {
   logic: ['controls_if', 'controls_ifelse'],
   functions: ['procedures_defnoreturn', 'procedures_defreturn', 'procedures_callnoreturn', 'procedures_callreturn'],
   lists: ['lists_create_with', 'lists_getIndex', 'lists_setIndex', 'lists_repeat', 'lists_length'],
+  sensors: ['sensor_row', 'sensor_col'],
 }
 
 export function getMissingCategories(usedBlockTypes: string[], requiredCategories: string[]): string[] {

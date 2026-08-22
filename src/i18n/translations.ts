@@ -32,7 +32,7 @@ const en: Translations = {
   'landing.paths.stat.puzzles': 'puzzles',
   'landing.paths.stat.ages': 'ages',
 
-  'landing.worlds.title': '24 Worlds to Explore',
+  'landing.worlds.title': '27 Worlds to Explore',
   'landing.worlds.sub': 'Browse every world across both paths — each one teaches a different concept at its own depth.',
   'landing.worlds.blocks.label': 'Block Coding',
   'landing.worlds.thinking.label': 'Brain Training',
@@ -86,6 +86,8 @@ const en: Translations = {
   'game.fail.obstacle': 'Crashed into an obstacle! 💥',
   'game.fail.path': 'Not quite! I didn\'t reach all the items. Check your path and try again! 💪',
   'game.fail.noactions': 'No movement blocks detected! Add some Move blocks! 🤔',
+  'game.fail.loop': 'That loop kept going but never moved me! Check the test — it has to become false at some point. 🔁',
+  'game.coords.readout': 'Row {row} · Column {col}',
   'game.efficiency.badge': '🎯 {n} blocks = 3 stars',
 
   // ── Grid legend ─────────────────────────────
@@ -103,6 +105,7 @@ const en: Translations = {
   'reward.criteria.logic': '💡 Try using an ❓ If/Else block to earn more stars!',
   'reward.criteria.functions': '💡 Try defining a 🔧 Function to earn more stars!',
   'reward.criteria.lists': '💡 Try using a 📋 List block to earn more stars!',
+  'reward.criteria.sensors': '💡 Try using a 🧭 Position block to earn more stars!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Jungle Adventure',
@@ -297,7 +300,7 @@ const id: Translations = {
   'landing.paths.stat.puzzles': 'teka-teki',
   'landing.paths.stat.ages': 'usia',
 
-  'landing.worlds.title': '24 Dunia untuk Dijelajahi',
+  'landing.worlds.title': '27 Dunia untuk Dijelajahi',
   'landing.worlds.sub': 'Jelajahi setiap dunia di kedua jalur — masing-masing mengajarkan konsep yang berbeda.',
   'landing.worlds.blocks.label': 'Coding Blok',
   'landing.worlds.thinking.label': 'Latihan Otak',
@@ -351,6 +354,8 @@ const id: Translations = {
   'game.fail.obstacle': 'Nabrak rintangan! 💥',
   'game.fail.path': 'Belum tepat! Belum mencapai semua item. Cek lagi jalannya dan coba lagi! 💪',
   'game.fail.noactions': 'Tidak ada blok gerak! Tambahkan blok Pindah dulu! 🤔',
+  'game.fail.loop': 'Perulangan itu terus berjalan tapi tidak menggerakkanku! Periksa ujinya — harus bisa jadi salah di suatu titik. 🔁',
+  'game.coords.readout': 'Baris {row} · Kolom {col}',
   'game.efficiency.badge': '🎯 {n} blok = 3 bintang',
 
   // ── Grid legend ─────────────────────────────
@@ -368,6 +373,7 @@ const id: Translations = {
   'reward.criteria.logic': '💡 Coba gunakan blok ❓ Jika/Selain untuk mendapat lebih banyak bintang!',
   'reward.criteria.functions': '💡 Coba definisikan 🔧 Fungsi untuk mendapat lebih banyak bintang!',
   'reward.criteria.lists': '💡 Coba gunakan blok 📋 Daftar untuk mendapat lebih banyak bintang!',
+  'reward.criteria.sensors': '💡 Coba gunakan blok 🧭 Posisi untuk mendapat lebih banyak bintang!',
 
   // ── World names ──────────────────────────────
   'world.jungle.name': 'Petualangan Hutan',

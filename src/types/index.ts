@@ -1,4 +1,4 @@
-export type WorldId = 'jungle' | 'space' | 'loops' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting' | 'debugging' | 'orchestra'
+export type WorldId = 'jungle' | 'space' | 'loops' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting' | 'debugging' | 'orchestra' | 'cove'
 
 export type LocalizedString = { en: string; id: string }
 
@@ -66,6 +66,8 @@ export interface Lesson {
   isTutorial?: true
   isBuggy?: true
   buggyState?: object
+  /** Render 1-based row/column labels and a live position readout on the grid. */
+  showCoords?: true
 }
 
 export interface LessonResult {
@@ -244,4 +246,15 @@ export interface GameState {
   blockCount: number
   steps: number
   errorMessage?: string
+}
+
+/** Why a run stopped generating actions before the code finished. */
+export type StopReason = 'action-cap' | 'loop-cap' | 'crashed'
+
+export interface ParseResult {
+  actions: GameAction[]
+  /** A genuine JavaScript exception thrown by the generated code. */
+  error?: string
+  /** Set when a guard halted generation. Not an error — see gameEngine. */
+  stopped?: StopReason
 }

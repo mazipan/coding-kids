@@ -62,8 +62,20 @@ The character can never occupy a cell where `cells[row][col] === 'obstacle'`. Su
 **INV-G3 — Action cap**  
 No code execution may produce more than `MAX_ACTIONS = 200` actions. Execution beyond this limit must be stopped.
 
+A loop whose body moves the character is bounded by that cap. A loop that does *not* move the character is bounded separately: Blockly's `INFINITE_LOOP_TRAP` injects `__tick()` at the top of every loop body, and the engine stops the run after `MAX_LOOP_TICKS = 10 000` ticks. Both guards stop generation cleanly — they never surface as a code error and never hang the tab.
+
 **INV-G4 — Sandbox**  
-Block-generated code runs in a `new Function(...)` context. Only the five game verbs (`moveRight`, `moveLeft`, `moveUp`, `moveDown`, `collect`) are exposed in scope. No access to `window`, `document`, `fetch`, `localStorage`, or any global.
+Block-generated code runs in a `new Function(...)` context under a `'use strict'` prologue. Exactly seven usable names are exposed in scope:
+
+| Name | Purpose |
+|------|---------|
+| `moveRight`, `moveLeft`, `moveUp`, `moveDown` | the four movement verbs |
+| `currentRow`, `currentCol` | read-only 1-based position sensors (Coordinate Cove) |
+| `__tick` | the loop guard behind INV-G3 |
+
+There is no `collect` verb — items are collected automatically by `applyAction` when the character enters their cell.
+
+Every identifier in `SHADOWED_GLOBALS` (`src/engine/gameEngine.ts`) is passed as an unbound parameter, so `window`, `document`, `fetch`, `localStorage`, and the other named globals resolve to `undefined` inside generated code. Adding a name to the exposed set requires a decision record; the sensors must stay **read-only** — no block may set the character's position, because that would bypass the INV-G1 and INV-G2 checks.
 
 ---
 
