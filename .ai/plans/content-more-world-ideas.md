@@ -203,12 +203,18 @@ The first roadmap item, Code Orchestra, was selected for implementation in `feat
 | Priority | World | Status | Plan |
 |---|---|---|---|
 | 1 | 🎵 Code Orchestra | **shipped** | `feat-code-orchestra-world.md` |
-| 2 | 🧭 Spatial Studio | blocked | needs the spatial-choice interaction prototype (a new puzzle type in `types/index.ts` plus a view in `ThinkingLesson.tsx`) built and passed through code + kid review before any lesson is authored |
+| 2 | 🧭 Spatial Studio | **shipped** | `feat-spatial-puzzle-prototype.md` — the prototype passed review, so the full 10-lesson arc shipped with it |
 | 3 | 🗺️ Planning Peaks | **shipped** | `content-planning-peaks-chance-camp.md` |
-| 4 | 🌱 Eco City | backlog | unblocked but deliberately deferred — a blocks world needs 10 grids with exact simulated routes and deserves its own independently revertible release |
+| 4 | 🌱 Eco City | **shipped** | `feat-eco-city-world.md` |
 | 5 | 🎲 Chance Camp | **shipped** | `content-planning-peaks-chance-camp.md` |
 | 6 | 🧭 Coordinate Cove | **shipped** | `feat-coordinate-cove-world.md` — the sensor design that unblocked it also restated INV-G3/INV-G4 |
 
-Planning Peaks and Chance Camp were taken out of priority order because they were the only remaining ideas that needed nothing but lesson data. Spatial Studio keeps its priority-2 position for whenever the interaction prototype is built; that prototype, not its content, is the next piece of work on it.
+### Roadmap status (updated 2026-08-22)
+
+Eco City shipped as `feat-eco-city-world.md`: a 10-lesson blocks bonus world built from the six pre-existing Blockly categories, with every canonical route simulated in `tests/ecoCityLessons.test.ts`. It deliberately does not use the `sensors` category Coordinate Cove added — reading a coordinate is Cove's concept, and Eco City's lessons are about naming and reusing a sub-route.
+
+**The roadmap is now fully delivered.** All six ideas have shipped, so the next content release needs a new roadmap rather than a pick from this one. The reserve ideas below (Robot Rescue Control Room, Pixel Garden, Word Bridges, Focus Forge) are the remaining backlog, and each still carries the design precondition recorded against it.
+
+Planning Peaks and Chance Camp were taken out of priority order because they were the only remaining ideas that needed nothing but lesson data. Spatial Studio and Coordinate Cove came last because each needed design work first — a reviewed interaction prototype and a position-sensor design respectively — and both of those landed before their content did.
 
 Two authoring constraints discovered while implementing these worlds have been promoted into `.ai/specs/worlds.md` so future plans do not rediscover them: `sort` puzzles render a fixed "smallest to largest" prompt, and `pattern`/`math` options are not localizable.
