@@ -42,6 +42,24 @@ interface LessonProgress {
 4. `level` and `totalStars` are recomputed from scratch on every write
 5. Badges are awarded once and never removed
 
+### Derived stats — what the player actually sees
+
+`totalStars` stays the append-only counter `completeLesson` writes, but nothing in the UI reads it as a
+star display any more. Every star figure shown to a player — the header pill, the world cards, the stats
+modal — is derived on the fly from `progress.lessons` by `src/utils/progressStats.ts`:
+
+- **Per path.** Blocks and thinking score differently (a blocks lesson is worth 3 or 5 stars depending on
+  its `starThresholds`, a thinking lesson always 3), so the two are summed separately and only added
+  together for the "both paths" total. The header pill shows the path the player is currently in.
+- **Tutorials excluded.** Tutorial lessons award a flat 1 star, are hidden from every world card, and can
+  never be improved. `getLessonsByWorld` already drops them, and the stats module inherits that.
+- **Unlock state reuses the store.** A world is locked by the same rule the hub uses:
+  `progress.xp >= world.unlockAtXP`, or `areBonusWorldsUnlocked(progress)` (exported from
+  `useProgress.ts`) for bonus worlds.
+
+Because everything is derived, a save written by an older build needs no migration — the numbers simply
+recompute from `lessons`.
+
 ### Badge IDs
 
 | ID | Awarded when |

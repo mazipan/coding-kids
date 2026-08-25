@@ -42,6 +42,7 @@ src/
 │   ├── Mascot.tsx              # Character + speech bubble
 │   ├── RewardModal.tsx         # Post-lesson modal: stars, XP, level-up banner
 │   ├── StarRating.tsx          # 1–3 stars display
+│   ├── StatsModal.tsx          # Achievement summary — level, per-path stars, per-world breakdown
 │   └── XPBar.tsx               # XP progress bar; hideLabel prop hides coding-themed level name
 ├── data/
 │   ├── lessons.ts              # 31 block coding lessons across 6 worlds
@@ -67,6 +68,7 @@ src/
 ├── types/
 │   └── index.ts                # All shared TypeScript types
 └── utils/
+    ├── progressStats.ts        # Derives per-path / per-world star + completion stats from progress
     └── sounds.ts               # Web Audio API synth sounds (no library)
 ```
 
@@ -82,6 +84,7 @@ src/
 - `src/vite-env.d.ts` (`/// <reference types="vite/client" />`) is required for TypeScript 7's stricter side-effect import checking (e.g. `import './index.css'`) — don't remove it.
 - `XPBar` has a `hideLabel` prop — pass it on the thinking path to suppress the coding-themed level name ("Code Cub" etc.) which is irrelevant to brain training.
 - Thinking lesson IDs follow `{worldId}-{number}` starting at `0` (e.g. `patterns-0`). Lesson 0 is always accessible; sequential unlock uses the same `isLessonUnlocked` logic as block coding.
+- The header star pill shows the **current path's** stars (blocks under `/app/blocks`, thinking under `/app/thinking`, combined on `/app`), derived by `src/utils/progressStats.ts`. `progress.totalStars` is a single cross-path counter that also includes tutorial stars — never render it as a star total.
 - All icons in the app use `lucide-react`. Never add a second icon library. Emoji is acceptable for decorative mascots and world/puzzle flavour; avoid emoji in interactive controls (buttons, badges, status indicators).
 - Translation strings must never embed arrow/symbol characters (`←`, `→`, `▶`, `✓`). Place icons in JSX alongside `t()` calls.
 

@@ -244,6 +244,22 @@ const en: Translations = {
   'path.continue': 'Continue',
   'path.back': 'Back to home',
 
+  // ── Stats / achievements ──────────────────────
+  'stats.open': 'See your achievements',
+  'stats.title': 'Your Achievements',
+  'stats.close': 'Close',
+  'stats.level.next': '{xp} XP to {name}',
+  'stats.level.max': 'Highest level reached!',
+  'stats.total.label': 'Stars from both paths',
+  'stats.stars': '{stars} of {max} stars',
+  'stats.percent': '{percent}% collected',
+  'stats.worlds.done': '{n} of {total} worlds finished',
+  'stats.lessons.done': '{n} of {total} lessons done',
+  'stats.worlds.title': 'Stars in every world',
+  'stats.bonus': 'Bonus worlds',
+  'stats.empty': 'Play a lesson to start collecting stars!',
+  'stats.here': "You're here",
+
   // ── Thinking path ─────────────────────────────
   'thinking.title': 'Brain Training',
   'thinking.sub': 'Build your problem-solving superpowers! 🧠',
@@ -511,6 +527,22 @@ const id: Translations = {
   'path.start': 'Mulai',
   'path.continue': 'Lanjutkan',
   'path.back': 'Kembali ke beranda',
+
+  // ── Stats / achievements ──────────────────────
+  'stats.open': 'Lihat pencapaianmu',
+  'stats.title': 'Pencapaianmu',
+  'stats.close': 'Tutup',
+  'stats.level.next': '{xp} XP lagi menuju {name}',
+  'stats.level.max': 'Level tertinggi tercapai!',
+  'stats.total.label': 'Bintang dari kedua jalur',
+  'stats.stars': '{stars} dari {max} bintang',
+  'stats.percent': '{percent}% terkumpul',
+  'stats.worlds.done': '{n} dari {total} dunia selesai',
+  'stats.lessons.done': '{n} dari {total} pelajaran selesai',
+  'stats.worlds.title': 'Bintang di setiap dunia',
+  'stats.bonus': 'Dunia bonus',
+  'stats.empty': 'Main satu pelajaran untuk mulai mengumpulkan bintang!',
+  'stats.here': 'Kamu di sini',
 
   // ── Thinking path ─────────────────────────────
   'thinking.title': 'Latihan Otak',
