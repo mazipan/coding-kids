@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, Star } from 'lucide-react'
+import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { XPBar } from './XPBar'
 import { Logo } from './Logo'
+import { StatsModal } from './StatsModal'
 import type { PlayerProgress } from '../types'
+import { getAllStats, type PathId } from '../utils/progressStats'
 import { useLanguage } from '../i18n/LanguageProvider'
 
 interface HeaderProps {
@@ -14,6 +17,7 @@ export function Header({ progress }: HeaderProps) {
   const { language, setLanguage, t } = useLanguage()
   const navigate = useNavigate()
   const location = useLocation()
+  const [statsOpen, setStatsOpen] = useState(false)
 
   const pathParts = location.pathname.split('/').filter(Boolean)
   // pathParts: ['app', 'blocks'|'thinking'] | ['app', 'blocks', 'world', worldId] | ['app', 'blocks', 'world', worldId, lessonNum]
@@ -23,6 +27,15 @@ export function Header({ progress }: HeaderProps) {
   const isWorldPage = isInSubPath && pathParts.length === 4 && pathParts[2] === 'world'
   const isLessonPage = isInSubPath && pathParts.length >= 5 && pathParts[2] === 'world'
   const showBack = isSubHome || isWorldPage || isLessonPage
+
+  // Each path scores stars its own way, so the pill counts only the path the player is in.
+  // On the hub (/app), where neither path is active, it falls back to the combined total.
+  const currentPath: PathId | null = isInSubPath ? (subPath as PathId) : null
+  const stats = getAllStats(progress)
+  const pathStats = currentPath === 'blocks' ? stats.blocks : currentPath === 'thinking' ? stats.thinking : null
+  const shownStars = pathStats ? pathStats.stars : stats.stars
+  // On the hub the modal opens on whichever path the player has invested in most.
+  const defaultStatsPath: PathId = stats.thinking.stars > stats.blocks.stars ? 'thinking' : 'blocks'
 
   const handleClick = () => {
     if (isLessonPage) {
@@ -64,11 +77,16 @@ export function Header({ progress }: HeaderProps) {
           <XPBar xp={progress.xp} compact hideLabel={subPath === 'thinking'} />
         </div>
 
-        {/* Stars */}
-        <div className="flex items-center gap-1 bg-yellow-500/20 border border-yellow-400/30 px-2 sm:px-3 py-1.5 rounded-full shrink-0">
+        {/* Stars — opens the achievement summary */}
+        <button
+          onClick={() => setStatsOpen(true)}
+          aria-label={t('stats.open')}
+          title={t('stats.open')}
+          className="flex items-center gap-1 bg-yellow-500/20 border border-yellow-400/30 hover:bg-yellow-500/30 hover:border-yellow-400/50 transition-colors px-2 sm:px-3 py-1.5 rounded-full shrink-0 cursor-pointer"
+        >
           <Star className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 shrink-0" />
-          <span className="font-bold text-yellow-200 text-sm">{progress.totalStars}</span>
-        </div>
+          <span className="font-bold text-yellow-200 text-sm">{shownStars}</span>
+        </button>
 
         {/* Language toggle */}
         <div className="flex rounded-xl overflow-hidden border border-purple-800/40 shrink-0">
@@ -86,6 +104,15 @@ export function Header({ progress }: HeaderProps) {
           </button>
         </div>
       </div>
+
+      {statsOpen && (
+        <StatsModal
+          progress={progress}
+          initialPath={currentPath ?? defaultStatsPath}
+          currentPath={currentPath}
+          onClose={() => setStatsOpen(false)}
+        />
+      )}
     </header>
   )
 }

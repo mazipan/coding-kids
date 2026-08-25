@@ -19,6 +19,11 @@ const DEFAULT_PROGRESS: PlayerProgress = {
   lastPlayed: new Date().toISOString(),
 }
 
+/** True once the final main-path lesson is cleared — the shared gate for every bonus world. */
+export function areBonusWorldsUnlocked(progress: PlayerProgress): boolean {
+  return progress.lessons[FINAL_LESSON_ID]?.completed ?? false
+}
+
 export function isLessonAvailable(progress: PlayerProgress, lessonId: string, worldId: string): boolean {
   if (BONUS_WORLD_IDS.has(worldId)) {
     if (!progress.lessons[FINAL_LESSON_ID]?.completed) return false
@@ -135,8 +140,8 @@ export function useProgress() {
   }, [progress.lessons])
 
   const isBonusWorldUnlocked = useCallback((): boolean => {
-    return progress.lessons[FINAL_LESSON_ID]?.completed ?? false
-  }, [progress.lessons])
+    return areBonusWorldsUnlocked(progress)
+  }, [progress])
 
   const isLessonUnlocked = useCallback((lessonId: string, worldId: string): boolean => {
     return isLessonAvailable(progress, lessonId, worldId)
