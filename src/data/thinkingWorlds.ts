@@ -11,7 +11,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'purple',
     bgGradient: 'from-purple-900/50 to-violet-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'logic',
@@ -23,7 +23,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'blue',
     bgGradient: 'from-blue-900/50 to-cyan-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'counting',
@@ -35,7 +35,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'emerald',
     bgGradient: 'from-emerald-900/50 to-teal-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'memory',
@@ -47,7 +47,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'rose',
     bgGradient: 'from-rose-900/50 to-pink-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'nature',
@@ -59,7 +59,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'green',
     bgGradient: 'from-green-900/50 to-teal-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'numbers',
@@ -71,7 +71,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'indigo',
     bgGradient: 'from-indigo-900/50 to-violet-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'decomposition',
@@ -83,7 +83,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'orange',
     bgGradient: 'from-orange-900/50 to-amber-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'abstraction',
@@ -95,7 +95,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'teal',
     bgGradient: 'from-teal-900/50 to-cyan-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'math_reasoning',
@@ -107,7 +107,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'amber',
     bgGradient: 'from-amber-900/50 to-yellow-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'induction',
@@ -119,7 +119,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'cyan',
     bgGradient: 'from-cyan-900/50 to-sky-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'deduction',
@@ -131,7 +131,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'violet',
     bgGradient: 'from-violet-900/50 to-purple-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'planning',
@@ -143,7 +143,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'sky',
     bgGradient: 'from-sky-900/50 to-blue-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'probability',
@@ -155,7 +155,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'lime',
     bgGradient: 'from-lime-900/50 to-green-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
   {
     id: 'spatial',
@@ -167,7 +167,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
     color: 'fuchsia',
     bgGradient: 'from-fuchsia-900/50 to-pink-900/30',
     unlockAtXP: 0,
-    lessonCount: 10,
+    lessonCount: 20,
   },
 ]
 
