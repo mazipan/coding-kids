@@ -18,6 +18,11 @@ export interface World {
   ageRange: string
   concept: LocalizedString
   character: string
+  /** Set when the character's standard emoji glyph has a real inherent left/right facing
+   * (a vehicle, boat, or human pictograph drawn facing one way) — GameGrid mirrors it
+   * horizontally so it visually faces the direction it's currently travelling. Omit for
+   * any character drawn front-on or pose-neutral. */
+  facingDefault?: 'left'
   characterName: string
   itemEmoji: string
   obstacleEmoji: string
