@@ -87,6 +87,9 @@ src/
 - The header star pill shows the **current path's** stars (blocks under `/app/blocks`, thinking under `/app/thinking`, combined on `/app`), derived by `src/utils/progressStats.ts`. `progress.totalStars` is a single cross-path counter that also includes tutorial stars — never render it as a star total.
 - All icons in the app use `lucide-react`. Never add a second icon library. Emoji is acceptable for decorative mascots and world/puzzle flavour; avoid emoji in interactive controls (buttons, badges, status indicators).
 - Translation strings must never embed arrow/symbol characters (`←`, `→`, `▶`, `✓`). Place icons in JSX alongside `t()` calls.
+- A `DEMO_STATES` entry in `BlocklyWalkthrough.tsx` is what turns the last teach-step button into "Show me an example!" — a world without one ends its walkthrough on a bare "Let's go!". Every world that ships an `isTutorial` lesson needs an entry; `tests/walkthroughDemos.test.ts` enforces that.
+- Entries in `DEMO_STATES` are `(lang) => object` builders, not plain objects: variable and procedure names inside a demo are block text the child reads, and must match the names the teach diagram just printed (`langkah`/`steps`, `gerak3Kanan`/`move3Right`).
+- A functions demo is two top-level stacks — Blockly gives a procedure definition its own root, it cannot be nested. Serialize `procedures_defnoreturn` with `fields: { NAME }` + `inputs: { STACK }`, and `procedures_callnoreturn` with `extraState: { name }` carrying the same string. **The definition must come first in the `blocks` array** — a call deserialized before its definition resolves to nothing. Keep the second stack's `y` close to the first: `loadState` anchors the viewport at the origin, and on a phone the walkthrough card covers the bottom of the workspace.
 
 ## OG image (`public/og-image.svg` + `public/og-image.png`)
 

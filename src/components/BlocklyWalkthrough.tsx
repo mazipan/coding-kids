@@ -105,8 +105,20 @@ function VarGet({ varName, lang }: { varName: string; lang: string }) {
 
 // ── Demo Blockly workspace states (JSON serialization) ────────────────────────
 
-const DEMO_STATES: Partial<Record<string, object>> = {
-  jungle: {
+/**
+ * A demo state is what turns the final teach-step button into "Show me an
+ * example!": the walkthrough injects it into the real workspace so a child can
+ * read a working program before clearing it and writing their own. A world with
+ * no entry here ends its walkthrough on a plain "Let's go!" instead.
+ *
+ * Each builder takes the active language because the identifiers inside a demo —
+ * variable and procedure names — are block text the child reads, and they have
+ * to match the names the teach diagram just showed them.
+ */
+type DemoStateBuilder = (lang: 'en' | 'id') => object
+
+const DEMO_STATES: Partial<Record<string, DemoStateBuilder>> = {
+  jungle: () => ({
     blocks: {
       languageVersion: 0,
       blocks: [{
@@ -114,8 +126,8 @@ const DEMO_STATES: Partial<Record<string, object>> = {
         next: { block: { type: 'move_right' } },
       }],
     },
-  },
-  space: {
+  }),
+  space: () => ({
     blocks: {
       languageVersion: 0,
       blocks: [{
@@ -126,8 +138,8 @@ const DEMO_STATES: Partial<Record<string, object>> = {
         },
       }],
     },
-  },
-  loops: {
+  }),
+  loops: () => ({
     blocks: {
       languageVersion: 0,
       blocks: [{
@@ -138,28 +150,31 @@ const DEMO_STATES: Partial<Record<string, object>> = {
         },
       }],
     },
-  },
-  ocean: {
-    variables: [{ name: 'steps', id: 'tour_var_steps' }],
-    blocks: {
-      languageVersion: 0,
-      blocks: [{
-        type: 'variables_set', x: 40, y: 30,
-        fields: { VAR: { id: 'tour_var_steps' } },
-        inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 4 } } } },
-        next: {
-          block: {
-            type: 'controls_repeat_ext',
-            inputs: {
-              TIMES: { block: { type: 'variables_get', fields: { VAR: { id: 'tour_var_steps' } } } },
-              DO: { block: { type: 'move_right' } },
+  }),
+  ocean: (lang) => {
+    const varName = lang === 'id' ? 'langkah' : 'steps'
+    return {
+      variables: [{ name: varName, id: 'tour_var_steps' }],
+      blocks: {
+        languageVersion: 0,
+        blocks: [{
+          type: 'variables_set', x: 40, y: 30,
+          fields: { VAR: { id: 'tour_var_steps' } },
+          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 4 } } } },
+          next: {
+            block: {
+              type: 'controls_repeat_ext',
+              inputs: {
+                TIMES: { block: { type: 'variables_get', fields: { VAR: { id: 'tour_var_steps' } } } },
+                DO: { block: { type: 'move_right' } },
+              },
             },
           },
-        },
-      }],
-    },
+        }],
+      },
+    }
   },
-  caves: {
+  caves: () => ({
     blocks: {
       languageVersion: 0,
       blocks: [{
@@ -175,8 +190,95 @@ const DEMO_STATES: Partial<Record<string, object>> = {
         },
       }],
     },
+  }),
+  // Functions are two top-level stacks — Blockly gives a procedure definition its
+  // own root, it cannot be nested. The definition has to come FIRST in the array:
+  // `procedures_callnoreturn` resolves its `extraState.name` against the
+  // definitions already on the workspace, so a call loaded first finds nothing.
+  factory: (lang) => {
+    const fnName = lang === 'id' ? 'gerak3Kanan' : 'move3Right'
+    return {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'procedures_defnoreturn', x: 40, y: 30,
+            fields: { NAME: fnName },
+            inputs: {
+              STACK: {
+                block: {
+                  type: 'move_right',
+                  next: { block: { type: 'move_right', next: { block: { type: 'move_right' } } } },
+                },
+              },
+            },
+          },
+          {
+            type: 'procedures_callnoreturn', x: 40, y: 280,
+            extraState: { name: fnName },
+            next: { block: { type: 'procedures_callnoreturn', extraState: { name: fnName } } },
+          },
+        ],
+      },
+    }
   },
-  portal: {
+  // Code Orchestra teaches loops AND functions, so the phrase inside the function
+  // is itself a loop — one repeated beat, replayed twice.
+  orchestra: (lang) => {
+    const fnName = lang === 'id' ? 'refrain' : 'chorus'
+    return {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'procedures_defnoreturn', x: 40, y: 30,
+            fields: { NAME: fnName },
+            inputs: {
+              STACK: {
+                block: {
+                  type: 'controls_repeat_ext',
+                  inputs: {
+                    TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                    DO: { block: { type: 'move_right' } },
+                  },
+                },
+              },
+            },
+          },
+          {
+            type: 'procedures_callnoreturn', x: 40, y: 260,
+            extraState: { name: fnName },
+            next: { block: { type: 'procedures_callnoreturn', extraState: { name: fnName } } },
+          },
+        ],
+      },
+    }
+  },
+  // Eco City teaches decomposition and reuse, not looping — the function body
+  // stays a flat piece of route so the reuse is the only idea on screen.
+  eco: (lang) => {
+    const fnName = lang === 'id' ? 'distrik' : 'district'
+    return {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'procedures_defnoreturn', x: 40, y: 30,
+            fields: { NAME: fnName },
+            inputs: {
+              STACK: { block: { type: 'move_right', next: { block: { type: 'move_right' } } } },
+            },
+          },
+          {
+            type: 'procedures_callnoreturn', x: 40, y: 230,
+            extraState: { name: fnName },
+            next: { block: { type: 'procedures_callnoreturn', extraState: { name: fnName } } },
+          },
+        ],
+      },
+    }
+  },
+  portal: () => ({
     blocks: {
       languageVersion: 0,
       blocks: [{
@@ -187,8 +289,8 @@ const DEMO_STATES: Partial<Record<string, object>> = {
         },
       }],
     },
-  },
-  cove: {
+  }),
+  cove: () => ({
     blocks: {
       languageVersion: 0,
       blocks: [{
@@ -209,7 +311,16 @@ const DEMO_STATES: Partial<Record<string, object>> = {
         },
       }],
     },
-  },
+  }),
+}
+
+/**
+ * The worked example a world's walkthrough injects, or `undefined` when that
+ * world has none. Exported so `tests/walkthroughDemos.test.ts` can assert that
+ * every world able to mount a walkthrough ships one.
+ */
+export function getDemoState(worldId: string, lang: 'en' | 'id'): object | undefined {
+  return DEMO_STATES[worldId]?.(lang)
 }
 
 // ── Teach step definitions per world ─────────────────────────────────────────
@@ -635,7 +746,7 @@ export function BlocklyWalkthrough({ world, onDone, onLoadState, onSwitchTab }: 
     }
     // Last teach step → inject demo + switch to demo phase
     if (hasDemoState) {
-      const state = DEMO_STATES[world.id]!
+      const state = DEMO_STATES[world.id]!(lang)
       onLoadState(state)
       onSwitchTab('blocks')
       setPhase('demo')

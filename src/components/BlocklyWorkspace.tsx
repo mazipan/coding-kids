@@ -85,6 +85,11 @@ export const BlocklyWorkspace = forwardRef<BlocklyWorkspaceHandle, BlocklyWorksp
         ws.clear()
         try {
           Blockly.serialization.workspaces.load(state, ws)
+          // A demo can be more than one top-level stack (a function definition
+          // plus its calls). Anchor the viewport at the origin so the stacks
+          // read top-down from the first row, clear of the walkthrough card
+          // that sits along the bottom edge on a phone.
+          ws.scroll(20, 20)
         } catch {
           // ignore incompatible state
         }
