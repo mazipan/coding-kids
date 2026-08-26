@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
@@ -8,13 +9,6 @@ interface GameGridProps {
   world: World
   gameState: GameState
   maxSize?: number
-}
-
-const FACING_ROTATE: Record<string, number> = {
-  move_right: 0,
-  move_left: 180,
-  move_up: -90,
-  move_down: 90,
 }
 
 export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridProps) {
@@ -29,6 +23,29 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
   const { charPos, collectedIds, status } = gameState
   const isSuccess = status === 'success'
   const isCrash = status === 'crashed'
+
+  // Some character emoji (e.g. 🏎️, ⛵, 🏊) have a real inherent left/right facing in their
+  // standard glyph design. GameGrid mirrors those horizontally to face the direction they're
+  // actually travelling, since gameplay defaults to moving rightward. `facingRight` starts
+  // `true` and updates only on a genuine column change or a fresh run — see the effect below.
+  const [facingRight, setFacingRight] = useState(true)
+  const prevColRef = useRef(charPos[1])
+  const prevStatusRef = useRef(status)
+
+  useEffect(() => {
+    const justStartedRun = status === 'running' && prevStatusRef.current !== 'running'
+    if (justStartedRun) {
+      setFacingRight(true)
+    } else if (charPos[1] > prevColRef.current) {
+      setFacingRight(true)
+    } else if (charPos[1] < prevColRef.current) {
+      setFacingRight(false)
+    }
+    prevColRef.current = charPos[1]
+    prevStatusRef.current = status
+  }, [charPos, status])
+
+  const mirrored = world.facingDefault === 'left' && facingRight
 
   // Coordinate Cove renders a labelled chart: the coordinate is read off the
   // gutter, never inferred by counting cells. Labels are 1-based so they match
@@ -214,8 +231,14 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
               filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))',
               display: 'block',
             }}
-            animate={status === 'idle' ? { y: [0, -4, 0] } : {}}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{
+              scaleX: mirrored ? -1 : 1,
+              y: status === 'idle' ? [0, -4, 0] : 0,
+            }}
+            transition={{
+              y: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+              scaleX: { duration: 0.2, ease: 'easeOut' },
+            }}
           >
             {world.character}
           </motion.span>
