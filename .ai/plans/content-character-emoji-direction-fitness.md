@@ -2,7 +2,7 @@
 
 **Slug:** `content-character-emoji-direction-fitness`
 **Date:** 2026-08-26
-**Status:** in-review
+**Status:** done
 
 ---
 
@@ -188,3 +188,18 @@ making the character slowly wobble through the flip instead of snapping to face 
    touch `worlds.ts` and `translations.ts` copy for no concrete bug.
 
 Re-ran all four verification commands after these fixes — still 171/171 tests pass, build clean.
+
+**reviewer-code pass (post-push):** verdict Needs changes, one real bug found. `resetGame`/`handleRetry`
+(`LessonScreen.tsx:225-231`, bound to the Reset button and RewardModal's Retry) sets `status: 'idle'`, not
+`'running'`, while also snapping `charPos` back to `lesson.startPos`. The `justStartedRun` check only
+fires on a transition *into* `'running'`, so the idle-reset path fell through to the stale
+column-comparison branch — comparing the new start column against wherever the character had ended up —
+and could leave the character rendered backwards at rest right after Reset/Retry, reproducing the exact
+bug the plan set out to fix. Fixed: `status === 'idle'` is now handled as its own branch that forces
+`facingRight` to `true` (safe here — idle is a rest frame, not mid-animation, so there's no flip-then-
+flip-back risk like the run-start case). Everything else in the review passed clean: plan compliance, all
+invariants, code quality, bundle impact, and the run-start race-condition logic the plan flagged as the
+trickiest part.
+
+Re-ran all four verification commands again after this fix — still 171/171 tests pass, build clean. Both
+reviewer-code and reviewer-kid have now passed against the final diff.

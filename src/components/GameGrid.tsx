@@ -34,11 +34,18 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
 
   useEffect(() => {
     const justStartedRun = status === 'running' && prevStatusRef.current !== 'running'
-    // A fresh run jumps charPos straight to lesson.startPos in the same update that sets
-    // status to 'running', so this rebases the tracked column without touching facingRight —
-    // forcing a direction here would flash the character to face right for one frame even
-    // when its first real move is left, then flip back and read as a stray twitch.
-    if (!justStartedRun) {
+    if (status === 'idle') {
+      // The Reset/Retry button snaps charPos back to lesson.startPos and leaves the game at
+      // rest here (not mid-animation), so it's safe to force the default rightward-facing
+      // orientation with no risk of a visible flip-then-flip-back.
+      setFacingRight(true)
+    } else if (!justStartedRun) {
+      // A fresh run also jumps charPos straight to lesson.startPos, but in the same update
+      // that sets status to 'running' — right before the first queued move animates. Forcing
+      // a direction here would flash the character to face right for one frame even when its
+      // first real move is left, then flip back and read as a stray twitch, so this only
+      // rebases the tracked column and leaves facingRight (already correct from the idle
+      // reset, or from the run this one interrupted) to update on the next real move.
       if (charPos[1] > prevColRef.current) {
         setFacingRight(true)
       } else if (charPos[1] < prevColRef.current) {
