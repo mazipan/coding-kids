@@ -774,8 +774,8 @@ export const LESSONS: Lesson[] = [
       id: 'Permatanya tersebar! Finn perlu menyimpan posisinya dalam variabel untuk navigasi yang efisien.',
     },
     mascotMessage: {
-      en: 'Variables can store your position too! 🤿 This is like giving your program a memory!',
-      id: 'Variabel juga bisa menyimpan posisimu! 🤿 Ini seperti memberikan memori pada programmu!',
+      en: 'Variables can store your position too! 🏊 This is like giving your program a memory!',
+      id: 'Variabel juga bisa menyimpan posisimu! 🏊 Ini seperti memberikan memori pada programmu!',
     },
     gridRows: 6,
     gridCols: 6,
@@ -879,8 +879,8 @@ export const LESSONS: Lesson[] = [
       id: 'Tantangan samudra terakhir! Finn harus mengumpulkan permata dalam pola spiral menggunakan variabel dan perulangan!',
     },
     mascotMessage: {
-      en: "The final ocean level! 🌊 Use everything you've learned — moves, loops, AND variables! You got this! 🤿",
-      id: 'Level samudra terakhir! 🌊 Gunakan segalanya yang sudah kamu pelajari — gerakan, perulangan, DAN variabel! Kamu bisa! 🤿',
+      en: "The final ocean level! 🌊 Use everything you've learned — moves, loops, AND variables! You got this! 🏊",
+      id: 'Level samudra terakhir! 🌊 Gunakan segalanya yang sudah kamu pelajari — gerakan, perulangan, DAN variabel! Kamu bisa! 🏊',
     },
     gridRows: 7,
     gridCols: 7,

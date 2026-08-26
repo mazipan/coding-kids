@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Lesson, GameState } from '../types'
 import type { World } from '../types'
@@ -8,13 +9,6 @@ interface GameGridProps {
   world: World
   gameState: GameState
   maxSize?: number
-}
-
-const FACING_ROTATE: Record<string, number> = {
-  move_right: 0,
-  move_left: 180,
-  move_up: -90,
-  move_down: 90,
 }
 
 export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridProps) {
@@ -29,6 +23,40 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
   const { charPos, collectedIds, status } = gameState
   const isSuccess = status === 'success'
   const isCrash = status === 'crashed'
+
+  // Some character emoji (e.g. 🏎️, ⛵, 🏊) have a real inherent left/right facing in their
+  // standard glyph design. GameGrid mirrors those horizontally to face the direction they're
+  // actually travelling, since gameplay defaults to moving rightward. `facingRight` starts
+  // `true` and otherwise only changes on a genuine column move — see the effect below.
+  const [facingRight, setFacingRight] = useState(true)
+  const prevColRef = useRef(charPos[1])
+  const prevStatusRef = useRef(status)
+
+  useEffect(() => {
+    const justStartedRun = status === 'running' && prevStatusRef.current !== 'running'
+    if (status === 'idle') {
+      // The Reset/Retry button snaps charPos back to lesson.startPos and leaves the game at
+      // rest here (not mid-animation), so it's safe to force the default rightward-facing
+      // orientation with no risk of a visible flip-then-flip-back.
+      setFacingRight(true)
+    } else if (!justStartedRun) {
+      // A fresh run also jumps charPos straight to lesson.startPos, but in the same update
+      // that sets status to 'running' — right before the first queued move animates. Forcing
+      // a direction here would flash the character to face right for one frame even when its
+      // first real move is left, then flip back and read as a stray twitch, so this only
+      // rebases the tracked column and leaves facingRight (already correct from the idle
+      // reset, or from the run this one interrupted) to update on the next real move.
+      if (charPos[1] > prevColRef.current) {
+        setFacingRight(true)
+      } else if (charPos[1] < prevColRef.current) {
+        setFacingRight(false)
+      }
+    }
+    prevColRef.current = charPos[1]
+    prevStatusRef.current = status
+  }, [charPos, status])
+
+  const mirrored = world.facingDefault === 'left' && facingRight
 
   // Coordinate Cove renders a labelled chart: the coordinate is read off the
   // gutter, never inferred by counting cells. Labels are 1-based so they match
@@ -214,8 +242,14 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
               filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))',
               display: 'block',
             }}
-            animate={status === 'idle' ? { y: [0, -4, 0] } : {}}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{
+              scaleX: mirrored ? -1 : 1,
+              y: status === 'idle' ? [0, -4, 0] : 0,
+            }}
+            transition={{
+              y: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+              scaleX: { duration: 0.2, ease: 'easeOut' },
+            }}
           >
             {world.character}
           </motion.span>

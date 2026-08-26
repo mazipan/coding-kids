@@ -24,6 +24,8 @@ Bonus worlds unlock after the final main-world lesson is complete. Within every 
 
 Source: `src/data/worlds.ts` — `WORLDS` array. Each world has `theme` (bgGradient, accentColor, textColor, cellBorder, cellBg), `emoji`, `character` (emoji for mascot), `characterName`, `itemEmoji`, `obstacleEmoji`, `goalEmoji`.
 
+`character` may also set `facingDefault: 'left'` when the emoji's standard glyph design has a real inherent left/right facing (a vehicle, boat, or human pictograph drawn facing one way) — `GameGrid` mirrors the character horizontally so it visually faces the direction it's currently travelling, since gameplay defaults to moving rightward. Omit the field for any character that is drawn front-on or pose-neutral (people, animals in a standing/sitting pose, robots) — flipping those has no correctness benefit and the field should not be added "just in case." Currently set on `loops` (🏎️), `cove` (⛵), and `ocean` (🏊).
+
 ## Lesson unlock rules
 
 - Lesson 0 in any world: always unlocked once the world itself is unlocked (lesson numbering is 0-indexed)
