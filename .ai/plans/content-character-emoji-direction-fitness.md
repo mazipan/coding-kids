@@ -173,3 +173,18 @@ making the character slowly wobble through the flip instead of snapping to face 
 
 `node_modules` was not yet installed in this session; ran `bun install` before the verification commands.
 `bunx biome ci`, `bun run type-check`, `bun run build`, and `bun test` (171 pass / 0 fail) all pass clean.
+
+**reviewer-kid pass (post-push):** verdict Fun, with two real issues, both fixed here:
+1. The run-start reset unconditionally forced `facingRight` to `true`, so a run whose first real
+   move is left showed a one-frame snap-to-right-facing immediately followed by a flip back to
+   left — a visible stray twitch. Fixed: a fresh run now only rebases `prevColRef` to the new
+   start column without touching `facingRight`; the character keeps its last known facing until a
+   real column move determines the new one, so there's no more forced snap.
+2. Two Ocean lesson `mascotMessage` strings (`src/data/lessons.ts`, lessons `ocean-2` and
+   `ocean-4`) hardcoded the old 🤿 emoji inline in the speech-bubble text, which then sat next to
+   the new 🏊 avatar in the same Mascot component. Swapped both inline 🤿 → 🏊 (EN and ID) so the
+   character reads consistently everywhere it appears. Left the "Finn the Diver" / "Finn si
+   Penyelam" tagline text as-is — a narrative label, not a visual clash, and rewriting it would
+   touch `worlds.ts` and `translations.ts` copy for no concrete bug.
+
+Re-ran all four verification commands after these fixes — still 171/171 tests pass, build clean.

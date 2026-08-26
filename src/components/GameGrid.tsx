@@ -27,19 +27,23 @@ export function GameGrid({ lesson, world, gameState, maxSize = 400 }: GameGridPr
   // Some character emoji (e.g. 🏎️, ⛵, 🏊) have a real inherent left/right facing in their
   // standard glyph design. GameGrid mirrors those horizontally to face the direction they're
   // actually travelling, since gameplay defaults to moving rightward. `facingRight` starts
-  // `true` and updates only on a genuine column change or a fresh run — see the effect below.
+  // `true` and otherwise only changes on a genuine column move — see the effect below.
   const [facingRight, setFacingRight] = useState(true)
   const prevColRef = useRef(charPos[1])
   const prevStatusRef = useRef(status)
 
   useEffect(() => {
     const justStartedRun = status === 'running' && prevStatusRef.current !== 'running'
-    if (justStartedRun) {
-      setFacingRight(true)
-    } else if (charPos[1] > prevColRef.current) {
-      setFacingRight(true)
-    } else if (charPos[1] < prevColRef.current) {
-      setFacingRight(false)
+    // A fresh run jumps charPos straight to lesson.startPos in the same update that sets
+    // status to 'running', so this rebases the tracked column without touching facingRight —
+    // forcing a direction here would flash the character to face right for one frame even
+    // when its first real move is left, then flip back and read as a stray twitch.
+    if (!justStartedRun) {
+      if (charPos[1] > prevColRef.current) {
+        setFacingRight(true)
+      } else if (charPos[1] < prevColRef.current) {
+        setFacingRight(false)
+      }
     }
     prevColRef.current = charPos[1]
     prevStatusRef.current = status
