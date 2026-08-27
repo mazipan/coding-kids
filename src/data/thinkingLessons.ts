@@ -1409,8 +1409,8 @@ const THINKING_LESSONS_CORE: ThinkingLesson[] = [
         id: 'Penalaran matematika adalah tentang memikirkan soal angka menggunakan petunjuk. Kita tidak hanya menghitung — kita berpikir tentang apa arti angka-angka itu!',
       },
       example: {
-        en: 'Example: "Which numbers are bigger than 5?" → Look at each number and ask: is it MORE than 5?',
-        id: 'Contoh: "Angka mana yang lebih besar dari 5?" → Lihat setiap angka dan tanya: apakah lebih dari 5?',
+        en: 'Example: "Which numbers are bigger than 5?" Look at each number and ask: is it MORE than 5?',
+        id: 'Contoh: "Angka mana yang lebih besar dari 5?" Lihat setiap angka dan tanya: apakah lebih dari 5?',
       },
     },
     puzzle: {
@@ -1498,8 +1498,8 @@ const THINKING_LESSONS_CORE: ThinkingLesson[] = [
         id: 'Ketika sebuah angka hilang dari persamaan, kita bertanya: "Angka apa yang membuat ini seimbang?" Coba setiap pilihan dan cek!',
       },
       example: {
-        en: 'Example: 5 + ? = 8 → Try 2: 5+2=7 ✗ → Try 3: 5+3=8 ✓',
-        id: 'Contoh: 5 + ? = 8 → Coba 2: 5+2=7 ✗ → Coba 3: 5+3=8 ✓',
+        en: 'Example: 5 + ? = 8. Try 2: 5+2=7, not yet. Try 3: 5+3=8, that\'s it!',
+        id: 'Contoh: 5 + ? = 8. Coba 2: 5+2=7, belum pas. Coba 3: 5+3=8, itu dia!',
       },
     },
     puzzle: {
@@ -1667,12 +1667,12 @@ const THINKING_LESSONS_CORE: ThinkingLesson[] = [
     tutorial: {
       title: { en: 'What is Inductive Reasoning?', id: 'Apa itu Penalaran Induktif?' },
       body: {
-        en: 'Inductive reasoning means: look at several examples → find what they all share → form a rule → apply it to new cases. You go from specific examples to a general rule!',
-        id: 'Penalaran induktif berarti: lihat beberapa contoh → temukan kesamaannya → bentuk aturan → terapkan ke kasus baru. Kamu bergerak dari contoh spesifik ke aturan umum!',
+        en: 'Inductive reasoning means: look at several examples, find what they all share, form a rule, then apply it to new cases. You go from specific examples to a general rule!',
+        id: 'Penalaran induktif berarti: lihat beberapa contoh, temukan kesamaannya, bentuk aturan, lalu terapkan ke kasus baru. Kamu bergerak dari contoh spesifik ke aturan umum!',
       },
       example: {
-        en: 'Examples: 2, 4, 6, 8 → Rule: "These are even numbers" → New case: Is 10 even? Yes, it fits the rule!',
-        id: 'Contoh: 2, 4, 6, 8 → Aturan: "Ini bilangan genap" → Kasus baru: Apakah 10 genap? Ya, cocok dengan aturannya!',
+        en: 'Examples: 2, 4, 6, 8. Rule: "These are even numbers." New case: Is 10 even? Yes, it fits the rule!',
+        id: 'Contoh: 2, 4, 6, 8. Aturan: "Ini bilangan genap." Kasus baru: Apakah 10 genap? Ya, cocok dengan aturannya!',
       },
     },
     puzzle: {
@@ -1815,8 +1815,8 @@ const THINKING_LESSONS_CORE: ThinkingLesson[] = [
         id: 'Ketika hal yang sama terjadi setiap kali kamu mengamati pola, kamu bisa membentuk aturan umum. Aturan harus mencakup SEMUA contoh yang kamu lihat.',
       },
       example: {
-        en: 'Observation: 🍎 falls down, 🪨 falls down, 🍂 falls down → Rule: "Things fall down when dropped." This covers all examples!',
-        id: 'Pengamatan: 🍎 jatuh ke bawah, 🪨 jatuh ke bawah, 🍂 jatuh ke bawah → Aturan: "Benda jatuh ke bawah ketika dijatuhkan." Ini mencakup semua contoh!',
+        en: 'Observation: 🍎 falls down, 🪨 falls down, 🍂 falls down. Rule: "Things fall down when dropped." This covers all examples!',
+        id: 'Pengamatan: 🍎 jatuh ke bawah, 🪨 jatuh ke bawah, 🍂 jatuh ke bawah. Aturan: "Benda jatuh ke bawah ketika dijatuhkan." Ini mencakup semua contoh!',
       },
     },
     puzzle: {
@@ -1955,8 +1955,8 @@ const THINKING_LESSONS_CORE: ThinkingLesson[] = [
         id: 'Penalaran deduktif bekerja dari atas ke bawah: mulai dengan aturan UMUM, lalu terapkan ke kasus SPESIFIK. Jika aturannya benar dan kasusnya cocok, kesimpulannya dijamin benar — tidak ada pengecualian!',
       },
       example: {
-        en: 'Rule: All birds have feathers. Case: A parrot is a bird. Conclusion: A parrot has feathers. ✓ (This MUST be true!)',
-        id: 'Aturan: Semua burung punya bulu. Kasus: Burung beo adalah burung. Kesimpulan: Burung beo punya bulu. ✓ (Ini PASTI benar!)',
+        en: 'Rule: All birds have feathers. Case: A parrot is a bird. Conclusion: A parrot has feathers. This MUST be true!',
+        id: 'Aturan: Semua burung punya bulu. Kasus: Burung beo adalah burung. Kesimpulan: Burung beo punya bulu. Ini PASTI benar!',
       },
     },
     puzzle: {
@@ -2046,14 +2046,14 @@ const THINKING_LESSONS_CORE: ThinkingLesson[] = [
     },
     xpReward: 15,
     tutorial: {
-      title: { en: 'Chain Reasoning: A → B → C', id: 'Rantai Penalaran: A → B → C' },
+      title: { en: 'Chain Reasoning: A leads to B leads to C', id: 'Rantai Penalaran: A menuju B menuju C' },
       body: {
-        en: 'Sometimes conclusions chain together: Rule 1 says A → B. Rule 2 says B → C. If A is true, then B is true (by Rule 1), and then C is true (by Rule 2). The chain carries the truth all the way through!',
-        id: 'Terkadang kesimpulan berantai: Aturan 1 bilang A → B. Aturan 2 bilang B → C. Jika A benar, maka B benar (oleh Aturan 1), dan kemudian C benar (oleh Aturan 2). Rantai membawa kebenaran sampai ke ujung!',
+        en: 'Sometimes conclusions chain together: Rule 1 says A leads to B. Rule 2 says B leads to C. If A is true, then B is true (by Rule 1), and then C is true (by Rule 2). The chain carries the truth all the way through!',
+        id: 'Terkadang kesimpulan berantai: Aturan 1 bilang A menuju B. Aturan 2 bilang B menuju C. Jika A benar, maka B benar (oleh Aturan 1), dan kemudian C benar (oleh Aturan 2). Rantai membawa kebenaran sampai ke ujung!',
       },
       example: {
-        en: 'If it\'s cloudy (A) → it rains (B). If it rains (B) → ground is wet (C). It\'s cloudy. Conclusion: ground is wet! ✓',
-        id: 'Jika mendung (A) → hujan (B). Jika hujan (B) → tanah basah (C). Sedang mendung. Kesimpulan: tanah basah! ✓',
+        en: 'If it\'s cloudy (A), then it rains (B). If it rains (B), then the ground is wet (C). It\'s cloudy, so the ground must be wet!',
+        id: 'Jika mendung (A), maka hujan (B). Jika hujan (B), maka tanah basah (C). Sedang mendung, jadi tanah pasti basah!',
       },
     },
     puzzle: {
