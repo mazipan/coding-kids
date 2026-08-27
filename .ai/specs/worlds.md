@@ -117,7 +117,7 @@ Selecting `variables`, `logic`, `lists`, **or** `sensors` also adds the Math cat
 
 ## Thinking worlds (Brain Training path)
 
-Source: `src/data/thinkingWorlds.ts` — `THINKING_WORLDS` array.
+Source: `src/data/thinkingWorlds/` — one file per world (e.g. `patterns.ts` exports `patternsWorld`), assembled into the `THINKING_WORLDS` array by `index.ts`.
 
 | ID | Emoji | Concept | Ages | Colour | unlockAtXP | Lessons |
 |----|-------|---------|------|--------|------------|---------|
@@ -239,7 +239,7 @@ Two rules keep the tier honest:
 ### Adding a new thinking lesson
 
 1. Append an entry to the correct world section — `thinkingLessons.ts` for a tier-one lesson (0–9), `thinkingLessonsAdvanced.ts` for tier two (10–19)
-2. Increment `lessonCount` in `src/data/thinkingWorlds.ts`
+2. Increment `lessonCount` in the world's file under `src/data/thinkingWorlds/`
 3. Lesson number follows 0-based sequential order; the next number is `lessonCount - 1` after the update
 4. Run `bun run build` — TypeScript catches missing required fields
 5. Run `bun run audit-lessons` — it checks contiguous numbering, both languages on every string, answers that exist among their options, true/false balance (INV-Q3), grid keys in range, and the tier-two XP rule. INV-Q1, INV-Q2 and the *feel* of INV-Q5 still need a human to read the lessons.
@@ -355,7 +355,7 @@ Run this audit against all existing lessons in the target world:
    ```ts
    export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'yourNewWorld'
    ```
-2. Add the world object to `THINKING_WORLDS` in `src/data/thinkingWorlds.ts`. Required fields:
+2. Add a new file exporting the world object under `src/data/thinkingWorlds/`, then import and register it in `src/data/thinkingWorlds/index.ts`'s `THINKING_WORLDS` array. Required fields:
    ```ts
    {
      id: ThinkingWorldId,

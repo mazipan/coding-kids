@@ -6,7 +6,7 @@
  * INV-Q5 still need a person to read the lessons.
  */
 import { THINKING_LESSONS } from '../src/data/thinkingLessons.ts';
-import { THINKING_WORLDS } from '../src/data/thinkingWorlds.ts';
+import { THINKING_WORLDS } from '../src/data/thinkingWorlds/index.ts';
 
 const problems = [];
 const fail = (msg) => problems.push(msg);

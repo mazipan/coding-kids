@@ -48,7 +48,8 @@ src/
 │   ├── lessons.ts              # 128 block coding lessons across 14 worlds
 │   ├── thinkingLessons.ts      # Brain training tier one — lessons 0–9 of every world
 │   ├── thinkingLessonsAdvanced.ts  # Brain training tier two — lessons 10–19 of every world
-│   ├── thinkingWorlds.ts       # 14 thinking worlds, 20 lessons each
+│   ├── thinkingWorlds/         # One file per thinking world (patterns.ts, logic.ts, ...) + index.ts
+│   │                           #   assembling THINKING_WORLDS — 14 worlds, 20 lessons each
 │   ├── worlds/                 # One file per world (jungle.ts, space.ts, ...) + index.ts
 │   │                           #   assembling WORLDS — theme colors, emoji, character, unlockAtXP
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), calculateXPReward(), getLevelInfo()

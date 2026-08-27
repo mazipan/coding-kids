@@ -1,0 +1,11 @@
+# 2026-08-27 — Split `src/data/thinkingWorlds.ts` into one file per thinking world
+
+**Context:** `src/data/thinkingWorlds.ts` held all 14 `ThinkingWorld` objects as one 176-line array literal — the same growing-file shape as `src/data/worlds.ts`, which was split into one file per world earlier the same day (see `2026-08-27-01-split-worlds-data-into-one-file-per-world.md`).
+
+**Decision:** Converted `thinkingWorlds.ts` into a `src/data/thinkingWorlds/` directory: one file per world, each exporting a single `{camelCaseId}World: ThinkingWorld` const, plus `index.ts` assembling `THINKING_WORLDS` in the original order and re-exporting `getThinkingWorld` unchanged. Import paths (`'../data/thinkingWorlds'`, `'./data/thinkingWorlds'`) are untouched. `math_reasoning` (the one snake_case world id) gets the camelCase export `mathReasoningWorld`; the `id` field itself, and every `ThinkingWorldId` union member, is unchanged.
+
+**Alternatives rejected:**
+- Also split `thinkingLessons.ts` / `thinkingLessonsAdvanced.ts` (the puzzle content, 2947 + 4612 lines) per world — out of scope for this request, which named "brain thinking paths" mirroring the worlds-file split specifically. Those files are already split by tier (0–9 / 10–19) for reviewable diffs, and restructuring ~280 lessons across 14 files is a materially larger, separate change.
+- Key worlds by object instead of array — same reasoning as the blocks-path decision: `THINKING_WORLDS.find/.map/.reduce/.length` call sites rely on array semantics.
+
+**Consequences:** Adding a thinking world is now "add one new file + one import line in `index.ts`" instead of inserting into a growing array, matching the pattern the blocks path now uses. Both `.ai/specs/worlds.md`'s "Adding a new thinking lesson" and "Adding a new thinking world" walkthroughs were updated to reference the new location. One import site broke on the swap: `scripts/audit-thinking-lessons.mjs` imported via an explicit `'../src/data/thinkingWorlds.ts'` path (extension included) rather than a bare specifier, which doesn't fall through to a directory's `index.ts` — fixed to `'.../thinkingWorlds/index.ts'`. Any future file-to-directory split should grep for explicit `.ts`-suffixed import paths in addition to bare specifiers.
