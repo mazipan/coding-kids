@@ -17,7 +17,7 @@ import { spatialLessonsAdvanced } from './spatial'
 /**
  * Tier two of the thinking path — lessons 10–19 of every world.
  *
- * Tier one (lessons 0–9, in `../thinkingLessons.ts`) teaches each world's core idea. Tier
+ * Tier one (lessons 0–9, in `../thinkingLessons/`) teaches each world's core idea. Tier
  * two raises the cognitive load rather than the reading load (INV-Q5): compound
  * conditions, chained reasoning, tracking a list that changes under you, composing two
  * transformations, satisfying several constraints at once.

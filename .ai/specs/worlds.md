@@ -147,10 +147,11 @@ Two pairs sit close enough that new lessons must respect the boundary:
 
 ### Thinking lesson fields
 
-Split by tier. `src/data/thinkingLessons.ts` holds lessons 0–9 of every world and spreads in
-`src/data/thinkingLessonsAdvanced/`, which holds lessons 10–19 split further into one file per world
-(e.g. `patterns.ts` exports `patternsLessonsAdvanced`), assembled into `THINKING_LESSONS_ADVANCED` by its
-own `index.ts`. The split is only for reviewability — `THINKING_LESSONS` is the single list everything
+Split by tier, each tier further split into one file per world. `src/data/thinkingLessons/` holds
+lessons 0–9 (e.g. `patterns.ts` exports `patternsLessons`), assembled into `THINKING_LESSONS` by its own
+`index.ts`, which also spreads in `src/data/thinkingLessonsAdvanced/` — lessons 10–19, same one-file-per-
+world shape (e.g. `patterns.ts` exports `patternsLessonsAdvanced`), assembled by its own `index.ts` into
+`THINKING_LESSONS_ADVANCED`. The split is only for reviewability — `THINKING_LESSONS` is the single list everything
 reads, and array order never matters because every lookup filters by `worldId` and sorts by `number`.
 
 Each lesson:
@@ -216,7 +217,7 @@ These are properties of the renderer, not style preferences. Breaking them ships
 
 ### Difficulty curve (20 lessons per world, in two tiers)
 
-**Tier one — lessons 0–9** (`thinkingLessons.ts`). Teaches the world's core idea.
+**Tier one — lessons 0–9** (`thinkingLessons/`, one file per world). Teaches the world's core idea.
 
 - Lessons 0–4: gentle introduction — simple 4-item sequences, basic if-then, small arithmetic.
 - Lessons 5–9: longer sequences (8–9 items), ABCD cycles, a blank in the middle, number sequences (+2, doubling), negation, reverse operations, order of operations.
@@ -239,7 +240,7 @@ Two rules keep the tier honest:
 
 ### Adding a new thinking lesson
 
-1. Append an entry to the correct file — `thinkingLessons.ts` for a tier-one lesson (0–9); the matching world's file under `thinkingLessonsAdvanced/` for tier two (10–19), e.g. `thinkingLessonsAdvanced/patterns.ts` for a new `patterns` lesson
+1. Append an entry to the matching world's file — under `thinkingLessons/` for a tier-one lesson (0–9), under `thinkingLessonsAdvanced/` for tier two (10–19), e.g. `thinkingLessonsAdvanced/patterns.ts` for a new tier-two `patterns` lesson
 2. Increment `lessonCount` in the world's file under `src/data/thinkingWorlds/`
 3. Lesson number follows 0-based sequential order; the next number is `lessonCount - 1` after the update
 4. Run `bun run build` — TypeScript catches missing required fields
@@ -311,7 +312,7 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
 
 ## Adding a new thinking lesson
 
-1. Append an entry to the correct world array in `src/data/thinkingLessons.ts`. Keep lessons ordered by `number`.
+1. Append an entry to the world's file under `src/data/thinkingLessons/`. Keep lessons ordered by `number`.
 2. Lesson ID format: `'{worldId}-{number}'` (0-indexed). E.g. the 11th lesson in `patterns` is `patterns-10`.
 3. All `title` and `mascotMessage` strings are `LocalizedString` — always provide both `en` and `id`.
 4. Increment `lessonCount` in the world's file under `src/data/thinkingWorlds/`.
@@ -379,7 +380,7 @@ Run this audit against all existing lessons in the target world:
    `tests/thinkingWorldsContent.test.ts` asserts every world's colour is present in both files. Do not skip this step; three worlds shipped mis-themed for several releases because the two maps drifted apart.
 5. The `bgGradient` uses `from-{color}-900/50 to-{secondaryColor}-900/30` — keep opacity low so the star field behind shows through.
 6. Add the puzzle type (if it's new) to `src/types/index.ts` and implement it in `src/screens/ThinkingLesson.tsx`.
-7. Add the lessons to `src/data/thinkingLessons.ts` following the "Adding a new thinking lesson" steps above.
+7. Add the lessons to the new world's file under `src/data/thinkingLessons/` following the "Adding a new thinking lesson" steps above.
 8. `ThinkingHome` renders a next-world banner automatically by reading the next item in `THINKING_WORLDS` — no code change needed for navigation between worlds.
 9. Update the hardcoded `landing.worlds.title` count in `src/i18n/translations.ts` (EN **and** ID) — it is a literal, not derived from the arrays.
 10. Update the catalog table above, the world counts in `README.md`, and add a decision log entry in `.ai/decisions/log/` explaining the new concept and age range.

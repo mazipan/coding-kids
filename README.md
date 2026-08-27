@@ -126,9 +126,10 @@ src/
 │   └── XPBar.tsx               # XP progress bar with optional level name (hideLabel prop)
 ├── data/
 │   ├── lessons.ts              # block coding lessons across 14 worlds
-│   ├── thinkingLessons.ts      # 140 brain training lessons across 14 worlds
-│   ├── thinkingWorlds.ts       # 14 thinking worlds
-│   ├── worlds.ts               # 14 block coding worlds with themes, emoji, characters
+│   ├── thinkingLessons/        # 140 tier-one brain training lessons, one file per world
+│   ├── thinkingLessonsAdvanced/ # 140 tier-two brain training lessons, one file per world
+│   ├── thinkingWorlds/         # 14 thinking worlds, one file per world
+│   ├── worlds/                 # 14 block coding worlds with themes, emoji, characters, one file per world
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), getLevelInfo()
 ├── engine/
 │   └── gameEngine.ts           # parseCodeToActions(), applyAction(), checkWin()

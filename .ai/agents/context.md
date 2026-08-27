@@ -46,7 +46,8 @@ src/
 │   └── XPBar.tsx               # XP progress bar; hideLabel prop hides coding-themed level name
 ├── data/
 │   ├── lessons.ts              # 128 block coding lessons across 14 worlds
-│   ├── thinkingLessons.ts      # Brain training tier one — lessons 0–9 of every world
+│   ├── thinkingLessons/        # One file per world (patterns.ts, logic.ts, ...) + index.ts
+│   │                            #   assembling THINKING_LESSONS — tier one, lessons 0–9
 │   ├── thinkingLessonsAdvanced/ # One file per world (patterns.ts, logic.ts, ...) + index.ts
 │   │                            #   assembling THINKING_LESSONS_ADVANCED — tier two, lessons 10–19
 │   ├── thinkingWorlds/         # One file per thinking world (patterns.ts, logic.ts, ...) + index.ts
@@ -88,7 +89,7 @@ src/
 - `src/vite-env.d.ts` (`/// <reference types="vite/client" />`) is required for TypeScript 7's stricter side-effect import checking (e.g. `import './index.css'`) — don't remove it.
 - `XPBar` has a `hideLabel` prop — pass it on the thinking path to suppress the coding-themed level name ("Code Cub" etc.) which is irrelevant to brain training.
 - Thinking lesson IDs follow `{worldId}-{number}` starting at `0` (e.g. `patterns-0`). Lesson 0 is always accessible; sequential unlock uses the same `isLessonUnlocked` logic as block coding.
-- Thinking lessons are split by tier — `thinkingLessons.ts` (0–9) spreads in `thinkingLessonsAdvanced/` (10–19, one file per world) to build `THINKING_LESSONS`. The split is for reviewable diffs only; array order never matters because every lookup filters by `worldId` and sorts by `number`. Add a tier-one lesson to `thinkingLessons.ts`; add a tier-two lesson to the matching world's file under `thinkingLessonsAdvanced/`.
+- Thinking lessons are split by tier — `thinkingLessons/` (0–9, one file per world) spreads in `thinkingLessonsAdvanced/` (10–19, one file per world) to build `THINKING_LESSONS`. The split is for reviewable diffs only; array order never matters because every lookup filters by `worldId` and sorts by `number`. Add a tier-one lesson to the matching world's file under `thinkingLessons/`; add a tier-two lesson to the matching world's file under `thinkingLessonsAdvanced/`.
 - `bun run audit-lessons` is the fourth check to run after any thinking-content change. It catches the mechanical content invariants (numbering, missing translations, an answer that is not among its options, true/false runs, grid keys out of range) that `tsc` cannot see.
 - The header star pill shows the **current path's** stars (blocks under `/app/blocks`, thinking under `/app/thinking`, combined on `/app`), derived by `src/utils/progressStats.ts`. `progress.totalStars` is a single cross-path counter that also includes tutorial stars — never render it as a star total.
 - All icons in the app use `lucide-react`. Never add a second icon library. Emoji is acceptable for decorative mascots and world/puzzle flavour; avoid emoji in interactive controls (buttons, badges, status indicators).
