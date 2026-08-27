@@ -1,13 +1,21 @@
 import { describe, expect, test } from 'bun:test'
 import { getThinkingLessonsByWorld } from '../src/data/thinkingLessons'
 import { THINKING_WORLDS } from '../src/data/thinkingWorlds'
-import type { SpatialGrid, SpatialPuzzle, ThinkingLesson } from '../src/types'
+import type { GridSelectPuzzle, IfThenPuzzle, MultiStepPuzzle, SpatialGrid, SpatialPuzzle, ThinkingLesson } from '../src/types'
 
-// Spatial Studio's world shape — 10 sequential lessons, unlockAtXP 0, the xp curve, the
+// Spatial Studio's world shape — 20 sequential lessons, unlockAtXP 0, the xp curve, the
 // lesson-0 tutorial, bilingual copy — is covered by thinkingWorldsContent.test.ts, which
-// now includes this world. What lives here is everything specific to the `spatial` puzzle
-// type: the figure grids, the option structure, and whether each authored answer really is
-// the transformation, route, or fold its own question describes.
+// includes this world. What lives here is everything specific to the `spatial` puzzle type:
+// the figure grids, the option structure, and whether each authored answer really is the
+// transformation, route, or fold its own question describes.
+//
+// Tier two (#68) also added 5 lessons of other puzzle types to this world — `grid-select`
+// (spatial-11, spatial-17), `multi-step` (spatial-13, spatial-18), `if-then` (spatial-15).
+// Their structural shape and bilingual copy are already covered generically, across every
+// world, by scripts/audit-thinking-lessons.mjs and thinkingWorldsContent.test.ts — not
+// re-checked here. What those two don't check is puzzle-specific geometry/logic correctness,
+// so each of the 5 gets its own hand-derived answer check below, in the same style as the
+// `spatial`-typed lessons' transformation checks (#70).
 
 const WORLD_ID = 'spatial'
 const EMPTY = '.'
@@ -89,11 +97,21 @@ function optionGrid(puzzle: SpatialPuzzle, id: string): SpatialGrid {
   return (option as SpatialPuzzle['options'][number]).grid
 }
 
+function lessonById(id: string): ThinkingLesson {
+  const lesson = lessons.find(l => l.id === id)
+  expect(`${id} exists: ${lesson !== undefined}`).toBe(`${id} exists: true`)
+  return lesson as ThinkingLesson
+}
+
+// The checks below read puzzle.figure/options/answerId, which only SpatialPuzzle has —
+// grid-select/multi-step/if-then are different shapes, not degenerate SpatialPuzzles.
+const spatialTypeLessons = lessons.filter(l => l.puzzle.type === 'spatial')
+
 // ── World and lesson shape ────────────────────────────────────
 
 // ── Puzzle data integrity ─────────────────────────────────────
 
-describe.each(lessons.map(l => [l.id, l] as const))('%s', (_id, lesson) => {
+describe.each(spatialTypeLessons.map(l => [l.id, l] as const))('%s', (_id, lesson) => {
   const puzzle = spatialPuzzle(lesson)
 
   test('grids are rectangular and use only the documented cell alphabet', () => {
@@ -277,7 +295,7 @@ function findMarker(grid: SpatialGrid): [number, number] {
 // ── The authored answers really are what each lesson claims ───
 
 function puzzleFor(number: number): SpatialPuzzle {
-  return spatialPuzzle(lessons[number])
+  return spatialPuzzle(spatialTypeLessons[number])
 }
 
 function answerGrid(puzzle: SpatialPuzzle): SpatialGrid {
@@ -423,12 +441,95 @@ describe('authored answers match their declared transformation', () => {
     expect(show(optionGrid(puzzle, 'd'))).toBe(show(driveRobot(4, start, 'up', [2, 'L', 1, 'R', 1])))
   })
 
+  test('11 — the tapped cells are exactly the ones that complete the mirror image', () => {
+    const puzzle = lessonById('spatial-11').puzzle as GridSelectPuzzle
+    const { cells } = puzzle
+    const width = cells[0].length
+    // The lesson's own note: the mirror line runs between the 2nd and 3rd column (1-indexed),
+    // i.e. between 0-indexed columns 1 and 2 — so column c mirrors column (width - 1 - c).
+    const expected: string[] = []
+    cells.forEach((row, r) => {
+      row.forEach((cell, c) => {
+        const mirrorCol = width - 1 - c
+        if (mirrorCol === c) return // on the mirror line itself, nothing to tap
+        if (cell === '' && cells[r][mirrorCol] !== '') expected.push(`${r}-${c}`)
+      })
+    })
+    expect([...puzzle.answer].sort()).toEqual(expected.sort())
+  })
+
+  test('13 — each turn is applied to the facing the previous step actually left you with', () => {
+    const puzzle = lessonById('spatial-13').puzzle as MultiStepPuzzle
+    // Same clockwise ordering as HEADINGS above, spelled out as the compass words this lesson uses.
+    const COMPASS = ['north', 'east', 'south', 'west'] as const
+    const turn = (heading: (typeof COMPASS)[number], steps: number) =>
+      COMPASS[(COMPASS.indexOf(heading) + steps + COMPASS.length) % COMPASS.length]
+
+    let heading: (typeof COMPASS)[number] = 'north'
+    heading = turn(heading, 1) // "turn once to the right"
+    expect(puzzle.steps[0].answerId).toBe(heading)
+    heading = turn(heading, 2) // "turn right twice more"
+    expect(puzzle.steps[1].answerId).toBe(heading)
+    heading = turn(heading, -1) // walking forward doesn't change facing, then "turn LEFT"
+    expect(puzzle.steps[2].answerId).toBe(heading)
+  })
+
+  test('15 — the raised hand is on the mirror side, not the same side', () => {
+    const puzzle = lessonById('spatial-15').puzzle as IfThenPuzzle
+    // Facing someone: what's on YOUR left is on THEIR right, and vice versa.
+    expect(puzzle.answerId).toBe('right')
+  })
+
+  test('17 — the marked cell is where the described directions actually land', () => {
+    const puzzle = lessonById('spatial-17').puzzle as GridSelectPuzzle
+    let palmRow = -1
+    let palmCol = -1
+    puzzle.cells.forEach((row, r) => {
+      row.forEach((cell, c) => {
+        if (cell === '🌴') {
+          palmRow = r
+          palmCol = c
+        }
+      })
+    })
+    expect(palmRow).toBeGreaterThanOrEqual(0)
+    expect(puzzle.answer).toEqual([`${palmRow + 1}-${palmCol + 2}`])
+  })
+
+  test('18 — the hole count matches the number of layers the folds actually produce', () => {
+    const puzzle = lessonById('spatial-18').puzzle as MultiStepPuzzle
+    const NUMBER_WORD: Record<number, string> = { 1: 'one', 2: 'two', 4: 'four', 8: 'eight' }
+    let layers = 1
+    layers *= 2 // fold in half once
+    expect(puzzle.steps[0].answerId).toBe(NUMBER_WORD[layers])
+    layers *= 2 // fold in half again
+    expect(puzzle.steps[1].answerId).toBe(NUMBER_WORD[layers])
+    // One punch through every layer, unfolded, leaves one hole per layer.
+    expect(puzzle.steps[2].answerId).toBe(NUMBER_WORD[layers])
+  })
+
   test('the answer never sits in the same slot three lessons running, or in over half of them', () => {
-    const answerIds = lessons.map(l => spatialPuzzle(l).answerId)
-    for (let i = 2; i < answerIds.length; i++) {
-      const run = answerIds[i] === answerIds[i - 1] && answerIds[i - 1] === answerIds[i - 2]
-      expect(`slots ${i - 2}..${i} all "${answerIds[i]}": ${run}`).toEndWith('false')
+    // "Running" means as actually experienced in play order (all 20 lessons, by number) — a
+    // non-spatial-type lesson (grid-select/multi-step/if-then) breaks any run, since its UI
+    // isn't a lettered A/B/C/D pick at all, so tapping the same letter through it does nothing.
+    let run = 0
+    let lastAnswerId: string | null = null
+    for (const lesson of lessons) {
+      if (lesson.puzzle.type !== 'spatial') {
+        run = 0
+        lastAnswerId = null
+        continue
+      }
+      const answerId = (lesson.puzzle as SpatialPuzzle).answerId
+      run = answerId === lastAnswerId ? run + 1 : 1
+      lastAnswerId = answerId
+      expect(`${lesson.id}: run of "${answerId}" reaches 3: ${run >= 3}`).toEndWith('false')
     }
+
+    // Scoped to spatial-typed lessons: their options use comparable slot letters (a/b/c/d).
+    // The 5 tier-two lessons of other types use semantic ids (east/right/...) or a cell-set
+    // answer, which are not comparable slot positions.
+    const answerIds = spatialTypeLessons.map(l => spatialPuzzle(l).answerId)
     for (const id of new Set(answerIds)) {
       const uses = answerIds.filter(a => a === id).length
       expect(`slot "${id}" used ${uses}/${answerIds.length}`).toEndWith(
