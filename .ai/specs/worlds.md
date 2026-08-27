@@ -121,20 +121,20 @@ Source: `src/data/thinkingWorlds.ts` — `THINKING_WORLDS` array.
 
 | ID | Emoji | Concept | Ages | Colour | unlockAtXP | Lessons |
 |----|-------|---------|------|--------|------------|---------|
-| patterns | 🔮 | Pattern recognition | 5–8 | purple | 0 | 10 |
-| logic | 🧠 | If-then reasoning | 7–10 | blue | 0 | 10 |
-| counting | ✨ | Number & math | 8–12 | emerald | 0 | 10 |
-| memory | 🧩 | Sequence memory | 6–10 | rose | 0 | 10 |
-| nature | 🌿 | Science thinking | 8–11 | green | 0 | 10 |
-| numbers | ⚡ | Number sequences | 9–13 | indigo | 0 | 10 |
-| decomposition | 🧩 | Decomposition | 6–10 | orange | 0 | 10 |
-| abstraction | 🔍 | Abstraction | 7–11 | teal | 0 | 10 |
-| math_reasoning | 🔢 | Mathematical reasoning | 8–12 | amber | 0 | 10 |
-| induction | 🔬 | Inductive reasoning | 8–12 | cyan | 0 | 10 |
-| deduction | 🕵️ | Deductive reasoning | 9–13 | violet | 0 | 10 |
-| planning | 🗺️ | Constraint planning | 8–12 | sky | 0 | 10 |
-| probability | 🎲 | Probability | 9–13 | lime | 0 | 10 |
-| spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 10 |
+| patterns | 🔮 | Pattern recognition | 5–8 | purple | 0 | 20 |
+| logic | 🧠 | If-then reasoning | 7–10 | blue | 0 | 20 |
+| counting | ✨ | Number & math | 8–12 | emerald | 0 | 20 |
+| memory | 🧩 | Sequence memory | 6–10 | rose | 0 | 20 |
+| nature | 🌿 | Science thinking | 8–11 | green | 0 | 20 |
+| numbers | ⚡ | Number sequences | 9–13 | indigo | 0 | 20 |
+| decomposition | 🧩 | Decomposition | 6–10 | orange | 0 | 20 |
+| abstraction | 🔍 | Abstraction | 7–11 | teal | 0 | 20 |
+| math_reasoning | 🔢 | Mathematical reasoning | 8–12 | amber | 0 | 20 |
+| induction | 🔬 | Inductive reasoning | 8–12 | cyan | 0 | 20 |
+| deduction | 🕵️ | Deductive reasoning | 9–13 | violet | 0 | 20 |
+| planning | 🗺️ | Constraint planning | 8–12 | sky | 0 | 20 |
+| probability | 🎲 | Probability | 9–13 | lime | 0 | 20 |
+| spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 20 |
 
 All fourteen worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely — see INV-L3, which binds any future thinking world too.
 
@@ -147,7 +147,12 @@ Two pairs sit close enough that new lessons must respect the boundary:
 
 ### Thinking lesson fields
 
-Defined in `src/data/thinkingLessons.ts`. Each lesson:
+Split across two files by tier. `src/data/thinkingLessons.ts` holds lessons 0–9 of every world and
+spreads in `src/data/thinkingLessonsAdvanced.ts`, which holds lessons 10–19. The split is only for
+reviewability — `THINKING_LESSONS` is the single list everything reads, and array order never matters
+because every lookup filters by `worldId` and sorts by `number`.
+
+Each lesson:
 
 ```ts
 {
@@ -157,7 +162,8 @@ Defined in `src/data/thinkingLessons.ts`. Each lesson:
   title: LocalizedString
   mascotMessage: LocalizedString
   xpReward: number
-  puzzle: PatternPuzzle | IfThenPuzzle | MathPuzzle
+  puzzle: ThinkingPuzzle       // see the puzzle-type table below
+  tutorial?: { title, body, example? }  // a card shown before the puzzle, dismissed by the child
 }
 ```
 
@@ -175,6 +181,8 @@ Defined in `src/data/thinkingLessons.ts`. Each lesson:
 | `match` | `pairs[]` of left/right items; kid links each pair |
 | `abstraction` | `subtype: 'odd-one-out' \| 'category-match'` + `items[]` + `correctIds[]` |
 | `spatial` | `question` (LocalizedString) + a `figure` grid + optional `note` (LocalizedString) + 4 `options[]`, each an `id`, a `grid`, and a `label: LocalizedString`; kid picks the frame that shows the transformed figure |
+| `multi-step` | `intro` (LocalizedString) + optional `visual` emoji + `steps[]`, each a `prompt`, `options[]` with `LocalizedString` labels, and an `answerId`; kid answers the steps in order and the whole chain is graded as one answer |
+| `grid-select` | `question` (LocalizedString) + optional `note` + `cells[][]` (emoji or `''` per cell) + `answer[]` of `'row-col'` keys; kid taps every square that fits and presses Check |
 
 ### Puzzle authoring constraints
 
@@ -182,7 +190,7 @@ These are properties of the renderer, not style preferences. Breaking them ships
 
 | Constraint | Why |
 |------------|-----|
-| `sort` is for **numeric ascending order only** | Its prompt is the fixed string `thinking.sort.prompt` — "Tap numbers from smallest to largest!". A `sort` puzzle whose answer is not ascending contradicts its own on-screen instruction. Use `sequence` for any other ordering. |
+| `sort` defaults to **numeric ascending order** | Without a `prompt`, the on-screen line is the fixed string `thinking.sort.prompt` — "Tap numbers from smallest to largest!" — so an answer that is not ascending contradicts its own instruction. To order something else (clock faces, powers), supply `prompt: LocalizedString` saying what "in order" means here. `sort.items` are plain strings, so they must still be numbers or emoji, never words. |
 | `pattern.options` and `math.options` must be **numbers or emoji** | They are typed `string[]`, not `LocalizedString[]`, so their text cannot be translated. A word answer there breaks INV-C2/INV-I1. When the answer needs words, use `if-then`, whose options carry `label: LocalizedString`. |
 | `sequence` has no question field | The constraints or clues must live in the lesson's `mascotMessage`, which renders directly above the puzzle. |
 | `abstraction` `correctIds` must be a **strict subset** of `items` | A multi-select where every item is correct teaches nothing and always passes. |
@@ -191,6 +199,11 @@ These are properties of the renderer, not style preferences. Breaking them ships
 | All `spatial` option grids share the **prompt figure's dimensions** | Options render side by side at one size. A differently sized grid changes the cell scale, which reads as a difference in the shape rather than in its orientation. |
 | A `spatial` option `label` must **never name its transformation** | "Quarter turn right" as a label answers the puzzle. Labels name the frame ("Shape A"), or carry real words only where the words are part of the question (a viewpoint name, for example). |
 | `spatial` distractors must be **believable spatial errors** | Wrong turn direction, mirrored instead of rotated, wrong mirror axis, turned too far, one cell short. An unrelated shape is filler and breaks INV-Q4. |
+| A `multi-step` chain is graded **all or nothing** | There is no partial credit and no per-step retry: one wrong link resets the chain to step 1 and costs an attempt (so a star). Keep chains to 2–3 steps, and make every step answerable from the intro plus the earlier steps — never from outside knowledge the puzzle has not supplied. |
+| A `multi-step` step's options carry `LocalizedString` labels | Unlike `pattern`/`math`, the options here are translated, so this is the type to reach for when the answer needs words. |
+| `grid-select` rows must all be the **same length** | The renderer derives the column count from the widest row and pads the rest, so a short row silently shifts every cell after it. |
+| A `grid-select` `answer` key must be **inside the grid** | Keys are `'row-col'`, 0-based. An out-of-range key makes the puzzle unsolvable; `bun run audit-lessons` catches it. |
+| `grid-select` cells may be pre-filled or blank | A blank (`''`) cell is one the child fills in (completing a pattern, mirroring a drawing); a pre-filled cell is one they mark (choosing seats, choosing map squares). Say which the puzzle wants in `question` or `note` — the generic prompt only says "tap every square that fits". |
 | A `spatial` puzzle whose dot is **not** a shape corner must supply `note` | The default line under the figure reads "The dot marks one corner of the shape". On a route, fold or map lesson the dot means the start, a pencil mark, or a door, and `note` replaces that line so the hint never contradicts the puzzle. |
 
 ### Star & XP logic (thinking path)
@@ -200,10 +213,24 @@ These are properties of the renderer, not style preferences. Breaking them ships
 - 1 star — correct on third attempt or later
 - XP is awarded once per lesson (delta on improvement, same `completeLesson` invariants as blocks)
 
-### Difficulty curve (10 lessons per world)
+### Difficulty curve (20 lessons per world, in two tiers)
 
-Lessons 0–4: gentle introduction, simple 4-item sequences / basic if-then / small arithmetic.  
-Lessons 5–9: progressive difficulty — longer sequences (8–9 items), ABCD cycles, blank in middle, number sequences (+2, doubling), negation logic, multi-step chains, reverse operations, order of operations.
+**Tier one — lessons 0–9** (`thinkingLessons.ts`). Teaches the world's core idea.
+
+- Lessons 0–4: gentle introduction — simple 4-item sequences, basic if-then, small arithmetic.
+- Lessons 5–9: longer sequences (8–9 items), ABCD cycles, a blank in the middle, number sequences (+2, doubling), negation, reverse operations, order of operations.
+
+**Tier two — lessons 10–19** (`thinkingLessonsAdvanced.ts`). Raises cognitive load, not reading load
+(INV-Q5). Every tier-two lesson must be harder than tier one for a *reason a child could name*, and the
+reason must be a mechanic the world has not used before — compound conditions, a chain whose second step
+needs the first, tracking a list that changes under you, satisfying several constraints at once, composing
+two transformations, working backwards from an end state. Bigger numbers and longer sentences are not
+difficulty.
+
+Two rules keep the tier honest:
+
+- **XP rises with the tier.** Tier two pays roughly 25–40 XP against tier one's 10–25. `bun run audit-lessons` fails if a world's tier-two average is not above its tier-one average.
+- **Every world's tier two opens a mechanic its tier one never used.** Where a world's tier one was ten puzzles of one type — `decomposition` was ten `sequence` puzzles — tier two must break out of it rather than adding an eleventh.
 
 ### Next-world navigation
 
@@ -211,10 +238,11 @@ Lessons 5–9: progressive difficulty — longer sequences (8–9 items), ABCD c
 
 ### Adding a new thinking lesson
 
-1. Append an entry to the correct world array in `src/data/thinkingLessons.ts`
+1. Append an entry to the correct world section — `thinkingLessons.ts` for a tier-one lesson (0–9), `thinkingLessonsAdvanced.ts` for tier two (10–19)
 2. Increment `lessonCount` in `src/data/thinkingWorlds.ts`
 3. Lesson number follows 0-based sequential order; the next number is `lessonCount - 1` after the update
 4. Run `bun run build` — TypeScript catches missing required fields
+5. Run `bun run audit-lessons` — it checks contiguous numbering, both languages on every string, answers that exist among their options, true/false balance (INV-Q3), grid keys in range, and the tier-two XP rule. INV-Q1, INV-Q2 and the *feel* of INV-Q5 still need a human to read the lessons.
 
 ---
 

@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { Star, ArrowRight, ArrowLeft, Check, BookOpen } from 'lucide-react'
-import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle, AbstractionPuzzle, SpatialPuzzle, SpatialGrid } from '../types'
+import { Star, ArrowRight, ArrowLeft, Check, X, BookOpen } from 'lucide-react'
+import type { ThinkingLesson, ThinkingWorld, LessonProgress, PatternPuzzle, IfThenPuzzle, MathPuzzle, SequencePuzzle, TrueFalsePuzzle, SortPuzzle, FillInPuzzle, MatchPuzzle, AbstractionPuzzle, SpatialPuzzle, SpatialGrid, MultiStepPuzzle, GridSelectPuzzle } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { useProgress } from '../store/useProgress'
@@ -969,6 +969,248 @@ function SpatialPuzzleView({
   )
 }
 
+/**
+ * A chain of linked questions. Each pick reveals the next step; the chain is only
+ * submitted once every step has a pick, so one wrong link fails the whole chain and the
+ * player rebuilds it from step 1. Answered steps stay on screen as chips, because the
+ * point of the model is carrying an earlier answer forward.
+ */
+function MultiStepPuzzleView({
+  puzzle,
+  onAnswer,
+  selected,
+  isCorrect,
+  completed,
+  language,
+  stepLabel,
+  brokenLabel,
+}: {
+  puzzle: MultiStepPuzzle
+  onAnswer: (value: string) => void
+  selected: string | null
+  isCorrect: boolean | null
+  completed: boolean
+  language: string
+  stepLabel: string
+  brokenLabel: string
+}) {
+  const [picks, setPicks] = useState<string[]>([])
+
+  // The parent clears `selected` a beat after a wrong answer — that is the cue to reset
+  // the chain, which keeps the wrong links visible while the shake plays.
+  useEffect(() => {
+    if (selected === null && !completed) {
+      setPicks([])
+    }
+  }, [selected, completed])
+
+  const total = puzzle.steps.length
+  const activeIndex = Math.min(picks.length, total - 1)
+
+  const handlePick = (optionId: string) => {
+    if (completed || picks.length >= total) return
+    const next = [...picks, optionId]
+    setPicks(next)
+    if (next.length === total) {
+      onAnswer(next.join(','))
+    }
+  }
+
+  return (
+    <div className="space-y-5">
+      <div className="bg-sky-900/40 border border-sky-500/30 rounded-2xl p-5 text-center space-y-3">
+        <p className="text-base sm:text-lg font-bold text-sky-100">
+          {localize(puzzle.intro, language as 'en' | 'id')}
+        </p>
+        {puzzle.visual && (
+          <div className="flex items-center justify-center">
+            <EmojiCluster text={puzzle.visual} surface="sequence" />
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        {puzzle.steps.map((step, stepIndex) => {
+          const pick = picks[stepIndex]
+          const isActive = stepIndex === activeIndex && picks.length < total && !completed
+          const isLocked = stepIndex > picks.length
+          if (isLocked) return null
+
+          const stepWrong = isCorrect === false && pick !== undefined && pick !== step.answerId
+
+          return (
+            <motion.div
+              key={step.id}
+              className={`rounded-2xl border-2 p-4 ${
+                stepWrong
+                  ? 'bg-red-500/15 border-red-400/60'
+                  : pick !== undefined
+                  ? 'bg-white/5 border-white/15'
+                  : 'bg-sky-500/10 border-sky-400/40'
+              }`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <div className="text-[11px] font-black tracking-wide text-sky-300/80 mb-1">
+                {stepLabel.replace('{n}', String(stepIndex + 1)).replace('{total}', String(total))}
+              </div>
+              <p className="text-sm sm:text-base font-bold text-white/90 mb-3">
+                {localize(step.prompt, language as 'en' | 'id')}
+              </p>
+
+              {isActive || pick === undefined ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {step.options.map(option => (
+                    <motion.button
+                      key={option.id}
+                      onClick={() => handlePick(option.id)}
+                      className="text-left px-3 py-2.5 rounded-xl border-2 bg-white/8 border-white/20 hover:bg-white/15 hover:border-white/40 transition-all flex items-center gap-2 cursor-pointer"
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      {option.emoji && <span className="text-xl shrink-0">{option.emoji}</span>}
+                      <span className="text-xs font-bold text-white/85 leading-tight">
+                        {localize(option.label, language as 'en' | 'id')}
+                      </span>
+                    </motion.button>
+                  ))}
+                </div>
+              ) : (
+                <div
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl border-2 ${
+                    completed || pick === step.answerId
+                      ? 'bg-green-500/25 border-green-400/60'
+                      : 'bg-red-500/25 border-red-400/60'
+                  }`}
+                >
+                  {completed || pick === step.answerId ? (
+                    <Check className="w-4 h-4 text-green-300 shrink-0" />
+                  ) : (
+                    <X className="w-4 h-4 text-red-300 shrink-0" />
+                  )}
+                  <span className="text-xs font-bold text-white/90 leading-tight">
+                    {localize(
+                      (step.options.find(o => o.id === pick) ?? step.options[0]).label,
+                      language as 'en' | 'id',
+                    )}
+                  </span>
+                </div>
+              )}
+            </motion.div>
+          )
+        })}
+      </div>
+
+      {isCorrect === false && !completed && (
+        <p className="text-center text-red-300/80 text-xs font-bold">{brokenLabel}</p>
+      )}
+    </div>
+  )
+}
+
+/**
+ * Tap-many-squares. The answer is a set of places rather than one of four options, so
+ * the player builds a shape or marks every spot a rule allows, then presses Check.
+ */
+function GridSelectPuzzleView({
+  puzzle,
+  onAnswer,
+  isCorrect,
+  completed,
+  language,
+  prompt,
+  checkLabel,
+}: {
+  puzzle: GridSelectPuzzle
+  onAnswer: (value: string) => void
+  isCorrect: boolean | null
+  completed: boolean
+  language: string
+  prompt: string
+  checkLabel: string
+}) {
+  const [picked, setPicked] = useState<string[]>([])
+
+  const cols = puzzle.cells.reduce((widest, row) => Math.max(widest, row.length), 0)
+  const answerSet = useMemo(() => new Set(puzzle.answer), [puzzle.answer])
+
+  const toggle = (key: string) => {
+    if (completed) return
+    setPicked(prev => (prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]))
+  }
+
+  const handleCheck = () => {
+    if (completed || picked.length === 0) return
+    onAnswer([...picked].sort().join(','))
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-fuchsia-900/40 border border-fuchsia-500/30 rounded-2xl p-5 text-center space-y-3">
+        <p className="text-lg sm:text-xl font-bold text-fuchsia-100">
+          {localize(puzzle.question, language as 'en' | 'id')}
+        </p>
+        {puzzle.note && (
+          <p className="text-xs text-fuchsia-200/70 leading-relaxed">
+            {localize(puzzle.note, language as 'en' | 'id')}
+          </p>
+        )}
+      </div>
+
+      <p className="text-center text-white/60 text-sm font-bold">{prompt}</p>
+
+      <motion.div
+        className="mx-auto grid gap-1.5 max-w-[320px]"
+        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+        animate={isCorrect === false ? { x: [-4, 4, -4, 4, 0] } : {}}
+        transition={{ duration: 0.3 }}
+      >
+        {puzzle.cells.flatMap((row, r) =>
+          Array.from({ length: cols }, (_, c) => {
+            const key = `${r}-${c}`
+            const content = row[c] ?? ''
+            const isPicked = picked.includes(key)
+            const shouldBePicked = answerSet.has(key)
+            const correct = completed && shouldBePicked
+            const wrong = !completed && isCorrect === false && isPicked && !shouldBePicked
+
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => toggle(key)}
+                disabled={completed}
+                className={`aspect-square rounded-lg border-2 flex items-center justify-center text-xl sm:text-2xl transition-all ${
+                  correct
+                    ? 'bg-green-500/30 border-green-400'
+                    : wrong
+                    ? 'bg-red-500/30 border-red-400'
+                    : isPicked
+                    ? 'bg-fuchsia-500/35 border-fuchsia-400'
+                    : 'bg-white/8 border-white/15 hover:bg-white/15 hover:border-white/35'
+                } ${completed ? 'cursor-default' : 'cursor-pointer'}`}
+              >
+                {content}
+              </button>
+            )
+          }),
+        )}
+      </motion.div>
+
+      {!completed && (
+        <motion.button
+          onClick={handleCheck}
+          disabled={picked.length === 0}
+          className="w-full py-3 rounded-2xl font-black text-white bg-fuchsia-600 hover:bg-fuchsia-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors border-2 border-fuchsia-500"
+          whileTap={{ scale: 0.97 }}
+        >
+          {checkLabel}
+        </motion.button>
+      )}
+    </div>
+  )
+}
+
 export function ThinkingLessonScreen({
   lesson,
   world,
@@ -996,6 +1238,8 @@ export function ThinkingLessonScreen({
     if (p.type === 'fill-in') return value.trim().toLowerCase() === p.answer.trim().toLowerCase()
     if (p.type === 'match') return value === 'matched'
     if (p.type === 'spatial') return value === p.answerId
+    if (p.type === 'multi-step') return value === p.steps.map(s => s.answerId).join(',')
+    if (p.type === 'grid-select') return value === [...p.answer].sort().join(',')
     if (p.type === 'abstraction') {
       if (p.subtype === 'odd-one-out') return value === p.correctIds[0]
       return value === [...p.correctIds].sort().join(',')
@@ -1160,7 +1404,7 @@ export function ThinkingLessonScreen({
             selected={selected}
             isCorrect={isCorrect}
             completed={completed}
-            prompt={t('thinking.sort.prompt')}
+            prompt={puzzle.prompt ? localize(puzzle.prompt, language) : t('thinking.sort.prompt')}
           />
         )}
         {puzzle.type === 'fill-in' && (
@@ -1193,6 +1437,29 @@ export function ThinkingLessonScreen({
             oddPrompt={t('thinking.abstraction.odd.prompt')}
             categoryPrompt={t('thinking.abstraction.category.prompt')}
             checkLabel={t('thinking.abstraction.check')}
+          />
+        )}
+        {puzzle.type === 'multi-step' && (
+          <MultiStepPuzzleView
+            puzzle={puzzle as MultiStepPuzzle}
+            onAnswer={handleAnswer}
+            selected={selected}
+            isCorrect={isCorrect}
+            completed={completed}
+            language={language}
+            stepLabel={t('thinking.multistep.step')}
+            brokenLabel={t('thinking.multistep.broken')}
+          />
+        )}
+        {puzzle.type === 'grid-select' && (
+          <GridSelectPuzzleView
+            puzzle={puzzle as GridSelectPuzzle}
+            onAnswer={handleAnswer}
+            isCorrect={isCorrect}
+            completed={completed}
+            language={language}
+            prompt={t('thinking.grid.prompt')}
+            checkLabel={t('thinking.grid.check')}
           />
         )}
         {puzzle.type === 'spatial' && (

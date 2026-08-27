@@ -1,6 +1,8 @@
 import type { ThinkingLesson } from '../types'
+import { THINKING_LESSONS_ADVANCED } from './thinkingLessonsAdvanced'
 
-export const THINKING_LESSONS: ThinkingLesson[] = [
+/** Lessons 0–9 of every world — the tier that teaches each world's core idea. */
+const THINKING_LESSONS_CORE: ThinkingLesson[] = [
   // ── Pattern World ────────────────────────────────────────────
   {
     id: 'patterns-0',
@@ -733,8 +735,8 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
     xpReward: 15,
     puzzle: {
       type: 'true-false',
-      statement: { en: 'If you pour cooking oil into a glass of water, the oil always floats on TOP of the water and does not mix in — no matter how hard you stir.', id: 'Jika kamu menuangkan minyak goreng ke dalam segelas air, minyak selalu mengapung di ATAS air dan tidak bercampur — seberapapun keras kamu mengaduknya.' },
-      answer: true,
+      statement: { en: 'If you stir a glass of water and cooking oil hard enough, the oil will mix right into the water and stay mixed.', id: 'Jika kamu mengaduk segelas air dan minyak goreng cukup keras, minyaknya akan bercampur ke dalam air dan tetap tercampur.' },
+      answer: false,
     },
   },
   {
@@ -2026,10 +2028,10 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
     puzzle: {
       type: 'true-false',
       statement: {
-        en: 'Rule: All birds have feathers. Fact: A fish does NOT have feathers. Conclusion: A fish is NOT a bird. Is this correct?',
-        id: 'Aturan: Semua burung punya bulu. Fakta: Ikan TIDAK punya bulu. Kesimpulan: Ikan BUKAN burung. Apakah ini benar?',
+        en: 'Rule: All birds have feathers. Fact: A fish does NOT have feathers. Conclusion: We still cannot tell whether a fish is a bird. Is this correct?',
+        id: 'Aturan: Semua burung punya bulu. Fakta: Ikan TIDAK punya bulu. Kesimpulan: Kita tetap tidak bisa tahu apakah ikan itu burung. Apakah ini benar?',
       },
-      answer: true,
+      answer: false,
     },
   },
 
@@ -2928,6 +2930,12 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
       answerId: 'b',
     },
   },
+]
+
+/** Both tiers. Order here does not matter — every lookup sorts or filters by number. */
+export const THINKING_LESSONS: ThinkingLesson[] = [
+  ...THINKING_LESSONS_CORE,
+  ...THINKING_LESSONS_ADVANCED,
 ]
 
 export function getThinkingLessonsByWorld(worldId: string): ThinkingLesson[] {

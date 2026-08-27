@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "audit-lessons": "bun scripts/audit-thinking-lessons.mjs",
     "build": "tsc -b && vite build",
     "check": "biome check --write",
     "type-check": "tsc -b --noEmit",

@@ -154,6 +154,8 @@ export interface SortPuzzle {
   type: 'sort'
   items: string[]
   answer: string[]
+  /** Overrides the default "smallest to largest" prompt when the items are not numbers. */
+  prompt?: LocalizedString
 }
 
 export interface FillInPuzzle {
@@ -215,7 +217,48 @@ export interface SpatialPuzzle {
   answerId: string
 }
 
-export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle | FillInPuzzle | MatchPuzzle | AbstractionPuzzle | SpatialPuzzle
+/**
+ * A chain of linked questions answered one after another. Every step must be right:
+ * the picks are submitted together as one answer, so a child has to carry the result of
+ * step N into step N+1 instead of guessing each part in isolation.
+ *
+ * This is the main way tier-two lessons (numbers 10-19) raise cognitive load without
+ * raising reading load — see `.ai/specs/worlds.md`.
+ */
+export interface MultiStepPuzzle {
+  type: 'multi-step'
+  /** The shared situation every step refers back to. Shown above the chain throughout. */
+  intro: LocalizedString
+  /** Optional emoji strip illustrating the intro, e.g. a list to remember. */
+  visual?: string
+  steps: Array<{
+    id: string
+    prompt: LocalizedString
+    options: Array<{ id: string; emoji?: string; label: LocalizedString }>
+    answerId: string
+  }>
+}
+
+/**
+ * A grid of cells the player taps to build an answer, rather than picking one of four.
+ * Used where the answer is a shape or a set of places — completing a pattern, mirroring
+ * a drawing, marking every spot that satisfies a constraint.
+ */
+export interface GridSelectPuzzle {
+  type: 'grid-select'
+  question: LocalizedString
+  /** Extra guidance under the question, e.g. where the mirror line runs. */
+  note?: LocalizedString
+  /**
+   * One entry per row, each entry one cell. A cell holds emoji (already-placed content)
+   * or `''` for a blank the player may tap. Every row must be the same length.
+   */
+  cells: string[][]
+  /** Every cell that must end up selected, as `row-col`, 0-based. */
+  answer: string[]
+}
+
+export type ThinkingPuzzle = PatternPuzzle | IfThenPuzzle | MathPuzzle | SequencePuzzle | TrueFalsePuzzle | SortPuzzle | FillInPuzzle | MatchPuzzle | AbstractionPuzzle | SpatialPuzzle | MultiStepPuzzle | GridSelectPuzzle
 
 export interface ThinkingLessonTutorial {
   title: LocalizedString

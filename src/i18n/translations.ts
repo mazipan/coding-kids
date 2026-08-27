@@ -283,6 +283,10 @@ const en: Translations = {
   'thinking.abstraction.check': 'Check',
   'thinking.spatial.prompt': 'Tap the frame that answers the question!',
   'thinking.spatial.marker': 'The dot marks one corner of the shape. Watch where the dot ends up.',
+  'thinking.multistep.step': 'Step {n} of {total}',
+  'thinking.multistep.broken': 'One link in the chain was wrong — build it again from step 1!',
+  'thinking.grid.prompt': 'Tap every square that fits! Then press Check.',
+  'thinking.grid.check': 'Check',
   'thinking.tutorial.dismiss': "Got it! Let's go!",
 }
 
@@ -567,6 +571,10 @@ const id: Translations = {
   'thinking.abstraction.check': 'Cek',
   'thinking.spatial.prompt': 'Ketuk bingkai yang menjawab pertanyaannya!',
   'thinking.spatial.marker': 'Titik menandai satu sudut bentuk. Perhatikan ke mana titik itu berpindah.',
+  'thinking.multistep.step': 'Langkah {n} dari {total}',
+  'thinking.multistep.broken': 'Ada satu mata rantai yang salah — susun lagi dari langkah 1!',
+  'thinking.grid.prompt': 'Ketuk setiap kotak yang sesuai! Lalu tekan Cek.',
+  'thinking.grid.check': 'Cek',
   'thinking.tutorial.dismiss': 'Mengerti! Ayo mulai!',
 }
 
