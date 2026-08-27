@@ -8,7 +8,7 @@
 
 ## Request
 
-> Last time I spawn some ideas; `.ai/plans/content-more-world-ideas.md` but only managed to ship 1, can you check if you can pick other ideas execution? respect our rules to add new worlds and levels.
+> Last time I spawn some ideas; `.ai/plans/2026-08-11-content-more-world-ideas.md` but only managed to ship 1, can you check if you can pick other ideas execution? respect our rules to add new worlds and levels.
 
 ---
 
@@ -150,7 +150,7 @@ Difficulty: 0–4 classify a single outcome as impossible, certain, more likely,
 | `tests/thinkingWorldsContent.test.ts` | add | Structural + invariant assertions for the two new worlds. |
 | `.ai/specs/worlds.md` | edit | Bring the thinking catalog up to date and add both worlds. |
 | `.ai/decisions/log.md` | edit | Record this decision. |
-| `.ai/plans/content-more-world-ideas.md` | edit | Update implementation notes and remaining backlog. |
+| `.ai/plans/2026-08-11-content-more-world-ideas.md` | edit | Update implementation notes and remaining backlog. |
 | `README.md` | edit | World and lesson counts, catalog table. |
 
 ### In-scope defect fix

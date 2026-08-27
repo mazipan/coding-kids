@@ -91,7 +91,7 @@ Every string shown to the user must go through `t()` from `useLanguage()`, or `l
 `bun run build` must succeed before any commit is pushed.
 
 **INV-C4 — localStorage is the only persistence**  
-No other storage mechanism (IndexedDB, cookies, sessionStorage, Cache API) may be used for user data without a decision record in `.ai/decisions/log.md`.
+No other storage mechanism (IndexedDB, cookies, sessionStorage, Cache API) may be used for user data without a decision record in `.ai/decisions/log/`.
 
 **INV-C5 — lucide-react is the only icon library**  
 All icons in the UI must come from `lucide-react`. Translation strings must never embed directional or status symbols (`←`, `→`, `▶`, `✓`, `🔒`, etc.) — icons are placed exclusively in JSX alongside `t()` calls. Emoji are permitted only for decorative mascots, world themes, and puzzle content, never as functional UI icons.

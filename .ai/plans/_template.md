@@ -1,3 +1,6 @@
+<!-- Save this file as .ai/plans/{YYYY-MM-DD}-{type}-{short-description}.md — the date prefix keeps the
+     directory sorted chronologically. See .ai/harness/rules.md → "File naming — plans and decisions". -->
+
 # Plan: {title}
 
 **Slug:** `{type}-{short-description}`  

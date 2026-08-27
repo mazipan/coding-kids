@@ -160,7 +160,7 @@ The current catalog already covers sequences, loops, loop efficiency, variables,
 
 | File | Change type | Notes |
 |---|---|---|
-| `.ai/plans/content-more-world-ideas.md` | add | Record the prioritized roadmap, briefs, constraints, and future implementation boundaries. |
+| `.ai/plans/2026-08-11-content-more-world-ideas.md` | add | Record the prioritized roadmap, briefs, constraints, and future implementation boundaries. |
 | `.ai/decisions/log.md` | edit | Record why worlds will ship incrementally and why Code Orchestra and Spatial Studio are first. |
 
 ---

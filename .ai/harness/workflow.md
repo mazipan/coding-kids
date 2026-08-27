@@ -10,7 +10,7 @@ Every change to this codebase follows this lifecycle. No code ships without a pl
 Request
   │
   ▼
-[Planner] ──creates──► .ai/plans/{slug}.md  (status: draft)
+[Planner] ──creates──► .ai/plans/{date}-{slug}.md  (status: draft)
                             │
                             ▼
                     [reviewer-code reviews plan]
@@ -61,7 +61,7 @@ Minimum plan contains:
 - Spec changes (drafted)
 - Rollback approach
 
-Artifact: `.ai/plans/{slug}.md` with `status: draft`
+Artifact: `.ai/plans/{date}-{slug}.md` with `status: draft`
 
 ---
 
@@ -137,13 +137,13 @@ Fill every section. Use the template at `.github/pull_request_template.md`.
 | **Invariants** | Tick every invariant touched. Note any pre-existing failures that are unrelated to this PR. |
 | **Screenshots** | Before/after for any UI change. Write "No visual change." when nothing changed visually. |
 | **Additional references** | Links to related issues, ADRs, specs, plan files, or external docs. |
-| **Agent attributes** | Model name, harness, and link to the `.ai/plans/{slug}.md` used, or "no plan — doc/config change only". |
+| **Agent attributes** | Model name, harness, and link to the `.ai/plans/{date}-{slug}.md` used, or "no plan — doc/config change only". |
 
 ---
 
 ## Decision record rule
 
-Any decision made during planning or review that isn't already in `.ai/decisions/` must be recorded in `.ai/decisions/log.md` before the plan is marked `approved`. This includes:
+Any decision made during planning or review that isn't already in `.ai/decisions/` must be recorded in `.ai/decisions/log/` before the plan is marked `approved`. This includes:
 - Why a particular approach was chosen over an alternative
 - Why an invariant exception was granted (rare)
 - Why an existing spec was changed
@@ -153,7 +153,7 @@ Any decision made during planning or review that isn't already in `.ai/decisions
 ## Plan file location and naming
 
 ```
-.ai/plans/{slug}.md
+.ai/plans/{date}-{slug}.md
 ```
 
 Slug format: `{type}-{short-description}` where type is one of:
@@ -162,7 +162,7 @@ Slug format: `{type}-{short-description}` where type is one of:
 - `refactor` — internal restructure with no user-visible change
 - `content` — lesson, translation, or copy change only
 
-Examples: `feat-streak-system.md`, `fix-blockly-resize-ios.md`, `content-jungle-lesson-7.md`
+Examples: `2026-08-27-feat-streak-system.md`, `2026-08-27-fix-blockly-resize-ios.md`, `2026-08-27-content-jungle-lesson-7.md`
 
 ---
 
