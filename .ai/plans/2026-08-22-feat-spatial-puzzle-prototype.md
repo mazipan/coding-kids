@@ -10,7 +10,7 @@
 
 > feat: Spatial Studio — prototype the spatial-choice puzzle type (blocks the world's content)
 >
-> Roadmap priority 2 from `.ai/plans/content-more-world-ideas.md`. **This issue is the prototype, not the lessons.**
+> Roadmap priority 2 from `.ai/plans/2026-08-11-content-more-world-ideas.md`. **This issue is the prototype, not the lessons.**
 >
 > ## Why this is blocked on code, not content
 >
@@ -157,7 +157,7 @@ The world is new, so there are no existing lessons to collide with. Within the w
 | `tests/thinkingWorldsContent.test.ts` | edit | Add `spatial` to `NEW_WORLDS` so the shared world-shape, localization and difficulty-curve suite covers it. |
 | `.ai/specs/worlds.md` | edit | Add the world row, the `spatial` puzzle-type row, and its authoring constraints. |
 | `.ai/decisions/log.md` | edit | Record the representation decision and the 3-lesson prototype scope. |
-| `.ai/plans/feat-spatial-puzzle-prototype.md` | add | This plan. |
+| `.ai/plans/2026-08-22-feat-spatial-puzzle-prototype.md` | add | This plan. |
 
 ---
 

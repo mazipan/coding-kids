@@ -7,7 +7,7 @@
 
 ## Request
 
-> Roadmap priority 4 from `.ai/plans/content-more-world-ideas.md` — 🌱 Eco City / Kota Hijau, ages 10–14. Help builder Sol route recycling, water and power tokens to finish a neighbourhood. Concept promise: "Break one big mission into smaller algorithms and reuse what works."
+> Roadmap priority 4 from `.ai/plans/2026-08-11-content-more-world-ideas.md` — 🌱 Eco City / Kota Hijau, ages 10–14. Help builder Sol route recycling, water and power tokens to finish a neighbourhood. Concept promise: "Break one big mission into smaller algorithms and reuse what works."
 
 ## Decision
 
@@ -99,7 +99,7 @@ Recycling, water and power appear only as scenery and are always explained insid
 | `src/i18n/translations.ts` | Update the hardcoded `landing.worlds.title` count (EN + ID). |
 | `tests/ecoCityLessons.test.ts` | Simulate every canonical route; assert the bonus gate. |
 | `.ai/specs/worlds.md` | Add `eco` to the blocks catalog. |
-| `.ai/plans/content-more-world-ideas.md` | Mark roadmap priority 4 shipped. |
+| `.ai/plans/2026-08-11-content-more-world-ideas.md` | Mark roadmap priority 4 shipped. |
 | `README.md` | Bonus-world table and world counts. |
 | `.ai/decisions/log.md` | Record the decision. |
 

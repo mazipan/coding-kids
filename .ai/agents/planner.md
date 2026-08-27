@@ -11,9 +11,9 @@ Receives a feature request, bug report, or improvement idea. Produces a plan doc
 
 ## Outputs
 
-1. A plan file at `.ai/plans/{slug}.md` using the template in `.ai/plans/_template.md`
+1. A plan file at `.ai/plans/{date}-{slug}.md` using the template in `.ai/plans/_template.md`
 2. Draft updates to any `.ai/specs/` files affected by the change
-3. A new entry in `.ai/decisions/log.md` recording what was decided and what alternatives were rejected
+3. A new entry in `.ai/decisions/log/` recording what was decided and what alternatives were rejected
 
 ## Process
 
@@ -38,7 +38,7 @@ Receives a feature request, bug report, or improvement idea. Produces a plan doc
 
 6. **Update specs.** If the change alters the store schema, adds a translation key section, introduces a new world field, etc., draft the spec update inline in the plan's "Spec changes" section. The builder will apply these after implementation.
 
-7. **Record the decision.** Add an entry to `.ai/decisions/log.md`.
+7. **Record the decision.** Add an entry to `.ai/decisions/log/`.
 
 ## Quality bar
 

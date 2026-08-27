@@ -276,7 +276,7 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
 3. Append the lessons to `src/data/lessons.ts` following the "Adding a new block coding lesson" steps above.
 4. If the new world introduces a new Blockly category (beyond `move`, `loops`, `variables`, `logic`, `functions`, `lists`), add it to `src/blockly/toolboxes.ts` and document it in the Blockly toolbox categories table above.
 5. Run `bun run build`.
-6. Add a decision log entry in `.ai/decisions/log.md` explaining the new concept and XP unlock threshold choice.
+6. Add a decision log entry in `.ai/decisions/log/` explaining the new concept and XP unlock threshold choice.
 
 ---
 
@@ -353,5 +353,5 @@ Run this audit against all existing lessons in the target world:
 7. Add the lessons to `src/data/thinkingLessons.ts` following the "Adding a new thinking lesson" steps above.
 8. `ThinkingHome` renders a next-world banner automatically by reading the next item in `THINKING_WORLDS` — no code change needed for navigation between worlds.
 9. Update the hardcoded `landing.worlds.title` count in `src/i18n/translations.ts` (EN **and** ID) — it is a literal, not derived from the arrays.
-10. Update the catalog table above, the world counts in `README.md`, and add a decision log entry in `.ai/decisions/log.md` explaining the new concept and age range.
+10. Update the catalog table above, the world counts in `README.md`, and add a decision log entry in `.ai/decisions/log/` explaining the new concept and age range.
 11. Run `bunx biome ci`, `bun run type-check`, `bun run build`, and `bun test`.

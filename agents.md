@@ -34,7 +34,7 @@ See `.ai/plans/_template.md` to start a new plan.
 ├── decisions/
 │   ├── architecture.md     One-off ADRs: static-only, routing, Blockly, sandboxing
 │   ├── storage.md          Why localStorage, versioning, XP append-only
-│   └── log.md              Running decision log — add an entry for every non-obvious choice
+│   └── log/                One file per decision — {date}-{NN}-{slug}.md, add an entry for every non-obvious choice
 ├── specs/
 │   ├── invariants.md       Non-negotiable truths — every change must preserve all of these
 │   ├── store.md            localStorage schema, badge table, write rules
@@ -46,7 +46,7 @@ See `.ai/plans/_template.md` to start a new plan.
 │   └── tasks.md            Copy-paste task prompts for common agent work
 └── plans/
     ├── _template.md        Template for a new plan file
-    └── {slug}.md           One file per change (created by planner, closed by reviewer)
+    └── {date}-{slug}.md    One file per change (created by planner, closed by reviewer)
 ```
 
 ---

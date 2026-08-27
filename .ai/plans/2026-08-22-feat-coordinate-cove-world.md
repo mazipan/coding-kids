@@ -10,7 +10,7 @@
 
 > implement coordinate cove, at #56.
 
-Issue #56 — *"feat: Coordinate Cove — design safe position-sensor blocks (blocks the world)"* — is roadmap priority 6 from `.ai/plans/content-more-world-ideas.md`. The issue scopes itself to the **engine design** and names the 10-lesson arc as a follow-up. The request asks for the world itself, so this plan answers all five design questions in #56 **and** delivers the engine change plus the world in one independently revertible release.
+Issue #56 — *"feat: Coordinate Cove — design safe position-sensor blocks (blocks the world)"* — is roadmap priority 6 from `.ai/plans/2026-08-11-content-more-world-ideas.md`. The issue scopes itself to the **engine design** and names the 10-lesson arc as a follow-up. The request asks for the world itself, so this plan answers all five design questions in #56 **and** delivers the engine change plus the world in one independently revertible release.
 
 ---
 
@@ -171,7 +171,7 @@ No two rows share both a mechanic and a scenario. Lessons 5 and 6 are the closes
 | `.ai/specs/invariants.md` | edit | Restate INV-G4; note the loop trap under INV-G3. |
 | `.ai/decisions/log.md` | edit | Sensor design decision record. |
 | `README.md` | edit | 6 bonus worlds, 13 block-coding worlds. |
-| `.ai/plans/content-more-world-ideas.md` | edit | Roadmap row 6 → shipped. |
+| `.ai/plans/2026-08-11-content-more-world-ideas.md` | edit | Roadmap row 6 → shipped. |
 
 ---
 

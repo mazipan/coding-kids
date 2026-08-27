@@ -35,5 +35,5 @@
 ## Agent attributes
 
 <!--
-AI model, harness version, plan file used (link to .ai/plans/{slug}.md), or "no plan — doc/config change only".
+AI model, harness version, plan file used (link to .ai/plans/{date}-{slug}.md), or "no plan — doc/config change only".
 -->
