@@ -22,7 +22,7 @@ Bonus worlds unlock after the final main-world lesson is complete. Within every 
 
 `eco` (Eco City) is a capstone: it uses all six existing Blockly categories and introduces no new block, no new engine behaviour, and no new goal type. Every one of its canonical routes is simulated in `tests/ecoCityLessons.test.ts`; any change to an Eco City grid must keep that test green.
 
-Source: `src/data/worlds.ts` — `WORLDS` array. Each world has `theme` (bgGradient, accentColor, textColor, cellBorder, cellBg), `emoji`, `character` (emoji for mascot), `characterName`, `itemEmoji`, `obstacleEmoji`, `goalEmoji`.
+Source: `src/data/worlds/` — one file per world (e.g. `jungle.ts` exports `jungleWorld`), assembled into the `WORLDS` array by `index.ts` in the order main worlds then bonus worlds. Each world has `theme` (bgGradient, accentColor, textColor, cellBorder, cellBg), `emoji`, `character` (emoji for mascot), `characterName`, `itemEmoji`, `obstacleEmoji`, `goalEmoji`.
 
 `character` may also set `facingDefault: 'left'` when the emoji's standard glyph design has a real inherent left/right facing (a vehicle, boat, or human pictograph drawn facing one way) — `GameGrid` mirrors the character horizontally so it visually faces the direction it's currently travelling, since gameplay defaults to moving rightward. Omit the field for any character that is drawn front-on or pose-neutral (people, animals in a standing/sitting pose, robots) — flipping those has no correctness benefit and the field should not be added "just in case." Currently set on `loops` (🏎️), `cove` (⛵), and `ocean` (🏊).
 

@@ -49,7 +49,8 @@ src/
 │   ├── thinkingLessons.ts      # Brain training tier one — lessons 0–9 of every world
 │   ├── thinkingLessonsAdvanced.ts  # Brain training tier two — lessons 10–19 of every world
 │   ├── thinkingWorlds.ts       # 14 thinking worlds, 20 lessons each
-│   ├── worlds.ts               # WORLDS array — theme colors, emoji, character, unlockAtXP
+│   ├── worlds/                 # One file per world (jungle.ts, space.ts, ...) + index.ts
+│   │                           #   assembling WORLDS — theme colors, emoji, character, unlockAtXP
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), calculateXPReward(), getLevelInfo()
 ├── engine/
 │   └── gameEngine.ts           # parseCodeToActions(), applyAction(), checkWin()
