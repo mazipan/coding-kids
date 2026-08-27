@@ -32,6 +32,19 @@ Never use `bunx tsc` directly — it may pull a stale version from bun's global 
 4. Commit with a descriptive message referencing the plan slug
 5. Push to the feature branch — never directly to master
 
+## File naming — plans and decisions
+
+Both `.ai/plans/` and `.ai/decisions/log/` are timestamp-prefixed so a plain directory listing sorts
+chronologically. Get this right on every new file — don't fall back to the pre-2026-08-27 convention:
+
+- **New plan:** `.ai/plans/{YYYY-MM-DD}-{type}-{short-description}.md` — today's date, then the existing
+  `{type}-{short-description}` slug. Never write a plan file without the date prefix.
+- **New decision:** one new file per decision in `.ai/decisions/log/`, named
+  `{YYYY-MM-DD}-{NN}-{slug}.md`. `NN` is a two-digit sequence — check `.ai/decisions/log/` for other files
+  already dated today and use the next number (`01` if there are none). Never append to, or edit the body
+  of, an existing decision file — each one is a permanent record of that decision as made at that time. See
+  `.ai/decisions/log/README.md` for the full convention.
+
 ## Invariant gate
 
 Before committing, run through `.ai/specs/invariants.md`. Every invariant marked "yes / affected" in the plan must be explicitly verified. If any is broken, the commit must not happen.
@@ -63,6 +76,7 @@ Before adding any UI copy, feature, or UX flow, ask: **does this serve Rafi (age
 - Hardcode user-visible strings — all copy through `t()` (INV-C2)
 - Change a localStorage key name without a migration plan (INV-C4)
 - Add a new dependency without it appearing in the plan
+- Write a plan file or decision record without the `{YYYY-MM-DD}-` filename prefix, or append a new decision to an existing file instead of creating a new one (see "File naming" above)
 - Merge to master without both reviewer-code and reviewer-kid passing
 - Add a lesson whose core mechanic AND scenario duplicate an existing lesson in the same world (INV-Q1)
 - Add true-false puzzles that create a run of 3+ same-answer questions in one world (INV-Q3)

@@ -157,3 +157,10 @@ and the verification commands below cover what reviewer-code would have.
   surrounding text became `log/README.md` instead).
 - `bunx biome ci`, `bun run type-check`, and `bun run build` all pass — expected, since this change touches
   no `src/` file.
+- Follow-up (same session): the initial pass updated the path patterns wherever they were *named*, but
+  didn't state the convention as a rule a future agent has to actively follow. Added a "File naming — plans
+  and decisions" section to `.ai/harness/rules.md` (plus a matching "must never" bullet), tightened
+  `.ai/agents/planner.md` steps 6–8 to spell out the date-prefix and per-day-sequence-number construction
+  instead of just showing the path shape, and added a one-line convention note at the top of
+  `.ai/plans/_template.md`. Also fixed a pre-existing duplicate "6." step number in `planner.md` while
+  renumbering around the new step.
