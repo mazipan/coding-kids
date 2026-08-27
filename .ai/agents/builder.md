@@ -6,7 +6,7 @@ Implements an approved plan. The builder writes code, runs the build, commits, a
 
 ## Inputs
 
-- An approved plan file from `.ai/plans/{slug}.md` (status must be `approved`)
+- An approved plan file from `.ai/plans/{date}-{slug}.md` (status must be `approved`)
 - The source files listed in the plan
 
 ## Process

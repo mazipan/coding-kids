@@ -28,7 +28,7 @@ No runtime, content, progress, persistence, i18n, or gameplay invariant is affec
 | File | Change |
 |---|---|
 | `biome.json` | Use the supported `rules.preset` setting. |
-| `.ai/plans/fix-biome-deprecated-preset.md` | Record scope and verification. |
+| `.ai/plans/2026-08-14-fix-biome-deprecated-preset.md` | Record scope and verification. |
 
 ## Spec changes
 

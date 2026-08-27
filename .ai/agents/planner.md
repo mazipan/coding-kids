@@ -11,9 +11,9 @@ Receives a feature request, bug report, or improvement idea. Produces a plan doc
 
 ## Outputs
 
-1. A plan file at `.ai/plans/{slug}.md` using the template in `.ai/plans/_template.md`
+1. A plan file at `.ai/plans/{date}-{slug}.md` using the template in `.ai/plans/_template.md`
 2. Draft updates to any `.ai/specs/` files affected by the change
-3. A new entry in `.ai/decisions/log.md` recording what was decided and what alternatives were rejected
+3. A new entry in `.ai/decisions/log/` recording what was decided and what alternatives were rejected
 
 ## Process
 
@@ -34,11 +34,11 @@ Receives a feature request, bug report, or improvement idea. Produces a plan doc
    - Verify the lesson's difficulty is appropriate for its position in the 0–9 curve (INV-Q5)
    If any check fails, redesign the lesson's mechanic or scenario before writing the implementation steps. Do not hand the builder a plan with duplicate content.
 
-6. **Write the plan.** Fill in `.ai/plans/_template.md`. The plan must be detailed enough that the builder agent can implement without making design decisions.
+6. **Write the plan.** Fill in `.ai/plans/_template.md` and save it as `.ai/plans/{YYYY-MM-DD}-{type}-{short-description}.md` — today's date first, so `.ai/plans/` keeps sorting chronologically (see `.ai/harness/rules.md`). The plan must be detailed enough that the builder agent can implement without making design decisions.
 
-6. **Update specs.** If the change alters the store schema, adds a translation key section, introduces a new world field, etc., draft the spec update inline in the plan's "Spec changes" section. The builder will apply these after implementation.
+7. **Update specs.** If the change alters the store schema, adds a translation key section, introduces a new world field, etc., draft the spec update inline in the plan's "Spec changes" section. The builder will apply these after implementation.
 
-7. **Record the decision.** Add an entry to `.ai/decisions/log.md`.
+8. **Record the decision.** Add a new file to `.ai/decisions/log/`, never edit an existing one. Name it `{YYYY-MM-DD}-{NN}-{slug}.md` — check the directory for other entries already dated today and use the next sequence number (`01` if none). See `.ai/decisions/log/README.md` for the entry format.
 
 ## Quality bar
 

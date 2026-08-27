@@ -71,7 +71,7 @@ Before implementation, routes 4, 9, and 10 may be adjusted only to make them bou
 | `src/store/useProgress.ts` | Recognize Orchestra as a bonus world for lesson gating. |
 | `.ai/specs/worlds.md` | Add the shipped world to the blocks catalog. |
 | `README.md` | Correct bonus-world counts/catalog and data-file descriptions. |
-| `.ai/plans/content-more-world-ideas.md` | Note that the first roadmap item is implemented. |
+| `.ai/plans/2026-08-11-content-more-world-ideas.md` | Note that the first roadmap item is implemented. |
 | `.ai/decisions/log.md` | Record the implementation decision. |
 
 ## Spec changes

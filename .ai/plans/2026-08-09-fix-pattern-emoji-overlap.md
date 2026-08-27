@@ -53,7 +53,7 @@ Pattern puzzles store multi-star answers as concatenated emoji strings (`⭐⭐�
 | File | Change type | Notes |
 |------|-------------|-------|
 | `src/screens/ThinkingLesson.tsx` | edit | Grapheme split helper + `PatternPuzzleView` layout |
-| `.ai/plans/fix-pattern-emoji-overlap.md` | add | This plan |
+| `.ai/plans/2026-08-09-fix-pattern-emoji-overlap.md` | add | This plan |
 
 ---
 

@@ -124,7 +124,7 @@ along the bottom edge on a phone.
 | `src/components/BlocklyWalkthrough.tsx` | edit | `DEMO_STATES` → language-aware builders; add `factory`, `orchestra`, `eco`; localize ocean's variable name; export `getDemoState` for the test |
 | `src/components/BlocklyWorkspace.tsx` | edit | `loadState` centres the viewport on the injected blocks |
 | `tests/walkthroughDemos.test.ts` | add | every teach-step world has a demo; the three new demos win their tutorial without crashing |
-| `.ai/decisions/log.md` | edit | decision entry |
+| `.ai/decisions/log/2026-08-26-02-…md` | add | decision record, one file per the `.ai/decisions/log/` convention |
 | `.ai/agents/context.md` | edit | gotcha: procedure demo serialization shape |
 
 ---
@@ -158,7 +158,7 @@ in `.ai/specs/`. `.ai/agents/context.md` gains one gotcha entry:
    of the private teach-step table.
 6. Anchor the viewport at the origin in `BlocklyWorkspace.loadState`.
 7. Add `tests/walkthroughDemos.test.ts`.
-8. Add the decision log entry and the `context.md` gotcha.
+8. Add the decision record and the `context.md` gotcha.
 9. Run `bunx biome ci`, `bun run type-check`, `bun run build`, `bun test` — all must pass.
 
 ---
@@ -206,6 +206,14 @@ Indonesian run renders `gerak3Kanan` and `Gerak Kanan`. The `Failed to fetch` co
 those runs are the sandbox proxy blocking the Google Fonts stylesheet at initial page load — present
 on every route, unrelated to this change, and not an INV-P1 concern (INV-P1 governs runtime after
 load).
+
+4. **Re-filed onto the new `.ai/` naming convention.** While this branch was open, `main` landed #67:
+   plans gained a `{YYYY-MM-DD}-` prefix and `.ai/decisions/log.md` was split into one file per
+   decision under `.ai/decisions/log/`. On merging, this plan moved to
+   `.ai/plans/2026-08-26-fix-function-world-demo-states.md` and the decision entry became
+   `.ai/decisions/log/2026-08-26-02-the-three-functions-worlds-get-a-worked-example-demo.md`
+   (`-02` because #64's character-emoji decision already holds `-01` for that date). Body unchanged
+   apart from the heading level the per-file format wants.
 
 Gate: `bunx biome ci` clean (its `files.includes` is `src/*.js` + `scripts/*.mjs`, so it does not
 cover `.tsx` in this repo), `bun run type-check` clean, `bun run build` clean, `bun test`
