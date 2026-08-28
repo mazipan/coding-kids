@@ -5,8 +5,8 @@
  * the half a human reviewer is bad at and a script is good at. INV-Q1, INV-Q2 and
  * INV-Q5 still need a person to read the lessons.
  */
-import { THINKING_LESSONS } from '../src/data/thinkingLessons.ts';
-import { THINKING_WORLDS } from '../src/data/thinkingWorlds.ts';
+import { THINKING_LESSONS } from '../src/data/thinkingLessons/index.ts';
+import { THINKING_WORLDS } from '../src/data/thinkingWorlds/index.ts';
 
 const problems = [];
 const fail = (msg) => problems.push(msg);

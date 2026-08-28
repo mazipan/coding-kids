@@ -1,0 +1,183 @@
+import type { ThinkingLesson } from '../../types'
+
+export const natureLessons: ThinkingLesson[] = [
+  // ── Nature Quest ─────────────────────────────────────────────
+  {
+    id: 'nature-0',
+    worldId: 'nature',
+    number: 0,
+    title: { en: 'Thirsty Plant', id: 'Tanaman Haus' },
+    mascotMessage: { en: 'Plants need water to survive! What happens without it? 🌿', id: 'Tanaman butuh air untuk bertahan! Apa yang terjadi tanpanya? 🌿' },
+    xpReward: 15,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: "IF a plant doesn't get any water...", id: 'JIKA tanaman tidak mendapat air...' },
+      options: [
+        { id: 'wilt', emoji: '🥀', label: { en: 'It wilts and dies', id: 'Ia layu dan mati' } },
+        { id: 'grow', emoji: '🌳', label: { en: 'It grows taller', id: 'Ia tumbuh lebih tinggi' } },
+        { id: 'blue', emoji: '💙', label: { en: 'It turns blue', id: 'Ia berubah biru' } },
+        { id: 'fly', emoji: '🦋', label: { en: 'It flies away', id: 'Ia terbang pergi' } },
+      ],
+      answerId: 'wilt',
+    },
+  },
+  {
+    id: 'nature-1',
+    worldId: 'nature',
+    number: 1,
+    title: { en: 'Hatching Time', id: 'Waktunya Menetas' },
+    mascotMessage: { en: 'TRUE or FALSE — do all birds start their life as an egg? 🥚', id: 'BENAR atau SALAH — apakah semua burung memulai hidup sebagai telur? 🥚' },
+    xpReward: 15,
+    puzzle: {
+      type: 'true-false',
+      statement: { en: 'Baby birds always hatch from eggs — that is how ALL birds start their lives.', id: 'Anak burung selalu menetas dari telur — begitulah semua burung memulai hidupnya.' },
+      answer: true,
+    },
+  },
+  {
+    id: 'nature-2',
+    worldId: 'nature',
+    number: 2,
+    title: { en: 'Oil and Water', id: 'Minyak dan Air' },
+    mascotMessage: { en: 'TRUE or FALSE — what happens when oil and water are mixed and left to settle? Think about what you\'ve seen in the kitchen! 🫙', id: 'BENAR atau SALAH — apa yang terjadi jika minyak dan air dicampur lalu dibiarkan? Pikirkan apa yang kamu lihat di dapur! 🫙' },
+    xpReward: 15,
+    puzzle: {
+      type: 'true-false',
+      statement: { en: 'If you stir a glass of water and cooking oil hard enough, the oil will mix right into the water and stay mixed.', id: 'Jika kamu mengaduk segelas air dan minyak goreng cukup keras, minyaknya akan bercampur ke dalam air dan tetap tercampur.' },
+      answer: false,
+    },
+  },
+  {
+    id: 'nature-3',
+    worldId: 'nature',
+    number: 3,
+    title: { en: 'Spoiled Milk', id: 'Susu Basi' },
+    mascotMessage: { en: 'What happens to food left out in the hot sun? Think about what heat does! 🥛', id: 'Apa yang terjadi pada makanan yang dibiarkan di panas matahari? Pikirkan apa yang panas lakukan! 🥛' },
+    xpReward: 15,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'IF you leave a glass of milk out in the hot sun for several hours...', id: 'JIKA kamu membiarkan segelas susu di bawah sinar matahari panas selama beberapa jam...' },
+      options: [
+        { id: 'spoil', emoji: '🤢', label: { en: 'It goes bad and smells sour', id: 'Ia menjadi basi dan berbau asam' } },
+        { id: 'fresh', emoji: '🥛', label: { en: 'It stays perfectly fresh', id: 'Ia tetap segar sempurna' } },
+        { id: 'freeze', emoji: '🧊', label: { en: 'It turns into ice cream', id: 'Ia berubah menjadi es krim' } },
+        { id: 'cheese', emoji: '🧀', label: { en: 'It instantly becomes cheese', id: 'Langsung berubah menjadi keju' } },
+      ],
+      answerId: 'spoil',
+    },
+  },
+  {
+    id: 'nature-4',
+    worldId: 'nature',
+    number: 4,
+    title: { en: 'Hungry Frog', id: 'Katak Lapar' },
+    mascotMessage: { en: 'What do frogs eat? Think about what they catch! 🐸', id: 'Apa yang dimakan katak? Pikirkan apa yang mereka tangkap! 🐸' },
+    xpReward: 18,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'IF a frog is hungry in the wild...', id: 'JIKA katak lapar di alam liar...' },
+      options: [
+        { id: 'bugs', emoji: '🦟', label: { en: 'It eats insects', id: 'Ia makan serangga' } },
+        { id: 'leaves', emoji: '🍃', label: { en: 'It eats leaves', id: 'Ia makan daun' } },
+        { id: 'fish', emoji: '🐟', label: { en: 'It eats big fish', id: 'Ia makan ikan besar' } },
+        { id: 'fruit', emoji: '🍎', label: { en: 'It eats apples', id: 'Ia makan apel' } },
+      ],
+      answerId: 'bugs',
+    },
+  },
+  {
+    id: 'nature-5',
+    worldId: 'nature',
+    number: 5,
+    title: { en: 'Plant Food', id: 'Makanan Tumbuhan' },
+    mascotMessage: { en: 'TRUE or FALSE — do plants actually make their own food, or do they need someone to feed them? 🌿', id: 'BENAR atau SALAH — apakah tumbuhan benar-benar membuat makanannya sendiri, atau perlu seseorang yang memberinya makan? 🌿' },
+    xpReward: 18,
+    puzzle: {
+      type: 'true-false',
+      statement: { en: 'Plants make their own food using sunlight, water, and air. This process is called photosynthesis.', id: 'Tumbuhan membuat makanannya sendiri menggunakan sinar matahari, air, dan udara. Proses ini disebut fotosintesis.' },
+      answer: true,
+    },
+  },
+  {
+    id: 'nature-6',
+    worldId: 'nature',
+    number: 6,
+    title: { en: 'Animal Homes', id: 'Rumah Hewan' },
+    mascotMessage: { en: 'Match each animal to where it lives! 🌍', id: 'Cocokkan setiap hewan dengan tempat tinggalnya! 🌍' },
+    xpReward: 20,
+    puzzle: {
+      type: 'match',
+      pairs: [
+        {
+          leftId: 'shark', leftEmoji: '🦈', leftLabel: { en: 'Shark', id: 'Hiu' },
+          rightId: 'ocean', rightEmoji: '🌊', rightLabel: { en: 'Ocean', id: 'Lautan' },
+        },
+        {
+          leftId: 'elephant', leftEmoji: '🐘', leftLabel: { en: 'Elephant', id: 'Gajah' },
+          rightId: 'savanna', rightEmoji: '🌿', rightLabel: { en: 'Savanna', id: 'Sabana' },
+        },
+        {
+          leftId: 'penguin', leftEmoji: '🐧', leftLabel: { en: 'Penguin', id: 'Penguin' },
+          rightId: 'antarctica', rightEmoji: '🧊', rightLabel: { en: 'Antarctica', id: 'Antartika' },
+        },
+      ],
+    },
+  },
+  {
+    id: 'nature-7',
+    worldId: 'nature',
+    number: 7,
+    title: { en: "Bear's Winter", id: 'Musim Dingin Beruang' },
+    mascotMessage: { en: 'Bears hibernate — they sleep for months! Where do they go? 🐻', id: 'Beruang berhibernasi — mereka tidur berbulan-bulan! Ke mana mereka pergi? 🐻' },
+    xpReward: 20,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'IF a bear needs to sleep all winter long...', id: 'JIKA beruang perlu tidur sepanjang musim dingin...' },
+      options: [
+        { id: 'cave', emoji: '🐻', label: { en: 'It sleeps in a cave', id: 'Ia tidur di gua' } },
+        { id: 'sea', emoji: '🌊', label: { en: 'It swims in the sea', id: 'Ia berenang di laut' } },
+        { id: 'south', emoji: '✈️', label: { en: 'It flies somewhere warm', id: 'Ia terbang ke tempat hangat' } },
+        { id: 'tree', emoji: '🌳', label: { en: 'It climbs a tall tree', id: 'Ia memanjat pohon tinggi' } },
+      ],
+      answerId: 'cave',
+    },
+  },
+  {
+    id: 'nature-8',
+    worldId: 'nature',
+    number: 8,
+    title: { en: 'Flower at Night', id: 'Bunga di Malam Hari' },
+    mascotMessage: { en: 'Some plants behave differently when the sun goes down! 🌸', id: 'Beberapa tanaman berperilaku berbeda saat matahari terbenam! 🌸' },
+    xpReward: 22,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'IF the sun sets and night begins...', id: 'JIKA matahari terbenam dan malam dimulai...' },
+      options: [
+        { id: 'close', emoji: '🌷', label: { en: 'Some flowers close up', id: 'Beberapa bunga menutup' } },
+        { id: 'grow', emoji: '🌱', label: { en: 'All plants grow faster', id: 'Semua tanaman tumbuh lebih cepat' } },
+        { id: 'ocean', emoji: '🌊', label: { en: 'The ocean gets bigger', id: 'Lautan menjadi lebih besar' } },
+        { id: 'rain', emoji: '🌧️', label: { en: 'It always rains', id: 'Selalu hujan' } },
+      ],
+      answerId: 'close',
+    },
+  },
+  {
+    id: 'nature-9',
+    worldId: 'nature',
+    number: 9,
+    title: { en: 'Butterfly Journey', id: 'Perjalanan Kupu-Kupu' },
+    mascotMessage: { en: 'Caterpillars transform inside a cocoon. What do they become? 🦋', id: 'Ulat berubah di dalam kepompong. Apa yang mereka jadi? 🦋' },
+    xpReward: 25,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'IF a caterpillar spins a cocoon around itself...', id: 'JIKA ulat membuat kepompong di sekitar dirinya...' },
+      options: [
+        { id: 'butterfly', emoji: '🦋', label: { en: 'A butterfly emerges', id: 'Kupu-kupu keluar' } },
+        { id: 'bee', emoji: '🐝', label: { en: 'A bee comes out', id: 'Lebah keluar' } },
+        { id: 'spider', emoji: '🕷️', label: { en: 'A spider crawls out', id: 'Laba-laba merangkak keluar' } },
+        { id: 'worm', emoji: '🪱', label: { en: 'A worm crawls out', id: 'Cacing merangkak keluar' } },
+      ],
+      answerId: 'butterfly',
+    },
+  },
+]
