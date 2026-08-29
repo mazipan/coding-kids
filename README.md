@@ -21,7 +21,7 @@ Write code with visual Blockly blocks. 7 main worlds + 7 bonus worlds teaching p
 | 🤖 Robot Factory | 11–13 | Functions | 6 |
 | ⏰ Time Portal | 12–14 | Arrays & Lists | 10 |
 
-**Bonus worlds** (unlocked after completing all main worlds):
+**Bonus worlds** (playable from the start, same as main worlds):
 
 | World | Ages | Concept | Lessons |
 |-------|------|---------|---------|

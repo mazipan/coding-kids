@@ -53,9 +53,11 @@ modal — is derived on the fly from `progress.lessons` by `src/utils/progressSt
   together for the "both paths" total. The header pill shows the path the player is currently in.
 - **Tutorials excluded.** Tutorial lessons award a flat 1 star, are hidden from every world card, and can
   never be improved. `getLessonsByWorld` already drops them, and the stats module inherits that.
-- **Unlock state reuses the store.** A world is locked by the same rule the hub uses:
-  `progress.xp >= world.unlockAtXP`, or `areBonusWorldsUnlocked(progress)` (exported from
-  `useProgress.ts`) for bonus worlds.
+- **Unlock state reuses the store.** Blocks worlds (main and bonus alike) are always
+  unlocked (INV-L2) — `unlocked` is hardcoded `true`, not derived from any check. Thinking
+  worlds still check `progress.xp >= world.unlockAtXP` via `isWorldUnlocked` (exported from
+  `useProgress.ts`), which is always true today since every thinking world declares
+  `unlockAtXP: 0` (INV-L3).
 
 Because everything is derived, a save written by an older build needs no migration — the numbers simply
 recompute from `lessons`.

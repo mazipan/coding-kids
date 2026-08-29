@@ -53,7 +53,7 @@ src/
 │   ├── thinkingWorlds/         # One file per thinking world (patterns.ts, logic.ts, ...) + index.ts
 │   │                           #   assembling THINKING_WORLDS — 14 worlds, 20 lessons each
 │   ├── worlds/                 # One file per world (jungle.ts, space.ts, ...) + index.ts
-│   │                           #   assembling WORLDS — theme colors, emoji, character, unlockAtXP
+│   │                           #   assembling WORLDS — theme colors, emoji, character (no world-level lock, INV-L2)
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), calculateXPReward(), getLevelInfo()
 ├── engine/
 │   └── gameEngine.ts           # parseCodeToActions(), applyAction(), checkWin()
