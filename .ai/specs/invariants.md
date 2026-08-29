@@ -38,11 +38,11 @@ Once a badge is awarded it is never removed, even if the triggering condition co
 
 ## Lesson unlock invariants
 
-**INV-L1 — Sequential unlock (thinking path only)**  
-In the thinking path, lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 0 (the first lesson) is always accessible. This does **not** apply to the blocks path — see INV-L2.
+**INV-L1 — Sequential unlock**  
+Lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 0 (the first lesson) is always accessible. This applies to both the blocks path and the thinking path — it governs unlock *within* a world. World-level accessibility for the blocks path is governed separately by INV-L2.
 
-**INV-L2 — The blocks path has no lock**  
-Every world in the blocks path — main and bonus alike — is accessible regardless of `progress.xp` or any lesson's completion state, and every lesson within every blocks world is accessible regardless of any other lesson's completion state. There is no XP gate, no bonus-world gate, and no sequential lesson gate anywhere in the blocks path. `progress.xp` and star counts are still tracked and displayed exactly as before (INV-PR1–PR4) — this invariant is about accessibility only, never about scoring.
+**INV-L2 — The blocks path has no world-level lock**  
+Every world in the blocks path — main and bonus alike — is accessible regardless of `progress.xp` or any lesson's completion state elsewhere in the app: there is no XP gate on any main world, and no longer a "finish the main path" gate on any bonus world. `progress.xp` and star counts are still tracked and displayed exactly as before (INV-PR1–PR4) — this invariant is about *world* accessibility only. Lessons *within* a world still unlock sequentially per INV-L1, including the tutorial gate that `orchestra`, `cove`, and `eco` place on their own lesson 1 (see `TUTORIAL_GATED_BONUS_WORLDS` in `src/store/useProgress.ts`).
 
 **INV-L3 — Thinking worlds are always unlocked**  
 All thinking worlds (`patterns`, `logic`, `counting`, `memory`, `nature`, `numbers`, `decomposition`, and every world added since) have `unlockAtXP: 0` and are accessible from the moment a player enters the thinking path. XP earned in either path contributes to the shared pool, but thinking worlds must never be gated by XP. Any new thinking world added in the future must also have `unlockAtXP: 0`.

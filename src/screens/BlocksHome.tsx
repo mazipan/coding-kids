@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { Check, Play } from 'lucide-react'
+import { Check, Play, Lock } from 'lucide-react'
 import { WORLDS } from '../data/worlds'
 import { getLessonsByWorld, getWorldTutorial } from '../data/lessons'
 import { StarRating } from '../components/StarRating'
@@ -12,11 +12,13 @@ import { localize } from '../i18n/localize'
 
 interface BlocksHomeProps {
   getLessonProgress: ReturnType<typeof useProgress>['getLessonProgress']
+  isLessonUnlocked: ReturnType<typeof useProgress>['isLessonUnlocked']
   selectedWorldId?: WorldId
 }
 
-// INV-L2 — the blocks path has no lock: every world and every lesson is playable from the start.
-export function BlocksHome({ getLessonProgress, selectedWorldId }: BlocksHomeProps) {
+// INV-L2 — the blocks path has no world-level lock: every world is playable from the start.
+// Lessons within a world still unlock sequentially (INV-L1).
+export function BlocksHome({ getLessonProgress, isLessonUnlocked, selectedWorldId }: BlocksHomeProps) {
   const { t, language } = useLanguage()
   const navigate = useNavigate()
 
@@ -408,14 +410,17 @@ export function BlocksHome({ getLessonProgress, selectedWorldId }: BlocksHomePro
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {worldLessons.map((lesson, index) => {
                 const lp = getLessonProgress(lesson.id)
+                const unlocked = isLessonUnlocked(lesson.id, selectedWorldId!)
                 const completed = lp?.completed ?? false
                 const stars = lp?.stars ?? 0
 
                 return (
                   <motion.button
                     key={lesson.id}
-                    onClick={() => navigate(`/app/blocks/world/${selectedWorldId}/${lesson.number}`)}
-                    className="relative text-left rounded-2xl p-4 sm:p-5 border transition-all cursor-pointer"
+                    onClick={() => unlocked && navigate(`/app/blocks/world/${selectedWorldId}/${lesson.number}`)}
+                    className={`relative text-left rounded-2xl p-4 sm:p-5 border transition-all ${
+                      unlocked ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
+                    }`}
                     style={{
                       background: completed
                         ? `linear-gradient(135deg, ${activeWorld?.theme.accentColor}20, ${activeWorld?.theme.accentColor}10)`
@@ -426,9 +431,15 @@ export function BlocksHome({ getLessonProgress, selectedWorldId }: BlocksHomePro
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.07 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={unlocked ? { scale: 1.02, y: -2 } : {}}
+                    whileTap={unlocked ? { scale: 0.98 } : {}}
                   >
+                    {!unlocked && (
+                      <div className="absolute inset-0 bg-black/40 rounded-2xl flex items-center justify-center z-10">
+                        <Lock className="w-7 h-7 text-white/50" />
+                      </div>
+                    )}
+
                     <div className="flex items-start justify-between mb-3">
                       <div
                         className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-lg"
@@ -440,17 +451,19 @@ export function BlocksHome({ getLessonProgress, selectedWorldId }: BlocksHomePro
                         {completed ? <Check className="w-5 h-5" /> : index + 1}
                       </div>
 
-                      <span
-                        className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-black"
-                        style={{
-                          background: completed
-                            ? `${activeWorld?.theme.accentColor}40`
-                            : 'linear-gradient(135deg, #7C3AED, #EC4899)',
-                          color: completed ? activeWorld?.theme.accentColor : 'white',
-                        }}
-                      >
-                        {completed ? t('common.play.again') : t('common.play')}
-                      </span>
+                      {unlocked && (
+                        <span
+                          className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-black"
+                          style={{
+                            background: completed
+                              ? `${activeWorld?.theme.accentColor}40`
+                              : 'linear-gradient(135deg, #7C3AED, #EC4899)',
+                            color: completed ? activeWorld?.theme.accentColor : 'white',
+                          }}
+                        >
+                          {completed ? t('common.play.again') : t('common.play')}
+                        </span>
+                      )}
                     </div>
 
                     <h3 className="font-black text-white text-sm sm:text-base mb-1">{localize(lesson.title, language)}</h3>

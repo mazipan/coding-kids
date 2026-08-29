@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
 import type { PlayerProgress, LessonProgress } from '../types'
 import { getLevelInfo } from '../data/xpSystem'
-import { WORLDS } from '../data/worlds'
 
 const STORAGE_KEY = 'codekids_progress_v1'
 
-/** Every blocks-path world id (main and bonus) — INV-L2: none of them are ever locked. */
-const BLOCKS_WORLD_IDS = new Set<string>(WORLDS.map(w => w.id))
+const BONUS_WORLD_IDS = new Set(['jurassic', 'parking', 'sorting', 'debugging', 'orchestra', 'cove', 'eco'])
+
+/** Bonus worlds that open with a tutorial (lesson 0) which must be cleared first. */
+const TUTORIAL_GATED_BONUS_WORLDS = new Set(['orchestra', 'cove', 'eco'])
 
 const DEFAULT_PROGRESS: PlayerProgress = {
   xp: 0,
@@ -17,16 +18,23 @@ const DEFAULT_PROGRESS: PlayerProgress = {
   lastPlayed: new Date().toISOString(),
 }
 
-/** Bonus worlds unlock immediately — the blocks path has no lock of any kind (INV-L2). */
+/** Bonus worlds unlock immediately — the blocks path has no world-level lock (INV-L2). */
 export function areBonusWorldsUnlocked(_progress: PlayerProgress): boolean {
   return true
 }
 
+/** INV-L1 — lessons unlock sequentially within every world, blocks and thinking alike. */
 export function isLessonAvailable(progress: PlayerProgress, lessonId: string, worldId: string): boolean {
-  // INV-L2 — the blocks path (main and bonus worlds alike) has no lock; every lesson is
-  // playable from the start. Sequential unlock below applies to the thinking path only.
-  if (BLOCKS_WORLD_IDS.has(worldId)) return true
-
+  if (BONUS_WORLD_IDS.has(worldId)) {
+    const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
+    if (lessonNum === 0) return true
+    if (lessonNum === 1) {
+      return TUTORIAL_GATED_BONUS_WORLDS.has(worldId)
+        ? progress.lessons[`${worldId}-0`]?.completed ?? false
+        : true
+    }
+    return progress.lessons[`${worldId}-${lessonNum - 1}`]?.completed ?? false
+  }
   const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
   if (lessonNum === 0) return true
   if (lessonNum === 1) {

@@ -54,16 +54,22 @@ function GameLayout() {
 // ── Blocks path routes ────────────────────────────────────────
 
 function WorldMapRoute() {
-  const { getLessonProgress } = useProgress()
-  return <BlocksHome getLessonProgress={getLessonProgress} />
+  const { getLessonProgress, isLessonUnlocked } = useProgress()
+  return <BlocksHome getLessonProgress={getLessonProgress} isLessonUnlocked={isLessonUnlocked} />
 }
 
 function WorldDetailRoute() {
   const { worldId } = useParams<{ worldId: string }>()
-  const { getLessonProgress } = useProgress()
+  const { getLessonProgress, isLessonUnlocked } = useProgress()
   const world = worldId ? getWorld(worldId) : null
   if (!world) return <Navigate to="/app/blocks" replace />
-  return <BlocksHome getLessonProgress={getLessonProgress} selectedWorldId={worldId as WorldId} />
+  return (
+    <BlocksHome
+      getLessonProgress={getLessonProgress}
+      isLessonUnlocked={isLessonUnlocked}
+      selectedWorldId={worldId as WorldId}
+    />
+  )
 }
 
 function LessonRoute() {

@@ -1,18 +1,25 @@
 status: done
 
-# Blocks path — remove all locks (free play)
+# Blocks path — remove the world-level lock (free play)
 
 ## What changed and why
 
 The blocks (code block) path currently gates progress in three ways: main worlds require
 `progress.xp >= world.unlockAtXP`, bonus worlds require the final main-path lesson
 (`portal-4`) to be completed, and lessons within any world unlock sequentially. The
-request is to remove every lock in the blocks path so a kid can jump into any world,
-including the bonus worlds, and any lesson within it, from the very start. Stars and XP
-still accrue exactly as before — only the *gating* is removed, not the scoring.
+request is to remove the **world-level** locks — a kid can jump into any world, including
+every bonus world, from the very start. Stars and XP still accrue exactly as before, and
+lessons *within* a world still unlock sequentially (INV-L1) — only world accessibility
+changes, not lesson order or scoring.
 
-The thinking path is unaffected: it already has no world-level XP gate (INV-L3) and
-keeps its existing sequential lesson unlock (INV-L1).
+**Correction (same day, see the "Correction" section below and
+`.ai/decisions/log/2026-08-29-02-blocks-lessons-stay-sequential-only-worlds-are-free.md`):**
+the first implementation pass went further than intended and also made every lesson
+within a world freely reorderable. That part was reverted; only the world-level lock is
+gone.
+
+The thinking path is unaffected throughout: it already has no world-level XP gate
+(INV-L3) and keeps its existing sequential lesson unlock (INV-L1).
 
 ## Files touched
 
@@ -83,3 +90,25 @@ migration needed.
 Implemented as planned. `bun test`, `bun run type-check`, and `bun run build` all pass.
 `bunx biome ci` is a no-op on these files (its `files.includes` only covers `src/*.js`
 and `scripts/*.mjs`, not the `.ts`/`.tsx` files this change touches).
+
+## Correction — lessons stay sequential (same day)
+
+The first pass implemented "fully free — any lesson, any world" per an explicit
+clarifying question. The user then corrected that: only worlds should be free; lessons
+within a world should stay sequential, as they always were. Reverted:
+
+- `src/store/useProgress.ts` — `isLessonAvailable` no longer short-circuits `true` for
+  blocks world ids. Restored the bonus/tutorial-gated branch (`BONUS_WORLD_IDS`,
+  `TUTORIAL_GATED_BONUS_WORLDS`) and the general sequential branch, both used for blocks
+  worlds again exactly as before this feature — minus the `portal-4` finale requirement,
+  which is gone for good (that was a world-level gate).
+- `src/screens/BlocksHome.tsx` / `src/App.tsx` — restored the per-lesson lock UI and the
+  `isLessonUnlocked` prop threading; the world-map-level lock UI stays removed.
+- `.ai/specs/invariants.md` / `.ai/specs/worlds.md` — INV-L1 widened back to both paths;
+  INV-L2 reworded to be explicit it's about world access only.
+- `tests/coordinateCoveLessons.test.ts`, `tests/orchestraLessons.test.ts`,
+  `tests/ecoCityLessons.test.ts` — restored sequential-unlock assertions, minus the
+  `portal-4` requirement.
+
+All three verification commands re-run clean after the correction. See the decision log
+entry above for the full rationale.

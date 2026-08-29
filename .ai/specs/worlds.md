@@ -18,7 +18,7 @@
 | cove | 🧭 | Coordinates & Position | 10–13 | 10 |
 | eco | 🌱 | Decomposition & Reuse | 10–14 | 10 |
 
-The blocks path has no lock of any kind (INV-L2): every world — main and bonus alike — and every lesson within it is playable from the start, regardless of XP or any other lesson's completion state. `World` has no `unlockAtXP` field. `isBonus` still marks the seven bonus worlds for display purposes (the "BONUS" badge and the separate section on the world map) but no longer gates access to them.
+The blocks path has no world-level lock (INV-L2): every world — main and bonus alike — is playable from the start, regardless of XP or any lesson's completion state elsewhere in the app. `World` has no `unlockAtXP` field. `isBonus` still marks the seven bonus worlds for display purposes (the "BONUS" badge and the separate section on the world map) but no longer gates access to the world itself. Lessons *within* a world still unlock one at a time — see "Lesson unlock rules" below.
 
 `eco` (Eco City) is a capstone: it uses all six existing Blockly categories and introduces no new block, no new engine behaviour, and no new goal type. Every one of its canonical routes is simulated in `tests/ecoCityLessons.test.ts`; any change to an Eco City grid must keep that test green.
 
@@ -26,13 +26,11 @@ Source: `src/data/worlds/` — one file per world (e.g. `jungle.ts` exports `jun
 
 `character` may also set `facingDefault: 'left'` when the emoji's standard glyph design has a real inherent left/right facing (a vehicle, boat, or human pictograph drawn facing one way) — `GameGrid` mirrors the character horizontally so it visually faces the direction it's currently travelling, since gameplay defaults to moving rightward. Omit the field for any character that is drawn front-on or pose-neutral (people, animals in a standing/sitting pose, robots) — flipping those has no correctness benefit and the field should not be added "just in case." Currently set on `loops` (🏎️), `cove` (⛵), and `ocean` (🏊).
 
-## Lesson unlock rules
+## Lesson unlock rules (INV-L1 — both paths)
 
-**Blocks path:** none — every lesson in every world is accessible from the start (INV-L2).
-
-**Thinking path (INV-L1):**
-- Lesson 0 in any world: always unlocked (lesson numbering is 0-indexed)
+- Lesson 0 in any world: always unlocked once the world itself is unlocked (lesson numbering is 0-indexed) — every blocks world is always unlocked (INV-L2)
 - Lesson N: requires lesson N-1 to be completed (`completed: true` in `useProgress`)
+- Three bonus worlds ship their own tutorial (`orchestra-0`, `cove-0`, `eco-0`) and gate lesson 1 behind it specifically — see `TUTORIAL_GATED_BONUS_WORLDS` in `src/store/useProgress.ts`. The other bonus worlds (`jurassic`, `parking`, `sorting`, `debugging`) have no lesson 0 and open straight into lesson 1.
 
 ## Lesson fields
 
