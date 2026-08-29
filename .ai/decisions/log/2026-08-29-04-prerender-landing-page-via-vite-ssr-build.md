@@ -21,10 +21,18 @@ with the rendered landing markup injected into `#root`, for `/`. `netlify.toml` 
 Two existing "dynamic feature checks" had to change to make the landing tree safe to render in Node
 and hydrate without a mismatch: `LanguageProvider`'s initial-language detection
 (`localStorage`/`navigator.language`, read synchronously in a `useState` initializer) and `LandingRoute`'s
-`hasProgress` returning-player check (read from the progress store at first render). Both now start
-from a fixed default (`'en'`, `false`) and correct themselves in a mount-only `useEffect` — the first
-paint is identical in Node and in the browser's pre-hydration render, and the correction is visually a
-single frame, not a user-facing behavior change.
+`hasProgress` returning-player check (read from the progress store at first render). `hasProgress` is
+scoped to `LandingRoute` alone, so it simply starts `false` and self-corrects in a mount-only `useEffect`.
+`LanguageProvider` is not scoped the same way — it wraps the whole route tree once, so forcing its
+default to `'en'` would have added a language-flash to every `/app/*` reload, not just the prerendered
+`/` page. An independent plan review caught this; the fix threads `main.tsx`'s existing
+`hasChildNodes()`-derived `isHydrating` flag down through `App` into an opt-in `forcedInitialLanguage`
+prop, so only the actual hydration path forces and self-corrects a fixed initial language — every normal
+`createRoot` load keeps its original synchronous, no-flash behavior. The same review also caught that
+`Footer`'s `__BUILD_DATE__` (a `vite.config.ts` `define` value recomputed at each config load) could
+disagree between the plan's two separate `vite build` invocations (client, then `--ssr`) if they straddle
+a UTC minute boundary — fixed by computing that timestamp once via a `BUILD_DATE` env var shared across
+both invocations.
 
 **Alternatives rejected:**
 - A prerendering plugin (`vite-plugin-ssg`, `vite-plugin-prerender-spa`, etc.) — pulls in a new
