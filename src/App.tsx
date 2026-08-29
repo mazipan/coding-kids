@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate, useNavigate, useParams, Outlet } from 'react-router-dom'
 import { LanguageProvider } from './i18n/LanguageProvider'
 import { Header } from './components/Header'
@@ -155,7 +156,12 @@ function ThinkingLessonRoute() {
 function LandingRoute() {
   const navigate = useNavigate()
   const { progress } = useProgress()
-  const hasProgress = progress.xp > 0 || progress.totalStars > 0
+  const [hasProgress, setHasProgress] = useState(false)
+
+  useEffect(() => {
+    setHasProgress(progress.xp > 0 || progress.totalStars > 0)
+  }, [progress.xp, progress.totalStars])
+
   return (
     <LandingScreen
       onStart={() => navigate('/app')}
@@ -171,9 +177,18 @@ function PathSelectorRoute() {
 
 // ── App ───────────────────────────────────────────────────────
 
-export default function App() {
+interface AppProps {
+  /**
+   * True only when hydrating prerendered markup (the `/` landing page, built by
+   * `src/entry-server.tsx`). Every other mount — `/app/*`, `bun run dev` — lands on an
+   * empty `#root` and leaves this unset. See `main.tsx`.
+   */
+  isHydrating?: boolean
+}
+
+export default function App({ isHydrating }: AppProps) {
   return (
-    <LanguageProvider>
+    <LanguageProvider forcedInitialLanguage={isHydrating ? 'en' : undefined}>
       <Routes>
         <Route path="/" element={<LandingRoute />} />
         <Route path="/app" element={<GameLayout />}>
