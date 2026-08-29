@@ -30,7 +30,7 @@ Source: `src/data/worlds/` — one file per world (e.g. `jungle.ts` exports `jun
 
 - Lesson 0 in any world: always unlocked once the world itself is unlocked (lesson numbering is 0-indexed) — every blocks world is always unlocked (INV-L2)
 - Lesson N: requires lesson N-1 to be completed (`completed: true` in `useProgress`)
-- Three bonus worlds ship their own tutorial (`orchestra-0`, `cove-0`, `eco-0`) and gate lesson 1 behind it specifically — see `TUTORIAL_GATED_BONUS_WORLDS` in `src/store/useProgress.ts`. The other bonus worlds (`jurassic`, `parking`, `sorting`, `debugging`) have no lesson 0 and open straight into lesson 1.
+- **Blocks-path exception:** where lesson 0 is a tutorial (`isTutorial: true` — the seven main worlds plus the bonus worlds `orchestra`, `cove`, `eco`), it is optional rather than a gate: lesson 1 is always open, whether or not the tutorial has been completed. Sequencing resumes normally from lesson 2 onward. The remaining bonus worlds (`jurassic`, `parking`, `sorting`, `debugging`) have no lesson 0 at all and open straight into an always-available lesson 1, for the same reason. The thinking path has no tutorial concept and follows the plain rule above with no exception — its lesson 1 always requires lesson 0.
 
 ## Lesson fields
 

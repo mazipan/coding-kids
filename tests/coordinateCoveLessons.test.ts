@@ -236,12 +236,9 @@ describe('Coordinate Cove — off-by-one debug lesson', () => {
 })
 
 describe('Coordinate Cove — unlock order', () => {
-  test('INV-L1: the world needs no finale, but lessons still unlock one at a time', () => {
+  test('INV-L1: the tutorial is optional — lesson 1 is open immediately, then lessons unlock one at a time', () => {
     const progress: PlayerProgress = { xp: 0, level: 1, lessons: {}, badges: [], totalStars: 0, lastPlayed: '' }
     expect(isLessonAvailable(progress, 'cove-0', 'cove')).toBe(true)
-    expect(isLessonAvailable(progress, 'cove-1', 'cove')).toBe(false)
-
-    progress.lessons['cove-0'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'cove-1', 'cove')).toBe(true)
     expect(isLessonAvailable(progress, 'cove-2', 'cove')).toBe(false)
 

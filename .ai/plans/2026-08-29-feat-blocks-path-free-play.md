@@ -112,3 +112,26 @@ within a world should stay sequential, as they always were. Reverted:
 
 All three verification commands re-run clean after the correction. See the decision log
 entry above for the full rationale.
+
+## Follow-up — the tutorial is optional, not a gate (same day)
+
+Restoring sequential unlock brought back a pre-existing detail: lesson 1 in every
+tutorial-bearing world was locked until the tutorial (lesson 0) was completed. Verified
+in-browser, then confirmed with the user this should also be removed — the tutorial stays
+playable but stops being a prerequisite for lesson 1. Lesson 2 onward is unaffected.
+
+- `src/store/useProgress.ts` — `isLessonAvailable` rewritten as a single function: lesson
+  0 always open; lesson 1 always open for every blocks-path world id (`BLOCKS_WORLD_IDS`,
+  derived from `WORLDS` — covers both tutorial-bearing and untutorialed bonus worlds
+  uniformly) and otherwise (thinking path) requires lesson 0 completed; lesson N ≥ 2
+  always requires lesson N-1. `BONUS_WORLD_IDS` / `TUTORIAL_GATED_BONUS_WORLDS` removed —
+  no longer needed now that bonus and main blocks worlds follow one rule.
+- `.ai/specs/invariants.md` / `.ai/specs/worlds.md` — INV-L1 gains the tutorial-optional
+  exception, scoped to blocks-path worlds only.
+- `tests/coordinateCoveLessons.test.ts`, `tests/orchestraLessons.test.ts`,
+  `tests/ecoCityLessons.test.ts` — updated for lesson 1 always open.
+- `tests/lessonUnlock.test.ts` (new) — direct coverage for a main world and a thinking
+  world, since no test previously exercised this path in isolation.
+
+See `.ai/decisions/log/2026-08-29-03-blocks-path-tutorial-becomes-optional-not-a-gate.md`
+for full rationale. All three verification commands pass after this follow-up.
