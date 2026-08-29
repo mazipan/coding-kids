@@ -19,5 +19,5 @@ export const cavesWorld: World = {
     accentColor: '#c084fc',
     textColor: '#e9d5ff',
   },
-  lessonCount: 6,
+  lessonCount: 10,
 }

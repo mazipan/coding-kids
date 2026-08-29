@@ -19,5 +19,5 @@ export const factoryWorld: World = {
     accentColor: '#9ca3af',
     textColor: '#d1d5db',
   },
-  lessonCount: 6,
+  lessonCount: 10,
 }
