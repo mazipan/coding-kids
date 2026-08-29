@@ -11,15 +11,14 @@ import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 
 interface BlocksHomeProps {
-  progress: ReturnType<typeof useProgress>['progress']
-  isWorldUnlocked: (xp: number) => boolean
-  isBonusWorldUnlocked: () => boolean
   getLessonProgress: ReturnType<typeof useProgress>['getLessonProgress']
   isLessonUnlocked: ReturnType<typeof useProgress>['isLessonUnlocked']
   selectedWorldId?: WorldId
 }
 
-export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, getLessonProgress, isLessonUnlocked, selectedWorldId }: BlocksHomeProps) {
+// INV-L2 — the blocks path has no world-level lock: every world is playable from the start.
+// Lessons within a world still unlock sequentially (INV-L1).
+export function BlocksHome({ getLessonProgress, isLessonUnlocked, selectedWorldId }: BlocksHomeProps) {
   const { t, language } = useLanguage()
   const navigate = useNavigate()
 
@@ -32,7 +31,6 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
   const currentWorldIdx = activeWorld && !activeWorld.isBonus ? mainWorlds.findIndex(w => w.id === activeWorld.id) : -1
   const nextMainWorld = currentWorldIdx >= 0 ? (mainWorlds[currentWorldIdx + 1] ?? null) : null
   const bonusWorlds = WORLDS.filter(w => w.isBonus)
-  const bonusUnlocked = isBonusWorldUnlocked()
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -80,7 +78,6 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
               {mainWorlds.map((world, index) => {
-                const unlocked = isWorldUnlocked(world.unlockAtXP)
                 const lessons = getLessonsByWorld(world.id)
                 const completedCount = lessons.filter(l => getLessonProgress(l.id)?.completed).length
                 const worldStars = lessons.reduce((sum, l) => sum + (getLessonProgress(l.id)?.stars ?? 0), 0)
@@ -89,46 +86,28 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                 return (
                   <motion.button
                     key={world.id}
-                    onClick={() => unlocked && navigate(`/app/blocks/world/${world.id}`)}
-                    className={`relative rounded-3xl overflow-hidden text-left transition-all ${
-                      unlocked ? 'cursor-pointer hover:scale-105' : 'cursor-not-allowed opacity-60'
-                    }`}
+                    onClick={() => navigate(`/app/blocks/world/${world.id}`)}
+                    className="relative rounded-3xl overflow-hidden text-left transition-all cursor-pointer hover:scale-105"
                     style={{
                       background: world.theme.bgGradient,
-                      boxShadow: unlocked ? `0 8px 32px ${world.theme.accentColor}40` : 'none',
+                      boxShadow: `0 8px 32px ${world.theme.accentColor}40`,
                       border: `1px solid ${world.theme.cellBorder}`,
                     }}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    whileHover={unlocked ? { y: -4 } : {}}
+                    whileHover={{ y: -4 }}
                   >
-                    {!unlocked && (
-                      <div className="absolute bottom-3 right-3 z-10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/60">
-                        <Lock className="w-3.5 h-3.5 text-white/80 shrink-0" />
-                        <div>
-                          <div className="text-white/80 font-bold text-xs leading-tight">
-                            {t('common.need.xp', { xp: world.unlockAtXP })}
-                          </div>
-                          <div className="text-amber-400 text-[10px] leading-tight font-bold">
-                            {t('common.to.unlock', { xp: world.unlockAtXP - progress.xp })}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {unlocked && (
-                      <div
-                        className="absolute -inset-1 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                        style={{ background: `radial-gradient(circle, ${world.theme.accentColor}20, transparent 70%)` }}
-                      />
-                    )}
+                    <div
+                      className="absolute -inset-1 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{ background: `radial-gradient(circle, ${world.theme.accentColor}20, transparent 70%)` }}
+                    />
 
                     <div className="p-5 sm:p-6">
                       <div className="flex items-start justify-between mb-3">
                         <motion.span
                           className="text-4xl sm:text-5xl"
-                          animate={{ rotate: unlocked ? [0, 5, -5, 0] : 0 }}
+                          animate={{ rotate: [0, 5, -5, 0] }}
                           transition={{ duration: 4, repeat: Infinity, delay: index * 0.5 }}
                         >
                           {world.emoji}
@@ -149,25 +128,23 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                         {t('common.learn')} <strong>{localize(world.concept, language)}</strong>
                       </p>
 
-                      {unlocked && (
-                        <div className="space-y-2">
-                          <div className="flex items-center justify-between text-xs" style={{ color: world.theme.textColor }}>
-                            <span>
-                              {t('common.completed', { n: completedCount, total: lessons.length })}
-                            </span>
-                            <span>⭐ {worldStars}/{maxStars}</span>
-                          </div>
-                          <div className="h-2 rounded-full bg-black/30 overflow-hidden">
-                            <motion.div
-                              className="h-full rounded-full"
-                              style={{ background: world.theme.accentColor }}
-                              initial={{ width: 0 }}
-                              animate={{ width: `${lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0}%` }}
-                              transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
-                            />
-                          </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs" style={{ color: world.theme.textColor }}>
+                          <span>
+                            {t('common.completed', { n: completedCount, total: lessons.length })}
+                          </span>
+                          <span>⭐ {worldStars}/{maxStars}</span>
                         </div>
-                      )}
+                        <div className="h-2 rounded-full bg-black/30 overflow-hidden">
+                          <motion.div
+                            className="h-full rounded-full"
+                            style={{ background: world.theme.accentColor }}
+                            initial={{ width: 0 }}
+                            animate={{ width: `${lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0}%` }}
+                            transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </motion.button>
                 )
@@ -208,16 +185,9 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
               <p className="text-center text-yellow-200/60 text-sm font-semibold mb-2">
                 {t('bonus.section.subtitle')}
               </p>
-              {!bonusUnlocked && (
-                <p className="text-center text-white/40 text-xs mb-6">
-                  {t('bonus.locked.hint')}
-                </p>
-              )}
-              {bonusUnlocked && (
-                <p className="text-center text-yellow-300/80 text-xs font-bold mb-6">
-                  ✨ {t('bonus.unlocked.all')} ✨
-                </p>
-              )}
+              <p className="text-center text-yellow-300/80 text-xs font-bold mb-6">
+                ✨ {t('bonus.unlocked.all')} ✨
+              </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
                 {bonusWorlds.map((world, index) => {
@@ -229,21 +199,17 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                   return (
                     <motion.button
                       key={world.id}
-                      onClick={() => bonusUnlocked && navigate(`/app/blocks/world/${world.id}`)}
-                      className={`relative rounded-3xl overflow-hidden text-left transition-all ${
-                        bonusUnlocked ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
-                      }`}
+                      onClick={() => navigate(`/app/blocks/world/${world.id}`)}
+                      className="relative rounded-3xl overflow-hidden text-left transition-all cursor-pointer"
                       style={{
                         background: world.theme.bgGradient,
-                        boxShadow: bonusUnlocked
-                          ? `0 8px 32px ${world.theme.accentColor}40, 0 0 0 1px rgba(234,179,8,0.3)`
-                          : 'none',
-                        border: `1px solid ${bonusUnlocked ? 'rgba(234,179,8,0.4)' : world.theme.cellBorder}`,
+                        boxShadow: `0 8px 32px ${world.theme.accentColor}40, 0 0 0 1px rgba(234,179,8,0.3)`,
+                        border: '1px solid rgba(234,179,8,0.4)',
                       }}
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8 + index * 0.12 }}
-                      whileHover={bonusUnlocked ? { y: -4, scale: 1.02 } : {}}
+                      whileHover={{ y: -4, scale: 1.02 }}
                     >
                       {/* Golden BONUS badge */}
                       <div
@@ -253,24 +219,16 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                         BONUS
                       </div>
 
-                      {!bonusUnlocked && (
-                        <div className="absolute bottom-3 right-3 z-20 p-2 rounded-xl bg-black/60">
-                          <Lock className="w-3.5 h-3.5 text-white/80" />
-                        </div>
-                      )}
-
-                      {bonusUnlocked && (
-                        <div
-                          className="absolute -inset-1 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                          style={{ background: `radial-gradient(circle, ${world.theme.accentColor}25, transparent 70%)` }}
-                        />
-                      )}
+                      <div
+                        className="absolute -inset-1 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                        style={{ background: `radial-gradient(circle, ${world.theme.accentColor}25, transparent 70%)` }}
+                      />
 
                       <div className="p-5 sm:p-6">
                         <div className="flex items-start justify-between mb-3">
                           <motion.span
                             className="text-4xl sm:text-5xl"
-                            animate={{ rotate: bonusUnlocked ? [0, 8, -8, 0] : 0 }}
+                            animate={{ rotate: [0, 8, -8, 0] }}
                             transition={{ duration: 3, repeat: Infinity, delay: index * 0.6 }}
                           >
                             {world.emoji}
@@ -291,25 +249,23 @@ export function BlocksHome({ progress, isWorldUnlocked, isBonusWorldUnlocked, ge
                           {t('common.learn')} <strong>{localize(world.concept, language)}</strong>
                         </p>
 
-                        {bonusUnlocked && (
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between text-xs" style={{ color: world.theme.textColor }}>
-                              <span>
-                                {t('common.completed', { n: completedCount, total: lessons.length })}
-                              </span>
-                              <span>⭐ {worldStars}/{maxStars}</span>
-                            </div>
-                            <div className="h-2 rounded-full bg-black/30 overflow-hidden">
-                              <motion.div
-                                className="h-full rounded-full"
-                                style={{ background: `linear-gradient(90deg, ${world.theme.accentColor}, #f59e0b)` }}
-                                initial={{ width: 0 }}
-                                animate={{ width: `${lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0}%` }}
-                                transition={{ duration: 0.8, delay: 0.8 + index * 0.12 + 0.3 }}
-                              />
-                            </div>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between text-xs" style={{ color: world.theme.textColor }}>
+                            <span>
+                              {t('common.completed', { n: completedCount, total: lessons.length })}
+                            </span>
+                            <span>⭐ {worldStars}/{maxStars}</span>
                           </div>
-                        )}
+                          <div className="h-2 rounded-full bg-black/30 overflow-hidden">
+                            <motion.div
+                              className="h-full rounded-full"
+                              style={{ background: `linear-gradient(90deg, ${world.theme.accentColor}, #f59e0b)` }}
+                              initial={{ width: 0 }}
+                              animate={{ width: `${lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0}%` }}
+                              transition={{ duration: 0.8, delay: 0.8 + index * 0.12 + 0.3 }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </motion.button>
                   )

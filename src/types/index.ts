@@ -28,7 +28,6 @@ export interface World {
   obstacleEmoji: string
   goalEmoji: string
   theme: WorldTheme
-  unlockAtXP: number
   lessonCount: number
   isBonus?: boolean
 }

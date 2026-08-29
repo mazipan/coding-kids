@@ -19,7 +19,6 @@ export const debuggingWorld: World = {
     accentColor: '#ef4444',
     textColor: '#fca5a5',
   },
-  unlockAtXP: 999999,
   lessonCount: 10,
   isBonus: true,
 }

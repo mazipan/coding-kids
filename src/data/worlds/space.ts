@@ -19,6 +19,5 @@ export const spaceWorld: World = {
     accentColor: '#818cf8',
     textColor: '#c7d2fe',
   },
-  unlockAtXP: 100,
   lessonCount: 6,
 }

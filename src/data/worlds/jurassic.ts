@@ -19,7 +19,6 @@ export const jurassicWorld: World = {
     accentColor: '#eab308',
     textColor: '#fef08a',
   },
-  unlockAtXP: 999999,
   lessonCount: 10,
   isBonus: true,
 }

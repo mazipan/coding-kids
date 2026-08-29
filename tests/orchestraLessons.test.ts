@@ -31,13 +31,9 @@ describe('Code Orchestra', () => {
     })
   })
 
-  test('bonus lessons require the main finale and the previous lesson', () => {
+  test('INV-L1: bonus lessons need no finale; the tutorial is optional, lessons after it unlock in order', () => {
     const progress: PlayerProgress = { xp: 0, level: 1, lessons: {}, badges: [], totalStars: 0, lastPlayed: '' }
-    expect(isLessonAvailable(progress, 'orchestra-1', 'orchestra')).toBe(false)
-    progress.lessons['portal-4'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'orchestra-0', 'orchestra')).toBe(true)
-    expect(isLessonAvailable(progress, 'orchestra-1', 'orchestra')).toBe(false)
-    progress.lessons['orchestra-0'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'orchestra-1', 'orchestra')).toBe(true)
     expect(isLessonAvailable(progress, 'orchestra-2', 'orchestra')).toBe(false)
     progress.lessons['orchestra-1'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }

@@ -2,23 +2,23 @@
 
 ## Block coding worlds
 
-| ID | Emoji | Concept | Ages | unlockAtXP | Lessons |
-|----|-------|---------|------|------------|---------|
-| jungle | 🌿 | Sequences | 5–7 | 0 | 6 |
-| space | 🚀 | Loops | 7–9 | 100 | 6 |
-| ocean | 🌊 | Variables | 9–10 | 350 | 5 |
-| caves | 💎 | Conditions | 10–11 | 700 | 6 |
-| factory | 🤖 | Functions | 11–13 | 1250 | 6 |
-| portal | ⏰ | Arrays & Lists | 12–14 | 1650 | 10 |
-| jurassic | 🦕 | Real-World Pathfinding | 10–14 | bonus gate | 10 |
-| parking | 🚗 | Sorting & Routing | 10–14 | bonus gate | 10 |
-| sorting | 📦 | Algorithms & Data | 11–14 | bonus gate | 10 |
-| debugging | 🐛 | Debugging | 11–14 | bonus gate | 10 |
-| orchestra | 🎵 | Loops & Functions | 8–12 | bonus gate | 10 |
-| cove | 🧭 | Coordinates & Position | 10–13 | bonus gate | 10 |
-| eco | 🌱 | Decomposition & Reuse | 10–14 | bonus gate | 10 |
+| ID | Emoji | Concept | Ages | Lessons |
+|----|-------|---------|------|---------|
+| jungle | 🌿 | Sequences | 5–7 | 6 |
+| space | 🚀 | Loops | 7–9 | 6 |
+| ocean | 🌊 | Variables | 9–10 | 5 |
+| caves | 💎 | Conditions | 10–11 | 6 |
+| factory | 🤖 | Functions | 11–13 | 6 |
+| portal | ⏰ | Arrays & Lists | 12–14 | 10 |
+| jurassic | 🦕 | Real-World Pathfinding | 10–14 | 10 |
+| parking | 🚗 | Sorting & Routing | 10–14 | 10 |
+| sorting | 📦 | Algorithms & Data | 11–14 | 10 |
+| debugging | 🐛 | Debugging | 11–14 | 10 |
+| orchestra | 🎵 | Loops & Functions | 8–12 | 10 |
+| cove | 🧭 | Coordinates & Position | 10–13 | 10 |
+| eco | 🌱 | Decomposition & Reuse | 10–14 | 10 |
 
-Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1. Three bonus worlds ship their own tutorial (`orchestra-0`, `cove-0`, `eco-0`) and gate lesson 1 behind it — see `TUTORIAL_GATED_BONUS_WORLDS` in `src/store/useProgress.ts`.
+The blocks path has no world-level lock (INV-L2): every world — main and bonus alike — is playable from the start, regardless of XP or any lesson's completion state elsewhere in the app. `World` has no `unlockAtXP` field. `isBonus` still marks the seven bonus worlds for display purposes (the "BONUS" badge and the separate section on the world map) but no longer gates access to the world itself. Lessons *within* a world still unlock one at a time — see "Lesson unlock rules" below.
 
 `eco` (Eco City) is a capstone: it uses all six existing Blockly categories and introduces no new block, no new engine behaviour, and no new goal type. Every one of its canonical routes is simulated in `tests/ecoCityLessons.test.ts`; any change to an Eco City grid must keep that test green.
 
@@ -26,10 +26,11 @@ Source: `src/data/worlds/` — one file per world (e.g. `jungle.ts` exports `jun
 
 `character` may also set `facingDefault: 'left'` when the emoji's standard glyph design has a real inherent left/right facing (a vehicle, boat, or human pictograph drawn facing one way) — `GameGrid` mirrors the character horizontally so it visually faces the direction it's currently travelling, since gameplay defaults to moving rightward. Omit the field for any character that is drawn front-on or pose-neutral (people, animals in a standing/sitting pose, robots) — flipping those has no correctness benefit and the field should not be added "just in case." Currently set on `loops` (🏎️), `cove` (⛵), and `ocean` (🏊).
 
-## Lesson unlock rules
+## Lesson unlock rules (INV-L1 — both paths)
 
-- Lesson 0 in any world: always unlocked once the world itself is unlocked (lesson numbering is 0-indexed)
+- Lesson 0 in any world: always unlocked once the world itself is unlocked (lesson numbering is 0-indexed) — every blocks world is always unlocked (INV-L2)
 - Lesson N: requires lesson N-1 to be completed (`completed: true` in `useProgress`)
+- **Blocks-path exception:** where lesson 0 is a tutorial (`isTutorial: true` — the seven main worlds plus the bonus worlds `orchestra`, `cove`, `eco`), it is optional rather than a gate: lesson 1 is always open, whether or not the tutorial has been completed. Sequencing resumes normally from lesson 2 onward. The remaining bonus worlds (`jurassic`, `parking`, `sorting`, `debugging`) have no lesson 0 at all and open straight into an always-available lesson 1, for the same reason. The thinking path has no tutorial concept and follows the plain rule above with no exception — its lesson 1 always requires lesson 0.
 
 ## Lesson fields
 
@@ -298,15 +299,14 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
        accentColor: string,   // hex for buttons/highlights
        textColor: string,     // hex for readable text on the dark bg
      },
-     unlockAtXP: number,      // XP required to access; use 999999 for bonus worlds
      lessonCount: number,     // set to the number of lessons you're adding
-     isBonus?: true,          // only set for bonus worlds (unlockAtXP: 999999)
+     isBonus?: true,          // only set for bonus worlds — display grouping only, does not gate access (INV-L2)
    }
    ```
 3. Append the lessons to `src/data/lessons.ts` following the "Adding a new block coding lesson" steps above.
 4. If the new world introduces a new Blockly category (beyond `move`, `loops`, `variables`, `logic`, `functions`, `lists`), add it to `src/blockly/toolboxes.ts` and document it in the Blockly toolbox categories table above.
 5. Run `bun run build`.
-6. Add a decision log entry in `.ai/decisions/log/` explaining the new concept and XP unlock threshold choice.
+6. Add a decision log entry in `.ai/decisions/log/` explaining the new concept and, if it's a bonus world, why.
 
 ---
 

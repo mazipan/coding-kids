@@ -20,7 +20,6 @@ export const coveWorld: World = {
     accentColor: '#2dd4bf',
     textColor: '#99f6e4',
   },
-  unlockAtXP: 999999,
   lessonCount: 10,
   isBonus: true,
 }

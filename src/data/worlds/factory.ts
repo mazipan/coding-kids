@@ -19,6 +19,5 @@ export const factoryWorld: World = {
     accentColor: '#9ca3af',
     textColor: '#d1d5db',
   },
-  unlockAtXP: 1250,
   lessonCount: 6,
 }

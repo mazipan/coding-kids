@@ -142,7 +142,6 @@ const en: Translations = {
   // ── Bonus worlds ─────────────────────────────
   'bonus.section.title': 'Bonus Worlds',
   'bonus.section.subtitle': 'Real-world coding challenges — no XP required!',
-  'bonus.locked.hint': 'Finish "Master of Time" in Time Portal to unlock all bonus worlds!',
   'bonus.unlocked.all': 'All bonus levels unlocked — jump in anywhere!',
   'bonus.all.open': 'All levels open!',
 
@@ -157,7 +156,6 @@ const en: Translations = {
   'common.stars': 'Stars',
   'common.tries': 'tries',
   'common.completed': '{n}/{total} lessons',
-  'common.to.unlock': '{xp} XP to unlock',
   'common.need.xp': 'Need {xp} XP',
   'common.xp.reward': '⚡ {xp} XP',
 
@@ -430,7 +428,6 @@ const id: Translations = {
   // ── Bonus worlds ─────────────────────────────
   'bonus.section.title': 'Dunia Bonus',
   'bonus.section.subtitle': 'Tantangan coding dunia nyata — tanpa XP!',
-  'bonus.locked.hint': 'Tamatkan "Master Waktu" di Portal Waktu untuk membuka semua dunia bonus!',
   'bonus.unlocked.all': 'Semua level bonus terbuka — langsung masuk ke mana saja!',
   'bonus.all.open': 'Semua level terbuka!',
 
@@ -445,7 +442,6 @@ const id: Translations = {
   'common.stars': 'Bintang',
   'common.tries': 'percobaan',
   'common.completed': '{n}/{total} pelajaran',
-  'common.to.unlock': '{xp} XP lagi',
   'common.need.xp': 'Butuh {xp} XP',
   'common.xp.reward': '⚡ {xp} XP',
 

@@ -19,7 +19,6 @@ export const ecoWorld: World = {
     accentColor: '#a3e635',
     textColor: '#ecfccb',
   },
-  unlockAtXP: 999999,
   lessonCount: 10,
   isBonus: true,
 }

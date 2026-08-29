@@ -19,6 +19,5 @@ export const portalWorld: World = {
     accentColor: '#fbbf24',
     textColor: '#fef3c7',
   },
-  unlockAtXP: 1650,
   lessonCount: 10,
 }

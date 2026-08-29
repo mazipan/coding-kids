@@ -3,7 +3,6 @@ import { getThinkingLessonsByWorld } from '../data/thinkingLessons'
 import { THINKING_WORLDS } from '../data/thinkingWorlds'
 import { WORLDS } from '../data/worlds'
 import { maxStarsForThresholds } from '../data/xpSystem'
-import { areBonusWorldsUnlocked } from '../store/useProgress'
 import type { LocalizedString, PlayerProgress } from '../types'
 
 /**
@@ -26,7 +25,7 @@ export interface WorldStats {
   id: string
   name: LocalizedString
   emoji: string
-  /** False when the world is still XP-gated (blocks) or behind the bonus gate. */
+  /** Always true for blocks worlds (INV-L2 — no lock). Thinking worlds are never gated either (INV-L3). */
   unlocked: boolean
   isBonus: boolean
   stars: number
@@ -85,8 +84,6 @@ function summarise(path: PathId, worlds: WorldStats[]): PathStats {
 }
 
 function blocksWorldStats(progress: PlayerProgress): WorldStats[] {
-  const bonusUnlocked = areBonusWorldsUnlocked(progress)
-
   return WORLDS.map(world => {
     // getLessonsByWorld drops the world tutorial, the same way every world card does.
     const lessons = getLessonsByWorld(world.id)
@@ -98,7 +95,8 @@ function blocksWorldStats(progress: PlayerProgress): WorldStats[] {
       id: world.id,
       name: world.name,
       emoji: world.emoji,
-      unlocked: world.isBonus ? bonusUnlocked : progress.xp >= world.unlockAtXP,
+      // INV-L2 — the blocks path has no lock; every world is unlocked from the start.
+      unlocked: true,
       isBonus: world.isBonus ?? false,
       stars,
       maxStars,

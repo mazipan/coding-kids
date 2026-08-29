@@ -19,7 +19,6 @@ export const sortingWorld: World = {
     accentColor: '#22d3ee',
     textColor: '#a5f3fc',
   },
-  unlockAtXP: 999999,
   lessonCount: 10,
   isBonus: true,
 }

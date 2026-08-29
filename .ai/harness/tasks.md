@@ -20,7 +20,7 @@ Standard task prompts. Copy, adjust the specifics, and hand to an agent.
 
 ## Add a world
 
-> "Add a seventh world: Cloud Kingdom. Concept: objects/maps. Ages 13–15. Emoji: ☁️. unlockAtXP: 2200. Character: 🌤️, characterName: Nimbus. Theme colors: light blue accent."
+> "Add a seventh world: Cloud Kingdom. Concept: objects/maps. Ages 13–15. Emoji: ☁️. Character: 🌤️, characterName: Nimbus. Theme colors: light blue accent."
 
 **Files touched:** `src/data/worlds/{new-id}.ts` (new file, exports `{newId}World`), `src/data/worlds/index.ts` (register it in `WORLDS`), `src/i18n/translations.ts`, `src/data/lessons.ts` (at least 3 starter lessons), `src/types/index.ts` (add new WorldId)  
 **Checklist:**
