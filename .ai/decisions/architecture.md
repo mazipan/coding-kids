@@ -65,3 +65,16 @@
 - Only two real routes exist — a data router would be over-engineering
 - v6-style API is simpler and has no loader/action complexity
 - v7 is backward compatible with v6 declarative API
+
+---
+
+## Landing page prerendering
+
+**Decision:** `/` is prerendered to static HTML at build time (`src/entry-server.tsx` + `scripts/prerender.mjs`, via `react-dom/server`'s `renderToString` and a one-off `vite build --ssr` of that one entry). `/app/*` stays a pure client-rendered SPA, served from a separate `dist/app.html` shell via a `netlify.toml` `/app*` redirect, so the prerendered landing markup never collides with a game route.
+
+**Rationale:**
+- The landing page is pure marketing content with no per-user state needed for its first paint — real HTML on first byte beats a blank `#root` for crawlers, no-JS visits, and perceived load time.
+- `/app/*` is inherently interactive (Blockly, the game grid, localStorage-backed progress) and gets no benefit from prerendering — full SSR of the whole app would add real complexity for zero payoff there.
+- No new dependency: `react-dom/server` and Vite's own `--ssr` build flag do the whole job for the one route that needs it, versus pulling in a prerendering plugin or a headless-browser snapshot step.
+
+**Constraint this imposes:** Anything reachable from `LandingScreen`'s render tree must stay safe to render in Node — no synchronous `window`/`document`/`localStorage` reads during render. `LanguageProvider` and the landing route's returning-player check defer their localStorage-derived state to a post-mount `useEffect`, and only on the actual hydration path (see `.ai/agents/context.md` → Known gotchas), specifically so the server-rendered and first-client-rendered trees agree and React doesn't hydration-mismatch. Full reasoning and the plan-review findings that shaped this are in `.ai/decisions/log/2026-08-29-04-prerender-landing-page-via-vite-ssr-build.md` and `2026-08-29-05-delete-redundant-public-redirects-file.md`.
