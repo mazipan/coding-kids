@@ -19,5 +19,5 @@ export const jungleWorld: World = {
     accentColor: '#4ade80',
     textColor: '#bbf7d0',
   },
-  lessonCount: 6,
+  lessonCount: 20,
 }

@@ -15,12 +15,44 @@ const solutions: ActionType[][] = [
   [...Array(6).fill(['move_right', 'move_down']).flat()],
   [...Array(2).fill(['move_right', 'move_right', 'move_down', 'move_down', 'move_right', 'move_right', 'move_up', 'move_up']).flat(), 'move_right'],
   ['move_right','move_right','move_down','move_down','move_left','move_left','move_down','move_down',...Array(7).fill('move_right'),...Array(2).fill('move_down')],
+  // 11 — uneven bar (right, down, down) x4
+  [...Array(4).fill(['move_right', 'move_down', 'move_down']).flat()],
+  // 12 — triple-step bar (right, right, right, down) x3
+  [...Array(3).fill(['move_right', 'move_right', 'move_right', 'move_down']).flat()],
+  // 13 — four-call refrain (right, right) x4
+  [...Array(8).fill('move_right')],
+  // 14 — double chorus: right x4, then down x4
+  [...Array(4).fill('move_right'), ...Array(4).fill('move_down')],
+  // 15 — long refrain (right, right, down) x5
+  [...Array(5).fill(['move_right', 'move_right', 'move_down']).flat()],
+  // 16 — falling refrain (down, right, right) x4
+  [...Array(4).fill(['move_down', 'move_right', 'move_right']).flat()],
+  // 17 — two-part invention: (right, down) x4 then (down, right) x3
+  [...Array(4).fill(['move_right', 'move_down']).flat(), ...Array(3).fill(['move_down', 'move_right']).flat()],
+  // 18 — triple movement: (right,right,down)x2, (down,right,right)x2, (right,down,down)x2
+  [
+    ...Array(2).fill(['move_right', 'move_right', 'move_down']).flat(),
+    ...Array(2).fill(['move_down', 'move_right', 'move_right']).flat(),
+    ...Array(2).fill(['move_right', 'move_down', 'move_down']).flat(),
+  ],
+  // 19 — grand movement: (right,right,down)x3, (down,right,right)x2, (right,down,down)x2
+  [
+    ...Array(3).fill(['move_right', 'move_right', 'move_down']).flat(),
+    ...Array(2).fill(['move_down', 'move_right', 'move_right']).flat(),
+    ...Array(2).fill(['move_right', 'move_down', 'move_down']).flat(),
+  ],
+  // 20 — maestro's symphony: (right,right,down)x3, (down,right,right)x3, (right,down,down)x2
+  [
+    ...Array(3).fill(['move_right', 'move_right', 'move_down']).flat(),
+    ...Array(3).fill(['move_down', 'move_right', 'move_right']).flat(),
+    ...Array(2).fill(['move_right', 'move_down', 'move_down']).flat(),
+  ],
 ] as ActionType[][]
 
 describe('Code Orchestra', () => {
   test('all canonical routes remain bounded and solve their lesson', () => {
     const lessons = getLessonsByWorld('orchestra')
-    expect(lessons).toHaveLength(10)
+    expect(lessons).toHaveLength(20)
     lessons.forEach((lesson, index) => {
       const finalState = solutions[index].reduce(
         (state, type) => applyAction(state, { type }, lesson),

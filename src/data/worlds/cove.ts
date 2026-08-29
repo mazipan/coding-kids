@@ -20,6 +20,6 @@ export const coveWorld: World = {
     accentColor: '#2dd4bf',
     textColor: '#99f6e4',
   },
-  lessonCount: 10,
+  lessonCount: 20,
   isBonus: true,
 }

@@ -19,6 +19,6 @@ export const orchestraWorld: World = {
     accentColor: '#f472b6',
     textColor: '#fce7f3',
   },
-  lessonCount: 10,
+  lessonCount: 20,
   isBonus: true,
 }

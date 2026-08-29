@@ -19,6 +19,6 @@ export const sortingWorld: World = {
     accentColor: '#22d3ee',
     textColor: '#a5f3fc',
   },
-  lessonCount: 10,
+  lessonCount: 20,
   isBonus: true,
 }

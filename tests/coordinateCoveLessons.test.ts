@@ -69,6 +69,86 @@ const SOLUTIONS: Array<{ id: string; blocks: number; code: string }> = [
       `while (currentCol() < 8) {\n${TICK}  moveRight();\n}\n` +
       `while (currentRow() < 8) {\n${TICK}  moveDown();\n}\n`,
   },
+  {
+    id: 'cove-11',
+    blocks: 10,
+    code:
+      `while (currentCol() < 7) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 5) {\n${TICK}  moveDown();\n}\n`,
+  },
+  {
+    id: 'cove-12',
+    blocks: 15,
+    code:
+      `while (currentRow() < 3) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() < 7) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 6) {\n${TICK}  moveDown();\n}\n`,
+  },
+  { id: 'cove-13', blocks: 5, code: `while (currentCol() > 3) {\n${TICK}  moveLeft();\n}\n` },
+  {
+    id: 'cove-14',
+    blocks: 10,
+    code:
+      `var steps = 4;\nfor (var i = 0; i < steps; i++) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 4) {\n${TICK}  moveDown();\n}\n`,
+  },
+  {
+    id: 'cove-15',
+    blocks: 20,
+    code:
+      `while (currentCol() < 5) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 6) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() < 9) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 9) {\n${TICK}  moveDown();\n}\n`,
+  },
+  {
+    id: 'cove-16',
+    blocks: 17,
+    code:
+      `var steps = 3;\nfor (var i = 0; i < steps; i++) {\n${TICK}  moveRight();\n}\n` +
+      `steps = steps + 2;\nfor (var j = 0; j < steps; j++) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 5) {\n${TICK}  moveDown();\n}\n`,
+  },
+  {
+    id: 'cove-17',
+    blocks: 25,
+    code:
+      `while (currentCol() < 4) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 3) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() < 8) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 6) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() < 11) {\n${TICK}  moveRight();\n}\n`,
+  },
+  {
+    id: 'cove-18',
+    blocks: 20,
+    code:
+      `while (currentCol() < 6) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 4) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() > 2) {\n${TICK}  moveLeft();\n}\n` +
+      `while (currentRow() < 7) {\n${TICK}  moveDown();\n}\n`,
+  },
+  {
+    id: 'cove-19',
+    blocks: 30,
+    code:
+      `while (currentCol() < 3) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 3) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() < 7) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 6) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() < 10) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 9) {\n${TICK}  moveDown();\n}\n`,
+  },
+  {
+    id: 'cove-20',
+    blocks: 27,
+    code:
+      `var steps = 3;\nfor (var i = 0; i < steps; i++) {\n${TICK}  moveRight();\n}\n` +
+      `steps = steps + 3;\nfor (var j = 0; j < steps; j++) {\n${TICK}  moveRight();\n}\n` +
+      `while (currentRow() < 4) {\n${TICK}  moveDown();\n}\n` +
+      `while (currentCol() > 2) {\n${TICK}  moveLeft();\n}\n` +
+      `while (currentRow() < 8) {\n${TICK}  moveDown();\n}\n`,
+  },
 ]
 
 function lessonById(id: string): Lesson {
@@ -85,7 +165,7 @@ function replay(lesson: Lesson, code: string) {
 }
 
 describe('Coordinate Cove — world shape', () => {
-  test('the world is a bonus world with a tutorial plus 10 lessons', () => {
+  test('the world is a bonus world with a tutorial plus 20 lessons', () => {
     const world = getWorld('cove')
     expect(world?.isBonus).toBe(true)
     expect(getLessonsByWorld('cove')).toHaveLength(world?.lessonCount)
@@ -99,7 +179,11 @@ describe('Coordinate Cove — world shape', () => {
   })
 
   test('every sensor lesson requires the sensors category for full stars', () => {
-    for (const id of ['cove-5', 'cove-6', 'cove-7', 'cove-8', 'cove-9', 'cove-10']) {
+    for (const id of [
+      'cove-5', 'cove-6', 'cove-7', 'cove-8', 'cove-9', 'cove-10',
+      'cove-11', 'cove-12', 'cove-13', 'cove-14', 'cove-15',
+      'cove-16', 'cove-17', 'cove-18', 'cove-19', 'cove-20',
+    ]) {
       expect(lessonById(id).requiredCategories).toContain('sensors')
     }
   })

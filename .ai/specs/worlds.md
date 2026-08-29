@@ -4,19 +4,25 @@
 
 | ID | Emoji | Concept | Ages | Lessons |
 |----|-------|---------|------|---------|
-| jungle | 🌿 | Sequences | 5–7 | 6 |
-| space | 🚀 | Loops | 7–9 | 6 |
-| ocean | 🌊 | Variables | 9–10 | 5 |
-| caves | 💎 | Conditions | 10–11 | 6 |
-| factory | 🤖 | Functions | 11–13 | 6 |
-| portal | ⏰ | Arrays & Lists | 12–14 | 10 |
-| jurassic | 🦕 | Real-World Pathfinding | 10–14 | 10 |
-| parking | 🚗 | Sorting & Routing | 10–14 | 10 |
-| sorting | 📦 | Algorithms & Data | 11–14 | 10 |
-| debugging | 🐛 | Debugging | 11–14 | 10 |
-| orchestra | 🎵 | Loops & Functions | 8–12 | 10 |
-| cove | 🧭 | Coordinates & Position | 10–13 | 10 |
-| eco | 🌱 | Decomposition & Reuse | 10–14 | 10 |
+| jungle | 🌿 | Sequences | 5–7 | 20 |
+| space | 🚀 | Loops | 7–9 | 20 |
+| loops | 🔄 | Loop Efficiency | 8–10 | 20 |
+| ocean | 🌊 | Variables | 9–11 | 20 |
+| caves | 💎 | Conditions | 10–12 | 20 |
+| factory | 🤖 | Functions | 11–13 | 20 |
+| portal | ⏰ | Arrays & Lists | 12–14 | 20 |
+| jurassic | 🦕 | Real-World Pathfinding | 10–14 | 20 |
+| parking | 🚗 | Sorting & Routing | 10–14 | 20 |
+| sorting | 📦 | Algorithms & Data | 11–14 | 20 |
+| debugging | 🐛 | Debugging | 11–14 | 20 |
+| orchestra | 🎵 | Loops & Functions | 8–12 | 20 |
+| cove | 🧭 | Coordinates & Position | 10–13 | 20 |
+| eco | 🌱 | Decomposition & Reuse | 10–14 | 20 |
+
+Every block-coding world now carries `lessonCount: 20` — see "Keeping lesson counts in sync" below for the
+rule that keeps it that way. `loops` (Loop Land) sits between `space` and `ocean` in `WORLDS`/`src/data/
+worlds/index.ts`; it was missing from this table before this rule existed even though the world itself
+predates it.
 
 The blocks path has no world-level lock (INV-L2): every world — main and bonus alike — is playable from the start, regardless of XP or any lesson's completion state elsewhere in the app. `World` has no `unlockAtXP` field. `isBonus` still marks the seven bonus worlds for display purposes (the "BONUS" badge and the separate section on the world map) but no longer gates access to the world itself. Lessons *within* a world still unlock one at a time — see "Lesson unlock rules" below.
 
@@ -264,11 +270,21 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
    ```ts
    cells: (() => { const g = emptyGrid(6, 6); g[2][3] = 'obstacle'; return g })()
    ```
-5. `starThresholds: [bronze, silver]` — `bronze` is the upper limit for 2 stars, `silver` for 3 stars. Bronze must be ≥ silver. Example: `[6, 4]` means ≤4 blocks → 3 stars, ≤6 blocks → 2 stars, >6 → 1 star. Use `[999, 999]` for tutorial lessons where stars don't matter.
+5. `starThresholds: [bronze, silver]` — `bronze` is the upper limit for 2 stars, `silver` for 3 stars. Bronze must be ≥ silver. Example: `[6, 4]` means ≤4 blocks → 3 stars, ≤6 blocks → 2 stars, >6 → 1 star. Use `[999, 999]` for tutorial lessons where stars don't matter. A 4-tuple `[t1, t2, t3, t4]` (descending) instead unlocks a 5-star scale — `blockCount <= t4` → 5★, `<= t3` → 4★, `<= t2` → 3★, `<= t1` → 2★, else 1★. `caves`, `factory`, `portal`, and every world after them use the 4-tuple; match whichever shape the rest of that world's lessons already use (see `calculateStars`/`maxStarsForThresholds` in `src/data/xpSystem.ts`).
 6. Set `requiredCategories` to the concept the world teaches (e.g. `['loops']` for Space). Omit it for worlds/lessons that don't gate on a specific category.
 7. Provide at least 2 hints. Make hint 1 tell the kid what to do next; hint 2 give the answer more directly.
-8. Increment `lessonCount` in `src/data/worlds.ts` for the world that received the new lesson.
+8. Increment `lessonCount` in the world's file under `src/data/worlds/` (e.g. `src/data/worlds/jungle.ts`).
 9. Run `bun run build` — TypeScript catches missing required fields.
+
+### Keeping lesson counts in sync
+
+Every block-coding world should carry the same `lessonCount` as the others unless there is a documented
+reason for a shorter world (record that reason in `.ai/decisions/log/`). Before adding a lesson to *one*
+world, check `lessonCount` across every world in `src/data/worlds/` — if the target world is already at the
+shared maximum, adding a lesson there without adding matching lessons elsewhere makes it deeper than its
+siblings again, which is exactly the inconsistency the 2026-08-29 lesson-count-uniformity change fixed (see
+`.ai/decisions/log/2026-08-29-04-uniform-block-world-lesson-counts.md`). When you lengthen or shorten one
+world, either bring the others to the same depth in the same change, or record why not.
 
 ---
 
@@ -278,7 +294,7 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
    ```ts
    export type WorldId = 'jungle' | 'space' | ... | 'yourNewWorld'
    ```
-2. Add the world object to `WORLDS` in `src/data/worlds.ts`. Required fields:
+2. Add a new file exporting the world object under `src/data/worlds/` (e.g. `src/data/worlds/yourNewWorld.ts`), then import and register it in `src/data/worlds/index.ts`'s `WORLDS` array. Required fields:
    ```ts
    {
      id: WorldId,

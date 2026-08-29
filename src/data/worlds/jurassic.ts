@@ -19,6 +19,6 @@ export const jurassicWorld: World = {
     accentColor: '#eab308',
     textColor: '#fef08a',
   },
-  lessonCount: 10,
+  lessonCount: 20,
   isBonus: true,
 }

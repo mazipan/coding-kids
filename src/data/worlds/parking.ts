@@ -19,6 +19,6 @@ export const parkingWorld: World = {
     accentColor: '#38bdf8',
     textColor: '#bae6fd',
   },
-  lessonCount: 10,
+  lessonCount: 20,
   isBonus: true,
 }

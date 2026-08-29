@@ -34,6 +34,30 @@ const solutions: ActionType[][] = [
   [...times(2, U), ...times(6, R), ...times(2, D)],
   // 10 — function, loop over it, then the run home around the river
   [...times(3, R, R, D), ...times(2, R), ...times(3, D)],
+  // 11 — turn into the alley, then one loop for seven bins
+  [...times(2, D), ...times(7, R)],
+  // 12 — the same length variable, grown twice, driving three legs
+  [...times(2, D), ...times(3, R), ...times(5, D)],
+  // 13 — two closed gates, two detours
+  [...times(2, D), ...times(6, R), ...times(2, D), ...times(2, R)],
+  // 14 — one corner function, called four times with a link road
+  times(4, R, R, D, R),
+  // 15 — five stops from the list, in order
+  [...times(3, R), ...times(3, D), ...times(4, R), ...times(3, U), ...times(2, R), ...times(5, D)],
+  // 16 — a detour function, called once inside an IF
+  [D, ...times(4, R), U, ...times(2, R)],
+  // 17 — a variable-length detour, guarded by an IF
+  [D, ...times(4, R), U],
+  // 18 — three list stops, a check-in function call after each but the last
+  [...times(4, R), R, ...times(3, D), R, ...times(3, R)],
+  // 19 — a variable-controlled repeat count driving the district function
+  times(3, R, R, D, R),
+  // 20 — variable-driven function loop, an IF-guarded river detour, then home
+  [
+    ...times(4, R, D, R, D, R),
+    ...times(2, D), ...times(3, R), ...times(2, U),
+    ...times(3, D), R,
+  ],
 ]
 
 function run(lesson: Lesson, actions: ActionType[]) {
@@ -43,10 +67,10 @@ function run(lesson: Lesson, actions: ActionType[]) {
 describe('Eco City', () => {
   const lessons = getLessonsByWorld('eco')
 
-  test('ships a tutorial plus ten lessons', () => {
+  test('ships a tutorial plus twenty lessons', () => {
     expect(getWorldTutorial('eco')).toBeDefined()
-    expect(lessons).toHaveLength(10)
-    expect(lessons.map(l => l.id)).toEqual(Array.from({ length: 10 }, (_, i) => `eco-${i + 1}`))
+    expect(lessons).toHaveLength(20)
+    expect(lessons.map(l => l.id)).toEqual(Array.from({ length: 20 }, (_, i) => `eco-${i + 1}`))
   })
 
   test('the tutorial route is solvable', () => {

@@ -19,6 +19,6 @@ export const debuggingWorld: World = {
     accentColor: '#ef4444',
     textColor: '#fca5a5',
   },
-  lessonCount: 10,
+  lessonCount: 20,
   isBonus: true,
 }

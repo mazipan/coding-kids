@@ -19,5 +19,5 @@ export const spaceWorld: World = {
     accentColor: '#818cf8',
     textColor: '#c7d2fe',
   },
-  lessonCount: 6,
+  lessonCount: 20,
 }

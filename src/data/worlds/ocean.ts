@@ -20,5 +20,5 @@ export const oceanWorld: World = {
     accentColor: '#38bdf8',
     textColor: '#bae6fd',
   },
-  lessonCount: 5,
+  lessonCount: 20,
 }

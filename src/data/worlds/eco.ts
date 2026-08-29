@@ -19,6 +19,6 @@ export const ecoWorld: World = {
     accentColor: '#a3e635',
     textColor: '#ecfccb',
   },
-  lessonCount: 10,
+  lessonCount: 20,
   isBonus: true,
 }
