@@ -19,5 +19,5 @@ export const portalWorld: World = {
     accentColor: '#fbbf24',
     textColor: '#fef3c7',
   },
-  lessonCount: 10,
+  lessonCount: 20,
 }

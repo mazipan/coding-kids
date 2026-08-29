@@ -189,8 +189,8 @@ export const LESSONS: Lesson[] = [
     number: 6,
     title: { en: 'Banana Bonanza', id: 'Pesta Pisang' },
     story: {
-      en: 'The jungle is full of bananas today! Bingo needs to collect ALL of them. One of his toughest days yet!',
-      id: 'Hutan penuh pisang hari ini! Bingo perlu mengumpulkan SEMUA pisang. Salah satu hari tersulitnya!',
+      en: 'The jungle is full of bananas today! Bingo needs to collect ALL of them. This was one of his toughest days yet!',
+      id: 'Hutan penuh pisang hari ini! Bingo perlu mengumpulkan SEMUA pisang. Ini salah satu hari tersulitnya!',
     },
     mascotMessage: {
       en: "Wow, so many bananas! 🍌🍌🍌 Can you plan a path that collects them all? You're so smart!",
@@ -326,12 +326,12 @@ export const LESSONS: Lesson[] = [
     number: 10,
     title: { en: 'Jungle Champion', id: 'Juara Hutan' },
     story: {
-      en: 'The biggest banana hunt ever! Four bananas, three thorny bushes, and the longest path Bingo has ever walked. Are you ready to become the Jungle Champion?',
-      id: 'Perburuan pisang terbesar! Empat pisang, tiga semak berduri, dan jalur terpanjang yang pernah Bingo lalui. Siap menjadi Juara Hutan?',
+      en: "One of Bingo's biggest banana hunts yet! Four bananas, three thorny bushes, and one of the longest paths Bingo has walked. Are you ready to become a Jungle Champion?",
+      id: 'Salah satu perburuan pisang terbesar Bingo! Empat pisang, tiga semak berduri, dan salah satu jalur terpanjang yang pernah Bingo lalui. Siap menjadi Juara Hutan?',
     },
     mascotMessage: {
-      en: "This is it — my biggest adventure! 🏆 Plan your whole path first, then build it step by step. You've got this! 🐒🍌",
-      id: 'Inilah dia — petualangan terbesarku! 🏆 Rencanakan seluruh jalurmu dulu, lalu susun langkah demi langkah. Kamu pasti bisa! 🐒🍌',
+      en: "This is one of my biggest adventures yet! 🏆 Plan your whole path first, then build it step by step. You've got this! 🐒🍌",
+      id: 'Ini salah satu petualangan terbesarku! 🏆 Rencanakan seluruh jalurmu dulu, lalu susun langkah demi langkah. Kamu pasti bisa! 🐒🍌',
     },
     gridRows: 8,
     gridCols: 8,
@@ -358,6 +358,418 @@ export const LESSONS: Lesson[] = [
       { en: 'Leg 1: right 6. Leg 2: down 2, left 5. Leg 3: down 2, right 6. Leg 4: down 3, left 4.', id: 'Bagian 1: kanan 6. Bagian 2: turun 2, kiri 5. Bagian 3: turun 2, kanan 6. Bagian 4: turun 3, kiri 4.' },
     ],
     starThresholds: [40, 28],
+  },
+  {
+    id: 'jungle-11',
+    worldId: 'jungle',
+    number: 11,
+    title: { en: 'Every Direction', id: 'Segala Arah' },
+    story: {
+      en: 'Bingo spots four bananas scattered in every direction today — some make him walk back the way he came, and one even needs him to climb back UP the jungle path!',
+      id: 'Bingo melihat empat pisang tersebar ke segala arah hari ini — beberapa membuatnya berjalan kembali ke arah semula, dan satu bahkan membutuhkan dia naik kembali ke atas jalur hutan!',
+    },
+    mascotMessage: {
+      en: "Whoa, this time I need EVERY direction — right, left, down, AND up! Let's map out the whole trail before we build it. 🐒",
+      id: 'Wah, kali ini aku butuh SEGALA arah — kanan, kiri, bawah, DAN atas! Ayo petakan seluruh jalur dulu sebelum kita menyusun bloknya. 🐒',
+    },
+    gridRows: 8,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(8, 8)
+      g[0][4] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[7][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [2, 6] },
+      { id: 'b2', pos: [2, 1] },
+      { id: 'b3', pos: [6, 3] },
+      { id: 'b4', pos: [5, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 24,
+    xpReward: 185,
+    hints: [
+      { en: "This time you'll need to use all four directions — plan the whole route before you start building blocks!", id: 'Kali ini kamu butuh keempat arah — rencanakan seluruh jalurnya sebelum mulai menyusun blok!' },
+      { en: 'Try: down 2, right 6 for the first banana. Then left 5 for the second. Then down 4, right 2 for the third. Finally up 1, right 4 for the last one!', id: 'Coba: turun 2, kanan 6 untuk pisang pertama. Lalu kiri 5 untuk pisang kedua. Lalu turun 4, kanan 2 untuk pisang ketiga. Terakhir naik 1, kanan 4 untuk pisang terakhir!' },
+    ],
+    starThresholds: [34, 24],
+  },
+  {
+    id: 'jungle-12',
+    worldId: 'jungle',
+    number: 12,
+    title: { en: 'Zigzag Vines', id: 'Zigzag di Hutan' },
+    story: {
+      en: 'The vines crisscross the whole jungle floor today, and Bingo must zigzag right, then left, then right, then left again to reach four bananas hidden along the winding trail.',
+      id: 'Sulur tanaman merambat menyilang di seluruh lantai hutan hari ini, dan Bingo harus zigzag kanan, lalu kiri, lalu kanan, lalu kiri lagi untuk mencapai empat pisang yang tersembunyi di sepanjang jalur berliku.',
+    },
+    mascotMessage: {
+      en: 'Zigzag time! 🌿 Right, left, right, left — let\'s follow the winding vine trail together!',
+      id: 'Waktunya zigzag! 🌿 Kanan, kiri, kanan, kiri — ayo ikuti jalur berliku ini bersama!',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[0][4] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[6][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [1, 6] },
+      { id: 'b2', pos: [3, 1] },
+      { id: 'b3', pos: [5, 7] },
+      { id: 'b4', pos: [7, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 31,
+    xpReward: 200,
+    hints: [
+      { en: 'Follow the zigzag — right and down, then left and down, then right and down, then left and down again!', id: 'Ikuti pola zigzag — kanan lalu bawah, kiri lalu bawah, kanan lalu bawah, kiri lalu bawah lagi!' },
+      { en: 'Try: down 1, right 6. Then down 2, left 5. Then down 2, right 6. Finally down 2, left 7!', id: 'Coba: turun 1, kanan 6. Lalu turun 2, kiri 5. Lalu turun 2, kanan 6. Terakhir turun 2, kiri 7!' },
+    ],
+    starThresholds: [44, 31],
+  },
+  {
+    id: 'jungle-13',
+    worldId: 'jungle',
+    number: 13,
+    title: { en: 'Twin Patches', id: 'Dua Rumpun Pisang' },
+    story: {
+      en: 'Bananas grow in pairs today! Bingo finds two bananas huddled close together near the top of the jungle, then two more huddled close together all the way at the bottom.',
+      id: 'Pisang tumbuh berpasangan hari ini! Bingo menemukan dua pisang berdekatan di bagian atas hutan, lalu dua pisang lagi berdekatan jauh di bagian bawah.',
+    },
+    mascotMessage: {
+      en: 'Pairs of bananas! 🍌🍌 Grab the close ones together, then make the long trip to the far pair!',
+      id: 'Pisang berpasangan! 🍌🍌 Ambil yang dekat dulu, lalu lakukan perjalanan jauh ke pasangan yang di bawah!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[3][3] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[6][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [1, 8] },
+      { id: 'b2', pos: [2, 8] },
+      { id: 'b3', pos: [8, 0] },
+      { id: 'b4', pos: [7, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 25,
+    xpReward: 215,
+    hints: [
+      { en: 'Grab the close pair together first, then make one long trip to the far pair!', id: 'Ambil pasangan yang dekat dulu, lalu lakukan satu perjalanan panjang ke pasangan yang jauh!' },
+      { en: 'Try: down 1, right 8 for the first banana, then down 1 for the second. Then down 6, left 8 for the third, then up 1 for the fourth!', id: 'Coba: turun 1, kanan 8 untuk pisang pertama, lalu turun 1 untuk pisang kedua. Lalu turun 6, kiri 8 untuk pisang ketiga, lalu naik 1 untuk pisang keempat!' },
+    ],
+    starThresholds: [35, 25],
+  },
+  {
+    id: 'jungle-14',
+    worldId: 'jungle',
+    number: 14,
+    title: { en: 'Thorn Wall', id: 'Tembok Duri' },
+    story: {
+      en: 'A long wall of thorny bushes stretches across the jungle, blocking the direct path to the first banana! Bingo must find the gap far below before he can continue his trek.',
+      id: 'Tembok panjang semak berduri membentang di hutan, menghalangi jalan langsung ke pisang pertama! Bingo harus mencari celah jauh di bawah sebelum bisa melanjutkan perjalanannya.',
+    },
+    mascotMessage: {
+      en: "Ouch, a whole WALL of thorns this time! 🌿 I have to go all the way down to find the gap. Let's plan it together!",
+      id: 'Aduh, ada TEMBOK penuh duri kali ini! 🌿 Aku harus turun jauh ke bawah untuk menemukan celahnya. Ayo rencanakan bersama!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[0][4] = 'obstacle'
+      g[1][4] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [1, 8] },
+      { id: 'b2', pos: [6, 1] },
+      { id: 'b3', pos: [8, 6] },
+      { id: 'b4', pos: [4, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 40,
+    xpReward: 230,
+    hints: [
+      { en: "The thorn wall blocks the straight path to the first banana — you'll need to go all the way down to find the gap!", id: 'Tembok duri menghalangi jalan lurus ke pisang pertama — kamu harus turun jauh untuk menemukan celahnya!' },
+      { en: 'Try: down 4, right 8, up 3 for the first banana. Then down 5, left 7. Then down 2, right 5. Finally up 4, right 2!', id: 'Coba: turun 4, kanan 8, naik 3 untuk pisang pertama. Lalu turun 5, kiri 7. Lalu turun 2, kanan 5. Terakhir naik 4, kanan 2!' },
+    ],
+    starThresholds: [56, 40],
+  },
+  {
+    id: 'jungle-15',
+    worldId: 'jungle',
+    number: 15,
+    title: { en: 'Banana Festival', id: 'Festival Pisang' },
+    story: {
+      en: "Five bananas ripened at once for the jungle's biggest banana festival! Bingo has never had to collect this many before.",
+      id: 'Lima pisang matang sekaligus untuk festival pisang terbesar di hutan! Bingo belum pernah harus mengumpulkan sebanyak ini sebelumnya.',
+    },
+    mascotMessage: {
+      en: "FIVE bananas?! 🍌🍌🍌🍌🍌 This is my biggest festival ever — let's plan every single step!",
+      id: 'LIMA pisang?! 🍌🍌🍌🍌🍌 Ini festival terbesarku — ayo rencanakan setiap langkahnya!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][1] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[4][0] = 'obstacle'
+      g[6][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [0, 4] },
+      { id: 'b2', pos: [3, 7] },
+      { id: 'b3', pos: [5, 2] },
+      { id: 'b4', pos: [7, 8] },
+      { id: 'b5', pos: [8, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 31,
+    xpReward: 245,
+    hints: [
+      { en: 'Five bananas is a lot to track — plan the whole path before you start if it helps!', id: 'Lima pisang itu banyak untuk diingat — coba rencanakan jalurnya sebelum mulai jika membantu!' },
+      { en: 'Try: right 4, then down 3 right 3, then down 2 left 5, then down 2 right 6, then down 1 left 5!', id: 'Coba: kanan 4, lalu turun 3 kanan 3, lalu turun 2 kiri 5, lalu turun 2 kanan 6, lalu turun 1 kiri 5!' },
+    ],
+    starThresholds: [43, 31],
+  },
+  {
+    id: 'jungle-16',
+    worldId: 'jungle',
+    number: 16,
+    title: { en: 'Early Thorns', id: 'Duri di Awal Jalan' },
+    story: {
+      en: "Right from the very first steps, thorny bushes block Bingo's way! He must head down to find the gap before he can even start collecting bananas.",
+      id: 'Sejak langkah pertama, semak berduri langsung menghalangi jalan Bingo! Dia harus turun ke bawah dulu untuk menemukan celah sebelum bisa mulai mengumpulkan pisang.',
+    },
+    mascotMessage: {
+      en: "Thorns right at the start?! 😮 I can't even take my first steps forward. Help me find the gap below!",
+      id: 'Duri sudah menghalangi sejak awal?! 😮 Aku bahkan belum bisa melangkah maju. Bantu aku menemukan celah di bawah!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[0][2] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [2, 6] },
+      { id: 'b2', pos: [1, 8] },
+      { id: 'b3', pos: [6, 1] },
+      { id: 'b4', pos: [8, 7] },
+      { id: 'b5', pos: [7, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 42,
+    xpReward: 260,
+    hints: [
+      { en: 'A row of thorny bushes blocks the way right from the start — head down first to find the gap!', id: 'Sederet semak berduri menghalangi jalan sejak awal — turun dulu untuk menemukan celahnya!' },
+      { en: 'Try: down 5, right 6, up 3 for the first banana. Then up 1, right 2. Then down 5, left 7. Then down 2, right 6. Finally up 1, left 4!', id: 'Coba: turun 5, kanan 6, naik 3 untuk pisang pertama. Lalu naik 1, kanan 2. Lalu turun 5, kiri 7. Lalu turun 2, kanan 6. Terakhir naik 1, kiri 4!' },
+    ],
+    starThresholds: [59, 42],
+  },
+  {
+    id: 'jungle-17',
+    worldId: 'jungle',
+    number: 17,
+    title: { en: 'Two Thorn Walls', id: 'Dua Tembok Duri' },
+    story: {
+      en: "Not one but TWO long walls of thorns cut across the jungle today. Bingo must find the gap in each wall — and remember which way to turn so he doesn't get stuck the second time.",
+      id: 'Bukan cuma satu, tapi DUA tembok panjang semak berduri melintasi hutan hari ini. Bingo harus menemukan celah di setiap tembok — dan ingat ke mana harus berbelok agar tidak terjebak untuk kedua kalinya.',
+    },
+    mascotMessage: {
+      en: 'Two thorn walls this time! 🌿🌿 One gap is easy to spot, but watch out for the second wall later in the trail!',
+      id: 'Dua tembok duri kali ini! 🌿🌿 Celah pertama mudah ditemukan, tapi hati-hati dengan tembok kedua nanti!',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[0][3] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [1, 7] },
+      { id: 'b2', pos: [4, 1] },
+      { id: 'b3', pos: [7, 8] },
+      { id: 'b4', pos: [6, 4] },
+      { id: 'b5', pos: [8, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 41,
+    xpReward: 280,
+    hints: [
+      { en: "There are two thorn walls this time — the first wall's gap is further down, and watch for the second wall later on!", id: 'Ada dua tembok duri kali ini — celah tembok pertama ada jauh di bawah, dan waspada tembok kedua nanti!' },
+      { en: 'Try: down 3, right 7, up 2 for the first banana. Then down 3, left 6. Then down 3, right 7. Then left 4, up 1. Finally down 2, left 3!', id: 'Coba: turun 3, kanan 7, naik 2 untuk pisang pertama. Lalu turun 3, kiri 6. Lalu turun 3, kanan 7. Lalu kiri 4, naik 1. Terakhir turun 2, kiri 3!' },
+    ],
+    starThresholds: [57, 41],
+  },
+  {
+    id: 'jungle-18',
+    worldId: 'jungle',
+    number: 18,
+    title: { en: "Closer Isn't Faster", id: 'Dekat Belum Tentu Cepat' },
+    story: {
+      en: 'The first banana looks close by, but a wall of thorns forces Bingo on a long detour to reach it! The banana that looks far away, though, turns out to be a quick and easy walk. Looks can be deceiving in the jungle!',
+      id: 'Pisang pertama terlihat dekat, tapi tembok duri memaksa Bingo memutar jauh untuk mencapainya! Sementara pisang yang terlihat jauh justru bisa dicapai dengan cepat dan mudah. Penampilan bisa menipu di hutan ini!',
+    },
+    mascotMessage: {
+      en: "That first banana looks SO close... but thorns make it a long trip! 😅 Don't judge a banana by its distance!",
+      id: 'Pisang pertama itu terlihat SANGAT dekat... tapi duri membuatnya jadi perjalanan jauh! 😅 Jangan menilai pisang hanya dari jaraknya!',
+    },
+    gridRows: 10,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(10, 9)
+      g[0][2] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [2, 4] },
+      { id: 'b2', pos: [8, 7] },
+      { id: 'b3', pos: [9, 2] },
+      { id: 'b4', pos: [6, 0] },
+      { id: 'b5', pos: [5, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 41,
+    xpReward: 300,
+    hints: [
+      { en: "Don't be fooled by distance — the closest-looking banana might take the longest path because of the thorn wall!", id: 'Jangan tertipu jarak — pisang yang terlihat paling dekat bisa jadi butuh jalur paling panjang karena tembok duri!' },
+      { en: 'Try: down 5, right 4, up 3 for the first banana. Then down 6, right 3. Then down 1, left 5. Then up 3, left 2. Finally up 1, right 8!', id: 'Coba: turun 5, kanan 4, naik 3 untuk pisang pertama. Lalu turun 6, kanan 3. Lalu turun 1, kiri 5. Lalu naik 3, kiri 2. Terakhir naik 1, kanan 8!' },
+    ],
+    starThresholds: [57, 41],
+  },
+  {
+    id: 'jungle-19',
+    worldId: 'jungle',
+    number: 19,
+    title: { en: 'Banana Harvest', id: 'Panen Pisang' },
+    story: {
+      en: "Six bananas ripened all at once — Bingo's biggest harvest yet! He'll need to plan a long path with many turns to gather every single one.",
+      id: 'Enam pisang matang sekaligus — panen terbesar Bingo sejauh ini! Dia perlu merencanakan jalur panjang dengan banyak belokan untuk mengumpulkan semuanya.',
+    },
+    mascotMessage: {
+      en: "SIX bananas?! 🍌🍌🍌🍌🍌🍌 My biggest harvest ever! Let's map out the whole path together!",
+      id: 'ENAM pisang?! 🍌🍌🍌🍌🍌🍌 Panen terbesarku! Ayo petakan seluruh jalurnya bersama!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][2] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[7][2] = 'obstacle'
+      g[9][9] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [0, 5] },
+      { id: 'b2', pos: [3, 9] },
+      { id: 'b3', pos: [5, 3] },
+      { id: 'b4', pos: [6, 8] },
+      { id: 'b5', pos: [8, 1] },
+      { id: 'b6', pos: [9, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 42,
+    xpReward: 325,
+    hints: [
+      { en: "This is Bingo's biggest harvest yet — take it one banana at a time and count the steps for each leg!", id: 'Ini panen terbesar Bingo — kumpulkan satu per satu dan hitung langkah untuk setiap bagian!' },
+      { en: 'Try: right 5, then down 3 right 4, then down 2 left 6, then down 1 right 5, then down 2 left 7, then down 1 right 6!', id: 'Coba: kanan 5, lalu turun 3 kanan 4, lalu turun 2 kiri 6, lalu turun 1 kanan 5, lalu turun 2 kiri 7, lalu turun 1 kanan 6!' },
+    ],
+    starThresholds: [59, 42],
+  },
+  {
+    id: 'jungle-20',
+    worldId: 'jungle',
+    number: 20,
+    title: { en: 'Ultimate Jungle Trek', id: 'Trekking Hutan Terhebat' },
+    story: {
+      en: "Six bananas, a long wall of thorns, and Bingo's longest, twistiest trek through the whole jungle. This trek brings together everything Bingo has learned — are you ready for the ultimate challenge?",
+      id: 'Enam pisang, tembok panjang semak berduri, dan perjalanan terpanjang serta paling berliku yang pernah dilalui Bingo di seluruh hutan. Trekking ini menggabungkan semua yang telah dipelajari Bingo — siap untuk tantangan terhebat ini?',
+    },
+    mascotMessage: {
+      en: "This is one of my greatest treks ever! 🏆 Six bananas, a big thorn wall, lots of turns — let's plan every step and go! 🐒🍌",
+      id: 'Ini salah satu trekking terhebatku! 🏆 Enam pisang, tembok duri besar, banyak belokan — ayo rencanakan setiap langkah dan mulai! 🐒🍌',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[0][5] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[4][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'b1', pos: [2, 8] },
+      { id: 'b2', pos: [0, 2] },
+      { id: 'b3', pos: [6, 1] },
+      { id: 'b4', pos: [9, 9] },
+      { id: 'b5', pos: [7, 4] },
+      { id: 'b6', pos: [9, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move'],
+    optimalBlockCount: 61,
+    xpReward: 350,
+    hints: [
+      { en: "This is Bingo's longest journey ever! A wall of thorns blocks the way more than once — dip down to find each gap before continuing.", id: 'Ini perjalanan terpanjang Bingo! Tembok duri menghalangi jalan lebih dari sekali — turun dulu untuk menemukan setiap celah sebelum melanjutkan.' },
+      { en: 'Try: down 5, right 8, up 3 for banana 1. Then down 3, left 6, up 5 for banana 2. Then down 6, left 1. Then down 3, right 8. Then up 2, left 5. Finally down 2, left 4!', id: 'Coba: turun 5, kanan 8, naik 3 untuk pisang 1. Lalu turun 3, kiri 6, naik 5 untuk pisang 2. Lalu turun 6, kiri 1. Lalu turun 3, kanan 8. Lalu naik 2, kiri 5. Terakhir turun 2, kiri 4!' },
+    ],
+    starThresholds: [87, 61],
   },
 
   // ─────────────────────────────────────────────
@@ -729,8 +1141,8 @@ export const LESSONS: Lesson[] = [
     number: 10,
     title: { en: 'Galactic Voyage', id: 'Perjalanan Galaksi' },
     story: {
-      en: 'The ultimate space voyage! Six stars, six obstacles, and the biggest station Astro has ever explored.',
-      id: 'Perjalanan luar angkasa tertinggi! Enam bintang, enam rintangan, dan stasiun terbesar yang pernah Astro jelajahi.',
+      en: 'One of the biggest space voyages yet! Six stars, six obstacles, and one of the biggest stations Astro has explored so far.',
+      id: 'Salah satu perjalanan luar angkasa terbesar sejauh ini! Enam bintang, enam rintangan, dan salah satu stasiun terbesar yang pernah Astro jelajahi.',
     },
     mascotMessage: {
       en: "This is the big one! 🌌 Plan your whole voyage, star by star, and use loops wherever the path runs straight. You've trained for this! 🚀",
@@ -767,6 +1179,429 @@ export const LESSONS: Lesson[] = [
       { en: 'Whenever a leg is a straight line, use a Repeat block — it keeps your ship\'s code light!', id: 'Setiap kali satu bagian berupa garis lurus, gunakan blok Ulangi — itu membuat kode pesawatmu ringan!' },
     ],
     starThresholds: [59, 39],
+  },
+  {
+    id: 'space-11',
+    worldId: 'space',
+    number: 11,
+    title: { en: 'Comet Zigzag', id: 'Zigzag Komet' },
+    story: {
+      en: "Astro spots a comet trail that zigzags through space — right, then down, then right again! Three straight legs, three loops.",
+      id: 'Astro melihat jejak komet yang berkelok-kelok di luar angkasa — kanan, lalu bawah, lalu kanan lagi! Tiga bagian lurus, tiga perulangan.',
+    },
+    mascotMessage: {
+      en: "Three straight legs in a row! 🚀 A Repeat block for each leg keeps your code short. Can you spot where each leg starts and ends?",
+      id: 'Tiga bagian lurus berturut-turut! 🚀 Satu blok Ulangi untuk setiap bagian membuat kodemu singkat. Bisakah kamu menemukan awal dan akhir setiap bagian?',
+    },
+    gridRows: 5,
+    gridCols: 9,
+    cells: emptyGrid(5, 9),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 1] }, { id: 's2', pos: [0, 2] }, { id: 's3', pos: [0, 3] }, { id: 's4', pos: [0, 4] },
+      { id: 's5', pos: [1, 4] }, { id: 's6', pos: [2, 4] }, { id: 's7', pos: [3, 4] },
+      { id: 's8', pos: [3, 5] }, { id: 's9', pos: [3, 6] }, { id: 's10', pos: [3, 7] }, { id: 's11', pos: [3, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 9,
+    xpReward: 230,
+    hints: [
+      { en: 'This trail has three straight parts — right, then down, then right again. Look for each straight run!', id: 'Jejak ini punya tiga bagian lurus — kanan, lalu bawah, lalu kanan lagi. Cari setiap bagian lurusnya!' },
+      { en: 'Repeat 4 (right), Repeat 3 (down), Repeat 4 (right) — three Repeat blocks, 9 blocks total!', id: 'Ulangi 4 (kanan), Ulangi 3 (bawah), Ulangi 4 (kanan) — tiga blok Ulangi, total 9 blok!' },
+    ],
+    starThresholds: [13, 9],
+  },
+  {
+    id: 'space-12',
+    worldId: 'space',
+    number: 12,
+    title: { en: 'Meteor Detour', id: 'Putaran Meteor' },
+    story: {
+      en: "A lone meteor drifts right into the middle of Astro's straight trail! Loop through the clear parts, then steer around the meteor by hand.",
+      id: 'Sebuah meteor tunggal melayang tepat di tengah jejak lurus Astro! Gunakan perulangan di bagian yang bersih, lalu kemudikan berputar mengelilingi meteor secara manual.',
+    },
+    mascotMessage: {
+      en: "Uh oh, a meteor blocks the path! ☄️ Loop through the first stretch, then go up, right, right, down to get around it — then loop again to finish!",
+      id: 'Waduh, ada meteor menghalangi jalan! ☄️ Gunakan perulangan di bagian pertama, lalu jalan atas, kanan, kanan, bawah untuk memutarnya — lalu ulangi lagi untuk selesai!',
+    },
+    gridRows: 5,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(5, 11)
+      g[2][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [2, 0],
+    items: [
+      { id: 's1', pos: [2, 1] }, { id: 's2', pos: [2, 2] }, { id: 's3', pos: [2, 3] }, { id: 's4', pos: [2, 4] },
+      { id: 's5', pos: [2, 6] }, { id: 's6', pos: [2, 7] }, { id: 's7', pos: [2, 8] }, { id: 's8', pos: [2, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 10,
+    xpReward: 248,
+    hints: [
+      { en: 'The trail is straight until a meteor blocks it partway through. Loop for the clean part first!', id: 'Jejaknya lurus sampai sebuah meteor menghalanginya di tengah jalan. Gunakan perulangan dulu untuk bagian yang bersih!' },
+      { en: 'Repeat right 4, then go around the meteor by hand (up, right, right, down), then Repeat right 3 to finish!', id: 'Ulangi kanan 4, lalu putar mengelilingi meteor secara manual (atas, kanan, kanan, bawah), lalu Ulangi kanan 3 untuk selesai!' },
+    ],
+    starThresholds: [15, 10],
+  },
+  {
+    id: 'space-13',
+    worldId: 'space',
+    number: 13,
+    title: { en: 'Nebula Cluster', id: 'Gugus Nebula' },
+    story: {
+      en: "A shimmering nebula scattered seven stars among seven drifting rocks! This is Astro's biggest star field yet — plan every leg of the route.",
+      id: 'Nebula yang berkilau menyebarkan tujuh bintang di antara tujuh batu yang melayang! Ini medan bintang terbesar Astro sejauh ini — rencanakan setiap bagian rute.',
+    },
+    mascotMessage: {
+      en: "Seven stars, seven rocks! 🌌 Take it slow, one star at a time, and loop wherever you can fly in a straight line.",
+      id: 'Tujuh bintang, tujuh batu! 🌌 Pelan-pelan, satu bintang setiap kali, dan gunakan perulangan setiap kali kamu bisa terbang lurus.',
+    },
+    gridRows: 9,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(9, 10)
+      g[0][8] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[6][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 6] },
+      { id: 's2', pos: [3, 3] },
+      { id: 's3', pos: [2, 8] },
+      { id: 's4', pos: [5, 6] },
+      { id: 's5', pos: [4, 1] },
+      { id: 's6', pos: [6, 6] },
+      { id: 's7', pos: [8, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 40,
+    xpReward: 260,
+    hints: [
+      { en: 'Draw the route on paper first — with seven stars, a clear plan saves you from getting lost among the rocks!', id: 'Gambar dulu rutenya di kertas — dengan tujuh bintang, rencana yang jelas menghindarkanmu tersesat di antara batu!' },
+      { en: 'The very first leg is a clean straight line — use a Repeat block there. The rest need careful step-by-step moves around the rocks!', id: 'Bagian pertama adalah garis lurus bersih — gunakan blok Ulangi di situ. Sisanya butuh gerakan langkah demi langkah yang hati-hati di sekitar batu!' },
+    ],
+    starThresholds: [58, 40],
+  },
+  {
+    id: 'space-14',
+    worldId: 'space',
+    number: 14,
+    title: { en: 'Quad Comet Relay', id: 'Estafet Komet Berempat' },
+    story: {
+      en: "Four comets left a relay of straight trails — right, down, right, down! Four Repeat blocks will fly Astro through the whole relay.",
+      id: 'Empat komet meninggalkan estafet jejak lurus — kanan, bawah, kanan, bawah! Empat blok Ulangi akan menerbangkan Astro melewati seluruh estafet.',
+    },
+    mascotMessage: {
+      en: "Four straight legs this time! 🚀 One Repeat block per leg — right, down, right, down. Keep your code light with 12 blocks!",
+      id: 'Empat bagian lurus kali ini! 🚀 Satu blok Ulangi untuk setiap bagian — kanan, bawah, kanan, bawah. Buat kodemu ringan dengan 12 blok!',
+    },
+    gridRows: 9,
+    gridCols: 11,
+    cells: emptyGrid(9, 11),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 1] }, { id: 's2', pos: [0, 2] }, { id: 's3', pos: [0, 3] }, { id: 's4', pos: [0, 4] }, { id: 's5', pos: [0, 5] },
+      { id: 's6', pos: [1, 5] }, { id: 's7', pos: [2, 5] }, { id: 's8', pos: [3, 5] }, { id: 's9', pos: [4, 5] },
+      { id: 's10', pos: [4, 6] }, { id: 's11', pos: [4, 7] }, { id: 's12', pos: [4, 8] }, { id: 's13', pos: [4, 9] }, { id: 's14', pos: [4, 10] },
+      { id: 's15', pos: [5, 10] }, { id: 's16', pos: [6, 10] }, { id: 's17', pos: [7, 10] }, { id: 's18', pos: [8, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 12,
+    xpReward: 280,
+    hints: [
+      { en: 'Four straight legs means four Repeat blocks — right, down, right, down. Spot where each leg begins!', id: 'Empat bagian lurus berarti empat blok Ulangi — kanan, bawah, kanan, bawah. Temukan di mana setiap bagian dimulai!' },
+      { en: 'Repeat 5 (right), Repeat 4 (down), Repeat 5 (right), Repeat 4 (down) — 12 blocks total for the whole relay!', id: 'Ulangi 5 (kanan), Ulangi 4 (bawah), Ulangi 5 (kanan), Ulangi 4 (bawah) — 12 blok total untuk seluruh estafet!' },
+    ],
+    starThresholds: [17, 12],
+  },
+  {
+    id: 'space-15',
+    worldId: 'space',
+    number: 15,
+    title: { en: 'Twin Meteor Detours', id: 'Dua Putaran Meteor' },
+    story: {
+      en: "Two lone meteors drift into Astro's long straight trail this time! Loop through each clear stretch, then steer around each meteor by hand.",
+      id: 'Dua meteor tunggal melayang ke jejak lurus panjang Astro kali ini! Gunakan perulangan di setiap bagian yang bersih, lalu kemudikan berputar mengelilingi setiap meteor secara manual.',
+    },
+    mascotMessage: {
+      en: "Double trouble! ☄️☄️ Two meteors, two detours. Loop, detour, loop, detour, loop — five parts, one long trail!",
+      id: 'Masalah ganda! ☄️☄️ Dua meteor, dua putaran. Ulangi, putar, ulangi, putar, ulangi — lima bagian, satu jejak panjang!',
+    },
+    gridRows: 4,
+    gridCols: 15,
+    cells: (() => {
+      const g = emptyGrid(4, 15)
+      g[2][4] = 'obstacle'
+      g[2][10] = 'obstacle'
+      return g
+    })(),
+    startPos: [2, 0],
+    items: [
+      { id: 's1', pos: [2, 1] }, { id: 's2', pos: [2, 2] }, { id: 's3', pos: [2, 3] },
+      { id: 's4', pos: [2, 5] },
+      { id: 's5', pos: [2, 6] }, { id: 's6', pos: [2, 7] }, { id: 's7', pos: [2, 8] }, { id: 's8', pos: [2, 9] },
+      { id: 's9', pos: [2, 11] },
+      { id: 's10', pos: [2, 12] }, { id: 's11', pos: [2, 13] }, { id: 's12', pos: [2, 14] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 17,
+    xpReward: 300,
+    hints: [
+      { en: 'The trail is broken TWICE this time. Handle each meteor the same way — loop up to it, detour around it, then keep going.', id: 'Jejaknya rusak DUA kali kali ini. Tangani setiap meteor dengan cara yang sama — ulangi sampai dekat, putar mengelilinginya, lalu lanjutkan.' },
+      { en: 'Repeat right 3, detour (up, right, right, down), Repeat right 4, detour again (up, right, right, down), then Repeat right 3 to finish!', id: 'Ulangi kanan 3, putar (atas, kanan, kanan, bawah), Ulangi kanan 4, putar lagi (atas, kanan, kanan, bawah), lalu Ulangi kanan 3 untuk selesai!' },
+    ],
+    starThresholds: [25, 17],
+  },
+  {
+    id: 'space-16',
+    worldId: 'space',
+    number: 16,
+    title: { en: 'Asteroid Swarm', id: 'Kawanan Asteroid' },
+    story: {
+      en: "A swarm of eight asteroids drifts through the sector, with seven stars scattered between them. Astro's biggest dodge-and-collect mission yet!",
+      id: 'Kawanan delapan asteroid melayang melintasi sektor, dengan tujuh bintang tersebar di antaranya. Misi menghindar-dan-kumpulkan terbesar Astro sejauh ini!',
+    },
+    mascotMessage: {
+      en: "Eight asteroids! 🌠 Plot your course star by star, and use a loop for every straight stretch you find.",
+      id: 'Delapan asteroid! 🌠 Rencanakan jalurmu bintang demi bintang, dan gunakan perulangan untuk setiap bagian lurus yang kamu temukan.',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[0][9] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[7][2] = 'obstacle'
+      g[9][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 7] },
+      { id: 's2', pos: [3, 4] },
+      { id: 's3', pos: [2, 9] },
+      { id: 's4', pos: [5, 2] },
+      { id: 's5', pos: [4, 10] },
+      { id: 's6', pos: [7, 6] },
+      { id: 's7', pos: [9, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 48,
+    xpReward: 320,
+    hints: [
+      { en: 'Map out all seven stars in order before dragging a single block — the swarm has more rocks than ever!', id: 'Petakan ketujuh bintang secara berurutan sebelum menyeret satu blok pun — kawanan ini punya lebih banyak batu dari sebelumnya!' },
+      { en: 'The first leg to star one is a clean straight line — loop it. After that, move one leg at a time and watch for rocks!', id: 'Bagian pertama menuju bintang satu adalah garis lurus bersih — gunakan perulangan. Setelah itu, bergerak satu bagian setiap kali dan waspada batu!' },
+    ],
+    starThresholds: [70, 48],
+  },
+  {
+    id: 'space-17',
+    worldId: 'space',
+    number: 17,
+    title: { en: 'Solar Wind Corridor', id: 'Koridor Angin Matahari' },
+    story: {
+      en: "A corridor of solar wind traces a staircase path through space — right, down, right, down, right! Five straight legs, five loops.",
+      id: 'Koridor angin matahari membentuk jalur tangga melintasi luar angkasa — kanan, bawah, kanan, bawah, kanan! Lima bagian lurus, lima perulangan.',
+    },
+    mascotMessage: {
+      en: "Five straight legs now! 🚀 A Repeat block for each leg keeps this long corridor short in code. You've got this!",
+      id: 'Lima bagian lurus sekarang! 🚀 Satu blok Ulangi untuk setiap bagian membuat koridor panjang ini singkat dalam kode. Kamu pasti bisa!',
+    },
+    gridRows: 8,
+    gridCols: 14,
+    cells: emptyGrid(8, 14),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 1] }, { id: 's2', pos: [0, 2] }, { id: 's3', pos: [0, 3] }, { id: 's4', pos: [0, 4] },
+      { id: 's5', pos: [1, 4] }, { id: 's6', pos: [2, 4] }, { id: 's7', pos: [3, 4] },
+      { id: 's8', pos: [3, 5] }, { id: 's9', pos: [3, 6] }, { id: 's10', pos: [3, 7] }, { id: 's11', pos: [3, 8] },
+      { id: 's12', pos: [4, 8] }, { id: 's13', pos: [5, 8] }, { id: 's14', pos: [6, 8] },
+      { id: 's15', pos: [6, 9] }, { id: 's16', pos: [6, 10] }, { id: 's17', pos: [6, 11] }, { id: 's18', pos: [6, 12] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 15,
+    xpReward: 340,
+    hints: [
+      { en: 'Five straight legs alternating right and down. Trace them with your finger on screen before you build!', id: 'Lima bagian lurus berselang-seling kanan dan bawah. Telusuri dengan jarimu di layar sebelum membangun!' },
+      { en: 'Repeat 4 (right), Repeat 3 (down), Repeat 4 (right), Repeat 3 (down), Repeat 4 (right) — 15 blocks for the whole corridor!', id: 'Ulangi 4 (kanan), Ulangi 3 (bawah), Ulangi 4 (kanan), Ulangi 3 (bawah), Ulangi 4 (kanan) — 15 blok untuk seluruh koridor!' },
+    ],
+    starThresholds: [22, 15],
+  },
+  {
+    id: 'space-18',
+    worldId: 'space',
+    number: 18,
+    title: { en: 'Comet Graveyard', id: 'Kuburan Komet' },
+    story: {
+      en: "Old comet debris and drifting rocks fill this sector — even the first stretch has a rock blocking the way! Loop, detour, then weave through the graveyard beyond.",
+      id: 'Puing komet lama dan batu yang melayang memenuhi sektor ini — bahkan bagian pertama pun ada batu yang menghalangi jalan! Ulangi, putar, lalu berkelok melewati kuburan di baliknya.',
+    },
+    mascotMessage: {
+      en: "This sector mixes everything you've learned! 🪐 A detour right at the start, then a scattered field of rocks and stars. Take your time, Astro!",
+      id: 'Sektor ini mencampur semua yang sudah kamu pelajari! 🪐 Ada putaran tepat di awal, lalu medan batu dan bintang yang tersebar. Santai saja, Astro!',
+    },
+    gridRows: 9,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(9, 12)
+      g[0][4] = 'obstacle'
+      g[1][1] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[8][10] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 1] }, { id: 's2', pos: [0, 2] }, { id: 's3', pos: [0, 3] },
+      { id: 's4', pos: [0, 5] },
+      { id: 's5', pos: [0, 6] }, { id: 's6', pos: [0, 7] }, { id: 's7', pos: [0, 8] },
+      { id: 's8', pos: [3, 5] },
+      { id: 's9', pos: [2, 10] },
+      { id: 's10', pos: [5, 6] },
+      { id: 's11', pos: [7, 9] },
+      { id: 's12', pos: [8, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 43,
+    xpReward: 355,
+    hints: [
+      { en: 'A rock breaks the very first straight line — loop up to it, detour around it (down, right, right, up), then loop again before the scattered field begins.', id: 'Sebuah batu memutus garis lurus pertama — ulangi sampai dekat, putar mengelilinginya (bawah, kanan, kanan, atas), lalu ulangi lagi sebelum medan yang tersebar dimulai.' },
+      { en: 'After the detour, treat the rest like a scattered field: one star at a time, careful steps around every rock!', id: 'Setelah putaran, perlakukan sisanya seperti medan tersebar: satu bintang setiap kali, langkah hati-hati di sekitar setiap batu!' },
+    ],
+    starThresholds: [62, 43],
+  },
+  {
+    id: 'space-19',
+    worldId: 'space',
+    number: 19,
+    title: { en: 'Deep Space Relay', id: 'Estafet Luar Angkasa Dalam' },
+    story: {
+      en: "Astro pushes deeper into space than ever — nine asteroids drift between eight stars scattered across the biggest field yet.",
+      id: 'Astro terbang lebih dalam ke luar angkasa dari sebelumnya — sembilan asteroid melayang di antara delapan bintang yang tersebar di medan terbesar sejauh ini.',
+    },
+    mascotMessage: {
+      en: "This is deep space! 🌌 Nine rocks, eight stars — the biggest scattered field before the final voyage. Plan carefully, star by star.",
+      id: 'Ini luar angkasa dalam! 🌌 Sembilan batu, delapan bintang — medan tersebar terbesar sebelum perjalanan terakhir. Rencanakan dengan hati-hati, bintang demi bintang.',
+    },
+    gridRows: 10,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(10, 12)
+      g[0][11] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[7][3] = 'obstacle'
+      g[8][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 9] },
+      { id: 's2', pos: [3, 5] },
+      { id: 's3', pos: [1, 11] },
+      { id: 's4', pos: [6, 8] },
+      { id: 's5', pos: [4, 1] },
+      { id: 's6', pos: [8, 6] },
+      { id: 's7', pos: [7, 10] },
+      { id: 's8', pos: [9, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 58,
+    xpReward: 380,
+    hints: [
+      { en: 'Eight stars means eight legs of the journey. Write the route down before you touch a single block!', id: 'Delapan bintang berarti delapan bagian perjalanan. Tuliskan rutenya sebelum menyentuh satu blok pun!' },
+      { en: 'The first leg is a clean straight line — loop it. Every leg after that needs careful manual steps around the asteroids!', id: 'Bagian pertama adalah garis lurus bersih — gunakan perulangan. Setiap bagian setelahnya butuh langkah manual yang hati-hati di sekitar asteroid!' },
+    ],
+    starThresholds: [84, 58],
+  },
+  {
+    id: 'space-20',
+    worldId: 'space',
+    number: 20,
+    title: { en: 'Final Frontier', id: 'Perbatasan Akhir' },
+    story: {
+      en: "This is it — the final frontier of Astro's space journey! Ten asteroids, nine stars, and the trickiest field the station has ever seen.",
+      id: 'Inilah dia — perbatasan akhir perjalanan luar angkasa Astro! Sepuluh asteroid, sembilan bintang, dan medan paling rumit yang pernah dilihat stasiun ini.',
+    },
+    mascotMessage: {
+      en: "You've made it to the final frontier! 🌌🚀 Everything you've learned — straight loops, detours, careful scattered fields — comes together right here. Good luck, space pilot!",
+      id: 'Kamu sudah sampai di perbatasan akhir! 🌌🚀 Semua yang sudah kamu pelajari — perulangan lurus, putaran, medan tersebar yang hati-hati — menyatu di sini. Semoga berhasil, pilot luar angkasa!',
+    },
+    gridRows: 10,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(10, 12)
+      g[0][11] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[8][11] = 'obstacle'
+      g[9][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 10] },
+      { id: 's2', pos: [4, 6] },
+      { id: 's3', pos: [2, 2] },
+      { id: 's4', pos: [6, 4] },
+      { id: 's5', pos: [5, 9] },
+      { id: 's6', pos: [9, 10] },
+      { id: 's7', pos: [8, 0] },
+      { id: 's8', pos: [1, 4] },
+      { id: 's9', pos: [1, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 59,
+    xpReward: 420,
+    hints: [
+      { en: 'Nine stars is the most yet — map the whole route on paper first, leg by leg, before you touch a single block!', id: 'Sembilan bintang adalah yang terbanyak sejauh ini — petakan seluruh rute di kertas dulu, bagian demi bagian, sebelum menyentuh satu blok pun!' },
+      { en: 'The first leg and the very last leg are both clean straight lines — loop those two! Every leg in between needs careful manual navigation around the asteroids.', id: 'Bagian pertama dan bagian terakhir sama-sama garis lurus bersih — gunakan perulangan untuk keduanya! Setiap bagian di antaranya butuh navigasi manual yang hati-hati di sekitar asteroid.' },
+    ],
+    starThresholds: [86, 59],
   },
 
   // ─────────────────────────────────────────────
@@ -1145,6 +1980,386 @@ export const LESSONS: Lesson[] = [
     ],
     starThresholds: [26, 16],
   },
+  {
+    id: 'loops-11',
+    worldId: 'loops',
+    number: 11,
+    title: { en: 'Long Drop, Short Shift', id: 'Turun Panjang, Geser Pendek' },
+    story: {
+      en: "A steep hill! Dash drops down 3 squares, then nudges right just 1 — over and over. The two Repeat blocks inside don't have to match in size to nest!",
+      id: 'Bukit yang curam! Dash turun 3 kotak, lalu bergeser kanan hanya 1 — berulang-ulang. Dua blok Ulangi di dalam tidak harus sama besar untuk bisa bersarang!',
+    },
+    mascotMessage: {
+      en: "Nested loops don't need matching numbers! 🏎️ Repeat 4 times [ Repeat 3 (Move Down), Repeat 1 (Move Right) ] — still only 8 blocks!",
+      id: 'Perulangan bersarang tidak perlu angka yang sama! 🏎️ Ulangi 4 kali [ Ulangi 3 (Gerak Bawah), Ulangi 1 (Gerak Kanan) ] — tetap hanya 8 blok!',
+    },
+    gridRows: 10,
+    gridCols: 4,
+    cells: emptyGrid(10, 4),
+    startPos: [0, 0],
+    items: [
+      { id: 'l1', pos: [3, 0] }, { id: 'l2', pos: [3, 1] },
+      { id: 'l3', pos: [6, 1] }, { id: 'l4', pos: [6, 2] },
+      { id: 'l5', pos: [9, 2] }, { id: 'l6', pos: [9, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 8,
+    xpReward: 365,
+    hints: [
+      { en: 'The pattern is down 3, right 1, repeated 4 times. Nest a Repeat-3-down and a Repeat-1-right inside an outer Repeat 4!', id: 'Polanya adalah turun 3, kanan 1, diulang 4 kali. Sarangkan Ulangi-3-bawah dan Ulangi-1-kanan di dalam Ulangi 4 luar!' },
+      { en: 'Outer Repeat 4 [ Repeat 3 (Move Down), Repeat 1 (Move Right) ] = 2+3+3 = 8 blocks, no matter how many times it repeats!', id: 'Ulangi 4 luar [ Ulangi 3 (Gerak Bawah), Ulangi 1 (Gerak Kanan) ] = 2+3+3 = 8 blok, berapa pun jumlah pengulangannya!' },
+    ],
+    starThresholds: [18, 8],
+  },
+  {
+    id: 'loops-12',
+    worldId: 'loops',
+    number: 12,
+    title: { en: 'Spiral Circuit', id: 'Sirkuit Spiral' },
+    story: {
+      en: 'The track curves three times, tracing a spiral: down-and-right, then right-and-up, then up-and-left. Each curve needs its own nested loop chained after the last!',
+      id: 'Lintasan berbelok tiga kali, membentuk spiral: turun-lalu-kanan, lalu kanan-lalu-atas, lalu atas-lalu-kiri. Setiap belokan butuh perulangan bersarangnya sendiri, dirangkai setelah yang sebelumnya!',
+    },
+    mascotMessage: {
+      en: "THREE nested loops chained together! 🏎️🌀 One for each curve of the spiral. 8 blocks per curve, 24 total!",
+      id: 'TIGA perulangan bersarang dirangkai bersama! 🏎️🌀 Satu untuk setiap belokan spiral. 8 blok per belokan, 24 total!',
+    },
+    gridRows: 5,
+    gridCols: 5,
+    cells: emptyGrid(5, 5),
+    startPos: [2, 0],
+    items: [
+      { id: 'l1', pos: [3, 0] }, { id: 'l2', pos: [3, 1] },
+      { id: 'l3', pos: [4, 1] }, { id: 'l4', pos: [4, 2] },
+      { id: 'l5', pos: [4, 3] }, { id: 'l6', pos: [3, 3] },
+      { id: 'l7', pos: [3, 4] }, { id: 'l8', pos: [2, 4] },
+      { id: 'l9', pos: [1, 4] }, { id: 'l10', pos: [1, 3] },
+      { id: 'l11', pos: [0, 3] }, { id: 'l12', pos: [0, 2] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 24,
+    xpReward: 385,
+    hints: [
+      { en: 'Build THREE separate nested Repeat structures, one after another: down+right, then right+up, then up+left, each repeated twice.', id: 'Bangun TIGA struktur Ulangi bersarang terpisah, satu demi satu: bawah+kanan, lalu kanan+atas, lalu atas+kiri, masing-masing diulang dua kali.' },
+      { en: 'Each nested segment is 8 blocks (outer Repeat 2 + two inner Repeat blocks). Three segments = 24 blocks total.', id: 'Setiap segmen bersarang adalah 8 blok (Ulangi 2 luar + dua blok Ulangi dalam). Tiga segmen = 24 blok total.' },
+    ],
+    starThresholds: [36, 24],
+  },
+  {
+    id: 'loops-13',
+    worldId: 'loops',
+    number: 13,
+    title: { en: 'Double Trouble Track', id: 'Lintasan Dua Rintangan' },
+    story: {
+      en: 'Three clean staircase steps, then TWO barriers break the last two! Nest a loop for the clean part, then handle each broken step by hand — twice.',
+      id: 'Tiga langkah tangga yang bersih, lalu DUA penghalang merusak dua langkah terakhir! Sarangkan perulangan untuk bagian bersih, lalu tangani setiap langkah yang rusak secara manual — dua kali.',
+    },
+    mascotMessage: {
+      en: "Double trouble means double detours! 🏎️🚧🚧 Nest the first 3 clean steps (8 blocks), then go around each barrier by hand.",
+      id: 'Dua rintangan berarti dua putaran! 🏎️🚧🚧 Sarangkan 3 langkah bersih pertama (8 blok), lalu putar setiap penghalang secara manual.',
+    },
+    gridRows: 8,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(8, 8)
+      g[4][3] = 'obstacle'
+      g[7][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'l1', pos: [1, 0] }, { id: 'l2', pos: [1, 1] },
+      { id: 'l3', pos: [2, 1] }, { id: 'l4', pos: [2, 2] },
+      { id: 'l5', pos: [3, 2] }, { id: 'l6', pos: [3, 3] },
+      { id: 'l7', pos: [5, 3] }, { id: 'l8', pos: [5, 5] },
+      { id: 'l9', pos: [7, 5] }, { id: 'l10', pos: [7, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 22,
+    xpReward: 405,
+    hints: [
+      { en: 'The first 3 steps are clean — nest Repeat 3 [ Repeat 1 (Move Down), Repeat 1 (Move Right) ] for those, just 8 blocks.', id: 'Tiga langkah pertama bersih — sarangkan Ulangi 3 [ Ulangi 1 (Gerak Bawah), Ulangi 1 (Gerak Kanan) ] untuk itu, hanya 8 blok.' },
+      { en: 'Barrier 1: go right, down, down, left by hand, then Repeat 2 right. Barrier 2: Repeat 2 down, then up, right, right, down by hand.', id: 'Penghalang 1: jalan kanan, bawah, bawah, kiri secara manual, lalu Ulangi 2 kanan. Penghalang 2: Ulangi 2 bawah, lalu atas, kanan, kanan, bawah secara manual.' },
+    ],
+    starThresholds: [32, 22],
+  },
+  {
+    id: 'loops-14',
+    worldId: 'loops',
+    number: 14,
+    title: { en: 'Short Drop, Long Shift', id: 'Turun Pendek, Geser Panjang' },
+    story: {
+      en: 'A long bridge! Dash drops down just 1 square, then dashes right 4 — over and over. Flip the ratio from before: now the SHIFT is the long part.',
+      id: 'Jembatan yang panjang! Dash turun hanya 1 kotak, lalu melesat kanan 4 — berulang-ulang. Balikkan rasio dari sebelumnya: kali ini GESERAN yang panjang.',
+    },
+    mascotMessage: {
+      en: "Mirror image of the hill! 🏎️ Repeat 3 times [ Repeat 1 (Move Down), Repeat 4 (Move Right) ] — still just 8 blocks, whichever side is long!",
+      id: 'Kebalikan dari bukit! 🏎️ Ulangi 3 kali [ Ulangi 1 (Gerak Bawah), Ulangi 4 (Gerak Kanan) ] — tetap hanya 8 blok, sisi mana pun yang panjang!',
+    },
+    gridRows: 4,
+    gridCols: 13,
+    cells: emptyGrid(4, 13),
+    startPos: [0, 0],
+    items: [
+      { id: 'l1', pos: [1, 0] }, { id: 'l2', pos: [1, 4] },
+      { id: 'l3', pos: [2, 4] }, { id: 'l4', pos: [2, 8] },
+      { id: 'l5', pos: [3, 8] }, { id: 'l6', pos: [3, 12] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 8,
+    xpReward: 420,
+    hints: [
+      { en: 'Down 1, right 4, repeated 3 times. Nest Repeat 1 (down) and Repeat 4 (right) inside an outer Repeat 3.', id: 'Bawah 1, kanan 4, diulang 3 kali. Sarangkan Ulangi 1 (bawah) dan Ulangi 4 (kanan) di dalam Ulangi 3 luar.' },
+      { en: 'Outer Repeat 3 [ Repeat 1 (Move Down), Repeat 4 (Move Right) ] = 8 blocks total, same trick as Long Drop, Short Shift.', id: 'Ulangi 3 luar [ Ulangi 1 (Gerak Bawah), Ulangi 4 (Gerak Kanan) ] = 8 blok total, trik yang sama seperti Turun Panjang, Geser Pendek.' },
+    ],
+    starThresholds: [18, 8],
+  },
+  {
+    id: 'loops-15',
+    worldId: 'loops',
+    number: 15,
+    title: { en: 'Square Loop', id: 'Putaran Persegi' },
+    story: {
+      en: 'Four turns bring Dash all the way back to the start line! Down-right, right-up, up-left, left-down — four nested loops forming one closed square.',
+      id: 'Empat belokan membawa Dash kembali ke garis start! Turun-kanan, kanan-atas, atas-kiri, kiri-bawah — empat perulangan bersarang membentuk satu persegi tertutup.',
+    },
+    mascotMessage: {
+      en: "A full square loop back to where you started! 🏎️🔁 Four nested segments, 8 blocks each, 32 total — and you finish right back at the start line!",
+      id: 'Putaran persegi penuh kembali ke tempat awal! 🏎️🔁 Empat segmen bersarang, 8 blok masing-masing, 32 total — dan kamu selesai tepat di garis start!',
+    },
+    gridRows: 5,
+    gridCols: 5,
+    cells: emptyGrid(5, 5),
+    startPos: [2, 0],
+    items: [
+      { id: 'l1', pos: [3, 0] }, { id: 'l2', pos: [3, 1] },
+      { id: 'l3', pos: [4, 1] }, { id: 'l4', pos: [4, 2] },
+      { id: 'l5', pos: [4, 3] }, { id: 'l6', pos: [3, 3] },
+      { id: 'l7', pos: [3, 4] }, { id: 'l8', pos: [2, 4] },
+      { id: 'l9', pos: [1, 4] }, { id: 'l10', pos: [1, 3] },
+      { id: 'l11', pos: [0, 3] }, { id: 'l12', pos: [0, 2] },
+      { id: 'l13', pos: [0, 1] }, { id: 'l14', pos: [1, 1] },
+      { id: 'l15', pos: [1, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 32,
+    xpReward: 440,
+    hints: [
+      { en: 'Four turns, four nested loops: down+right, right+up, up+left, left+down — each repeated twice.', id: 'Empat belokan, empat perulangan bersarang: bawah+kanan, kanan+atas, atas+kiri, kiri+bawah — masing-masing diulang dua kali.' },
+      { en: '4 segments x 8 blocks = 32. The very last step lands you back on the start square — no star there, just the finish!', id: '4 segmen x 8 blok = 32. Langkah terakhir membawamu kembali ke kotak start — tidak ada bintang di situ, hanya garis finis!' },
+    ],
+    starThresholds: [48, 32],
+  },
+  {
+    id: 'loops-16',
+    worldId: 'loops',
+    number: 16,
+    title: { en: 'Triple Trouble', id: 'Tiga Rintangan' },
+    story: {
+      en: 'Three barriers this time, breaking three different steps of the staircase! Nest the clean start, then handle THREE broken steps by hand, one after another.',
+      id: 'Tiga penghalang kali ini, merusak tiga langkah berbeda dari tangga! Sarangkan bagian awal yang bersih, lalu tangani TIGA langkah rusak secara manual, satu demi satu.',
+    },
+    mascotMessage: {
+      en: "Triple trouble, triple detours! 🏎️🚧🚧🚧 Nest the clean start (8 blocks), then three separate hand-coded detours around three barriers.",
+      id: 'Tiga rintangan, tiga putaran! 🏎️🚧🚧🚧 Sarangkan bagian awal yang bersih (8 blok), lalu tiga putaran manual di sekitar tiga penghalang.',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[4][3] = 'obstacle'
+      g[7][6] = 'obstacle'
+      g[8][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 9],
+    items: [
+      { id: 'l1', pos: [1, 9] }, { id: 'l2', pos: [1, 8] },
+      { id: 'l3', pos: [2, 8] }, { id: 'l4', pos: [2, 7] },
+      { id: 'l5', pos: [3, 7] }, { id: 'l6', pos: [3, 6] },
+      { id: 'l7', pos: [5, 6] }, { id: 'l8', pos: [5, 4] },
+      { id: 'l9', pos: [7, 4] }, { id: 'l10', pos: [7, 2] },
+      { id: 'l11', pos: [9, 2] }, { id: 'l12', pos: [9, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 29,
+    xpReward: 460,
+    hints: [
+      { en: 'The first 3 steps are clean — nest Repeat 3 [ Repeat 1 (Move Down), Repeat 1 (Move Left) ] for those, 8 blocks.', id: 'Tiga langkah pertama bersih — sarangkan Ulangi 3 [ Ulangi 1 (Gerak Bawah), Ulangi 1 (Gerak Kiri) ] untuk itu, 8 blok.' },
+      { en: 'Each barrier costs 7 blocks: one clean Repeat-2 side plus a 4-move hand-coded detour around the blocked side.', id: 'Setiap penghalang membutuhkan 7 blok: satu sisi Ulangi-2 yang bersih ditambah putaran manual 4 langkah di sisi yang terhalang.' },
+    ],
+    starThresholds: [39, 29],
+  },
+  {
+    id: 'loops-17',
+    worldId: 'loops',
+    number: 17,
+    title: { en: 'Wave and Barrier', id: 'Gelombang dan Penghalang' },
+    story: {
+      en: 'The track dips down then rises back up — but a barrier breaks the very last rise! Nest the down-wave and most of the up-wave, then detour around the barrier.',
+      id: 'Lintasan turun lalu naik lagi — tapi penghalang merusak kenaikan terakhir! Sarangkan gelombang turun dan sebagian besar gelombang naik, lalu putar penghalang.',
+    },
+    mascotMessage: {
+      en: "A wave AND a barrier?! 🏎️🌊🚧 Nest the down-right wave (8 blocks), then the up-right wave hits a barrier on its last stretch.",
+      id: 'Gelombang DAN penghalang?! 🏎️🌊🚧 Sarangkan gelombang turun-kanan (8 blok), lalu gelombang naik-kanan menabrak penghalang di bagian terakhirnya.',
+    },
+    gridRows: 5,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(5, 9)
+      g[1][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'l1', pos: [2, 0] }, { id: 'l2', pos: [2, 2] },
+      { id: 'l3', pos: [4, 2] }, { id: 'l4', pos: [4, 4] },
+      { id: 'l5', pos: [2, 4] }, { id: 'l6', pos: [2, 6] },
+      { id: 'l7', pos: [0, 6] }, { id: 'l8', pos: [0, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 21,
+    xpReward: 480,
+    hints: [
+      { en: 'The down-right wave is clean — nest Repeat 2 [ Repeat 2 (Move Down), Repeat 2 (Move Right) ] for that, 8 blocks.', id: 'Gelombang turun-kanan bersih — sarangkan Ulangi 2 [ Ulangi 2 (Gerak Bawah), Ulangi 2 (Gerak Kanan) ] untuk itu, 8 blok.' },
+      { en: 'The up-right wave: first Repeat 2 up + Repeat 2 right (6 blocks), then a barrier blocks the second up-move — detour left, up, up, right by hand.', id: 'Gelombang atas-kanan: pertama Ulangi 2 atas + Ulangi 2 kanan (6 blok), lalu penghalang menutup gerak atas kedua — putar kiri, atas, atas, kanan secara manual.' },
+    ],
+    starThresholds: [25, 21],
+  },
+  {
+    id: 'loops-18',
+    worldId: 'loops',
+    number: 18,
+    title: { en: 'Uneven Spiral', id: 'Spiral Tak Setara' },
+    story: {
+      en: 'A spiral where every curve is lopsided — long drop/short shift, short shift/long climb, short climb/long slide. Three nested loops, each with its own uneven ratio.',
+      id: 'Spiral di mana setiap belokan tidak seimbang — turun panjang/geser pendek, geser pendek/naik panjang, naik pendek/geser panjang. Tiga perulangan bersarang, masing-masing dengan rasionya sendiri yang tak seimbang.',
+    },
+    mascotMessage: {
+      en: "Every curve has its own uneven ratio! 🏎️🌀 Three nested loops, none of them matching — still just 8 blocks each, 24 total.",
+      id: 'Setiap belokan punya rasio tak seimbangnya sendiri! 🏎️🌀 Tiga perulangan bersarang, tidak ada yang sama — tetap hanya 8 blok masing-masing, 24 total.',
+    },
+    gridRows: 9,
+    gridCols: 5,
+    cells: emptyGrid(9, 5),
+    startPos: [4, 0],
+    items: [
+      { id: 'l1', pos: [6, 0] }, { id: 'l2', pos: [6, 1] },
+      { id: 'l3', pos: [8, 1] }, { id: 'l4', pos: [8, 2] },
+      { id: 'l5', pos: [8, 3] }, { id: 'l6', pos: [6, 3] },
+      { id: 'l7', pos: [6, 4] }, { id: 'l8', pos: [4, 4] },
+      { id: 'l9', pos: [3, 4] }, { id: 'l10', pos: [3, 2] },
+      { id: 'l11', pos: [2, 2] }, { id: 'l12', pos: [2, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 24,
+    xpReward: 500,
+    hints: [
+      { en: 'Curve 1: Repeat 2 down, Repeat 1 right. Curve 2: Repeat 1 right, Repeat 2 up. Curve 3: Repeat 1 up, Repeat 2 left. Each nested, each repeated twice.', id: 'Belokan 1: Ulangi 2 bawah, Ulangi 1 kanan. Belokan 2: Ulangi 1 kanan, Ulangi 2 atas. Belokan 3: Ulangi 1 atas, Ulangi 2 kiri. Masing-masing bersarang, masing-masing diulang dua kali.' },
+      { en: 'The ratio does not matter for the block count — every nested curve costs 8 blocks (outer 2 + two inner Repeats of 3 each).', id: 'Rasionya tidak memengaruhi jumlah blok — setiap belokan bersarang tetap 8 blok (luar 2 + dua Ulangi dalam masing-masing 3).' },
+    ],
+    starThresholds: [36, 24],
+  },
+  {
+    id: 'loops-19',
+    worldId: 'loops',
+    number: 19,
+    title: { en: 'The Gauntlet', id: 'Lintasan Cobaan' },
+    story: {
+      en: 'A long uneven staircase — down 1, right 2, six times — with TWO barriers on non-adjacent steps and one clean step wedged between them. Nest what you can, then handle each barrier by hand.',
+      id: 'Tangga panjang yang tak seimbang — bawah 1, kanan 2, enam kali — dengan DUA penghalang di langkah yang tidak berurutan dan satu langkah bersih terselip di antaranya. Sarangkan yang bisa, lalu tangani setiap penghalang secara manual.',
+    },
+    mascotMessage: {
+      en: "The ultimate gauntlet! 🏎️🏆 Nest the first 3 clean steps, detour around a barrier, breeze through a clean step, then detour around one more barrier.",
+      id: 'Lintasan cobaan sesungguhnya! 🏎️🏆 Sarangkan 3 langkah bersih pertama, putar satu penghalang, lewati satu langkah bersih dengan mudah, lalu putar satu penghalang lagi.',
+    },
+    gridRows: 7,
+    gridCols: 13,
+    cells: (() => {
+      const g = emptyGrid(7, 13)
+      g[4][7] = 'obstacle'
+      g[6][11] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'l1', pos: [1, 0] }, { id: 'l2', pos: [1, 2] },
+      { id: 'l3', pos: [2, 2] }, { id: 'l4', pos: [2, 4] },
+      { id: 'l5', pos: [3, 4] }, { id: 'l6', pos: [3, 6] },
+      { id: 'l7', pos: [4, 6] }, { id: 'l8', pos: [4, 8] },
+      { id: 'l9', pos: [5, 8] }, { id: 'l10', pos: [5, 10] },
+      { id: 'l11', pos: [6, 10] }, { id: 'l12', pos: [6, 12] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 28,
+    xpReward: 525,
+    hints: [
+      { en: 'Steps 1-3 are clean — nest Repeat 3 [ Repeat 1 (Move Down), Repeat 2 (Move Right) ] for those, 8 blocks.', id: 'Langkah 1-3 bersih — sarangkan Ulangi 3 [ Ulangi 1 (Gerak Bawah), Ulangi 2 (Gerak Kanan) ] untuk itu, 8 blok.' },
+      { en: 'Step 4 and step 6 each hit a barrier on the right-move — detour up, right, right, down by hand each time. Step 5 in between is fully clean.', id: 'Langkah 4 dan langkah 6 masing-masing menabrak penghalang di gerak kanan — putar atas, kanan, kanan, bawah secara manual setiap kali. Langkah 5 di antaranya sepenuhnya bersih.' },
+    ],
+    starThresholds: [38, 28],
+  },
+  {
+    id: 'loops-20',
+    worldId: 'loops',
+    number: 20,
+    title: { en: 'Master of the Spiral', id: 'Penguasa Spiral' },
+    story: {
+      en: 'The full square loop returns — but this time TWO of its four turns are broken by barriers! Nest the two clean turns, then hand-detour around each barrier on the other two.',
+      id: 'Putaran persegi penuh kembali — tapi kali ini DUA dari empat belokannya rusak oleh penghalang! Sarangkan dua belokan bersih, lalu putar manual di sekitar setiap penghalang pada dua belokan lainnya.',
+    },
+    mascotMessage: {
+      en: "The true test of a Loop Master! 🏎️🏆🌀 Two clean nested turns, two barrier-broken turns — combine everything you've learned in Loop Land.",
+      id: 'Ujian sejati seorang Penguasa Perulangan! 🏎️🏆🌀 Dua belokan bersarang yang bersih, dua belokan yang rusak penghalang — gabungkan semua yang telah kamu pelajari di Negeri Perulangan.',
+    },
+    gridRows: 7,
+    gridCols: 7,
+    cells: (() => {
+      const g = emptyGrid(7, 7)
+      g[3][6] = 'obstacle'
+      g[3][0] = 'obstacle'
+      return g
+    })(),
+    startPos: [4, 0],
+    items: [
+      { id: 'l1', pos: [5, 0] }, { id: 'l2', pos: [5, 1] },
+      { id: 'l3', pos: [6, 1] }, { id: 'l4', pos: [6, 2] },
+      { id: 'l5', pos: [6, 4] }, { id: 'l6', pos: [4, 4] },
+      { id: 'l7', pos: [4, 6] }, { id: 'l8', pos: [2, 6] },
+      { id: 'l9', pos: [1, 6] }, { id: 'l10', pos: [1, 5] },
+      { id: 'l11', pos: [0, 5] }, { id: 'l12', pos: [0, 4] },
+      { id: 'l13', pos: [0, 2] }, { id: 'l14', pos: [2, 2] },
+      { id: 'l15', pos: [2, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    requiredCategories: ['loops'],
+    optimalBlockCount: 42,
+    xpReward: 560,
+    hints: [
+      { en: 'Turn 1 (down-right) and Turn 3 (up-left) are clean — nest Repeat 2 [ Repeat 1, Repeat 1 ] for each, 8 blocks apiece.', id: 'Belokan 1 (bawah-kanan) dan Belokan 3 (atas-kiri) bersih — sarangkan Ulangi 2 [ Ulangi 1, Ulangi 1 ] untuk masing-masing, 8 blok per belokan.' },
+      { en: 'Turn 2 and Turn 4 each have one clean rep plus one barrier-broken rep: 6 blocks + (3 blocks + a 4-move hand detour) = 13 blocks each.', id: 'Belokan 2 dan Belokan 4 masing-masing punya satu repetisi bersih dan satu repetisi rusak penghalang: 6 blok + (3 blok + putaran manual 4 langkah) = 13 blok masing-masing.' },
+    ],
+    starThresholds: [50, 42],
+  },
 
   // ─────────────────────────────────────────────
   // WORLD 3: OCEAN DEEP — Variables
@@ -1508,8 +2723,8 @@ export const LESSONS: Lesson[] = [
       id: 'Selaman terdalam dan terluas! Tiga rintangan berbatu, empat permata, dan semua trik yang dipelajari Finn — variabel, perulangan, dan navigasi cermat.',
     },
     mascotMessage: {
-      en: "This is my deepest dive ever! 🌊🏆 Reuse your variable for the clear stretches, and navigate the rocks by hand where you must. You're an Ocean Grandmaster!",
-      id: 'Ini selaman terdalamku! 🌊🏆 Pakai ulang variabelmu di bagian bersih, dan navigasi batu secara manual jika perlu. Kamu Grandmaster Samudra!',
+      en: "This is one of my deepest dives yet! 🌊🏆 Reuse your variable for the clear stretches, and navigate the rocks by hand where you must. You're an Ocean Grandmaster!",
+      id: 'Ini salah satu selaman terdalamku! 🌊🏆 Pakai ulang variabelmu di bagian bersih, dan navigasi batu secara manual jika perlu. Kamu Grandmaster Samudra!',
     },
     gridRows: 9,
     gridCols: 8,
@@ -1537,6 +2752,411 @@ export const LESSONS: Lesson[] = [
       { en: 'For gem 2, go down 4, left 3. For gem 3, go down 3, left 2. For gem 4, go down 1, right 4 — no obstacle sits on any of these three legs.', id: 'Untuk permata 2, turun 4, kiri 3. Untuk permata 3, turun 3, kiri 2. Untuk permata 4, turun 1, kanan 4 — tidak ada rintangan di ketiga bagian ini.' },
     ],
     starThresholds: [32, 22],
+  },
+  {
+    id: 'ocean-11',
+    worldId: 'ocean',
+    number: 11,
+    title: { en: 'Rip Current Detour', id: 'Memutari Arus Deras' },
+    story: {
+      en: 'A powerful rip current pulls Finn along, but sharp coral blocks the straight path — twice! Reuse your "steps" variable for the clear stretches, and swim around the coral by hand where you must.',
+      id: 'Arus deras yang kuat menarik Finn, tapi karang tajam memblokir jalur lurus — dua kali! Pakai ulang variabel "langkah" untuk bagian yang bersih, dan berenang mengitari karang secara manual jika perlu.',
+    },
+    mascotMessage: {
+      en: 'Two patches of coral this time! 🪸 Reset "steps" before each clear stretch, and swim around by hand when the coral gets in the way.',
+      id: 'Dua bongkah karang kali ini! 🪸 Atur ulang "langkah" sebelum setiap bagian bersih, dan berenang mengitari secara manual saat karang menghalangi.',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[1][8] = 'obstacle'
+      g[3][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 8] },
+      { id: 'g2', pos: [2, 3] },
+      { id: 'g3', pos: [7, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 23,
+    xpReward: 300,
+    hints: [
+      { en: 'Set "steps" to 8 and repeat right for gem 1 — the top row is clear all the way.', id: 'Atur "langkah" ke 8 dan ulangi kanan untuk permata 1 — baris atas bersih sepanjang jalan.' },
+      { en: 'Coral blocks the dive straight down after gem 1! Go left 1, down 2, right 1 by hand, then set "steps" to 5 and repeat left for gem 2. Coral blocks the next dive too — go right 1, down 2, left 1 by hand, then set "steps" to 3 and repeat down for gem 3.', id: 'Karang menghalangi selaman lurus ke bawah setelah permata 1! Jalan kiri 1, bawah 2, kanan 1 secara manual, lalu atur "langkah" ke 5 dan ulangi kiri untuk permata 2. Karang menghalangi lagi — jalan kanan 1, bawah 2, kiri 1 secara manual, lalu atur "langkah" ke 3 dan ulangi bawah untuk permata 3.' },
+    ],
+    starThresholds: [33, 23],
+  },
+  {
+    id: 'ocean-12',
+    worldId: 'ocean',
+    number: 12,
+    title: { en: 'Rising Tide', id: 'Pasang Naik' },
+    story: {
+      en: 'The tide is rising, and each swim needs to be longer than the last! Finn discovers a new trick: set "steps" to steps PLUS a little more before each stretch, instead of picking a fresh number every time.',
+      id: 'Air pasang sedang naik, dan setiap renang perlu lebih jauh dari sebelumnya! Finn menemukan trik baru: atur "langkah" menjadi langkah DITAMBAH sedikit lagi sebelum setiap bagian, bukan memilih angka baru setiap kali.',
+    },
+    mascotMessage: {
+      en: 'New trick! 🌊 Instead of a fresh number, set "steps" to "steps + 2" — the SAME variable, built on its own last value!',
+      id: 'Trik baru! 🌊 Alih-alih angka baru, atur "langkah" menjadi "langkah + 2" — variabel yang SAMA, dibangun dari nilai terakhirnya sendiri!',
+    },
+    gridRows: 5,
+    gridCols: 9,
+    cells: emptyGrid(5, 9),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 2] },
+      { id: 'g2', pos: [4, 2] },
+      { id: 'g3', pos: [4, 8] },
+      { id: 'g4', pos: [4, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 26,
+    xpReward: 320,
+    hints: [
+      { en: 'Set "steps" to 2 and repeat right for gem 1. For gem 2, find "steps + 2" in Variables/Math, plug in "steps" and 2, and set "steps" to that — then repeat down.', id: 'Atur "langkah" ke 2 dan ulangi kanan untuk permata 1. Untuk permata 2, cari "langkah + 2" di Variabel/Matematika, pasang "langkah" dan 2, lalu atur "langkah" ke hasilnya — kemudian ulangi bawah.' },
+      { en: 'Keep adding 2 each time: gem 3 needs "steps + 2" again (repeat right), and gem 4 needs "steps + 2" once more (repeat left) — steps grows 2, 4, 6, 8!', id: 'Terus tambahkan 2 setiap kali: permata 3 butuh "langkah + 2" lagi (ulangi kanan), dan permata 4 butuh "langkah + 2" sekali lagi (ulangi kiri) — langkah bertambah 2, 4, 6, 8!' },
+    ],
+    starThresholds: [38, 26],
+  },
+  {
+    id: 'ocean-13',
+    worldId: 'ocean',
+    number: 13,
+    title: { en: 'Shipwreck Salvage', id: 'Penyelamatan Kapal Karam' },
+    story: {
+      en: 'An old shipwreck rests on the ocean floor, its broken hull scattered everywhere. Finn must salvage gems from the wreckage, weaving carefully between the debris.',
+      id: 'Kapal karam tua beristirahat di dasar samudra, lambungnya yang pecah tersebar di mana-mana. Finn harus menyelamatkan permata dari puing-puing, berkelok hati-hati di antara reruntuhan.',
+    },
+    mascotMessage: {
+      en: 'So much wreckage down here! ⚓ Take it piece by piece and find a safe path around every broken plank.',
+      id: 'Banyak sekali reruntuhan di sini! ⚓ Ambil satu per satu dan cari jalur aman di sekitar setiap papan yang patah.',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[1][5] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[6][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 5] },
+      { id: 'g2', pos: [3, 5] },
+      { id: 'g3', pos: [6, 2] },
+      { id: 'g4', pos: [7, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    optimalBlockCount: 22,
+    xpReward: 340,
+    hints: [
+      { en: 'Gem 1 is a straight swim right along the top. Then go right 1, down 3, left 1 to reach gem 2 — the wreckage blocks a straight dive down.', id: 'Permata 1 adalah renang lurus ke kanan di bagian atas. Lalu jalan kanan 1, bawah 3, kiri 1 untuk mencapai permata 2 — reruntuhan menghalangi selaman lurus ke bawah.' },
+      { en: 'From gem 2, go down 2, left 3, down 1 to gem 3. From gem 3, go down 1, right 5 to gem 4 — the bottom row is clear all the way.', id: 'Dari permata 2, jalan bawah 2, kiri 3, bawah 1 ke permata 3. Dari permata 3, jalan bawah 1, kanan 5 ke permata 4 — baris bawah bersih sepanjang jalan.' },
+    ],
+    starThresholds: [32, 22],
+  },
+  {
+    id: 'ocean-14',
+    worldId: 'ocean',
+    number: 14,
+    title: { en: 'Bioluminescent Bay', id: 'Teluk Bercahaya' },
+    story: {
+      en: 'Glowing plankton light up the night water! Finn follows their trail across five long stretches, reusing "steps" each time and swimming around one dark patch of coral by hand.',
+      id: 'Plankton bercahaya menerangi air malam! Finn mengikuti jejaknya melintasi lima bagian panjang, memakai ulang "langkah" setiap kali dan berenang mengitari satu bongkah karang gelap secara manual.',
+    },
+    mascotMessage: {
+      en: 'Five glowing stretches to swim! ✨ Reuse "steps" for each one, and hand-navigate around the one dark patch of coral in the middle.',
+      id: 'Lima bagian bercahaya untuk direnangi! ✨ Pakai ulang "langkah" untuk masing-masing, dan navigasi manual mengitari satu bongkah karang gelap di tengah.',
+    },
+    gridRows: 9,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(9, 8)
+      g[4][4] = 'obstacle'
+      g[7][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 6] },
+      { id: 'g2', pos: [4, 6] },
+      { id: 'g3', pos: [4, 2] },
+      { id: 'g4', pos: [8, 2] },
+      { id: 'g5', pos: [8, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 26,
+    xpReward: 365,
+    hints: [
+      { en: 'Set "steps" to 6, repeat right for gem 1. Set "steps" to 4, repeat down for gem 2. Coral blocks the straight swim left after that — go down 1, left 4, up 1 by hand for gem 3.', id: 'Atur "langkah" ke 6, ulangi kanan untuk permata 1. Atur "langkah" ke 4, ulangi bawah untuk permata 2. Karang menghalangi renang lurus ke kiri setelah itu — jalan bawah 1, kiri 4, atas 1 secara manual untuk permata 3.' },
+      { en: 'Set "steps" to 4 again and repeat down for gem 4. Then set "steps" to 3 and repeat right for the fifth and final gem!', id: 'Atur "langkah" ke 4 lagi dan ulangi bawah untuk permata 4. Lalu atur "langkah" ke 3 dan ulangi kanan untuk permata kelima dan terakhir!' },
+    ],
+    starThresholds: [38, 26],
+  },
+  {
+    id: 'ocean-15',
+    worldId: 'ocean',
+    number: 15,
+    title: { en: 'Anglerfish Alley', id: 'Lorong Ikan Angler' },
+    story: {
+      en: "Deep in a dark alley of rock, an anglerfish's glow is the only light. Finn combines his growing-steps trick with a hand-swum detour around a jagged rock.",
+      id: 'Jauh di lorong batu yang gelap, cahaya ikan angler adalah satu-satunya penerangan. Finn menggabungkan trik langkah-yang-bertambah dengan jalan memutar manual di sekitar batu tajam.',
+    },
+    mascotMessage: {
+      en: 'Growing steps AND a detour in one level! 🐟 Add to "steps" for the clear stretches, and swim around the rock by hand in between.',
+      id: 'Langkah bertambah DAN jalan memutar dalam satu level! 🐟 Tambahkan ke "langkah" untuk bagian bersih, dan berenang mengitari batu secara manual di antaranya.',
+    },
+    gridRows: 8,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(8, 11)
+      g[4][4] = 'obstacle'
+      g[1][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 3] },
+      { id: 'g2', pos: [4, 3] },
+      { id: 'g3', pos: [4, 5] },
+      { id: 'g4', pos: [4, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 23,
+    xpReward: 390,
+    hints: [
+      { en: 'Set "steps" to 3, repeat right for gem 1. Set "steps" to "steps + 1" (now 4), repeat down for gem 2.', id: 'Atur "langkah" ke 3, ulangi kanan untuk permata 1. Atur "langkah" ke "langkah + 1" (sekarang 4), ulangi bawah untuk permata 2.' },
+      { en: 'A rock blocks the straight path from gem 2! Go down 1, right 2, up 1 by hand for gem 3. Then set "steps" to "steps + 1" again (now 5) and repeat right for the final gem.', id: 'Batu menghalangi jalur lurus dari permata 2! Jalan bawah 1, kanan 2, atas 1 secara manual untuk permata 3. Lalu atur "langkah" ke "langkah + 1" lagi (sekarang 5) dan ulangi kanan untuk permata terakhir.' },
+    ],
+    starThresholds: [33, 23],
+  },
+  {
+    id: 'ocean-16',
+    worldId: 'ocean',
+    number: 16,
+    title: { en: 'Octopus Maze', id: 'Labirin Gurita' },
+    story: {
+      en: 'A shy octopus has tangled the currents into a winding maze. Finn must reuse "steps" across four long stretches and swim around two stretches of rock by hand.',
+      id: 'Gurita pemalu telah mengusutkan arus menjadi labirin berliku. Finn harus memakai ulang "langkah" di empat bagian panjang dan berenang mengitari dua bagian berbatu secara manual.',
+    },
+    mascotMessage: {
+      en: 'This maze has FOUR variable stretches and TWO rocky detours! 🐙 Take your time and plan each turn carefully.',
+      id: 'Labirin ini punya EMPAT bagian variabel dan DUA jalan memutar berbatu! 🐙 Ambil waktumu dan rencanakan setiap belokan dengan hati-hati.',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[5][4] = 'obstacle'
+      g[8][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 6] },
+      { id: 'g2', pos: [5, 6] },
+      { id: 'g3', pos: [5, 2] },
+      { id: 'g4', pos: [8, 2] },
+      { id: 'g5', pos: [8, 4] },
+      { id: 'g6', pos: [8, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 32,
+    xpReward: 420,
+    hints: [
+      { en: 'Set "steps" to 6, repeat right for gem 1. Set "steps" to 5, repeat down for gem 2. Rock blocks the swim left — go down 1, left 4, up 1 by hand for gem 3.', id: 'Atur "langkah" ke 6, ulangi kanan untuk permata 1. Atur "langkah" ke 5, ulangi bawah untuk permata 2. Batu menghalangi renang ke kiri — jalan bawah 1, kiri 4, atas 1 secara manual untuk permata 3.' },
+      { en: 'Set "steps" to 3, repeat down for gem 4. Set "steps" to 2, repeat right for gem 5. One more rock blocks the swim right — go up 1, right 4, down 1 by hand for the final gem!', id: 'Atur "langkah" ke 3, ulangi bawah untuk permata 4. Atur "langkah" ke 2, ulangi kanan untuk permata 5. Satu batu lagi menghalangi renang ke kanan — jalan atas 1, kanan 4, bawah 1 secara manual untuk permata terakhir!' },
+    ],
+    starThresholds: [46, 32],
+  },
+  {
+    id: 'ocean-17',
+    worldId: 'ocean',
+    number: 17,
+    title: { en: 'Whirlpool Vortex', id: 'Pusaran Air' },
+    story: {
+      en: "A whirlpool spins Finn in a zigzag path, with jagged rock at every turn. He'll need his growing-steps trick twice, and two hand-swum detours to get past the rocks.",
+      id: 'Pusaran air memutar Finn dalam jalur zigzag, dengan batu tajam di setiap belokan. Dia perlu trik langkah-bertambah dua kali, dan dua jalan memutar manual untuk melewati batu-batu itu.',
+    },
+    mascotMessage: {
+      en: 'Rocks at every turn! 🌀 Use "steps + 2" or "steps + 1" to grow your variable, and swim around each rock by hand when you reach it.',
+      id: 'Batu di setiap belokan! 🌀 Gunakan "langkah + 2" atau "langkah + 1" untuk menumbuhkan variabelmu, dan berenang mengitari setiap batu secara manual saat mencapainya.',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[1][3] = 'obstacle'
+      g[7][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 3] },
+      { id: 'g2', pos: [2, 3] },
+      { id: 'g3', pos: [7, 3] },
+      { id: 'g4', pos: [7, 5] },
+      { id: 'g5', pos: [3, 5] },
+      { id: 'g6', pos: [3, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 32,
+    xpReward: 450,
+    hints: [
+      { en: 'Set "steps" to 3, repeat right for gem 1. A rock blocks the dive straight down — go right 1, down 2, left 1 by hand for gem 2. Set "steps" to "steps + 2" (now 5) and repeat down for gem 3.', id: 'Atur "langkah" ke 3, ulangi kanan untuk permata 1. Batu menghalangi selaman lurus ke bawah — jalan kanan 1, bawah 2, kiri 1 secara manual untuk permata 2. Atur "langkah" ke "langkah + 2" (sekarang 5) dan ulangi bawah untuk permata 3.' },
+      { en: 'Another rock blocks the swim right — go up 1, right 2, down 1 by hand for gem 4. Set "steps" to 4 and repeat up for gem 5. Set "steps" to "steps + 1" (now 5) and repeat left for the final gem.', id: 'Batu lain menghalangi renang ke kanan — jalan atas 1, kanan 2, bawah 1 secara manual untuk permata 4. Atur "langkah" ke 4 dan ulangi atas untuk permata 5. Atur "langkah" ke "langkah + 1" (sekarang 5) dan ulangi kiri untuk permata terakhir.' },
+    ],
+    starThresholds: [46, 32],
+  },
+  {
+    id: 'ocean-18',
+    worldId: 'ocean',
+    number: 18,
+    title: { en: 'Abyssal Trench', id: 'Palung Terdalam' },
+    story: {
+      en: 'The deepest trench yet — seven long stretches wind past three rocky hazards. Finn reuses "steps" five times and hand-swims around two real blockages.',
+      id: 'Palung terdalam sejauh ini — tujuh bagian panjang berkelok melewati tiga bahaya berbatu. Finn memakai ulang "langkah" lima kali dan berenang manual mengitari dua penghalang sungguhan.',
+    },
+    mascotMessage: {
+      en: 'Seven stretches in one dive! 🌑 Five use your "steps" variable, and two need a careful hand-swum detour around the rocks.',
+      id: 'Tujuh bagian dalam satu selaman! 🌑 Lima menggunakan variabel "langkah"-mu, dan dua butuh jalan memutar manual yang hati-hati mengitari batu.',
+    },
+    gridRows: 9,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(9, 10)
+      g[6][6] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[2][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 5] },
+      { id: 'g2', pos: [6, 5] },
+      { id: 'g3', pos: [6, 8] },
+      { id: 'g4', pos: [8, 8] },
+      { id: 'g5', pos: [8, 4] },
+      { id: 'g6', pos: [8, 0] },
+      { id: 'g7', pos: [5, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 36,
+    xpReward: 490,
+    hints: [
+      { en: 'Set "steps" to 5, repeat right for gem 1. Set "steps" to 6, repeat down for gem 2. Rock blocks the swim right — go down 1, right 3, up 1 by hand for gem 3.', id: 'Atur "langkah" ke 5, ulangi kanan untuk permata 1. Atur "langkah" ke 6, ulangi bawah untuk permata 2. Batu menghalangi renang ke kanan — jalan bawah 1, kanan 3, atas 1 secara manual untuk permata 3.' },
+      { en: 'Set "steps" to 2, repeat down for gem 4. Another rock blocks the swim left — go up 1, left 4, down 1 by hand for gem 5. Then set "steps" to 4, repeat left for gem 6, and set "steps" to 3, repeat up for the final gem.', id: 'Atur "langkah" ke 2, ulangi bawah untuk permata 4. Batu lain menghalangi renang ke kiri — jalan atas 1, kiri 4, bawah 1 secara manual untuk permata 5. Lalu atur "langkah" ke 4, ulangi kiri untuk permata 6, dan atur "langkah" ke 3, ulangi atas untuk permata terakhir.' },
+    ],
+    starThresholds: [52, 36],
+  },
+  {
+    id: 'ocean-19',
+    worldId: 'ocean',
+    number: 19,
+    title: { en: "Leviathan's Path", id: 'Jejak Leviathan' },
+    story: {
+      en: 'A legendary leviathan once swam this exact trench! Finn follows its ancient path — resetting "steps" fresh twice, growing it three times, and hand-swimming around two real blockages.',
+      id: 'Leviathan legendaris pernah berenang di palung ini! Finn mengikuti jalur kunonya — mengatur ulang "langkah" dengan angka baru dua kali, menumbuhkannya tiga kali, dan berenang manual mengitari dua penghalang sungguhan.',
+    },
+    mascotMessage: {
+      en: 'This is the leviathan\'s own path! 🐋 Some stretches need a fresh number for "steps", others need "steps + 1" or "steps + 2" — read carefully!',
+      id: 'Ini jalur milik sang leviathan sendiri! 🐋 Beberapa bagian butuh angka baru untuk "langkah", yang lain butuh "langkah + 1" atau "langkah + 2" — baca dengan cermat!',
+    },
+    gridRows: 10,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(10, 9)
+      g[6][5] = 'obstacle'
+      g[9][6] = 'obstacle'
+      g[2][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 4] },
+      { id: 'g2', pos: [6, 4] },
+      { id: 'g3', pos: [6, 7] },
+      { id: 'g4', pos: [9, 7] },
+      { id: 'g5', pos: [9, 3] },
+      { id: 'g6', pos: [5, 3] },
+      { id: 'g7', pos: [5, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 42,
+    xpReward: 530,
+    hints: [
+      { en: 'Set "steps" to 4, repeat right for gem 1. Set "steps" to "steps + 2" (now 6), repeat down for gem 2. Rock blocks the swim right — go down 1, right 3, up 1 by hand for gem 3.', id: 'Atur "langkah" ke 4, ulangi kanan untuk permata 1. Atur "langkah" ke "langkah + 2" (sekarang 6), ulangi bawah untuk permata 2. Batu menghalangi renang ke kanan — jalan bawah 1, kanan 3, atas 1 secara manual untuk permata 3.' },
+      { en: 'Set "steps" to 3 (a fresh number), repeat down for gem 4. Another rock blocks the swim left — go up 1, left 4, down 1 by hand for gem 5. Set "steps" to "steps + 1" (now 4), repeat up for gem 6, then "steps + 1" again (now 5), repeat right for the final gem.', id: 'Atur "langkah" ke 3 (angka baru), ulangi bawah untuk permata 4. Batu lain menghalangi renang ke kiri — jalan atas 1, kiri 4, bawah 1 secara manual untuk permata 5. Atur "langkah" ke "langkah + 1" (sekarang 4), ulangi atas untuk permata 6, lalu "langkah + 1" lagi (sekarang 5), ulangi kanan untuk permata terakhir.' },
+    ],
+    starThresholds: [61, 42],
+  },
+  {
+    id: 'ocean-20',
+    worldId: 'ocean',
+    number: 20,
+    title: { en: 'Ocean Sovereign', id: 'Penguasa Samudra' },
+    story: {
+      en: 'The widest, deepest dive of all — eight long stretches, three real rocky blockages, and every trick Finn has ever learned. Master this, and you rule the ocean itself.',
+      id: 'Selaman terluas dan terdalam dari semuanya — delapan bagian panjang, tiga penghalang berbatu sungguhan, dan semua trik yang pernah dipelajari Finn. Kuasai ini, dan kamu menguasai samudra itu sendiri.',
+    },
+    mascotMessage: {
+      en: 'This is it — the biggest dive of all! 🌊👑 Reuse and grow "steps" for every clear stretch, and swim around all three rocks by hand. You\'re an Ocean Sovereign!',
+      id: 'Inilah dia — selaman terbesar dari semuanya! 🌊👑 Pakai ulang dan tumbuhkan "langkah" untuk setiap bagian bersih, dan berenang mengitari ketiga batu secara manual. Kamu Penguasa Samudra!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[7][6] = 'obstacle'
+      g[9][7] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[2][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 5] },
+      { id: 'g2', pos: [7, 5] },
+      { id: 'g3', pos: [7, 8] },
+      { id: 'g4', pos: [9, 8] },
+      { id: 'g5', pos: [9, 3] },
+      { id: 'g6', pos: [6, 3] },
+      { id: 'g7', pos: [6, 5] },
+      { id: 'g8', pos: [6, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables'],
+    requiredCategories: ['variables', 'loops'],
+    optimalBlockCount: 47,
+    xpReward: 600,
+    hints: [
+      { en: 'Set "steps" to 5, repeat right for gem 1. Set "steps" to "steps + 2" (now 7), repeat down for gem 2. Rock blocks the swim right — go down 1, right 3, up 1 by hand for gem 3. Set "steps" to 2, repeat down for gem 4.', id: 'Atur "langkah" ke 5, ulangi kanan untuk permata 1. Atur "langkah" ke "langkah + 2" (sekarang 7), ulangi bawah untuk permata 2. Batu menghalangi renang ke kanan — jalan bawah 1, kanan 3, atas 1 secara manual untuk permata 3. Atur "langkah" ke 2, ulangi bawah untuk permata 4.' },
+      { en: 'Another rock blocks the swim left — go up 1, left 5, down 1 by hand for gem 5. Set "steps" to "steps + 1" (now 3), repeat up for gem 6. A third rock blocks the swim right — go up 1, right 2, down 1 by hand for gem 7. Set "steps" to "steps + 1" (now 4), repeat right for the final gem!', id: 'Batu lain menghalangi renang ke kiri — jalan atas 1, kiri 5, bawah 1 secara manual untuk permata 5. Atur "langkah" ke "langkah + 1" (sekarang 3), ulangi atas untuk permata 6. Batu ketiga menghalangi renang ke kanan — jalan atas 1, kanan 2, bawah 1 secara manual untuk permata 7. Atur "langkah" ke "langkah + 1" (sekarang 4), ulangi kanan untuk permata terakhir!' },
+    ],
+    starThresholds: [68, 47],
   },
 
   // ─────────────────────────────────────────────
@@ -1944,12 +3564,12 @@ export const LESSONS: Lesson[] = [
     number: 10,
     title: { en: 'Cave Grandmaster', id: 'Grandmaster Gua' },
     story: {
-      en: 'The ultimate cave trial! Six crystals, eight boulders, and the biggest cavern Zara has ever explored. Every skill she has learned comes together here.',
-      id: 'Uji coba gua tertinggi! Enam kristal, delapan batu besar, dan gua terbesar yang pernah Zara jelajahi. Semua keahlian yang dia pelajari bersatu di sini.',
+      en: 'One of the toughest cave trials yet! Six crystals, eight boulders, and one of the biggest caverns Zara has explored so far. Every skill she has learned comes together here.',
+      id: 'Salah satu uji coba gua tersulit sejauh ini! Enam kristal, delapan batu besar, dan salah satu gua terbesar yang pernah Zara jelajahi. Semua keahlian yang dia pelajari bersatu di sini.',
     },
     mascotMessage: {
-      en: "This is the deepest cavern of all! 🔮 Use loops for the straight legs and if-else to guide every decision. You're a true Cave Grandmaster! 🧝✨",
-      id: 'Ini gua terdalam dari semuanya! 🔮 Gunakan perulangan untuk bagian lurus dan jika-selain untuk memandu setiap keputusan. Kamu Grandmaster Gua sejati! 🧝✨',
+      en: "This is one of the deepest caverns yet! 🔮 Use loops for the straight legs and if-else to guide every decision. You're a true Cave Grandmaster! 🧝✨",
+      id: 'Ini salah satu gua terdalam yang pernah ada! 🔮 Gunakan perulangan untuk bagian lurus dan jika-selain untuk memandu setiap keputusan. Kamu Grandmaster Gua sejati! 🧝✨',
     },
     gridRows: 10,
     gridCols: 10,
@@ -1984,6 +3604,496 @@ export const LESSONS: Lesson[] = [
       { en: 'Crystal 2 → 3: down, then right. 3 → 4: left, then down. 4 → 5: right, then down. 5 → 6: down, then left.', id: 'Kristal 2 → 3: turun, lalu kanan. 3 → 4: kiri, lalu turun. 4 → 5: kanan, lalu turun. 5 → 6: turun, lalu kiri.' },
     ],
     starThresholds: [78, 56, 49, 41],
+  },
+  {
+    id: 'caves-11',
+    worldId: 'caves',
+    number: 11,
+    title: { en: 'Sunken Chamber', id: 'Ruang Tenggelam' },
+    story: {
+      en: 'A flooded chamber sits below the vault, its crystals scattered around water-worn boulders. Zara wades carefully, checking every path before she steps.',
+      id: 'Ruang yang terendam air berada di bawah ruang bawah tanah, kristalnya tersebar di antara batu besar yang terkikis air. Zara melangkah hati-hati, memeriksa setiap jalur sebelum melangkah.',
+    },
+    mascotMessage: {
+      en: 'Six crystals wait below the waterline! 💧 Use if-else to check your path around every boulder before you commit to a move.',
+      id: 'Enam kristal menanti di bawah permukaan air! 💧 Gunakan jika-selain untuk memeriksa jalurmu di sekitar setiap batu besar sebelum melangkah.',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][1] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][7] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[8][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 8] },
+      { id: 'c2', pos: [3, 5] },
+      { id: 'c3', pos: [5, 9] },
+      { id: 'c4', pos: [7, 2] },
+      { id: 'c5', pos: [9, 6] },
+      { id: 'c6', pos: [9, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
+    optimalBlockCount: 38,
+    xpReward: 330,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'From crystal 1 to 2: down 3, left 3. Crystal 2 to 3: down 2, right 4. Crystal 3 to 4: down 2, left 7. Crystal 4 to 5: down 2, right 4. Crystal 5 to 6: right 3.', id: 'Dari kristal 1 ke 2: turun 3, kiri 3. Kristal 2 ke 3: turun 2, kanan 4. Kristal 3 ke 4: turun 2, kiri 7. Kristal 4 ke 5: turun 2, kanan 4. Kristal 5 ke 6: kanan 3.' },
+    ],
+    starThresholds: [72, 53, 46, 38],
+  },
+  {
+    id: 'caves-12',
+    worldId: 'caves',
+    number: 12,
+    title: { en: 'Whispering Tunnel', id: 'Terowongan Berbisik' },
+    story: {
+      en: 'A long tunnel hums with echoes as Zara moves through it. Six crystals glow faintly among the boulders, each one asking for a careful decision.',
+      id: 'Terowongan panjang bergema saat Zara melewatinya. Enam kristal bersinar samar di antara batu besar, masing-masing membutuhkan keputusan yang cermat.',
+    },
+    mascotMessage: {
+      en: 'Listen to the echoes and plan each turn! 👂 Wrap your moves in if-else so you never bump a boulder in the dark.',
+      id: 'Dengarkan gemanya dan rencanakan setiap belokan! 👂 Bungkus gerakanmu dalam jika-selain agar tidak menabrak batu besar dalam gelap.',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[1][2] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[8][9] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 9] },
+      { id: 'c2', pos: [3, 6] },
+      { id: 'c3', pos: [5, 10] },
+      { id: 'c4', pos: [7, 3] },
+      { id: 'c5', pos: [9, 7] },
+      { id: 'c6', pos: [9, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
+    optimalBlockCount: 39,
+    xpReward: 345,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'From crystal 1 to 2: down 3, left 3. Crystal 2 to 3: down 2, right 4. Crystal 3 to 4: down 2, left 7. Crystal 4 to 5: down 2, right 4. Crystal 5 to 6: right 3.', id: 'Dari kristal 1 ke 2: turun 3, kiri 3. Kristal 2 ke 3: turun 2, kanan 4. Kristal 3 ke 4: turun 2, kiri 7. Kristal 4 ke 5: turun 2, kanan 4. Kristal 5 ke 6: kanan 3.' },
+    ],
+    starThresholds: [74, 55, 47, 39],
+  },
+  {
+    id: 'caves-13',
+    worldId: 'caves',
+    number: 13,
+    title: { en: 'Obsidian Hall', id: 'Aula Obsidian' },
+    story: {
+      en: 'A vast hall of black glass stretches ahead, seven crystals scattered across it. Zara must combine loops and conditions to cross it safely.',
+      id: 'Aula luas dari kaca hitam terbentang di depan, tujuh kristal tersebar di dalamnya. Zara harus menggabungkan perulangan dan kondisi untuk melewatinya dengan aman.',
+    },
+    mascotMessage: {
+      en: 'The obsidian hall is huge! 🖤 Use loops for the long straight stretches and if-else at every boulder.',
+      id: 'Aula obsidian ini sangat besar! 🖤 Gunakan perulangan untuk bagian lurus yang panjang dan jika-selain di setiap batu besar.',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][1] = 'obstacle'
+      g[1][4] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][9] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 8] },
+      { id: 'c2', pos: [2, 5] },
+      { id: 'c3', pos: [4, 9] },
+      { id: 'c4', pos: [6, 2] },
+      { id: 'c5', pos: [7, 7] },
+      { id: 'c6', pos: [9, 1] },
+      { id: 'c7', pos: [9, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic', 'loops'],
+    optimalBlockCount: 50,
+    xpReward: 365,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Crystal 1 to 2: down 2, left 3. 2 to 3: down 2, right 4. 3 to 4: down 2, left 7. 4 to 5: down 1, right 5. 5 to 6: down 2, left 6. 6 to 7: right 8.', id: 'Kristal 1 ke 2: turun 2, kiri 3. 2 ke 3: turun 2, kanan 4. 3 ke 4: turun 2, kiri 7. 4 ke 5: turun 1, kanan 5. 5 ke 6: turun 2, kiri 6. 6 ke 7: kanan 8.' },
+    ],
+    starThresholds: [95, 70, 60, 50],
+  },
+  {
+    id: 'caves-14',
+    worldId: 'caves',
+    number: 14,
+    title: { en: 'Glowing Abyss', id: 'Jurang Bercahaya' },
+    story: {
+      en: 'The tunnel opens onto a glowing abyss, its light reflecting off seven crystals and eight scattered boulders far below.',
+      id: 'Terowongan terbuka menuju jurang yang bercahaya, cahayanya memantul dari tujuh kristal dan delapan batu besar yang tersebar di bawah.',
+    },
+    mascotMessage: {
+      en: 'The glow lights the way, but the boulders are everywhere! 🔦 Check your path with if-else at every turn.',
+      id: 'Cahaya menerangi jalan, tapi batu besar ada di mana-mana! 🔦 Periksa jalurmu dengan jika-selain di setiap belokan.',
+    },
+    gridRows: 11,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(11, 10)
+      g[1][2] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[7][6] = 'obstacle'
+      g[9][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 9] },
+      { id: 'c2', pos: [2, 6] },
+      { id: 'c3', pos: [4, 9] },
+      { id: 'c4', pos: [6, 2] },
+      { id: 'c5', pos: [8, 7] },
+      { id: 'c6', pos: [10, 1] },
+      { id: 'c7', pos: [10, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
+    optimalBlockCount: 51,
+    xpReward: 380,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Crystal 1 to 2: down 2, left 3. 2 to 3: down 2, right 3. 3 to 4: down 2, left 7. 4 to 5: down 2, right 5. 5 to 6: down 2, left 6. 6 to 7: right 8.', id: 'Kristal 1 ke 2: turun 2, kiri 3. 2 ke 3: turun 2, kanan 3. 3 ke 4: turun 2, kiri 7. 4 ke 5: turun 2, kanan 5. 5 ke 6: turun 2, kiri 6. 6 ke 7: kanan 8.' },
+    ],
+    starThresholds: [97, 71, 61, 51],
+  },
+  {
+    id: 'caves-15',
+    worldId: 'caves',
+    number: 15,
+    title: { en: 'Molten Passage', id: 'Lorong Lava' },
+    story: {
+      en: 'Heat shimmers through a molten passage lined with seven crystals and nine boulders. Zara needs loops for the long stretches and if-else for every turn.',
+      id: 'Panas berkilau di sepanjang lorong lava yang dipenuhi tujuh kristal dan sembilan batu besar. Zara butuh perulangan untuk bagian panjang dan jika-selain di setiap belokan.',
+    },
+    mascotMessage: {
+      en: "It's getting hot in here! 🔥 Use loops on the long legs and if-else to dodge every boulder.",
+      id: 'Semakin panas di sini! 🔥 Gunakan perulangan di bagian panjang dan jika-selain untuk menghindari setiap batu besar.',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[1][3] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[3][10] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[7][6] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[8][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 10] },
+      { id: 'c2', pos: [2, 7] },
+      { id: 'c3', pos: [4, 10] },
+      { id: 'c4', pos: [6, 3] },
+      { id: 'c5', pos: [8, 8] },
+      { id: 'c6', pos: [9, 2] },
+      { id: 'c7', pos: [9, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic', 'loops'],
+    optimalBlockCount: 51,
+    xpReward: 395,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Crystal 1 to 2: down 2, left 3. 2 to 3: down 2, right 3. 3 to 4: down 2, left 7. 4 to 5: down 2, right 5. 5 to 6: down 1, left 6. 6 to 7: right 8.', id: 'Kristal 1 ke 2: turun 2, kiri 3. 2 ke 3: turun 2, kanan 3. 3 ke 4: turun 2, kiri 7. 4 ke 5: turun 2, kanan 5. 5 ke 6: turun 1, kiri 6. 6 ke 7: kanan 8.' },
+    ],
+    starThresholds: [97, 71, 61, 51],
+  },
+  {
+    id: 'caves-16',
+    worldId: 'caves',
+    number: 16,
+    title: { en: 'Frozen Grotto', id: 'Gua Beku' },
+    story: {
+      en: 'Ice coats every wall of this grotto. Seven crystals shimmer between nine frozen boulders, and one wrong step means starting the route over.',
+      id: 'Es melapisi setiap dinding gua ini. Tujuh kristal berkilau di antara sembilan batu besar yang membeku, dan satu langkah salah berarti mengulang rute dari awal.',
+    },
+    mascotMessage: {
+      en: "It's slippery in here! ❄️ Take it slow — plan every leg with if-else before you build your code.",
+      id: 'Licin sekali di sini! ❄️ Pelan-pelan — rencanakan setiap bagian dengan jika-selain sebelum menyusun kode.',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[1][2] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[3][10] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[7][6] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[9][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 10] },
+      { id: 'c2', pos: [2, 7] },
+      { id: 'c3', pos: [4, 10] },
+      { id: 'c4', pos: [6, 3] },
+      { id: 'c5', pos: [8, 9] },
+      { id: 'c6', pos: [10, 2] },
+      { id: 'c7', pos: [10, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic', 'loops'],
+    optimalBlockCount: 54,
+    xpReward: 410,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Crystal 1 to 2: down 2, left 3. 2 to 3: down 2, right 3. 3 to 4: down 2, left 7. 4 to 5: down 2, right 6. 5 to 6: down 2, left 7. 6 to 7: right 8.', id: 'Kristal 1 ke 2: turun 2, kiri 3. 2 ke 3: turun 2, kanan 3. 3 ke 4: turun 2, kiri 7. 4 ke 5: turun 2, kanan 6. 5 ke 6: turun 2, kiri 7. 6 ke 7: kanan 8.' },
+    ],
+    starThresholds: [103, 76, 65, 54],
+  },
+  {
+    id: 'caves-17',
+    worldId: 'caves',
+    number: 17,
+    title: { en: 'Echo Cavern', id: 'Gua Gema' },
+    story: {
+      en: 'Every footstep echoes eight times in this vast cavern. Eight crystals hide among the boulders, and Zara must think through every decision before she moves.',
+      id: 'Setiap langkah kaki bergema delapan kali di gua yang luas ini. Delapan kristal tersembunyi di antara batu besar, dan Zara harus berpikir matang sebelum bergerak.',
+    },
+    mascotMessage: {
+      en: 'Eight crystals echoing through the dark! 🗣️ Combine loops and if-else to zigzag through safely.',
+      id: 'Delapan kristal bergema dalam gelap! 🗣️ Gabungkan perulangan dan jika-selain untuk zigzag dengan aman.',
+    },
+    gridRows: 11,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(11, 10)
+      g[2][1] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[8][4] = 'obstacle'
+      g[8][8] = 'obstacle'
+      g[10][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 9] },
+      { id: 'c2', pos: [1, 3] },
+      { id: 'c3', pos: [3, 9] },
+      { id: 'c4', pos: [4, 2] },
+      { id: 'c5', pos: [6, 8] },
+      { id: 'c6', pos: [7, 1] },
+      { id: 'c7', pos: [9, 9] },
+      { id: 'c8', pos: [10, 2] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic', 'loops'],
+    optimalBlockCount: 66,
+    xpReward: 430,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Crystal 1 to 2: down 1, left 6. 2 to 3: down 2, right 6. 3 to 4: down 1, left 7. 4 to 5: down 2, right 6. 5 to 6: down 1, left 7. 6 to 7: down 2, right 8. 7 to 8: down 1, left 7.', id: 'Kristal 1 ke 2: turun 1, kiri 6. 2 ke 3: turun 2, kanan 6. 3 ke 4: turun 1, kiri 7. 4 ke 5: turun 2, kanan 6. 5 ke 6: turun 1, kiri 7. 6 ke 7: turun 2, kanan 8. 7 ke 8: turun 1, kiri 7.' },
+    ],
+    starThresholds: [125, 92, 79, 66],
+  },
+  {
+    id: 'caves-18',
+    worldId: 'caves',
+    number: 18,
+    title: { en: 'Shattered Spire', id: 'Menara Retak' },
+    story: {
+      en: 'A collapsed spire has scattered ten boulders and eight crystals across the widest cavern Zara has ever seen.',
+      id: 'Menara yang runtuh telah menyebarkan sepuluh batu besar dan delapan kristal di gua terluas yang pernah Zara lihat.',
+    },
+    mascotMessage: {
+      en: 'So much rubble! 🪨 Break this into small legs and check each one with if-else before you move on.',
+      id: 'Banyak sekali reruntuhan! 🪨 Bagi ini menjadi bagian-bagian kecil dan periksa setiap bagian dengan jika-selain sebelum lanjut.',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[1][1] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[8][5] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[10][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 10] },
+      { id: 'c2', pos: [1, 4] },
+      { id: 'c3', pos: [3, 10] },
+      { id: 'c4', pos: [4, 3] },
+      { id: 'c5', pos: [6, 9] },
+      { id: 'c6', pos: [7, 2] },
+      { id: 'c7', pos: [9, 10] },
+      { id: 'c8', pos: [10, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic'],
+    optimalBlockCount: 67,
+    xpReward: 445,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Crystal 1 to 2: down 1, left 6. 2 to 3: down 2, right 6. 3 to 4: down 1, left 7. 4 to 5: down 2, right 6. 5 to 6: down 1, left 7. 6 to 7: down 2, right 8. 7 to 8: down 1, left 7.', id: 'Kristal 1 ke 2: turun 1, kiri 6. 2 ke 3: turun 2, kanan 6. 3 ke 4: turun 1, kiri 7. 4 ke 5: turun 2, kanan 6. 5 ke 6: turun 1, kiri 7. 6 ke 7: turun 2, kanan 8. 7 ke 8: turun 1, kiri 7.' },
+    ],
+    starThresholds: [127, 94, 80, 67],
+  },
+  {
+    id: 'caves-19',
+    worldId: 'caves',
+    number: 19,
+    title: { en: 'Crystal Labyrinth', id: 'Labirin Kristal' },
+    story: {
+      en: 'A true labyrinth of tunnels and boulders spreads across the widest cavern yet. Eight crystals wait at its farthest corners.',
+      id: 'Labirin sesungguhnya berupa terowongan dan batu besar terbentang di gua terluas yang pernah ada. Delapan kristal menanti di sudut-sudut terjauhnya.',
+    },
+    mascotMessage: {
+      en: 'A real labyrinth! 🌀 Combine loops and if-else for every long stretch — you can do this!',
+      id: 'Labirin sungguhan! 🌀 Gabungkan perulangan dan jika-selain untuk setiap bagian panjang — kamu pasti bisa!',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[1][0] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][7] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[8][0] = 'obstacle'
+      g[9][0] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 10] },
+      { id: 'c2', pos: [1, 2] },
+      { id: 'c3', pos: [3, 10] },
+      { id: 'c4', pos: [5, 1] },
+      { id: 'c5', pos: [7, 10] },
+      { id: 'c6', pos: [8, 2] },
+      { id: 'c7', pos: [9, 10] },
+      { id: 'c8', pos: [10, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic', 'loops'],
+    optimalBlockCount: 79,
+    xpReward: 460,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Crystal 1 to 2: down 1, left 8. 2 to 3: down 2, right 8. 3 to 4: down 2, left 9. 4 to 5: down 2, right 9. 5 to 6: down 1, left 8. 6 to 7: down 1, right 8. 7 to 8: down 1, left 9.', id: 'Kristal 1 ke 2: turun 1, kiri 8. 2 ke 3: turun 2, kanan 8. 3 ke 4: turun 2, kiri 9. 4 ke 5: turun 2, kanan 9. 5 ke 6: turun 1, kiri 8. 6 ke 7: turun 1, kanan 8. 7 ke 8: turun 1, kiri 9.' },
+    ],
+    starThresholds: [150, 111, 95, 79],
+  },
+  {
+    id: 'caves-20',
+    worldId: 'caves',
+    number: 20,
+    title: { en: 'Cave Sovereign', id: 'Penguasa Gua' },
+    story: {
+      en: "Beyond even the Grandmaster trial lies the Sovereign's Cavern — the widest, most boulder-choked chamber in all of Crystal Caves. Eight crystals wait at its farthest edges, and every leg of the journey demands a decision.",
+      id: 'Melampaui bahkan uji coba Grandmaster terletak Gua Sang Penguasa — ruang terluas dan paling dipenuhi batu besar di seluruh Gua Kristal. Delapan kristal menanti di ujung-ujung terjauhnya, dan setiap bagian perjalanan membutuhkan sebuah keputusan.',
+    },
+    mascotMessage: {
+      en: "This is it — the Sovereign's Cavern! 👑 Loops for every long stretch, if-else for every decision. Prove you're ready to rule the caves! 🧝✨",
+      id: 'Inilah dia — Gua Sang Penguasa! 👑 Perulangan untuk setiap bagian panjang, jika-selain untuk setiap keputusan. Buktikan kamu siap menguasai gua ini! 🧝✨',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[2][1] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[2][9] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[8][9] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'c1', pos: [0, 10] },
+      { id: 'c2', pos: [1, 0] },
+      { id: 'c3', pos: [3, 10] },
+      { id: 'c4', pos: [4, 0] },
+      { id: 'c5', pos: [6, 10] },
+      { id: 'c6', pos: [7, 0] },
+      { id: 'c7', pos: [9, 10] },
+      { id: 'c8', pos: [10, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic'],
+    requiredCategories: ['logic', 'loops'],
+    optimalBlockCount: 90,
+    xpReward: 490,
+    hints: [
+      { en: 'Crystal 1 is a straight walk right along the entire top row.', id: 'Kristal 1 adalah jalan lurus ke kanan di sepanjang baris atas.' },
+      { en: 'Every leg zigzags full width: down, then all the way left; down, then all the way right — alternating right to left all the way to the final corner.', id: 'Setiap bagian zigzag selebar penuh: turun, lalu kiri sepenuhnya; turun, lalu kanan sepenuhnya — bergantian kanan dan kiri sampai sudut terakhir.' },
+    ],
+    starThresholds: [171, 126, 108, 90],
   },
 
   // ─────────────────────────────────────────────
@@ -2415,8 +4525,8 @@ export const LESSONS: Lesson[] = [
     number: 10,
     title: { en: 'Factory Grandmaster', id: 'Grandmaster Pabrik' },
     story: {
-      en: 'The final assembly line — the biggest, busiest floor in the whole factory! Six gears, eight machines, and every skill Bolt has learned: functions, loops, AND conditions together.',
-      id: 'Lini perakitan terakhir — lantai terbesar dan tersibuk di seluruh pabrik! Enam gear, delapan mesin, dan semua keahlian yang dipelajari Bolt: fungsi, perulangan, DAN kondisi bersama.',
+      en: 'A massive assembly line — one of the biggest, busiest floors in the factory! Six gears, eight machines, and every skill Bolt has learned: functions, loops, AND conditions together.',
+      id: 'Lini perakitan raksasa — salah satu lantai terbesar dan tersibuk di pabrik! Enam gear, delapan mesin, dan semua keahlian yang dipelajari Bolt: fungsi, perulangan, DAN kondisi bersama.',
     },
     mascotMessage: {
       en: "This is the grandest assembly line yet! 🏭🏆 Combine functions, loops, and if-else — you're a true Factory Grandmaster! 🤖",
@@ -2455,6 +4565,468 @@ export const LESSONS: Lesson[] = [
       { en: 'From gear 3, go left, down, left, down to gear 4 around the machinery. Gear 4 → 5: down 3, right 6, up 1. Gear 5 → 6: down 1, left 4.', id: 'Dari gear 3, jalan kiri, turun, kiri, turun ke gear 4 mengitari mesin. Gear 4 → 5: turun 3, kanan 6, naik 1. Gear 5 → 6: turun 1, kiri 4.' },
     ],
     starThresholds: [80, 58, 50, 42],
+  },
+  {
+    id: 'factory-11',
+    worldId: 'factory',
+    number: 11,
+    title: { en: 'Welding Bay', id: 'Bengkel Las' },
+    story: {
+      en: 'A new welding bay hums with robotic arms! Bolt writes one function to handle the tricky turns and calls it wherever he needs it.',
+      id: 'Bengkel las baru berdengung dengan lengan robot! Bolt menulis satu fungsi untuk menangani belokan sulit dan memanggilnya kapan pun dibutuhkan.',
+    },
+    mascotMessage: {
+      en: 'Spot the moves you repeat and wrap them in a function! 🔧⚡ One good function saves you from writing the same blocks over and over.',
+      id: 'Kenali gerakan yang berulang dan bungkus dalam sebuah fungsi! 🔧⚡ Satu fungsi yang baik menghemat kamu dari menulis blok yang sama berulang kali.',
+    },
+    gridRows: 7,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(7, 8)
+      g[1][3] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[6][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 4] },
+      { id: 'g2', pos: [3, 1] },
+      { id: 'g3', pos: [2, 7] },
+      { id: 'g4', pos: [6, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions'],
+    optimalBlockCount: 25,
+    xpReward: 390,
+    hints: [
+      { en: 'Gear 1 is a straight walk right across the top of the welding bay.', id: 'Gear 1 adalah jalan lurus ke kanan di bagian atas bengkel las.' },
+      { en: 'Gear 1 → 2: down then left. Gear 2 → 3: right then up. Gear 3 → 4: down then left.', id: 'Gear 1 → 2: turun lalu kiri. Gear 2 → 3: kanan lalu naik. Gear 3 → 4: turun lalu kiri.' },
+    ],
+    starThresholds: [48, 35, 30, 25],
+  },
+  {
+    id: 'factory-12',
+    worldId: 'factory',
+    number: 12,
+    title: { en: 'Circuit Row', id: 'Baris Sirkuit' },
+    story: {
+      en: 'Circuit Row is lined with buzzing control panels. Bolt combines a function with a loop to zip along each straight row of wiring.',
+      id: 'Baris Sirkuit dipenuhi panel kontrol yang berdengung. Bolt menggabungkan fungsi dengan perulangan untuk melaju cepat di sepanjang setiap baris kabel lurus.',
+    },
+    mascotMessage: {
+      en: 'Straight stretches are perfect for a loop — wrap your function call inside repeat! 🔄⚙️',
+      id: 'Bagian lurus sangat cocok untuk perulangan — bungkus panggilan fungsimu di dalam ulangi! 🔄⚙️',
+    },
+    gridRows: 8,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(8, 8)
+      g[1][5] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[6][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 6] },
+      { id: 'g2', pos: [3, 3] },
+      { id: 'g3', pos: [5, 7] },
+      { id: 'g4', pos: [7, 2] },
+      { id: 'g5', pos: [6, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops'],
+    optimalBlockCount: 29,
+    xpReward: 400,
+    hints: [
+      { en: 'Gear 1 is a straight walk right — perfect for a loop!', id: 'Gear 1 adalah jalan lurus ke kanan — cocok untuk perulangan!' },
+      { en: 'Gear 1 → 2: down then left. Gear 2 → 3: right then down. Gear 3 → 4: down then left. Gear 4 → 5: up then right.', id: 'Gear 1 → 2: turun lalu kiri. Gear 2 → 3: kanan lalu turun. Gear 3 → 4: turun lalu kiri. Gear 4 → 5: naik lalu kanan.' },
+    ],
+    starThresholds: [55, 41, 35, 29],
+  },
+  {
+    id: 'factory-13',
+    worldId: 'factory',
+    number: 13,
+    title: { en: 'Conveyor Alley', id: 'Lorong Konveyor' },
+    story: {
+      en: 'The conveyor alley splits into two paths at every junction. Bolt must decide — with an if-else — which function to call at each fork.',
+      id: 'Lorong konveyor pabrik terbagi menjadi dua jalur di setiap persimpangan. Bolt harus memutuskan — dengan jika-selain — fungsi mana yang dipanggil di setiap persimpangan.',
+    },
+    mascotMessage: {
+      en: 'Not every path needs a loop — sometimes you just need to CHOOSE the right function! 🔀🔧',
+      id: 'Tidak semua jalur butuh perulangan — kadang kamu hanya perlu MEMILIH fungsi yang tepat! 🔀🔧',
+    },
+    gridRows: 8,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(8, 9)
+      g[1][2] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 7] },
+      { id: 'g2', pos: [3, 5] },
+      { id: 'g3', pos: [5, 8] },
+      { id: 'g4', pos: [7, 2] },
+      { id: 'g5', pos: [6, 6] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'logic'],
+    optimalBlockCount: 30,
+    xpReward: 410,
+    hints: [
+      { en: 'Gear 1 is a straight walk right along the top of the alley.', id: 'Gear 1 adalah jalan lurus ke kanan di sepanjang atas lorong.' },
+      { en: 'Gear 1 → 2: down then left. Gear 2 → 3: right then down. Gear 3 → 4: down then left. Gear 4 → 5: right then up.', id: 'Gear 1 → 2: turun lalu kiri. Gear 2 → 3: kanan lalu turun. Gear 3 → 4: turun lalu kiri. Gear 4 → 5: kanan lalu naik.' },
+    ],
+    starThresholds: [57, 42, 36, 30],
+  },
+  {
+    id: 'factory-14',
+    worldId: 'factory',
+    number: 14,
+    title: { en: 'Paint Shop Puzzle', id: 'Teka-Teki Bengkel Cat' },
+    story: {
+      en: "The paint shop's robotic sprayers move in tight, repeating patterns. Bolt writes a function for the pattern and loops it across the room.",
+      id: 'Penyembur robotik di bengkel cat bergerak dalam pola berulang yang rapat. Bolt menulis fungsi untuk pola itu dan mengulanginya di seluruh ruangan.',
+    },
+    mascotMessage: {
+      en: "See a shape you'll need again? Function it. See a straight stretch? Loop it! 🎨🔁",
+      id: 'Lihat bentuk yang akan kamu perlukan lagi? Jadikan fungsi. Lihat bagian lurus? Ulangi dengan perulangan! 🎨🔁',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][6] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[7][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 8] },
+      { id: 'g2', pos: [2, 5] },
+      { id: 'g3', pos: [4, 8] },
+      { id: 'g4', pos: [6, 2] },
+      { id: 'g5', pos: [8, 6] },
+      { id: 'g6', pos: [7, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops'],
+    optimalBlockCount: 34,
+    xpReward: 420,
+    hints: [
+      { en: 'Gear 1 is a straight walk right across the top — great spot for a loop.', id: 'Gear 1 adalah jalan lurus ke kanan di bagian atas — cocok untuk perulangan.' },
+      { en: 'Gear 1 → 2: down then left. Gear 2 → 3: down then right. Gear 3 → 4: left then down. Gear 4 → 5 → 6: weave carefully around the machines near the bottom.', id: 'Gear 1 → 2: turun lalu kiri. Gear 2 → 3: turun lalu kanan. Gear 3 → 4: kiri lalu turun. Gear 4 → 5 → 6: berkelok hati-hati mengitari mesin di dekat bawah.' },
+    ],
+    starThresholds: [65, 48, 41, 34],
+  },
+  {
+    id: 'factory-15',
+    worldId: 'factory',
+    number: 15,
+    title: { en: 'Power Grid Overhaul', id: 'Perombakan Jaringan Daya' },
+    story: {
+      en: "The power grid room is Bolt's toughest yet — functions for repeated shapes, loops for straight runs, and if-else to dodge the trickiest machines.",
+      id: 'Ruang jaringan daya adalah tantangan tersulit Bolt sejauh ini — fungsi untuk bentuk berulang, perulangan untuk bagian lurus, dan jika-selain untuk menghindari mesin paling rumit.',
+    },
+    mascotMessage: {
+      en: 'Now combine ALL three: functions, loops, AND if-else! 💡🔧🔄 This is where real coders shine.',
+      id: 'Sekarang gabungkan SEMUA: fungsi, perulangan, DAN jika-selain! 💡🔧🔄 Di sinilah coder sejati bersinar.',
+    },
+    gridRows: 9,
+    gridCols: 9,
+    cells: (() => {
+      const g = emptyGrid(9, 9)
+      g[1][4] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 7] },
+      { id: 'g2', pos: [3, 4] },
+      { id: 'g3', pos: [5, 7] },
+      { id: 'g4', pos: [7, 2] },
+      { id: 'g5', pos: [8, 8] },
+      { id: 'g6', pos: [4, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops', 'logic'],
+    optimalBlockCount: 38,
+    xpReward: 435,
+    hints: [
+      { en: 'Gear 1 is a straight walk right along the top row.', id: 'Gear 1 adalah jalan lurus ke kanan di baris atas.' },
+      { en: 'Weave down and left carefully to gear 2 around the machines. Gear 2 → 3: down then right. Gear 3 → 4: down then left. Gear 4 → 5: down then right. Gear 5 → 6: loop back up and around to the last gear.', id: 'Berkelok turun dan kiri hati-hati ke gear 2 mengitari mesin. Gear 2 → 3: turun lalu kanan. Gear 3 → 4: turun lalu kiri. Gear 4 → 5: turun lalu kanan. Gear 5 → 6: putar kembali naik dan mengitari ke gear terakhir.' },
+    ],
+    starThresholds: [72, 53, 46, 38],
+  },
+  {
+    id: 'factory-16',
+    worldId: 'factory',
+    number: 16,
+    title: { en: 'Sorting Depot', id: 'Depot Penyortiran' },
+    story: {
+      en: 'Crates roll through the sorting depot on crisscrossing belts. Bolt needs every trick — functions, loops, and if-else — to reach every gear.',
+      id: 'Peti bergulir melalui depot penyortiran di sabuk yang saling silang. Bolt membutuhkan semua trik — fungsi, perulangan, dan jika-selain — untuk mencapai setiap gear.',
+    },
+    mascotMessage: {
+      en: 'Belts cross everywhere here! Plan your route leg by leg before you code. 📦🔀',
+      id: 'Sabuk saling silang di mana-mana! Rencanakan rutemu selangkah demi selangkah sebelum menulis kode. 📦🔀',
+    },
+    gridRows: 9,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(9, 10)
+      g[1][5] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 8] },
+      { id: 'g2', pos: [3, 5] },
+      { id: 'g3', pos: [5, 8] },
+      { id: 'g4', pos: [7, 2] },
+      { id: 'g5', pos: [8, 9] },
+      { id: 'g6', pos: [4, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops', 'logic'],
+    optimalBlockCount: 41,
+    xpReward: 450,
+    hints: [
+      { en: 'Gear 1 is a straight walk right across the top of the depot.', id: 'Gear 1 adalah jalan lurus ke kanan di bagian atas depot.' },
+      { en: 'Weave left and down to gear 2 around the machines. Gear 2 → 3: down then right. Gear 3 → 4: right then down. Gear 4 → 5: down then right. Gear 5 → 6: loop back up and around.', id: 'Berkelok kiri dan turun ke gear 2 mengitari mesin. Gear 2 → 3: turun lalu kanan. Gear 3 → 4: kanan lalu turun. Gear 4 → 5: turun lalu kanan. Gear 5 → 6: putar kembali naik dan mengitari.' },
+    ],
+    starThresholds: [78, 57, 49, 41],
+  },
+  {
+    id: 'factory-17',
+    worldId: 'factory',
+    number: 17,
+    title: { en: 'Loading Dock Chaos', id: 'Kekacauan Dermaga Muat' },
+    story: {
+      en: 'Crates and forklifts crowd the loading dock. Bolt writes functions for each detour and loops the long straight hauls.',
+      id: 'Peti dan forklift memenuhi dermaga muat. Bolt menulis fungsi untuk setiap belokan dan mengulangi bagian lurus yang panjang dengan perulangan.',
+    },
+    mascotMessage: {
+      en: 'Seven gears, eight machines — the biggest dock yet! Break it into functions, piece by piece. 📦🤖',
+      id: 'Tujuh gear, delapan mesin — dermaga terbesar sejauh ini! Pecah menjadi fungsi, sepotong demi sepotong. 📦🤖',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][7] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[8][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 9] },
+      { id: 'g2', pos: [2, 6] },
+      { id: 'g3', pos: [4, 9] },
+      { id: 'g4', pos: [6, 3] },
+      { id: 'g5', pos: [8, 7] },
+      { id: 'g6', pos: [9, 1] },
+      { id: 'g7', pos: [9, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops'],
+    optimalBlockCount: 48,
+    xpReward: 465,
+    hints: [
+      { en: 'Gear 1 is a straight walk right across the top — loop it!', id: 'Gear 1 adalah jalan lurus ke kanan di bagian atas — gunakan perulangan!' },
+      { en: 'Gear 1 → 2: down then left. Gear 2 → 3: right then down. Gear 3 → 4: weave down and left around the machines. Gear 4 → 5: right then down. Gear 5 → 6: down then left. Gear 6 → 7: straight right along the bottom.', id: 'Gear 1 → 2: turun lalu kiri. Gear 2 → 3: kanan lalu turun. Gear 3 → 4: berkelok turun dan kiri mengitari mesin. Gear 4 → 5: kanan lalu turun. Gear 5 → 6: turun lalu kiri. Gear 6 → 7: lurus kanan di sepanjang bawah.' },
+    ],
+    starThresholds: [91, 67, 58, 48],
+  },
+  {
+    id: 'factory-18',
+    worldId: 'factory',
+    number: 18,
+    title: { en: 'Control Room Circuit', id: 'Sirkuit Ruang Kontrol' },
+    story: {
+      en: "The control room's panels blink in patterns Bolt must decode. Functions, loops, and if-else all come together for this circuit.",
+      id: 'Panel di ruang kontrol berkedip dalam pola yang harus dipecahkan Bolt. Fungsi, perulangan, dan jika-selain semua bersatu untuk sirkuit ini.',
+    },
+    mascotMessage: {
+      en: "This circuit needs everything you've learned! 💡 Plan each leg, then code it piece by piece.",
+      id: 'Sirkuit ini membutuhkan semua yang telah kamu pelajari! 💡 Rencanakan setiap bagian, lalu kode sepotong demi sepotong.',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][3] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[8][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 8] },
+      { id: 'g2', pos: [3, 3] },
+      { id: 'g3', pos: [5, 8] },
+      { id: 'g4', pos: [7, 4] },
+      { id: 'g5', pos: [9, 1] },
+      { id: 'g6', pos: [8, 9] },
+      { id: 'g7', pos: [2, 6] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops', 'logic'],
+    optimalBlockCount: 54,
+    xpReward: 480,
+    hints: [
+      { en: 'Gear 1 is a straight walk right across the top of the control room.', id: 'Gear 1 adalah jalan lurus ke kanan di bagian atas ruang kontrol.' },
+      { en: "Weave around the machines for each leg — gear 2 needs a careful path down-left, gear 3 zigzags down-right, then it's down-left, down-left, right-up, and left-up to the last gear.", id: 'Berkelok mengitari mesin untuk setiap bagian — gear 2 butuh jalur turun-kiri yang hati-hati, gear 3 berkelok turun-kanan, lalu turun-kiri, turun-kiri, kanan-naik, dan kiri-naik ke gear terakhir.' },
+    ],
+    starThresholds: [103, 76, 65, 54],
+  },
+  {
+    id: 'factory-19',
+    worldId: 'factory',
+    number: 19,
+    title: { en: 'Turbo Assembly Line', id: 'Lini Perakitan Turbo' },
+    story: {
+      en: 'The assembly line shifts into turbo mode across an even wider factory floor. Bolt needs sharp functions, tight loops, and smart if-else to keep up.',
+      id: 'Lini perakitan beralih ke mode turbo di lantai pabrik yang lebih luas. Bolt membutuhkan fungsi yang tajam, perulangan yang rapat, dan jika-selain yang cerdas untuk mengikuti.',
+    },
+    mascotMessage: {
+      en: 'Turbo mode means more gears, more machines, and no room for messy code! 🚀🔧',
+      id: 'Mode turbo berarti lebih banyak gear, lebih banyak mesin, dan tidak ada ruang untuk kode berantakan! 🚀🔧',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[1][8] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][10] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[9][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 10] },
+      { id: 'g2', pos: [2, 7] },
+      { id: 'g3', pos: [4, 10] },
+      { id: 'g4', pos: [6, 3] },
+      { id: 'g5', pos: [8, 8] },
+      { id: 'g6', pos: [9, 2] },
+      { id: 'g7', pos: [9, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops', 'logic'],
+    optimalBlockCount: 53,
+    xpReward: 500,
+    hints: [
+      { en: 'Gear 1 is a straight walk right across the wide top row.', id: 'Gear 1 adalah jalan lurus ke kanan di baris atas yang lebar.' },
+      { en: 'Gear 1 → 2: down then left. Gear 2 → 3: down then right. Gear 3 → 4: weave down and left around the machines. Gear 4 → 5: down then right. Gear 5 → 6: weave left and down around the machines. Gear 6 → 7: weave up, right, then down to the final gear.', id: 'Gear 1 → 2: turun lalu kiri. Gear 2 → 3: turun lalu kanan. Gear 3 → 4: berkelok turun dan kiri mengitari mesin. Gear 4 → 5: turun lalu kanan. Gear 5 → 6: berkelok kiri dan turun mengitari mesin. Gear 6 → 7: berkelok naik, kanan, lalu turun ke gear terakhir.' },
+    ],
+    starThresholds: [101, 74, 64, 53],
+  },
+  {
+    id: 'factory-20',
+    worldId: 'factory',
+    number: 20,
+    title: { en: 'Factory Legend', id: 'Legenda Pabrik' },
+    story: {
+      en: 'Bolt takes on the widest factory floor yet — eight gears scattered among ten humming machines. Every skill counts: functions, loops, and if-else, all working together.',
+      id: 'Bolt menghadapi lantai pabrik terluas yang pernah ada — delapan gear tersebar di antara sepuluh mesin yang berdengung. Setiap keahlian dibutuhkan: fungsi, perulangan, dan jika-selain, semua bekerja bersama.',
+    },
+    mascotMessage: {
+      en: "Eight gears, ten machines — this is Bolt's toughest run yet! 🏭⭐ Show everything you've learned and become a Factory Legend!",
+      id: 'Delapan gear, sepuluh mesin — ini lari tersulit Bolt sejauh ini! 🏭⭐ Tunjukkan semua yang telah kamu pelajari dan jadilah Legenda Pabrik!',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[1][9] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][10] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[9][6] = 'obstacle'
+      g[10][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'g1', pos: [0, 10] },
+      { id: 'g2', pos: [2, 7] },
+      { id: 'g3', pos: [4, 10] },
+      { id: 'g4', pos: [6, 3] },
+      { id: 'g5', pos: [8, 9] },
+      { id: 'g6', pos: [10, 4] },
+      { id: 'g7', pos: [9, 10] },
+      { id: 'g8', pos: [1, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions'],
+    requiredCategories: ['functions', 'loops', 'logic'],
+    optimalBlockCount: 70,
+    xpReward: 520,
+    hints: [
+      { en: 'Gear 1 is a straight walk right across the very top row.', id: 'Gear 1 adalah jalan lurus ke kanan di baris paling atas.' },
+      { en: 'Gear 1 → 2: down then left. Gear 2 → 3: down then right. Gear 3 → 4: down then left, all the way across. Gear 4 → 5: right then down then right, weaving around a machine. Gear 5 → 6: left then down. Gear 6 → 7: up then right then down. Gear 7 → 8: the big final haul — up and left back toward the corner.', id: 'Gear 1 → 2: turun lalu kiri. Gear 2 → 3: turun lalu kanan. Gear 3 → 4: turun lalu kiri, sepanjang jalan. Gear 4 → 5: kanan lalu turun lalu kanan, berkelok mengitari mesin. Gear 5 → 6: kiri lalu turun. Gear 6 → 7: naik lalu kanan lalu turun. Gear 7 → 8: perjalanan akhir yang besar — naik dan kiri kembali ke sudut.' },
+    ],
+    starThresholds: [133, 98, 84, 70],
   },
 
   // ─────────────────────────────────────────────
@@ -2819,12 +5391,12 @@ export const LESSONS: Lesson[] = [
     number: 9,
     title: { en: 'Time Lord', id: 'Penguasa Waktu' },
     story: {
-      en: 'The true final challenge! Become the Time Lord — master arrays, loops, functions, and conditions to collect all 8 crystals!',
-      id: 'Tantangan akhir yang sesungguhnya! Jadilah Penguasa Waktu — kuasai array, perulangan, fungsi, dan kondisi untuk mengumpulkan semua 8 kristal!',
+      en: 'One of the toughest challenges yet! Become the Time Lord — master arrays, loops, functions, and conditions to collect all 8 crystals!',
+      id: 'Salah satu tantangan tersulit sejauh ini! Jadilah Penguasa Waktu — kuasai array, perulangan, fungsi, dan kondisi untuk mengumpulkan semua 8 kristal!',
     },
     mascotMessage: {
-      en: "You're the TIME LORD now! 👑 Use EVERY skill — lists, loops, functions, conditions! This is your ultimate test! ⏰🌟",
-      id: 'Kamu adalah PENGUASA WAKTU sekarang! 👑 Gunakan SETIAP kemampuan — daftar, perulangan, fungsi, kondisi! Ini ujian terakhirmu! ⏰🌟',
+      en: "You're becoming a true TIME LORD! 👑 Use EVERY skill — lists, loops, functions, conditions! This is one of your toughest tests yet! ⏰🌟",
+      id: 'Kamu semakin dekat menjadi PENGUASA WAKTU! 👑 Gunakan SETIAP kemampuan — daftar, perulangan, fungsi, kondisi! Ini salah satu ujian tersulitmu sejauh ini! ⏰🌟',
     },
     gridRows: 8,
     gridCols: 10,
@@ -2917,6 +5489,519 @@ export const LESSONS: Lesson[] = [
         ],
       },
     },
+  },
+  {
+    id: 'portal-11',
+    worldId: 'portal',
+    number: 11,
+    title: { en: 'Rift Runner', id: 'Pelari Retakan' },
+    story: {
+      en: 'A time rift has torn open across the corridor! Nova must write reusable functions that loop through her crystal list to seal it before it spreads.',
+      id: 'Sebuah retakan waktu terbuka di lorong! Nova harus menulis fungsi yang bisa dipakai ulang dan mengulang daftar kristalnya untuk menutupnya sebelum menyebar.',
+    },
+    mascotMessage: {
+      en: 'Write a FUNCTION that loops through a list of moves! 🔧🔁 Call it wherever the rift pattern repeats!',
+      id: 'Tulis FUNGSI yang mengulang daftar gerakan! 🔧🔁 Panggil fungsi itu setiap kali pola retakan muncul lagi!',
+    },
+    gridRows: 8,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(8, 10)
+      g[2][7] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[0][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 3] },
+      { id: 't2', pos: [3, 3] },
+      { id: 't3', pos: [3, 7] },
+      { id: 't4', pos: [6, 7] },
+      { id: 't5', pos: [6, 2] },
+      { id: 't6', pos: [1, 2] },
+      { id: 't7', pos: [1, 9] },
+      { id: 't8', pos: [7, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions'],
+    optimalBlockCount: 36,
+    xpReward: 465,
+    hints: [
+      { en: "Look for a repeating pattern in the crystal layout — that's a job for a function!", id: 'Perhatikan pola berulang dalam susunan kristal — itu tugas untuk sebuah fungsi!' },
+      { en: 'Define one function with a loop inside that handles a full lane, then call it for each lane of the rift.', id: 'Definisikan satu fungsi dengan perulangan di dalamnya untuk satu jalur penuh, lalu panggil fungsi itu untuk setiap jalur retakan.' },
+    ],
+    starThresholds: [76, 54, 45, 36],
+  },
+  {
+    id: 'portal-12',
+    worldId: 'portal',
+    number: 12,
+    title: { en: 'Chrono Vault', id: 'Brankas Waktu' },
+    story: {
+      en: 'Deep inside a sealed chrono-vault, crystals sit behind logic locks. Nova must check conditions before her loop can safely move to the next crystal in the list.',
+      id: 'Di dalam brankas waktu yang terkunci, kristal-kristal berada di balik kunci logika. Nova harus memeriksa kondisi sebelum perulangannya bisa aman melangkah ke kristal berikutnya dalam daftar.',
+    },
+    mascotMessage: {
+      en: 'Use an IF block inside your loop to check before you move! 🔐🧠 Combine logic with your crystal list to unlock the vault!',
+      id: 'Gunakan blok JIKA di dalam perulanganmu untuk memeriksa sebelum bergerak! 🔐🧠 Gabungkan logika dengan daftar kristalmu untuk membuka brankas!',
+    },
+    gridRows: 9,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(9, 10)
+      g[1][7] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][6] = 'obstacle'
+      g[0][7] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[4][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 4] },
+      { id: 't2', pos: [4, 4] },
+      { id: 't3', pos: [4, 9] },
+      { id: 't4', pos: [8, 9] },
+      { id: 't5', pos: [8, 3] },
+      { id: 't6', pos: [2, 3] },
+      { id: 't7', pos: [2, 8] },
+      { id: 't8', pos: [6, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'logic'],
+    optimalBlockCount: 38,
+    xpReward: 480,
+    hints: [
+      { en: 'Some paths need a check first — not every move is automatically safe.', id: 'Beberapa jalur perlu diperiksa dulu — tidak semua gerakan otomatis aman.' },
+      { en: 'Put an IF condition inside your repeat loop to decide when to turn.', id: 'Letakkan kondisi JIKA di dalam perulanganmu untuk memutuskan kapan harus berbelok.' },
+    ],
+    starThresholds: [80, 57, 48, 38],
+  },
+  {
+    id: 'portal-13',
+    worldId: 'portal',
+    number: 13,
+    title: { en: 'Quantum Timeline', id: 'Garis Waktu Kuantum' },
+    story: {
+      en: 'The timeline has split into branches! Nova writes a function that uses logic to decide which branch of the list to follow.',
+      id: 'Garis waktu terpecah menjadi cabang-cabang! Nova menulis fungsi yang menggunakan logika untuk memutuskan cabang daftar mana yang harus diikuti.',
+    },
+    mascotMessage: {
+      en: 'Build a FUNCTION with an IF inside! 🧩🧠 Let it decide which crystal from your list to grab next!',
+      id: 'Buat FUNGSI dengan JIKA di dalamnya! 🧩🧠 Biarkan fungsi itu memutuskan kristal mana dari daftarmu yang harus diambil berikutnya!',
+    },
+    gridRows: 9,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(9, 10)
+      g[0][7] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[7][7] = 'obstacle'
+      g[8][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 5] },
+      { id: 't2', pos: [3, 5] },
+      { id: 't3', pos: [3, 9] },
+      { id: 't4', pos: [8, 9] },
+      { id: 't5', pos: [8, 4] },
+      { id: 't6', pos: [5, 4] },
+      { id: 't7', pos: [5, 0] },
+      { id: 't8', pos: [1, 0] },
+      { id: 't9', pos: [1, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'functions', 'logic'],
+    optimalBlockCount: 41,
+    xpReward: 495,
+    hints: [
+      { en: "Not every branch leads the same way — your function needs to decide.", id: 'Tidak semua cabang mengarah ke jalur yang sama — fungsimu perlu memutuskan.' },
+      { en: 'Write one function with a condition inside, then call it once per branch of the timeline.', id: 'Tulis satu fungsi dengan kondisi di dalamnya, lalu panggil sekali untuk setiap cabang garis waktu.' },
+    ],
+    starThresholds: [86, 62, 52, 41],
+  },
+  {
+    id: 'portal-14',
+    worldId: 'portal',
+    number: 14,
+    title: { en: 'Echo Chamber', id: 'Ruang Gema' },
+    story: {
+      en: 'Sound echoes fold back on themselves in this ancient chamber. Nova must combine everything — lists, loops, functions, and logic — to navigate the folding paths.',
+      id: 'Gema suara melipat kembali ke dirinya sendiri di ruang kuno ini. Nova harus menggabungkan semuanya — daftar, perulangan, fungsi, dan logika — untuk menavigasi jalur yang melipat.',
+    },
+    mascotMessage: {
+      en: 'Time to combine ALL FOUR skills! 📋🔁🔧🧠 Lists, loops, functions, AND logic working together!',
+      id: 'Saatnya menggabungkan SEMUA EMPAT kemampuan! 📋🔁🔧🧠 Daftar, perulangan, fungsi, DAN logika bekerja bersama!',
+    },
+    gridRows: 9,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(9, 11)
+      g[0][9] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[1][10] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 6] },
+      { id: 't2', pos: [4, 6] },
+      { id: 't3', pos: [4, 10] },
+      { id: 't4', pos: [8, 10] },
+      { id: 't5', pos: [8, 3] },
+      { id: 't6', pos: [3, 3] },
+      { id: 't7', pos: [3, 0] },
+      { id: 't8', pos: [1, 0] },
+      { id: 't9', pos: [1, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions', 'logic'],
+    optimalBlockCount: 44,
+    xpReward: 510,
+    hints: [
+      { en: "This chamber needs every tool you've learned — don't leave any out!", id: 'Ruang ini butuh semua alat yang sudah kamu pelajari — jangan ada yang tertinggal!' },
+      { en: 'Write a function with a loop and an IF inside, built from your crystal list.', id: 'Tulis fungsi dengan perulangan dan JIKA di dalamnya, dibangun dari daftar kristalmu.' },
+    ],
+    starThresholds: [92, 66, 55, 44],
+  },
+  {
+    id: 'portal-15',
+    worldId: 'portal',
+    number: 15,
+    title: { en: 'Fractured Era', id: 'Era Retak' },
+    story: {
+      en: 'This era has fractured into shifting fragments! Nova needs sharp logic inside her loops and functions to keep the list of crystals in order.',
+      id: 'Era ini pecah menjadi pecahan-pecahan yang berpindah! Nova butuh logika yang tajam di dalam perulangan dan fungsinya agar daftar kristal tetap teratur.',
+    },
+    mascotMessage: {
+      en: 'The fragments keep shifting! 🧩 Use logic to check your position before each loop step!',
+      id: 'Pecahan-pecahan terus berpindah! 🧩 Gunakan logika untuk memeriksa posisimu sebelum setiap langkah perulangan!',
+    },
+    gridRows: 9,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(9, 11)
+      g[0][9] = 'obstacle'
+      g[1][4] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][7] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 7] },
+      { id: 't2', pos: [3, 7] },
+      { id: 't3', pos: [3, 2] },
+      { id: 't4', pos: [7, 2] },
+      { id: 't5', pos: [7, 9] },
+      { id: 't6', pos: [2, 9] },
+      { id: 't7', pos: [2, 4] },
+      { id: 't8', pos: [5, 4] },
+      { id: 't9', pos: [5, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions', 'logic'],
+    optimalBlockCount: 45,
+    xpReward: 525,
+    hints: [
+      { en: 'Some fragments are trickier than others — plan your function calls carefully.', id: 'Beberapa pecahan lebih rumit dari yang lain — rencanakan pemanggilan fungsimu dengan hati-hati.' },
+      { en: 'Use a function for each fragment, with a loop and IF check inside handling the list of moves.', id: 'Gunakan fungsi untuk setiap pecahan, dengan perulangan dan pengecekan JIKA di dalamnya yang menangani daftar gerakan.' },
+    ],
+    starThresholds: [95, 68, 57, 45],
+  },
+  {
+    id: 'portal-16',
+    worldId: 'portal',
+    number: 16,
+    title: { en: 'Nested Timestream', id: 'Aliran Waktu Bersarang' },
+    story: {
+      en: 'Timestreams flow inside other timestreams here! Nova must nest her loops and functions carefully while tracking everything in lists.',
+      id: 'Aliran waktu mengalir di dalam aliran waktu lain di sini! Nova harus menyusun perulangan dan fungsinya secara bertingkat sambil melacak semuanya dalam daftar.',
+    },
+    mascotMessage: {
+      en: 'Loops inside loops, functions inside functions! 🌀 Keep your lists organized so nothing gets lost in the nesting!',
+      id: 'Perulangan di dalam perulangan, fungsi di dalam fungsi! 🌀 Jaga daftarmu tetap teratur agar tidak ada yang hilang di dalam susunan bertingkat ini!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[0][10] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[2][9] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][10] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[7][0] = 'obstacle'
+      g[8][4] = 'obstacle'
+      g[9][10] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 8] },
+      { id: 't2', pos: [4, 8] },
+      { id: 't3', pos: [4, 1] },
+      { id: 't4', pos: [9, 1] },
+      { id: 't5', pos: [9, 9] },
+      { id: 't6', pos: [3, 9] },
+      { id: 't7', pos: [3, 3] },
+      { id: 't8', pos: [7, 3] },
+      { id: 't9', pos: [7, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions', 'logic'],
+    optimalBlockCount: 55,
+    xpReward: 540,
+    hints: [
+      { en: 'Layers within layers — break the journey into smaller functions.', id: 'Lapisan di dalam lapisan — pecah perjalanan menjadi fungsi-fungsi yang lebih kecil.' },
+      { en: 'Write a function per layer, call one from inside another, and use logic to know when to stop.', id: 'Tulis satu fungsi per lapisan, panggil satu dari dalam yang lain, dan gunakan logika untuk tahu kapan harus berhenti.' },
+    ],
+    starThresholds: [116, 83, 69, 55],
+  },
+  {
+    id: 'portal-17',
+    worldId: 'portal',
+    number: 17,
+    title: { en: 'Singularity Sprint', id: 'Sprint Singularitas' },
+    story: {
+      en: 'A singularity is collapsing the corridors fast! Nova must sprint through her full toolkit — lists, loops, functions, logic — before time runs out.',
+      id: 'Sebuah singularitas dengan cepat meruntuhkan lorong-lorong! Nova harus berlari cepat menggunakan semua perangkatnya — daftar, perulangan, fungsi, logika — sebelum waktu habis.',
+    },
+    mascotMessage: {
+      en: 'No time to waste! ⚡ Combine your lists, loops, functions, and logic into one fast efficient plan!',
+      id: 'Tidak ada waktu untuk buang-buang! ⚡ Gabungkan daftar, perulangan, fungsi, dan logikamu menjadi satu rencana yang cepat dan efisien!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[0][10] = 'obstacle'
+      g[1][4] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][10] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][0] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[9][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 9] },
+      { id: 't2', pos: [3, 9] },
+      { id: 't3', pos: [3, 1] },
+      { id: 't4', pos: [6, 1] },
+      { id: 't5', pos: [6, 10] },
+      { id: 't6', pos: [9, 10] },
+      { id: 't7', pos: [9, 2] },
+      { id: 't8', pos: [5, 2] },
+      { id: 't9', pos: [5, 7] },
+      { id: 't10', pos: [1, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions', 'logic'],
+    optimalBlockCount: 56,
+    xpReward: 555,
+    hints: [
+      { en: 'Speed matters here — reuse functions instead of repeating blocks.', id: 'Kecepatan penting di sini — gunakan ulang fungsi daripada mengulang blok.' },
+      { en: 'Write compact functions with loops and IF checks, and call them in the right order from your list.', id: 'Tulis fungsi yang ringkas dengan perulangan dan pengecekan JIKA, lalu panggil dalam urutan yang tepat dari daftarmu.' },
+    ],
+    starThresholds: [118, 84, 71, 56],
+  },
+  {
+    id: 'portal-18',
+    worldId: 'portal',
+    number: 18,
+    title: { en: 'Multiverse Merge', id: 'Peleburan Multisemesta' },
+    story: {
+      en: 'Two versions of the same corridor are merging into one! Nova must reconcile both lists of crystals using loops, functions, and logic.',
+      id: 'Dua versi lorong yang sama sedang bergabung menjadi satu! Nova harus menyatukan kedua daftar kristal menggunakan perulangan, fungsi, dan logika.',
+    },
+    mascotMessage: {
+      en: 'Two timelines becoming one! 🌌 Use logic to tell which crystals are new and functions to collect them efficiently!',
+      id: 'Dua garis waktu menyatu menjadi satu! 🌌 Gunakan logika untuk mengetahui kristal mana yang baru dan fungsi untuk mengumpulkannya secara efisien!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[1][5] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[1][8] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[7][6] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 10] },
+      { id: 't2', pos: [4, 10] },
+      { id: 't3', pos: [4, 0] },
+      { id: 't4', pos: [9, 0] },
+      { id: 't5', pos: [9, 10] },
+      { id: 't6', pos: [6, 10] },
+      { id: 't7', pos: [6, 3] },
+      { id: 't8', pos: [2, 3] },
+      { id: 't9', pos: [2, 8] },
+      { id: 't10', pos: [7, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions', 'logic'],
+    optimalBlockCount: 63,
+    xpReward: 570,
+    hints: [
+      { en: "Not everything doubles up — check before you count a crystal twice.", id: 'Tidak semuanya berlipat ganda — periksa dulu sebelum menghitung kristal dua kali.' },
+      { en: 'Loop through your list, use an IF to check each crystal, and call a function to grab it.', id: 'Ulangi daftarmu, gunakan JIKA untuk memeriksa setiap kristal, dan panggil fungsi untuk mengambilnya.' },
+    ],
+    starThresholds: [132, 95, 79, 63],
+  },
+  {
+    id: 'portal-19',
+    worldId: 'portal',
+    number: 19,
+    title: { en: 'Vortex Convergence', id: 'Konvergensi Vorteks' },
+    story: {
+      en: 'Every path in the vortex converges toward the center! Nova must weave together every list, loop, function, and condition she knows to survive the pull.',
+      id: 'Setiap jalur di dalam pusaran mengarah ke pusat! Nova harus merajut semua daftar, perulangan, fungsi, dan kondisi yang ia ketahui untuk bertahan dari tarikannya.',
+    },
+    mascotMessage: {
+      en: 'The vortex pulls everything together! 🌀 So should your code — lists, loops, functions, and logic, all working as one!',
+      id: 'Pusaran menarik semuanya menjadi satu! 🌀 Begitu juga kodemu — daftar, perulangan, fungsi, dan logika, semua bekerja bersama!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[3][3] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[7][2] = 'obstacle'
+      g[7][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [0, 10] },
+      { id: 't2', pos: [9, 10] },
+      { id: 't3', pos: [9, 0] },
+      { id: 't4', pos: [1, 0] },
+      { id: 't5', pos: [1, 9] },
+      { id: 't6', pos: [8, 9] },
+      { id: 't7', pos: [8, 1] },
+      { id: 't8', pos: [2, 1] },
+      { id: 't9', pos: [2, 8] },
+      { id: 't10', pos: [7, 8] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions', 'logic'],
+    optimalBlockCount: 79,
+    xpReward: 585,
+    hints: [
+      { en: 'The outer ring is easy, but the pull gets stronger the deeper you go.', id: 'Cincin luar mudah, tapi tarikannya makin kuat semakin dalam kamu masuk.' },
+      { en: 'Write nested functions for each ring of the vortex, using loops and IF checks with your crystal list.', id: 'Tulis fungsi bertingkat untuk setiap cincin pusaran, gunakan perulangan dan pengecekan JIKA dengan daftar kristalmu.' },
+    ],
+    starThresholds: [166, 119, 100, 79],
+  },
+  {
+    id: 'portal-20',
+    worldId: 'portal',
+    number: 20,
+    title: { en: 'Chrono Master', id: 'Sang Kronomaster' },
+    story: {
+      en: 'The final convergence point where all timelines meet! To become the true Chrono Master, Nova must command lists, loops, functions, and logic together, flawlessly, one more time.',
+      id: 'Titik pertemuan akhir tempat semua garis waktu bersatu! Untuk menjadi Sang Kronomaster sejati, Nova harus menguasai daftar, perulangan, fungsi, dan logika sekaligus, dengan sempurna, sekali lagi.',
+    },
+    mascotMessage: {
+      en: "This is it — the Chrono Master trial! 👑⏰ Every skill you've built comes together here. You've got this, Nova!",
+      id: 'Inilah dia — ujian Sang Kronomaster! 👑⏰ Semua kemampuan yang sudah kamu bangun berkumpul di sini. Kamu pasti bisa, Nova!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[0][2] = 'obstacle'
+      g[0][6] = 'obstacle'
+      g[0][10] = 'obstacle'
+      g[1][4] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][0] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[7][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 't1', pos: [9, 1] },
+      { id: 't2', pos: [0, 3] },
+      { id: 't3', pos: [9, 5] },
+      { id: 't4', pos: [0, 7] },
+      { id: 't5', pos: [9, 9] },
+      { id: 't6', pos: [4, 10] },
+      { id: 't7', pos: [4, 8] },
+      { id: 't8', pos: [9, 8] },
+      { id: 't9', pos: [9, 4] },
+      { id: 't10', pos: [9, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['lists', 'loops', 'functions', 'logic'],
+    optimalBlockCount: 75,
+    xpReward: 610,
+    hints: [
+      { en: 'Break the whole journey into zones, and write one function per zone.', id: 'Pecah seluruh perjalanan menjadi beberapa zona, dan tulis satu fungsi untuk setiap zona.' },
+      { en: 'Use lists for your zone coordinates, loops to move through each one, and IF checks to handle the tricky turns.', id: 'Gunakan daftar untuk koordinat setiap zona, perulangan untuk bergerak melalui masing-masing, dan pengecekan JIKA untuk menangani belokan yang rumit.' },
+    ],
+    starThresholds: [158, 113, 95, 75],
   },
 
   // ─────────────────────────────────────────────
@@ -3338,12 +6423,12 @@ export const LESSONS: Lesson[] = [
     number: 10,
     title: { en: 'The Great Extinction', id: 'Kepunahan Besar' },
     story: {
-      en: "The asteroid is hours away! Dr. Rex must save ten dinosaur eggs — the last of their kind — from across the entire 10×10 park. This is the ultimate real-world pathfinding challenge. Every move counts!",
-      id: 'Asteroid tinggal beberapa jam lagi! Dr. Rex harus menyelamatkan sepuluh telur dinosaurus — yang terakhir dari jenisnya — dari seluruh taman 10×10. Ini adalah tantangan pencarian jalur dunia nyata tertinggi. Setiap gerakan sangat berarti!',
+      en: "The asteroid is hours away! Dr. Rex must save ten dinosaur eggs — the last of their kind — from across the entire 10×10 park. This is one of the toughest real-world pathfinding challenges yet. Every move counts!",
+      id: 'Asteroid tinggal beberapa jam lagi! Dr. Rex harus menyelamatkan sepuluh telur dinosaurus — yang terakhir dari jenisnya — dari seluruh taman 10×10. Ini adalah salah satu tantangan pencarian jalur dunia nyata tersulit sejauh ini. Setiap gerakan sangat berarti!',
     },
     mascotMessage: {
-      en: "THE GREAT EXTINCTION — final challenge! 🌋🦕 Ten eggs, one chance. This is the Travelling Salesman Problem — one of the most famous algorithms in computer science. Give it your BEST!",
-      id: 'KEPUNAHAN BESAR — tantangan final! 🌋🦕 Sepuluh telur, satu kesempatan. Ini adalah Masalah Penjual Keliling — salah satu algoritma paling terkenal dalam ilmu komputer. Berikan yang TERBAIK!',
+      en: "THE GREAT EXTINCTION! 🌋🦕 Ten eggs, one of your toughest tests yet. This is the Travelling Salesman Problem — one of the most famous algorithms in computer science. Give it your BEST!",
+      id: 'KEPUNAHAN BESAR! 🌋🦕 Sepuluh telur, salah satu ujian tersulitmu sejauh ini. Ini adalah Masalah Penjual Keliling — salah satu algoritma paling terkenal dalam ilmu komputer. Berikan yang TERBAIK!',
     },
     gridRows: 10,
     gridCols: 10,
@@ -3388,6 +6473,628 @@ export const LESSONS: Lesson[] = [
       { en: 'Functions + lists = the real programmer\'s toolkit for solving this problem!', id: 'Fungsi + daftar = perangkat programmer nyata untuk memecahkan masalah ini!' },
     ],
     starThresholds: [315, 225, 188, 150],
+  },
+  {
+    id: 'jurassic-11',
+    worldId: 'jurassic',
+    number: 11,
+    title: { en: 'Flash Flood Rescue', id: 'Penyelamatan Banjir Bandang' },
+    story: {
+      en: 'A flash flood is rising through the lowlands! Dr. Rex must rescue eleven eggs scattered across the park before the water reaches the nests — just like a ride-share app grouping multiple pickups into one smart route.',
+      id: 'Banjir bandang naik melalui dataran rendah! Dr. Rex harus menyelamatkan sebelas telur yang tersebar di taman sebelum air mencapai sarang — seperti aplikasi ride-share yang mengelompokkan banyak titik jemput menjadi satu rute cerdas.',
+    },
+    mascotMessage: {
+      en: 'Flash flood rising! 🌊🦕 Real ride-sharing apps group multiple pickups into one efficient route — use LOOPS, FUNCTIONS, and LISTS to plan your rescue stops before the water rises!',
+      id: 'Banjir bandang naik! 🌊🦕 Aplikasi ride-sharing nyata mengelompokkan banyak titik jemput menjadi satu rute efisien — gunakan PERULANGAN, FUNGSI, dan DAFTAR untuk merencanakan titik penyelamatanmu sebelum air naik!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[1][1] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][3] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[8][5] = 'obstacle'
+      g[8][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 9] },
+      { id: 'e2', pos: [2, 8] },
+      { id: 'e3', pos: [2, 4] },
+      { id: 'e4', pos: [4, 6] },
+      { id: 'e5', pos: [4, 0] },
+      { id: 'e6', pos: [5, 9] },
+      { id: 'e7', pos: [5, 2] },
+      { id: 'e8', pos: [7, 8] },
+      { id: 'e9', pos: [7, 4] },
+      { id: 'e10', pos: [9, 6] },
+      { id: 'e11', pos: [9, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 165,
+    xpReward: 750,
+    hints: [
+      { en: 'Group nearby eggs together like a rideshare app pools nearby passengers!', id: 'Kelompokkan telur yang berdekatan seperti aplikasi rideshare mengumpulkan penumpang yang berdekatan!' },
+      { en: 'Sweep row by row in a zigzag — down one row, across, down again — to catch every egg with minimal backtracking!', id: 'Sisir baris demi baris secara zigzag — turun satu baris, menyeberang, turun lagi — untuk menangkap setiap telur dengan jalan bolak-balik minimal!' },
+    ],
+    starThresholds: [347, 248, 207, 165],
+  },
+  {
+    id: 'jurassic-12',
+    worldId: 'jurassic',
+    number: 12,
+    title: { en: 'Stampede Season', id: 'Musim Kawanan Berlari' },
+    story: {
+      en: 'A stampede of dinosaurs is thundering across the plains, blocking paths as it moves! Dr. Rex must reroute on the fly to rescue eleven eggs — exactly like a GPS app recalculating your route around live traffic.',
+      id: 'Kawanan dinosaurus berlari kencang melintasi dataran, memblokir jalur saat bergerak! Dr. Rex harus mengubah rute secara langsung untuk menyelamatkan sebelas telur — persis seperti aplikasi GPS yang menghitung ulang rutemu di sekitar lalu lintas langsung.',
+    },
+    mascotMessage: {
+      en: 'Stampede alert! 🦕💨 Real GPS apps recalculate your route the instant a road closes. Use IF conditions and FUNCTIONS to reroute around the herd!',
+      id: 'Peringatan kawanan berlari! 🦕💨 Aplikasi GPS nyata menghitung ulang rutemu begitu jalan ditutup. Gunakan kondisi IF dan FUNGSI untuk mengubah rute di sekitar kawanan!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[2][1] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[8][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 10] },
+      { id: 'e2', pos: [1, 4] },
+      { id: 'e3', pos: [1, 9] },
+      { id: 'e4', pos: [3, 0] },
+      { id: 'e5', pos: [3, 7] },
+      { id: 'e6', pos: [5, 2] },
+      { id: 'e7', pos: [5, 10] },
+      { id: 'e8', pos: [7, 4] },
+      { id: 'e9', pos: [7, 9] },
+      { id: 'e10', pos: [9, 0] },
+      { id: 'e11', pos: [9, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 190,
+    xpReward: 800,
+    hints: [
+      { en: 'When a direct path looks blocked, use IF conditions to pick a different direction — just like GPS rerouting!', id: 'Saat jalur langsung terlihat terhalang, gunakan kondisi IF untuk memilih arah lain — persis seperti GPS yang mengubah rute!' },
+      { en: 'Visit eggs in the order they appear across the rows, alternating left and right, to keep your route short!', id: 'Kunjungi telur sesuai urutan munculnya di setiap baris, berselang-seling kiri dan kanan, agar rutemu tetap pendek!' },
+    ],
+    starThresholds: [399, 285, 238, 190],
+  },
+  {
+    id: 'jurassic-13',
+    worldId: 'jurassic',
+    number: 13,
+    title: { en: 'Amber Mine Collapse', id: 'Runtuhnya Tambang Amber' },
+    story: {
+      en: 'The amber mine has collapsed, trapping twelve eggs behind fallen rock! Dr. Rex must navigate the rubble like a warehouse robot picking items off shelves — efficient, precise, and never wasting a step.',
+      id: 'Tambang amber runtuh, memerangkap dua belas telur di balik bebatuan yang jatuh! Dr. Rex harus menavigasi puing seperti robot gudang yang mengambil barang dari rak — efisien, presisi, dan tidak membuang satu langkah pun.',
+    },
+    mascotMessage: {
+      en: 'Mine collapse! ⛏️🦕 Real warehouse robots plan their picking route before they move an inch. Use FUNCTIONS and LISTS to plan your dig-and-rescue route!',
+      id: 'Tambang runtuh! ⛏️🦕 Robot gudang nyata merencanakan rute pengambilan sebelum bergerak sedikit pun. Gunakan FUNGSI dan DAFTAR untuk merencanakan rute penggalian dan penyelamatanmu!',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[2][1] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 10] },
+      { id: 'e2', pos: [1, 2] },
+      { id: 'e3', pos: [1, 7] },
+      { id: 'e4', pos: [3, 4] },
+      { id: 'e5', pos: [3, 9] },
+      { id: 'e6', pos: [5, 0] },
+      { id: 'e7', pos: [5, 5] },
+      { id: 'e8', pos: [7, 2] },
+      { id: 'e9', pos: [7, 9] },
+      { id: 'e10', pos: [9, 4] },
+      { id: 'e11', pos: [9, 7] },
+      { id: 'e12', pos: [9, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 215,
+    xpReward: 850,
+    hints: [
+      { en: "Write one function for 'go collect an egg' and call it for each one — real robots reuse the same routine!", id: "Tulis satu fungsi untuk 'pergi ambil telur' dan panggil untuk setiap telur — robot nyata menggunakan kembali rutin yang sama!" },
+      { en: "Handle each row's eggs before moving to the next row — it mirrors how a warehouse robot clears one aisle at a time!", id: 'Selesaikan telur di satu baris sebelum pindah ke baris berikutnya — ini meniru cara robot gudang membersihkan satu lorong pada satu waktu!' },
+    ],
+    starThresholds: [452, 323, 269, 215],
+  },
+  {
+    id: 'jurassic-14',
+    worldId: 'jurassic',
+    number: 14,
+    title: { en: 'Canopy Wildfire', id: 'Kebakaran Kanopi Hutan' },
+    story: {
+      en: 'Wildfire is racing through the jungle canopy! Dr. Rex commands a rescue route to save twelve eggs before the flames spread — just like a drone swarm coordinating flight paths to fight a wildfire from above.',
+      id: 'Kebakaran hutan menjalar cepat melalui kanopi hutan! Dr. Rex memandu rute penyelamatan untuk menyelamatkan dua belas telur sebelum api menyebar — persis seperti kawanan drone yang mengoordinasikan jalur terbang untuk memadamkan kebakaran dari atas.',
+    },
+    mascotMessage: {
+      en: 'Wildfire spreading! 🔥🦕 Real firefighting drone swarms split up the sky into routes so no area is missed. Use LOOPS and FUNCTIONS to cover the canopy fast!',
+      id: 'Kebakaran menyebar! 🔥🦕 Kawanan drone pemadam kebakaran nyata membagi langit menjadi rute agar tidak ada area yang terlewat. Gunakan PERULANGAN dan FUNGSI untuk menjangkau kanopi dengan cepat!',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[1][1] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][3] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 10] },
+      { id: 'e2', pos: [2, 2] },
+      { id: 'e3', pos: [2, 8] },
+      { id: 'e4', pos: [4, 0] },
+      { id: 'e5', pos: [4, 6] },
+      { id: 'e6', pos: [6, 2] },
+      { id: 'e7', pos: [6, 10] },
+      { id: 'e8', pos: [8, 0] },
+      { id: 'e9', pos: [8, 8] },
+      { id: 'e10', pos: [10, 2] },
+      { id: 'e11', pos: [10, 6] },
+      { id: 'e12', pos: [10, 10] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 240,
+    xpReward: 900,
+    hints: [
+      { en: 'Store all egg positions in a list first — plan the whole flight path before you launch!', id: 'Simpan semua posisi telur dalam daftar terlebih dahulu — rencanakan seluruh jalur penerbangan sebelum kamu berangkat!' },
+      { en: 'Move down through the rows in order, sweeping left-right-left across each one, just like a drone covering a grid!', id: 'Bergerak turun melalui baris secara berurutan, menyapu kiri-kanan-kiri di setiap baris, persis seperti drone yang menjangkau sebuah kisi!' },
+    ],
+    starThresholds: [504, 360, 301, 240],
+  },
+  {
+    id: 'jurassic-15',
+    worldId: 'jurassic',
+    number: 15,
+    title: { en: 'River Surge Crossing', id: 'Penyeberangan Arus Sungai' },
+    story: {
+      en: 'An underground river has surged beneath Fossil Valley, flooding the tunnels! Dr. Rex must find a route across the surface like a subway dispatcher rerouting trains around a flooded line — twelve eggs, one connected path.',
+      id: 'Sungai bawah tanah meluap di bawah Lembah Fosil, membanjiri terowongan! Dr. Rex harus menemukan rute di permukaan seperti operator kereta bawah tanah yang mengalihkan jalur di sekitar rel yang banjir — dua belas telur, satu jalur yang terhubung.',
+    },
+    mascotMessage: {
+      en: 'River surge! 🌊🚇 Real metro networks reroute entire train lines around a single flooded tunnel. Use FUNCTIONS and LISTS to connect every egg into one smooth route!',
+      id: 'Arus sungai meluap! 🌊🚇 Jaringan kereta bawah tanah nyata mengalihkan seluruh jalur kereta di sekitar satu terowongan yang banjir. Gunakan FUNGSI dan DAFTAR untuk menghubungkan setiap telur menjadi satu rute yang mulus!',
+    },
+    gridRows: 11,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(11, 12)
+      g[1][1] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[1][4] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[1][8] = 'obstacle'
+      g[1][10] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][3] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[3][10] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[5][10] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 11] },
+      { id: 'e2', pos: [2, 2] },
+      { id: 'e3', pos: [2, 9] },
+      { id: 'e4', pos: [4, 5] },
+      { id: 'e5', pos: [4, 11] },
+      { id: 'e6', pos: [6, 0] },
+      { id: 'e7', pos: [6, 7] },
+      { id: 'e8', pos: [8, 2] },
+      { id: 'e9', pos: [8, 9] },
+      { id: 'e10', pos: [10, 5] },
+      { id: 'e11', pos: [10, 11] },
+      { id: 'e12', pos: [10, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 265,
+    xpReward: 950,
+    hints: [
+      { en: 'Think of each row as a train line — finish collecting on one line before switching to the next!', id: 'Anggap setiap baris sebagai jalur kereta — selesaikan pengumpulan di satu jalur sebelum berpindah ke jalur berikutnya!' },
+      { en: 'Twelve eggs span six rows — visit them two at a time per row for the shortest connected route!', id: 'Dua belas telur tersebar di enam baris — kunjungi dua per baris untuk rute terhubung terpendek!' },
+    ],
+    starThresholds: [557, 398, 332, 265],
+  },
+  {
+    id: 'jurassic-16',
+    worldId: 'jurassic',
+    number: 16,
+    title: { en: 'Migration Corridor', id: 'Koridor Migrasi' },
+    story: {
+      en: 'A herd is migrating straight through the heart of the park, cutting off the usual trails! Dr. Rex must chart a new corridor for twelve eggs — just like satellite networks recalculate coverage paths as satellites move in orbit.',
+      id: 'Kawanan bermigrasi tepat melintasi jantung taman, memutus jalur biasa! Dr. Rex harus memetakan koridor baru untuk dua belas telur — persis seperti jaringan satelit yang menghitung ulang jalur cakupan saat satelit bergerak di orbit.',
+    },
+    mascotMessage: {
+      en: 'Migration corridor! 🛰️🦕 Real satellite networks constantly recalculate the best path as things move. Use LOOPS, FUNCTIONS, and LISTS to chart your corridor!',
+      id: 'Koridor migrasi! 🛰️🦕 Jaringan satelit nyata terus menghitung ulang jalur terbaik saat sesuatu bergerak. Gunakan PERULANGAN, FUNGSI, dan DAFTAR untuk memetakan koridormu!',
+    },
+    gridRows: 11,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(11, 12)
+      g[2][1] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[2][10] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[4][10] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[5][10] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 11] },
+      { id: 'e2', pos: [1, 2] },
+      { id: 'e3', pos: [1, 9] },
+      { id: 'e4', pos: [3, 7] },
+      { id: 'e5', pos: [3, 11] },
+      { id: 'e6', pos: [6, 0] },
+      { id: 'e7', pos: [6, 4] },
+      { id: 'e8', pos: [8, 9] },
+      { id: 'e9', pos: [8, 2] },
+      { id: 'e10', pos: [10, 7] },
+      { id: 'e11', pos: [10, 0] },
+      { id: 'e12', pos: [10, 11] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 295,
+    xpReward: 1000,
+    hints: [
+      { en: 'A satellite recalculates its path every time it passes a new position — recalculate yours after every egg!', id: 'Satelit menghitung ulang jalurnya setiap kali melewati posisi baru — hitung ulang jalurmu setelah setiap telur!' },
+      { en: 'Follow the rows top to bottom, picking up both eggs in a row before dropping to the next!', id: 'Ikuti baris dari atas ke bawah, ambil kedua telur di satu baris sebelum turun ke baris berikutnya!' },
+    ],
+    starThresholds: [620, 443, 370, 295],
+  },
+  {
+    id: 'jurassic-17',
+    worldId: 'jurassic',
+    number: 17,
+    title: { en: 'Poacher Lockdown', id: 'Penguncian Pemburu Liar' },
+    story: {
+      en: 'Poachers have triggered a park-wide lockdown! Dr. Rex must reach thirteen eggs before the gates seal — exactly like an emergency dispatcher routing the fastest ambulance to every call at once.',
+      id: 'Pemburu liar memicu penguncian seluruh taman! Dr. Rex harus mencapai tiga belas telur sebelum gerbang tertutup — persis seperti operator gawat darurat yang mengarahkan ambulans tercepat ke setiap panggilan sekaligus.',
+    },
+    mascotMessage: {
+      en: 'Lockdown triggered! 🚨🦕 Real emergency dispatch systems route responders to every call in the smartest order. Use everything you know — LOOPS, FUNCTIONS, LISTS, and LOGIC!',
+      id: 'Penguncian dipicu! 🚨🦕 Sistem gawat darurat nyata mengarahkan petugas ke setiap panggilan dalam urutan paling cerdas. Gunakan semua yang kamu tahu — PERULANGAN, FUNGSI, DAFTAR, dan LOGIKA!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[1][1] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][3] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][5] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][3] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[7][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 11] },
+      { id: 'e2', pos: [2, 2] },
+      { id: 'e3', pos: [2, 8] },
+      { id: 'e4', pos: [4, 0] },
+      { id: 'e5', pos: [4, 6] },
+      { id: 'e6', pos: [4, 11] },
+      { id: 'e7', pos: [6, 2] },
+      { id: 'e8', pos: [6, 10] },
+      { id: 'e9', pos: [8, 0] },
+      { id: 'e10', pos: [8, 8] },
+      { id: 'e11', pos: [10, 4] },
+      { id: 'e12', pos: [10, 11] },
+      { id: 'e13', pos: [10, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 325,
+    xpReward: 1050,
+    hints: [
+      { en: 'An ambulance dispatcher never backtracks unnecessarily — plan your full route with a list before moving!', id: 'Operator ambulans tidak pernah bolak-balik tanpa perlu — rencanakan seluruh rutemu dengan daftar sebelum bergerak!' },
+      { en: "Thirteen eggs across seven rows — clear each row's eggs left-to-right or right-to-left before dropping down!", id: 'Tiga belas telur di tujuh baris — selesaikan telur di setiap baris dari kiri ke kanan atau sebaliknya sebelum turun!' },
+    ],
+    starThresholds: [683, 488, 407, 325],
+  },
+  {
+    id: 'jurassic-18',
+    worldId: 'jurassic',
+    number: 18,
+    title: { en: 'Meteor Shower Warning', id: 'Peringatan Hujan Meteor' },
+    story: {
+      en: 'A meteor shower is streaking overhead! Dr. Rex deploys a rescue plan across the whole park to save thirteen eggs — just like a drone delivery fleet assigning the shortest route to each drone in its fleet.',
+      id: 'Hujan meteor melintas di langit! Dr. Rex menerapkan rencana penyelamatan di seluruh taman untuk menyelamatkan tiga belas telur — persis seperti armada drone pengiriman yang menetapkan rute terpendek untuk setiap drone dalam armadanya.',
+    },
+    mascotMessage: {
+      en: 'Meteor shower warning! ☄️🦕 Real delivery drone fleets split routes so every drone flies the shortest possible path. Plan yours the same way!',
+      id: 'Peringatan hujan meteor! ☄️🦕 Armada drone pengiriman nyata membagi rute agar setiap drone terbang di jalur sesingkat mungkin. Rencanakan rutemu dengan cara yang sama!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[2][1] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[2][10] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[4][7] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[4][10] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[8][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 11] },
+      { id: 'e2', pos: [1, 4] },
+      { id: 'e3', pos: [3, 9] },
+      { id: 'e4', pos: [3, 2] },
+      { id: 'e5', pos: [5, 11] },
+      { id: 'e6', pos: [5, 6] },
+      { id: 'e7', pos: [7, 0] },
+      { id: 'e8', pos: [7, 9] },
+      { id: 'e9', pos: [9, 4] },
+      { id: 'e10', pos: [9, 11] },
+      { id: 'e11', pos: [11, 2] },
+      { id: 'e12', pos: [11, 9] },
+      { id: 'e13', pos: [11, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 355,
+    xpReward: 1100,
+    hints: [
+      { en: 'Split the park into sections like a drone fleet splits the sky — one function per section!', id: 'Bagi taman menjadi beberapa bagian seperti armada drone membagi langit — satu fungsi per bagian!' },
+      { en: 'Work through the rows from top to bottom, alternating direction each row, to cover all thirteen eggs efficiently!', id: 'Kerjakan baris dari atas ke bawah, berganti arah setiap baris, untuk menjangkau ketiga belas telur secara efisien!' },
+    ],
+    starThresholds: [746, 533, 445, 355],
+  },
+  {
+    id: 'jurassic-19',
+    worldId: 'jurassic',
+    number: 19,
+    title: { en: 'Last Nest Standing', id: 'Sarang Terakhir yang Bertahan' },
+    story: {
+      en: 'The nest is under siege — this is the last clutch of thirteen eggs left in the valley! Dr. Rex must plan the ultimate last-mile route, just like delivery companies optimize the final stretch to every doorstep.',
+      id: 'Sarang dikepung — ini adalah kumpulan terakhir dari tiga belas telur yang tersisa di lembah! Dr. Rex harus merencanakan rute mil terakhir yang sempurna, persis seperti perusahaan pengiriman yang mengoptimalkan bagian akhir ke setiap pintu.',
+    },
+    mascotMessage: {
+      en: "Last nest standing! 📦🦕 Real delivery companies obsess over the 'last mile' — the final stretch to each stop. Make every one of your last moves count!",
+      id: "Sarang terakhir yang bertahan! 📦🦕 Perusahaan pengiriman nyata sangat memperhatikan 'mil terakhir' — bagian akhir ke setiap tujuan. Buat setiap gerakan terakhirmu berarti!",
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[1][2] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[1][10] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[4][7] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[4][10] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[8][2] = 'obstacle'
+      g[8][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 11] },
+      { id: 'e2', pos: [2, 4] },
+      { id: 'e3', pos: [2, 8] },
+      { id: 'e4', pos: [3, 1] },
+      { id: 'e5', pos: [3, 11] },
+      { id: 'e6', pos: [5, 6] },
+      { id: 'e7', pos: [5, 0] },
+      { id: 'e8', pos: [7, 8] },
+      { id: 'e9', pos: [7, 4] },
+      { id: 'e10', pos: [9, 1] },
+      { id: 'e11', pos: [9, 11] },
+      { id: 'e12', pos: [11, 6] },
+      { id: 'e13', pos: [11, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 385,
+    xpReward: 1150,
+    hints: [
+      { en: "The 'last mile' is the hardest part — plan the final rows first since they're the trickiest to reach!", id: "'Mil terakhir' adalah bagian tersulit — rencanakan baris terakhir lebih dulu karena paling sulit dijangkau!" },
+      { en: "Move row by row from top to bottom, collecting every egg in a row before continuing — that's the shortest connected path here!", id: 'Bergerak baris demi baris dari atas ke bawah, kumpulkan setiap telur di satu baris sebelum melanjutkan — itulah jalur terhubung terpendek di sini!' },
+    ],
+    starThresholds: [809, 578, 482, 385],
+  },
+  {
+    id: 'jurassic-20',
+    worldId: 'jurassic',
+    number: 20,
+    title: { en: 'Dawn of a New Era', id: 'Fajar Era Baru' },
+    story: {
+      en: 'Life returns to the park! Dr. Rex now builds a sanctuary for a new generation — thirteen eggs across the biggest park yet, guarded by every real-world routing system working together: GPS, drones, warehouse robots, and dispatch, all at once. This is the new benchmark for real-world pathfinding.',
+      id: 'Kehidupan kembali ke taman! Dr. Rex kini membangun suaka untuk generasi baru — tiga belas telur di taman terbesar sejauh ini, dijaga oleh setiap sistem perutean dunia nyata yang bekerja bersama: GPS, drone, robot gudang, dan dispatch, semuanya sekaligus. Ini adalah standar baru untuk pencarian jalur dunia nyata.',
+    },
+    mascotMessage: {
+      en: "DAWN OF A NEW ERA! 🌅🦕 Every system you've learned — GPS routing, drone fleets, warehouse robots, dispatch — comes together here. Thirteen eggs, the biggest park yet. Show me your best algorithm!",
+      id: 'FAJAR ERA BARU! 🌅🦕 Semua sistem yang sudah kamu pelajari — perutean GPS, armada drone, robot gudang, dispatch — menyatu di sini. Tiga belas telur, taman terbesar sejauh ini. Tunjukkan algoritma terbaikmu!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[2][1] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[2][10] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[4][10] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][3] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[6][8] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'e1', pos: [0, 11] },
+      { id: 'e2', pos: [1, 2] },
+      { id: 'e3', pos: [3, 9] },
+      { id: 'e4', pos: [3, 5] },
+      { id: 'e5', pos: [5, 0] },
+      { id: 'e6', pos: [5, 11] },
+      { id: 'e7', pos: [7, 2] },
+      { id: 'e8', pos: [7, 9] },
+      { id: 'e9', pos: [9, 5] },
+      { id: 'e10', pos: [9, 11] },
+      { id: 'e11', pos: [11, 0] },
+      { id: 'e12', pos: [11, 7] },
+      { id: 'e13', pos: [11, 9] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 430,
+    xpReward: 1300,
+    hints: [
+      { en: 'This is every skill combined — start with a list of all thirteen positions and a function to travel between them!', id: 'Ini adalah gabungan semua keterampilan — mulai dengan daftar ketiga belas posisi dan fungsi untuk bergerak di antaranya!' },
+      { en: "Sweep the rows from top to bottom in order, collecting each row's eggs before dropping to the next — the biggest park yet needs the most disciplined route!", id: 'Sisir baris dari atas ke bawah secara berurutan, kumpulkan telur di setiap baris sebelum turun ke baris berikutnya — taman terbesar sejauh ini butuh rute paling disiplin!' },
+    ],
+    starThresholds: [903, 645, 539, 430],
   },
 
   // ─────────────────────────────────────────────
@@ -3809,12 +7516,12 @@ export const LESSONS: Lesson[] = [
     number: 10,
     title: { en: 'Mega City Grid', id: 'Kisi Kota Mega' },
     story: {
-      en: "The entire city grid is yours to manage! Ten critical parking zones are spread across the 10×10 map. This is the Master Parking Officer final exam — only the most efficient algorithm will earn three stars!",
-      id: 'Seluruh kisi kota menjadi tanggungjawabmu! Sepuluh zona parkir kritis tersebar di seluruh peta 10×10. Ini adalah ujian akhir Petugas Parkir Master — hanya algoritma yang paling efisien yang akan mendapatkan tiga bintang!',
+      en: "The entire city grid is yours to manage! Ten critical parking zones are spread across the 10×10 map. This is one of the toughest parking challenges yet — only the most efficient algorithm will earn three stars!",
+      id: 'Seluruh kisi kota menjadi tanggungjawabmu! Sepuluh zona parkir kritis tersebar di seluruh peta 10×10. Ini adalah salah satu tantangan parkir tersulit sejauh ini — hanya algoritma yang paling efisien yang akan mendapatkan tiga bintang!',
     },
     mascotMessage: {
-      en: "MEGA CITY final! 🏙️ Congratulations — you've mastered the routing algorithms that real smart-city systems use to manage millions of vehicles. Code the perfect path and BECOME the algorithm! 🚗",
-      id: 'Final KOTA MEGA! 🏙️ Selamat — kamu telah menguasai algoritma perutean yang digunakan sistem kota cerdas nyata untuk mengelola jutaan kendaraan. Buat kode jalur yang sempurna dan JADILAH algoritmanya! 🚗',
+      en: "MEGA CITY challenge! 🏙️ Congratulations — you've mastered the routing algorithms that real smart-city systems use to manage millions of vehicles. Code the perfect path and BECOME the algorithm! 🚗",
+      id: 'Tantangan KOTA MEGA! 🏙️ Selamat — kamu telah menguasai algoritma perutean yang digunakan sistem kota cerdas nyata untuk mengelola jutaan kendaraan. Buat kode jalur yang sempurna dan JADILAH algoritmanya! 🚗',
     },
     gridRows: 10,
     gridCols: 10,
@@ -3859,6 +7566,625 @@ export const LESSONS: Lesson[] = [
       { en: 'Think like a GPS: minimize total distance, not just hops between zones!', id: 'Berpikirlah seperti GPS: minimalkan total jarak, bukan hanya lompatan antar zona!' },
     ],
     starThresholds: [315, 225, 188, 150],
+  },
+  {
+    id: 'parking-11',
+    worldId: 'parking',
+    number: 11,
+    title: { en: 'Snow Day Closures', id: 'Penutupan Hari Salju' },
+    story: {
+      en: 'A surprise snowstorm has closed sections of the parking district overnight! Ten zones must be re-checked before the plows finish clearing the streets. Parker needs a route that dodges every snowdrift and closed lane.',
+      id: 'Badai salju dadakan telah menutup beberapa bagian distrik parkir semalaman! Sepuluh zona harus diperiksa ulang sebelum mobil salju selesai membersihkan jalan. Parker membutuhkan rute yang menghindari setiap tumpukan salju dan jalur tertutup.',
+    },
+    mascotMessage: {
+      en: 'Snow day chaos! ❄️ Real city plow routes are calculated by algorithms that avoid closed roads automatically. Combine LOOPS, FUNCTIONS, and LISTS to route around every snowdrift!',
+      id: 'Kekacauan hari salju! ❄️ Rute mobil salju kota nyata dihitung oleh algoritma yang secara otomatis menghindari jalan tertutup. Gabungkan PERULANGAN, FUNGSI, dan DAFTAR untuk mengelilingi setiap tumpukan salju!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[0][6] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[5][0] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[8][3] = 'obstacle'
+      g[8][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 10] },
+      { id: 'p2', pos: [1, 5] },
+      { id: 'p3', pos: [2, 9] },
+      { id: 'p4', pos: [3, 3] },
+      { id: 'p5', pos: [4, 8] },
+      { id: 'p6', pos: [5, 2] },
+      { id: 'p7', pos: [6, 9] },
+      { id: 'p8', pos: [7, 4] },
+      { id: 'p9', pos: [8, 10] },
+      { id: 'p10', pos: [9, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 155,
+    xpReward: 750,
+    hints: [
+      { en: 'Snowdrifts block some direct paths — plan a route around them before you start coding!', id: 'Tumpukan salju menghalangi beberapa jalur langsung — rencanakan rute mengelilinginya sebelum mulai membuat kode!' },
+      { en: 'Group nearby zones into short functions so your path stays efficient block by block!', id: 'Kelompokkan zona-zona yang berdekatan ke dalam fungsi pendek agar jalurmu tetap efisien blok demi blok!' },
+    ],
+    starThresholds: [326, 232, 194, 155],
+  },
+  {
+    id: 'parking-12',
+    worldId: 'parking',
+    number: 12,
+    title: { en: 'EV Charging Rush', id: 'Buru-Buru Isi Daya EV' },
+    story: {
+      en: 'Electric vehicles are flooding in for a discount charging window! Eleven charging stalls across the lot must be checked and activated before the promotion ends. Parker must move fast and smart.',
+      id: 'Mobil listrik membanjiri tempat parkir demi jendela diskon pengisian daya! Sebelas stasiun pengisian di area parkir harus diperiksa dan diaktifkan sebelum promo berakhir. Parker harus bergerak cepat dan cerdas.',
+    },
+    mascotMessage: {
+      en: 'EV charging rush! 🔌 Real charging networks use smart routing to send drivers to the nearest free stall. Use VARIABLES to track which stalls are activated and FUNCTIONS to speed up the route!',
+      id: 'Buru-buru isi daya EV! 🔌 Jaringan pengisian daya nyata menggunakan rute cerdas untuk mengarahkan pengemudi ke stasiun kosong terdekat. Gunakan VARIABEL untuk melacak stasiun yang sudah diaktifkan dan FUNGSI untuk mempercepat rute!',
+    },
+    gridRows: 11,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(11, 10)
+      g[0][3] = 'obstacle'
+      g[1][7] = 'obstacle'
+      g[1][1] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[3][2] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[4][0] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][8] = 'obstacle'
+      g[9][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 9] },
+      { id: 'p2', pos: [1, 4] },
+      { id: 'p3', pos: [2, 8] },
+      { id: 'p4', pos: [2, 1] },
+      { id: 'p5', pos: [3, 5] },
+      { id: 'p6', pos: [4, 9] },
+      { id: 'p7', pos: [5, 2] },
+      { id: 'p8', pos: [6, 9] },
+      { id: 'p9', pos: [7, 0] },
+      { id: 'p10', pos: [8, 5] },
+      { id: 'p11', pos: [10, 3] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 174,
+    xpReward: 800,
+    hints: [
+      { en: 'Eleven stalls means eleven trips — a list keeps your plan organized!', id: 'Sebelas stasiun berarti sebelas perjalanan — daftar akan membuat rencanamu tetap teratur!' },
+      { en: 'Write one function that drives to a stall, then reuse it for each position in your list!', id: 'Tulis satu fungsi yang menuju ke sebuah stasiun, lalu gunakan kembali untuk setiap posisi dalam daftarmu!' },
+    ],
+    starThresholds: [365, 261, 218, 174],
+  },
+  {
+    id: 'parking-13',
+    worldId: 'parking',
+    number: 13,
+    title: { en: 'Music Festival Weekend', id: 'Akhir Pekan Festival Musik' },
+    story: {
+      en: "The city's biggest music festival has taken over downtown! Eleven scattered stage-side parking zones must be cleared between sets. Parker has to sweep the whole festival grounds without missing a single stage.",
+      id: 'Festival musik terbesar kota telah mengambil alih pusat kota! Sebelas zona parkir di sekitar panggung yang tersebar harus dibersihkan di antara pertunjukan. Parker harus menyapu seluruh area festival tanpa melewatkan satu panggung pun.',
+    },
+    mascotMessage: {
+      en: 'Festival weekend! 🎸 Event organizers sweep huge grounds row by row with the same zigzag logic delivery robots use. Build a LIST of every stage zone and LOOP through your sweep pattern!',
+      id: 'Akhir pekan festival! 🎸 Penyelenggara acara menyapu area luas baris demi baris dengan logika zigzag yang sama seperti yang digunakan robot pengiriman. Buat DAFTAR setiap zona panggung dan gunakan PERULANGAN untuk pola sapuanmu!',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[0][5] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[1][8] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[2][9] = 'obstacle'
+      g[3][0] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[7][2] = 'obstacle'
+      g[7][7] = 'obstacle'
+      g[8][4] = 'obstacle'
+      g[9][8] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 10] },
+      { id: 'p2', pos: [1, 5] },
+      { id: 'p3', pos: [2, 1] },
+      { id: 'p4', pos: [3, 9] },
+      { id: 'p5', pos: [4, 2] },
+      { id: 'p6', pos: [5, 9] },
+      { id: 'p7', pos: [6, 1] },
+      { id: 'p8', pos: [7, 9] },
+      { id: 'p9', pos: [8, 1] },
+      { id: 'p10', pos: [9, 9] },
+      { id: 'p11', pos: [10, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 216,
+    xpReward: 850,
+    hints: [
+      { en: 'Sweep the grounds row by row — zigzagging left-right-left wastes fewer steps than jumping randomly!', id: 'Sapu area baris demi baris — zigzag kiri-kanan-kiri membuang lebih sedikit langkah daripada melompat sembarangan!' },
+      { en: 'Store all eleven stage zones in a list ordered by row, then loop through it top to bottom!', id: 'Simpan semua sebelas zona panggung dalam daftar yang diurutkan berdasarkan baris, lalu lakukan perulangan dari atas ke bawah!' },
+    ],
+    starThresholds: [454, 324, 271, 216],
+  },
+  {
+    id: 'parking-14',
+    worldId: 'parking',
+    number: 14,
+    title: { en: 'Downtown Marathon', id: 'Maraton Pusat Kota' },
+    story: {
+      en: 'Marathon day has closed half the downtown streets! Eleven checkpoint zones along the wide race route must be confirmed clear before runners arrive. Parker must navigate a much bigger course than ever before.',
+      id: 'Hari maraton telah menutup separuh jalan pusat kota! Sebelas zona pos pemeriksaan di sepanjang rute lomba yang luas harus dipastikan bersih sebelum pelari tiba. Parker harus menavigasi lintasan yang jauh lebih besar dari sebelumnya.',
+    },
+    mascotMessage: {
+      en: 'Marathon closures! 🏃 Cities plan road-closure routes with the same pathfinding logic as GPS apps. Use FUNCTIONS for each checkpoint and a LIST to keep the whole route in order!',
+      id: 'Penutupan jalan maraton! 🏃 Kota merencanakan rute penutupan jalan dengan logika pencarian jalur yang sama seperti aplikasi GPS. Gunakan FUNGSI untuk setiap pos pemeriksaan dan DAFTAR untuk menjaga seluruh rute tetap berurutan!',
+    },
+    gridRows: 11,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(11, 12)
+      g[0][6] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[1][10] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][11] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[5][0] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[6][11] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[9][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 11] },
+      { id: 'p2', pos: [1, 1] },
+      { id: 'p3', pos: [2, 11] },
+      { id: 'p4', pos: [3, 1] },
+      { id: 'p5', pos: [4, 11] },
+      { id: 'p6', pos: [5, 1] },
+      { id: 'p7', pos: [6, 10] },
+      { id: 'p8', pos: [7, 2] },
+      { id: 'p9', pos: [8, 11] },
+      { id: 'p10', pos: [9, 1] },
+      { id: 'p11', pos: [10, 11] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 275,
+    xpReward: 900,
+    hints: [
+      { en: "The course is wider than anything you've coded before — double-check every checkpoint's row and column!", id: 'Lintasan ini lebih luas dari apa pun yang pernah kamu buat kodenya — periksa kembali baris dan kolom setiap pos pemeriksaan!' },
+      { en: "Write a reusable function for 'travel to checkpoint' and call it once per zone in your list!", id: "Tulis fungsi yang dapat digunakan kembali untuk 'pergi ke pos pemeriksaan' dan panggil sekali untuk setiap zona dalam daftarmu!" },
+    ],
+    starThresholds: [578, 412, 345, 275],
+  },
+  {
+    id: 'parking-15',
+    worldId: 'parking',
+    number: 15,
+    title: { en: 'Cruise Ship Terminal', id: 'Terminal Kapal Pesiar' },
+    story: {
+      en: "A cruise ship the size of a small city has just docked! Twelve passenger drop-off zones across the sprawling terminal must be confirmed before boarding begins. This is Parker's biggest single terminal yet.",
+      id: 'Kapal pesiar sebesar kota kecil baru saja berlabuh! Dua belas zona penurunan penumpang di terminal yang luas harus dipastikan sebelum boarding dimulai. Ini adalah terminal tunggal terbesar yang pernah dihadapi Parker.',
+    },
+    mascotMessage: {
+      en: "Cruise terminal! 🛳️ Ports track thousands of arriving passengers with the same list-and-loop systems you're learning. Use LISTS to queue all twelve drop-off zones and LOOPS to visit them fast!",
+      id: 'Terminal kapal pesiar! 🛳️ Pelabuhan melacak ribuan penumpang yang datang dengan sistem daftar-dan-perulangan yang sama seperti yang kamu pelajari. Gunakan DAFTAR untuk mengantri kedua belas zona penurunan dan PERULANGAN untuk mengunjunginya dengan cepat!',
+    },
+    gridRows: 11,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(11, 12)
+      g[0][7] = 'obstacle'
+      g[1][4] = 'obstacle'
+      g[1][11] = 'obstacle'
+      g[2][2] = 'obstacle'
+      g[2][9] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[3][0] = 'obstacle'
+      g[4][10] = 'obstacle'
+      g[4][3] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[5][1] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][11] = 'obstacle'
+      g[7][2] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[9][3] = 'obstacle'
+      g[9][10] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 11] },
+      { id: 'p2', pos: [1, 1] },
+      { id: 'p3', pos: [2, 11] },
+      { id: 'p4', pos: [3, 1] },
+      { id: 'p5', pos: [4, 11] },
+      { id: 'p6', pos: [5, 2] },
+      { id: 'p7', pos: [5, 11] },
+      { id: 'p8', pos: [6, 1] },
+      { id: 'p9', pos: [7, 11] },
+      { id: 'p10', pos: [8, 1] },
+      { id: 'p11', pos: [9, 11] },
+      { id: 'p12', pos: [10, 1] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 317,
+    xpReward: 950,
+    hints: [
+      { en: 'Twelve zones is your biggest list yet — sort it by row before you start moving!', id: 'Dua belas zona adalah daftar terbesarmu sejauh ini — urutkan berdasarkan baris sebelum kamu mulai bergerak!' },
+      { en: 'Alternate between the left and right edges of the terminal as you sweep down each row!', id: 'Berpindah bergantian antara tepi kiri dan kanan terminal saat kamu menyapu setiap baris ke bawah!' },
+    ],
+    starThresholds: [666, 476, 397, 317],
+  },
+  {
+    id: 'parking-16',
+    worldId: 'parking',
+    number: 16,
+    title: { en: 'Black Friday Blitz', id: 'Serbuan Black Friday' },
+    story: {
+      en: "It's the biggest shopping day of the year! Twelve retail bays across a packed 12-row lot must be secured before doors open. Parker faces the densest crowd of obstacles yet.",
+      id: 'Ini adalah hari belanja terbesar tahun ini! Dua belas area ritel di area parkir 12 baris yang padat harus diamankan sebelum pintu dibuka. Parker menghadapi kepadatan rintangan terpadat sejauh ini.',
+    },
+    mascotMessage: {
+      en: 'Black Friday blitz! 🛒 Retailers plan parking flow months in advance using route simulations just like this one. Combine every tool — LOOPS, FUNCTIONS, VARIABLES, LISTS — to beat the rush!',
+      id: 'Serbuan Black Friday! 🛒 Peritel merencanakan alur parkir berbulan-bulan sebelumnya menggunakan simulasi rute seperti ini. Gabungkan semua alat — PERULANGAN, FUNGSI, VARIABEL, DAFTAR — untuk mengalahkan keramaian!',
+    },
+    gridRows: 12,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(12, 11)
+      g[0][5] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][7] = 'obstacle'
+      g[2][0] = 'obstacle'
+      g[2][9] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[3][10] = 'obstacle'
+      g[4][1] = 'obstacle'
+      g[4][8] = 'obstacle'
+      g[5][6] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[6][0] = 'obstacle'
+      g[7][5] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][2] = 'obstacle'
+      g[8][9] = 'obstacle'
+      g[9][7] = 'obstacle'
+      g[10][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 10] },
+      { id: 'p2', pos: [1, 0] },
+      { id: 'p3', pos: [2, 10] },
+      { id: 'p4', pos: [3, 0] },
+      { id: 'p5', pos: [4, 10] },
+      { id: 'p6', pos: [5, 0] },
+      { id: 'p7', pos: [6, 10] },
+      { id: 'p8', pos: [7, 0] },
+      { id: 'p9', pos: [8, 10] },
+      { id: 'p10', pos: [9, 0] },
+      { id: 'p11', pos: [10, 10] },
+      { id: 'p12', pos: [11, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 326,
+    xpReward: 1000,
+    hints: [
+      { en: 'With 12 rows and this many obstacles, plan your sweep direction before writing a single block!', id: 'Dengan 12 baris dan rintangan sebanyak ini, rencanakan arah sapuanmu sebelum menulis satu blok pun!' },
+      { en: "Alternate left-edge and right-edge zones row by row — it's the fastest way to cover a tall lot!", id: 'Berpindah antara zona tepi kiri dan tepi kanan baris demi baris — ini cara tercepat untuk mencakup area parkir yang tinggi!' },
+    ],
+    starThresholds: [685, 489, 408, 326],
+  },
+  {
+    id: 'parking-17',
+    worldId: 'parking',
+    number: 17,
+    title: { en: "New Year's Eve Countdown", id: 'Hitung Mundur Malam Tahun Baru' },
+    story: {
+      en: "Fireworks launch at midnight and the whole city is parking at once! Twelve crowd-control zones across a full 12×12 grid must be locked down before the countdown begins. There's no room for wasted moves tonight.",
+      id: 'Kembang api akan diluncurkan tepat tengah malam dan seluruh kota sedang parkir bersamaan! Dua belas zona pengendalian keramaian di seluruh kisi 12×12 harus diamankan sebelum hitung mundur dimulai. Tidak ada ruang untuk gerakan yang sia-sia malam ini.',
+    },
+    mascotMessage: {
+      en: "Countdown to midnight! 🎆 Big cities run crowd-control software that reroutes traffic in real time on New Year's Eve. Use everything you've learned to lock down all twelve zones before the ball drops!",
+      id: 'Hitung mundur menuju tengah malam! 🎆 Kota-kota besar menjalankan perangkat lunak pengendalian keramaian yang mengalihkan lalu lintas secara real time saat malam Tahun Baru. Gunakan semua yang telah kamu pelajari untuk mengamankan kedua belas zona sebelum hitung mundur berakhir!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[0][6] = 'obstacle'
+      g[1][3] = 'obstacle'
+      g[1][10] = 'obstacle'
+      g[2][8] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][11] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[5][7] = 'obstacle'
+      g[5][0] = 'obstacle'
+      g[6][4] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[8][6] = 'obstacle'
+      g[8][11] = 'obstacle'
+      g[9][3] = 'obstacle'
+      g[10][9] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 11] },
+      { id: 'p2', pos: [1, 0] },
+      { id: 'p3', pos: [2, 11] },
+      { id: 'p4', pos: [3, 0] },
+      { id: 'p5', pos: [4, 11] },
+      { id: 'p6', pos: [5, 1] },
+      { id: 'p7', pos: [6, 11] },
+      { id: 'p8', pos: [7, 0] },
+      { id: 'p9', pos: [8, 10] },
+      { id: 'p10', pos: [9, 0] },
+      { id: 'p11', pos: [10, 11] },
+      { id: 'p12', pos: [11, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 342,
+    xpReward: 1050,
+    hints: [
+      { en: 'A full 12×12 grid means longer trips between zones — budget extra moves for the far corners!', id: 'Kisi 12×12 penuh berarti perjalanan lebih panjang antar zona — sisakan lebih banyak gerakan untuk sudut-sudut jauh!' },
+      { en: 'Sweep zigzag from edge to edge, row by row, to cover the whole grid without backtracking!', id: 'Sapu secara zigzag dari tepi ke tepi, baris demi baris, untuk mencakup seluruh kisi tanpa mundur ke belakang!' },
+    ],
+    starThresholds: [718, 513, 429, 342],
+  },
+  {
+    id: 'parking-18',
+    worldId: 'parking',
+    number: 18,
+    title: { en: 'Convention Center Expo', id: 'Ekspo Pusat Konvensi' },
+    story: {
+      en: "A massive trade expo has taken over the convention center! Twelve exhibitor loading docks must be checked before the show floor opens to the public. The obstacle-filled loading yard is Parker's trickiest maze yet.",
+      id: 'Ekspo dagang besar-besaran telah mengambil alih pusat konvensi! Dua belas dermaga bongkar muat peserta pameran harus diperiksa sebelum lantai pameran dibuka untuk umum. Halaman bongkar muat yang penuh rintangan ini adalah labirin tersulit Parker sejauh ini.',
+    },
+    mascotMessage: {
+      en: 'Expo day! 📦 Convention centers schedule loading docks with routing software to avoid gridlock backstage. Chain FUNCTIONS and LISTS together to clear all twelve docks efficiently!',
+      id: 'Hari ekspo! 📦 Pusat konvensi menjadwalkan dermaga bongkar muat dengan perangkat lunak perutean untuk menghindari kemacetan di belakang panggung. Rangkai FUNGSI dan DAFTAR bersama untuk membersihkan kedua belas dermaga secara efisien!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[0][3] = 'obstacle'
+      g[0][8] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[1][10] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][9] = 'obstacle'
+      g[3][4] = 'obstacle'
+      g[3][11] = 'obstacle'
+      g[4][7] = 'obstacle'
+      g[4][0] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[6][5] = 'obstacle'
+      g[6][11] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[8][4] = 'obstacle'
+      g[9][9] = 'obstacle'
+      g[10][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 11] },
+      { id: 'p2', pos: [1, 0] },
+      { id: 'p3', pos: [2, 11] },
+      { id: 'p4', pos: [3, 0] },
+      { id: 'p5', pos: [4, 11] },
+      { id: 'p6', pos: [5, 0] },
+      { id: 'p7', pos: [6, 10] },
+      { id: 'p8', pos: [7, 0] },
+      { id: 'p9', pos: [8, 11] },
+      { id: 'p10', pos: [9, 0] },
+      { id: 'p11', pos: [10, 11] },
+      { id: 'p12', pos: [11, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 346,
+    xpReward: 1100,
+    hints: [
+      { en: 'The loading yard is packed with obstacles — trace your route around them before coding!', id: 'Halaman bongkar muat penuh dengan rintangan — telusuri rutemu mengelilinginya sebelum membuat kode!' },
+      { en: 'Visit docks in row order and let a single helper function carry you between each one!', id: 'Kunjungi dermaga secara berurutan berdasarkan baris dan biarkan satu fungsi pembantu membawamu di antara masing-masing!' },
+    ],
+    starThresholds: [727, 519, 434, 346],
+  },
+  {
+    id: 'parking-19',
+    worldId: 'parking',
+    number: 19,
+    title: { en: 'State Fair Weekend', id: 'Akhir Pekan Pekan Raya' },
+    story: {
+      en: 'The state fair has rolled into town with rides, vendors, and record crowds! Thirteen vendor and visitor zones spread across the fairgrounds must be checked before the gates open. Parker has never managed this many zones at once.',
+      id: 'Pekan raya telah tiba di kota dengan wahana, pedagang, dan kerumunan rekor! Tiga belas zona pedagang dan pengunjung yang tersebar di area pekan raya harus diperiksa sebelum gerbang dibuka. Parker belum pernah mengelola zona sebanyak ini sekaligus.',
+    },
+    mascotMessage: {
+      en: 'State fair weekend! 🎡 Large events like this run on route-planning software that handles dozens of zones at once. Use LISTS to hold all thirteen zones and FUNCTIONS to visit them one by one!',
+      id: 'Akhir pekan pekan raya! 🎡 Acara besar seperti ini berjalan dengan perangkat lunak perencanaan rute yang menangani puluhan zona sekaligus. Gunakan DAFTAR untuk menyimpan ketiga belas zona dan FUNGSI untuk mengunjunginya satu per satu!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[0][8] = 'obstacle'
+      g[1][5] = 'obstacle'
+      g[1][0] = 'obstacle'
+      g[2][10] = 'obstacle'
+      g[2][3] = 'obstacle'
+      g[3][7] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][11] = 'obstacle'
+      g[4][4] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[6][6] = 'obstacle'
+      g[6][0] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[7][3] = 'obstacle'
+      g[8][8] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][11] = 'obstacle'
+      g[10][5] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 11] },
+      { id: 'p2', pos: [1, 1] },
+      { id: 'p3', pos: [2, 11] },
+      { id: 'p4', pos: [3, 0] },
+      { id: 'p5', pos: [4, 10] },
+      { id: 'p6', pos: [5, 0] },
+      { id: 'p7', pos: [6, 11] },
+      { id: 'p8', pos: [6, 1] },
+      { id: 'p9', pos: [7, 11] },
+      { id: 'p10', pos: [8, 0] },
+      { id: 'p11', pos: [9, 10] },
+      { id: 'p12', pos: [10, 0] },
+      { id: 'p13', pos: [11, 11] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 353,
+    xpReward: 1150,
+    hints: [
+      { en: 'Thirteen zones is a lot to track — write your list first, then code the movement!', id: 'Tiga belas zona adalah jumlah yang banyak untuk dilacak — tulis daftarmu dulu, baru buat kode gerakannya!' },
+      { en: 'Sweep the fairgrounds zigzag style, alternating sides as you move down each row!', id: 'Sapu area pekan raya dengan gaya zigzag, berpindah sisi saat kamu bergerak turun di setiap baris!' },
+    ],
+    starThresholds: [741, 530, 442, 353],
+  },
+  {
+    id: 'parking-20',
+    worldId: 'parking',
+    number: 20,
+    title: { en: 'Smart-City Command Center', id: 'Pusat Komando Kota Cerdas' },
+    story: {
+      en: "You've been promoted to lead a real smart-city command center! Thirteen critical zones across the largest, most obstacle-packed grid yet must be routed perfectly. This is the biggest routing challenge City Parking has ever thrown at you!",
+      id: 'Kamu telah dipromosikan untuk memimpin pusat komando kota cerdas yang sesungguhnya! Tiga belas zona kritis di kisi terbesar dan paling penuh rintangan sejauh ini harus dirutekan dengan sempurna. Ini adalah tantangan perutean terbesar yang pernah diberikan City Parking kepadamu!',
+    },
+    mascotMessage: {
+      en: "SMART-CITY COMMAND CENTER! 🌆 Real smart cities run routing algorithms exactly like the one you just wrote to manage millions of vehicles every day. You've mastered every tool in the parking officer's toolkit — congratulations, Master Router! 🚦",
+      id: 'PUSAT KOMANDO KOTA CERDAS! 🌆 Kota cerdas nyata menjalankan algoritma perutean persis seperti yang baru saja kamu tulis untuk mengelola jutaan kendaraan setiap hari. Kamu telah menguasai setiap alat dalam perangkat petugas parkir — selamat, Sang Master Perutean! 🚦',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[0][3] = 'obstacle'
+      g[0][9] = 'obstacle'
+      g[1][6] = 'obstacle'
+      g[1][1] = 'obstacle'
+      g[2][10] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[4][6] = 'obstacle'
+      g[4][11] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[7][4] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][2] = 'obstacle'
+      g[8][8] = 'obstacle'
+      g[9][6] = 'obstacle'
+      g[10][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'p1', pos: [0, 11] },
+      { id: 'p2', pos: [1, 0] },
+      { id: 'p3', pos: [2, 11] },
+      { id: 'p4', pos: [3, 0] },
+      { id: 'p5', pos: [4, 10] },
+      { id: 'p6', pos: [5, 0] },
+      { id: 'p7', pos: [6, 11] },
+      { id: 'p8', pos: [6, 0] },
+      { id: 'p9', pos: [7, 11] },
+      { id: 'p10', pos: [8, 0] },
+      { id: 'p11', pos: [9, 11] },
+      { id: 'p12', pos: [10, 0] },
+      { id: 'p13', pos: [11, 11] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 399,
+    xpReward: 1300,
+    hints: [
+      { en: 'This is the largest grid yet — sketch your full zigzag sweep on paper before writing any blocks!', id: 'Ini adalah kisi terbesar sejauh ini — sketsakan seluruh pola sapuan zigzagmu di atas kertas sebelum menulis blok apa pun!' },
+      { en: 'Store all thirteen zones in one list, sweep row by row alternating edges, and let functions carry the repeated legs!', id: 'Simpan ketiga belas zona dalam satu daftar, sapu baris demi baris berpindah sisi, dan biarkan fungsi menangani perjalanan yang berulang!' },
+    ],
+    starThresholds: [838, 598, 500, 399],
   },
 
   // ─────────────────────────────────────────────
@@ -4284,12 +8610,12 @@ export const LESSONS: Lesson[] = [
     number: 10,
     title: { en: 'Galactic Dispatch', id: 'Pengiriman Galaktik' },
     story: {
-      en: "Final mission: ten packages scattered across the entire 10×10 space warehouse. This is the Galactic Dispatch — Sorty's ultimate test of algorithmic mastery. Code the perfect route and become a true Master Sorter!",
-      id: 'Misi terakhir: sepuluh paket tersebar di seluruh gudang luar angkasa 10×10. Ini adalah Pengiriman Galaktik — ujian penguasaan algoritma Sorty yang tertinggi. Buat kode rute yang sempurna dan jadilah Penyortir Master sejati!',
+      en: "One of the toughest dispatch runs yet: ten packages scattered across the entire 10×10 space warehouse. This is the Galactic Dispatch — a serious test of Sorty's algorithmic mastery. Code the perfect route and become a true Master Sorter!",
+      id: 'Salah satu run pengiriman tersulit sejauh ini: sepuluh paket tersebar di seluruh gudang luar angkasa 10×10. Ini adalah Pengiriman Galaktik — ujian serius penguasaan algoritma Sorty. Buat kode rute yang sempurna dan jadilah Penyortir Master sejati!',
     },
     mascotMessage: {
-      en: "GALACTIC DISPATCH — the final challenge! 🚀📦 You've learned the algorithms that power real robots, apps, and AI systems. Ten packages, one perfect run. Show the galaxy what a true programmer can do! 🌌",
-      id: 'PENGIRIMAN GALAKTIK — tantangan final! 🚀📦 Kamu telah mempelajari algoritma yang menggerakkan robot nyata, aplikasi, dan sistem AI. Sepuluh paket, satu run yang sempurna. Tunjukkan kepada galaksi apa yang bisa dilakukan programmer sejati! 🌌',
+      en: "GALACTIC DISPATCH — one of the toughest challenges yet! 🚀📦 You've learned the algorithms that power real robots, apps, and AI systems. Ten packages, one perfect run. Show the galaxy what a true programmer can do! 🌌",
+      id: 'PENGIRIMAN GALAKTIK — salah satu tantangan tersulit sejauh ini! 🚀📦 Kamu telah mempelajari algoritma yang menggerakkan robot nyata, aplikasi, dan sistem AI. Sepuluh paket, satu run yang sempurna. Tunjukkan kepada galaksi apa yang bisa dilakukan programmer sejati! 🌌',
     },
     gridRows: 10,
     gridCols: 10,
@@ -4334,6 +8660,621 @@ export const LESSONS: Lesson[] = [
       { en: 'A reusable "goTo(row, col)" function removes almost all repeated code!', id: 'Fungsi "goTo(baris, kolom)" yang dapat digunakan kembali menghapus hampir semua kode berulang!' },
     ],
     starThresholds: [336, 240, 200, 160],
+  },
+  {
+    id: 'sorting-11',
+    worldId: 'sorting',
+    number: 11,
+    title: { en: 'Return Processing Rush', id: 'Kejar Proses Retur' },
+    story: {
+      en: "Customers sent packages back! Ten returned items are scattered around the warehouse waiting to be re-shelved before the next shipping cycle. Sorty must sweep through and reclaim every one — reverse logistics is just as tricky as forward dispatch.",
+      id: 'Pelanggan mengirim paket kembali! Sepuluh barang retur tersebar di gudang menunggu untuk disimpan ulang sebelum siklus pengiriman berikutnya. Sorty harus menyapu dan mengambil semuanya — logistik terbalik sama rumitnya dengan pengiriman biasa.',
+    },
+    mascotMessage: {
+      en: "Return rush! 🔄📦 Real warehouses run reverse-logistics algorithms just like forward ones — the packages just flow the other way. Plan your sweep route before you start coding!",
+      id: 'Kejar retur! 🔄📦 Gudang nyata menjalankan algoritma logistik terbalik sama seperti yang maju — paketnya saja mengalir ke arah sebaliknya. Rencanakan rute sapuanmu sebelum mulai menulis kode!',
+    },
+    gridRows: 10,
+    gridCols: 10,
+    cells: (() => {
+      const g = emptyGrid(10, 10)
+      g[0][8] = 'obstacle'
+      g[1][1] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][8] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][9] = 'obstacle'
+      g[6][1] = 'obstacle'
+      g[6][7] = 'obstacle'
+      g[6][9] = 'obstacle'
+      g[7][1] = 'obstacle'
+      g[7][9] = 'obstacle'
+      g[9][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 7] },
+      { id: 's2', pos: [2, 9] },
+      { id: 's3', pos: [4, 6] },
+      { id: 's4', pos: [1, 3] },
+      { id: 's5', pos: [3, 0] },
+      { id: 's6', pos: [5, 8] },
+      { id: 's7', pos: [7, 5] },
+      { id: 's8', pos: [6, 2] },
+      { id: 's9', pos: [9, 9] },
+      { id: 's10', pos: [8, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 180,
+    xpReward: 750,
+    hints: [
+      { en: 'Store all ten return positions in a list before you plan your sweep!', id: 'Simpan semua sepuluh posisi retur dalam daftar sebelum merencanakan sapuanmu!' },
+      { en: 'A reusable "goTo(row, col)" function handles every stop with the same few blocks!', id: 'Fungsi "goTo(baris, kolom)" yang dapat digunakan kembali menangani setiap pemberhentian dengan blok yang sama!' },
+    ],
+    starThresholds: [378, 270, 225, 180],
+  },
+  {
+    id: 'sorting-12',
+    worldId: 'sorting',
+    number: 12,
+    title: { en: 'Cross-Dock Relay', id: 'Relay Cross-Dock' },
+    story: {
+      en: "Ten packages arrive at one dock and must go straight to another — no shelving, just a fast relay across a wider warehouse floor. Sorty has to plan the handoff route through a busier layout than ever before.",
+      id: 'Sepuluh paket tiba di satu dermaga dan harus langsung menuju dermaga lain — tanpa disimpan di rak, hanya relay cepat melintasi lantai gudang yang lebih luas. Sorty harus merencanakan rute serah terima melalui tata letak yang lebih ramai dari sebelumnya.',
+    },
+    mascotMessage: {
+      en: "Cross-dock relay! 🚚 Real distribution centers skip storage entirely for fast-moving freight — straight from inbound to outbound. Use FUNCTIONS so your relay code stays clean across a bigger floor!",
+      id: 'Relay cross-dock! 🚚 Pusat distribusi nyata melewatkan penyimpanan sepenuhnya untuk kargo yang bergerak cepat — langsung dari masuk ke keluar. Gunakan FUNGSI agar kodemu tetap rapi di lantai yang lebih besar!',
+    },
+    gridRows: 10,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(10, 11)
+      g[1][0] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[3][1] = 'obstacle'
+      g[3][6] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][10] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[5][8] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][9] = 'obstacle'
+      g[9][5] = 'obstacle'
+      g[9][7] = 'obstacle'
+      g[9][9] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 10] },
+      { id: 's2', pos: [3, 10] },
+      { id: 's3', pos: [2, 4] },
+      { id: 's4', pos: [5, 7] },
+      { id: 's5', pos: [4, 1] },
+      { id: 's6', pos: [7, 9] },
+      { id: 's7', pos: [6, 3] },
+      { id: 's8', pos: [9, 0] },
+      { id: 's9', pos: [8, 7] },
+      { id: 's10', pos: [1, 5] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 200,
+    xpReward: 800,
+    hints: [
+      { en: 'The floor is wider now — plan which side to clear first before writing blocks!', id: 'Lantainya sekarang lebih lebar — rencanakan sisi mana yang dibereskan lebih dulu sebelum menulis blok!' },
+      { en: 'Keep a list of relay stops and loop through it with one shared function!', id: 'Simpan daftar pemberhentian relay dan ulangi dengan satu fungsi bersama!' },
+    ],
+    starThresholds: [420, 300, 250, 200],
+  },
+  {
+    id: 'sorting-13',
+    worldId: 'sorting',
+    number: 13,
+    title: { en: 'Cold-Chain Priority', id: 'Prioritas Rantai Dingin' },
+    story: {
+      en: "Eleven perishable packages must reach cold storage before they spoil! Sorty must find the fastest route across an even larger warehouse — every wasted move counts when the cargo is time-sensitive.",
+      id: 'Sebelas paket yang mudah rusak harus mencapai penyimpanan dingin sebelum busuk! Sorty harus menemukan rute tercepat melintasi gudang yang lebih besar lagi — setiap gerakan yang terbuang sangat berarti ketika kargo sensitif waktu.',
+    },
+    mascotMessage: {
+      en: "Cold-chain priority! ❄️📦 Real supply chains race against the clock for perishable goods. Use LISTS to order your stops by urgency and FUNCTIONS to keep your route efficient!",
+      id: 'Prioritas rantai dingin! ❄️📦 Rantai pasok nyata berpacu dengan waktu untuk barang yang mudah rusak. Gunakan DAFTAR untuk mengurutkan pemberhentianmu berdasarkan urgensi dan FUNGSI agar rutemu tetap efisien!',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[1][1] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][9] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][4] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 10] },
+      { id: 's2', pos: [2, 10] },
+      { id: 's3', pos: [4, 7] },
+      { id: 's4', pos: [1, 3] },
+      { id: 's5', pos: [3, 0] },
+      { id: 's6', pos: [6, 9] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [8, 2] },
+      { id: 's9', pos: [10, 10] },
+      { id: 's10', pos: [9, 6] },
+      { id: 's11', pos: [7, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 220,
+    xpReward: 850,
+    hints: [
+      { en: 'Eleven packages, one clock — sketch your full route on paper before coding!', id: 'Sebelas paket, satu jam — buat sketsa rute lengkapmu di kertas sebelum menulis kode!' },
+      { en: 'A function that takes a target row and column removes almost all repeated movement code!', id: 'Fungsi yang menerima baris dan kolom target menghapus hampir semua kode gerakan yang berulang!' },
+    ],
+    starThresholds: [462, 330, 275, 220],
+  },
+  {
+    id: 'sorting-14',
+    worldId: 'sorting',
+    number: 14,
+    title: { en: 'Overnight Express', id: 'Ekspres Semalam' },
+    story: {
+      en: "The overnight express truck leaves at dawn! Eleven packages are scattered across a warehouse in a completely different pattern than Sorty has seen before, and every one must be aboard before the doors close.",
+      id: 'Truk ekspres semalam berangkat saat fajar! Sebelas paket tersebar di gudang dengan pola yang sama sekali berbeda dari yang pernah Sorty lihat, dan setiap paket harus naik sebelum pintu ditutup.',
+    },
+    mascotMessage: {
+      en: "Overnight express! 🌙🚚 Real shipping networks run their busiest routes while everyone sleeps. Plan carefully — the layout has changed, so your old route won't work here!",
+      id: 'Ekspres semalam! 🌙🚚 Jaringan pengiriman nyata menjalankan rute tersibuknya saat semua orang tidur. Rencanakan dengan hati-hati — tata letaknya berubah, jadi rute lamamu tidak akan berhasil di sini!',
+    },
+    gridRows: 11,
+    gridCols: 11,
+    cells: (() => {
+      const g = emptyGrid(11, 11)
+      g[1][1] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[9][3] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[10][5] = 'obstacle'
+      g[10][6] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[10][7] = 'obstacle'
+      g[1][8] = 'obstacle'
+      g[9][8] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[4][9] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [10, 0] },
+      { id: 's2', pos: [10, 2] },
+      { id: 's3', pos: [7, 4] },
+      { id: 's4', pos: [3, 1] },
+      { id: 's5', pos: [0, 3] },
+      { id: 's6', pos: [9, 6] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [2, 8] },
+      { id: 's9', pos: [10, 10] },
+      { id: 's10', pos: [6, 9] },
+      { id: 's11', pos: [0, 7] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 240,
+    xpReward: 900,
+    hints: [
+      { en: "This warehouse is laid out differently — don't reuse your old route, plan a fresh one!", id: 'Gudang ini tata letaknya berbeda — jangan pakai ulang rute lamamu, rencanakan yang baru!' },
+      { en: 'Group nearby packages into small clusters and visit one cluster at a time!', id: 'Kelompokkan paket-paket terdekat menjadi kluster kecil dan kunjungi satu kluster dalam satu waktu!' },
+    ],
+    starThresholds: [504, 360, 300, 240],
+  },
+  {
+    id: 'sorting-15',
+    worldId: 'sorting',
+    number: 15,
+    title: { en: 'Zero-G Exchange Hub', id: 'Hub Pertukaran Gravitasi-Nol' },
+    story: {
+      en: "The zero-gravity exchange hub just opened a new wing! Eleven packages float across an even wider floor, and Sorty must extend its usual route into unfamiliar territory to collect them all.",
+      id: 'Hub pertukaran gravitasi-nol baru saja membuka sayap baru! Sebelas paket melayang di lantai yang lebih lebar, dan Sorty harus memperluas rute biasanya ke wilayah yang belum dikenal untuk mengumpulkan semuanya.',
+    },
+    mascotMessage: {
+      en: "Zero-G exchange! 🛰️📦 New wing, wider floor, same great algorithms. Extend your list of stops and let your function handle the extra distance!",
+      id: 'Pertukaran gravitasi-nol! 🛰️📦 Sayap baru, lantai lebih lebar, algoritma tetap hebat. Perluas daftar pemberhentianmu dan biarkan fungsimu menangani jarak tambahan!',
+    },
+    gridRows: 11,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(11, 12)
+      g[1][1] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][9] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][4] = 'obstacle'
+      g[5][11] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 10] },
+      { id: 's2', pos: [2, 11] },
+      { id: 's3', pos: [4, 7] },
+      { id: 's4', pos: [1, 3] },
+      { id: 's5', pos: [3, 0] },
+      { id: 's6', pos: [6, 9] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [8, 2] },
+      { id: 's9', pos: [10, 10] },
+      { id: 's10', pos: [9, 6] },
+      { id: 's11', pos: [7, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 260,
+    xpReward: 950,
+    hints: [
+      { en: "The new wing adds an extra column on the right — don't forget to route through it!", id: 'Sayap baru menambahkan satu kolom ekstra di kanan — jangan lupa untuk melewatinya!' },
+      { en: 'Reuse the same goTo(row, col) function for every stop, including the new wing!', id: 'Gunakan kembali fungsi goTo(baris, kolom) yang sama untuk setiap pemberhentian, termasuk sayap baru!' },
+    ],
+    starThresholds: [546, 390, 325, 260],
+  },
+  {
+    id: 'sorting-16',
+    worldId: 'sorting',
+    number: 16,
+    title: { en: 'Peak Season Overflow', id: 'Luapan Musim Puncak' },
+    story: {
+      en: "Peak season overflow — twelve packages now, the most Sorty has ever handled at once! The zero-G hub is packed corner to corner, and a single missed package means the whole shipment is late.",
+      id: 'Luapan musim puncak — dua belas paket sekarang, jumlah terbanyak yang pernah ditangani Sorty sekaligus! Hub gravitasi-nol penuh sesak dari sudut ke sudut, dan satu paket yang terlewat berarti seluruh pengiriman terlambat.',
+    },
+    mascotMessage: {
+      en: "Peak season! 📦📦📦 Twelve packages is a real logistics challenge — even professional warehouse software struggles here. Build a solid list, loop through it, and trust your function!",
+      id: 'Musim puncak! 📦📦📦 Dua belas paket adalah tantangan logistik sesungguhnya — bahkan perangkat lunak gudang profesional kesulitan di sini. Buat daftar yang solid, ulangi dengan perulangan, dan percayai fungsimu!',
+    },
+    gridRows: 11,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(11, 12)
+      g[1][1] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][9] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][4] = 'obstacle'
+      g[5][11] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 10] },
+      { id: 's2', pos: [2, 11] },
+      { id: 's3', pos: [4, 7] },
+      { id: 's4', pos: [1, 3] },
+      { id: 's5', pos: [3, 0] },
+      { id: 's6', pos: [6, 9] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [8, 2] },
+      { id: 's9', pos: [10, 10] },
+      { id: 's10', pos: [9, 6] },
+      { id: 's11', pos: [7, 0] },
+      { id: 's12', pos: [0, 11] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 280,
+    xpReward: 1000,
+    hints: [
+      { en: 'Twelve stops — write the full list of positions before touching a single move block!', id: 'Dua belas pemberhentian — tulis daftar lengkap posisinya sebelum menyentuh satu blok gerak pun!' },
+      { en: "The twelfth package sits in the far corner — save it for last so you don't backtrack!", id: 'Paket kedua belas ada di sudut terjauh — simpan untuk yang terakhir agar tidak jalan bolak-balik!' },
+    ],
+    starThresholds: [588, 420, 350, 280],
+  },
+  {
+    id: 'sorting-17',
+    worldId: 'sorting',
+    number: 17,
+    title: { en: 'Orbital Transfer Station', id: 'Stasiun Transfer Orbital' },
+    story: {
+      en: "Welcome to the orbital transfer station — a full extra row has been added to the warehouse floor for the biggest handoff yet. Twelve packages, nineteen obstacles, and a route that stretches further than ever.",
+      id: 'Selamat datang di stasiun transfer orbital — satu baris ekstra penuh telah ditambahkan ke lantai gudang untuk serah terima terbesar sejauh ini. Dua belas paket, sembilan belas rintangan, dan rute yang membentang lebih jauh dari sebelumnya.',
+    },
+    mascotMessage: {
+      en: "Orbital transfer! 🛰️ The floor just grew again. Real space stations coordinate transfers across huge modules using the exact same routing logic you're building!",
+      id: 'Transfer orbital! 🛰️ Lantainya baru saja bertambah lagi. Stasiun luar angkasa nyata mengoordinasikan transfer di modul-modul besar menggunakan logika perutean yang persis sama dengan yang kamu bangun!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[1][1] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][9] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][4] = 'obstacle'
+      g[5][11] = 'obstacle'
+      g[11][1] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 10] },
+      { id: 's2', pos: [2, 11] },
+      { id: 's3', pos: [4, 7] },
+      { id: 's4', pos: [1, 3] },
+      { id: 's5', pos: [3, 0] },
+      { id: 's6', pos: [6, 9] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [8, 2] },
+      { id: 's9', pos: [11, 10] },
+      { id: 's10', pos: [9, 6] },
+      { id: 's11', pos: [7, 0] },
+      { id: 's12', pos: [0, 11] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 300,
+    xpReward: 1050,
+    hints: [
+      { en: 'The extra bottom row holds one package — route through it without doubling back!', id: 'Baris bawah ekstra menyimpan satu paket — lewati tanpa jalan bolak-balik!' },
+      { en: 'Sort your list by distance from the last stop for a true nearest-neighbour sweep!', id: 'Urutkan daftarmu berdasarkan jarak dari pemberhentian terakhir untuk sapuan tetangga terdekat yang sesungguhnya!' },
+    ],
+    starThresholds: [630, 450, 375, 300],
+  },
+  {
+    id: 'sorting-18',
+    worldId: 'sorting',
+    number: 18,
+    title: { en: 'Interstellar Consolidation', id: 'Konsolidasi Antarbintang' },
+    story: {
+      en: "Before the interstellar jump, every scattered package must be consolidated into one shipment. Twelve packages sit across a station laid out completely differently from anything Sorty has sorted before.",
+      id: 'Sebelum lompatan antarbintang, setiap paket yang tersebar harus dikonsolidasikan menjadi satu pengiriman. Dua belas paket berada di stasiun dengan tata letak yang sama sekali berbeda dari yang pernah disortir Sorty sebelumnya.',
+    },
+    mascotMessage: {
+      en: "Interstellar consolidation! 🚀 Every package must be aboard before the jump — no exceptions. Trust the algorithm you've built and let your function do the heavy lifting!",
+      id: 'Konsolidasi antarbintang! 🚀 Setiap paket harus sudah naik sebelum lompatan — tanpa kecuali. Percayai algoritma yang telah kamu bangun dan biarkan fungsimu melakukan kerja berat!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[1][1] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[9][3] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[10][5] = 'obstacle'
+      g[10][6] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[10][7] = 'obstacle'
+      g[1][8] = 'obstacle'
+      g[9][8] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[11][5] = 'obstacle'
+      g[1][11] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [10, 0] },
+      { id: 's2', pos: [11, 2] },
+      { id: 's3', pos: [7, 4] },
+      { id: 's4', pos: [3, 1] },
+      { id: 's5', pos: [0, 3] },
+      { id: 's6', pos: [9, 6] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [2, 8] },
+      { id: 's9', pos: [10, 11] },
+      { id: 's10', pos: [6, 9] },
+      { id: 's11', pos: [0, 7] },
+      { id: 's12', pos: [11, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 320,
+    xpReward: 1100,
+    hints: [
+      { en: "A completely new layout — don't assume anything, map every stop fresh!", id: 'Tata letak yang sama sekali baru — jangan berasumsi apa pun, petakan setiap pemberhentian dari awal!' },
+      { en: 'Two packages sit in far corners of the bottom row — visit them back to back!', id: 'Dua paket berada di sudut jauh baris bawah — kunjungi keduanya secara berurutan!' },
+    ],
+    starThresholds: [672, 480, 400, 320],
+  },
+  {
+    id: 'sorting-19',
+    worldId: 'sorting',
+    number: 19,
+    title: { en: 'Quantum Route Optimization', id: 'Optimisasi Rute Kuantum' },
+    story: {
+      en: "Thirteen packages, twenty obstacles, one warehouse floor. Sorty must apply true nearest-neighbour routing — greedily choosing the closest unsorted package at every step — to beat the clock on the busiest floor yet.",
+      id: 'Tiga belas paket, dua puluh rintangan, satu lantai gudang. Sorty harus menerapkan perutean tetangga terdekat sesungguhnya — memilih paket terdekat yang belum disortir secara serakah di setiap langkah — untuk mengalahkan waktu di lantai tersibuk sejauh ini.',
+    },
+    mascotMessage: {
+      en: "Quantum routing! ⚛️📦 Thirteen packages — the greedy nearest-neighbour algorithm real robots use is your best friend here. Pick the closest package, sort it, repeat!",
+      id: 'Perutean kuantum! ⚛️📦 Tiga belas paket — algoritma tetangga terdekat serakah yang digunakan robot nyata adalah teman terbaikmu di sini. Pilih paket terdekat, sortir, ulangi!',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[1][1] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[2][1] = 'obstacle'
+      g[2][6] = 'obstacle'
+      g[3][5] = 'obstacle'
+      g[3][9] = 'obstacle'
+      g[4][2] = 'obstacle'
+      g[4][5] = 'obstacle'
+      g[5][2] = 'obstacle'
+      g[5][10] = 'obstacle'
+      g[6][10] = 'obstacle'
+      g[7][8] = 'obstacle'
+      g[7][10] = 'obstacle'
+      g[8][1] = 'obstacle'
+      g[8][9] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[9][4] = 'obstacle'
+      g[5][11] = 'obstacle'
+      g[11][1] = 'obstacle'
+      g[11][11] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [0, 10] },
+      { id: 's2', pos: [2, 11] },
+      { id: 's3', pos: [4, 7] },
+      { id: 's4', pos: [1, 3] },
+      { id: 's5', pos: [3, 0] },
+      { id: 's6', pos: [6, 9] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [8, 2] },
+      { id: 's9', pos: [11, 10] },
+      { id: 's10', pos: [11, 3] },
+      { id: 's11', pos: [9, 6] },
+      { id: 's12', pos: [7, 0] },
+      { id: 's13', pos: [0, 11] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 340,
+    xpReward: 1150,
+    hints: [
+      { en: 'Thirteen packages — build the full list first, then greedily pick the nearest one each time!', id: 'Tiga belas paket — buat daftar lengkap dulu, lalu pilih yang terdekat secara serakah setiap kali!' },
+      { en: 'The new package in the bottom row connects best to its two nearest neighbours — route it between them!', id: 'Paket baru di baris bawah tersambung terbaik dengan dua tetangga terdekatnya — rutekan di antara keduanya!' },
+    ],
+    starThresholds: [714, 510, 425, 340],
+  },
+  {
+    id: 'sorting-20',
+    worldId: 'sorting',
+    number: 20,
+    title: { en: 'Omega Protocol', id: 'Protokol Omega' },
+    story: {
+      en: "The Omega Protocol has activated — thirteen packages across the largest, most obstacle-dense warehouse floor Sorty has ever faced. Every algorithm learned so far — loops, lists, functions, nearest-neighbour routing — must work together for one flawless final run.",
+      id: 'Protokol Omega telah aktif — tiga belas paket di lantai gudang terbesar dan terpadat rintangan yang pernah dihadapi Sorty. Setiap algoritma yang telah dipelajari — perulangan, daftar, fungsi, perutean tetangga terdekat — harus bekerja sama untuk satu run terakhir yang sempurna.',
+    },
+    mascotMessage: {
+      en: "OMEGA PROTOCOL! ⚡🌌📦 Beyond Galactic Dispatch, beyond anything before — this is where every algorithm you've learned comes together. Build your list, greedily route the nearest package, and reuse one clean function. You're ready. 🏆",
+      id: 'PROTOKOL OMEGA! ⚡🌌📦 Melampaui Pengiriman Galaktik, melampaui apa pun sebelumnya — di sinilah setiap algoritma yang telah kamu pelajari bersatu. Buat daftarmu, rutekan paket terdekat secara serakah, dan gunakan kembali satu fungsi yang rapi. Kamu siap. 🏆',
+    },
+    gridRows: 12,
+    gridCols: 12,
+    cells: (() => {
+      const g = emptyGrid(12, 12)
+      g[1][1] = 'obstacle'
+      g[9][1] = 'obstacle'
+      g[1][2] = 'obstacle'
+      g[6][2] = 'obstacle'
+      g[5][3] = 'obstacle'
+      g[9][3] = 'obstacle'
+      g[2][4] = 'obstacle'
+      g[5][4] = 'obstacle'
+      g[2][5] = 'obstacle'
+      g[10][5] = 'obstacle'
+      g[10][6] = 'obstacle'
+      g[8][7] = 'obstacle'
+      g[10][7] = 'obstacle'
+      g[1][8] = 'obstacle'
+      g[9][8] = 'obstacle'
+      g[1][9] = 'obstacle'
+      g[4][9] = 'obstacle'
+      g[11][5] = 'obstacle'
+      g[1][11] = 'obstacle'
+      g[11][11] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [
+      { id: 's1', pos: [10, 0] },
+      { id: 's2', pos: [11, 2] },
+      { id: 's3', pos: [7, 4] },
+      { id: 's4', pos: [3, 1] },
+      { id: 's5', pos: [0, 3] },
+      { id: 's6', pos: [9, 6] },
+      { id: 's7', pos: [5, 5] },
+      { id: 's8', pos: [2, 8] },
+      { id: 's9', pos: [10, 11] },
+      { id: 's10', pos: [3, 11] },
+      { id: 's11', pos: [6, 9] },
+      { id: 's12', pos: [0, 7] },
+      { id: 's13', pos: [11, 0] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'logic', 'variables', 'functions', 'lists'],
+    optimalBlockCount: 400,
+    xpReward: 1250,
+    hints: [
+      { en: 'Thirteen packages, twenty obstacles — this is everything you know, combined. Plan the whole route on paper first!', id: 'Tiga belas paket, dua puluh rintangan — ini semua yang kamu tahu, digabungkan. Rencanakan seluruh rute di kertas terlebih dahulu!' },
+      { en: 'One reusable goTo(row, col) function plus a list sorted by nearest-neighbour distance solves the entire floor!', id: 'Satu fungsi goTo(baris, kolom) yang dapat digunakan kembali ditambah daftar yang diurutkan berdasarkan jarak tetangga terdekat menyelesaikan seluruh lantai!' },
+    ],
+    starThresholds: [840, 600, 500, 400],
   },
 
   // ─────────────────────────────────────────────
@@ -4996,7 +9937,7 @@ export const LESSONS: Lesson[] = [
     worldId: 'debugging',
     number: 10,
     isBuggy: true,
-    title: { en: 'The Final Bug Hunt', id: 'Perburuan Bug Terakhir' },
+    title: { en: 'The Warning Sign Bug', id: 'Bug Tanda Peringatan' },
     story: {
       en: "Two separate bugs hidden in two loops — one makes the robot fall off the edge, and the other leaves it short. Watch out for the warning sign blocking row 0! Fix both counts to finish the mission.",
       id: 'Dua bug tersembunyi di dua perulangan — satu membuat robot jatuh dari tepi, dan yang lain membuatnya kurang. Hati-hati dengan tanda peringatan yang menghalangi baris 0! Perbaiki kedua jumlahnya untuk menyelesaikan misi.',
@@ -5061,6 +10002,665 @@ export const LESSONS: Lesson[] = [
                     block: {
                       type: 'move_right',
                       id: 'dbg_d10_4',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-11',
+    worldId: 'debugging',
+    number: 11,
+    isBuggy: true,
+    title: { en: 'Four-Leg Journey', id: 'Perjalanan Empat Kaki' },
+    story: {
+      en: "The robot's journey now has FOUR loops instead of two or three! One of them has the wrong count and the robot stops short partway through the third turn.",
+      id: 'Perjalanan robot sekarang punya EMPAT perulangan, bukan dua atau tiga! Salah satunya punya jumlah yang salah dan robot berhenti di tengah belokan ketiga.',
+    },
+    mascotMessage: {
+      en: "Run it and watch closely — the robot does two legs perfectly, then the third leg stops too soon. 🐛", id: 'Jalankan dan perhatikan baik-baik — robot menyelesaikan dua kaki perjalanan dengan sempurna, lalu kaki ketiga berhenti terlalu cepat. 🐛',
+    },
+    gridRows: 6,
+    gridCols: 8,
+    cells: emptyGrid(6, 8),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-11', pos: [5, 7] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 12,
+    xpReward: 165,
+    hints: [
+      { en: 'The path is: right 3, down 2, right 4, down 3. Which loop\'s count does not match?', id: 'Jalurnya: kanan 3, bawah 2, kanan 4, bawah 3. Jumlah perulangan mana yang tidak cocok?' },
+      { en: 'The third loop should repeat 4 times, not 2.', id: 'Perulangan ketiga seharusnya berulang 4 kali, bukan 2.' },
+    ],
+    starThresholds: [36, 24, 16, 12],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d11_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d11_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d11_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                  DO: { block: { type: 'move_down', id: 'dbg_d11_4' } },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d11_5',
+                    inputs: {
+                      TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                      DO: { block: { type: 'move_right', id: 'dbg_d11_6' } },
+                    },
+                    next: {
+                      block: {
+                        type: 'controls_repeat_ext',
+                        id: 'dbg_d11_7',
+                        inputs: {
+                          TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+                          DO: { block: { type: 'move_down', id: 'dbg_d11_8' } },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-12',
+    worldId: 'debugging',
+    number: 12,
+    isBuggy: true,
+    title: { en: 'The Missing Segment', id: 'Segmen yang Hilang' },
+    story: {
+      en: "This time the bug isn't a wrong number — a WHOLE loop is missing! The robot does two legs of the journey perfectly, then just... stops. It never turns the final corner.",
+      id: 'Kali ini bug-nya bukan angka yang salah — SATU perulangan seluruhnya hilang! Robot menyelesaikan dua kaki perjalanan dengan sempurna, lalu... berhenti begitu saja. Ia tidak pernah berbelok di sudut terakhir.',
+    },
+    mascotMessage: {
+      en: "Nothing is broken in the two loops you see — something is just missing after them. Add the final loop yourself! 🐛",
+      id: 'Tidak ada yang rusak di dua perulangan yang kamu lihat — ada sesuatu yang hilang setelahnya. Tambahkan perulangan terakhir sendiri! 🐛',
+    },
+    gridRows: 4,
+    gridCols: 8,
+    cells: emptyGrid(4, 8),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-12', pos: [3, 7] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 9,
+    xpReward: 180,
+    hints: [
+      { en: 'The robot ends at row 3, column 4 — but the wrench is at column 7.', id: 'Robot berakhir di baris 3, kolom 4 — tapi kuncinya ada di kolom 7.' },
+      { en: 'Add a new Repeat block after the last one: repeat 3 times, Move Right.', id: 'Tambahkan blok Ulangi baru setelah yang terakhir: ulangi 3 kali, Gerak Kanan.' },
+    ],
+    starThresholds: [27, 18, 12, 9],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d12_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d12_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d12_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+                  DO: { block: { type: 'move_down', id: 'dbg_d12_4' } },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-13',
+    worldId: 'debugging',
+    number: 13,
+    isBuggy: true,
+    title: { en: 'Extra Detour', id: 'Jalan Memutar Tambahan' },
+    story: {
+      en: "There's an extra loop that shouldn't be there at all! It sends the robot straight into a warning sign. Find the whole block that doesn't belong and remove it.",
+      id: 'Ada perulangan tambahan yang seharusnya tidak ada! Itu mengirim robot langsung ke tanda peringatan. Temukan blok yang tidak seharusnya ada dan hapus.',
+    },
+    mascotMessage: {
+      en: "The robot crashes partway through — but this time the fix isn't a number, it's a whole block that needs to go. 🐛",
+      id: 'Robot bertabrakan di tengah jalan — tapi kali ini perbaikannya bukan angka, melainkan satu blok utuh yang harus dihapus. 🐛',
+    },
+    gridRows: 5,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(5, 8)
+      g[0][7] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-13', pos: [4, 5] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 195,
+    hints: [
+      { en: 'Run the code — the robot crashes into a warning sign partway along the top row.', id: 'Jalankan kode — robot bertabrakan ke tanda peringatan di tengah baris atas.' },
+      { en: 'Delete the middle Repeat block entirely — the robot only needs to go right 5 times, then down 4 times.', id: 'Hapus blok Ulangi yang di tengah sepenuhnya — robot hanya perlu ke kanan 5 kali, lalu ke bawah 4 kali.' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d13_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 5 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d13_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d13_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                  DO: { block: { type: 'move_right', id: 'dbg_d13_4' } },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d13_5',
+                    inputs: {
+                      TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+                      DO: { block: { type: 'move_down', id: 'dbg_d13_6' } },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-14',
+    worldId: 'debugging',
+    number: 14,
+    isBuggy: true,
+    title: { en: 'Double Direction Swap', id: 'Tukar Arah Ganda' },
+    story: {
+      en: "Two loops out of three point the wrong way! The robot crashes instantly on the very first move — and even after that's fixed, a second wrong direction is still hiding at the end.",
+      id: 'Dua dari tiga perulangan mengarah ke arah yang salah! Robot langsung bertabrakan pada gerakan pertama — dan bahkan setelah itu diperbaiki, arah salah kedua masih bersembunyi di akhir.',
+    },
+    mascotMessage: {
+      en: "Fix the first crash, run again, then look closely at the LAST loop too. 🐛", id: 'Perbaiki tabrakan pertama, jalankan lagi, lalu perhatikan baik-baik perulangan TERAKHIR juga. 🐛',
+    },
+    gridRows: 6,
+    gridCols: 5,
+    cells: emptyGrid(6, 5),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-14', pos: [5, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 9,
+    xpReward: 210,
+    hints: [
+      { en: 'The robot crashes off the top edge immediately. The path should start by going DOWN.', id: 'Robot langsung bertabrakan keluar tepi atas. Jalurnya seharusnya dimulai dengan bergerak ke BAWAH.' },
+      { en: 'The middle loop (right 4) is correct. The last loop should also move DOWN, not up.', id: 'Perulangan tengah (kanan 4) sudah benar. Perulangan terakhir juga seharusnya bergerak ke BAWAH, bukan atas.' },
+    ],
+    starThresholds: [27, 18, 12, 9],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d14_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+              DO: { block: { type: 'move_up', id: 'dbg_d14_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d14_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+                  DO: { block: { type: 'move_right', id: 'dbg_d14_4' } },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d14_5',
+                    inputs: {
+                      TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                      DO: { block: { type: 'move_up', id: 'dbg_d14_6' } },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-15',
+    worldId: 'debugging',
+    number: 15,
+    isBuggy: true,
+    title: { en: 'Loop Order Chaos', id: 'Kekacauan Urutan Perulangan' },
+    story: {
+      en: "All three loop counts and directions are correct — but the first two are in the WRONG ORDER! Running right before going down sends the robot straight into a warning sign.",
+      id: 'Ketiga jumlah dan arah perulangan sudah benar — tapi dua yang pertama dalam URUTAN YANG SALAH! Bergerak ke kanan sebelum ke bawah mengirim robot langsung ke tanda peringatan.',
+    },
+    mascotMessage: {
+      en: "Nothing needs a NEW number here — just drag two blocks into the right order! 🐛", id: 'Tidak ada yang butuh angka BARU di sini — cukup seret dua blok ke urutan yang benar! 🐛',
+    },
+    gridRows: 6,
+    gridCols: 5,
+    cells: (() => {
+      const g = emptyGrid(6, 5)
+      g[0][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-15', pos: [5, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 9,
+    xpReward: 225,
+    hints: [
+      { en: 'The robot crashes into the warning sign on row 0 — it goes right before it should go down.', id: 'Robot bertabrakan ke tanda peringatan di baris 0 — ia bergerak ke kanan sebelum seharusnya ke bawah.' },
+      { en: 'Swap the first two loop blocks: down 3 should come before right 4. The last loop (down 2) is already in the right place.', id: 'Tukar dua blok perulangan pertama: bawah 3 harus sebelum kanan 4. Perulangan terakhir (bawah 2) sudah di tempat yang benar.' },
+    ],
+    starThresholds: [27, 18, 12, 9],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d15_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d15_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d15_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+                  DO: { block: { type: 'move_down', id: 'dbg_d15_4' } },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d15_5',
+                    inputs: {
+                      TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                      DO: { block: { type: 'move_down', id: 'dbg_d15_6' } },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-16',
+    worldId: 'debugging',
+    number: 16,
+    isBuggy: true,
+    title: { en: 'Count and Direction', id: 'Jumlah dan Arah' },
+    story: {
+      en: "The second loop has TWO bugs stacked in one block — the wrong direction AND the wrong count. The first loop is perfect, but don't stop checking there!",
+      id: 'Perulangan kedua punya DUA bug bertumpuk dalam satu blok — arah yang salah DAN jumlah yang salah. Perulangan pertama sudah sempurna, tapi jangan berhenti memeriksa di situ!',
+    },
+    mascotMessage: {
+      en: "One loop, two mistakes. Fix the direction first, then check if the count is still wrong. 🐛", id: 'Satu perulangan, dua kesalahan. Perbaiki arahnya dulu, lalu periksa apakah jumlahnya masih salah. 🐛',
+    },
+    gridRows: 6,
+    gridCols: 5,
+    cells: emptyGrid(6, 5),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-16', pos: [5, 4] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 6,
+    xpReward: 240,
+    hints: [
+      { en: 'The first loop (right 4) is correct. The second loop moves the robot the wrong way — it should go DOWN.', id: 'Perulangan pertama (kanan 4) sudah benar. Perulangan kedua menggerakkan robot ke arah yang salah — seharusnya ke BAWAH.' },
+      { en: 'After fixing the direction, the count is also wrong — it should repeat 5 times, not 3.', id: 'Setelah memperbaiki arahnya, jumlahnya juga salah — seharusnya berulang 5 kali, bukan 3.' },
+    ],
+    starThresholds: [18, 12, 9, 6],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d16_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d16_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d16_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+                  DO: { block: { type: 'move_up', id: 'dbg_d16_4' } },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-17',
+    worldId: 'debugging',
+    number: 17,
+    isBuggy: true,
+    title: { en: 'The Long Chain', id: 'Rantai Panjang' },
+    story: {
+      en: "Four loops chained together — the longest chain yet! The second loop points the wrong way and crashes the robot, and the last loop's count leaves it short.",
+      id: 'Empat perulangan yang berantai — rantai terpanjang sejauh ini! Perulangan kedua mengarah ke arah yang salah dan membuat robot bertabrakan, dan jumlah perulangan terakhir membuatnya kurang.',
+    },
+    mascotMessage: {
+      en: "Long chains mean more places for bugs to hide. Fix one crash at a time and keep running the code. 🐛", id: 'Rantai panjang berarti lebih banyak tempat bug bersembunyi. Perbaiki satu tabrakan setiap kali dan terus jalankan kodenya. 🐛',
+    },
+    gridRows: 8,
+    gridCols: 6,
+    cells: emptyGrid(8, 6),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-17', pos: [7, 5] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 12,
+    xpReward: 260,
+    hints: [
+      { en: 'The path is: right 3, down 4, right 2, down 3. The robot crashes right after the first turn — check the second loop\'s direction.', id: 'Jalurnya: kanan 3, bawah 4, kanan 2, bawah 3. Robot bertabrakan tepat setelah belokan pertama — periksa arah perulangan kedua.' },
+      { en: 'After that\'s fixed, the robot stops one row short at the very end — the last loop should repeat 3 times, not 2.', id: 'Setelah itu diperbaiki, robot berhenti satu baris sebelum akhir — perulangan terakhir seharusnya berulang 3 kali, bukan 2.' },
+    ],
+    starThresholds: [36, 24, 16, 12],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d17_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d17_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d17_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+                  DO: { block: { type: 'move_up', id: 'dbg_d17_4' } },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d17_5',
+                    inputs: {
+                      TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                      DO: { block: { type: 'move_right', id: 'dbg_d17_6' } },
+                    },
+                    next: {
+                      block: {
+                        type: 'controls_repeat_ext',
+                        id: 'dbg_d17_7',
+                        inputs: {
+                          TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                          DO: { block: { type: 'move_down', id: 'dbg_d17_8' } },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-18',
+    worldId: 'debugging',
+    number: 18,
+    isBuggy: true,
+    title: { en: 'Obstacle Course Bugs', id: 'Bug Lintasan Rintangan' },
+    story: {
+      en: "Warning signs dot the whole grid this time! The middle loop stops short of its mark, and the last loop points the wrong way — but the signs don't lie about which direction is safe.",
+      id: 'Tanda peringatan tersebar di seluruh grid kali ini! Perulangan tengah berhenti sebelum tandanya, dan perulangan terakhir mengarah ke arah yang salah — tapi tanda-tanda itu tidak berbohong tentang arah mana yang aman.',
+    },
+    mascotMessage: {
+      en: "Two bugs among three loops. The signs are just decoration this time — focus on the counts and directions. 🐛", id: 'Dua bug di antara tiga perulangan. Tanda-tandanya cuma dekorasi kali ini — fokus pada jumlah dan arahnya. 🐛',
+    },
+    gridRows: 7,
+    gridCols: 6,
+    cells: (() => {
+      const g = emptyGrid(7, 6)
+      g[2][5] = 'obstacle'
+      g[5][2] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-18', pos: [6, 5] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 9,
+    xpReward: 280,
+    hints: [
+      { en: 'The path is: down 4, right 5, down 2. The middle loop stops short — check its count.', id: 'Jalurnya: bawah 4, kanan 5, bawah 2. Perulangan tengah berhenti terlalu cepat — periksa jumlahnya.' },
+      { en: 'The last loop points the wrong way — it should move DOWN, not up, to reach the wrench.', id: 'Perulangan terakhir mengarah ke arah yang salah — seharusnya bergerak ke BAWAH, bukan atas, untuk mencapai kunci.' },
+    ],
+    starThresholds: [27, 18, 12, 9],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d18_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+              DO: { block: { type: 'move_down', id: 'dbg_d18_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d18_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+                  DO: { block: { type: 'move_right', id: 'dbg_d18_4' } },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d18_5',
+                    inputs: {
+                      TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                      DO: { block: { type: 'move_up', id: 'dbg_d18_6' } },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-19',
+    worldId: 'debugging',
+    number: 19,
+    isBuggy: true,
+    title: { en: 'The Missing And The Wrong', id: 'Yang Hilang Dan Yang Salah' },
+    story: {
+      en: "This one combines two kinds of bugs at once: the second loop's count is wrong, AND the entire third loop is missing. Fix the number, then build the missing piece yourself.",
+      id: 'Yang ini menggabungkan dua jenis bug sekaligus: jumlah perulangan kedua salah, DAN seluruh perulangan ketiga hilang. Perbaiki angkanya, lalu bangun sendiri bagian yang hilang.',
+    },
+    mascotMessage: {
+      en: "Fix what's broken first, then look for what's not there at all. 🐛", id: 'Perbaiki dulu yang rusak, lalu cari yang sama sekali tidak ada. 🐛',
+    },
+    gridRows: 5,
+    gridCols: 8,
+    cells: emptyGrid(5, 8),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-19', pos: [4, 7] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 9,
+    xpReward: 305,
+    hints: [
+      { en: 'The robot should go: right 3, down 4, right 4 — but it stops at row 2, and never turns right again.', id: 'Robot seharusnya: kanan 3, bawah 4, kanan 4 — tapi ia berhenti di baris 2, dan tidak pernah berbelok kanan lagi.' },
+      { en: 'Fix the second loop\'s count to 4, then ADD a brand new loop after it: repeat 4 times, Move Right.', id: 'Perbaiki jumlah perulangan kedua menjadi 4, lalu TAMBAHKAN perulangan baru setelahnya: ulangi 4 kali, Gerak Kanan.' },
+    ],
+    starThresholds: [27, 18, 12, 9],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d19_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d19_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d19_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                  DO: { block: { type: 'move_down', id: 'dbg_d19_4' } },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    id: 'debugging-20',
+    worldId: 'debugging',
+    number: 20,
+    isBuggy: true,
+    title: { en: 'The Grand Bug Hunt', id: 'Perburuan Bug Akbar' },
+    story: {
+      en: "Every kind of bug you've ever fixed is hiding in this one program: a wrong order, a wrong count, a wrong direction, AND a whole missing loop. This is the biggest bug hunt Bugsy has ever assembled!",
+      id: 'Setiap jenis bug yang pernah kamu perbaiki bersembunyi dalam satu program ini: urutan salah, jumlah salah, arah salah, DAN satu perulangan yang hilang seluruhnya. Ini perburuan bug terbesar yang pernah Bugsy susun!',
+    },
+    mascotMessage: {
+      en: "Take it one bug at a time, just like always. Run, spot one problem, fix it, run again. You've got this! 🐛🔧", id: 'Kerjakan satu bug setiap kali, seperti biasa. Jalankan, temukan satu masalah, perbaiki, jalankan lagi. Kamu pasti bisa! 🐛🔧',
+    },
+    gridRows: 6,
+    gridCols: 8,
+    cells: (() => {
+      const g = emptyGrid(6, 8)
+      g[0][3] = 'obstacle'
+      return g
+    })(),
+    startPos: [0, 0],
+    items: [{ id: 'wrench-20', pos: [5, 7] }],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops'],
+    optimalBlockCount: 12,
+    xpReward: 340,
+    hints: [
+      { en: 'The correct path is: down 3, right 4, down 2, right 3. Right now the first two loops are swapped in order, which crashes the robot into the warning sign.', id: 'Jalur yang benar: bawah 3, kanan 4, bawah 2, kanan 3. Saat ini dua perulangan pertama tertukar urutannya, yang membuat robot bertabrakan ke tanda peringatan.' },
+      { en: 'After reordering, fix the down-loop\'s count to 3, fix the third loop to move down 2 times (not up 3), then ADD the final loop: repeat 3 times, Move Right.', id: 'Setelah mengurutkan ulang, perbaiki jumlah perulangan bawah menjadi 3, perbaiki perulangan ketiga agar bergerak bawah 2 kali (bukan atas 3 kali), lalu TAMBAHKAN perulangan terakhir: ulangi 3 kali, Gerak Kanan.' },
+    ],
+    starThresholds: [36, 24, 16, 12],
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [
+          {
+            type: 'controls_repeat_ext',
+            id: 'dbg_d20_1',
+            x: 30,
+            y: 30,
+            inputs: {
+              TIMES: { shadow: { type: 'math_number', fields: { NUM: 4 } } },
+              DO: { block: { type: 'move_right', id: 'dbg_d20_2' } },
+            },
+            next: {
+              block: {
+                type: 'controls_repeat_ext',
+                id: 'dbg_d20_3',
+                inputs: {
+                  TIMES: { shadow: { type: 'math_number', fields: { NUM: 2 } } },
+                  DO: { block: { type: 'move_down', id: 'dbg_d20_4' } },
+                },
+                next: {
+                  block: {
+                    type: 'controls_repeat_ext',
+                    id: 'dbg_d20_5',
+                    inputs: {
+                      TIMES: { shadow: { type: 'math_number', fields: { NUM: 3 } } },
+                      DO: { block: { type: 'move_up', id: 'dbg_d20_6' } },
                     },
                   },
                 },
@@ -5173,12 +10773,112 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'orchestra-10', worldId: 'orchestra', number: 10,
-    title: { en: 'Grand Finale', id: 'Final Akbar' },
-    story: { en: 'Compose a zigzag verse, sweep across the stage, and collect every grand-finale note!', id: 'Susun bait zigzag, melintas panggung, dan kumpulkan setiap nada final akbar!' },
-    mascotMessage: { en: 'Loops and a function together — collect the whole finale! 🎭', id: 'Perulangan dan fungsi bersama — kumpulkan seluruh final! 🎭' },
+    title: { en: 'Zigzag Verse', id: 'Bait Zigzag' },
+    story: { en: 'Compose a zigzag verse, sweep across the stage, and collect every note in this dazzling passage!', id: 'Susun bait zigzag, melintas panggung, dan kumpulkan setiap nada dalam bagian yang memukau ini!' },
+    mascotMessage: { en: 'Loops and a function together — collect the whole passage! 🎭', id: 'Perulangan dan fungsi bersama — kumpulkan seluruh bagian! 🎭' },
     gridRows: 8, gridCols: 8, cells: emptyGrid(8, 8), startPos: [0, 0], items: [{id:'n1',pos:[0,2]},{id:'n2',pos:[2,2]},{id:'n3',pos:[2,0]},{id:'n4',pos:[4,0]},{id:'n5',pos:[4,7]},{id:'n6',pos:[6,7]}],
     goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 17, xpReward: 220,
     hints: [{ en: 'Put four two-step lines into one zigzag function.', id: 'Taruh empat garis dua langkah ke dalam satu fungsi zigzag.' }, { en: 'Call the zigzag once, repeat Right 7 times, then repeat Down 2 times.', id: 'Panggil zigzag sekali, ulangi Kanan 7 kali, lalu ulangi Bawah 2 kali.' }], starThresholds: [36, 27, 21, 17],
+  },
+  {
+    id: 'orchestra-11', worldId: 'orchestra', number: 11,
+    title: { en: 'Uneven Bar', id: 'Birama Tak Rata' },
+    story: { en: 'A new bar shape: one note right, then two notes down — four times in a row.', id: 'Bentuk birama baru: satu nada kanan, lalu dua nada bawah — empat kali berturut-turut.' },
+    mascotMessage: { en: 'This bar is uneven — one step then two! Loop the whole three-move bar 4 times. 🎵', id: 'Birama ini tidak rata — satu langkah lalu dua! Ulangi seluruh birama tiga gerakan 4 kali. 🎵' },
+    gridRows: 9, gridCols: 5, cells: emptyGrid(9, 5), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[1,1]},{id:'n3',pos:[2,1]},{id:'n4',pos:[2,2]},{id:'n5',pos:[3,2]},{id:'n6',pos:[4,2]},{id:'n7',pos:[4,3]},{id:'n8',pos:[5,3]},{id:'n9',pos:[6,3]},{id:'n10',pos:[6,4]},{id:'n11',pos:[7,4]},{id:'n12',pos:[8,4]}],
+    goalType: 'collect_all', availableCategories: ['move','loops'], requiredCategories: ['loops'], optimalBlockCount: 5, xpReward: 235,
+    hints: [{ en: 'The bar is: right once, down twice. Put all three moves inside one Repeat block.', id: 'Biramanya: kanan sekali, bawah dua kali. Taruh ketiga gerakan di dalam satu blok Ulangi.' }, { en: 'Repeat 4 times: Move Right, Move Down, Move Down. Just 5 blocks total!', id: 'Ulangi 4 kali: Gerak Kanan, Gerak Bawah, Gerak Bawah. Hanya 5 blok total!' }], starThresholds: [12, 5],
+  },
+  {
+    id: 'orchestra-12', worldId: 'orchestra', number: 12,
+    title: { en: 'Triple Step Bar', id: 'Birama Tiga Langkah' },
+    story: { en: 'Three quick notes right, then one note down — repeated three times across the stage.', id: 'Tiga nada cepat ke kanan, lalu satu nada bawah — diulang tiga kali melintasi panggung.' },
+    mascotMessage: { en: 'Three-and-one this time! Loop the whole four-move bar 3 times. 🎶', id: 'Tiga-dan-satu kali ini! Ulangi seluruh birama empat gerakan 3 kali. 🎶' },
+    gridRows: 4, gridCols: 10, cells: emptyGrid(4, 10), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[0,2]},{id:'n3',pos:[0,3]},{id:'n4',pos:[1,3]},{id:'n5',pos:[1,4]},{id:'n6',pos:[1,5]},{id:'n7',pos:[1,6]},{id:'n8',pos:[2,6]},{id:'n9',pos:[2,7]},{id:'n10',pos:[2,8]},{id:'n11',pos:[2,9]},{id:'n12',pos:[3,9]}],
+    goalType: 'collect_all', availableCategories: ['move','loops'], requiredCategories: ['loops'], optimalBlockCount: 6, xpReward: 250,
+    hints: [{ en: 'The bar is: right three times, down once. Put all four moves inside one Repeat block.', id: 'Biramanya: kanan tiga kali, bawah sekali. Taruh keempat gerakan di dalam satu blok Ulangi.' }, { en: 'Repeat 3 times: Move Right, Move Right, Move Right, Move Down. Just 6 blocks!', id: 'Ulangi 3 kali: Gerak Kanan, Gerak Kanan, Gerak Kanan, Gerak Bawah. Hanya 6 blok!' }], starThresholds: [14, 6],
+  },
+  {
+    id: 'orchestra-13', worldId: 'orchestra', number: 13,
+    title: { en: 'Four-Call Refrain', id: 'Refrain Empat Panggilan' },
+    story: { en: 'The two-step refrain returns four times this time, not three. Name it once, call it four times.', id: 'Refrain dua langkah kembali empat kali kali ini, bukan tiga. Beri nama sekali, panggil empat kali.' },
+    mascotMessage: { en: 'One function, FOUR calls! Define the two-step refrain, then call it four times. 🎤', id: 'Satu fungsi, EMPAT panggilan! Definisikan refrain dua langkah, lalu panggil empat kali. 🎤' },
+    gridRows: 1, gridCols: 9, cells: emptyGrid(1, 9), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[0,2]},{id:'n3',pos:[0,3]},{id:'n4',pos:[0,4]},{id:'n5',pos:[0,5]},{id:'n6',pos:[0,6]},{id:'n7',pos:[0,7]},{id:'n8',pos:[0,8]}],
+    goalType: 'collect_all', availableCategories: ['move','functions'], requiredCategories: ['functions'], optimalBlockCount: 7, xpReward: 260,
+    hints: [{ en: 'Define a function with two Move Right blocks inside.', id: 'Definisikan fungsi dengan dua blok Gerak Kanan di dalamnya.' }, { en: 'Call your two-step function 4 times — that reaches all 8 notes in 7 blocks!', id: 'Panggil fungsi dua langkahmu 4 kali — itu mencapai semua 8 nada dengan 7 blok!' }], starThresholds: [15, 7],
+  },
+  {
+    id: 'orchestra-14', worldId: 'orchestra', number: 14,
+    title: { en: 'Double Chorus', id: 'Refrain Ganda' },
+    story: { en: 'Two different choruses this time, one after another — first a right-hand run, then a down-hand run.', id: 'Dua refrain berbeda kali ini, satu demi satu — pertama larik tangan kanan, lalu larik tangan bawah.' },
+    mascotMessage: { en: 'Name TWO different choruses! One for right, one for down — call each twice, in order. 🎼', id: 'Beri nama DUA refrain berbeda! Satu untuk kanan, satu untuk bawah — panggil masing-masing dua kali, berurutan. 🎼' },
+    gridRows: 5, gridCols: 5, cells: emptyGrid(5, 5), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[0,2]},{id:'n3',pos:[0,3]},{id:'n4',pos:[0,4]},{id:'n5',pos:[1,4]},{id:'n6',pos:[2,4]},{id:'n7',pos:[3,4]},{id:'n8',pos:[4,4]}],
+    goalType: 'collect_all', availableCategories: ['move','functions'], requiredCategories: ['functions'], optimalBlockCount: 10, xpReward: 275,
+    hints: [{ en: 'Define a "right chorus" function (two Move Right) and a "down chorus" function (two Move Down).', id: 'Definisikan fungsi "refrain kanan" (dua Gerak Kanan) dan fungsi "refrain bawah" (dua Gerak Bawah).' }, { en: 'Call the right chorus twice, THEN call the down chorus twice. Order matters!', id: 'Panggil refrain kanan dua kali, LALU panggil refrain bawah dua kali. Urutan penting!' }], starThresholds: [22, 10],
+  },
+  {
+    id: 'orchestra-15', worldId: 'orchestra', number: 15,
+    title: { en: 'Long Refrain', id: 'Refrain Panjang' },
+    story: { en: 'A three-step refrain climbs across the whole stage, repeating five times — the longest yet.', id: 'Refrain tiga langkah melintasi seluruh panggung, berulang lima kali — terpanjang sejauh ini.' },
+    mascotMessage: { en: 'Function inside a loop, five times! Define the three-step refrain, then repeat calling it 5 times. 🎵', id: 'Fungsi di dalam perulangan, lima kali! Definisikan refrain tiga langkah, lalu ulangi memanggilnya 5 kali. 🎵' },
+    gridRows: 6, gridCols: 11, cells: emptyGrid(6, 11), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[0,2]},{id:'n3',pos:[1,2]},{id:'n4',pos:[1,3]},{id:'n5',pos:[1,4]},{id:'n6',pos:[2,4]},{id:'n7',pos:[2,5]},{id:'n8',pos:[2,6]},{id:'n9',pos:[3,6]},{id:'n10',pos:[3,7]},{id:'n11',pos:[3,8]},{id:'n12',pos:[4,8]},{id:'n13',pos:[4,9]},{id:'n14',pos:[4,10]},{id:'n15',pos:[5,10]}],
+    goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 7, xpReward: 290,
+    hints: [{ en: 'Define a function: Move Right, Move Right, Move Down.', id: 'Definisikan fungsi: Gerak Kanan, Gerak Kanan, Gerak Bawah.' }, { en: 'Put the function call inside a Repeat block set to 5. Just 7 blocks for the whole long refrain!', id: 'Taruh panggilan fungsi di dalam blok Ulangi yang diatur ke 5. Hanya 7 blok untuk seluruh refrain panjang!' }], starThresholds: [18, 7],
+  },
+  {
+    id: 'orchestra-16', worldId: 'orchestra', number: 16,
+    title: { en: 'Falling Refrain', id: 'Refrain Jatuh' },
+    story: { en: 'This refrain falls first, then steps right twice — repeated four times down the stage.', id: 'Refrain ini jatuh dulu, lalu melangkah kanan dua kali — diulang empat kali menuruni panggung.' },
+    mascotMessage: { en: 'Down first this time! Define Move Down, Move Right, Move Right — then repeat calling it 4 times. 🎶', id: 'Bawah dulu kali ini! Definisikan Gerak Bawah, Gerak Kanan, Gerak Kanan — lalu ulangi memanggilnya 4 kali. 🎶' },
+    gridRows: 5, gridCols: 9, cells: emptyGrid(5, 9), startPos: [0, 0],
+    items: [{id:'n1',pos:[1,0]},{id:'n2',pos:[1,1]},{id:'n3',pos:[1,2]},{id:'n4',pos:[2,2]},{id:'n5',pos:[2,3]},{id:'n6',pos:[2,4]},{id:'n7',pos:[3,4]},{id:'n8',pos:[3,5]},{id:'n9',pos:[3,6]},{id:'n10',pos:[4,6]},{id:'n11',pos:[4,7]},{id:'n12',pos:[4,8]}],
+    goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 7, xpReward: 305,
+    hints: [{ en: 'Define a function: Move Down, Move Right, Move Right.', id: 'Definisikan fungsi: Gerak Bawah, Gerak Kanan, Gerak Kanan.' }, { en: 'Put the function call inside a Repeat block set to 4. 7 blocks total!', id: 'Taruh panggilan fungsi di dalam blok Ulangi yang diatur ke 4. Total 7 blok!' }], starThresholds: [18, 7],
+  },
+  {
+    id: 'orchestra-17', worldId: 'orchestra', number: 17,
+    title: { en: 'Two-Part Invention', id: 'Invensi Dua Bagian' },
+    story: { en: 'Two different refrains, each in its own loop — first right-then-down four times, then down-then-right three times.', id: 'Dua refrain berbeda, masing-masing dalam perulangannya sendiri — pertama kanan-lalu-bawah empat kali, lalu bawah-lalu-kanan tiga kali.' },
+    mascotMessage: { en: 'Two parts, two function-and-loop pairs! Part one: right-down, looped 4 times. Part two: down-right, looped 3 times. 🎻', id: 'Dua bagian, dua pasangan fungsi-dan-perulangan! Bagian satu: kanan-bawah, diulang 4 kali. Bagian dua: bawah-kanan, diulang 3 kali. 🎻' },
+    gridRows: 8, gridCols: 8, cells: emptyGrid(8, 8), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[1,1]},{id:'n3',pos:[1,2]},{id:'n4',pos:[2,2]},{id:'n5',pos:[2,3]},{id:'n6',pos:[3,3]},{id:'n7',pos:[3,4]},{id:'n8',pos:[4,4]},{id:'n9',pos:[5,4]},{id:'n10',pos:[5,5]},{id:'n11',pos:[6,5]},{id:'n12',pos:[6,6]},{id:'n13',pos:[7,6]},{id:'n14',pos:[7,7]}],
+    goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 12, xpReward: 320,
+    hints: [{ en: 'Part one function: Move Right, Move Down. Loop it 4 times. Part two function: Move Down, Move Right. Loop it 3 times.', id: 'Fungsi bagian satu: Gerak Kanan, Gerak Bawah. Ulangi 4 kali. Fungsi bagian dua: Gerak Bawah, Gerak Kanan. Ulangi 3 kali.' }, { en: 'Play part one completely before starting part two. 6 blocks + 6 blocks = 12 total!', id: 'Mainkan bagian satu sepenuhnya sebelum memulai bagian dua. 6 blok + 6 blok = 12 total!' }], starThresholds: [30, 12],
+  },
+  {
+    id: 'orchestra-18', worldId: 'orchestra', number: 18,
+    title: { en: 'Triple Movement', id: 'Gerakan Tiga Babak' },
+    story: { en: 'A symphony in three movements: right-right-down, then down-right-right, then right-down-down — each looped twice.', id: 'Simfoni dalam tiga babak: kanan-kanan-bawah, lalu bawah-kanan-kanan, lalu kanan-bawah-bawah — masing-masing diulang dua kali.' },
+    mascotMessage: { en: 'THREE movements now! Three functions, three loops, each repeated twice. Play them in order. 🎼', id: 'TIGA babak sekarang! Tiga fungsi, tiga perulangan, masing-masing diulang dua kali. Mainkan berurutan. 🎼' },
+    gridRows: 9, gridCols: 11, cells: emptyGrid(9, 11), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[0,2]},{id:'n3',pos:[1,2]},{id:'n4',pos:[1,3]},{id:'n5',pos:[1,4]},{id:'n6',pos:[2,4]},{id:'n7',pos:[3,4]},{id:'n8',pos:[3,5]},{id:'n9',pos:[3,6]},{id:'n10',pos:[4,6]},{id:'n11',pos:[4,7]},{id:'n12',pos:[4,8]},{id:'n13',pos:[4,9]},{id:'n14',pos:[5,9]},{id:'n15',pos:[6,9]},{id:'n16',pos:[6,10]},{id:'n17',pos:[7,10]},{id:'n18',pos:[8,10]}],
+    goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 21, xpReward: 335,
+    hints: [{ en: 'Movement 1: right-right-down, looped 2 times. Movement 2: down-right-right, looped 2 times. Movement 3: right-down-down, looped 2 times.', id: 'Babak 1: kanan-kanan-bawah, diulang 2 kali. Babak 2: bawah-kanan-kanan, diulang 2 kali. Babak 3: kanan-bawah-bawah, diulang 2 kali.' }, { en: 'Each movement is its own function+loop pair: 7 blocks each, 21 blocks for the whole symphony!', id: 'Setiap babak adalah pasangan fungsi+perulangannya sendiri: 7 blok masing-masing, 21 blok untuk seluruh simfoni!' }], starThresholds: [42, 21],
+  },
+  {
+    id: 'orchestra-19', worldId: 'orchestra', number: 19,
+    title: { en: 'Grand Movement', id: 'Gerakan Akbar' },
+    story: { en: 'The three-movement symphony grows grander: the first movement now repeats three times instead of two.', id: 'Simfoni tiga babak tumbuh lebih megah: babak pertama sekarang diulang tiga kali, bukan dua.' },
+    mascotMessage: { en: 'The first movement got longer! 🎭 Same three functions, but movement one loops 3 times now instead of 2.', id: 'Babak pertama menjadi lebih panjang! 🎭 Fungsi yang sama, tapi babak satu kini diulang 3 kali, bukan 2.' },
+    gridRows: 10, gridCols: 13, cells: emptyGrid(10, 13), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[0,2]},{id:'n3',pos:[1,2]},{id:'n4',pos:[1,3]},{id:'n5',pos:[1,4]},{id:'n6',pos:[2,4]},{id:'n7',pos:[2,5]},{id:'n8',pos:[2,6]},{id:'n9',pos:[3,6]},{id:'n10',pos:[4,6]},{id:'n11',pos:[4,7]},{id:'n12',pos:[4,8]},{id:'n13',pos:[5,8]},{id:'n14',pos:[5,9]},{id:'n15',pos:[5,10]},{id:'n16',pos:[5,11]},{id:'n17',pos:[6,11]},{id:'n18',pos:[7,11]},{id:'n19',pos:[7,12]},{id:'n20',pos:[8,12]},{id:'n21',pos:[9,12]}],
+    goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 21, xpReward: 350,
+    hints: [{ en: 'Movement 1: right-right-down, looped 3 times. Movement 2: down-right-right, looped 2 times. Movement 3: right-down-down, looped 2 times.', id: 'Babak 1: kanan-kanan-bawah, diulang 3 kali. Babak 2: bawah-kanan-kanan, diulang 2 kali. Babak 3: kanan-bawah-bawah, diulang 2 kali.' }, { en: 'The block count stays the same — 7 blocks per movement — even though movement 1 covers more ground!', id: 'Jumlah blok tetap sama — 7 blok per babak — walaupun babak 1 mencakup jarak yang lebih jauh!' }], starThresholds: [42, 21],
+  },
+  {
+    id: 'orchestra-20', worldId: 'orchestra', number: 20,
+    title: { en: "Maestro's Symphony", id: 'Simfoni Sang Maestro' },
+    story: { en: 'The grandest symphony yet — three movements, the first two looped three times each, the last twice. Every trick you\'ve learned, together at last.', id: 'Simfoni termegah sejauh ini — tiga babak, dua babak pertama diulang tiga kali masing-masing, yang terakhir dua kali. Semua trik yang telah kamu pelajari, bersatu akhirnya.' },
+    mascotMessage: { en: "You're a true maestro now! 🎭🏆 Three functions, three loops, orchestrated together. Play your masterpiece!", id: 'Kamu maestro sejati sekarang! 🎭🏆 Tiga fungsi, tiga perulangan, diorkestrasi bersama. Mainkan mahakaryamu!' },
+    gridRows: 11, gridCols: 15, cells: emptyGrid(11, 15), startPos: [0, 0],
+    items: [{id:'n1',pos:[0,1]},{id:'n2',pos:[0,2]},{id:'n3',pos:[1,2]},{id:'n4',pos:[1,3]},{id:'n5',pos:[1,4]},{id:'n6',pos:[2,4]},{id:'n7',pos:[2,5]},{id:'n8',pos:[2,6]},{id:'n9',pos:[3,6]},{id:'n10',pos:[4,6]},{id:'n11',pos:[4,7]},{id:'n12',pos:[4,8]},{id:'n13',pos:[5,8]},{id:'n14',pos:[5,9]},{id:'n15',pos:[5,10]},{id:'n16',pos:[6,10]},{id:'n17',pos:[6,11]},{id:'n18',pos:[6,12]},{id:'n19',pos:[6,13]},{id:'n20',pos:[7,13]},{id:'n21',pos:[8,13]},{id:'n22',pos:[8,14]},{id:'n23',pos:[9,14]},{id:'n24',pos:[10,14]}],
+    goalType: 'collect_all', availableCategories: ['move','loops','functions'], requiredCategories: ['functions','loops'], optimalBlockCount: 21, xpReward: 375,
+    hints: [{ en: 'Movement 1: right-right-down, looped 3 times. Movement 2: down-right-right, looped 3 times. Movement 3: right-down-down, looped 2 times.', id: 'Babak 1: kanan-kanan-bawah, diulang 3 kali. Babak 2: bawah-kanan-kanan, diulang 3 kali. Babak 3: kanan-bawah-bawah, diulang 2 kali.' }, { en: 'Three functions, three loops — 7 blocks each, 21 total, no matter how grand the symphony grows!', id: 'Tiga fungsi, tiga perulangan — 7 blok masing-masing, 21 total, seberapa pun megahnya simfoni ini tumbuh!' }], starThresholds: [48, 21],
   },
 
   // ─────────────────────────────────────────────
@@ -5352,6 +11052,130 @@ export const LESSONS: Lesson[] = [
       { en: 'Leg 3: while 🧭 my column < 8, move right. Leg 4: while 🧭 my row < 8, move down.', id: 'Tahap 3: selama 🧭 kolomku < 8, gerak kanan. Tahap 4: selama 🧭 barisku < 8, gerak bawah.' },
     ], starThresholds: [46, 33, 26, 20],
   },
+  {
+    id: 'cove-11', worldId: 'cove', number: 11, showCoords: true,
+    title: { en: 'Chart a Longer Course', id: 'Susun Rute Lebih Panjang' },
+    story: { en: 'Open water stretches further this time — two sensor legs, one after another, carry you to the marker.', id: 'Laut lepas kali ini terbentang lebih jauh — dua tahap sensor, satu demi satu, membawamu ke penanda.' },
+    mascotMessage: { en: 'First sail east while my column is less than 7. Then sail south while my row is less than 5. Same trick, just a longer voyage! 🧭', id: 'Pertama berlayar timur selama kolomku kurang dari 7. Lalu berlayar selatan selama barisku kurang dari 5. Trik yang sama, cuma perjalanannya lebih panjang! 🧭' },
+    gridRows: 6, gridCols: 8, cells: emptyGrid(6, 8), startPos: [0, 0], items: [{ id: 'm1', pos: [4, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 10, xpReward: 250,
+    hints: [
+      { en: 'Leg 1: while 🧭 my column < 7, move right.', id: 'Tahap 1: selama 🧭 kolomku < 7, gerak kanan.' },
+      { en: 'Leg 2: while 🧭 my row < 5, move down.', id: 'Tahap 2: selama 🧭 barisku < 5, gerak bawah.' },
+    ], starThresholds: [24, 17, 13, 10],
+  },
+  {
+    id: 'cove-12', worldId: 'cove', number: 12, showCoords: true,
+    title: { en: 'Row, Column, Row', id: 'Baris, Kolom, Baris' },
+    story: { en: 'Three legs this time: sail down, then east, then down again. Each leg watches a different number.', id: 'Tiga tahap kali ini: berlayar turun, lalu ke timur, lalu turun lagi. Setiap tahap mengawasi angka yang berbeda.' },
+    mascotMessage: { en: 'Row less than 3, then column less than 7, then row less than 6. Three loops, three sensors, one voyage! 🧭', id: 'Baris kurang dari 3, lalu kolom kurang dari 7, lalu baris kurang dari 6. Tiga perulangan, tiga sensor, satu perjalanan! 🧭' },
+    gridRows: 7, gridCols: 8, cells: emptyGrid(7, 8), startPos: [0, 0], items: [{ id: 'm1', pos: [2, 6] }, { id: 'm2', pos: [5, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 15, xpReward: 260,
+    hints: [
+      { en: 'Leg 1: while 🧭 my row < 3, move down. Leg 2: while 🧭 my column < 7, move right.', id: 'Tahap 1: selama 🧭 barisku < 3, gerak bawah. Tahap 2: selama 🧭 kolomku < 7, gerak kanan.' },
+      { en: 'Leg 3: while 🧭 my row < 6, move down.', id: 'Tahap 3: selama 🧭 barisku < 6, gerak bawah.' },
+    ], starThresholds: [35, 25, 19, 15],
+  },
+  {
+    id: 'cove-13', worldId: 'cove', number: 13, showCoords: true,
+    title: { en: 'Sail Back West', id: 'Berlayar Kembali ke Barat' },
+    story: { en: 'The current pushed you too far east. This time the sensor counts down, not up — sail west until your column is small enough.', id: 'Arus mendorongmu terlalu jauh ke timur. Kali ini sensornya menghitung mundur, bukan naik — berlayarlah ke barat sampai kolommu cukup kecil.' },
+    mascotMessage: { en: 'A new test: while my column is greater than 3! Keep sailing west until that stops being true. 🧭', id: 'Uji baru: selama kolomku lebih besar dari 3! Terus berlayar barat sampai itu tidak lagi benar. 🧭' },
+    gridRows: 5, gridCols: 9, cells: emptyGrid(5, 9), startPos: [2, 8], items: [{ id: 'm1', pos: [2, 2] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 5, xpReward: 270,
+    hints: [
+      { en: 'Use "repeat while" with 🧭 my column > 3 as the test.', id: 'Pakai "ulangi selama" dengan uji 🧭 kolomku > 3.' },
+      { en: 'Inside the loop, one ⬅️ Move Left — sailing west lowers your column number.', id: 'Di dalam perulangan, satu ⬅️ Gerak Kiri — berlayar ke barat menurunkan angka kolommu.' },
+    ], starThresholds: [12, 9, 6, 5],
+  },
+  {
+    id: 'cove-14', worldId: 'cove', number: 14, showCoords: true,
+    title: { en: 'Fixed Steps, Then a Sensor', id: 'Langkah Tetap, Lalu Sensor' },
+    story: { en: 'The first leg is always the same four steps east. The second leg depends on where the reef sits — read your row and stop yourself.', id: 'Tahap pertama selalu sama: empat langkah ke timur. Tahap kedua bergantung di mana beting berada — baca barismu dan berhentilah sendiri.' },
+    mascotMessage: { en: 'A steps variable set to 4 handles the first leg. Then switch to a sensor loop for the second — while my row < 4! 📦🧭', id: 'Variabel langkah diisi 4 menangani tahap pertama. Lalu ganti ke perulangan sensor untuk tahap kedua — selama barisku < 4! 📦🧭' },
+    gridRows: 5, gridCols: 6, cells: emptyGrid(5, 6), startPos: [0, 0], items: [{ id: 'm1', pos: [0, 4] }, { id: 'm2', pos: [3, 4] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors', 'variables'], requiredCategories: ['variables', 'sensors'], optimalBlockCount: 10, xpReward: 280,
+    hints: [
+      { en: 'Set steps to 4, repeat steps times with one ➡️ Move Right inside.', id: 'Isi langkah dengan 4, ulangi sebanyak langkah dengan satu ➡️ Gerak Kanan di dalamnya.' },
+      { en: 'Then: while 🧭 my row < 4, move down.', id: 'Lalu: selama 🧭 barisku < 4, gerak bawah.' },
+    ], starThresholds: [24, 17, 13, 10],
+  },
+  {
+    id: 'cove-15', worldId: 'cove', number: 15, showCoords: true,
+    title: { en: 'The Wider Chart', id: 'Peta yang Lebih Luas' },
+    story: { en: 'A bigger version of the deep chart — four legs, four sensors, and every test has to be exact.', id: 'Versi lebih besar dari peta dalam — empat tahap, empat sensor, dan setiap uji harus tepat.' },
+    mascotMessage: { en: 'Column 5, then row 6, then column 9, then row 9. Four sensor loops, one after another! 🧭', id: 'Kolom 5, lalu baris 6, lalu kolom 9, lalu baris 9. Empat perulangan sensor, satu demi satu! 🧭' },
+    gridRows: 9, gridCols: 10, cells: emptyGrid(9, 10), startPos: [0, 0], items: [{ id: 'm1', pos: [5, 4] }, { id: 'm2', pos: [5, 8] }, { id: 'm3', pos: [8, 8] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 20, xpReward: 300,
+    hints: [
+      { en: 'Leg 1: while 🧭 my column < 5, move right. Leg 2: while 🧭 my row < 6, move down.', id: 'Tahap 1: selama 🧭 kolomku < 5, gerak kanan. Tahap 2: selama 🧭 barisku < 6, gerak bawah.' },
+      { en: 'Leg 3: while 🧭 my column < 9, move right. Leg 4: while 🧭 my row < 9, move down.', id: 'Tahap 3: selama 🧭 kolomku < 9, gerak kanan. Tahap 4: selama 🧭 barisku < 9, gerak bawah.' },
+    ], starThresholds: [46, 33, 26, 20],
+  },
+  {
+    id: 'cove-16', worldId: 'cove', number: 16, showCoords: true,
+    title: { en: 'Grow the Steps Twice', id: 'Tambahkan Langkah Dua Kali' },
+    story: { en: 'Set steps once, sail it, grow the number, sail again — then finish with a sensor leg south.', id: 'Isi langkah sekali, berlayar, tambah angkanya, berlayar lagi — lalu selesaikan dengan tahap sensor ke selatan.' },
+    mascotMessage: { en: 'Steps starts at 3. Sail east. Add 2 to steps. Sail east again. Then: while my row < 5, move down. 📦🧭', id: 'Langkah dimulai dari 3. Berlayar timur. Tambahkan 2 ke langkah. Berlayar timur lagi. Lalu: selama barisku < 5, gerak bawah. 📦🧭' },
+    gridRows: 6, gridCols: 9, cells: emptyGrid(6, 9), startPos: [0, 0], items: [{ id: 'm1', pos: [0, 3] }, { id: 'm2', pos: [0, 8] }, { id: 'm3', pos: [4, 8] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors', 'variables'], requiredCategories: ['variables', 'sensors'], optimalBlockCount: 17, xpReward: 310,
+    hints: [
+      { en: 'Set steps to 3, repeat and sail east. Then set steps to steps + 2, repeat and sail east again.', id: 'Isi langkah dengan 3, ulangi dan berlayar timur. Lalu isi langkah dengan langkah + 2, ulangi dan berlayar timur lagi.' },
+      { en: 'Finish with: while 🧭 my row < 5, move down.', id: 'Selesaikan dengan: selama 🧭 barisku < 5, gerak bawah.' },
+    ], starThresholds: [41, 29, 22, 17],
+  },
+  {
+    id: 'cove-17', worldId: 'cove', number: 17, showCoords: true,
+    title: { en: 'Five Bearings', id: 'Lima Arah' },
+    story: { en: 'The longest chart yet — five legs, alternating east and south, each one a sensor loop.', id: 'Peta terpanjang sejauh ini — lima tahap, bergantian timur dan selatan, masing-masing perulangan sensor.' },
+    mascotMessage: { en: 'Column 4, row 3, column 8, row 6, column 11. Five loops in a row — take it one bearing at a time! 🧭', id: 'Kolom 4, baris 3, kolom 8, baris 6, kolom 11. Lima perulangan berturut-turut — kerjakan satu arah dalam satu waktu! 🧭' },
+    gridRows: 7, gridCols: 12, cells: emptyGrid(7, 12), startPos: [0, 0], items: [{ id: 'm1', pos: [2, 3] }, { id: 'm2', pos: [2, 7] }, { id: 'm3', pos: [5, 7] }, { id: 'm4', pos: [5, 10] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 25, xpReward: 330,
+    hints: [
+      { en: 'Leg 1: column < 4. Leg 2: row < 3. Leg 3: column < 8.', id: 'Tahap 1: kolom < 4. Tahap 2: baris < 3. Tahap 3: kolom < 8.' },
+      { en: 'Leg 4: row < 6. Leg 5: column < 11. Same pattern every time — while, sensor, move.', id: 'Tahap 4: baris < 6. Tahap 5: kolom < 11. Pola yang sama setiap kali — selama, sensor, gerak.' },
+    ], starThresholds: [60, 43, 33, 25],
+  },
+  {
+    id: 'cove-18', worldId: 'cove', number: 18, showCoords: true,
+    title: { en: 'The Zigzag Reef', id: 'Beting Zigzag' },
+    story: { en: 'This reef bends the course sideways. Sail east, then south, then back west, then south again — reefs guard every turn.', id: 'Beting ini membelokkan rute ke samping. Berlayar timur, lalu selatan, lalu kembali barat, lalu selatan lagi — beting menjaga setiap belokan.' },
+    mascotMessage: { en: 'Column 6, then row 4, then column 2 — going backwards — then row 7. Watch which way you are counting! 🧭', id: 'Kolom 6, lalu baris 4, lalu kolom 2 — berbalik arah — lalu baris 7. Perhatikan ke arah mana kamu menghitung! 🧭' },
+    gridRows: 8, gridCols: 7,
+    cells: (() => { const g = emptyGrid(8, 7); g[0][6] = 'obstacle'; g[4][5] = 'obstacle'; g[3][0] = 'obstacle'; g[7][1] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'm1', pos: [3, 5] }, { id: 'm2', pos: [3, 1] }, { id: 'm3', pos: [6, 1] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 20, xpReward: 350,
+    hints: [
+      { en: 'Leg 1: column < 6. Leg 2: row < 4. Leg 3: column > 2 — this one counts down while sailing west.', id: 'Tahap 1: kolom < 6. Tahap 2: baris < 4. Tahap 3: kolom > 2 — ini menghitung turun saat berlayar barat.' },
+      { en: 'Leg 4: row < 7. The reefs sit right where an overshoot would run you aground.', id: 'Tahap 4: baris < 7. Betingnya ada tepat di tempat kelebihan langkah akan mengandaskanmu.' },
+    ], starThresholds: [46, 33, 26, 20],
+  },
+  {
+    id: 'cove-19', worldId: 'cove', number: 19, showCoords: true,
+    title: { en: 'Six-Leg Expedition', id: 'Ekspedisi Enam Tahap' },
+    story: { en: 'The biggest chart in the cove — six legs, six sensor tests, no shortcuts.', id: 'Peta terbesar di teluk ini — enam tahap, enam uji sensor, tanpa jalan pintas.' },
+    mascotMessage: { en: 'Column 3, row 3, column 7, row 6, column 10, row 9. Six loops — same pattern, just more of it! 🧭', id: 'Kolom 3, baris 3, kolom 7, baris 6, kolom 10, baris 9. Enam perulangan — pola yang sama, cuma lebih banyak! 🧭' },
+    gridRows: 9, gridCols: 11, cells: emptyGrid(9, 11), startPos: [0, 0], items: [{ id: 'm1', pos: [2, 2] }, { id: 'm2', pos: [2, 6] }, { id: 'm3', pos: [5, 6] }, { id: 'm4', pos: [5, 9] }, { id: 'm5', pos: [8, 9] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['sensors', 'loops'], optimalBlockCount: 30, xpReward: 380,
+    hints: [
+      { en: 'Column 3, row 3, column 7 — the first half of the expedition.', id: 'Kolom 3, baris 3, kolom 7 — separuh pertama ekspedisi.' },
+      { en: 'Row 6, column 10, row 9 — finish the second half the same way.', id: 'Baris 6, kolom 10, baris 9 — selesaikan separuh kedua dengan cara yang sama.' },
+    ], starThresholds: [72, 51, 39, 30],
+  },
+  {
+    id: 'cove-20', worldId: 'cove', number: 20, showCoords: true,
+    title: { en: "Navigator's Masterpiece", id: 'Mahakarya Navigator' },
+    story: { en: 'Every trick you have learned, in one voyage: a steps variable that grows, then a zigzag of sensor legs to the final marker.', id: 'Semua trik yang telah kamu pelajari, dalam satu perjalanan: variabel langkah yang bertambah, lalu zigzag tahap sensor ke penanda terakhir.' },
+    mascotMessage: { en: 'Steps starts at 3, sails east, then grows by 3 and sails again. Then row 4, column 2 — backwards — and row 8. You are a true navigator now! 🧭📦🏆', id: 'Langkah dimulai dari 3, berlayar timur, lalu bertambah 3 dan berlayar lagi. Lalu baris 4, kolom 2 — berbalik arah — dan baris 8. Kamu navigator sejati sekarang! 🧭📦🏆' },
+    gridRows: 9, gridCols: 10,
+    cells: (() => { const g = emptyGrid(9, 10); g[4][9] = 'obstacle'; g[3][0] = 'obstacle'; g[8][1] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'm1', pos: [0, 9] }, { id: 'm2', pos: [3, 9] }, { id: 'm3', pos: [3, 1] }, { id: 'm4', pos: [7, 1] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors', 'variables'], requiredCategories: ['variables', 'sensors'], optimalBlockCount: 27, xpReward: 420,
+    hints: [
+      { en: 'Set steps to 3, sail east. Set steps to steps + 3, sail east again.', id: 'Isi langkah dengan 3, berlayar timur. Isi langkah dengan langkah + 3, berlayar timur lagi.' },
+      { en: 'Then three sensor legs: row < 4, column > 2, row < 8.', id: 'Lalu tiga tahap sensor: baris < 4, kolom > 2, baris < 8.' },
+    ], starThresholds: [65, 46, 35, 27],
+  },
   // ─────────────────────────────────────────────
   // BONUS WORLD 7: ECO CITY — Decomposition & Reuse
   // ─────────────────────────────────────────────
@@ -5500,9 +11324,9 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'eco-10', worldId: 'eco', number: 10,
-    title: { en: 'Eco City Finale', id: 'Final Kota Hijau' },
-    story: { en: 'Last mission: three identical districts, a link road east, then the drop at the city hub. The river across the low streets is closed to trucks, so stay above it until the far side.', id: 'Misi terakhir: tiga distrik identik, jalan penghubung ke timur, lalu pengantaran di pusat kota. Sungai yang melintasi jalan-jalan bawah tertutup untuk truk, jadi tetaplah di atasnya sampai sisi terjauh.' },
-    mascotMessage: { en: 'Everything you learned in one round: a function, a loop over it, and two more loops home. 🏙️', id: 'Semua yang kamu pelajari dalam satu putaran: sebuah fungsi, perulangan atasnya, dan dua perulangan lagi menuju pulang. 🏙️' },
+    title: { en: 'City Hub Run', id: 'Rute Pusat Kota' },
+    story: { en: 'One of the bigger rounds yet: three identical districts, a link road east, then the drop at the city hub. The river across the low streets is closed to trucks, so stay above it until the far side.', id: 'Salah satu putaran lebih besar sejauh ini: tiga distrik identik, jalan penghubung ke timur, lalu pengantaran di pusat kota. Sungai yang melintasi jalan-jalan bawah tertutup untuk truk, jadi tetaplah di atasnya sampai sisi terjauh.' },
+    mascotMessage: { en: 'Everything you have learned so far, in one round: a function, a loop over it, and two more loops home. 🏙️', id: 'Semua yang sudah kamu pelajari sejauh ini, dalam satu putaran: sebuah fungsi, perulangan atasnya, dan dua perulangan lagi menuju pulang. 🏙️' },
     gridRows: 7, gridCols: 9,
     cells: (() => { const g = emptyGrid(7, 9); [0, 1, 2, 3, 4, 5].forEach(col => { g[4][col] = 'obstacle' }); return g })(),
     startPos: [0, 0],
@@ -5513,6 +11337,160 @@ export const LESSONS: Lesson[] = [
       { en: 'Define the district, Repeat the call 3 times, then Repeat Right 2 times and Repeat Down 3 times.', id: 'Definisikan distriknya, Ulangi panggilannya 3 kali, lalu Ulangi Kanan 2 kali dan Ulangi Bawah 3 kali.' },
     ],
     starThresholds: [28, 20, 16, 13],
+  },
+  {
+    id: 'eco-11', worldId: 'eco', number: 11,
+    title: { en: 'Recycling Alley', id: 'Gang Daur Ulang' },
+    story: { en: 'A side street off the main road holds seven identical recycling bins in a row. Turn into the alley first, then loop your way down it.', id: 'Sebuah gang di samping jalan utama menyimpan tujuh tempat sampah daur ulang berjajar. Belok ke gang dulu, lalu susuri dengan perulangan.' },
+    mascotMessage: { en: 'Two moves to turn into the alley, then one loop for all seven bins. 🔄♻️', id: 'Dua gerakan untuk belok ke gang, lalu satu perulangan untuk ketujuh tempat sampah. 🔄♻️' },
+    gridRows: 4, gridCols: 9, cells: emptyGrid(4, 9), startPos: [0, 0],
+    items: [1, 2, 3, 4, 5, 6, 7].map(col => ({ id: `bin-${col}`, pos: [2, col] as [number, number] })),
+    goalType: 'collect_all', availableCategories: ['move', 'loops'], requiredCategories: ['loops'], optimalBlockCount: 5, xpReward: 230,
+    hints: [
+      { en: 'Drive down 2 to turn into the alley — no loop needed for that short a stretch.', id: 'Jalan turun 2 untuk belok ke gang — tidak perlu perulangan untuk jarak sependek itu.' },
+      { en: 'Then Repeat Move Right 7 times for every bin in a row.', id: 'Lalu Ulangi Gerak Kanan 7 kali untuk setiap tempat sampah berjajar.' },
+    ],
+    starThresholds: [11, 8, 6, 5],
+  },
+  {
+    id: 'eco-12', worldId: 'eco', number: 12,
+    title: { en: 'Three Growing Blocks', id: 'Tiga Blok yang Membesar' },
+    story: { en: 'Three streets on this plan each get longer than the last. Store the length in a variable, then grow it twice as you go.', id: 'Tiga jalan di rencana ini masing-masing makin panjang dari yang sebelumnya. Simpan panjangnya dalam variabel, lalu besarkan dua kali seiring perjalanan.' },
+    mascotMessage: { en: 'Length starts at 2. Sail it, add 1, sail it, add 2 more, sail it once more. The same variable, growing each time. 📦', id: 'Panjang dimulai dari 2. Jalani, tambah 1, jalani, tambah 2 lagi, jalani sekali lagi. Variabel yang sama, membesar setiap kali. 📦' },
+    gridRows: 8, gridCols: 4, cells: emptyGrid(8, 4), startPos: [0, 0],
+    items: [{ id: 'glass', pos: [2, 0] }, { id: 'pump', pos: [2, 3] }, { id: 'grid', pos: [7, 3] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'variables'], requiredCategories: ['variables'], optimalBlockCount: 19, xpReward: 250,
+    hints: [
+      { en: 'Set length to 2 and repeat Down. Then set length to length + 1 (now 3) and repeat Right.', id: 'Isi panjang dengan 2 dan ulangi Bawah. Lalu isi panjang dengan panjang + 1 (sekarang 3) dan ulangi Kanan.' },
+      { en: 'Finally set length to length + 2 (now 5) and repeat Down once more.', id: 'Terakhir isi panjang dengan panjang + 2 (sekarang 5) dan ulangi Bawah sekali lagi.' },
+    ],
+    starThresholds: [41, 29, 23, 19],
+  },
+  {
+    id: 'eco-13', worldId: 'eco', number: 13,
+    title: { en: 'Both Gates Closed', id: 'Kedua Gerbang Tutup' },
+    story: { en: 'Two signs today: the north gate is shut, and further on the middle gate is shut too. Check each sign in your code and take the open lane both times.', id: 'Dua papan tanda hari ini: gerbang utara tutup, dan lebih jauh gerbang tengah juga tutup. Periksa tiap papan di kodemu dan ambil jalur terbuka dua kali.' },
+    mascotMessage: { en: 'Two IF blocks this time, one for each closed gate. Solve the first detour, then the second one further down the road. 🚧🚧', id: 'Dua blok JIKA kali ini, satu untuk tiap gerbang tertutup. Selesaikan putaran pertama, lalu yang kedua lebih jauh di jalan. 🚧🚧' },
+    gridRows: 6, gridCols: 9,
+    cells: (() => { const g = emptyGrid(6, 9); g[0][3] = 'obstacle'; g[1][3] = 'obstacle'; g[2][7] = 'obstacle'; g[3][7] = 'obstacle'; return g })(),
+    startPos: [0, 0],
+    items: [{ id: 'compost', pos: [2, 6] }, { id: 'power', pos: [4, 8] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'variables', 'logic'], requiredCategories: ['logic'], optimalBlockCount: 13, xpReward: 270,
+    hints: [
+      { en: 'Inside the first IF: Repeat Down 2 times, then Repeat Right 6 times to clear the north gate.', id: 'Di dalam JIKA pertama: Ulangi Bawah 2 kali, lalu Ulangi Kanan 6 kali untuk melewati gerbang utara.' },
+      { en: 'Inside the second IF: Repeat Down 2 times, then Move Right twice to clear the middle gate.', id: 'Di dalam JIKA kedua: Ulangi Bawah 2 kali, lalu Gerak Kanan dua kali untuk melewati gerbang tengah.' },
+    ],
+    starThresholds: [28, 20, 16, 13],
+  },
+  {
+    id: 'eco-14', worldId: 'eco', number: 14,
+    title: { en: 'Four Identical Corners', id: 'Empat Sudut Identik' },
+    story: { en: 'Four new corners were built from the exact same shape: right, right, down. Name that shape once, then call it four times with a link road east after each.', id: 'Empat sudut baru dibangun dari bentuk yang persis sama: kanan, kanan, bawah. Beri nama bentuk itu sekali, lalu panggil empat kali dengan jalan penghubung ke timur setelah tiap panggilan.' },
+    mascotMessage: { en: 'One corner function, called four times, with a link road after each call. 🔧', id: 'Satu fungsi sudut, dipanggil empat kali, dengan jalan penghubung setelah tiap panggilan. 🔧' },
+    gridRows: 6, gridCols: 13, cells: emptyGrid(6, 13), startPos: [0, 0],
+    items: [{ id: 'c1', pos: [1, 3] }, { id: 'c2', pos: [2, 6] }, { id: 'c3', pos: [3, 9] }, { id: 'c4', pos: [4, 12] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'functions'], requiredCategories: ['functions'], optimalBlockCount: 8, xpReward: 290,
+    hints: [
+      { en: 'Define a function with Right, Right, Down.', id: 'Definisikan fungsi dengan Kanan, Kanan, Bawah.' },
+      { en: 'Repeat 4 times: call the function, then Move Right.', id: 'Ulangi 4 kali: panggil fungsinya, lalu Gerak Kanan.' },
+    ],
+    starThresholds: [17, 12, 10, 8],
+  },
+  {
+    id: 'eco-15', worldId: 'eco', number: 15,
+    title: { en: 'Five-Stop Recycling Route', id: 'Rute Daur Ulang Lima Henti' },
+    story: { en: "Sol's tablet now holds five stops instead of three. Keep the list, then work through every leg between them in order.", id: 'Tablet Sol kini menyimpan lima perhentian, bukan tiga. Simpan daftarnya, lalu kerjakan setiap kaki di antaranya secara berurutan.' },
+    mascotMessage: { en: 'A longer list this time — five stops, six legs between them. Write the plan down first. 📋', id: 'Daftar lebih panjang kali ini — lima perhentian, enam kaki di antaranya. Tulis dulu rencananya. 📋' },
+    gridRows: 6, gridCols: 11, cells: emptyGrid(6, 11), startPos: [0, 0],
+    items: [{ id: 'stop1', pos: [0, 3] }, { id: 'stop2', pos: [3, 3] }, { id: 'stop3', pos: [3, 7] }, { id: 'stop4', pos: [0, 7] }, { id: 'stop5', pos: [5, 9] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'variables', 'lists'], requiredCategories: ['lists'], optimalBlockCount: 26, xpReward: 310,
+    hints: [
+      { en: 'Build a list of the five stops first, then write the leg between each pair.', id: 'Buat dulu daftar lima perhentian, lalu tulis kaki di antara tiap pasang.' },
+      { en: 'Right 3, down 3, right 4, up 3, right 2, then down 5.', id: 'Kanan 3, turun 3, kanan 4, naik 3, kanan 2, lalu turun 5.' },
+    ],
+    starThresholds: [56, 40, 32, 26],
+  },
+  {
+    id: 'eco-16', worldId: 'eco', number: 16,
+    title: { en: 'Detour Function', id: 'Fungsi Jalan Putar' },
+    story: { en: 'A short wall blocks the direct road. Name the detour around it as a function, then call it once from inside an IF before finishing the drive.', id: 'Tembok pendek menghalangi jalan langsung. Beri nama jalan putar di sekitarnya sebagai fungsi, lalu panggil sekali dari dalam JIKA sebelum menyelesaikan perjalanan.' },
+    mascotMessage: { en: 'Define detour as down, right-right-right-right, up. Call it inside an IF, then two more moves right to finish. 🔧🚧', id: 'Definisikan jalanPutar sebagai bawah, kanan-kanan-kanan-kanan, atas. Panggil di dalam JIKA, lalu dua gerakan lagi ke kanan untuk selesai. 🔧🚧' },
+    gridRows: 3, gridCols: 7,
+    cells: (() => { const g = emptyGrid(3, 7); g[0][2] = 'obstacle'; g[0][3] = 'obstacle'; return g })(),
+    startPos: [0, 0],
+    items: [{ id: 'mid', pos: [1, 4] }, { id: 'final', pos: [0, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'functions'], requiredCategories: ['logic', 'functions'], optimalBlockCount: 9, xpReward: 330,
+    hints: [
+      { en: 'Define detour: Move Down, Move Right 4 times, Move Up. That dips under the wall and back up.', id: 'Definisikan jalanPutar: Gerak Bawah, Gerak Kanan 4 kali, Gerak Atas. Itu turun di bawah tembok dan naik lagi.' },
+      { en: 'Put the call inside an IF block, then two more Move Right blocks to reach the final token.', id: 'Taruh panggilannya di dalam blok JIKA, lalu dua blok Gerak Kanan lagi untuk mencapai token terakhir.' },
+    ],
+    starThresholds: [19, 14, 11, 9],
+  },
+  {
+    id: 'eco-17', worldId: 'eco', number: 17,
+    title: { en: 'How Long Is the Detour?', id: 'Seberapa Panjang Jalan Putarnya?' },
+    story: { en: 'A single blocked square needs only a one-square dip to clear. Store that dip length in a variable and use it on both sides of the detour.', id: 'Satu kotak terhalang hanya butuh turun satu kotak untuk lewat. Simpan panjang turunnya dalam variabel dan pakai di kedua sisi jalan putar.' },
+    mascotMessage: { en: 'dipLength is 1. Inside an IF, dip down dipLength, cross 4, then rise up dipLength. Same variable, both ends. 📦🚧', id: 'panjangTurun adalah 1. Di dalam JIKA, turun sebanyak panjangTurun, lintasi 4, lalu naik sebanyak panjangTurun. Variabel yang sama, kedua ujung. 📦🚧' },
+    gridRows: 2, gridCols: 5,
+    cells: (() => { const g = emptyGrid(2, 5); g[0][2] = 'obstacle'; return g })(),
+    startPos: [0, 0],
+    items: [{ id: 'mid', pos: [1, 4] }, { id: 'final', pos: [0, 4] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'variables', 'logic'], requiredCategories: ['variables', 'logic'], optimalBlockCount: 13, xpReward: 350,
+    hints: [
+      { en: 'Set dipLength to 1. Inside an IF, repeat dipLength times Down.', id: 'Isi panjangTurun dengan 1. Di dalam JIKA, ulangi sebanyak panjangTurun kali Bawah.' },
+      { en: 'Then Repeat Right 4 times to cross, then repeat dipLength times Up to finish the detour.', id: 'Lalu Ulangi Kanan 4 kali untuk melintasi, lalu ulangi sebanyak panjangTurun kali Atas untuk selesaikan jalan putar.' },
+    ],
+    starThresholds: [28, 20, 16, 13],
+  },
+  {
+    id: 'eco-18', worldId: 'eco', number: 18,
+    title: { en: 'The Route List Calls Home', id: 'Daftar Rute Menelepon Pusat' },
+    story: { en: 'Three stops on the list, and after each one Sol calls in a quick check-in before moving on to the next leg.', id: 'Tiga perhentian di daftar, dan setelah tiap perhentian Sol menelepon pusat sebentar sebelum lanjut ke kaki berikutnya.' },
+    mascotMessage: { en: 'Define checkIn as one Move Right. Call it after every stop except the last one. 📋🔧', id: 'Definisikan lapor sebagai satu Gerak Kanan. Panggil setelah tiap perhentian kecuali yang terakhir. 📋🔧' },
+    gridRows: 4, gridCols: 10, cells: emptyGrid(4, 10), startPos: [0, 0],
+    items: [{ id: 'stop1', pos: [0, 4] }, { id: 'stop2', pos: [3, 5] }, { id: 'stop3', pos: [3, 9] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'functions', 'lists'], requiredCategories: ['lists', 'functions'], optimalBlockCount: 18, xpReward: 370,
+    hints: [
+      { en: 'Build a list of the three stops. Define checkIn as one Move Right.', id: 'Buat daftar tiga perhentian. Definisikan lapor sebagai satu Gerak Kanan.' },
+      { en: 'Right 4, call checkIn, down 3, call checkIn, right 3 to the final stop.', id: 'Kanan 4, panggil lapor, turun 3, panggil lapor, kanan 3 ke perhentian terakhir.' },
+    ],
+    starThresholds: [39, 28, 22, 18],
+  },
+  {
+    id: 'eco-19', worldId: 'eco', number: 19,
+    title: { en: 'The Growing District', id: 'Distrik yang Bertambah' },
+    story: { en: 'Three districts share the same shape again, but this time the number of repeats lives in a variable, not a fixed number.', id: 'Tiga distrik berbagi bentuk yang sama lagi, tapi kali ini jumlah pengulangannya disimpan di variabel, bukan angka tetap.' },
+    mascotMessage: { en: 'reps is 3. Repeat reps times: call the district function, then move right. The count itself is a variable now! 📦🔧', id: 'ulangan adalah 3. Ulangi sebanyak ulangan kali: panggil fungsi distrik, lalu gerak kanan. Jumlahnya sendiri sekarang variabel! 📦🔧' },
+    gridRows: 4, gridCols: 10, cells: emptyGrid(4, 10), startPos: [0, 0],
+    items: [{ id: 'd1', pos: [1, 3] }, { id: 'd2', pos: [2, 6] }, { id: 'd3', pos: [3, 9] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'variables', 'functions'], requiredCategories: ['variables', 'functions'], optimalBlockCount: 10, xpReward: 390,
+    hints: [
+      { en: 'Define the district as Right, Right, Down. Set reps to 3.', id: 'Definisikan distrik sebagai Kanan, Kanan, Bawah. Isi ulangan dengan 3.' },
+      { en: 'Repeat reps times: call the district, then Move Right.', id: 'Ulangi sebanyak ulangan kali: panggil distriknya, lalu Gerak Kanan.' },
+    ],
+    starThresholds: [22, 15, 12, 10],
+  },
+  {
+    id: 'eco-20', worldId: 'eco', number: 20,
+    title: { en: 'Eco City Grand Tour', id: 'Tur Besar Kota Hijau' },
+    story: { en: 'Every trick Sol has learned, in one long round: a variable-controlled function loop through four districts, an IF-guarded detour around the river, and a final list of two stops home.', id: 'Semua trik yang telah dipelajari Sol, dalam satu putaran panjang: perulangan fungsi terkendali variabel melalui empat distrik, jalan putar berpenjaga JIKA di sekitar sungai, dan daftar akhir dua perhentian pulang.' },
+    mascotMessage: { en: 'reps is 4, looping the district function with a link road. Then an IF dips around the river. Then two more stops home. Everything, together! 🏙️👷', id: 'ulangan adalah 4, mengulang fungsi distrik dengan jalan penghubung. Lalu JIKA turun di sekitar sungai. Lalu dua perhentian lagi pulang. Semuanya, bersama! 🏙️👷' },
+    gridRows: 12, gridCols: 17,
+    cells: (() => { const g = emptyGrid(12, 17); g[8][13] = 'obstacle'; g[8][14] = 'obstacle'; return g })(),
+    startPos: [0, 0],
+    items: [
+      { id: 'd1', pos: [2, 3] }, { id: 'd2', pos: [4, 6] }, { id: 'd3', pos: [6, 9] }, { id: 'd4', pos: [8, 12] },
+      { id: 'river', pos: [8, 15] }, { id: 'hub', pos: [11, 16] },
+    ],
+    goalType: 'collect_all',
+    availableCategories: ['move', 'loops', 'variables', 'logic', 'functions', 'lists'],
+    requiredCategories: ['functions', 'variables', 'logic'],
+    optimalBlockCount: 24, xpReward: 430,
+    hints: [
+      { en: 'Define the district as Right, Down, Right, Down. Set reps to 4. Repeat reps times: call it, then Move Right.', id: 'Definisikan distrik sebagai Kanan, Bawah, Kanan, Bawah. Isi ulangan dengan 4. Ulangi sebanyak ulangan kali: panggil, lalu Gerak Kanan.' },
+      { en: 'Then inside an IF: down 2, right 3, up 2 around the river. Finally down 3, right 1 to the hub.', id: 'Lalu di dalam JIKA: turun 2, kanan 3, naik 2 mengelilingi sungai. Terakhir turun 3, kanan 1 ke pusat.' },
+    ],
+    starThresholds: [52, 37, 29, 24],
   },
 
 ]

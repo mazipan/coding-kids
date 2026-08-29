@@ -20,5 +20,5 @@ export const loopsWorld: World = {
     accentColor: '#f97316',
     textColor: '#fed7aa',
   },
-  lessonCount: 10,
+  lessonCount: 20,
 }

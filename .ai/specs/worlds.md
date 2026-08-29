@@ -4,22 +4,22 @@
 
 | ID | Emoji | Concept | Ages | Lessons |
 |----|-------|---------|------|---------|
-| jungle | 🌿 | Sequences | 5–7 | 10 |
-| space | 🚀 | Loops | 7–9 | 10 |
-| loops | 🔄 | Loop Efficiency | 8–10 | 10 |
-| ocean | 🌊 | Variables | 9–11 | 10 |
-| caves | 💎 | Conditions | 10–12 | 10 |
-| factory | 🤖 | Functions | 11–13 | 10 |
-| portal | ⏰ | Arrays & Lists | 12–14 | 10 |
-| jurassic | 🦕 | Real-World Pathfinding | 10–14 | 10 |
-| parking | 🚗 | Sorting & Routing | 10–14 | 10 |
-| sorting | 📦 | Algorithms & Data | 11–14 | 10 |
-| debugging | 🐛 | Debugging | 11–14 | 10 |
-| orchestra | 🎵 | Loops & Functions | 8–12 | 10 |
-| cove | 🧭 | Coordinates & Position | 10–13 | 10 |
-| eco | 🌱 | Decomposition & Reuse | 10–14 | 10 |
+| jungle | 🌿 | Sequences | 5–7 | 20 |
+| space | 🚀 | Loops | 7–9 | 20 |
+| loops | 🔄 | Loop Efficiency | 8–10 | 20 |
+| ocean | 🌊 | Variables | 9–11 | 20 |
+| caves | 💎 | Conditions | 10–12 | 20 |
+| factory | 🤖 | Functions | 11–13 | 20 |
+| portal | ⏰ | Arrays & Lists | 12–14 | 20 |
+| jurassic | 🦕 | Real-World Pathfinding | 10–14 | 20 |
+| parking | 🚗 | Sorting & Routing | 10–14 | 20 |
+| sorting | 📦 | Algorithms & Data | 11–14 | 20 |
+| debugging | 🐛 | Debugging | 11–14 | 20 |
+| orchestra | 🎵 | Loops & Functions | 8–12 | 20 |
+| cove | 🧭 | Coordinates & Position | 10–13 | 20 |
+| eco | 🌱 | Decomposition & Reuse | 10–14 | 20 |
 
-Every block-coding world now carries `lessonCount: 10` — see "Keeping lesson counts in sync" below for the
+Every block-coding world now carries `lessonCount: 20` — see "Keeping lesson counts in sync" below for the
 rule that keeps it that way. `loops` (Loop Land) sits between `space` and `ocean` in `WORLDS`/`src/data/
 worlds/index.ts`; it was missing from this table before this rule existed even though the world itself
 predates it.
