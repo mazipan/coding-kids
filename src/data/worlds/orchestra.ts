@@ -19,7 +19,6 @@ export const orchestraWorld: World = {
     accentColor: '#f472b6',
     textColor: '#fce7f3',
   },
-  unlockAtXP: 999999,
   lessonCount: 10,
   isBonus: true,
 }

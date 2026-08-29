@@ -2,23 +2,23 @@
 
 ## Block coding worlds
 
-| ID | Emoji | Concept | Ages | unlockAtXP | Lessons |
-|----|-------|---------|------|------------|---------|
-| jungle | 🌿 | Sequences | 5–7 | 0 | 6 |
-| space | 🚀 | Loops | 7–9 | 100 | 6 |
-| ocean | 🌊 | Variables | 9–10 | 350 | 5 |
-| caves | 💎 | Conditions | 10–11 | 700 | 6 |
-| factory | 🤖 | Functions | 11–13 | 1250 | 6 |
-| portal | ⏰ | Arrays & Lists | 12–14 | 1650 | 10 |
-| jurassic | 🦕 | Real-World Pathfinding | 10–14 | bonus gate | 10 |
-| parking | 🚗 | Sorting & Routing | 10–14 | bonus gate | 10 |
-| sorting | 📦 | Algorithms & Data | 11–14 | bonus gate | 10 |
-| debugging | 🐛 | Debugging | 11–14 | bonus gate | 10 |
-| orchestra | 🎵 | Loops & Functions | 8–12 | bonus gate | 10 |
-| cove | 🧭 | Coordinates & Position | 10–13 | bonus gate | 10 |
-| eco | 🌱 | Decomposition & Reuse | 10–14 | bonus gate | 10 |
+| ID | Emoji | Concept | Ages | Lessons |
+|----|-------|---------|------|---------|
+| jungle | 🌿 | Sequences | 5–7 | 6 |
+| space | 🚀 | Loops | 7–9 | 6 |
+| ocean | 🌊 | Variables | 9–10 | 5 |
+| caves | 💎 | Conditions | 10–11 | 6 |
+| factory | 🤖 | Functions | 11–13 | 6 |
+| portal | ⏰ | Arrays & Lists | 12–14 | 10 |
+| jurassic | 🦕 | Real-World Pathfinding | 10–14 | 10 |
+| parking | 🚗 | Sorting & Routing | 10–14 | 10 |
+| sorting | 📦 | Algorithms & Data | 11–14 | 10 |
+| debugging | 🐛 | Debugging | 11–14 | 10 |
+| orchestra | 🎵 | Loops & Functions | 8–12 | 10 |
+| cove | 🧭 | Coordinates & Position | 10–13 | 10 |
+| eco | 🌱 | Decomposition & Reuse | 10–14 | 10 |
 
-Bonus worlds unlock after the final main-world lesson is complete. Within every bonus world, lessons still unlock sequentially: lesson 1 is initially open and lesson N requires lesson N−1. Three bonus worlds ship their own tutorial (`orchestra-0`, `cove-0`, `eco-0`) and gate lesson 1 behind it — see `TUTORIAL_GATED_BONUS_WORLDS` in `src/store/useProgress.ts`.
+The blocks path has no lock of any kind (INV-L2): every world — main and bonus alike — and every lesson within it is playable from the start, regardless of XP or any other lesson's completion state. `World` has no `unlockAtXP` field. `isBonus` still marks the seven bonus worlds for display purposes (the "BONUS" badge and the separate section on the world map) but no longer gates access to them.
 
 `eco` (Eco City) is a capstone: it uses all six existing Blockly categories and introduces no new block, no new engine behaviour, and no new goal type. Every one of its canonical routes is simulated in `tests/ecoCityLessons.test.ts`; any change to an Eco City grid must keep that test green.
 
@@ -28,7 +28,10 @@ Source: `src/data/worlds/` — one file per world (e.g. `jungle.ts` exports `jun
 
 ## Lesson unlock rules
 
-- Lesson 0 in any world: always unlocked once the world itself is unlocked (lesson numbering is 0-indexed)
+**Blocks path:** none — every lesson in every world is accessible from the start (INV-L2).
+
+**Thinking path (INV-L1):**
+- Lesson 0 in any world: always unlocked (lesson numbering is 0-indexed)
 - Lesson N: requires lesson N-1 to be completed (`completed: true` in `useProgress`)
 
 ## Lesson fields
@@ -298,15 +301,14 @@ Code Cub → Junior Coder → ... → Master Coder (6650+ XP). Full table in `sr
        accentColor: string,   // hex for buttons/highlights
        textColor: string,     // hex for readable text on the dark bg
      },
-     unlockAtXP: number,      // XP required to access; use 999999 for bonus worlds
      lessonCount: number,     // set to the number of lessons you're adding
-     isBonus?: true,          // only set for bonus worlds (unlockAtXP: 999999)
+     isBonus?: true,          // only set for bonus worlds — display grouping only, does not gate access (INV-L2)
    }
    ```
 3. Append the lessons to `src/data/lessons.ts` following the "Adding a new block coding lesson" steps above.
 4. If the new world introduces a new Blockly category (beyond `move`, `loops`, `variables`, `logic`, `functions`, `lists`), add it to `src/blockly/toolboxes.ts` and document it in the Blockly toolbox categories table above.
 5. Run `bun run build`.
-6. Add a decision log entry in `.ai/decisions/log/` explaining the new concept and XP unlock threshold choice.
+6. Add a decision log entry in `.ai/decisions/log/` explaining the new concept and, if it's a bonus world, why.
 
 ---
 

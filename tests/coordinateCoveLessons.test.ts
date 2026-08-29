@@ -88,7 +88,6 @@ describe('Coordinate Cove — world shape', () => {
   test('the world is a bonus world with a tutorial plus 10 lessons', () => {
     const world = getWorld('cove')
     expect(world?.isBonus).toBe(true)
-    expect(world?.unlockAtXP).toBe(999999)
     expect(getLessonsByWorld('cove')).toHaveLength(world?.lessonCount)
     expect(lessonById('cove-0').isTutorial).toBe(true)
   })
@@ -237,25 +236,15 @@ describe('Coordinate Cove — off-by-one debug lesson', () => {
 })
 
 describe('Coordinate Cove — unlock order', () => {
-  test('INV-L1/INV-L2: the world needs the main finale, then the tutorial, then each lesson in turn', () => {
+  test('INV-L2: every lesson is available immediately, with no finale or prior-lesson gate', () => {
     const progress: PlayerProgress = { xp: 0, level: 1, lessons: {}, badges: [], totalStars: 0, lastPlayed: '' }
-    expect(isLessonAvailable(progress, 'cove-0', 'cove')).toBe(false)
-
-    progress.lessons['portal-4'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'cove-0', 'cove')).toBe(true)
-    expect(isLessonAvailable(progress, 'cove-1', 'cove')).toBe(false)
-
-    progress.lessons['cove-0'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'cove-1', 'cove')).toBe(true)
-    expect(isLessonAvailable(progress, 'cove-2', 'cove')).toBe(false)
-
-    progress.lessons['cove-1'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'cove-2', 'cove')).toBe(true)
   })
 
-  test('untutorialed bonus worlds keep their existing lesson-1 behaviour', () => {
+  test('bonus worlds have no lesson-1 gate either', () => {
     const progress: PlayerProgress = { xp: 0, level: 1, lessons: {}, badges: [], totalStars: 0, lastPlayed: '' }
-    progress.lessons['portal-4'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'jurassic-1', 'jurassic')).toBe(true)
   })
 })

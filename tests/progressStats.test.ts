@@ -157,19 +157,14 @@ describe('per-world figures', () => {
 })
 
 describe('unlock state', () => {
-  test('blocks worlds follow the XP gate, bonus worlds the final-lesson gate', () => {
+  test('INV-L2 — every blocks world, main and bonus, is unlocked from the start', () => {
     const locked = getPathStats(EMPTY, 'blocks').worlds
-    expect(locked.find(w => w.id === 'jungle')?.unlocked).toBe(true)
-    expect(locked.find(w => w.id === 'space')?.unlocked).toBe(false)
-    expect(locked.find(w => w.id === 'jurassic')?.unlocked).toBe(false)
-
-    const rich = getPathStats(makeProgress({}, 999_999), 'blocks').worlds
-    expect(rich.find(w => w.id === 'space')?.unlocked).toBe(true)
-    // XP alone never opens a bonus world.
-    expect(rich.find(w => w.id === 'jurassic')?.unlocked).toBe(false)
+    expect(locked.every(w => w.unlocked)).toBe(true)
+    expect(locked.find(w => w.id === 'space')?.unlocked).toBe(true)
+    expect(locked.find(w => w.id === 'jurassic')?.unlocked).toBe(true)
 
     const cleared = getPathStats(makeProgress({ 'portal-4': { stars: 3 } }), 'blocks').worlds
-    expect(cleared.find(w => w.id === 'jurassic')?.unlocked).toBe(true)
+    expect(cleared.every(w => w.unlocked)).toBe(true)
   })
 
   test('INV-L3 — every thinking world is unlocked from the start', () => {

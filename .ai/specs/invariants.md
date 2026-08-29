@@ -38,14 +38,14 @@ Once a badge is awarded it is never removed, even if the triggering condition co
 
 ## Lesson unlock invariants
 
-**INV-L1 — Sequential unlock**  
-Lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 0 (the first lesson) is always accessible once the world is unlocked. This applies to both the blocks path and the thinking path.
+**INV-L1 — Sequential unlock (thinking path only)**  
+In the thinking path, lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 0 (the first lesson) is always accessible. This does **not** apply to the blocks path — see INV-L2.
 
-**INV-L2 — World unlock by XP (blocks path)**  
-In the blocks path, a world is accessible only when `progress.xp >= world.unlockAtXP`. The Jungle world (0 XP) is always accessible.
+**INV-L2 — The blocks path has no lock**  
+Every world in the blocks path — main and bonus alike — is accessible regardless of `progress.xp` or any lesson's completion state, and every lesson within every blocks world is accessible regardless of any other lesson's completion state. There is no XP gate, no bonus-world gate, and no sequential lesson gate anywhere in the blocks path. `progress.xp` and star counts are still tracked and displayed exactly as before (INV-PR1–PR4) — this invariant is about accessibility only, never about scoring.
 
 **INV-L3 — Thinking worlds are always unlocked**  
-All thinking worlds (`patterns`, `logic`, `counting`, `memory`, `nature`, `numbers`, `decomposition`) have `unlockAtXP: 0` and are accessible from the moment a player enters the thinking path. XP earned in either path contributes to the shared pool, but thinking worlds must never be gated by XP. Any new thinking world added in the future must also have `unlockAtXP: 0`.
+All thinking worlds (`patterns`, `logic`, `counting`, `memory`, `nature`, `numbers`, `decomposition`, and every world added since) have `unlockAtXP: 0` and are accessible from the moment a player enters the thinking path. XP earned in either path contributes to the shared pool, but thinking worlds must never be gated by XP. Any new thinking world added in the future must also have `unlockAtXP: 0`.
 
 ---
 

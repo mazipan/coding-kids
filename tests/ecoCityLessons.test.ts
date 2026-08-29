@@ -109,16 +109,10 @@ describe('Eco City', () => {
     expect(run(finale!, times(5, D)).status).toBe('crashed')
   })
 
-  test('bonus lessons require the main finale and the previous lesson', () => {
+  test('INV-L2: bonus lessons need no finale, tutorial, or previous lesson', () => {
     const progress: PlayerProgress = { xp: 0, level: 1, lessons: {}, badges: [], totalStars: 0, lastPlayed: '' }
-    expect(isLessonAvailable(progress, 'eco-1', 'eco')).toBe(false)
-    progress.lessons['portal-4'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'eco-0', 'eco')).toBe(true)
-    expect(isLessonAvailable(progress, 'eco-1', 'eco')).toBe(false)
-    progress.lessons['eco-0'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'eco-1', 'eco')).toBe(true)
-    expect(isLessonAvailable(progress, 'eco-2', 'eco')).toBe(false)
-    progress.lessons['eco-1'] = { completed: true, stars: 1, xpEarned: 0, attempts: 1 }
     expect(isLessonAvailable(progress, 'eco-2', 'eco')).toBe(true)
   })
 })

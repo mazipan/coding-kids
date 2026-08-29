@@ -19,7 +19,6 @@ export const parkingWorld: World = {
     accentColor: '#38bdf8',
     textColor: '#bae6fd',
   },
-  unlockAtXP: 999999,
   lessonCount: 10,
   isBonus: true,
 }

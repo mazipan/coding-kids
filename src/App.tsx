@@ -54,47 +54,27 @@ function GameLayout() {
 // ── Blocks path routes ────────────────────────────────────────
 
 function WorldMapRoute() {
-  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
-  return (
-    <BlocksHome
-      progress={progress}
-      isWorldUnlocked={isWorldUnlocked}
-      isBonusWorldUnlocked={isBonusWorldUnlocked}
-      getLessonProgress={getLessonProgress}
-      isLessonUnlocked={isLessonUnlocked}
-    />
-  )
+  const { getLessonProgress } = useProgress()
+  return <BlocksHome getLessonProgress={getLessonProgress} />
 }
 
 function WorldDetailRoute() {
   const { worldId } = useParams<{ worldId: string }>()
-  const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
+  const { getLessonProgress } = useProgress()
   const world = worldId ? getWorld(worldId) : null
   if (!world) return <Navigate to="/app/blocks" replace />
-  return (
-    <BlocksHome
-      progress={progress}
-      isWorldUnlocked={isWorldUnlocked}
-      isBonusWorldUnlocked={isBonusWorldUnlocked}
-      getLessonProgress={getLessonProgress}
-      isLessonUnlocked={isLessonUnlocked}
-      selectedWorldId={worldId as WorldId}
-    />
-  )
+  return <BlocksHome getLessonProgress={getLessonProgress} selectedWorldId={worldId as WorldId} />
 }
 
 function LessonRoute() {
   const { worldId, lessonNumber } = useParams<{ worldId: string; lessonNumber: string }>()
-  const { completeLesson, getLessonProgress, isWorldUnlocked, isLessonUnlocked, isBonusWorldUnlocked } = useProgress()
+  const { completeLesson, getLessonProgress, isLessonUnlocked } = useProgress()
 
   const lesson = worldId && lessonNumber ? getLessonByNumber(worldId, Number(lessonNumber)) : null
   const world = worldId ? getWorld(worldId) : null
 
-  const worldAccessible = world
-    ? (world.isBonus ? isBonusWorldUnlocked() : isWorldUnlocked(world.unlockAtXP))
-    : false
-
-  if (!lesson || !world || !worldAccessible) {
+  // INV-L2 — the blocks path has no lock; any existing world+lesson pair is accessible.
+  if (!lesson || !world) {
     return <Navigate to="/app/blocks" replace />
   }
 

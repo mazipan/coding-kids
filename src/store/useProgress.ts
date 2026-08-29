@@ -1,14 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 import type { PlayerProgress, LessonProgress } from '../types'
 import { getLevelInfo } from '../data/xpSystem'
+import { WORLDS } from '../data/worlds'
 
 const STORAGE_KEY = 'codekids_progress_v1'
 
-const BONUS_WORLD_IDS = new Set(['jurassic', 'parking', 'sorting', 'debugging', 'orchestra', 'cove', 'eco'])
-const FINAL_LESSON_ID = 'portal-4'
-
-/** Bonus worlds that open with a tutorial (lesson 0) which must be cleared first. */
-const TUTORIAL_GATED_BONUS_WORLDS = new Set(['orchestra', 'cove', 'eco'])
+/** Every blocks-path world id (main and bonus) — INV-L2: none of them are ever locked. */
+const BLOCKS_WORLD_IDS = new Set<string>(WORLDS.map(w => w.id))
 
 const DEFAULT_PROGRESS: PlayerProgress = {
   xp: 0,
@@ -19,23 +17,16 @@ const DEFAULT_PROGRESS: PlayerProgress = {
   lastPlayed: new Date().toISOString(),
 }
 
-/** True once the final main-path lesson is cleared — the shared gate for every bonus world. */
-export function areBonusWorldsUnlocked(progress: PlayerProgress): boolean {
-  return progress.lessons[FINAL_LESSON_ID]?.completed ?? false
+/** Bonus worlds unlock immediately — the blocks path has no lock of any kind (INV-L2). */
+export function areBonusWorldsUnlocked(_progress: PlayerProgress): boolean {
+  return true
 }
 
 export function isLessonAvailable(progress: PlayerProgress, lessonId: string, worldId: string): boolean {
-  if (BONUS_WORLD_IDS.has(worldId)) {
-    if (!progress.lessons[FINAL_LESSON_ID]?.completed) return false
-    const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
-    if (lessonNum === 0) return true
-    if (lessonNum === 1) {
-      return TUTORIAL_GATED_BONUS_WORLDS.has(worldId)
-        ? progress.lessons[`${worldId}-0`]?.completed ?? false
-        : true
-    }
-    return progress.lessons[`${worldId}-${lessonNum - 1}`]?.completed ?? false
-  }
+  // INV-L2 — the blocks path (main and bonus worlds alike) has no lock; every lesson is
+  // playable from the start. Sequential unlock below applies to the thinking path only.
+  if (BLOCKS_WORLD_IDS.has(worldId)) return true
+
   const lessonNum = parseInt(lessonId.split('-')[1] ?? '1', 10)
   if (lessonNum === 0) return true
   if (lessonNum === 1) {

@@ -20,6 +20,5 @@ export const loopsWorld: World = {
     accentColor: '#f97316',
     textColor: '#fed7aa',
   },
-  unlockAtXP: 250,
   lessonCount: 6,
 }
