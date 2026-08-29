@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "audit-lessons": "bun scripts/audit-thinking-lessons.mjs",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && export BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%S.000Z) && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "check": "biome check --write",
     "type-check": "tsc -b --noEmit",
     "dev": "vite",

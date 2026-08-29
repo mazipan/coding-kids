@@ -2,7 +2,7 @@
 
 **Slug:** `feat-static-landing-page-prerender`
 **Date:** 2026-08-29
-**Status:** approved
+**Status:** done
 
 ---
 
@@ -165,4 +165,10 @@ Status: **approved**.
 
 ## Implementation notes
 
-{Filled in by builder after implementation.}
+Implemented all 14 steps as planned, with one addition discovered during implementation:
+
+- **`public/_redirects` removed (deviation, not in original plan).** The repo carried a pre-existing `public/_redirects` file (`/* /index.html 200`, added in an unrelated 2026-08-01 dependency-upgrade commit) that Netlify copies into `dist/` alongside `netlify.toml`'s redirects. Netlify does not clearly guarantee that `netlify.toml` redirects run *before* a `_redirects` file's catch-all — if the `_redirects` catch-all is evaluated first, it would match every path (including `/app/*`) and serve `dist/index.html` unconditionally, silently defeating the new `/app*` → `/app.html` split from step 9. Since `netlify.toml` already fully subsumes what `_redirects` did, the safest fix was to delete the redundant file rather than depend on undocumented cross-source precedence. Documented in `.ai/agents/context.md`'s Deployment section so a future change doesn't reintroduce it.
+- `vite build --ssr src/entry-server.tsx --outDir dist-ssr` emits `dist-ssr/entry-server.js` (a real ESM bundle, `react`/`react-dom`/`framer-motion`/etc. left external per Vite's SSR default) — confirmed by running it once before writing `scripts/prerender.mjs`, per the plan's own caution not to assume the filename.
+- Verified end-to-end in a real browser (headless Chromium via CDP): `bun run build`'s output hydrates with zero console errors/warnings and zero exceptions; the language toggle and the CTA's client-side navigation to `/app` both work correctly post-hydration. Confirmed `dist/index.html`'s `#root` contains real landing markup and `dist/app.html`'s `#root` is empty, and that the `__BUILD_DATE__` text baked into the prerendered HTML matches the client bundle's.
+  - Note for future debugging: most of the verification time on this task went into chasing an apparent hydration bug (duplicated DOM under `#root`) that turned out to be entirely caused by stale/reused local test-server ports in this sandbox, not the shipped code — confirmed by re-running the identical build on freshly-verified ports and getting a clean result every time. If a future agent sees mysterious duplicate content while testing locally, kill and verify port state before suspecting the hydration logic itself.
+- All three verification commands pass (`bunx biome ci`, `bun run type-check`, `bun run build`), and `bun test` passes unchanged (304 pass / 8 skip, pre-existing skips unrelated to this change).

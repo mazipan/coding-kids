@@ -27,7 +27,10 @@ export default defineConfig({
   base: '/',
   define: {
     __COMMIT_SHA__: JSON.stringify(getCommitSha()),
-    __BUILD_DATE__: JSON.stringify(new Date().toISOString()),
+    // Shared across the client and SSR (--ssr) build invocations via the `build`
+    // script's exported BUILD_DATE, so the prerendered landing page and the client
+    // bundle agree on this value and don't hydration-mismatch on Footer's text.
+    __BUILD_DATE__: JSON.stringify(process.env.BUILD_DATE ?? new Date().toISOString()),
   },
   build: {
     chunkSizeWarningLimit: 1200,

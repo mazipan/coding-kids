@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import { TRANSLATIONS, type Language } from './translations'
 
 interface LanguageContextValue {
@@ -17,8 +17,29 @@ function getInitialLanguage(): Language {
   return navigator.language.startsWith('id') ? 'id' : 'en'
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(getInitialLanguage)
+interface LanguageProviderProps {
+  children: ReactNode
+  /**
+   * Pins the first render's language instead of reading localStorage/navigator.language.
+   * Only for hydrating prerendered markup (the landing page): server and client must
+   * agree on the very first render or React logs a hydration mismatch. When set, the
+   * real stored/browser language is detected and applied right after mount instead.
+   * Leave unset for every normal (non-hydrating) mount — it keeps today's exact,
+   * flash-free behavior.
+   */
+  forcedInitialLanguage?: Language
+}
+
+export function LanguageProvider({ children, forcedInitialLanguage }: LanguageProviderProps) {
+  const [language, setLanguageState] = useState<Language>(
+    () => forcedInitialLanguage ?? getInitialLanguage(),
+  )
+
+  useEffect(() => {
+    if (forcedInitialLanguage === undefined) return
+    const detected = getInitialLanguage()
+    setLanguageState(prev => (detected !== prev ? detected : prev))
+  }, [forcedInitialLanguage])
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang)
