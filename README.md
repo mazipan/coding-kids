@@ -1,6 +1,6 @@
 # CodeKids 🚀
 
-A fun, free learning adventure for kids ages 5–14. Two parallel paths: visual block coding and brain-training puzzles. No downloads, no logins, no ads.
+A fun, free learning adventure for kids ages 5–14. Three parallel paths: visual block coding, brain-training puzzles, and digital citizenship. No downloads, no logins, no ads.
 
 **Live:** [coding.mazipan.space](https://coding.mazipan.space) → https://coding-kids.netlify.app/ (_alternative_)
 
@@ -53,14 +53,25 @@ Pattern recognition, logic puzzles, math, science, and reasoning challenges. No 
 | 🎲 Chance Camp | 9–13 | Probability | 10 |
 | 🧭 Spatial Studio | 7–11 | Spatial Reasoning | 10 |
 
+### 🛡️ Digital Citizenship
+Scenario puzzles that teach kids to be safe, private, and kind online. No code editor required. All 4 worlds are unlocked from the start.
+
+| World | Ages | Concept | Lessons |
+|-------|------|---------|---------|
+| 🔑 Password Planet | 5–7 | Secrets & Strong Codes | 10 |
+| 🏝️ Privacy Cove | 8–10 | What's Safe to Share | 10 |
+| 💛 Kindness Kingdom | 8–10 | Being Kind Online | 10 |
+| 🕵️ Scam Detectors | 11–14 | Spotting Scams & Phishing | 10 |
+
 ---
 
 ## Features
 
-- **Two learning paths** — Block Coding and Brain Training, both accessible from the hub at `/app`
-- **Shared XP & stars** — progress flows across both paths; one store, one level system
+- **Three learning paths** — Block Coding, Brain Training, and Digital Citizenship, all accessible from the hub at `/app`
+- **Shared XP & stars** — progress flows across all three paths; one store, one level system
 - **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 7 bonus worlds)
 - **14 brain training worlds** — 140 puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, deduction, constraint planning, probability, and spatial reasoning
+- **4 digital citizenship worlds** — 40 puzzles covering passwords, privacy, kindness, and spotting scams
 - **XP & leveling** — 15 levels from Code Cub to Master Coder
 - **Stars per lesson** — 1–3 stars based on code efficiency (blocks) or attempts (thinking)
 - **Next-world navigation** — each world links directly to the next at the bottom of its lesson list
@@ -121,6 +132,7 @@ src/
 │   ├── GameGrid.tsx            # Absolute-positioned cells, Framer Motion character
 │   ├── Header.tsx              # Sticky nav: logo/back (path-aware), XP bar, stars, EN/ID toggle
 │   ├── Mascot.tsx              # Character + speech bubble
+│   ├── PuzzlePlayer.tsx        # Shared puzzle-type renderer used by both Brain Training and Digital Citizenship
 │   ├── RewardModal.tsx         # Post-lesson modal: stars, XP, level-up banner
 │   ├── StarRating.tsx          # 1–3 stars display
 │   └── XPBar.tsx               # XP progress bar with optional level name (hideLabel prop)
@@ -129,6 +141,8 @@ src/
 │   ├── thinkingLessons/        # 140 tier-one brain training lessons, one file per world
 │   ├── thinkingLessonsAdvanced/ # 140 tier-two brain training lessons, one file per world
 │   ├── thinkingWorlds/         # 14 thinking worlds, one file per world
+│   ├── safetyLessons/          # 40 digital citizenship lessons, one file per world
+│   ├── safetyWorlds/           # 4 digital citizenship worlds, one file per world
 │   ├── worlds/                 # 14 block coding worlds with themes, emoji, characters, one file per world
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), getLevelInfo()
 ├── engine/

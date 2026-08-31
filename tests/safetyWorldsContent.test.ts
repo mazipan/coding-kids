@@ -1,11 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, test } from 'bun:test'
-import { getThinkingLessonsByWorld } from '../src/data/thinkingLessons'
-import { THINKING_WORLDS } from '../src/data/thinkingWorlds'
-import type { ThinkingLesson } from '../src/types'
-
-// Spatial Studio's figure grids and transformation correctness are checked
-// separately in spatialPuzzle.test.ts.
+import { getSafetyLessonsByWorld } from '../src/data/safetyLessons'
+import { SAFETY_WORLDS } from '../src/data/safetyWorlds'
 
 // INV-C5: translation strings never embed directional or status symbols.
 const FORBIDDEN_SYMBOLS = ['←', '→', '▶', '✓', '✗', '✗', '🔒']
@@ -33,9 +29,9 @@ function collectLocalized(node: unknown, path: string, out: Array<{ path: string
   }
 }
 
-describe.each(THINKING_WORLDS.map(w => w.id))('thinking world: %s', worldId => {
-  const world = THINKING_WORLDS.find(w => w.id === worldId)!
-  const lessons = getThinkingLessonsByWorld(worldId)
+describe.each(SAFETY_WORLDS.map(w => w.id))('safety world: %s', worldId => {
+  const world = SAFETY_WORLDS.find(w => w.id === worldId)!
+  const lessons = getSafetyLessonsByWorld(worldId)
 
   test('is registered and always unlocked (INV-L3)', () => {
     expect(world).toBeDefined()
@@ -43,8 +39,9 @@ describe.each(THINKING_WORLDS.map(w => w.id))('thinking world: %s', worldId => {
     expect(world.lessonCount).toBe(lessons.length)
   })
 
-  test('has 20 sequentially numbered lessons (INV-L1)', () => {
-    expect(lessons).toHaveLength(20)
+  // MVP ships tier one only (0-9) — see .ai/plans/2026-08-31-feat-digital-citizenship-path.md.
+  test('has 10 sequentially numbered lessons (INV-L1)', () => {
+    expect(lessons).toHaveLength(10)
     lessons.forEach((lesson, i) => {
       expect(lesson.number).toBe(i)
       expect(lesson.id).toBe(`${worldId}-${i}`)
@@ -81,24 +78,13 @@ describe.each(THINKING_WORLDS.map(w => w.id))('thinking world: %s', worldId => {
   test('every puzzle has a reachable, unambiguous answer', () => {
     for (const lesson of lessons) {
       const p = lesson.puzzle
-      if (p.type === 'pattern') {
-        expect(p.options).toContain(p.answer)
-        expect(new Set(p.options).size).toBe(p.options.length)
-      } else if (p.type === 'math') {
-        expect(p.options).toContain(p.answer)
-        expect(new Set(p.options).size).toBe(p.options.length)
-        expect(p.options).toHaveLength(4)
-      } else if (p.type === 'if-then') {
+      if (p.type === 'if-then') {
         const ids = p.options.map(o => o.id)
         expect(new Set(ids).size).toBe(ids.length)
         expect(ids).toContain(p.answerId)
         expect(p.options).toHaveLength(4)
       } else if (p.type === 'true-false') {
         expect(typeof p.answer).toBe('boolean')
-      } else if (p.type === 'sequence') {
-        const ids = p.steps.map(s => s.id)
-        expect(new Set(ids).size).toBe(ids.length)
-        expect(p.steps.length).toBeGreaterThanOrEqual(3)
       } else if (p.type === 'abstraction') {
         const ids = p.items.map(i => i.id)
         expect(new Set(ids).size).toBe(ids.length)
@@ -106,17 +92,20 @@ describe.each(THINKING_WORLDS.map(w => w.id))('thinking world: %s', worldId => {
         // A multi-select where every item is correct teaches nothing.
         expect(p.correctIds.length).toBeLessThan(p.items.length)
         for (const correct of p.correctIds) expect(ids).toContain(correct)
+      } else if (p.type === 'match') {
+        const leftIds = p.pairs.map(pair => pair.leftId)
+        const rightIds = p.pairs.map(pair => pair.rightId)
+        expect(new Set(leftIds).size).toBe(leftIds.length)
+        expect(new Set(rightIds).size).toBe(rightIds.length)
       } else if (p.type === 'sort') {
-        // `thinking.sort.prompt` is hardcoded to "smallest to largest" whenever a sort
-        // puzzle omits its own `prompt`, so an unprompted sort must genuinely be numeric
-        // ascending order. Tier two also has sorts whose items are not plain numeric
-        // strings (fractions, exponents, clock emoji) — those either carry their own
-        // `prompt` or are covered by the permutation/uniqueness checks in
-        // scripts/audit-thinking-lessons.mjs instead.
-        const allNumeric = p.items.every(item => !Number.isNaN(Number(item)))
-        if (allNumeric) {
-          const numeric = p.answer.map(Number)
-          expect([...numeric].sort((a, b) => a - b)).toEqual(numeric)
+        expect([...p.items].sort().join()).toBe([...p.answer].sort().join())
+        expect(p.items.join()).not.toBe(p.answer.join())
+      } else if (p.type === 'multi-step') {
+        expect(p.steps.length).toBeGreaterThanOrEqual(2)
+        for (const step of p.steps) {
+          const ids = step.options.map(o => o.id)
+          expect(new Set(ids).size).toBe(ids.length)
+          expect(ids).toContain(step.answerId)
         }
       }
     }
@@ -125,7 +114,7 @@ describe.each(THINKING_WORLDS.map(w => w.id))('thinking world: %s', worldId => {
   test('true-false answers never run 3 deep (INV-Q3)', () => {
     const answers = lessons
       .filter(l => l.puzzle.type === 'true-false')
-      .map(l => (l.puzzle as Extract<ThinkingLesson['puzzle'], { type: 'true-false' }>).answer)
+      .map(l => (l.puzzle as { type: 'true-false'; answer: boolean }).answer)
 
     let run = 1
     for (let i = 1; i < answers.length; i++) {
@@ -134,42 +123,21 @@ describe.each(THINKING_WORLDS.map(w => w.id))('thinking world: %s', worldId => {
     }
   })
 
-  test('xp rewards follow the documented difficulty curve (INV-Q5)', () => {
-    // Each 5-lesson block (0-4, 5-9, 10-14, 15-19) must not get cheaper as lessons
-    // get harder within that block.
-    for (let start = 0; start < 20; start += 5) {
-      const block = lessons.slice(start, start + 5).map(l => l.xpReward)
-      expect([...block].sort((a, b) => a - b)).toEqual(block)
-    }
-
-    // Tier two (10-19) must reward more on average than tier one (0-9), mirroring
-    // scripts/audit-thinking-lessons.mjs's own INV-Q5 check — XP is not required to be
-    // globally non-decreasing across the tier boundary, only harder-on-average.
-    const avg = (ls: ThinkingLesson[]) => ls.reduce((s, l) => s + l.xpReward, 0) / ls.length
-    const tierOne = lessons.filter(l => l.number < 10)
-    const tierTwo = lessons.filter(l => l.number >= 10)
-    expect(avg(tierTwo)).toBeGreaterThan(avg(tierOne))
-  })
-
-  // Only the six worlds designed after the tutorial-card pattern was introduced
-  // (math_reasoning, induction, deduction, planning, probability, spatial) open with
-  // one — the original eight worlds predate it and never had one. Regression-guard the
-  // worlds that do have it without inventing a requirement for the ones that don't.
-  test.skipIf(!lessons[0]?.tutorial)('lesson 0 opens the world with a tutorial card', () => {
-    expect(lessons[0].tutorial).toBeDefined()
+  test('the harder half (5-9) rewards more XP on average than the easier half (0-4) (INV-Q5)', () => {
+    const avg = (ls: typeof lessons) => ls.reduce((s, l) => s + l.xpReward, 0) / ls.length
+    const easier = lessons.slice(0, 5)
+    const harder = lessons.slice(5, 10)
+    expect(avg(harder)).toBeGreaterThan(avg(easier))
   })
 })
 
-describe('thinking world themes', () => {
-  // Regression guard for the bug fixed alongside these worlds: a world whose `color`
-  // is missing from either colour map silently renders with the purple fallback.
-  // `getWorldTheme` moved out of ThinkingHome.tsx into a shared module (also used by
-  // SafetyHome.tsx) so both ThinkingHome and SafetyHome stay in sync automatically —
-  // LandingScreen still keeps its own map (different, lighter-context colour values).
+describe('safety world themes', () => {
+  // Regression guard mirroring the thinking-path check: a world whose `color` is
+  // missing from either colour map silently renders with the purple fallback.
   const worldColorThemes = readFileSync(new URL('../src/utils/worldColorThemes.ts', import.meta.url), 'utf8')
   const landing = readFileSync(new URL('../src/screens/LandingScreen.tsx', import.meta.url), 'utf8')
 
-  test.each(THINKING_WORLDS.map(w => [w.id, w.color] as const))(
+  test.each(SAFETY_WORLDS.map(w => [w.id, w.color] as const))(
     '%s uses colour "%s" registered in both colour maps',
     (_id, color) => {
       expect(worldColorThemes).toContain(`${color}:`)
@@ -177,8 +145,8 @@ describe('thinking world themes', () => {
     },
   )
 
-  test('every thinking world colour is distinct', () => {
-    const colors = THINKING_WORLDS.map(w => w.color)
+  test('every safety world colour is distinct', () => {
+    const colors = SAFETY_WORLDS.map(w => w.color)
     expect(new Set(colors).size).toBe(colors.length)
   })
 })

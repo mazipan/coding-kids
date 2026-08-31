@@ -2,7 +2,7 @@
 
 **Slug:** `feat-digital-citizenship-path`
 **Date:** 2026-08-31
-**Status:** approved
+**Status:** in-review
 
 ---
 
@@ -341,4 +341,48 @@ No changes requested. Status → `approved`, ready for Build.
 
 ## Implementation notes
 
-{Filled in by builder after implementation.}
+Implemented in full per the plan, with one deliberate deviation and a few additions surfaced during
+build:
+
+**Deviation — `LandingScreen.tsx`'s `THINKING_COLOR_MAP` was *not* merged into `worldColorThemes.ts`.**
+On inspection the two maps use genuinely different hex values for the same colour name (the shared
+`getWorldTheme` module uses brighter/lighter shades tuned for `ThinkingHome`/`SafetyHome`'s dark
+cards; `THINKING_COLOR_MAP` uses more saturated true colours tuned for the landing page's small
+accent dots). Forcing them into one map would have changed one page's visual appearance —
+an unintended change the plan didn't call for. Instead: `getWorldTheme` was extracted from
+`ThinkingHome.tsx` into `src/utils/worldColorThemes.ts` (genuine duplication removed — this is what
+`SafetyHome.tsx` now also imports), and the 4 new colours (`yellow`, `slate`, `pink`, `red`) were
+added to *both* maps, matching the codebase's existing pattern for every other colour. Recorded here
+rather than silently diverging from the plan text.
+
+**Additions beyond the plan's explicit file list (needed to keep `bun test` green / keep the landing
+page consistent with the new 3-path reality):**
+- `tests/progressStats.test.ts` — updated to assert `stats.safety` alongside `stats.blocks`/`stats.thinking`
+  (the existing "maximums match the lesson tables" test broke once `getAllStats` started summing a
+  third path); added an `INV-L3 — every safety world is unlocked` test mirroring the thinking one.
+- `tests/thinkingWorldsContent.test.ts` — the "colour registered in both maps" regression guard read
+  `ThinkingHome.tsx`'s file source directly; updated to read `worldColorThemes.ts` instead, since
+  that's where the colour map now actually lives.
+- `LandingScreen.tsx` — beyond the plan's "add a mention," added a full third path card (mirroring
+  the existing Blocks/Thinking cards exactly) and a third "Digital Citizenship worlds" showcase row
+  in the ALL WORLDS section, since a mention-only treatment would have looked inconsistent next to
+  the two existing paths' full treatment. Updated `landing.stats.paths` (2→3), `landing.worlds.title`
+  (28→32 worlds), and related copy in both languages.
+- `README.md` — added the Digital Citizenship worlds table and updated the path/world counts in
+  "Features," consistent with the existing Block Coding / Brain Training sections. Left the
+  block-coding and brain-training lesson-count figures in the existing tables untouched — they were
+  already stale before this change (say 6/10 lessons per world; the actual `lessonCount` is now 20
+  everywhere per an earlier, unrelated decision) and fixing that is out of this plan's scope.
+
+**Verification performed:**
+- `bunx biome ci`, `bun run type-check`, `bun run build`, `bun run audit-lessons`, `bun test` — all
+  green (338 pass, 8 pre-existing skips, 0 fail).
+- Manual smoke test via `bun run dev` + headless Chromium: `/app` shows all 3 path cards including
+  the new Digital Citizenship card; `/app/safety` world map and `/app/safety/world/scams` lesson list
+  render correctly (locked/unlocked state, XP values); navigating directly to a locked lesson
+  (`/app/safety/world/scams/9` with no progress) correctly redirects to the world's lesson list
+  (INV-L1); a full DOM dump of `/app/safety` confirms all 4 world names render (an early screenshot
+  appeared to show only 2 due to framer-motion's staggered fade-in still mid-animation at capture
+  time — not a real bug, confirmed via DOM inspection).
+
+No implementation steps were skipped. Ready for dual review (reviewer-code + reviewer-kid).
