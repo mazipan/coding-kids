@@ -2,27 +2,34 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Star, ArrowRight, ArrowLeft, BookOpen } from 'lucide-react'
-import type { ThinkingLesson, ThinkingWorld, LessonProgress } from '../types'
+import type { SafetyLesson, SafetyWorld, LessonProgress } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { useProgress } from '../store/useProgress'
 import { PuzzlePlayer, isPuzzleAnswerCorrect } from '../components/PuzzlePlayer'
 
-interface ThinkingLessonProps {
-  lesson: ThinkingLesson
-  world: ThinkingWorld
+interface SafetyLessonProps {
+  lesson: SafetyLesson
+  world: SafetyWorld
   completeLesson: ReturnType<typeof useProgress>['completeLesson']
   existingProgress: LessonProgress | undefined
   nextLessonNumber?: number
 }
 
-export function ThinkingLessonScreen({
+/**
+ * Mirrors `ThinkingLessonScreen`'s chrome (header, tutorial card, mascot message,
+ * completion card) but navigates under `/app/safety/...`. Deliberately reuses the
+ * `thinking.*` translation keys for puzzle-interaction copy ("Correct!", attempt counter,
+ * etc.) — the rendered text is domain-neutral; see the plan's "Alternatives considered"
+ * for why a parallel `safety.*` copy of the same ~20 keys wasn't worth the duplication.
+ */
+export function SafetyLessonScreen({
   lesson,
   world,
   completeLesson,
   existingProgress,
   nextLessonNumber,
-}: ThinkingLessonProps) {
+}: SafetyLessonProps) {
   const { t, language } = useLanguage()
   const navigate = useNavigate()
   const [showTutorial, setShowTutorial] = useState(!!lesson.tutorial)
@@ -55,9 +62,9 @@ export function ThinkingLessonScreen({
 
   const handleNext = () => {
     if (nextLessonNumber !== undefined) {
-      navigate(`/app/thinking/world/${lesson.worldId}/${nextLessonNumber}`)
+      navigate(`/app/safety/world/${lesson.worldId}/${nextLessonNumber}`)
     } else {
-      navigate(`/app/thinking/world/${lesson.worldId}`)
+      navigate(`/app/safety/world/${lesson.worldId}`)
     }
   }
 

@@ -1,42 +1,42 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Check, Lock, ChevronRight, Play } from 'lucide-react'
-import { THINKING_WORLDS } from '../data/thinkingWorlds'
-import { getThinkingLessonsByWorld } from '../data/thinkingLessons'
+import { SAFETY_WORLDS } from '../data/safetyWorlds'
+import { getSafetyLessonsByWorld } from '../data/safetyLessons'
 import { StarRating } from '../components/StarRating'
-import type { ThinkingWorldId, LessonProgress, PlayerProgress } from '../types'
+import type { SafetyWorldId, LessonProgress, PlayerProgress } from '../types'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import { useProgress } from '../store/useProgress'
 import { getWorldTheme } from '../utils/worldColorThemes'
 
-interface ThinkingHomeProps {
+interface SafetyHomeProps {
   progress: PlayerProgress
   getLessonProgress: (id: string) => LessonProgress | undefined
   isWorldUnlocked: (xp: number) => boolean
   isLessonUnlocked: (lessonId: string, worldId: string) => boolean
-  selectedWorldId?: ThinkingWorldId
+  selectedWorldId?: SafetyWorldId
 }
 
-export function ThinkingHome({
+export function SafetyHome({
   progress,
   getLessonProgress,
   isWorldUnlocked,
   isLessonUnlocked,
   selectedWorldId,
-}: ThinkingHomeProps) {
+}: SafetyHomeProps) {
   const { t, language } = useLanguage()
   const navigate = useNavigate()
 
-  const activeWorld = selectedWorldId ? THINKING_WORLDS.find(w => w.id === selectedWorldId) : null
-  const worldLessons = selectedWorldId ? getThinkingLessonsByWorld(selectedWorldId) : []
+  const activeWorld = selectedWorldId ? SAFETY_WORLDS.find(w => w.id === selectedWorldId) : null
+  const worldLessons = selectedWorldId ? getSafetyLessonsByWorld(selectedWorldId) : []
 
   if (activeWorld && selectedWorldId) {
     const theme = getWorldTheme(activeWorld.color)
     const completedCount = worldLessons.filter(l => getLessonProgress(l.id)?.completed).length
     const allDone = completedCount === worldLessons.length
-    const currentWorldIdx = THINKING_WORLDS.findIndex(w => w.id === selectedWorldId)
-    const nextWorld = THINKING_WORLDS[currentWorldIdx + 1] ?? null
+    const currentWorldIdx = SAFETY_WORLDS.findIndex(w => w.id === selectedWorldId)
+    const nextWorld = SAFETY_WORLDS[currentWorldIdx + 1] ?? null
 
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
@@ -81,7 +81,7 @@ export function ThinkingHome({
             return (
               <motion.button
                 key={lesson.id}
-                onClick={() => unlocked && navigate(`/app/thinking/world/${selectedWorldId}/${lesson.number}`)}
+                onClick={() => unlocked && navigate(`/app/safety/world/${selectedWorldId}/${lesson.number}`)}
                 disabled={!unlocked}
                 className={`relative text-left rounded-2xl p-4 border transition-all ${
                   unlocked ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
@@ -148,7 +148,7 @@ export function ThinkingHome({
 
         {nextWorld && (
           <motion.button
-            onClick={() => navigate(`/app/thinking/world/${nextWorld.id}`)}
+            onClick={() => navigate(`/app/safety/world/${nextWorld.id}`)}
             className="mt-8 w-full flex items-center gap-4 p-5 rounded-2xl border hover:border-white/40 transition-all text-left"
             style={{
               background: getWorldTheme(nextWorld.color).bgGradient,
@@ -187,23 +187,23 @@ export function ThinkingHome({
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
         >
-          🧠
+          🛡️
         </motion.div>
-        <h1 className="text-3xl font-black text-white mb-2">{t('thinking.title')}</h1>
-        <p className="text-purple-300">{t('thinking.sub')}</p>
+        <h1 className="text-3xl font-black text-white mb-2">{t('safety.title')}</h1>
+        <p className="text-purple-300">{t('safety.sub')}</p>
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-        {THINKING_WORLDS.map((world, idx) => {
+        {SAFETY_WORLDS.map((world, idx) => {
           const unlocked = isWorldUnlocked(world.unlockAtXP)
           const theme = getWorldTheme(world.color)
-          const lessons = getThinkingLessonsByWorld(world.id)
+          const lessons = getSafetyLessonsByWorld(world.id)
           const completedCount = lessons.filter(l => getLessonProgress(l.id)?.completed).length
 
           return (
             <motion.button
               key={world.id}
-              onClick={() => unlocked && navigate(`/app/thinking/world/${world.id}`)}
+              onClick={() => unlocked && navigate(`/app/safety/world/${world.id}`)}
               disabled={!unlocked}
               className={`relative rounded-3xl overflow-hidden text-left transition-all ${
                 unlocked ? 'cursor-pointer hover:scale-105' : 'cursor-not-allowed opacity-60'
@@ -288,10 +288,10 @@ export function ThinkingHome({
 }
 
 // Route wrapper that pulls progress from store
-export function ThinkingHomeWithProgress({ selectedWorldId }: { selectedWorldId?: ThinkingWorldId }) {
+export function SafetyHomeWithProgress({ selectedWorldId }: { selectedWorldId?: SafetyWorldId }) {
   const { progress, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
   return (
-    <ThinkingHome
+    <SafetyHome
       progress={progress}
       getLessonProgress={getLessonProgress}
       isWorldUnlocked={isWorldUnlocked}

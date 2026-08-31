@@ -19,23 +19,27 @@ const en: Translations = {
   'landing.stats.ages': 'age range',
 
   'landing.paths.label': 'Choose Your Path',
-  'landing.paths.title': 'Two ways to grow',
-  'landing.paths.sub': 'Pick the path that fits — or explore both. XP and stars flow across the whole adventure.',
+  'landing.paths.title': 'Three ways to grow',
+  'landing.paths.sub': 'Pick the path that fits — or explore all three. XP and stars flow across the whole adventure.',
   'landing.paths.blocks.title': 'Block Coding',
   'landing.paths.blocks.desc': 'Write real programs with colorful drag-and-drop blocks. Kids learn genuine programming concepts — no syntax, no frustration.',
   'landing.paths.blocks.concepts': 'Sequences · Loops · Variables · Conditions · Functions · Arrays',
   'landing.paths.thinking.title': 'Brain Training',
   'landing.paths.thinking.desc': 'Solve puzzles that build pattern recognition, logical thinking, and math reasoning — no keyboard required.',
   'landing.paths.thinking.topics': 'Patterns · Logic · Math · Memory · Science · Reasoning',
+  'landing.paths.safety.title': 'Digital Citizenship',
+  'landing.paths.safety.desc': 'Scenario puzzles that teach kids to be safe, private, and kind online — passwords, privacy, kindness, and spotting scams.',
+  'landing.paths.safety.topics': 'Passwords · Privacy · Kindness · Scams',
   'landing.paths.stat.worlds': 'worlds',
   'landing.paths.stat.lessons': 'lessons',
   'landing.paths.stat.puzzles': 'puzzles',
   'landing.paths.stat.ages': 'ages',
 
-  'landing.worlds.title': '28 Worlds to Explore',
-  'landing.worlds.sub': 'Browse every world across both paths — each one teaches a different concept at its own depth.',
+  'landing.worlds.title': '32 Worlds to Explore',
+  'landing.worlds.sub': 'Browse every world across all three paths — each one teaches a different concept at its own depth.',
   'landing.worlds.blocks.label': 'Block Coding',
   'landing.worlds.thinking.label': 'Brain Training',
+  'landing.worlds.safety.label': 'Digital Citizenship',
   'landing.worlds.lessons': 'lessons',
 
   'landing.trust.label': 'For Parents',
@@ -238,6 +242,8 @@ const en: Translations = {
   'path.blocks.desc': 'Write code with visual blocks. 11 themed worlds to explore!',
   'path.thinking.name': 'Brain Training',
   'path.thinking.desc': 'Patterns, logic & math puzzles. Build your problem-solving superpowers!',
+  'path.safety.name': 'Digital Citizenship',
+  'path.safety.desc': 'Passwords, privacy, kindness & spotting scams. Be smart and safe online!',
   'path.start': 'Start',
   'path.continue': 'Continue',
   'path.back': 'Back to home',
@@ -286,6 +292,10 @@ const en: Translations = {
   'thinking.grid.prompt': 'Tap every square that fits! Then press Check.',
   'thinking.grid.check': 'Check',
   'thinking.tutorial.dismiss': "Got it! Let's go!",
+
+  // ── Safety path ────────────────────────────────
+  'safety.title': 'Digital Citizenship',
+  'safety.sub': 'Be smart, safe, and kind online! 🛡️',
 }
 
 const id: Translations = {
@@ -305,23 +315,27 @@ const id: Translations = {
   'landing.stats.ages': 'rentang usia',
 
   'landing.paths.label': 'Pilih Jalurmu',
-  'landing.paths.title': 'Dua cara untuk berkembang',
-  'landing.paths.sub': 'Pilih jalur yang cocok — atau jelajahi keduanya. XP dan bintang mengalir di seluruh petualangan.',
+  'landing.paths.title': 'Tiga cara untuk berkembang',
+  'landing.paths.sub': 'Pilih jalur yang cocok — atau jelajahi ketiganya. XP dan bintang mengalir di seluruh petualangan.',
   'landing.paths.blocks.title': 'Coding Blok',
   'landing.paths.blocks.desc': 'Tulis program nyata dengan blok berwarna yang bisa diseret. Anak-anak belajar konsep pemrograman sungguhan — tanpa sintaks, tanpa frustrasi.',
   'landing.paths.blocks.concepts': 'Urutan · Perulangan · Variabel · Kondisi · Fungsi · Array',
   'landing.paths.thinking.title': 'Latihan Otak',
   'landing.paths.thinking.desc': 'Selesaikan teka-teki yang membangun pengenalan pola, berpikir logis, dan penalaran matematika — tanpa keyboard.',
   'landing.paths.thinking.topics': 'Pola · Logika · Matematika · Memori · Sains · Penalaran',
+  'landing.paths.safety.title': 'Warga Digital',
+  'landing.paths.safety.desc': 'Teka-teki skenario yang mengajarkan anak-anak untuk aman, menjaga privasi, dan baik secara online — kata sandi, privasi, kebaikan, dan mengenali penipuan.',
+  'landing.paths.safety.topics': 'Kata Sandi · Privasi · Kebaikan · Penipuan',
   'landing.paths.stat.worlds': 'dunia',
   'landing.paths.stat.lessons': 'pelajaran',
   'landing.paths.stat.puzzles': 'teka-teki',
   'landing.paths.stat.ages': 'usia',
 
-  'landing.worlds.title': '28 Dunia untuk Dijelajahi',
-  'landing.worlds.sub': 'Jelajahi setiap dunia di kedua jalur — masing-masing mengajarkan konsep yang berbeda.',
+  'landing.worlds.title': '32 Dunia untuk Dijelajahi',
+  'landing.worlds.sub': 'Jelajahi setiap dunia di ketiga jalur — masing-masing mengajarkan konsep yang berbeda.',
   'landing.worlds.blocks.label': 'Coding Blok',
   'landing.worlds.thinking.label': 'Latihan Otak',
+  'landing.worlds.safety.label': 'Warga Digital',
   'landing.worlds.lessons': 'pelajaran',
 
   'landing.trust.label': 'Untuk Orang Tua',
@@ -524,6 +538,8 @@ const id: Translations = {
   'path.blocks.desc': 'Tulis kode dengan blok visual. 11 dunia bertema untuk dijelajahi!',
   'path.thinking.name': 'Latihan Otak',
   'path.thinking.desc': 'Puzzle pola, logika & matematika. Kembangkan kemampuan memecahkan masalah!',
+  'path.safety.name': 'Warga Digital',
+  'path.safety.desc': 'Kata sandi, privasi, kebaikan & mengenali penipuan. Cerdas dan aman secara online!',
   'path.start': 'Mulai',
   'path.continue': 'Lanjutkan',
   'path.back': 'Kembali ke beranda',
@@ -572,6 +588,10 @@ const id: Translations = {
   'thinking.grid.prompt': 'Ketuk setiap kotak yang sesuai! Lalu tekan Cek.',
   'thinking.grid.check': 'Cek',
   'thinking.tutorial.dismiss': 'Mengerti! Ayo mulai!',
+
+  // ── Safety path ────────────────────────────────
+  'safety.title': 'Warga Digital',
+  'safety.sub': 'Cerdas, aman, dan baik secara online! 🛡️',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }

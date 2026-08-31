@@ -278,6 +278,39 @@ export interface ThinkingLesson {
 
 // ── Blocks path ───────────────────────────────────────────────
 
+// ── Safety path (Digital Citizenship) ────────────────────────
+
+export type SafetyWorldId = 'passwords' | 'privacy' | 'kindness' | 'scams'
+
+export interface SafetyWorld {
+  id: SafetyWorldId
+  name: LocalizedString
+  emoji: string
+  tagline: LocalizedString
+  ageRange: string
+  concept: LocalizedString
+  color: string
+  bgGradient: string
+  unlockAtXP: number
+  lessonCount: number
+}
+
+/** Puzzle shapes are domain-agnostic — the safety path reuses the thinking path's puzzle system. */
+export type SafetyPuzzle = ThinkingPuzzle
+
+export interface SafetyLesson {
+  id: string
+  worldId: SafetyWorldId
+  number: number
+  title: LocalizedString
+  mascotMessage: LocalizedString
+  xpReward: number
+  puzzle: SafetyPuzzle
+  tutorial?: ThinkingLessonTutorial
+}
+
+// ── Blocks path ───────────────────────────────────────────────
+
 export type ActionType = 'move_right' | 'move_left' | 'move_up' | 'move_down'
 
 export interface GameAction {

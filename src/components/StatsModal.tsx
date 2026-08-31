@@ -6,7 +6,7 @@ import { getLevelInfo, getNextLevelInfo, getXPProgress } from '../data/xpSystem'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import type { PlayerProgress } from '../types'
-import { getAllStats, type PathId, type PathStats, type WorldStats } from '../utils/progressStats'
+import { getAllStats, type AllStats, type PathId, type PathStats, type WorldStats } from '../utils/progressStats'
 
 interface StatsModalProps {
   onClose: () => void
@@ -20,11 +20,19 @@ interface StatsModalProps {
 const PATH_ACCENT: Record<PathId, string> = {
   blocks: '#a855f7',
   thinking: '#38bdf8',
+  safety: '#fb7185',
 }
 
 const PATH_EMOJI: Record<PathId, string> = {
   blocks: '🧩',
   thinking: '🧠',
+  safety: '🛡️',
+}
+
+function statsForPath(stats: AllStats, path: PathId): PathStats {
+  if (path === 'blocks') return stats.blocks
+  if (path === 'thinking') return stats.thinking
+  return stats.safety
 }
 
 function ProgressBar({ percent, color }: { percent: number; color: string }) {
@@ -137,7 +145,7 @@ export function StatsModal({ onClose, progress, initialPath, currentPath }: Stat
   const level = getLevelInfo(progress.xp)
   const nextLevel = getNextLevelInfo(progress.xp)
   const xpProgress = getXPProgress(progress.xp)
-  const activeStats = activePath === 'blocks' ? stats.blocks : stats.thinking
+  const activeStats = statsForPath(stats, activePath)
 
   return (
     <ModalOverlay
@@ -231,9 +239,9 @@ export function StatsModal({ onClose, progress, initialPath, currentPath }: Stat
               </div>
 
               {/* Path tabs */}
-              <div className="mt-5 grid grid-cols-2 gap-2">
-                {(['blocks', 'thinking'] as PathId[]).map(path => {
-                  const pathStats = path === 'blocks' ? stats.blocks : stats.thinking
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {(['blocks', 'thinking', 'safety'] as PathId[]).map(path => {
+                  const pathStats = statsForPath(stats, path)
                   const isActive = activePath === path
 
                   return (
