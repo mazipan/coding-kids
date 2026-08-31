@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Code2, Lightbulb, Gift, ShieldCheck, GraduationCap } from 'lucide-react'
 import { WORLDS } from '../data/worlds'
 import { THINKING_WORLDS } from '../data/thinkingWorlds'
+import { SAFETY_WORLDS } from '../data/safetyWorlds'
 import { useLanguage } from '../i18n/LanguageProvider'
 import { localize } from '../i18n/localize'
 import { Logo } from '../components/Logo'
@@ -28,6 +29,10 @@ const THINKING_COLOR_MAP: Record<string, { accent: string; bg: string }> = {
   sky:    { accent: '#0ea5e9', bg: 'rgba(14,165,233,0.08)' },
   lime:   { accent: '#84cc16', bg: 'rgba(132,204,22,0.08)' },
   fuchsia:{ accent: '#d946ef', bg: 'rgba(217,70,239,0.08)' },
+  yellow: { accent: '#eab308', bg: 'rgba(234,179,8,0.08)' },
+  slate:  { accent: '#64748b', bg: 'rgba(100,116,139,0.08)' },
+  pink:   { accent: '#ec4899', bg: 'rgba(236,72,153,0.08)' },
+  red:    { accent: '#ef4444', bg: 'rgba(239,68,68,0.08)' },
 }
 
 function FadeIn({
@@ -67,6 +72,7 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
 
   const totalCodingLessons = WORLDS.filter(w => !w.isBonus).reduce((sum, w) => sum + w.lessonCount, 0)
   const totalThinkingLessons = THINKING_WORLDS.reduce((sum, w) => sum + w.lessonCount, 0)
+  const totalSafetyLessons = SAFETY_WORLDS.reduce((sum, w) => sum + w.lessonCount, 0)
 
   const gradientHeadline = (text: string) => {
     const words = text.split(' ')
@@ -216,9 +222,9 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
             transition={{ delay: 0.4 }}
           >
             {[
-              { value: '2', label: t('landing.stats.paths') },
-              { value: String(WORLDS.length + THINKING_WORLDS.length), label: t('landing.stats.worlds') },
-              { value: `${totalThinkingLessons}+`, label: t('landing.stats.puzzles') },
+              { value: '3', label: t('landing.stats.paths') },
+              { value: String(WORLDS.length + THINKING_WORLDS.length + SAFETY_WORLDS.length), label: t('landing.stats.worlds') },
+              { value: `${totalThinkingLessons + totalSafetyLessons}+`, label: t('landing.stats.puzzles') },
               { value: '5–14', label: t('landing.stats.ages') },
             ].map(({ value, label }) => (
               <div
@@ -246,7 +252,7 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {/* Block Coding */}
             <FadeIn delay={0.05}>
               <div
@@ -344,6 +350,55 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
                 </div>
               </div>
             </FadeIn>
+
+            {/* Digital Citizenship */}
+            <FadeIn delay={0.15}>
+              <div
+                className="relative rounded-3xl p-7 sm:p-8 border border-rose-500/20 overflow-hidden h-full flex flex-col"
+                style={{ background: 'linear-gradient(135deg, #1a020e 0%, #240412 50%, #2e0616 100%)' }}
+              >
+                <div className="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-[60px] pointer-events-none" />
+                <div className="relative z-10 flex flex-col flex-1">
+                  <div
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5"
+                    style={{ background: 'rgba(244,63,94,0.2)', border: '1px solid rgba(244,63,94,0.3)' }}
+                  >
+                    <ShieldCheck size={24} color="#fb7185" />
+                  </div>
+                  <h3 className="text-2xl font-extrabold text-white mb-3">
+                    {t('landing.paths.safety.title')}
+                  </h3>
+                  <p className="text-rose-200/60 text-base leading-relaxed mb-5">
+                    {t('landing.paths.safety.desc')}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {t('landing.paths.safety.topics').split(' · ').map(topic => (
+                      <span
+                        key={topic}
+                        className="text-xs font-semibold px-3 py-1 rounded-full"
+                        style={{ background: 'rgba(244,63,94,0.15)', color: '#fda4af' }}
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-auto grid grid-cols-3 gap-3 pt-5 border-t border-rose-500/15">
+                    <div className="text-center">
+                      <div className="text-xl font-extrabold text-white">{SAFETY_WORLDS.length}</div>
+                      <div className="text-xs text-rose-300/50 mt-0.5">{t('landing.paths.stat.worlds')}</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-extrabold text-white">{totalSafetyLessons}</div>
+                      <div className="text-xs text-rose-300/50 mt-0.5">{t('landing.paths.stat.puzzles')}</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xl font-extrabold text-white">5–14</div>
+                      <div className="text-xs text-rose-300/50 mt-0.5">{t('landing.paths.stat.ages')}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -412,6 +467,45 @@ export function LandingScreen({ onStart, hasProgress }: LandingScreenProps) {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {THINKING_WORLDS.map((world, i) => {
+              const c = THINKING_COLOR_MAP[world.color] ?? { accent: '#a855f7', bg: 'rgba(168,85,247,0.08)' }
+              return (
+                <FadeIn key={world.id} delay={i * 0.04}>
+                  <div
+                    className="rounded-2xl p-4 border hover:scale-[1.03] transition-transform duration-200 cursor-default"
+                    style={{
+                      background: c.bg,
+                      borderColor: `${c.accent}25`,
+                    }}
+                  >
+                    <div className="text-2xl mb-2">{world.emoji}</div>
+                    <h3 className="font-bold text-sm text-white mb-1 leading-snug">
+                      {localize(world.name, language)}
+                    </h3>
+                    <div className="text-xs font-semibold mb-2" style={{ color: c.accent }}>
+                      {localize(world.concept, language)}
+                    </div>
+                    <div className="text-xs text-white/30">
+                      {world.lessonCount} {t('landing.worlds.lessons')}
+                    </div>
+                  </div>
+                </FadeIn>
+              )
+            })}
+          </div>
+
+          {/* Digital Citizenship worlds */}
+          <FadeIn className="mb-4 mt-10">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 px-3 py-1.5 rounded-full">
+                <span className="text-sm">🛡️</span>
+                <span className="text-rose-300 text-sm font-bold">{t('landing.worlds.safety.label')}</span>
+              </div>
+              <div className="flex-1 h-px bg-white/[0.06]" />
+            </div>
+          </FadeIn>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {SAFETY_WORLDS.map((world, i) => {
               const c = THINKING_COLOR_MAP[world.color] ?? { accent: '#a855f7', bg: 'rgba(168,85,247,0.08)' }
               return (
                 <FadeIn key={world.id} delay={i * 0.04}>

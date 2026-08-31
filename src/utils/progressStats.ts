@@ -1,6 +1,8 @@
 import { getLessonsByWorld } from '../data/lessons'
 import { getThinkingLessonsByWorld } from '../data/thinkingLessons'
 import { THINKING_WORLDS } from '../data/thinkingWorlds'
+import { getSafetyLessonsByWorld } from '../data/safetyLessons'
+import { SAFETY_WORLDS } from '../data/safetyWorlds'
 import { WORLDS } from '../data/worlds'
 import { maxStarsForThresholds } from '../data/xpSystem'
 import type { LocalizedString, PlayerProgress } from '../types'
@@ -16,7 +18,7 @@ import type { LocalizedString, PlayerProgress } from '../types'
  * lesson is worth 3 or 5 stars depending on its thresholds, a thinking lesson always 3.
  */
 
-export type PathId = 'blocks' | 'thinking'
+export type PathId = 'blocks' | 'thinking' | 'safety'
 
 /** Every thinking puzzle is scored on attempts: 1st try 3 stars, 2nd 2, then 1. */
 export const THINKING_MAX_STARS_PER_LESSON = 3
@@ -55,6 +57,7 @@ export interface PathStats {
 export interface AllStats {
   blocks: PathStats
   thinking: PathStats
+  safety: PathStats
   stars: number
   maxStars: number
   percent: number
@@ -132,18 +135,46 @@ function thinkingWorldStats(progress: PlayerProgress): WorldStats[] {
   })
 }
 
+function safetyWorldStats(progress: PlayerProgress): WorldStats[] {
+  return SAFETY_WORLDS.map(world => {
+    const lessons = getSafetyLessonsByWorld(world.id)
+    const stars = lessons.reduce((sum, l) => sum + (progress.lessons[l.id]?.stars ?? 0), 0)
+    const maxStars = lessons.length * THINKING_MAX_STARS_PER_LESSON
+    const lessonsCompleted = lessons.filter(l => progress.lessons[l.id]?.completed).length
+
+    return {
+      id: world.id,
+      name: world.name,
+      emoji: world.emoji,
+      // INV-L3 — safety worlds are never gated, same as thinking worlds.
+      unlocked: progress.xp >= world.unlockAtXP,
+      isBonus: false,
+      stars,
+      maxStars,
+      lessonsCompleted,
+      lessonsTotal: lessons.length,
+      finished: lessons.length > 0 && lessonsCompleted === lessons.length,
+      percent: percentOf(stars, maxStars),
+    }
+  })
+}
+
+function worldStatsForPath(progress: PlayerProgress, path: PathId): WorldStats[] {
+  if (path === 'blocks') return blocksWorldStats(progress)
+  if (path === 'thinking') return thinkingWorldStats(progress)
+  return safetyWorldStats(progress)
+}
+
 export function getPathStats(progress: PlayerProgress, path: PathId): PathStats {
-  return summarise(
-    path,
-    path === 'blocks' ? blocksWorldStats(progress) : thinkingWorldStats(progress)
-  )
+  return summarise(path, worldStatsForPath(progress, path))
 }
 
 export function getAllStats(progress: PlayerProgress): AllStats {
   const blocks = getPathStats(progress, 'blocks')
   const thinking = getPathStats(progress, 'thinking')
-  const stars = blocks.stars + thinking.stars
-  const maxStars = blocks.maxStars + thinking.maxStars
+  const safety = getPathStats(progress, 'safety')
+  const stars = blocks.stars + thinking.stars + safety.stars
+  const maxStars = blocks.maxStars + thinking.maxStars + safety.maxStars
 
-  return { blocks, thinking, stars, maxStars, percent: percentOf(stars, maxStars) }
+  return { blocks, thinking, safety, stars, maxStars, percent: percentOf(stars, maxStars) }
 }

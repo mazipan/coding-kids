@@ -2,6 +2,8 @@ import { describe, expect, test } from 'bun:test'
 import { getLessonsByWorld, LESSONS } from '../src/data/lessons'
 import { getThinkingLessonsByWorld } from '../src/data/thinkingLessons'
 import { THINKING_WORLDS } from '../src/data/thinkingWorlds'
+import { getSafetyLessonsByWorld } from '../src/data/safetyLessons'
+import { SAFETY_WORLDS } from '../src/data/safetyWorlds'
 import { WORLDS } from '../src/data/worlds'
 import { maxStarsForThresholds } from '../src/data/xpSystem'
 import type { PlayerProgress } from '../src/types'
@@ -37,10 +39,12 @@ describe('empty progress', () => {
     const stats = getAllStats(EMPTY)
     expect(stats.blocks.stars).toBe(0)
     expect(stats.thinking.stars).toBe(0)
+    expect(stats.safety.stars).toBe(0)
     expect(stats.stars).toBe(0)
     expect(stats.percent).toBe(0)
     expect(stats.blocks.worldsFinished).toBe(0)
     expect(stats.thinking.worldsFinished).toBe(0)
+    expect(stats.safety.worldsFinished).toBe(0)
   })
 
   test('maximums match the lesson tables', () => {
@@ -55,18 +59,25 @@ describe('empty progress', () => {
       (sum, w) => sum + getThinkingLessonsByWorld(w.id).length * THINKING_MAX_STARS_PER_LESSON,
       0
     )
+    const safetyMax = SAFETY_WORLDS.reduce(
+      (sum, w) => sum + getSafetyLessonsByWorld(w.id).length * THINKING_MAX_STARS_PER_LESSON,
+      0
+    )
 
     expect(stats.blocks.maxStars).toBe(blocksMax)
     expect(stats.thinking.maxStars).toBe(thinkingMax)
-    expect(stats.maxStars).toBe(blocksMax + thinkingMax)
+    expect(stats.safety.maxStars).toBe(safetyMax)
+    expect(stats.maxStars).toBe(blocksMax + thinkingMax + safetyMax)
     expect(stats.blocks.maxStars).toBeGreaterThan(0)
     expect(stats.thinking.maxStars).toBeGreaterThan(0)
+    expect(stats.safety.maxStars).toBeGreaterThan(0)
   })
 
   test('every world is listed once per path', () => {
     const stats = getAllStats(EMPTY)
     expect(stats.blocks.worlds.map(w => w.id)).toEqual(WORLDS.map(w => w.id))
     expect(stats.thinking.worlds.map(w => w.id)).toEqual(THINKING_WORLDS.map(w => w.id))
+    expect(stats.safety.worlds.map(w => w.id)).toEqual(SAFETY_WORLDS.map(w => w.id))
   })
 })
 
@@ -169,6 +180,12 @@ describe('unlock state', () => {
 
   test('INV-L3 — every thinking world is unlocked from the start', () => {
     const stats = getPathStats(EMPTY, 'thinking')
+    expect(stats.worlds.every(w => w.unlocked)).toBe(true)
+    expect(stats.worldsUnlocked).toBe(stats.worldsTotal)
+  })
+
+  test('INV-L3 — every safety world is unlocked from the start', () => {
+    const stats = getPathStats(EMPTY, 'safety')
     expect(stats.worlds.every(w => w.unlocked)).toBe(true)
     expect(stats.worldsUnlocked).toBe(stats.worldsTotal)
   })

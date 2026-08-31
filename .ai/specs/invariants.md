@@ -39,15 +39,15 @@ Once a badge is awarded it is never removed, even if the triggering condition co
 ## Lesson unlock invariants
 
 **INV-L1 — Sequential unlock**  
-Lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 0 (the first lesson) is always accessible. This applies to both the blocks path and the thinking path — it governs unlock *within* a world. World-level accessibility for the blocks path is governed separately by INV-L2.
+Lesson N in a world is only accessible after lesson N-1 is marked `completed: true`. Lesson 0 (the first lesson) is always accessible. This applies to the blocks path, the thinking path, and the safety path alike — it governs unlock *within* a world. World-level accessibility for the blocks path is governed separately by INV-L2.
 
-**Exception — the tutorial is optional, never a gate.** In every blocks-path world whose lesson 0 is a tutorial (`isTutorial: true` — the seven main worlds plus `orchestra`, `cove`, `eco`), lesson 1 is accessible regardless of whether the tutorial is completed. Sequencing resumes normally from lesson 2 onward (lesson N still requires lesson N-1). Bonus worlds with no lesson 0 at all (`jurassic`, `parking`, `sorting`, `debugging`; numbering starts at 1) fall under the same rule — their lesson 1 is always open. The thinking path has no tutorial concept, so its lesson 1 always requires lesson 0 completed, with no exception.
+**Exception — the tutorial is optional, never a gate.** In every blocks-path world whose lesson 0 is a tutorial (`isTutorial: true` — the seven main worlds plus `orchestra`, `cove`, `eco`), lesson 1 is accessible regardless of whether the tutorial is completed. Sequencing resumes normally from lesson 2 onward (lesson N still requires lesson N-1). Bonus worlds with no lesson 0 at all (`jurassic`, `parking`, `sorting`, `debugging`; numbering starts at 1) fall under the same rule — their lesson 1 is always open. Neither the thinking path nor the safety path has a tutorial concept, so their lesson 1 always requires lesson 0 completed, with no exception.
 
 **INV-L2 — The blocks path has no world-level lock**  
 Every world in the blocks path — main and bonus alike — is accessible regardless of `progress.xp` or any lesson's completion state elsewhere in the app: there is no XP gate on any main world, and no longer a "finish the main path" gate on any bonus world. `progress.xp` and star counts are still tracked and displayed exactly as before (INV-PR1–PR4) — this invariant is about *world* accessibility only. Lessons *within* a world still unlock sequentially per INV-L1, including the tutorial gate that `orchestra`, `cove`, and `eco` place on their own lesson 1 (see `TUTORIAL_GATED_BONUS_WORLDS` in `src/store/useProgress.ts`).
 
-**INV-L3 — Thinking worlds are always unlocked**  
-All thinking worlds (`patterns`, `logic`, `counting`, `memory`, `nature`, `numbers`, `decomposition`, and every world added since) have `unlockAtXP: 0` and are accessible from the moment a player enters the thinking path. XP earned in either path contributes to the shared pool, but thinking worlds must never be gated by XP. Any new thinking world added in the future must also have `unlockAtXP: 0`.
+**INV-L3 — Thinking and safety worlds are always unlocked**  
+All thinking worlds (`patterns`, `logic`, `counting`, `memory`, `nature`, `numbers`, `decomposition`, and every world added since) and all safety worlds (`passwords`, `privacy`, `kindness`, `scams`, and every world added since) have `unlockAtXP: 0` and are accessible from the moment a player enters that path. XP earned in any path contributes to the shared pool, but neither thinking nor safety worlds may ever be gated by XP. Any new thinking or safety world added in the future must also have `unlockAtXP: 0`.
 
 ---
 

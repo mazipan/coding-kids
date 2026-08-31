@@ -10,12 +10,16 @@ import { LandingScreen } from './screens/LandingScreen'
 import { PathSelector } from './screens/PathSelector'
 import { ThinkingHomeWithProgress } from './screens/ThinkingHome'
 import { ThinkingLessonScreen } from './screens/ThinkingLesson'
+import { SafetyHomeWithProgress } from './screens/SafetyHome'
+import { SafetyLessonScreen } from './screens/SafetyLesson'
 import { useProgress } from './store/useProgress'
 import { getLessonByNumber, getLessonsByWorld } from './data/lessons'
 import { getWorld, WORLDS } from './data/worlds'
 import { getThinkingWorld, THINKING_WORLDS } from './data/thinkingWorlds'
 import { getThinkingLessonByNumber, getThinkingLessonsByWorld } from './data/thinkingLessons'
-import type { WorldId, ThinkingWorldId } from './types'
+import { getSafetyWorld } from './data/safetyWorlds'
+import { getSafetyLessonByNumber, getSafetyLessonsByWorld } from './data/safetyLessons'
+import type { WorldId, ThinkingWorldId, SafetyWorldId } from './types'
 
 function GameLayout() {
   const { progress } = useProgress()
@@ -152,6 +156,47 @@ function ThinkingLessonRoute() {
   )
 }
 
+// ── Safety path routes ────────────────────────────────────────
+
+function SafetyWorldRoute() {
+  const { worldId } = useParams<{ worldId: string }>()
+  const { isWorldUnlocked } = useProgress()
+  const world = worldId ? getSafetyWorld(worldId) : null
+  if (!world || !isWorldUnlocked(world.unlockAtXP)) return <Navigate to="/app/safety" replace />
+  return <SafetyHomeWithProgress selectedWorldId={worldId as SafetyWorldId} />
+}
+
+function SafetyLessonRoute() {
+  const { worldId, lessonNumber } = useParams<{ worldId: string; lessonNumber: string }>()
+  const { completeLesson, getLessonProgress, isWorldUnlocked, isLessonUnlocked } = useProgress()
+
+  const world = worldId ? getSafetyWorld(worldId) : null
+  const lesson = worldId && lessonNumber !== undefined
+    ? getSafetyLessonByNumber(worldId, Number(lessonNumber))
+    : null
+
+  if (!world || !lesson || !isWorldUnlocked(world.unlockAtXP)) {
+    return <Navigate to="/app/safety" replace />
+  }
+
+  if (!isLessonUnlocked(lesson.id, lesson.worldId)) {
+    return <Navigate to={`/app/safety/world/${worldId}`} replace />
+  }
+
+  const nextLesson = getSafetyLessonsByWorld(worldId!).find(l => l.number === lesson.number + 1)
+
+  return (
+    <SafetyLessonScreen
+      key={lesson.id}
+      lesson={lesson}
+      world={world}
+      completeLesson={completeLesson}
+      existingProgress={getLessonProgress(lesson.id)}
+      nextLessonNumber={nextLesson?.number}
+    />
+  )
+}
+
 // ── Landing ───────────────────────────────────────────────────
 
 function LandingRoute() {
@@ -204,6 +249,11 @@ export default function App({ isHydrating }: AppProps) {
             <Route index element={<ThinkingHomeWithProgress />} />
             <Route path="world/:worldId" element={<ThinkingWorldRoute />} />
             <Route path="world/:worldId/:lessonNumber" element={<ThinkingLessonRoute />} />
+          </Route>
+          <Route path="safety">
+            <Route index element={<SafetyHomeWithProgress />} />
+            <Route path="world/:worldId" element={<SafetyWorldRoute />} />
+            <Route path="world/:worldId/:lessonNumber" element={<SafetyLessonRoute />} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />

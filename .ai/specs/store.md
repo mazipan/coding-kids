@@ -54,10 +54,15 @@ modal — is derived on the fly from `progress.lessons` by `src/utils/progressSt
 - **Tutorials excluded.** Tutorial lessons award a flat 1 star, are hidden from every world card, and can
   never be improved. `getLessonsByWorld` already drops them, and the stats module inherits that.
 - **Unlock state reuses the store.** Blocks worlds (main and bonus alike) are always
-  unlocked (INV-L2) — `unlocked` is hardcoded `true`, not derived from any check. Thinking
-  worlds still check `progress.xp >= world.unlockAtXP` via `isWorldUnlocked` (exported from
-  `useProgress.ts`), which is always true today since every thinking world declares
+  unlocked (INV-L2) — `unlocked` is hardcoded `true`, not derived from any check. Thinking and
+  safety worlds still check `progress.xp >= world.unlockAtXP` via `isWorldUnlocked` (exported from
+  `useProgress.ts`), which is always true today since every thinking and safety world declares
   `unlockAtXP: 0` (INV-L3).
+
+A third path, `safety` (Digital Citizenship), is scored identically to `thinking` — every safety
+lesson is worth up to 3 stars, scored by attempt count, and safety worlds are never XP-gated
+(INV-L3). `AllStats` carries `blocks`, `thinking`, and `safety` as separate `PathStats`, summed
+for the combined total.
 
 Because everything is derived, a save written by an older build needs no migration — the numbers simply
 recompute from `lessons`.

@@ -390,8 +390,8 @@ Run this audit against all existing lessons in the target world:
    ```
 3. Choose a `color` not already used by any world in the catalog table above. Pick a Tailwind color that has 900-shade availability.
 4. **Register the new colour in both colour maps, or the world silently renders purple:**
-   - `getWorldTheme` in `src/screens/ThinkingHome.tsx` — `?? themes.purple` swallows an unregistered colour with no error
-   - `THINKING_COLOR_MAP` in `src/screens/LandingScreen.tsx` — same silent purple fallback
+   - `getWorldTheme` in `src/utils/worldColorThemes.ts` — shared by `ThinkingHome.tsx` and `SafetyHome.tsx`; `?? WORLD_COLOR_THEMES.purple` swallows an unregistered colour with no error
+   - `THINKING_COLOR_MAP` in `src/screens/LandingScreen.tsx` — same silent purple fallback, kept separate because it uses different (lighter-context) hex values than `worldColorThemes.ts`
 
    `tests/thinkingWorldsContent.test.ts` asserts every world's colour is present in both files. Do not skip this step; three worlds shipped mis-themed for several releases because the two maps drifted apart.
 5. The `bgGradient` uses `from-{color}-900/50 to-{secondaryColor}-900/30` — keep opacity low so the star field behind shows through.
@@ -401,3 +401,47 @@ Run this audit against all existing lessons in the target world:
 9. Update the hardcoded `landing.worlds.title` count in `src/i18n/translations.ts` (EN **and** ID) — it is a literal, not derived from the arrays.
 10. Update the catalog table above, the world counts in `README.md`, and add a decision log entry in `.ai/decisions/log/` explaining the new concept and age range.
 11. Run `bunx biome ci`, `bun run type-check`, `bun run build`, and `bun test`.
+
+---
+
+## Safety worlds (Digital Citizenship path)
+
+Source: `src/data/safetyWorlds/` — one file per world, assembled into the `SAFETY_WORLDS` array by
+`index.ts`. Lessons: `src/data/safetyLessons/` — one file per world, assembled into `SAFETY_LESSONS`
+by its own `index.ts`. Same shapes as the thinking path's `ThinkingWorld`/`ThinkingLesson` — see
+`SafetyWorld`/`SafetyLesson` in `src/types/index.ts` — and the same `ThinkingPuzzle` union (aliased
+as `SafetyPuzzle`, since the twelve puzzle shapes are domain-agnostic), rendered by the shared
+`src/components/PuzzlePlayer.tsx` — the same puzzle-view components and `isPuzzleAnswerCorrect`
+grading logic the thinking path uses, extracted out of `ThinkingLesson.tsx` so neither path
+duplicates them. `SafetyHome.tsx` and `SafetyLesson.tsx` otherwise mirror `ThinkingHome.tsx` and
+`ThinkingLesson.tsx`'s chrome (world map, lesson list, tutorial card, completion card), routed
+under `/app/safety/...` instead of `/app/thinking/...`. `SafetyLessonScreen` deliberately reuses
+the `thinking.*` translation keys for that chrome (attempt counter, "Correct!", etc.) — the
+rendered copy is domain-neutral, so a parallel `safety.*` copy of the same ~20 keys wasn't worth
+the duplication; see `.ai/decisions/log/2026-08-31-01-third-parallel-path-digital-citizenship.md`.
+
+| ID | Emoji | Concept | Ages | Colour | unlockAtXP | Lessons |
+|----|-------|---------|------|--------|------------|---------|
+| passwords | 🔑 | Secrets & strong codes | 5–7 | yellow | 0 | 10 |
+| privacy | 🏝️ | What's safe to share | 8–10 | slate | 0 | 10 |
+| kindness | 💛 | Being kind online | 8–10 | pink | 0 | 10 |
+| scams | 🕵️ | Spotting scams & phishing | 11–14 | red | 0 | 10 |
+
+All safety worlds are unlocked from the start (INV-L3), same as thinking worlds. This is an MVP —
+tier one only (lessons 0–9). A tier-two `safetyLessonsAdvanced/` directory (lessons 10–19) can be
+added later following the same pattern as `thinkingLessonsAdvanced/`; `scripts/audit-thinking-lessons.mjs`'s
+tier-two XP check already skips cleanly for a world with no tier-two lessons yet.
+
+### Adding a new safety world / lesson
+
+Follow "Adding a new thinking world" / "Adding a new thinking lesson" above exactly, substituting
+`Safety` for `Thinking` and `src/data/safetyWorlds/` / `src/data/safetyLessons/` for the thinking
+equivalents. The colour-registration rule is simpler here than the thinking path's: `ThinkingHome`
+and `SafetyHome` both read world-map colours from the single shared `getWorldTheme` in
+`src/utils/worldColorThemes.ts` — register a new colour there once and both screens pick it up.
+`LandingScreen.tsx` still keeps its own separate `THINKING_COLOR_MAP` (different, lighter-context
+hex values tuned for that page) — register the same colour name there too, or the world silently
+renders with the purple fallback on the landing page only. `tests/safetyWorldsContent.test.ts`
+asserts every safety world's colour is present in both `worldColorThemes.ts` and `LandingScreen.tsx`,
+mirroring `tests/thinkingWorldsContent.test.ts` for the thinking path. Run `bun run audit-lessons` —
+it validates both the thinking and safety datasets in one pass.

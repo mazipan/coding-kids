@@ -15,6 +15,9 @@ export function PathSelector({ progress }: PathSelectorProps) {
   const hasThinkingProgress = Object.keys(progress.lessons).some(id =>
     id.startsWith('patterns-') || id.startsWith('logic-') || id.startsWith('counting-')
   )
+  const hasSafetyProgress = Object.keys(progress.lessons).some(id =>
+    id.startsWith('passwords-') || id.startsWith('privacy-') || id.startsWith('kindness-') || id.startsWith('scams-')
+  )
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -30,7 +33,7 @@ export function PathSelector({ progress }: PathSelectorProps) {
         </h1>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Thinking path — first */}
         <motion.button
           onClick={() => navigate('/app/thinking')}
@@ -76,6 +79,31 @@ export function PathSelector({ progress }: PathSelectorProps) {
           <p className="text-purple-200 text-sm leading-relaxed mb-6">{t('path.blocks.desc')}</p>
           <div className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white font-bold px-5 py-2.5 rounded-xl transition-colors text-sm">
             {hasBlocksProgress
+              ? <><Play className="w-3.5 h-3.5 fill-current" /><span>{t('path.continue')}</span></>
+              : <><span>{t('path.start')}</span><ArrowRight className="w-3.5 h-3.5" /></>}
+          </div>
+        </motion.button>
+
+        {/* Safety path — third */}
+        <motion.button
+          onClick={() => navigate('/app/safety')}
+          className="group relative bg-gradient-to-br from-rose-900/60 to-pink-900/40 border border-rose-500/30 rounded-3xl p-8 text-left hover:border-rose-400/60 hover:from-rose-800/60 transition-all duration-300 cursor-pointer"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          {hasSafetyProgress && (
+            <div className="absolute top-4 right-4 bg-rose-500/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+              {t('path.continue')}
+            </div>
+          )}
+          <div className="text-5xl mb-4">🛡️</div>
+          <h2 className="text-2xl font-black text-white mb-2">{t('path.safety.name')}</h2>
+          <p className="text-rose-200 text-sm leading-relaxed mb-6">{t('path.safety.desc')}</p>
+          <div className="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white font-bold px-5 py-2.5 rounded-xl transition-colors text-sm">
+            {hasSafetyProgress
               ? <><Play className="w-3.5 h-3.5 fill-current" /><span>{t('path.continue')}</span></>
               : <><span>{t('path.start')}</span><ArrowRight className="w-3.5 h-3.5" /></>}
           </div>
