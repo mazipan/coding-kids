@@ -10,8 +10,17 @@ interface LanguageContextValue {
 const LanguageContext = createContext<LanguageContextValue | null>(null)
 
 const LANG_KEY = 'codekids_language'
+export const LANG_PARAM = 'lang'
+
+function getLangFromSearch(): Language | null {
+  if (typeof window === 'undefined') return null
+  const fromSearch = new URLSearchParams(window.location.search).get(LANG_PARAM)
+  return fromSearch === 'en' || fromSearch === 'id' ? fromSearch : null
+}
 
 function getInitialLanguage(): Language {
+  const fromSearch = getLangFromSearch()
+  if (fromSearch) return fromSearch
   const stored = localStorage.getItem(LANG_KEY)
   if (stored === 'en' || stored === 'id') return stored
   return navigator.language.startsWith('id') ? 'id' : 'en'
