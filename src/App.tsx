@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate, useNavigate, useParams, Outlet } from 'react-router-dom'
 import { LanguageProvider } from './i18n/LanguageProvider'
+import { LanguageUrlSync } from './i18n/LanguageUrlSync'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { BlocksHome } from './screens/BlocksHome'
@@ -234,6 +235,7 @@ interface AppProps {
 export default function App({ isHydrating }: AppProps) {
   return (
     <LanguageProvider forcedInitialLanguage={isHydrating ? 'en' : undefined}>
+      <LanguageUrlSync />
       <Routes>
         <Route path="/" element={<LandingRoute />} />
         <Route path="/app" element={<GameLayout />}>
