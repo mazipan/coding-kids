@@ -69,8 +69,8 @@ Before adding any UI copy, feature, or UX flow, ask: **does this serve Rafi (age
 
 - Add a backend, database, or API call of any kind
 - Add user authentication or accounts
-- Add analytics, tracking scripts, or telemetry
-- Collect or transmit any personal data
+- Add analytics, tracking scripts, or telemetry beyond the single named Google Analytics exception in INV-P1/INV-P2 — any further tracking requires a new decision record
+- Collect or transmit any personal data (the Google Analytics exception in INV-P2 covers anonymous usage events only, never progress data, localStorage contents, or anything personally identifying)
 - Add features that require a server (including serverless functions)
 - Let any of the three verification commands fail before pushing (INV-C1, INV-C3)
 - Hardcode user-visible strings — all copy through `t()` (INV-C2)
