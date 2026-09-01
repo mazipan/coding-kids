@@ -47,7 +47,7 @@ const en: Translations = {
   'landing.trust.free.title': 'Free forever',
   'landing.trust.free.desc': 'No subscription, no paywalls, no in-app purchases. The entire experience is completely free.',
   'landing.trust.private.title': 'Completely private',
-  'landing.trust.private.desc': 'No account needed. No email. No personal data ever leaves the device.',
+  'landing.trust.private.desc': 'No account needed. No email. Nothing to sign up for — just play.',
   'landing.trust.edu.title': 'Actually educational',
   'landing.trust.edu.desc': 'Aligned with computational thinking curriculum — teaching sequences, logic, and reasoning, not just button-pressing.',
 
@@ -62,7 +62,7 @@ const en: Translations = {
   'landing.final.cta': 'Start Your Adventure Now',
 
   'landing.footer': 'Made with ❤️ for young coders everywhere',
-  'landing.footer.free': 'Free · No signup · No ads · No data collected',
+  'landing.footer.free': 'Free · No signup · No ads',
 
   // ── Footer ──────────────────────────────────
   'footer.copyright': '© {year}-present Irfan Maulana & Claude',
@@ -343,7 +343,7 @@ const id: Translations = {
   'landing.trust.free.title': 'Gratis selamanya',
   'landing.trust.free.desc': 'Tanpa berlangganan, tanpa biaya tersembunyi, tanpa pembelian dalam aplikasi. Seluruh pengalaman sepenuhnya gratis.',
   'landing.trust.private.title': 'Sepenuhnya privat',
-  'landing.trust.private.desc': 'Tidak perlu akun. Tidak perlu email. Tidak ada data pribadi yang pernah meninggalkan perangkat.',
+  'landing.trust.private.desc': 'Tidak perlu akun. Tidak perlu email. Tidak ada yang perlu didaftarkan — langsung main.',
   'landing.trust.edu.title': 'Sungguh edukatif',
   'landing.trust.edu.desc': 'Selaras dengan kurikulum berpikir komputasi — mengajarkan urutan, logika, dan penalaran, bukan sekadar menekan tombol.',
 
@@ -358,7 +358,7 @@ const id: Translations = {
   'landing.final.cta': 'Mulai Sekarang',
 
   'landing.footer': 'Dibuat dengan ❤️ untuk para coder muda di seluruh dunia',
-  'landing.footer.free': 'Gratis · Tanpa daftar · Tanpa iklan · Tanpa pengumpulan data',
+  'landing.footer.free': 'Gratis · Tanpa daftar · Tanpa iklan',
 
   // ── Footer ──────────────────────────────────
   'footer.copyright': '© {year}-sekarang Irfan Maulana & Claude',

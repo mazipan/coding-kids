@@ -7,10 +7,10 @@ These are non-negotiable truths about the system. Every change must preserve eve
 ## Product invariants
 
 **INV-P1 — No network calls at runtime**  
-After the initial page load, the app must function completely offline. No fetch, XHR, WebSocket, or import() call may be made to an external host during gameplay.
+After the initial page load, the app must function completely offline. No fetch, XHR, WebSocket, or import() call may be made to an external host during gameplay. **Named exception:** the Google Analytics (`gtag.js`) tag loaded in `index.html` (property `G-DR1H5XD5MK`) is permitted to load its script and send its own beacons. No other network call may be added without a new decision record.
 
 **INV-P2 — Zero data exfiltration**  
-No user data, progress, or behaviour is ever sent to any external server, analytics endpoint, or third-party service.
+No user data, progress, or behaviour is ever sent to any external server, analytics endpoint, or third-party service. **Named exception:** anonymous page-view/usage events sent to Google Analytics via the `gtag.js` tag in `index.html` (see INV-P1). This does not extend to progress data, localStorage contents, lesson answers, or any other in-app data — none of that may ever be sent to Google Analytics or any other service.
 
 **INV-P3 — No account required**  
 No screen in the app may gate content behind authentication, registration, or email verification.
