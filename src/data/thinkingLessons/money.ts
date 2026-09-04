@@ -1,0 +1,168 @@
+import type { ThinkingLesson } from '../../types'
+
+export const moneyLessons: ThinkingLesson[] = [
+  // ── Money & Time · tier one ──────────────────────────────────
+  // Lessons 0–4: single/simple coin counts, whole-hour clock reading, a 4-step daily
+  // routine. Lessons 5–9: mixed denominations, change-making, half- and quarter-hour
+  // reading, a duration question that crosses into the next hour.
+  {
+    id: 'money-0',
+    worldId: 'money',
+    number: 0,
+    title: { en: 'Coins for a Sticker', id: 'Koin untuk Stiker' },
+    mascotMessage: { en: 'A sticker costs 6. Add up your coins to see if you have enough! 🪙', id: 'Stiker harganya 6. Jumlahkan koinmu untuk melihat apakah cukup! 🪙' },
+    xpReward: 10,
+    puzzle: {
+      type: 'math',
+      question: { en: 'You have a 5-coin and a 1-coin. How much money do you have?', id: 'Kamu punya koin 5 dan koin 1. Berapa uangmu semuanya?' },
+      visual: '🪙',
+      options: ['4', '5', '6', '7'],
+      answer: '6',
+    },
+  },
+  {
+    id: 'money-1',
+    worldId: 'money',
+    number: 1,
+    title: { en: 'What Time Is It?', id: 'Jam Berapa Sekarang?' },
+    mascotMessage: { en: 'The short hand shows the hour. Read it carefully! 🕒', id: 'Jarum pendek menunjukkan jam. Baca dengan teliti! 🕒' },
+    xpReward: 12,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'The short hand points to 3 and the long hand points to 12. What time is it?', id: 'Jarum pendek menunjuk ke 3 dan jarum panjang menunjuk ke 12. Pukul berapa sekarang?' },
+      options: [
+        { id: 'three', emoji: '🕒', label: { en: '3:00', id: '3:00' } },
+        { id: 'twelve', emoji: '🕛', label: { en: '12:00', id: '12:00' } },
+        { id: 'nine', emoji: '🕘', label: { en: '9:00', id: '9:00' } },
+        { id: 'six', emoji: '🕕', label: { en: '6:00', id: '6:00' } },
+      ],
+      answerId: 'three',
+    },
+  },
+  {
+    id: 'money-2',
+    worldId: 'money',
+    number: 2,
+    title: { en: 'Morning Routine', id: 'Rutinitas Pagi' },
+    mascotMessage: { en: 'A school morning has an order. Tap the steps from first to last! ⏰', id: 'Pagi sekolah punya urutan. Ketuk langkahnya dari awal sampai akhir! ⏰' },
+    xpReward: 12,
+    puzzle: {
+      type: 'sequence',
+      steps: [
+        { id: 'wake', emoji: '⏰', label: { en: 'Wake up', id: 'Bangun tidur' } },
+        { id: 'dress', emoji: '👕', label: { en: 'Get dressed', id: 'Pakai baju' } },
+        { id: 'breakfast', emoji: '🥣', label: { en: 'Eat breakfast', id: 'Makan sarapan' } },
+        { id: 'school', emoji: '🎒', label: { en: 'Go to school', id: 'Pergi ke sekolah' } },
+      ],
+    },
+  },
+  {
+    id: 'money-3',
+    worldId: 'money',
+    number: 3,
+    title: { en: 'Piggy Bank Total', id: 'Total Tabungan' },
+    mascotMessage: { en: 'Add up every coin in your piggy bank, one value at a time! 🐷', id: 'Jumlahkan setiap koin di tabunganmu, satu per satu nilainya! 🐷' },
+    xpReward: 15,
+    puzzle: {
+      type: 'math',
+      question: { en: 'Your piggy bank has a 10-coin, a 5-coin, and two 1-coins. How much money is that in total?', id: 'Tabunganmu berisi koin 10, koin 5, dan dua koin 1. Berapa total uangnya?' },
+      visual: '🐷',
+      options: ['15', '16', '17', '18'],
+      answer: '17',
+    },
+  },
+  {
+    id: 'money-4',
+    worldId: 'money',
+    number: 4,
+    title: { en: 'Enough to Buy?', id: 'Cukup untuk Membeli?' },
+    mascotMessage: { en: 'Add up what you have, then compare it to the price. 🧸', id: 'Jumlahkan apa yang kamu punya, lalu bandingkan dengan harganya. 🧸' },
+    xpReward: 15,
+    puzzle: {
+      type: 'true-false',
+      statement: { en: 'A toy costs 14. You have three 5-coins. You have enough money to buy it.', id: 'Mainan harganya 14. Kamu punya tiga koin 5. Uangmu cukup untuk membelinya.' },
+      answer: true,
+    },
+  },
+  {
+    id: 'money-5',
+    worldId: 'money',
+    number: 5,
+    title: { en: 'Half Past', id: 'Setengah Lewat' },
+    mascotMessage: { en: 'When the long hand points straight down at the 6, it is half past the hour. 🕟', id: 'Kalau jarum panjang menunjuk lurus ke bawah ke arah 6, itu berarti setengah lewat jam. 🕟' },
+    xpReward: 18,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'The long hand points to the 6 and the short hand is between 4 and 5. What time is it?', id: 'Jarum panjang menunjuk ke 6 dan jarum pendek berada di antara 4 dan 5. Pukul berapa sekarang?' },
+      options: [
+        { id: 'fourthirty', emoji: '🕟', label: { en: '4:30', id: '4:30' } },
+        { id: 'fivethirty', emoji: '🕠', label: { en: '5:30', id: '5:30' } },
+        { id: 'four', emoji: '🕓', label: { en: '4:00', id: '4:00' } },
+        { id: 'sixthirty', emoji: '🕡', label: { en: '6:30', id: '6:30' } },
+      ],
+      answerId: 'fourthirty',
+    },
+  },
+  {
+    id: 'money-6',
+    worldId: 'money',
+    number: 6,
+    title: { en: 'Your Change', id: 'Uang Kembalianmu' },
+    mascotMessage: { en: 'What you paid minus what it cost is your change back. 🧃', id: 'Uang yang kamu bayar dikurangi harganya adalah kembalianmu. 🧃' },
+    xpReward: 18,
+    puzzle: {
+      type: 'math',
+      question: { en: 'A juice costs 8. You pay with a 10-coin. How much change do you get back?', id: 'Jus harganya 8. Kamu membayar dengan koin 10. Berapa kembalian yang kamu terima?' },
+      visual: '🧃',
+      options: ['1', '2', '3', '18'],
+      answer: '2',
+    },
+  },
+  {
+    id: 'money-7',
+    worldId: 'money',
+    number: 7,
+    title: { en: 'Cheaper or Pricier?', id: 'Lebih Murah atau Lebih Mahal?' },
+    mascotMessage: { en: 'Compare the two prices carefully before you decide. ✏️', id: 'Bandingkan kedua harga dengan hati-hati sebelum memutuskan. ✏️' },
+    xpReward: 18,
+    puzzle: {
+      type: 'true-false',
+      statement: { en: 'A pencil costs 4 and an eraser costs 6. The pencil is more expensive than the eraser.', id: 'Pensil harganya 4 dan penghapus harganya 6. Pensil lebih mahal dari penghapus.' },
+      answer: false,
+    },
+  },
+  {
+    id: 'money-8',
+    worldId: 'money',
+    number: 8,
+    title: { en: 'Quarter Past', id: 'Seperempat Lewat' },
+    mascotMessage: { en: 'When the long hand points to the 3, it is quarter past the hour. 🕗', id: 'Kalau jarum panjang menunjuk ke 3, itu berarti seperempat lewat jam. 🕗' },
+    xpReward: 20,
+    puzzle: {
+      type: 'if-then',
+      condition: { en: 'The long hand points to the 3 and the short hand is just past the 7. What time is it?', id: 'Jarum panjang menunjuk ke 3 dan jarum pendek baru melewati 7. Pukul berapa sekarang?' },
+      options: [
+        { id: 'sevenfifteen', emoji: '🕢', label: { en: '7:15', id: '7:15' } },
+        { id: 'sevenfortyfive', emoji: '🕗', label: { en: '7:45', id: '7:45' } },
+        { id: 'threeseven', emoji: '🕘', label: { en: '3:07', id: '3:07' } },
+        { id: 'seventhirty', emoji: '🕢', label: { en: '7:30', id: '7:30' } },
+      ],
+      answerId: 'sevenfifteen',
+    },
+  },
+  {
+    id: 'money-9',
+    worldId: 'money',
+    number: 9,
+    title: { en: 'Movie Time', id: 'Waktu Nonton Film' },
+    mascotMessage: { en: 'Add the length of the movie onto the start time. 🎬', id: 'Tambahkan lama film ke waktu mulainya. 🎬' },
+    xpReward: 22,
+    puzzle: {
+      type: 'math',
+      question: { en: 'A movie starts at 3:00 and lasts 2 hours. What time does it end?', id: 'Film dimulai pukul 3:00 dan berlangsung 2 jam. Pukul berapa film selesai?' },
+      visual: '🎬',
+      options: ['2:00', '4:00', '5:00', '6:00'],
+      answer: '5:00',
+    },
+  },
+]

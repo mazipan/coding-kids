@@ -1,4 +1,4 @@
-export type WorldId = 'jungle' | 'space' | 'loops' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting' | 'debugging' | 'orchestra' | 'cove' | 'eco'
+export type WorldId = 'jungle' | 'space' | 'loops' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting' | 'debugging' | 'orchestra' | 'cove' | 'eco' | 'boolean'
 
 export type LocalizedString = { en: string; id: string }
 
@@ -100,7 +100,7 @@ export interface PlayerProgress {
 
 // ── Thinking path ─────────────────────────────────────────────
 
-export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction' | 'math_reasoning' | 'induction' | 'deduction' | 'planning' | 'probability' | 'spatial'
+export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction' | 'math_reasoning' | 'induction' | 'deduction' | 'planning' | 'probability' | 'spatial' | 'money'
 
 export interface ThinkingWorld {
   id: ThinkingWorldId

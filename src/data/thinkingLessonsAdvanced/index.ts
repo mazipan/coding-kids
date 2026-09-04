@@ -7,6 +7,7 @@ import { inductionLessonsAdvanced } from './induction'
 import { logicLessonsAdvanced } from './logic'
 import { mathReasoningLessonsAdvanced } from './mathReasoning'
 import { memoryLessonsAdvanced } from './memory'
+import { moneyLessonsAdvanced } from './money'
 import { natureLessonsAdvanced } from './nature'
 import { numbersLessonsAdvanced } from './numbers'
 import { patternsLessonsAdvanced } from './patterns'
@@ -47,4 +48,5 @@ export const THINKING_LESSONS_ADVANCED: ThinkingLesson[] = [
   ...planningLessonsAdvanced,
   ...probabilityLessonsAdvanced,
   ...spatialLessonsAdvanced,
+  ...moneyLessonsAdvanced,
 ]

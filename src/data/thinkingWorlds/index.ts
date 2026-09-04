@@ -7,6 +7,7 @@ import { inductionWorld } from './induction'
 import { logicWorld } from './logic'
 import { mathReasoningWorld } from './mathReasoning'
 import { memoryWorld } from './memory'
+import { moneyWorld } from './money'
 import { natureWorld } from './nature'
 import { numbersWorld } from './numbers'
 import { patternsWorld } from './patterns'
@@ -29,6 +30,7 @@ export const THINKING_WORLDS: ThinkingWorld[] = [
   planningWorld,
   probabilityWorld,
   spatialWorld,
+  moneyWorld,
 ]
 
 export function getThinkingWorld(id: string): ThinkingWorld | undefined {

@@ -1,4 +1,5 @@
 import type { World } from '../../types'
+import { booleanWorld } from './boolean'
 import { cavesWorld } from './caves'
 import { coveWorld } from './cove'
 import { debuggingWorld } from './debugging'
@@ -30,6 +31,7 @@ export const WORLDS: World[] = [
   orchestraWorld,
   coveWorld,
   ecoWorld,
+  booleanWorld,
 ]
 
 export function getWorld(id: string): World | undefined {
