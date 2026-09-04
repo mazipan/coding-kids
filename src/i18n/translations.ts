@@ -35,7 +35,7 @@ const en: Translations = {
   'landing.paths.stat.puzzles': 'puzzles',
   'landing.paths.stat.ages': 'ages',
 
-  'landing.worlds.title': '33 Worlds to Explore',
+  'landing.worlds.title': '34 Worlds to Explore',
   'landing.worlds.sub': 'Browse every world across all three paths — each one teaches a different concept at its own depth.',
   'landing.worlds.blocks.label': 'Block Coding',
   'landing.worlds.thinking.label': 'Brain Training',
@@ -331,7 +331,7 @@ const id: Translations = {
   'landing.paths.stat.puzzles': 'teka-teki',
   'landing.paths.stat.ages': 'usia',
 
-  'landing.worlds.title': '33 Dunia untuk Dijelajahi',
+  'landing.worlds.title': '34 Dunia untuk Dijelajahi',
   'landing.worlds.sub': 'Jelajahi setiap dunia di ketiga jalur — masing-masing mengajarkan konsep yang berbeda.',
   'landing.worlds.blocks.label': 'Coding Blok',
   'landing.worlds.thinking.label': 'Latihan Otak',

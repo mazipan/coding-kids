@@ -35,7 +35,7 @@ Write code with visual Blockly blocks. 7 main worlds + 8 bonus worlds teaching p
 | 💡 Logic Lighthouse | 8–14 | Boolean Logic (AND / OR / NOT) | 20 |
 
 ### 🧠 Brain Training
-Pattern recognition, logic puzzles, math, science, and reasoning challenges. No code editor required. All 14 worlds are unlocked from the start.
+Pattern recognition, logic puzzles, math, science, and reasoning challenges. No code editor required. All 15 worlds are unlocked from the start.
 
 | World | Ages | Concept | Lessons |
 |-------|------|---------|---------|
@@ -53,6 +53,7 @@ Pattern recognition, logic puzzles, math, science, and reasoning challenges. No 
 | 🗺️ Planning Peaks | 8–12 | Constraint Planning | 10 |
 | 🎲 Chance Camp | 9–13 | Probability | 10 |
 | 🧭 Spatial Studio | 7–11 | Spatial Reasoning | 10 |
+| 💰 Money & Time | 6–13 | Everyday Numeracy | 20 |
 
 ### 🛡️ Digital Citizenship
 Scenario puzzles that teach kids to be safe, private, and kind online. No code editor required. All 4 worlds are unlocked from the start.
@@ -71,7 +72,7 @@ Scenario puzzles that teach kids to be safe, private, and kind online. No code e
 - **Three learning paths** — Block Coding, Brain Training, and Digital Citizenship, all accessible from the hub at `/app`
 - **Shared XP & stars** — progress flows across all three paths; one store, one level system
 - **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 8 bonus worlds)
-- **14 brain training worlds** — 140 puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, deduction, constraint planning, probability, and spatial reasoning
+- **15 brain training worlds** — 140+ puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, deduction, constraint planning, probability, spatial reasoning, and everyday money & time skills
 - **4 digital citizenship worlds** — 40 puzzles covering passwords, privacy, kindness, and spotting scams
 - **XP & leveling** — 15 levels from Code Cub to Master Coder
 - **Stars per lesson** — 1–3 stars based on code efficiency (blocks) or attempts (thinking)
@@ -139,12 +140,12 @@ src/
 │   └── XPBar.tsx               # XP progress bar with optional level name (hideLabel prop)
 ├── data/
 │   ├── lessons.ts              # block coding lessons across 15 worlds
-│   ├── thinkingLessons/        # 140 tier-one brain training lessons, one file per world
-│   ├── thinkingLessonsAdvanced/ # 140 tier-two brain training lessons, one file per world
-│   ├── thinkingWorlds/         # 14 thinking worlds, one file per world
+│   ├── thinkingLessons/        # 150 tier-one brain training lessons, one file per world
+│   ├── thinkingLessonsAdvanced/ # 150 tier-two brain training lessons, one file per world
+│   ├── thinkingWorlds/         # 15 thinking worlds, one file per world
 │   ├── safetyLessons/          # 40 digital citizenship lessons, one file per world
 │   ├── safetyWorlds/           # 4 digital citizenship worlds, one file per world
-│   ├── worlds/                 # 14 block coding worlds with themes, emoji, characters, one file per world
+│   ├── worlds/                 # 15 block coding worlds with themes, emoji, characters, one file per world
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), getLevelInfo()
 ├── engine/
 │   └── gameEngine.ts           # parseCodeToActions(), applyAction(), checkWin()
