@@ -12,6 +12,7 @@ import { ThinkingHomeWithProgress } from './screens/ThinkingHome'
 import { ThinkingLessonScreen } from './screens/ThinkingLesson'
 import { SafetyHomeWithProgress } from './screens/SafetyHome'
 import { SafetyLessonScreen } from './screens/SafetyLesson'
+import { NotFoundScreen } from './screens/NotFoundScreen'
 import { useProgress } from './store/useProgress'
 import { getLessonByNumber, getLessonsByWorld } from './data/lessons'
 import { getWorld, WORLDS } from './data/worlds'
@@ -221,6 +222,12 @@ function PathSelectorRoute() {
   return <PathSelector progress={progress} />
 }
 
+// ── Not found ─────────────────────────────────────────────────
+
+function NotFoundRoute() {
+  return <NotFoundScreen />
+}
+
 // ── App ───────────────────────────────────────────────────────
 
 interface AppProps {
@@ -256,7 +263,7 @@ export default function App({ isHydrating }: AppProps) {
             <Route path="world/:worldId/:lessonNumber" element={<SafetyLessonRoute />} />
           </Route>
         </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFoundRoute />} />
       </Routes>
     </LanguageProvider>
   )

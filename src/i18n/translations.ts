@@ -296,6 +296,11 @@ const en: Translations = {
   // ── Safety path ────────────────────────────────
   'safety.title': 'Digital Citizenship',
   'safety.sub': 'Be smart, safe, and kind online! 🛡️',
+
+  // ── Not found ──────────────────────────────────
+  'notFound.title': 'Page Not Found',
+  'notFound.message': "This page doesn't exist — maybe it moved, or the link was mistyped.",
+  'notFound.cta': 'Back to Home',
 }
 
 const id: Translations = {
@@ -592,6 +597,11 @@ const id: Translations = {
   // ── Safety path ────────────────────────────────
   'safety.title': 'Warga Digital',
   'safety.sub': 'Cerdas, aman, dan baik secara online! 🛡️',
+
+  // ── Not found ──────────────────────────────────
+  'notFound.title': 'Halaman Tidak Ditemukan',
+  'notFound.message': 'Halaman ini tidak ada — mungkin sudah dipindahkan, atau tautannya salah ketik.',
+  'notFound.cta': 'Kembali ke Beranda',
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = { en, id }
