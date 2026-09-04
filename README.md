@@ -9,7 +9,7 @@ A fun, free learning adventure for kids ages 5–14. Three parallel paths: visua
 ## Learning Paths
 
 ### 🧩 Block Coding
-Write code with visual Blockly blocks. 7 main worlds + 7 bonus worlds teaching programming concepts.
+Write code with visual Blockly blocks. 7 main worlds + 8 bonus worlds teaching programming concepts.
 
 | World | Ages | Concept | Lessons |
 |-------|------|---------|---------|
@@ -32,6 +32,7 @@ Write code with visual Blockly blocks. 7 main worlds + 7 bonus worlds teaching p
 | 🎵 Code Orchestra | 8–12 | Loops & Functions | 10 |
 | 🧭 Coordinate Cove | 10–13 | Coordinates & Position | 10 |
 | 🌱 Eco City | 10–14 | Decomposition & Reuse | 10 |
+| 💡 Logic Lighthouse | 8–14 | Boolean Logic (AND / OR / NOT) | 20 |
 
 ### 🧠 Brain Training
 Pattern recognition, logic puzzles, math, science, and reasoning challenges. No code editor required. All 15 worlds are unlocked from the start.
@@ -70,7 +71,7 @@ Scenario puzzles that teach kids to be safe, private, and kind online. No code e
 
 - **Three learning paths** — Block Coding, Brain Training, and Digital Citizenship, all accessible from the hub at `/app`
 - **Shared XP & stars** — progress flows across all three paths; one store, one level system
-- **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 7 bonus worlds)
+- **7 block coding worlds** — Jungle → Space → Loop Land → Ocean → Crystal Caves → Robot Factory → Time Portal (+ 8 bonus worlds)
 - **15 brain training worlds** — 140+ puzzles covering patterns, logic, math, memory, science, numbers, decomposition, abstraction, math reasoning, induction, deduction, constraint planning, probability, spatial reasoning, and everyday money & time skills
 - **4 digital citizenship worlds** — 40 puzzles covering passwords, privacy, kindness, and spotting scams
 - **XP & leveling** — 15 levels from Code Cub to Master Coder
@@ -138,13 +139,13 @@ src/
 │   ├── StarRating.tsx          # 1–3 stars display
 │   └── XPBar.tsx               # XP progress bar with optional level name (hideLabel prop)
 ├── data/
-│   ├── lessons.ts              # block coding lessons across 14 worlds
+│   ├── lessons.ts              # block coding lessons across 15 worlds
 │   ├── thinkingLessons/        # 150 tier-one brain training lessons, one file per world
 │   ├── thinkingLessonsAdvanced/ # 150 tier-two brain training lessons, one file per world
 │   ├── thinkingWorlds/         # 15 thinking worlds, one file per world
 │   ├── safetyLessons/          # 40 digital citizenship lessons, one file per world
 │   ├── safetyWorlds/           # 4 digital citizenship worlds, one file per world
-│   ├── worlds/                 # 14 block coding worlds with themes, emoji, characters, one file per world
+│   ├── worlds/                 # 15 block coding worlds with themes, emoji, characters, one file per world
 │   └── xpSystem.ts             # 15 XP levels, calculateStars(), getLevelInfo()
 ├── engine/
 │   └── gameEngine.ts           # parseCodeToActions(), applyAction(), checkWin()
