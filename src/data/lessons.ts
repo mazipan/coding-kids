@@ -11493,6 +11493,344 @@ export const LESSONS: Lesson[] = [
     starThresholds: [52, 37, 29, 24],
   },
 
+  // ─────────────────────────────────────────────
+  // WORLD 15 (BONUS): LOGIC LIGHTHOUSE — Boolean Logic (AND / OR / NOT)
+  // ─────────────────────────────────────────────
+  {
+    id: 'boolean-1', worldId: 'boolean', number: 1,
+    title: { en: 'Both Switches On', id: 'Kedua Saklar Menyala' },
+    story: { en: 'The lighthouse gate has two switches. It only opens when BOTH are on — that is what AND means.', id: 'Gerbang mercusuar punya dua saklar. Gerbangnya hanya terbuka jika KEDUANYA menyala — itulah arti DAN.' },
+    mascotMessage: { en: 'Open ❓ Logic and drag "if ... do". Then drag the "and" block into the diamond, and put "true" in both of its sockets. AND needs both sides true! 🦉', id: 'Buka ❓ Kondisi dan seret "jika ... lakukan". Lalu seret blok "dan" ke berliannya, dan taruh "benar" di kedua slotnya. DAN butuh kedua sisi benar! 🦉' },
+    gridRows: 3, gridCols: 6, cells: emptyGrid(3, 6), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 3] }],
+    goalType: 'collect_all', availableCategories: ['move', 'logic'], requiredCategories: ['logic'], optimalBlockCount: 7, xpReward: 130,
+    hints: [
+      { en: 'The "and" block lives in ❓ Logic, above the true/false blocks. Drag two "true" blocks into its two sockets.', id: 'Blok "dan" ada di ❓ Kondisi, di atas blok benar/salah. Seret dua blok "benar" ke dua slotnya.' },
+      { en: 'Put 3 Move Right blocks inside the if. If either switch were off, the gate would stay shut!', id: 'Taruh 3 blok Gerak Kanan di dalam if. Jika salah satu saklar mati, gerbangnya tetap tertutup!' },
+    ], starThresholds: [12, 10, 8, 7],
+  },
+  {
+    id: 'boolean-2', worldId: 'boolean', number: 2,
+    title: { en: 'Either Switch Works', id: 'Salah Satu Saklar Cukup' },
+    story: { en: 'This gate is friendlier — it opens if EITHER switch is on. That is what OR means: only one side needs to be true.', id: 'Gerbang ini lebih ramah — terbuka jika SALAH SATU saklar menyala. Itulah arti ATAU: cukup satu sisi yang benar.' },
+    mascotMessage: { en: 'Drag the "or" block into the if. Put "true" in the top socket and "false" in the bottom one — it still opens! 🦉', id: 'Seret blok "atau" ke dalam if. Taruh "benar" di slot atas dan "salah" di slot bawah — tetap terbuka! 🦉' },
+    gridRows: 3, gridCols: 6, cells: emptyGrid(3, 6), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 3] }],
+    goalType: 'collect_all', availableCategories: ['move', 'logic'], requiredCategories: ['logic'], optimalBlockCount: 7, xpReward: 140,
+    hints: [
+      { en: 'The "or" block looks just like "and" but with a different dropdown word — check the socket at the top of the "and" block.', id: 'Blok "atau" mirip "dan" tapi kata di dropdown-nya beda — lihat bagian atas blok "dan".' },
+      { en: 'One true, one false — OR only needs one of them, so the gate still opens. Then 3 Move Right inside.', id: 'Satu benar, satu salah — ATAU cuma butuh salah satu, jadi gerbangnya tetap terbuka. Lalu 3 Gerak Kanan di dalamnya.' },
+    ], starThresholds: [12, 10, 8, 7],
+  },
+  {
+    id: 'boolean-3', worldId: 'boolean', number: 3,
+    title: { en: 'Flip the Broken Switch', id: 'Balik Saklar yang Rusak' },
+    story: { en: 'This switch is stuck on "false". NOT flips it around — NOT false becomes true!', id: 'Saklar ini macet di "salah". BUKAN membalikkannya — BUKAN salah menjadi benar!' },
+    mascotMessage: { en: 'Grab the "not" block and tuck "false" inside it. "not false" turns into true, and the gate opens! 🦉', id: 'Ambil blok "bukan" dan selipkan "salah" di dalamnya. "bukan salah" menjadi benar, dan gerbangnya terbuka! 🦉' },
+    gridRows: 3, gridCols: 5, cells: emptyGrid(3, 5), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 3] }],
+    goalType: 'collect_all', availableCategories: ['move', 'logic'], requiredCategories: ['logic'], optimalBlockCount: 6, xpReward: 150,
+    hints: [
+      { en: 'The "not" block is a single socket — drop the "false" block right into it.', id: 'Blok "bukan" cuma punya satu slot — masukkan blok "salah" tepat di dalamnya.' },
+      { en: 'not(false) = true, so the if runs. Add 3 Move Right blocks inside.', id: 'bukan(salah) = benar, jadi if-nya berjalan. Tambahkan 3 blok Gerak Kanan di dalamnya.' },
+    ], starThresholds: [11, 9, 7, 6],
+  },
+  {
+    id: 'boolean-4', worldId: 'boolean', number: 4, showCoords: true,
+    title: { en: 'Cross Until Both Clear', id: 'Menyeberang Sampai Keduanya Aman' },
+    story: { en: 'Two beacons watch this bridge. Keep sailing while your column is under BOTH limits — AND always stops at the stricter one.', id: 'Dua suar mengawasi jembatan ini. Terus berlayar selama kolommu di bawah KEDUA batas — DAN selalu berhenti di batas yang lebih ketat.' },
+    mascotMessage: { en: 'Repeat while (my column < 9) AND (my column < 7). Whichever number is smaller wins — you will stop at Column 7! 🦉', id: 'Ulangi selama (kolomku < 9) DAN (kolomku < 7). Angka yang lebih kecil yang menang — kamu akan berhenti di Kolom 7! 🦉' },
+    gridRows: 3, gridCols: 10, cells: emptyGrid(3, 10), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 9, xpReward: 160,
+    hints: [
+      { en: 'Use "repeat while" with an "and" in its test slot. Drop a comparison into each of the and\'s two sockets.', id: 'Pakai "ulangi jika" dengan "dan" di slot ujinya. Taruh perbandingan di kedua slot "dan".' },
+      { en: 'Compare 🧭 my column < 9, and 🧭 my column < 7. The loop stops the moment either one fails — that is Column 7.', id: 'Bandingkan 🧭 kolomku < 9, dan 🧭 kolomku < 7. Perulangan berhenti begitu salah satunya gagal — yaitu Kolom 7.' },
+    ], starThresholds: [15, 12, 10, 9],
+  },
+  {
+    id: 'boolean-5', worldId: 'boolean', number: 5, showCoords: true,
+    title: { en: 'Stop At Whichever Beacon First', id: 'Berhenti di Suar yang Lebih Dulu' },
+    story: { en: 'Two beacons flash further down the channel. Sail until you reach EITHER one — OR stops at whichever comes first.', id: 'Dua suar berkedip di sepanjang alur. Berlayarlah sampai mencapai SALAH SATU — ATAU berhenti di yang lebih dulu tercapai.' },
+    mascotMessage: { en: 'Repeat until (my column = 7) OR (my column = 4). Column 4 is closer, so that is where you will stop! 🦉', id: 'Ulangi sampai (kolomku = 7) ATAU (kolomku = 4). Kolom 4 lebih dekat, jadi di situlah kamu akan berhenti! 🦉' },
+    gridRows: 3, gridCols: 10, cells: emptyGrid(3, 10), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 3] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 9, xpReward: 170,
+    hints: [
+      { en: 'Switch the loop to "repeat until", then put an "or" in its test slot with two equals-comparisons inside.', id: 'Ubah perulangannya jadi "ulangi sampai", lalu taruh "atau" di slot ujinya dengan dua perbandingan sama-dengan di dalamnya.' },
+      { en: 'Test 🧭 my column = 7, and 🧭 my column = 4. Moving right from Column 1, you hit 4 long before 7.', id: 'Uji 🧭 kolomku = 7, dan 🧭 kolomku = 4. Bergerak kanan dari Kolom 1, kamu mencapai 4 jauh sebelum 7.' },
+    ], starThresholds: [15, 12, 10, 9],
+  },
+  {
+    id: 'boolean-6', worldId: 'boolean', number: 6, showCoords: true,
+    title: { en: 'Keep Going While Not There Yet', id: 'Terus Jalan Selama Belum Sampai' },
+    story: { en: 'You can say a test two ways: "while my column is less than 5" or "while NOT (my column equals 5)". They mean the same thing!', id: 'Kamu bisa mengucapkan uji dengan dua cara: "selama kolomku kurang dari 5" atau "selama BUKAN (kolomku sama dengan 5)". Artinya sama!' },
+    mascotMessage: { en: 'This time use "not" wrapped around an equals test: while not(my column = 5). Watch it stop in exactly the same place a < test would! 🦉', id: 'Kali ini pakai "bukan" yang membungkus uji sama dengan: selama bukan(kolomku = 5). Lihat berhentinya persis sama seperti uji < ! 🦉' },
+    gridRows: 3, gridCols: 8, cells: emptyGrid(3, 8), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 4] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 6, xpReward: 180,
+    hints: [
+      { en: 'In the "repeat while" test slot, drop a "not" block, and inside that a "=" comparison.', id: 'Di slot uji "ulangi jika", taruh blok "bukan", dan di dalamnya taruh perbandingan "=".' },
+      { en: 'Compare 🧭 my column = 5. not(true) becomes false right when you arrive, so the loop stops there.', id: 'Bandingkan 🧭 kolomku = 5. bukan(benar) menjadi salah tepat saat kamu tiba, jadi perulangannya berhenti di situ.' },
+    ], starThresholds: [11, 9, 7, 6],
+  },
+  {
+    id: 'boolean-7', worldId: 'boolean', number: 7,
+    title: { en: 'Any Full Match Opens It', id: 'Kombinasi Lengkap Apa Pun Membuka' },
+    story: { en: 'This gate checks (true AND true) OR false. You can mix AND inside OR — the whole thing is still true.', id: 'Gerbang ini memeriksa (benar DAN benar) ATAU salah. Kamu bisa menaruh DAN di dalam ATAU — semuanya tetap benar.' },
+    mascotMessage: { en: 'Build "and(true, true)" first, then drop it into the LEFT socket of an "or" block, with "false" on the right. 🦉', id: 'Bangun dulu "dan(benar, benar)", lalu masukkan ke slot KIRI blok "atau", dengan "salah" di kanan. 🦉' },
+    gridRows: 3, gridCols: 6, cells: emptyGrid(3, 6), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 4] }],
+    goalType: 'collect_all', availableCategories: ['move', 'logic'], requiredCategories: ['logic'], optimalBlockCount: 10, xpReward: 190,
+    hints: [
+      { en: 'Blocks can nest inside each other! Build the small "and" piece first, then drag it whole into the "or".', id: 'Blok bisa bersarang satu sama lain! Bangun dulu bagian "dan" yang kecil, lalu seret utuh ke dalam "atau".' },
+      { en: '(true and true) is true, so the or is true no matter what the false side says. Add 4 Move Right inside the if.', id: '(benar dan benar) adalah benar, jadi atau-nya benar apa pun kata sisi salah. Tambahkan 4 Gerak Kanan di dalam if.' },
+    ], starThresholds: [16, 13, 11, 10],
+  },
+  {
+    id: 'boolean-8', worldId: 'boolean', number: 8,
+    title: { en: 'One Gate, Two Keys', id: 'Satu Gerbang, Dua Kunci' },
+    story: { en: 'This gate needs the power ON, AND (either key). Power is the must-have; the keys are the choice.', id: 'Gerbang ini butuh daya MENYALA, DAN (salah satu kunci). Daya wajib ada; kuncinya boleh pilih.' },
+    mascotMessage: { en: 'Build "true or false" for the two keys first, then drop that into the RIGHT socket of an "and" block, with "true" on the left for power. 🦉', id: 'Bangun dulu "benar atau salah" untuk dua kunci, lalu masukkan ke slot KANAN blok "dan", dengan "benar" di kiri untuk daya. 🦉' },
+    gridRows: 3, gridCols: 6, cells: emptyGrid(3, 6), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 4] }],
+    goalType: 'collect_all', availableCategories: ['move', 'logic'], requiredCategories: ['logic'], optimalBlockCount: 10, xpReward: 200,
+    hints: [
+      { en: 'This time the "or" is nested inside the "and", not the other way around — order matters when you build it.', id: 'Kali ini "atau" bersarang di dalam "dan", bukan sebaliknya — urutannya penting saat kamu membangunnya.' },
+      { en: 'true and (true or false) = true. Add 4 Move Right blocks inside the if.', id: 'benar dan (benar atau salah) = benar. Tambahkan 4 blok Gerak Kanan di dalam if.' },
+    ], starThresholds: [16, 13, 11, 10],
+  },
+  {
+    id: 'boolean-9', worldId: 'boolean', number: 9, showCoords: true,
+    title: { en: 'Two Ways to Say No', id: 'Dua Cara Mengatakan Tidak' },
+    story: { en: 'The vault door only stays LOCKED if you are standing at Row 3, Column 1 — both at once. NOT (both) is true anywhere else, even if just one of them is off.', id: 'Pintu brankas hanya TERKUNCI jika kamu berdiri di Baris 3, Kolom 1 — keduanya sekaligus. BUKAN (keduanya) benar di tempat lain mana pun, bahkan jika cuma satu yang berbeda.' },
+    mascotMessage: { en: 'You start at Row 2 — already not Row 3! So not(row=3 and col=1) is true no matter your column. Build it and sail through. 🦉', id: 'Kamu mulai di Baris 2 — sudah bukan Baris 3! Jadi bukan(baris=3 dan kolom=1) benar apa pun kolommu. Bangun dan berlayarlah. 🦉' },
+    gridRows: 3, gridCols: 7, cells: emptyGrid(3, 7), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 4] }],
+    goalType: 'collect_all', availableCategories: ['move', 'logic', 'sensors'], requiredCategories: ['logic', 'sensors'], optimalBlockCount: 13, xpReward: 210,
+    hints: [
+      { en: 'Build "my row = 3 and my column = 1" first, then wrap the whole thing in "not".', id: 'Bangun dulu "barisku = 3 dan kolomku = 1", lalu bungkus semuanya dengan "bukan".' },
+      { en: 'Since your row is 2, the "and" is already false before checking the column — so "not" makes the door open. Add 4 Move Right inside.', id: 'Karena barismu 2, "dan"-nya sudah salah sebelum memeriksa kolom — jadi "bukan" membuat pintunya terbuka. Tambahkan 4 Gerak Kanan di dalamnya.' },
+    ], starThresholds: [19, 16, 14, 13],
+  },
+  {
+    id: 'boolean-10', worldId: 'boolean', number: 10, showCoords: true, isBuggy: true,
+    title: { en: 'The Mixed-Up Gate', id: 'Gerbang yang Tertukar' },
+    story: { en: 'Ollie wired an AND-loop to cross the bridge, but one of the two numbers is wrong — the loop stops too soon.', id: 'Ollie memasang perulangan-DAN untuk menyeberangi jembatan, tapi salah satu dari dua angkanya salah — perulangannya berhenti terlalu cepat.' },
+    mascotMessage: { en: "The battery is at Column 7, but my loop's second test stops it way earlier! Find the wrong number and fix it. 🦉🐛", id: 'Baterainya ada di Kolom 7, tapi uji kedua di perulanganku menghentikannya jauh lebih awal! Temukan angka yang salah dan perbaiki. 🦉🐛' },
+    gridRows: 3, gridCols: 9, cells: emptyGrid(3, 9), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 9, xpReward: 220,
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [{
+          type: 'controls_whileUntil', x: 40, y: 30,
+          fields: { MODE: 'WHILE' },
+          inputs: {
+            BOOL: {
+              block: {
+                type: 'logic_operation',
+                fields: { OP: 'AND' },
+                inputs: {
+                  A: {
+                    block: {
+                      type: 'logic_compare',
+                      fields: { OP: 'LT' },
+                      inputs: {
+                        A: { block: { type: 'sensor_col' } },
+                        B: { block: { type: 'math_number', fields: { NUM: 9 } } },
+                      },
+                    },
+                  },
+                  B: {
+                    block: {
+                      type: 'logic_compare',
+                      fields: { OP: 'LT' },
+                      inputs: {
+                        A: { block: { type: 'sensor_col' } },
+                        B: { block: { type: 'math_number', fields: { NUM: 5 } } },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            DO: { block: { type: 'move_right' } },
+          },
+        }],
+      },
+    },
+    hints: [
+      { en: 'Read the loop out loud: "while my column < 9 and my column < 5". The second, stricter number is the one controlling the stop.', id: 'Bacakan perulangannya: "selama kolomku < 9 dan kolomku < 5". Angka kedua yang lebih ketat itulah yang mengendalikan berhentinya.' },
+      { en: 'Click the second number, 5, and change it to 7. Now the loop stops right on Column 7, where the battery is.', id: 'Klik angka kedua, 5, dan ubah jadi 7. Sekarang perulangannya berhenti tepat di Kolom 7, tempat baterainya.' },
+    ], starThresholds: [15, 12, 10, 9],
+  },
+  {
+    id: 'boolean-11', worldId: 'boolean', number: 11, showCoords: true,
+    title: { en: 'Vault Needs Both', id: 'Brankas Butuh Keduanya' },
+    story: { en: 'A real vault door: it checks that you are standing exactly at Row 1, Column 1 before it will open — AND of two live sensor readings.', id: 'Pintu brankas sungguhan: memeriksa apakah kamu berdiri tepat di Baris 1, Kolom 1 sebelum terbuka — DAN dari dua pembacaan sensor langsung.' },
+    mascotMessage: { en: 'Test 🧭 my row = 1 AND 🧭 my column = 1 — true right where you start! Then the route: down 3, right 5, to the battery. 🦉', id: 'Uji 🧭 barisku = 1 DAN 🧭 kolomku = 1 — benar tepat di titik awalmu! Lalu rutenya: turun 3, kanan 5, ke baterai. 🦉' },
+    gridRows: 6, gridCols: 8,
+    cells: (() => { const g = emptyGrid(6, 8); g[5][7] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'b1', pos: [3, 5] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['logic', 'sensors'], optimalBlockCount: 16, xpReward: 230,
+    hints: [
+      { en: 'Build the "and" test first: 🧭 my row = 1 and 🧭 my column = 1. It reads true before you have moved at all.', id: 'Bangun dulu uji "dan": 🧭 barisku = 1 dan 🧭 kolomku = 1. Terbaca benar sebelum kamu bergerak sama sekali.' },
+      { en: 'Inside the if: 3 Move Down blocks, then 5 Move Right blocks.', id: 'Di dalam if: 3 blok Gerak Bawah, lalu 5 blok Gerak Kanan.' },
+    ], starThresholds: [24, 20, 18, 16],
+  },
+  {
+    id: 'boolean-12', worldId: 'boolean', number: 12, showCoords: true,
+    title: { en: 'Two Doors, One Key', id: 'Dua Pintu, Satu Kunci' },
+    story: { en: 'Either door opens the passage: the row-1 door, OR a column-50 door that does not even exist on this chart. Only one needs to be real.', id: 'Kedua pintu bisa membuka lorong ini: pintu baris-1, ATAU pintu kolom-50 yang bahkan tidak ada di peta ini. Cukup satu yang nyata.' },
+    mascotMessage: { en: 'Test 🧭 my row = 1 OR 🧭 my column = 50. The row test is true, so OR does not even need the impossible column! Sail right 6, then down 3. 🦉', id: 'Uji 🧭 barisku = 1 ATAU 🧭 kolomku = 50. Uji barisnya benar, jadi ATAU bahkan tidak butuh kolom yang mustahil itu! Berlayar kanan 6, lalu turun 3. 🦉' },
+    gridRows: 5, gridCols: 9,
+    cells: (() => { const g = emptyGrid(5, 9); g[4][8] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'b1', pos: [3, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['logic', 'sensors'], optimalBlockCount: 17, xpReward: 240,
+    hints: [
+      { en: 'Build an "or" test: 🧭 my row = 1, or 🧭 my column = 50. The second half can be silly — OR only needs one side true.', id: 'Bangun uji "atau": 🧭 barisku = 1, atau 🧭 kolomku = 50. Bagian kedua boleh konyol — ATAU cuma butuh satu sisi benar.' },
+      { en: 'Inside the if: 6 Move Right blocks, then 3 Move Down blocks.', id: 'Di dalam if: 6 blok Gerak Kanan, lalu 3 blok Gerak Bawah.' },
+    ], starThresholds: [25, 21, 19, 17],
+  },
+  {
+    id: 'boolean-13', worldId: 'boolean', number: 13, showCoords: true,
+    title: { en: 'Stay Off The Locked Row', id: 'Jauhi Baris yang Terkunci' },
+    story: { en: 'Row 9 is off-limits — a locked shelf guards it. As long as NOT (my row = 9), the way ahead stays open.', id: 'Baris 9 terlarang — rak terkunci menjaganya. Selama BUKAN (barisku = 9), jalan di depan tetap terbuka.' },
+    mascotMessage: { en: 'You start on Row 1, nowhere near the locked Row 9, so not(my row = 9) is true. Sail right 7, then down 2, to the battery. 🦉', id: 'Kamu mulai di Baris 1, jauh dari Baris 9 yang terkunci, jadi bukan(barisku = 9) benar. Berlayar kanan 7, lalu turun 2, ke baterai. 🦉' },
+    gridRows: 6, gridCols: 9,
+    cells: (() => { const g = emptyGrid(6, 9); g[4][3] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'b1', pos: [2, 7] }],
+    goalType: 'collect_all', availableCategories: ['move', 'logic', 'sensors'], requiredCategories: ['logic', 'sensors'], optimalBlockCount: 14, xpReward: 250,
+    hints: [
+      { en: 'Build "my row = 9" first, then wrap it in "not". Drop that whole piece into the if diamond.', id: 'Bangun dulu "barisku = 9", lalu bungkus dengan "bukan". Masukkan seluruh bagian itu ke berlian if.' },
+      { en: 'Inside the if: 7 Move Right blocks, then 2 Move Down blocks.', id: 'Di dalam if: 7 blok Gerak Kanan, lalu 2 blok Gerak Bawah.' },
+    ], starThresholds: [21, 18, 16, 14],
+  },
+  {
+    id: 'boolean-14', worldId: 'boolean', number: 14, showCoords: true,
+    title: { en: 'The Narrow Corridor', id: 'Lorong Sempit' },
+    story: { en: 'A reef wall looms ahead in the top row, but your AND-loop is stricter than the wall — it turns you south before you ever reach it.', id: 'Dinding beting menjulang di baris atas, tapi perulangan-DAN-mu lebih ketat dari dindingnya — kamu berbelok ke selatan sebelum sampai di sana.' },
+    mascotMessage: { en: 'Leg 1: repeat while (my column < 10) AND (my column < 7). Leg 2: repeat while (my row < 10) AND (my row < 4). Two AND-loops, one safe corridor. 🦉', id: 'Tahap 1: ulangi selama (kolomku < 10) DAN (kolomku < 7). Tahap 2: ulangi selama (barisku < 10) DAN (barisku < 4). Dua perulangan-DAN, satu lorong aman. 🦉' },
+    gridRows: 6, gridCols: 10,
+    cells: (() => { const g = emptyGrid(6, 10); g[0][7] = 'obstacle'; g[0][8] = 'obstacle'; g[0][9] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'b1', pos: [3, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 18, xpReward: 260,
+    hints: [
+      { en: 'The reef sits at Columns 8–10 in Row 1. Your stricter bound of 7 turns you south before you ever get near it.', id: 'Betingnya ada di Kolom 8–10 di Baris 1. Batas ketatmu, 7, membuatmu berbelok selatan jauh sebelum mendekatinya.' },
+      { en: 'Leg 1: while (🧭 column < 10) and (🧭 column < 7), move right. Leg 2: while (🧭 row < 10) and (🧭 row < 4), move down.', id: 'Tahap 1: selama (🧭 kolom < 10) dan (🧭 kolom < 7), gerak kanan. Tahap 2: selama (🧭 baris < 10) dan (🧭 baris < 4), gerak bawah.' },
+    ], starThresholds: [27, 23, 20, 18],
+  },
+  {
+    id: 'boolean-15', worldId: 'boolean', number: 15, showCoords: true,
+    title: { en: 'Two Beacons, First Wins', id: 'Dua Suar, yang Pertama Menang' },
+    story: { en: 'Each leg of this voyage has two possible beacons. Sail until you reach either one — OR always catches whichever is closer.', id: 'Setiap tahap perjalanan ini punya dua suar yang mungkin. Berlayarlah sampai mencapai salah satu — ATAU selalu menangkap yang lebih dekat.' },
+    mascotMessage: { en: 'Leg 1: repeat until (my column = 9) OR (my column = 6). Leg 2: repeat until (my row = 9) OR (my row = 5). The smaller number wins both times. 🦉', id: 'Tahap 1: ulangi sampai (kolomku = 9) ATAU (kolomku = 6). Tahap 2: ulangi sampai (barisku = 9) ATAU (barisku = 5). Angka yang lebih kecil menang di kedua tahap. 🦉' },
+    gridRows: 7, gridCols: 10, cells: emptyGrid(7, 10), startPos: [0, 0], items: [{ id: 'b1', pos: [4, 5] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 18, xpReward: 270,
+    hints: [
+      { en: 'Leg 1: until (🧭 column = 9) or (🧭 column = 6), move right. You reach 6 first.', id: 'Tahap 1: sampai (🧭 kolom = 9) atau (🧭 kolom = 6), gerak kanan. Kamu mencapai 6 lebih dulu.' },
+      { en: 'Leg 2: until (🧭 row = 9) or (🧭 row = 5), move down. You reach 5 first.', id: 'Tahap 2: sampai (🧭 baris = 9) atau (🧭 baris = 5), gerak bawah. Kamu mencapai 5 lebih dulu.' },
+    ], starThresholds: [27, 23, 20, 18],
+  },
+  {
+    id: 'boolean-16', worldId: 'boolean', number: 16, showCoords: true,
+    title: { en: 'The Long Watch', id: 'Penjagaan Panjang' },
+    story: { en: 'Two legs, two NOT-tests. Ollie prefers "keep going while NOT there" over "less than" — same journey, different words.', id: 'Dua tahap, dua uji BUKAN. Ollie lebih suka "terus jalan selama BUKAN di sana" daripada "kurang dari" — perjalanan sama, kata berbeda.' },
+    mascotMessage: { en: 'Leg 1: while not(my column = 6), move right. Leg 2: while not(my row = 5), move down. 🦉', id: 'Tahap 1: selama bukan(kolomku = 6), gerak kanan. Tahap 2: selama bukan(barisku = 5), gerak bawah. 🦉' },
+    gridRows: 7, gridCols: 9, cells: emptyGrid(7, 9), startPos: [0, 0], items: [{ id: 'b1', pos: [4, 5] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 10, xpReward: 280,
+    hints: [
+      { en: 'Leg 1: while not(🧭 column = 6), move right.', id: 'Tahap 1: selama bukan(🧭 kolom = 6), gerak kanan.' },
+      { en: 'Leg 2: while not(🧭 row = 5), move down. Both stop the instant the equals-test flips true.', id: 'Tahap 2: selama bukan(🧭 baris = 5), gerak bawah. Keduanya berhenti begitu uji sama-dengan berubah menjadi benar.' },
+    ], starThresholds: [16, 13, 11, 10],
+  },
+  {
+    id: 'boolean-17', worldId: 'boolean', number: 17, showCoords: true,
+    title: { en: 'Two Vaults, Either Fully Matched', id: 'Dua Brankas, Salah Satu Cocok Penuh' },
+    story: { en: 'Two vaults exist on this chart, each needing its own row AND column match. You only need to fully match ONE of them.', id: 'Ada dua brankas di peta ini, masing-masing butuh baris DAN kolom yang cocok. Kamu hanya perlu mencocokkan SATU sepenuhnya.' },
+    mascotMessage: { en: '(row=1 AND col=1) OR (row=99 AND col=99). The first vault matches right where you start — the second is impossible, and that is fine! 🦉', id: '(baris=1 DAN kolom=1) ATAU (baris=99 DAN kolom=99). Brankas pertama cocok tepat di titik awalmu — yang kedua mustahil, dan itu tidak apa-apa! 🦉' },
+    gridRows: 6, gridCols: 9,
+    cells: (() => { const g = emptyGrid(6, 9); g[5][8] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'b1', pos: [3, 6] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['logic', 'sensors'], optimalBlockCount: 25, xpReward: 290,
+    hints: [
+      { en: 'Build each vault as its own "and" first: (row=1 and col=1), and separately (row=99 and col=99). Then join them with "or".', id: 'Bangun setiap brankas sebagai "dan" tersendiri dulu: (baris=1 dan kolom=1), dan terpisah (baris=99 dan kolom=99). Lalu gabungkan dengan "atau".' },
+      { en: 'Only the first vault needs to be real — OR does not care that the second is impossible. Inside the if: 6 Move Right, then 3 Move Down.', id: 'Cuma brankas pertama yang perlu nyata — ATAU tidak peduli yang kedua mustahil. Di dalam if: 6 Gerak Kanan, lalu 3 Gerak Bawah.' },
+    ], starThresholds: [35, 30, 27, 25],
+  },
+  {
+    id: 'boolean-18', worldId: 'boolean', number: 18, showCoords: true,
+    title: { en: 'Real Position, Real Choice', id: 'Posisi Nyata, Pilihan Nyata' },
+    story: { en: 'The final vault needs the row to match, AND then either one of two columns. Real sensors, a real nested choice.', id: 'Brankas terakhir butuh baris yang cocok, DAN lalu salah satu dari dua kolom. Sensor sungguhan, pilihan bersarang sungguhan.' },
+    mascotMessage: { en: 'my row = 1 AND (my column = 1 OR my column = 99). The row matches, and the first column choice matches too. 🦉', id: 'barisku = 1 DAN (kolomku = 1 ATAU kolomku = 99). Barisnya cocok, dan pilihan kolom pertama juga cocok. 🦉' },
+    gridRows: 6, gridCols: 9,
+    cells: (() => { const g = emptyGrid(6, 9); g[0][8] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'b1', pos: [4, 5] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['logic', 'sensors'], optimalBlockCount: 21, xpReward: 300,
+    hints: [
+      { en: 'Build the "or" for the two columns first: (col=1 or col=99). Then drop that into the right socket of an "and" whose left socket is row=1.', id: 'Bangun dulu "atau" untuk dua kolom: (kolom=1 atau kolom=99). Lalu masukkan ke slot kanan "dan" yang slot kirinya baris=1.' },
+      { en: 'Inside the if: 5 Move Right blocks, then 4 Move Down blocks.', id: 'Di dalam if: 5 blok Gerak Kanan, lalu 4 blok Gerak Bawah.' },
+    ], starThresholds: [30, 26, 23, 21],
+  },
+  {
+    id: 'boolean-19', worldId: 'boolean', number: 19, showCoords: true, isBuggy: true,
+    title: { en: 'The Lighthouse Debug', id: 'Debug Mercusuar' },
+    story: { en: "Ollie's OR-loop was supposed to stop at whichever beacon comes first, but one of the two numbers is wrong — it stops too soon.", id: 'Perulangan-ATAU Ollie seharusnya berhenti di suar mana pun yang lebih dulu, tapi salah satu dari dua angkanya salah — berhenti terlalu cepat.' },
+    mascotMessage: { en: 'The real beacon is at Column 5, but a wrong number in my OR-test stops the loop before that. Find it and fix it! 🦉🐛', id: 'Suar sungguhan ada di Kolom 5, tapi angka salah di uji-ATAU-ku menghentikan perulangannya sebelum itu. Temukan dan perbaiki! 🦉🐛' },
+    gridRows: 3, gridCols: 10, cells: emptyGrid(3, 10), startPos: [1, 0], items: [{ id: 'b1', pos: [1, 4] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['loops', 'sensors'], optimalBlockCount: 9, xpReward: 310,
+    buggyState: {
+      blocks: {
+        languageVersion: 0,
+        blocks: [{
+          type: 'controls_whileUntil', x: 40, y: 30,
+          fields: { MODE: 'UNTIL' },
+          inputs: {
+            BOOL: {
+              block: {
+                type: 'logic_operation',
+                fields: { OP: 'OR' },
+                inputs: {
+                  A: {
+                    block: {
+                      type: 'logic_compare',
+                      fields: { OP: 'EQ' },
+                      inputs: {
+                        A: { block: { type: 'sensor_col' } },
+                        B: { block: { type: 'math_number', fields: { NUM: 8 } } },
+                      },
+                    },
+                  },
+                  B: {
+                    block: {
+                      type: 'logic_compare',
+                      fields: { OP: 'EQ' },
+                      inputs: {
+                        A: { block: { type: 'sensor_col' } },
+                        B: { block: { type: 'math_number', fields: { NUM: 3 } } },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            DO: { block: { type: 'move_right' } },
+          },
+        }],
+      },
+    },
+    hints: [
+      { en: 'Read it out loud: "until my column = 8 or my column = 3". Moving right from Column 1, which one do you reach first?', id: 'Bacakan: "sampai kolomku = 8 atau kolomku = 3". Bergerak kanan dari Kolom 1, mana yang kamu capai lebih dulu?' },
+      { en: 'Click the second number, 3, and change it to 5. Now the loop stops right on Column 5, where the beacon is.', id: 'Klik angka kedua, 3, dan ubah jadi 5. Sekarang perulangannya berhenti tepat di Kolom 5, tempat suarnya.' },
+    ], starThresholds: [15, 12, 10, 9],
+  },
+  {
+    id: 'boolean-20', worldId: 'boolean', number: 20, showCoords: true,
+    title: { en: 'The Final Beacon: Two Ways to Say No', id: 'Suar Terakhir: Dua Cara Mengatakan Tidak' },
+    story: { en: 'The lighthouse door has two forbidden spots: Row 9 Column 9, and Row 1 Column 2. Stay off BOTH exact combinations and it opens — NOT(match) AND NOT(match).', id: 'Pintu mercusuar punya dua titik terlarang: Baris 9 Kolom 9, dan Baris 1 Kolom 2. Hindari KEDUA kombinasi persis itu dan pintunya terbuka — BUKAN(cocok) DAN BUKAN(cocok).' },
+    mascotMessage: { en: "You start at Row 1, Column 1 — close to the second forbidden spot, but the column is off by one, so that AND is already false. Both NOTs come out true. Build it yourself this time! 🦉", id: 'Kamu mulai di Baris 1, Kolom 1 — dekat dengan titik terlarang kedua, tapi kolomnya beda satu, jadi DAN itu sudah salah. Kedua BUKAN menjadi benar. Kali ini bangun sendiri! 🦉' },
+    gridRows: 7, gridCols: 10,
+    cells: (() => { const g = emptyGrid(7, 10); g[6][9] = 'obstacle'; return g })(),
+    startPos: [0, 0], items: [{ id: 'b1', pos: [5, 7] }],
+    goalType: 'collect_all', availableCategories: ['move', 'loops', 'logic', 'sensors'], requiredCategories: ['logic', 'sensors'], optimalBlockCount: 30, xpReward: 350,
+    hints: [
+      { en: 'Build two NOT-of-AND pieces separately — not(row=9 and col=9), and not(row=1 and col=2) — then join the two with a top-level "and".', id: 'Bangun dua bagian BUKAN-dari-DAN secara terpisah — bukan(baris=9 dan kolom=9), dan bukan(baris=1 dan kolom=2) — lalu gabungkan keduanya dengan "dan" di paling atas.' },
+      { en: 'Both forbidden spots miss you, so both NOTs are true, and the door opens. Inside the if: 7 Move Right blocks, then 5 Move Down blocks.', id: 'Kedua titik terlarang meleset darimu, jadi kedua BUKAN benar, dan pintunya terbuka. Di dalam if: 7 blok Gerak Kanan, lalu 5 blok Gerak Bawah.' },
+    ], starThresholds: [40, 35, 32, 30],
+  },
+
 ]
 
 export function getLessonsByWorld(worldId: string): Lesson[] {
