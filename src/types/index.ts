@@ -1,4 +1,4 @@
-export type WorldId = 'jungle' | 'space' | 'loops' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting' | 'debugging' | 'orchestra' | 'cove' | 'eco'
+export type WorldId = 'jungle' | 'space' | 'loops' | 'ocean' | 'caves' | 'factory' | 'portal' | 'jurassic' | 'parking' | 'sorting' | 'debugging' | 'orchestra' | 'cove' | 'eco' | 'boolean'
 
 export type LocalizedString = { en: string; id: string }
 
