@@ -8,6 +8,7 @@ import { inductionLessons } from './induction'
 import { logicLessons } from './logic'
 import { mathReasoningLessons } from './mathReasoning'
 import { memoryLessons } from './memory'
+import { moneyLessons } from './money'
 import { natureLessons } from './nature'
 import { numbersLessons } from './numbers'
 import { patternsLessons } from './patterns'
@@ -31,6 +32,7 @@ export const THINKING_LESSONS: ThinkingLesson[] = [
   ...planningLessons,
   ...probabilityLessons,
   ...spatialLessons,
+  ...moneyLessons,
   ...THINKING_LESSONS_ADVANCED,
 ]
 

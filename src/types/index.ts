@@ -100,7 +100,7 @@ export interface PlayerProgress {
 
 // ── Thinking path ─────────────────────────────────────────────
 
-export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction' | 'math_reasoning' | 'induction' | 'deduction' | 'planning' | 'probability' | 'spatial'
+export type ThinkingWorldId = 'patterns' | 'logic' | 'counting' | 'memory' | 'nature' | 'numbers' | 'decomposition' | 'abstraction' | 'math_reasoning' | 'induction' | 'deduction' | 'planning' | 'probability' | 'spatial' | 'money'
 
 export interface ThinkingWorld {
   id: ThinkingWorldId

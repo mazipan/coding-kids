@@ -142,8 +142,9 @@ Source: `src/data/thinkingWorlds/` — one file per world (e.g. `patterns.ts` ex
 | planning | 🗺️ | Constraint planning | 8–12 | sky | 0 | 20 |
 | probability | 🎲 | Probability | 9–13 | lime | 0 | 20 |
 | spatial | 🧭 | Spatial reasoning | 7–11 | fuchsia | 0 | 20 |
+| money | 💰 | Everyday numeracy | 6–13 | yellow | 0 | 20 |
 
-All fourteen worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely — see INV-L3, which binds any future thinking world too.
+All fifteen worlds are unlocked from the start (`unlockAtXP: 0`). World-level XP gates are intentionally removed to let kids explore freely — see INV-L3, which binds any future thinking world too.
 
 ### World boundaries
 
@@ -151,6 +152,7 @@ Two pairs sit close enough that new lessons must respect the boundary:
 
 - `decomposition` (Step by Step) vs `planning` (Planning Peaks) — both use `sequence`. In `decomposition` the answer is the familiar real-world routine and comes from the child's own knowledge. In `planning` the answer comes from written clues in `mascotMessage`, and the clues may deliberately contradict the habitual order.
 - `logic` (Logic Land) vs `probability` (Chance Camp) — both use `if-then`. `logic` asks what *must* follow from a rule; `probability` asks what is *likely*, *possible*, *certain*, or *fair*. Never phrase a Chance Camp answer as a certainty unless the puzzle is specifically about certainty.
+- `money` (Money & Time) vs `counting`/`math_reasoning`/`numbers`/`probability`/`planning` — several of those worlds already use coins or clocks as flavour for an abstract-reasoning mechanic (arithmetic drills, algebra, geometric sequences, randomness, constraint optimisation). `money` is the applied skill itself: recognising a coin's value, reading clock hands, making change, comparing unit price, budgeting an allowance, spotting a schedule conflict. Never add a `money` lesson that is really one of those worlds' mechanics re-skinned with a coin emoji — the test is whether the lesson still makes sense with the money/time framing removed (if yes, it belongs in the other world instead).
 
 ### Thinking lesson fields
 
